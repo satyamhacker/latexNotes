@@ -9505,7 +9505,7 @@ Real-world mein, cloud environments (AWS, GCP, Azure) mein SSRF ka impact massiv
 
 ### ⚠️ 10. [[HL::Pentest Anti-Patterns & Common Mistakes (Beginner Traps)::HL]]
 
-* **❌ Mistake:** Sirf `127.0.0.1` try karke give up kar dena.
+* [[HL::**❌ Mistake:** Sirf `127.0.0.1` try karke give up kar dena.::HL]]
 * [[HL::**🤦 Why:** Beginners sochte hain agar loopback filter ho gaya toh SSRF nahi hai.::HL]]
 * **✅ [[HL::The 'Pro' Way:** Bypasses try karo: `http://2130706433/` (decimal),::HL]] `http://0/`, [[HL::ya `http://127.1/`.::HL]]
 * **⚡ [[HL::Consequences:** Tum high-severity vulnerability miss kar doge.::HL]]
@@ -10019,8 +10019,8 @@ Socho ek robot hai jiska kaam sirf parcel deliver karna hai, aur tum usko addres
 
 [[HL::> **Step 2:** Attacker IP ki jagah **payloads** (malicious code pieces) dalta hai using **semicolon** (`;`) ya `;&&` (pehli command fail/pass hone ke baad doosri chalao).::HL]]
 
-> **Step 3:** Target Application bina kisi **protection** (sanitization) ke isse bash/cmd ko bhejti hai.
-> **Step 4:** System `ping` execute karne ke saath-saath attacker ka appended command (e.g., `reboot` ya `rm -rf /`) chala deta hai, jisse server crash ho sakta hai.
+> [[HL::**Step 3:** Target Application bina kisi **protection** (sanitization) ke isse bash/cmd ko bhejti hai.::HL]]
+> [[HL::**Step 4:** System `ping` execute karne ke saath-saath attacker ka appended command (e.g., `reboot` ya `rm -rf /`) chala deta hai, jisse server crash ho sakta hai.::HL]]
 
 ### 🔒 8. Attack Surface & Defense
 
@@ -10047,7 +10047,7 @@ CTFs (Capture The Flag competitions) mein yeh bahut common scenario hai jahan ek
 
 
 * [[HL::**Confusion 2 — "Kya mujhe command inject karne ke liye hamesha semicolon (`;`) use karna hoga?"**::HL]]
-* **Galat soch:** Semicolon ke bina command chain nahi hoti.
+* [[HL::**Galat soch:** Semicolon ke bina command chain nahi hoti.::HL]]
 * [[HL::**Actually:** Semicolon Linux mein do commands alag karta hai. Windows mein `&` ya `&&` zyada common hai. Pipe `|` operator dono OS mein previous command ka output discard karke second command chala deta hai.::HL]]
 
 
