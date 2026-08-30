@@ -11815,13 +11815,10 @@ Bug bounty (HackerOne) mein ek famous chat application ka real-time ticker tha j
 ### ⚖️ 13. Comparison (HTTP vs WebSockets)
 
 | Feature | HTTP/REST APIs | WebSockets (WSS) APIs |
-
 | --- | --- | --- |
 | **Direction** | Unidirectional (Client requests, Server responds) | Bidirectional (Full-duplex communication) |
-
 | **Connection State** | Stateless (har request alag hai) | Persistent (ek lamba connection) |
 | **WAF Inspection** | Very strict (payloads easily detected) | Often bypassed (frames inspection is weak) |
-
 ### 🔄 14. Kill Chain & Attack Phase Flow
 
 ```text
