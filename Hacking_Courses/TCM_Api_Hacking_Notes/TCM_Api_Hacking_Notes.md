@@ -2260,6 +2260,9 @@ RuleID:      [[HL::generic-api-key::HL]]
 
 Starbucks ki bug bounty mein ek security researcher ne GitHub par ek simple dork search kiya. Use Starbucks ki ek public repo mili jisme ek AWS API key commit history mein chhooti hui thi. Jab hacker ne us key ka use kiya, toh use pata chala ki ye key production systems ke poore infrastructure par "SuperAdmin" privileges rakhti thi. Hacker ne responsible disclosure kiya aur us ek GitHub leak (OSINT) ke liye usse massive bounty di gayi.
 
+                       [ 🔑 Found: AWS_KEY=123XYZ ] ---> (Attacker Gets Admin)
+```
+
 ### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes
 
 * **❌ [[HL::Mistake:** GitHub repo par sirf latest code check karna aur history (pichle commits) ignore kar dena.::HL]]
@@ -2408,9 +2411,9 @@ Hotel analogy se samajhte hain:
 [[HL::> Yeh purely conceptual topic hai — isliye Hands-On section ki jagah Concept Visualization de raha hoon.::HL]]
 [[HL::> **Step-by-Step Authorization Failures:**::HL]]
 
-> 1. **Normal Flow:** Attacker (User ID: 10) -> Requests `/api/data?id=10` -> Server gives Data for 10.
-> 2. **BOLA Attack:** Attacker (User ID: 10) -> Requests `/api/data?id=12` -> Server fails to verify if ID 10 owns ID 12's data -> Server gives Data for 12. *(Data breach)*
-> 3. **BFLA Attack:** Attacker (Role: Standard) -> Requests `POST /api/admin/delete_user` -> Server fails to check role -> Server deletes user. *(Function abuse)*
+> 1. [[HL::**Normal Flow:** Attacker (User ID: 10) -> Requests `/api/data?id=10` -> Server gives Data for 10.::HL]]
+> 2. [[HL::**BOLA Attack:** Attacker (User ID: 10) -> Requests `/api/data?id=12` -> Server fails to verify if ID 10 owns ID 12's data -> Server gives Data for 12. *(Data breach)*::HL]]
+> 3. [[HL::**BFLA Attack:** Attacker (Role: Standard) -> Requests `POST /api/admin/delete_user` -> Server fails to check role -> Server deletes user. *(Function abuse)*::HL]]
 > 
 > 
 
