@@ -12,6 +12,8 @@ Your ONLY job: **Find → Wrap → Output.** Nothing else.
 
 **CRITICAL PRE-FLIGHT CHECK:** Before writing changes to the document, your Python script MUST print the exact lines it is about to modify. You must manually verify that the `[[HL::` tags do not wrap around massive multi-line blocks or destroy list markers before applying the final write operation.
 
+**CRITICAL POST-FLIGHT CHECK (MANDATORY VALIDATION):** After your Python script completes its write operation, you MUST NOT blindly declare success. You MUST execute a separate manual verification step (e.g., writing a Python validation script) to count `[[HL::` vs `::HL]]` tags (ensuring exactly equal numbers) and check for broken table separator rows (e.g. `| [[HL:::---::HL]] |`), broken HTML tags, broken Markdown links, or wrapped code block backticks. If structural breakages are found, you MUST aggressively heal them before ending your turn.
+
 **CRITICAL SCRIPTING RULES:**
 1. **State Initialization:** You MUST parse the document for existing `[[HL::...::HL]]` tags and add them to your `highlighted_intervals` before processing new terms.
 2. **Fuzzy Matcher Boundaries:** If you implement a fuzzy matching algorithm that allows skipping unmatched words, ensure that your `start_index` strictly corresponds to the FIRST matched token, not the starting loop index. Swallowing unmatched prefix tokens will corrupt the highlight boundaries.

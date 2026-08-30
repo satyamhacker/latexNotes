@@ -513,9 +513,15 @@ document.addEventListener("DOMContentLoaded", () => {
         // 🟡 1. Extract highlights BEFORE hljs runs to protect them
         let hlCount = 0;
         let hlMap = {};
-        let rawCode = safeCode.replace(/\[\[HL::(.*?)::HL\]\]/g, function(match, p1) {
+        let rawCode = safeCode.replace(/\[\[HL::([\s\S]*?)::HL\]\]/g, function(match, p1) {
             let key = `HLTOKEN${hlCount}ENDHL`;
-            hlMap[key] = p1;
+            // Escape HTML entities to prevent DOM breakout inside <pre>
+            let escaped = p1.replace(/&/g, "&amp;")
+                            .replace(/</g, "&lt;")
+                            .replace(/>/g, "&gt;")
+                            .replace(/"/g, "&quot;")
+                            .replace(/'/g, "&#039;");
+            hlMap[key] = escaped;
             hlCount++;
             return key;
         });
