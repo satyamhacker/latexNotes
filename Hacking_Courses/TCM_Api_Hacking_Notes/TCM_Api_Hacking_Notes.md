@@ -11692,15 +11692,15 @@ Normal HTTP `(web protocol)` ek **Walkie-Talkie** jaisa hai — ek baar mein ek 
 *(Attacker HTTP Handshake request intercept karta hai aur Origin change karta hai)*
 
 ```http
-# Burp Suite | HTTP/1.1 | Handshake Request
-1  GET /chat HTTP/1.1                # GET method se chat endpoint call kiya
+# [[HL::Burp Suite | HTTP/1.1 | Handshake Request::HL]]
+[[HL::1  GET /chat HTTP/1.1                # GET method se chat endpoint call kiya::HL]]
 
-2  Host: target-chat.com             # Target server ka domain
-3  Upgrade: websocket                # Server ko bata raha hai ki connection HTTP se WebSocket pe upgrade karo
-4  Connection: Upgrade               # Upgrade confirm karne ka header
-5  Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ== # Base64 encoded nonce (security key handshake ke liye)
-6  Sec-WebSocket-Version: 13         # WebSocket protocol ka version
-7  Origin: https://evil-attacker.com # ATTACK: Origin header attacker ke domain pe set kiya (agar server isse accept kare toh CSWSH possible hai)
+[[HL::2  Host: target-chat.com             # Target server ka domain::HL]]
+[[HL::3  Upgrade: websocket                # Server ko bata raha hai ki connection HTTP se WebSocket pe upgrade karo::HL]]
+[[HL::4  Connection: Upgrade               # Upgrade confirm karne ka header::HL]]
+[[HL::5  Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ== # Base64 encoded nonce (security key handshake ke liye)::HL]]
+[[HL::6  Sec-WebSocket-Version: 13         # WebSocket protocol ka version::HL]]
+[[HL::7  Origin: https://evil-attacker.com # ATTACK: Origin header attacker ke domain pe set kiya (agar server isse accept kare toh CSWSH possible hai)::HL]]
 
 ```
 
@@ -11718,13 +11718,13 @@ Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=
 *(Ab connection establish ho gaya hai, WAF bypass ho chuka hai. Attacker Burp Repeater (WebSocket tab) se direct payload bhejta hai)*
 
 ```json
-# Burp Suite Repeater (WebSocket Connection Active)
-1  {
-2    "message_type": "chat",         # JSON frame WSS pe ja raha hai (chat application ka format)
+# [[HL::Burp Suite Repeater (WebSocket Connection Active)::HL]]
+[[HL::1  {::HL]]
+[[HL::2    "message_type": "chat",         # JSON frame WSS pe ja raha hai (chat application ka format)::HL]]
 
-3    "user": "attacker",             # Attacker ka username
-4    "content": "<img src=x onerror=alert(1)>" # ATTACK: XSS payload injection
-5  }
+[[HL::3    "user": "attacker",             # Attacker ka username::HL]]
+[[HL::4    "content": "<img src=x onerror=alert(1)>" # ATTACK: XSS payload injection::HL]]
+[[HL::5  }::HL]]
 
 ```
 
@@ -11768,18 +11768,11 @@ Bug bounty (HackerOne) mein ek famous chat application ka real-time ticker tha j
 
 ### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** Sirf HTTP history check karna aur WebSockets tab ignore karna.
-* **🤦 Why:** Beginners ko lagta hai ki saari API calls `POST /api/v1/...` aayengi.
-* **✅ The 'Pro' Way:** Hamesha Burp mein "WebSockets History" tab monitor karo, especially chat ya live dashboards pe.
-* **⚡ Consequences:** Tum target ki sabse vulnerable, uninspected attack surface (real-time API) completely miss kar doge.
-
+* [[HL::**❌ Mistake:** Sirf HTTP history check karna aur WebSockets tab ignore karna.::HL]]* [[HL::**🤦 Why:** Beginners ko lagta hai ki saari API calls `POST /api/v1/...` aayengi.::HL]]* [[HL::**✅ The 'Pro' Way:** Hamesha Burp mein "WebSockets History" tab monitor karo, especially chat ya live dashboards pe.::HL]]* [[HL::**⚡ Consequences:** Tum target ki sabse vulnerable, uninspected attack surface (real-time API) completely miss kar doge.::HL]]
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
 * **Confusion 1 — "Kya wss:// HTTPS se alag hai?"**
-* **Galat soch:** Dono same chiz hain.
-* **Actually:** `ws://` (WebSocket) unencrypted hai jaise `http://`, aur `wss://` (WebSocket Secure) encrypted (TLS) hai jaise `https://`. Par WebSockets HTTP ke upar sirf handshake karte hain, fir binary stream ban jate hain.
-* **Prove karo:** Wireshark chalao. Tum dekhoge HTTP request 101 pe ruk jati hai, uske baad alag "WebSocket" protocol ke packets dikhte hain.
-
+* [[HL::**Galat soch:** Dono same chiz hain.::HL]]* [[HL::**Actually:** `ws://` (WebSocket) unencrypted hai jaise `http://`, aur `wss://` (WebSocket Secure) encrypted (TLS) hai jaise `https://`. Par WebSockets HTTP ke upar sirf handshake karte hain, fir binary stream ban jate hain.::HL]]* [[HL::**Prove karo:** Wireshark chalao. Tum dekhoge HTTP request 101 pe ruk jati hai, uske baad alag "WebSocket" protocol ke packets dikhte hain.::HL]]
 
 * **Confusion 2 — "CSWSH aur CSRF mein kya difference hai?"**
 * **Galat soch:** Dono bas alag naam hain same attack ke.
@@ -11787,11 +11780,7 @@ Bug bounty (HackerOne) mein ek famous chat application ka real-time ticker tha j
 * **Prove karo:** CSWSH ka payload JavaScript `new WebSocket('wss://target.com')` use karta hai jo victim ke cookies ke saath auth ho jata hai.
 
 
-* **Confusion 3 — "Kya WAFs WebSockets ko inspect nahi kar sakte?"**
-* **Galat soch:** Agar WAF laga hai toh XSS/SQLi block ho jayega.
-* **Actually:** "WebSockets HTTP nahi hain." Traditional WAFs HTTP request body (JSON/URL-encoded) ko parse karte hain. Ek baar connection upgrade (101) ho gaya, frames unke liye black-box type ban jate hain jab tak WAF explicitly WebSocket parsing ke liye configure na ho (jo mostly nahi hota).
-* **Prove karo:** Payload ko normal POST request mein bhejo (block hoga) vs WebSocket frame mein bhejo (execute hoga).
-
+* [[HL::**Confusion 3 — "Kya WAFs WebSockets ko inspect nahi kar sakte?"**::HL]]* [[HL::**Galat soch:** Agar WAF laga hai toh XSS/SQLi block ho jayega.::HL]]* [[HL::**Actually:** "WebSockets HTTP nahi hain." Traditional WAFs HTTP request body (JSON/URL-encoded) ko parse karte hain. Ek baar connection upgrade (101) ho gaya, frames unke liye black-box type ban jate hain jab tak WAF explicitly WebSocket parsing ke liye configure na ho (jo mostly nahi hota).::HL]]* [[HL::**Prove karo:** Payload ko normal POST request mein bhejo (block hoga) vs WebSocket frame mein bhejo (execute hoga).::HL]]
 
 
 ### 🛠️ 12. Troubleshooting Flowchart (Tool/Exploit Issues)
@@ -11814,11 +11803,11 @@ Bug bounty (HackerOne) mein ek famous chat application ka real-time ticker tha j
 
 ### ⚖️ 13. Comparison (HTTP vs WebSockets)
 
-| Feature | HTTP/REST APIs | WebSockets (WSS) APIs |
+| [[HL::Feature::HL]] | [[HL::HTTP/REST APIs::HL]] | [[HL::WebSockets (WSS) APIs::HL]] |
 | --- | --- | --- |
-| **Direction** | Unidirectional (Client requests, Server responds) | Bidirectional (Full-duplex communication) |
-| **Connection State** | Stateless (har request alag hai) | Persistent (ek lamba connection) |
-| **WAF Inspection** | Very strict (payloads easily detected) | Often bypassed (frames inspection is weak) |
+| [[HL::**Direction**::HL]] | [[HL::Unidirectional (Client requests, Server responds)::HL]] | [[HL::Bidirectional (Full-duplex communication)::HL]] |
+| [[HL::**Connection State**::HL]] | [[HL::Stateless (har request alag hai)::HL]] | [[HL::Persistent (ek lamba connection)::HL]] |
+| [[HL::**WAF Inspection**::HL]] | [[HL::Very strict (payloads easily detected)::HL]] | [[HL::Often bypassed (frames inspection is weak)::HL]] |
 ### 🔄 14. Kill Chain & Attack Phase Flow
 
 ```text
@@ -11851,8 +11840,8 @@ Bug bounty (HackerOne) mein ek famous chat application ka real-time ticker tha j
 
 ### ❓ 16. Interview & Certification Exam Q&A
 
-* **Q: WebSockets ke liye WAF bypass kyun easy hota hai?**
-**A:** Kyunki WAFs primarily HTTP protocol (Method, Headers, Body) ko analyze karne ke liye bane hote hain. WebSockets handshake ke baad ek raw persistent TCP stream mein convert ho jate hain jisme data "frames" mein flow hota hai. Agar WAF explicit frame inspection ke liye tuned nahi hai, toh payload WAF se seedha nikal jata hai.
+* [[HL::**Q: WebSockets ke liye WAF bypass kyun easy hota hai?**::HL]]
+[[HL::**A:** Kyunki WAFs primarily HTTP protocol (Method, Headers, Body) ko analyze karne ke liye bane hote hain. WebSockets handshake ke baad ek raw persistent TCP stream mein convert ho jate hain jisme data "frames" mein flow hota hai. Agar WAF explicit frame inspection ke liye tuned nahi hai, toh payload WAF se seedha nikal jata hai.::HL]]
 * **Q: CSWSH perform karne ke liye sabse important header konsa hai aur kyun?**
 **A:** `Origin` header. Server ko isi se pata chalta hai ki WebSocket connection attempt kis website se ho raha hai. Agar server `Origin` validate nahi karta, toh attacker kisi bhi random domain se WebSocket initiate karke victim ka session hijack kar sakta hai (using victim's cookies automatically sent by browser).
 * **Q: Burp Suite mein WebSockets test karte waqt agar connection disconnect ho jaye Repeater mein, tum kya karoge?**
@@ -11906,13 +11895,10 @@ REST API (JSON) ek open Postcard ki tarah hai — beech mein postman (proxy/Burp
 ### 📖 3. Technical Definition
 
 * **Precise English:** gRPC (Google Remote Procedure Call) is a modern, high-performance RPC framework that uses HTTP/2 for transport and Protocol Buffers (Protobuf) for binary serialization. It converts structured data into a compact binary stream, making it highly efficient but unreadable to standard text-based HTTP proxies.
-* **Hinglish Simplification:** gRPC ek fast communication tarika hai jahan API ka data text (JSON) ki jagah chote binary chunks (Protobuf) mein convert hokar HTTP/2 ke upar travel karta hai.
-
+* [[HL::**Hinglish Simplification:** gRPC ek fast communication tarika hai jahan API ka data text (JSON) ki jagah chote binary chunks (Protobuf) mein convert hokar HTTP/2 ke upar travel karta hai.::HL]]
 ### 🧠 4. Why This Matters (Pentester/Red Teamer ke liye Zaroorat Kyun Hai?)
 
-* **Problem:** Agar backend microservices ya mobile apps gRPC use kar rahe hain, toh unka traffic Burp Suite mein `application/grpc` content-type ke saath unreadable binary (gibberish) dikhega. Tum seedha payloads inject nahi kar paoge.
-* **Solution:** Binary serialization ko samajhna aur usko deserialize (decode) karke read/write format mein laana zaroori hai, taaki hidden vulnerabilities (BOLA/IDOR, SQLi) exploit ki ja sakein.
-* **What breaks if we don't know this?** Tum modern scalable apps ki poori API attack surface ko "encrypted" samajh ke skip kar doge, jabki wo sirf serialized hoti hai.
+* [[HL::**Problem:** Agar backend microservices ya mobile apps gRPC use kar rahe hain, toh unka traffic Burp Suite mein `application/grpc` content-type ke saath unreadable binary (gibberish) dikhega. Tum seedha payloads inject nahi kar paoge.::HL]]* [[HL::**Solution:** Binary serialization ko samajhna aur usko deserialize (decode) karke read/write format mein laana zaroori hai, taaki hidden vulnerabilities (BOLA/IDOR, SQLi) exploit ki ja sakein.::HL]]* **What breaks if we don't know this?** Tum modern scalable apps ki poori API attack surface ko "encrypted" samajh ke skip kar doge, jabki wo sirf serialized hoti hai.
 * **✅ Kab use karo (Use in engagement when):** Jab Burp HTTP history mein `Content-Type: application/grpc` ya `application/grpc-web` dikhe, aur body data human-readable na ho.
 * **❌ Kab mat karo / Alternative prefer karo:** Agar data already clear-text JSON ya XML mein aa raha hai, toh Protobuf tools ka koi use nahi hai.
 
@@ -12014,10 +12000,7 @@ Bug bounty programs mein modern Uber-like ride-sharing apps ya trading platforms
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Kya Protobuf aur JSON mein farq sirf language ka hai?"**
-* **Galat soch:** Dono text-based formats hain alag style mein.
-* **Actually:** JSON text-based aur human-readable hai. Protobuf binary-based aur computer-optimized hai (machine-readable). Protobuf mein field names (`"username": "admin"`) nahi jaate, sirf unke number tags (`"1": "admin"`) jaate hain, isliye woh chota aur fast hota hai.
-* **Prove karo:** JSON payload network pe easily padha ja sakta hai bina kisi special tool ke. Protobuf hex dump lagta hai jab tak decoder na ho.
+* [[HL::**Confusion 1 — "Kya Protobuf aur JSON mein farq sirf language ka hai?"**::HL]]* [[HL::**Galat soch:** Dono text-based formats hain alag style mein.::HL]]* [[HL::**Actually:** JSON text-based aur human-readable hai. Protobuf binary-based aur computer-optimized hai (machine-readable). Protobuf mein field names (`"username": "admin"`) nahi jaate, sirf unke number tags (`"1": "admin"`) jaate hain, isliye woh chota aur fast hota hai.::HL]]* **Prove karo:** JSON payload network pe easily padha ja sakta hai bina kisi special tool ke. Protobuf hex dump lagta hai jab tak decoder na ho.
 
 
 * **Confusion 2 — ".proto files kya karti hain?"**
@@ -12414,15 +12397,11 @@ Socho ek coffee shop ka menu board hai. Barista roz subah pichhe kitchen se (Ori
 ### 📖 3. Technical Definition
 
 * **Precise English:** Web Cache Poisoning occurs when an attacker exploits unkeyed parameters or HTTP headers to force a caching server (like Varnish or Cloudflare) to store a malicious response, which is then served to subsequent users requesting the same resource.
-* **Hinglish Simplification:** Jab hum server ke cache (fast memory) ko trick karke apna harmful data wahan save karwa dete hain, toh jab normal users wo URL kholte hain, unhe server ki jagah us cache se humara harmful data deliver hota hai.
-
+* [[HL::**Hinglish Simplification:** Jab hum server ke cache (fast memory) ko trick karke apna harmful data wahan save karwa dete hain, toh jab normal users wo URL kholte hain, unhe server ki jagah us cache se humara harmful data deliver hota hai.::HL]]
 ### 🧠 4. Why This Matters
 
-* **Problem:** Normal **Reflected XSS** (Cross-Site Scripting — target application mein malicious JavaScript inject karna) ko execute karne ke liye victim ko ek phishing link pe click karwana padta hai.
-* **Solution:** Cache poisoning se payload directly server ke cache mein store ho jata hai. Attacker ko kisi ko link nahi bhejna padta — victim jab normal legal URL bhi visit karega, toh usko exploit trigger ho jayega.
-* **What breaks?** Yeh vulnerability APIs aur web apps pe massive scale attack allow karti hai — ek hi jhatke mein hazaron users compromise ho sakte hain.
-* **✅ Kab use karo:** Jab target application **Cloudflare** (CDN / Web protection service) ya **Varnish** (caching proxy) use karti ho aur HTTP response mein `X-Cache: HIT` ya `CF-Cache-Status: HIT` headers dikhein.
-* **❌ Kab mat karo:** Agar response mein `Cache-Control: no-cache` ho, ya har request pe `MISS` aa raha ho, toh cache poisoning possible nahi hai. Live production user-facing URLs ko test mat karo bina cache-buster (`?cb=123`) lagaye warna real users attack ho jayenge.
+* [[HL::**Problem:** Normal **Reflected XSS** (Cross-Site Scripting — target application mein malicious JavaScript inject karna) ko execute karne ke liye victim ko ek phishing link pe click karwana padta hai.::HL]]* [[HL::**Solution:** Cache poisoning se payload directly server ke cache mein store ho jata hai. Attacker ko kisi ko link nahi bhejna padta — victim jab normal legal URL bhi visit karega, toh usko exploit trigger ho jayega.::HL]]* **What breaks?** Yeh vulnerability APIs aur web apps pe massive scale attack allow karti hai — ek hi jhatke mein hazaron users compromise ho sakte hain.
+* [[HL::**✅ Kab use karo:** Jab target application **Cloudflare** (CDN / Web protection service) ya **Varnish** (caching proxy) use karti ho aur HTTP response mein `X-Cache: HIT` ya `CF-Cache-Status: HIT` headers dikhein.::HL]]* **❌ Kab mat karo:** Agar response mein `Cache-Control: no-cache` ho, ya har request pe `MISS` aa raha ho, toh cache poisoning possible nahi hai. Live production user-facing URLs ko test mat karo bina cache-buster (`?cb=123`) lagaye warna real users attack ho jayenge.
 
 ### 🔍 5. Visual / Terminal Mein Kya Dikhega
 
@@ -12654,15 +12633,10 @@ Is topic mein hum seekhenge ki kaise developers naye API versions (jaise `/v2/`)
 ### 📖 3. Technical Definition
 
 * **Precise English:** Exploiting "Zombie APIs" or shadow APIs — older, deprecated versions of an API that remain active and accessible. These legacy endpoints often lack the security patches and authorization controls implemented in newer versions.
-* **Hinglish Simplification:** Nayi API banne ke baad purani API ko band na karna ek security risk hai. Attacker nayi secure URL ke number ko change karke purani vulnerable URL pe attack karta hai.
-
+* [[HL::**Hinglish Simplification:** Nayi API banne ke baad purani API ko band na karna ek security risk hai. Attacker nayi secure URL ke number ko change karke purani vulnerable URL pe attack karta hai.::HL]]
 ### 🧠 4. Why This Matters
 
-* **Problem:** Developer ne `/v2/users` mein BOLA (Broken Object Level Authorization — ek user doosre user ka data dekh sakta hai) fix kar diya, par `/v1/users` abhi bhi server pe live hai. **Backwards compatibility** (purane mobile apps ko support karne ke liye) ke chakkar mein security compromise ho gayi.
-* **Solution:** APIs ka proper lifecycle management hona chahiye aur purane endpoints ko kill karna zaroori hai.
-* **What breaks?** Attacker unpatched vulnerabilities ko "Patch Bypass" ki tarah use karke system compromise kar sakta hai.
-* **✅ Kab use karo:** Jab target API URL mein `/v2/`, `/v3/` dikhe. Ya fir endpoint bilkul secure lag raha ho aur tum older implementation test karna chahte ho.
-* **❌ Kab mat karo / Alternative prefer karo:** Agar API properly **Sunset headers** (HTTP header jo batata hai ki API kab deprecate/band hogi) return kar rahi hai aur endpoint permanently off hai, toh time waste mat karo.
+* [[HL::**Problem:** Developer ne `/v2/users` mein BOLA (Broken Object Level Authorization — ek user doosre user ka data dekh sakta hai) fix kar diya, par `/v1/users` abhi bhi server pe live hai. **Backwards compatibility** (purane mobile apps ko support karne ke liye) ke chakkar mein security compromise ho gayi.::HL]]* [[HL::**Solution:** APIs ka proper lifecycle management hona chahiye aur purane endpoints ko kill karna zaroori hai.::HL]]* [[HL::**What breaks?** Attacker unpatched vulnerabilities ko "Patch Bypass" ki tarah use karke system compromise kar sakta hai.::HL]]* [[HL::**✅ Kab use karo:** Jab target API URL mein `/v2/`, `/v3/` dikhe. Ya fir endpoint bilkul secure lag raha ho aur tum older implementation test karna chahte ho.::HL]]* **❌ Kab mat karo / Alternative prefer karo:** Agar API properly **Sunset headers** (HTTP header jo batata hai ki API kab deprecate/band hogi) return kar rahi hai aur endpoint permanently off hai, toh time waste mat karo.
 
 ### 💻 7. Hands-On — Lab-Ready Commands
 
@@ -12687,12 +12661,12 @@ v1         200       1850  (Zombie API found! Data structure might be different/
 
 #### 🛠️ Step-by-Step GUI Navigation (Burp Intruder)
 
-1. **Burp Suite:** Request ko pakdo jisme version number hai (e.g., `/v2/`).
-2. Request pe Right-click -> `Send to Intruder`.
-3. Intruder tab mein jao -> `Positions` sub-tab. `Clear §` pe click karo.
-4. Version number `2` ko highlight karo aur `Add §` pe click karo (jaise `/v§2§/`).
-5. `Payloads` tab mein jao -> Payload type ko **Numbers** set karo (From: 1, To: 10, Step: 1).
-6. **Start attack** pe click karo aur `200 OK` responses dhundo. Agar `/v1/` 200 OK de raha hai, toh use Repeater mein bhej kar wahan purane attacks (BOLA, Mass Assignment) try karo.
+1. [[HL::**Burp Suite:** Request ko pakdo jisme version number hai (e.g., `/v2/`).::HL]]
+2. [[HL::Request pe Right-click -> `Send to Intruder`.::HL]]
+3. [[HL::Intruder tab mein jao -> `Positions` sub-tab. `Clear §` pe click karo.::HL]]
+4. [[HL::Version number `2` ko highlight karo aur `Add §` pe click karo (jaise `/v§2§/`).::HL]]
+5. [[HL::`Payloads` tab mein jao -> Payload type ko **Numbers** set karo (From: 1, To: 10, Step: 1).::HL]]
+6. [[HL::**Start attack** pe click karo aur `200 OK` responses dhundo. Agar `/v1/` 200 OK de raha hai, toh use Repeater mein bhej kar wahan purane attacks (BOLA, Mass Assignment) try karo.::HL]]
 
 ### 🔒 8. Attack Surface & Defense
 
@@ -12701,10 +12675,7 @@ v1         200       1850  (Zombie API found! Data structure might be different/
 
 ### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** Agar `/v3/profile` endpoint secure nikla, toh man lena ki BOLA exist nahi karta aur aage badh jana.
-* **🤦 Why:** Beginners assume karte hain ki agar latest feature secure hai toh pichhle saare raste band honge.
-* **✅ The 'Pro' Way:** Hamesha purane versions (`/v1/`, `/v2/`, ya `/mobile/v1/`) ko manually brute-force karo. Un patched vulnerabilities yahi chhupi hoti hain.
-* **⚡ Consequences:** Ek aasan High-Severity finding miss ho jayegi jo ek simple URL path change karne se mil sakti thi.
+* [[HL::**❌ Mistake:** Agar `/v3/profile` endpoint secure nikla, toh man lena ki BOLA exist nahi karta aur aage badh jana.::HL]]* [[HL::**🤦 Why:** Beginners assume karte hain ki agar latest feature secure hai toh pichhle saare raste band honge.::HL]]* [[HL::**✅ The 'Pro' Way:** Hamesha purane versions (`/v1/`, `/v2/`, ya `/mobile/v1/`) ko manually brute-force karo. Un patched vulnerabilities yahi chhupi hoti hain.::HL]]* **⚡ Consequences:** Ek aasan High-Severity finding miss ho jayegi jo ek simple URL path change karne se mil sakti thi.
 
 ### 🔑 18. Keywords Coverage Verification
 
@@ -12844,8 +12815,7 @@ Socho tumhara ek dukaandaar dost hai jo tumhe call karke batata hai "Suresh ne 1
 ### 📖 3. Technical Definition
 
 * **Precise English:** Webhooks are asynchronous, user-defined HTTP callbacks triggered by specific events in a third-party service. Without proper cryptographic validation (like HMAC), attackers can forge payloads to bypass business logic or trigger state changes. (MITRE ATT&CK: T1190 — Exploit Public-Facing Application)
-* **Hinglish Simplification:** Webhook ek system hai jahan ek application dusri application ko HTTP request bhejti hai jab koi event hota hai (jaise payment success). Agar receiver is request ki authenticity verify nahi karta, toh attacker fake requests bhej sakta hai.
-
+* [[HL::**Hinglish Simplification:** Webhook ek system hai jahan ek application dusri application ko HTTP request bhejti hai jab koi event hota hai (jaise payment success). Agar receiver is request ki authenticity verify nahi karta, toh attacker fake requests bhej sakta hai.::HL]]
 ### 🧠 4. Why This Matters (Pentester/Red Teamer ke liye Zaroorat Kyun Hai?)
 
 * **Problem:** Agar API third-party service (jaise Stripe/GitHub) se aane wale webhooks ko bina cryptographic signature ke consume karti hai, toh koi bhi fake event (jaise `payment_intent.succeeded`) bhej sakta hai.
@@ -12935,10 +12905,7 @@ Bug bounty programs mein payment gateways (Stripe, Razorpay) ke integrations che
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Webhook aur API Polling mein kya farq hai?"**
-* **Galat soch:** Dono same tarike se data fetch karte hain.
-* **Actually:** Polling mein tumhara server baar-baar poochta hai "kya payment hui?". Webhooks **asynchronous** (event-driven, bina wait kiye background me chalne wala) hote hain — third-party khud batati hai "payment ho gayi".
-* **Prove karo:** Network tab mein dekho. Polling mein har 5 second mein GET request jayegi. Webhook mein sirf ek POST request aayegi jab event trigger hoga.
+* [[HL::**Confusion 1 — "Webhook aur API Polling mein kya farq hai?"**::HL]]* [[HL::**Galat soch:** Dono same tarike se data fetch karte hain.::HL]]* [[HL::**Actually:** Polling mein tumhara server baar-baar poochta hai "kya payment hui?". Webhooks **asynchronous** (event-driven, bina wait kiye background me chalne wala) hote hain — third-party khud batati hai "payment ho gayi".::HL]]* **Prove karo:** Network tab mein dekho. Polling mein har 5 second mein GET request jayegi. Webhook mein sirf ek POST request aayegi jab event trigger hoga.
 
 
 * **Confusion 2 — "Blind SSRF aur regular SSRF mein webhook context mein kya farq hai?"**
@@ -13069,11 +13036,11 @@ Burp Repeater mein SSRF parameter ke andar tum `url=http://billing-service:8080/
 
 #### 🛠️ Step-by-Step GUI Navigation (Burp Suite Repeater)
 
-1. Burp Suite proxy se ek aisi request pakdo jo external URLs fetch karti ho (e.g., Profile picture upload by URL).
-2. Request ko `Repeater` mein send karo (`Ctrl+R`).
-3. Vulnerable parameter (`file=` ya `url=`) mein internal hostname inject karo.
-4. Hostnames guess/bruteforce karo (Intruder use karke) e.g., `localhost`, `127.0.0.1`, `user-service.local`, `internal-api`.
-5. Send dabao aur dekho kya internal service bina auth ke data de rahi hai.
+1. [[HL::Burp Suite proxy se ek aisi request pakdo jo external URLs fetch karti ho (e.g., Profile picture upload by URL).::HL]]
+2. [[HL::Request ko `Repeater` mein send karo (`Ctrl+R`).::HL]]
+3. [[HL::Vulnerable parameter (`file=` ya `url=`) mein internal hostname inject karo.::HL]]
+4. [[HL::Hostnames guess/bruteforce karo (Intruder use karke) e.g., `localhost`, `127.0.0.1`, `user-service.local`, `internal-api`.::HL]]
+5. [[HL::Send dabao aur dekho kya internal service bina auth ke data de rahi hai.::HL]]
 
 #### 🔬 Attack Command (SSRF Pivoting via Burp Request)
 
