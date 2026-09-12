@@ -458,6 +458,9 @@ Sections: 3 | Topics: 7 | Subtopics: 29
 ===Section 1: Host Your Own MongoDB & Redis===
 Speaker yahan "pullify" ke through MongoDB aur Redis ko self-host karne, unhe GUI tools se connect karne, aur Python ke saath integrate karne ka complete process explain karta hai. `[⚠️ Derived]`
 
+> **[⚠️ CRITICAL CORRECTION]**
+> The speaker demonstrates exposing MongoDB and Redis on public ports (5432/5433). This is a serious architectural anti-pattern. **Databases should NEVER be exposed publicly.** Coolify explicitly supports private communication over Docker networks without publishing host ports. Use SSH tunneling to access databases via GUI tools locally.
+
 --1--Host Your Own MongoDB & Redis--
 Topic 1: MongoDB Setup & GUI Connection
 Subtopics: MongoDB Concept, Pullify Deployment, Version Selection, Port Configuration, MongoDB Compass, Public URL Connection
@@ -810,17 +813,16 @@ Here is the comprehensive list of the **Missing Topics**, why they are critical,
 
 ### 🚨 1. Automated Backups & Disaster Recovery (Crucial Missing Topic)
 
-The course teaches how to set up MinIO (an S3 alternative) and databases, but it **completely misses** how to link them together for automated backups.
+The course teaches how to set up MinIO and databases, but it **completely misses** the critical distinction between instance backups and application data backups.
 
 * **Missing Subtopics:**
-* Coolify Database Backup Configuration (Linking MariaDB/MongoDB to MinIO).
-* Setting up Backup Schedules (e.g., daily at 2 AM) using Cron syntax in Coolify.
-* Restoration Process: How to restore a database from a backup with one click.
-* VPS-Level Snapshots (Contabo/Vultr snapshot features).
-
+* Native Engine-Aware Scheduled Backups: Linking PostgreSQL/MariaDB/MongoDB/ClickHouse to S3-compatible targets natively in Coolify.
+* Retention Controls: Managing how many backups to keep.
+* **CRITICAL - Testing Restores:** A backup being "successful" does not prove it is restorable. You must routinely test restoring to a staging environment.
+* Coolify Instance Backup vs Application Backup: Instance backup saves Coolify's configuration/state, NOT your application databases or volumes.
 
 * **Why it MUST be in the notes:**
-Databases crash, and updates fail. If you don't have automated backups, you will have to manually SSH into the server, write complex `mysqldump` or `mongodump` commands, and manually transfer files. One typo in a manual database command can wipe out your entire production data. Coolify handles this via UI, which eliminates human error entirely.
+Databases crash, and updates fail. If you don't have automated backups, you will have to manually SSH into the server. Furthermore, assuming that a Coolify instance backup protects your database data is a fatal mistake. Coolify handles engine-aware backups natively via its UI, eliminating manual scripting, but this requires explicit configuration and rigorous restore-testing.
 
 ### 🚨 2. Scheduled Tasks & Cron Jobs (Server & Container Level)
 
@@ -853,12 +855,23 @@ If you ever host a custom Node.js, Python, or React application, doing it manual
 The curriculum shows hardcoding passwords (like pasting the database password into Mautic), but skips proper secrets management.
 
 * **Missing Subtopics:**
-* Using Coolify's Environment Variables (`.env`) UI.
-* Sharing variables across different containers.
-
+* Utilizing Coolify's Native Env Controls: Build vs Runtime variables, multiline secrets, and locked values.
+* Sharing variables across Team/Project/Environment/Server scopes.
+* Understanding the limits of Coolify's encrypted system vs Dedicated Enterprise Secret Management (e.g., HashiCorp Vault / OpenBao).
 
 * **Why it MUST be in the notes:**
-Manually opening files via `nano` in the terminal to edit `.env` files is risky; you might accidentally delete a line or break the syntax, crashing the app. Coolify provides a safe, GUI-based environment variable manager that prevents formatting errors.
+Manually opening files via `nano` in the terminal to edit `.env` files is risky. Coolify provides a safe, native, GUI-based environment variable manager. However, as you scale to dozens of microservices, you must understand that Coolify's system is not a replacement for a dedicated enterprise secrets-management system like Vault.
+
+### 🚨 4.5. Application Rollback ≠ Database Rollback (Disaster Recovery)
+
+Coolify has a rollback feature, but it is often deeply misunderstood by beginners.
+
+* **Missing Subtopics:**
+* Coolify's Rollback Mechanism: Redeploying an older retained application image.
+* State Persistence: Understanding that redeploying an image does NOT reverse database migrations, restore persistent storage, or undo external side effects.
+
+* **Why it MUST be in the notes:**
+This distinction deserves its own course module. **Application rollback ≠ release rollback ≠ database rollback ≠ disaster recovery.** If a bad deployment corrupts your database schema, hitting "Rollback" in Coolify will only revert the code, leaving the old code completely incompatible with the newly corrupted database.
 
 ### 🚨 5. Server Maintenance & Docker Cleanup
 
@@ -991,16 +1004,15 @@ Here is the final **Deep DevOps & PaaS Missing List (Topics 13 to 18)** to make 
 
 ### 🚨 13. Private Networking & DB Security (The "AWS VPC" Equivalent)
 
-**⚠️ Critical Flaw in Current Course:** Section 4 mein speaker ne MongoDB aur Redis ko `Public Port 5432/5433` par expose karke "Public URL" generate kiya hai. DevOps mein **kabhi bhi databases ko publicly internet par expose nahi karte**, warna ransomware bots unhe hack kar lete hain.
+**⚠️ Critical Flaw in Current Course:** Section 4 mein speaker ne MongoDB aur Redis ko `Public Port 5432/5433` par expose karke "Public URL" generate kiya hai. Yeh ek serious architectural anti-pattern hai. DevOps mein **kabhi bhi databases ko publicly internet par expose nahi karte**.
 
 * **Missing Subtopics:**
-* Coolify Internal Docker Networks (Connecting Apps to DBs privately).
-* Accessing Databases via SSH Tunnels (DBeaver/MongoDB Compass over SSH) without opening public ports.
-* Closing all unused VPS ports using UFW (Uncomplicated Firewall) via Coolify settings.
-
+* Coolify Native Internal Docker Networks: Connecting Apps to DBs privately without publishing host ports (this is supported natively in Coolify).
+* The Production Routing Pattern: `Internet → Cloudflare/edge → Coolify Proxy → Web/API` while `Web/API → private Docker network → DB/Redis`.
+* Preferring the VPS provider's graphical firewall/security-group UI to close unused ports (Coolify documentation states firewall config is handled by the provider/host, not inside Coolify settings).
 
 * **Why it MUST be in the notes:**
-Ek real PaaS databases ko ek "Private Cloud/VPC" mein rakhta hai. Agar aap MongoDB public karenge, toh Fail2Ban ke bawajood brute-force attacks honge. Internal network routing sikhana PaaS ka core concept hai.
+Ek real PaaS databases ko ek "Private Cloud/VPC" mein rakhta hai. Agar aap MongoDB public karenge, toh ransomware attacks honge. Internet se direct MongoDB ka connection kabhi nahi hona chahiye. Also, configuring firewalls via the VPS provider UI aligns perfectly with the "zero-CLI" philosophy.
 
 ### 🚨 14. PR Previews & Ephemeral Environments (The "Vercel / AWS Amplify" Equivalent)
 
@@ -1015,17 +1027,16 @@ Pichli baar humne GitHub Auto-Deploy (CI/CD) ki baat ki thi. Lekin modern PaaS (
 * **Why it MUST be in the notes:**
 DevOps mein aap seedha production (`main` branch) par code test nahi karte. PR Previews se aapka frontend/backend temporary URL par live ho jata hai testing ke liye. Zero commands, fully automated staging environments.
 
-### 🚨 15. Zero-Downtime Deployments & Health Checks (The "AWS Target Group Health" Equivalent)
+### 🚨 15. Rolling Updates & Zero-Downtime Realities (The "AWS Target Group Health" Equivalent)
 
 Jab aap Coolify se naya update push karte hain, agar naye code mein error ho, toh app crash ho jayegi.
 
 * **Missing Subtopics:**
 * Configuring Coolify/Docker Health Checks (e.g., checking if `/api/health` returns HTTP 200).
-* Implementing **Zero-Downtime Rolling Updates**.
-
+* The Myth of Guaranteed Zero Downtime: Why rolling updates do NOT automatically equal guaranteed zero downtime.
 
 * **Why it MUST be in the notes:**
-Ek proper PaaS pehle naye container ko start karta hai, uska "Health Check" karta hai. Agar naya container healthy hai, tabhi purane ko delete karta hai. Isse users ko deployment ke waqt 502 Bad Gateway errors nahi aate. Yeh UI se configure karna aana chahiye.
+Beginners assume that `healthy new container → old container removed = zero downtime`. Coolify explicitly states this is not guaranteed simply by rolling updates. The application *must* support readiness checks, graceful shutdown, backward-compatible database/API changes, shared state handling, and parallel instances. This needs to be a major lesson rather than a footnote.
 
 ### 🚨 16. App Scaling & Load Balancing (The "AWS Auto Scaling / ELB" Equivalent)
 
