@@ -711,7 +711,28 @@ Subtopics: Coolify Dashboard 2FA, TOTP Configuration, Recovery Codes
 
 * Depth Level: Deep
 * Coverage Angle: Practical only
-* Transcript mein content volume: Long explanation (Note: Replaced with zero-CLI UI approach)
+* Transcript mein content volume: Long explanation (Note: Replaced with zero-CLI UI approach)2. 🔴 Section 6 — SSH 2FA is still the old CLI/PAM implementation
+
+Target:
+Section 6 → Topic 3: Two-Factor Authentication (2FA) Implementation
+
+The Flaw:
+It still teaches PAM + sshd_config + Google Authenticator + manual SSH configuration.
+
+That is unnecessary complexity under your Coolify-first/zero-CLI operating philosophy.
+
+The Fix:
+Replace with:
+
+“Coolify Dashboard 2FA + Recovery Codes”
+
+Profile → Two-factor Authentication → Configure → TOTP → save recovery codes
+
+Coolify currently supports native TOTP 2FA and recovery codes. (coolify.io)
+
+Keep SSH hardening separately as:
+
+SSH keys + disable password authentication
 * Key terms from transcript: two-factor authentication, verification code
 * Explicit emphasis by speaker: None
 * Speaker ne jo analogies/examples use kiye: None
