@@ -1472,9 +1472,64 @@ Section 17: Infrastructure Snapshot & Full Recovery
 ==================================================================================
 
 
-# Section 18: GUI-First / Zero-CLI Operations
 
-### --18--GUI-First / Zero-CLI Operations--
+
+# Section 18: Data & Infrastructure Encryption
+
+### --18--Data & Infrastructure Encryption--
+
+## Topic 1: Encryption at Rest & Backup Protection
+
+**Subtopics:** Disk Encryption, Backup Encryption, Snapshot Encryption, Object-Storage Encryption, Encryption Keys, Key Management, Key Recovery, Key Rotation, Encrypted Restore Testing
+
+### [📊 SCOPE SIGNAL for Topic 1:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Both
+* **Transcript mein content volume:** Complete protection model for stored production data and backups
+* **Key terms from curriculum:** Disk Encryption, Backup Encryption, Snapshot Encryption, Object Storage Encryption, Encryption Key, Key Management, Key Recovery, Key Rotation, Restore Testing
+* **Explicit emphasis:** Backup ya snapshot protected hona aur encrypted hona separate requirements hain; encryption key lost hui toh data restore impossible ho sakta hai.
+* **Speaker ne jo analogies/examples use kiye:** None
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 1:
+
+[Encryption at Rest, Disk Encryption, Backup Encryption, Snapshot Encryption, Object Storage Encryption, Encryption Key, Key Management, Key Recovery, Key Rotation, Encrypted Backup, Encrypted Restore, Key Loss, Customer Data, User Data, Payment Data]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* **Testing/Offline Phase:** Production data, backups aur snapshots ke liye encryption strategy define karke encryption keys securely store ki jati hain.
+* **Fixing/Iteration Phase:** Encrypted backup ko restore karke verify kiya jata hai ki correct key available hone par data successfully recover hota hai.
+* **Live Production Phase:** Database, customer data, persistent files aur backup copies encrypted-at-rest protection ke saath maintain hoti hain.
+* **Additional context:** Encryption ka complete lifecycle:
+
+```text
+Generate Key
+↓
+Securely Store Key
+↓
+Encrypt Data
+↓
+Backup
+↓
+Rotate Key
+↓
+Preserve Recovery Capability
+↓
+Test Encrypted Restore
+```
+
+**Critical rule:** Encryption key ka backup/recovery mechanism khud production recovery architecture ka part hona chahiye.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Section 18: Data & Infrastructure Encryption
+    Topic 1: Encryption at Rest & Backup Protection
+
+==================================================================================
+
+# Section 19: GUI-First / Zero-CLI Operations
+
+### --19--GUI-First / Zero-CLI Operations--
 
 ## Topic 1: GUI → API → SSH Operating Philosophy
 
@@ -1504,15 +1559,17 @@ Section 17: Infrastructure Snapshot & Full Recovery
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 18: GUI-First / Zero-CLI Operations
+
+
+Section 19: GUI-First / Zero-CLI Operations
     Topic 1: GUI → API → SSH Operating Philosophy
 
 ==================================================================================
 
 
-# Section 19: Frontend, Backend & Mobile Production Delivery
+# Section 20: Frontend, Backend & Mobile Production Delivery
 
-### --19--Frontend, Backend & Mobile Production Delivery--
+### --20--Frontend, Backend & Mobile Production Delivery--
 
 ## Topic 1: Frontend Production Deployment
 
@@ -1596,7 +1653,7 @@ Section 18: GUI-First / Zero-CLI Operations
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 19: Frontend, Backend & Mobile Production Delivery
+Section 20: Frontend, Backend & Mobile Production Delivery
     Topic 1: Frontend Production Deployment
     Topic 2: Backend/API Production Deployment
     Topic 3: Mobile CI/CD with Jenkins
@@ -1604,9 +1661,9 @@ Section 19: Frontend, Backend & Mobile Production Delivery
 ==================================================================================
 
 
-# Section 20: Open-Source CI/CD & Container Registry
+# Section 21: Open-Source CI/CD & Container Registry
 
-### --20--Open-Source CI/CD & Container Registry--
+### --21--Open-Source CI/CD & Container Registry--
 
 ## Topic 1: Jenkins Self-Hosted CI/CD
 
@@ -1663,16 +1720,16 @@ Section 19: Frontend, Backend & Mobile Production Delivery
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 20: Open-Source CI/CD & Container Registry
+Section 21: Open-Source CI/CD & Container Registry
     Topic 1: Jenkins Self-Hosted CI/CD
     Topic 2: Self-Hosted Container Registry
 
 ==================================================================================
 
 
-# Section 21: E-Commerce Edge Protection
+# Section 22: E-Commerce Edge Protection
 
-### --21--E-Commerce Edge Protection--
+### --22--E-Commerce Edge Protection--
 
 ## Topic 1: API Rate Limiting & Abuse Protection
 
@@ -1729,16 +1786,16 @@ Section 20: Open-Source CI/CD & Container Registry
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 21: E-Commerce Edge Protection
+Section 22: E-Commerce Edge Protection
     Topic 1: API Rate Limiting & Abuse Protection
     Topic 2: Open-Source WAF & Edge Security Implementation
 
 ==================================================================================
 
 
-# Section 22: Production Secrets & Sensitive Credentials
+# Section 23: Production Secrets & Sensitive Credentials
 
-### --22--Production Secrets & Sensitive Credentials--
+### --23--Production Secrets & Sensitive Credentials--
 
 ## Topic 1: Self-Hosted Secret Management Lifecycle
 
@@ -1768,15 +1825,15 @@ Section 21: E-Commerce Edge Protection
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 22: Production Secrets & Sensitive Credentials
+Section 23: Production Secrets & Sensitive Credentials
     Topic 1: Self-Hosted Secret Management Lifecycle
 
 ==================================================================================
 
 
-# Section 23: Object Storage, Static Asset Caching & Media Delivery
+# Section 24: Object Storage, Static Asset Caching & Media Delivery
 
-### --23--Object Storage, CDN & Media Delivery--
+### --24--Object Storage, CDN & Media Delivery--
 
 ## Topic 1: Production Media Delivery with MinIO
 
@@ -1806,15 +1863,15 @@ Section 22: Production Secrets & Sensitive Credentials
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 23: Object Storage, Static Asset Caching & Media Delivery
+Section 24: Object Storage, Static Asset Caching & Media Delivery
     Topic 1: Production Media Delivery with MinIO
 
 ==================================================================================
 
 
-# Section 24: Environment & Release Isolation
+# Section 25: Environment & Release Isolation
 
-### --24--Environment & Release Isolation--
+### --25--Environment & Release Isolation--
 
 ## Topic 1: Development → Staging → Production Separation
 
@@ -1844,15 +1901,15 @@ Section 23: Object Storage, Static Asset Caching & Media Delivery
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 24: Environment & Release Isolation
+Section 25: Environment & Release Isolation
     Topic 1: Development → Staging → Production Separation
 
 ==================================================================================
 
 
-# Section 25: E-Commerce Capacity & Scaling
+# Section 26: E-Commerce Capacity & Scaling
 
-### --25--E-Commerce Capacity & Scaling--
+### --26--E-Commerce Capacity & Scaling--
 
 ## Topic 1: 1000-User Capacity Testing
 
@@ -1909,16 +1966,16 @@ Section 24: Environment & Release Isolation
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 25: E-Commerce Capacity & Scaling
+Section 26: E-Commerce Capacity & Scaling
     Topic 1: 1000-User Capacity Testing
     Topic 2: Scaling Decision Policy
 
 ==================================================================================
 
 
-# Section 26: E-Commerce Queue Architecture
+# Section 27: E-Commerce Queue Architecture
 
-### --26--E-Commerce Queue Architecture--
+### --27--E-Commerce Queue Architecture--
 
 ## Topic 1: Production Background Job System
 
@@ -1975,16 +2032,16 @@ Section 25: E-Commerce Capacity & Scaling
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 26: E-Commerce Queue Architecture
+Section 27: E-Commerce Queue Architecture
     Topic 1: Production Background Job System
     Topic 2: Retry, DLQ & Graceful Worker Operations
 
 ==================================================================================
 
 
-# Section 27: Production Logging & PII Protection
+# Section 28: Production Logging & PII Protection
 
-### --27--Production Logging & PII Protection--
+### --28--Production Logging & PII Protection--
 
 ## Topic 1: Structured Logging & Sensitive Data Redaction
 
@@ -2014,15 +2071,15 @@ Section 26: E-Commerce Queue Architecture
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 27: Production Logging & PII Protection
+Section 28: Production Logging & PII Protection
     Topic 1: Structured Logging & Sensitive Data Redaction
 
 ==================================================================================
 
 
-# Section 28: Application-Specific Release Engineering
+# Section 29: Application-Specific Release Engineering
 
-### --28--Application-Specific Release Engineering--
+### --29--Application-Specific Release Engineering--
 
 ## Topic 1: Backend Release Playbook
 
@@ -2106,7 +2163,7 @@ Section 27: Production Logging & PII Protection
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 28: Application-Specific Release Engineering
+Section 29: Application-Specific Release Engineering
     Topic 1: Backend Release Playbook
     Topic 2: Frontend Release Playbook
     Topic 3: Mobile Release Playbook
@@ -2114,9 +2171,9 @@ Section 28: Application-Specific Release Engineering
 ==================================================================================
 
 
-# Section 29: Coolify Daily Operations Mastery
+# Section 30: Coolify Daily Operations Mastery
 
-### --29--Coolify Daily Operations Mastery--
+### --30--Coolify Daily Operations Mastery--
 
 ## Topic 1: Frequently Used Coolify GUI Features
 
@@ -2173,16 +2230,16 @@ Section 28: Application-Specific Release Engineering
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 29: Coolify Daily Operations Mastery
+Section 30: Coolify Daily Operations Mastery
     Topic 1: Frequently Used Coolify GUI Features
     Topic 2: Coolify Deployment, Recovery & Resource Operations
 
 ==================================================================================
 
 
-# Section 30: Coolify API Automation
+# Section 31: Coolify API Automation
 
-### --30--Coolify API Automation--
+### --31--Coolify API Automation--
 
 ## Topic 1: API-Driven Production Deployment
 
@@ -2212,15 +2269,15 @@ Section 29: Coolify Daily Operations Mastery
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 30: Coolify API Automation
+Section 31: Coolify API Automation
     Topic 1: API-Driven Production Deployment
 
 ==================================================================================
 
 
-# Section 31: Unified Production Observability
+# Section 32: Unified Production Observability
 
-### --31--Unified Production Observability--
+### --32--Unified Production Observability--
 
 ## Topic 1: Metrics + Logs + Traces + Alerts
 
@@ -2250,7 +2307,7 @@ Section 30: Coolify API Automation
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 31: Unified Production Observability
+Section 32: Unified Production Observability
     Topic 1: Metrics + Logs + Traces + Alerts
 
 
