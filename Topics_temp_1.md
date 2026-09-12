@@ -843,7 +843,7 @@ Setting the literal groundwork and the Coolify control plane.
 * **1. VPS Capacity Selection:** Sizing the initial node to handle the Coolify control plane plus production workloads without memory starvation.
 * **2. VPS Account & Bootstrap:** Provisioning the initial Ubuntu server.
 * **3. Coolify Installation:** Running the automated bootstrap script.
-* **4. Coolify Dashboard + Projects/Resources:** Structuring logical environments (Production vs Staging) using Coolify Projects.
+* **4. Coolify Dashboard + Projects/Resources:** Teaching the `Project → Environment → Resource` architecture. One E-Commerce project contains separate Production and Staging Environments, which then contain the DB/Web resources.
 * **5. DNS + Domain:** Pointing global DNS records to the single VPS public IP.
 * **6. Traefik + HTTPS (Edge Routing & Auto TLS):** Utilizing Coolify Proxy (Traefik) as the ALB/Ingress equivalent. `General → Domains`. Let Coolify generate routes and TLS certs automatically.
 
@@ -853,11 +853,11 @@ Setting the literal groundwork and the Coolify control plane.
 Securing the perimeter before any application data or code is deployed.
 
 * **7. SSH Key Authentication:** Enforcing cryptographic login for the base server.
-* **8. Disable Password SSH:** Removing the #1 target for automated botnets.
+* **8. Disable Password SSH:** Disable SSH password authentication to eliminate password-guessing/brute-force authentication as an attack path.
 * **9. Coolify 2FA:** Securing the Coolify UI natively via `Profile → Two-factor Authentication → Configure → TOTP` and saving recovery codes offline.
 * **10. Provider Firewall:** Utilizing the VPS provider's graphical firewall UI to strictly close all unused ports (never exposing DBs to the public internet).
 * **11. Coolify API Token / Least Privilege:** Creating deploy-only tokens restricted by IP for automation. Never use root tokens for CI.
-* **12. Secret Management & Rotation Lifecycle (NEW):** Secrets are not just created once. The required workflow: identify secret → generate upstream → replace in Coolify UI → save → redeploy → validate health → revoke old secret.
+* **12. Secret Management & Rotation Lifecycle:** Secrets are not just created once. The required workflow: identify secret → generate upstream → replace in Coolify UI → save → redeploy → validate health → revoke old secret.
 
 ---
 
@@ -878,13 +878,20 @@ Deploying the stateless and stateful components of the application.
 The CI/CD pipeline and release engineering.
 
 * **20. Git / Forgejo:** Deploying a self-hosted Git forge outside the critical production workload whenever practical.
+  * **Coolify Auto Deploy + Watch Paths:** Utilizing monorepo watch paths (e.g., `apps/api/**`) to avoid unnecessary full-platform rebuilds.
 * **21. CI (Woodpecker/Forgejo Actions):** Building and testing the immutable artifact.
 * **22. Staging:** Deploying to a sandboxed URL before production.
 * **23. Smoke Testing:** Validating basic functionality post-deployment.
 * **24. Deployment Hooks:** Using pre/post deployment commands in the Coolify UI for cache clearing or schema preparation.
 * **25. Deployment History / Logs:** Using the Coolify UI to answer "What changed, what broke, and what version is serving customers?"
+  * **Deploy vs Redeploy vs Restart vs Force Deploy:**
+    * *Deploy:* First deployment.
+    * *Redeploy:* Normal release cycle.
+    * *Restart:* Recreate runtime without rebuild.
+    * *Force Deploy:* Bypass build cache for a fresh build.
+  * **Resource Operations (Clone vs Move):** Note that cloning configuration does NOT clone persistent data.
 * **26. Rolling Updates:** `healthy new container → old container removed`. **⚠️ CRITICAL CAVEAT:** Coolify application-level rolling updates are NOT supported for Docker Compose applications.
-* **27. Dependency & Version Pinning (NEW):** Avoid `latest` tags. Pin versions explicitly in staging, test, and promote to production to guarantee reproducibility.
+* **27. Dependency & Version Pinning:** Avoid `latest` tags. Pin versions explicitly in staging, test, and promote to production to guarantee reproducibility.
 * **28. Rollback:** Redeploying an older image. *(Warning: Application image rollback does NOT rollback database migrations).*
 
 ---
@@ -903,48 +910,49 @@ The CI/CD pipeline and release engineering.
 ## 📊 PHASE 6 — Production Operations
 Day-2 operations, observability, and maintenance.
 
-* **34. Coolify Metrics:** Monitoring server CPU/RAM usage.
-* **35. Uptime Kuma:** Tracking actual HTTP availability (502 Bad Gateway) vs just container health.
+* **34. Coolify Sentinel + Metrics | AWS EC2 Health/CloudWatch Equivalent:** Utilizing Sentinel (server heartbeat + health) and Metrics (resource history).
+* **35. Uptime Kuma:** Tracking actual external HTTP availability (502 Bad Gateway).
 * **36. Notifications:** Native Coolify event routing. Preferred policy: SMTP or a FOSS incident webhook instead of Telegram/Discord.
 * **37. Native Audit Logs:** Using built-in Coolify UI audit trails for authentication/deployment tracking before building custom logging stacks.
 * **38. Docker Cleanup:** `Servers → Server → Docker Cleanup`. Prioritize image retention; leave "Delete Unused Volumes" disabled unless positively identified.
 * **39. OS Patching:** Using the Coolify dashboard for safe, UI-driven OS security updates.
-* **40. Production Incident Runbook (NEW):** The Decision Tree: `RED alert → Logs → Healthcheck → Recent deployment? → Image Rollback? → DB impact? → DB Restore?` (Do not blindly troubleshoot; follow the path).
+* **40. Deployment Queue & Build Concurrency Control:** Managing `Servers → Configuration → Advanced` limits to prevent parallel builds from spiking CPU/RAM and starving the database/checkout.
+* **41. Production Incident Runbook:** The Decision Tree: `RED alert → Logs → Healthcheck → Recent deployment? → Image Rollback? → DB impact? → DB Restore?` (Do not blindly troubleshoot; follow the path).
 
 ---
 
 ## 💎 PHASE 7 — E-commerce Reliability
 Ensuring the platform handles real-world commerce anomalies safely.
 
-* **41. Payment Idempotency:** Ensuring payment gateway retries never create duplicate orders.
-* **42. Webhook Reconciliation:** Background reconciliation tasks for missed events.
-* **43. DB Migration Expand/Contract:** Ensuring schema changes are backward-compatible during rolling update overlap.
-* **44. DB Connection/Capacity Protection (NEW):** Handling connection exhaustion (e.g. 1000 requests → 1000 DB connections → checkout down). Implement application-side connection pooling before increasing Coolify resource limits.
-* **45. Queue Retries / DLQ:** Handling poison messages safely.
-* **46. Log Redaction / PII:** Ensuring CVVs/Passwords never hit JSON logs.
-* **47. Load Testing (k6):** Proactively finding capacity limits.
+* **42. Payment Idempotency:** Ensuring payment gateway retries never create duplicate orders.
+* **43. Webhook Reconciliation:** Background reconciliation tasks for missed events.
+* **44. DB Migration Expand/Contract:** Ensuring schema changes are backward-compatible during rolling update overlap.
+* **45. DB Connection/Capacity Protection:** Handling connection exhaustion (e.g. 1000 requests → 1000 DB connections → checkout down). Implement application-side connection pooling before increasing Coolify resource limits.
+* **46. Queue Retries / DLQ:** Handling poison messages safely.
+* **47. Log Redaction / PII:** Ensuring CVVs/Passwords never hit JSON logs.
+* **48. Load Testing (k6):** Proactively finding capacity limits.
 
 ---
 
 ## 📈 PHASE 8 — Scale-Up
 Scaling beyond a single server.
 
-* **48. Multi-Server Deployment (Experimental HA Path):** Coolify deploys apps to multiple nodes, but external load balancers and DB clustering remain your responsibility. (Persistent storage apps cannot use this!).
-* **49. External Load Balancer:** Distributing traffic across nodes.
-* **50. Stateless Horizontal Scaling:** Scaling web/API tiers via Coolify UI replicas.
-* **51. DB HA & MinIO HA:** Deploying DB replication or erasure coding.
-* **52. Advanced Observability:** Winston + SigNoz/Loki for distributed tracing.
-* **53. Security Scanning:** Trivy (Containers) and Gitleaks (Secrets) in CI pipelines.
+* **49. Multi-Server Deployment (Experimental HA Path):** Coolify deploys apps to multiple nodes, but external load balancers and DB clustering remain your responsibility. (Persistent storage apps cannot use this!).
+* **50. External Load Balancer:** Distributing traffic across nodes.
+* **51. Stateless Horizontal Scaling:** Scaling web/API tiers via Coolify UI replicas.
+* **52. DB HA & MinIO HA:** Deploying DB replication or erasure coding.
+* **53. Advanced Observability:** Winston + SigNoz/Loki for distributed tracing.
+* **54. Security Scanning:** Trivy (Containers) and Gitleaks (Secrets) in CI pipelines.
 
 ---
 
 ## 🧰 PHASE 9 — Optional / Specialized
 Non-critical add-ons for specific workflows.
 
-* **54. PR Previews:** Ephemeral environments for pull requests.
-* **55. Mobile CI/CD:** Using Fastlane for OTA updates and APK/IPA builds.
-* **56. Geo-testing / Browser Automation:** Selenium/Playwright testing matrix.
-* **57. Advanced Search:** Meilisearch/Typesense integration.
+* **55. PR Previews:** Ephemeral environments for pull requests.
+* **56. Mobile CI/CD:** Using Fastlane for OTA updates and APK/IPA builds.
+* **57. Geo-testing / Browser Automation:** Selenium/Playwright testing matrix.
+* **58. Advanced Search:** Meilisearch/Typesense integration.
 
 ---
 
