@@ -999,7 +999,8 @@ Topic 3: Release Engineering & Rollbacks
 Speaker yahan application data, database, aur Coolify instance configuration ka foolproof, immutable backup architecture samjhata hai. `[⚠️ Derived]`
 
 Topic 1: Backup Workflows & DR Testing
-Subtopics: DB Engine-Aware Backups, Application Storage Backups, Coolify Instance Backup, APP_KEY Recovery, External S3/MinIO, Full DR Drill
+Subtopics: DB Engine-Aware Backups, Application Storage Backups, Coolify Instance Backup, APP_KEY Recovery, External S3/MinIO, Full DR Drill, Restore Drill, Point-in-Time Recovery Verification, Backup Integrity Validation, Application Recovery Verification
+
 
 [📊 SCOPE SIGNAL for Topic 1:
 
@@ -1086,7 +1087,8 @@ Section 12: Production Operations (Phase 6)
 Speaker payment idiosyncrasies, schema migrations, aur high-traffic scenarios mein platform code aur database ko protect karne ki strategies discuss karta hai. `[⚠️ Derived]`
 
 Topic 1: Transaction & Database Protection
-Subtopics: Payment Idempotency, Webhook Reconciliation, DB Migration Strategy, Connection Exhaustion, Queue Retries
+Subtopics: Payment Idempotency, Webhook Reconciliation, DB Migration Strategy, Connection Exhaustion, Queue Retries, Duplicate Payment Simulation, Duplicate Webhook Simulation, Idempotency Verification, Expand/Contract Migration Lab, Backward Compatibility Test, DB Connection Exhaustion Test
+
 
 [📊 SCOPE SIGNAL for Topic 1:
 
@@ -1188,6 +1190,57 @@ Subtopics: Dedicated Build Server, External Load Balancer, Stateless Scaling, DB
 * **Live Production Phase:** Primary database fail hone par approved failover process ke through standby ko promote kiya jata hai.
 * **Additional context:** Replication failure se automatic safe failover guarantee nahi hota; failover mechanism, quorum/decision process aur application connection switching separately design karne padte hain.
 
+
+### 🧪 HANDS-ON DATABASE HA LAB:
+
+Lab 1: Primary → Replica Setup
+* Primary database configure karo.
+* Replica/standby node configure karo.
+* Replication establish karo.
+* Replication status verify karo.
+
+Lab 2: Replication Validation
+* Primary database mein test data insert karo.
+* Replica par verify karo ki data replicate hua.
+* Replication lag measure/observe karo.
+
+Lab 3: Replication Failure Simulation
+* Controlled test mein replication interrupt karo.
+* Replica lag / failure observe karo.
+* Failure identify karo.
+* Replication recover/re-sync karo.
+
+Lab 4: Primary Failure Simulation
+* Controlled environment mein primary database unavailable karo.
+* Standby/replica status verify karo.
+* Approved failover/promotion procedure execute karo.
+* Application ko promoted database se reconnect karo.
+* Read/write operations test karo.
+
+Lab 5: Recovery After Failover
+* Original primary ko recover/rebuild karo.
+* New replication relationship establish karo.
+* System ko stable state mein return karo.
+
+### ⚠️ CRITICAL DISTINCTIONS TO PRACTICE:
+
+Replication ≠ Backup
+Replication ≠ Restore
+Replication ≠ Automatic Failover
+Replica ≠ Independent Disaster Recovery Copy
+HA ≠ Zero Data Loss
+
+### ✅ VERIFICATION CHECKLIST:
+
+[ ] Replication healthy
+[ ] Replication lag observable
+[ ] Failure detected
+[ ] Replica promotion tested
+[ ] Application reconnect tested
+[ ] Read/write verified
+[ ] Original primary recovery tested
+[ ] New replication path verified
+
 ### 🧠 CORE CONCEPTS TO MASTER:
 
 * Replication ≠ Backup
@@ -1258,6 +1311,96 @@ Section 14: Scale-Up (Phase 8)
 * **Live Production Phase:** VPS 1 aur VPS 2 defined responsibilities ke saath continuously production workloads serve karte hain.
 * **Additional context:** Architecture ko “available servers” ke basis par nahi, failure domain, resource usage aur operational simplicity ke basis par design kiya jayega.
 
+
+### 🧪 HANDS-ON RECOVERY LAB:
+
+Lab 1: Database Restore Test
+* Production-like database ka fresh backup create karo.
+* Controlled test environment mein database damage/delete simulate karo.
+* Correct backup select karo.
+* Database restore perform karo.
+* Tables/data/counts verify karo.
+* Application ko restored database se reconnect karo.
+* Checkout/login/order flow test karo.
+
+Lab 2: Application File Restore Test
+* Persistent application data ka backup create karo.
+* Selected file/folder intentionally remove ya corrupt karo.
+* Backup se restore karo.
+* Application functionality verify karo.
+
+Lab 3: Coolify Recovery Test
+* Coolify instance/configuration backup available verify karo.
+* Fresh recovery environment mein restore process perform karo.
+* Applications, domains, secrets/configuration aur resource definitions verify karo.
+
+Lab 4: Full Recovery Drill
+* Assume primary VPS completely lost.
+* New VPS provision karo.
+* Network/firewall configure karo.
+* Coolify restore/rebuild karo.
+* Application + DB + Redis + MinIO restore karo.
+* Domain and HTTPS validate karo.
+* Final smoke test perform karo.
+
+### ✅ VERIFICATION CHECKLIST:
+
+[ ] Backup successfully created
+[ ] Backup integrity verified
+[ ] Database restored successfully
+[ ] Application started with restored data
+[ ] Users/orders/files visible
+[ ] Domain/HTTPS working
+[ ] RPO measured
+[ ] RTO measured
+[ ] Recovery procedure documented
+
+
+### 🧪 HANDS-ON E-COMMERCE RELIABILITY LAB:
+
+Lab 1: Duplicate Payment/Webhook Test
+* Test payment create karo.
+* Same webhook intentionally multiple times deliver karo.
+* Verify karo ki duplicate order create nahi hota.
+* Verify karo payment state only once transition hoti hai.
+* Idempotency key / event identifier inspect karo.
+
+Expected Result:
+1 payment event
+→ 1 order/payment state transition
+→ repeated webhook ignored or safely reconciled
+
+Lab 2: Webhook Reconciliation Test
+* Successful payment ke baad webhook delivery temporarily delay/miss simulate karo.
+* Order ko pending state mein observe karo.
+* Reconciliation process execute karo.
+* Final order/payment state verify karo.
+
+Lab 3: Expand/Contract Migration Test
+* Existing production-like schema create karo.
+* New schema ko backward-compatible way mein expand karo.
+* Old application version aur new application version ko simultaneously run karo.
+* Data compatibility verify karo.
+* Final cleanup/contract step perform karo.
+
+Lab 4: Connection Exhaustion Test
+* Controlled load generate karo.
+* DB connection count monitor karo.
+* Application connection pooling behavior observe karo.
+* Limit hit hone par application behavior verify karo.
+* Pool size/tuning change karke retest karo.
+
+### ✅ VERIFICATION CHECKLIST:
+
+[ ] Duplicate webhook safe
+[ ] Duplicate order prevented
+[ ] Payment state consistent
+[ ] Reconciliation works
+[ ] Old + new application versions compatible
+[ ] Migration rollback/recovery understood
+[ ] DB connections monitored
+[ ] Load ke under checkout remains functional
+
 ---
 
 ## Topic 2: Two-VPS Networking, Failure Scenarios & Public Exposure
@@ -1284,6 +1427,57 @@ Section 14: Scale-Up (Phase 8)
 * **Fixing/Iteration Phase:** Publicly exposed ports ko identify karke firewall aur network rules tighten kiye jate hain.
 * **Live Production Phase:** Public traffic sirf required edge endpoints tak jata hai; internal services private network ke through communicate karti hain.
 * **Additional context:** VPS 1 down aur VPS 2 down ke separate consequences aur recovery procedures document kiye jate hain.
+
+
+### 🧪 HANDS-ON DATABASE HA LAB:
+
+Lab 1: Primary → Replica Setup
+* Primary database configure karo.
+* Replica/standby node configure karo.
+* Replication establish karo.
+* Replication status verify karo.
+
+Lab 2: Replication Validation
+* Primary database mein test data insert karo.
+* Replica par verify karo ki data replicate hua.
+* Replication lag measure/observe karo.
+
+Lab 3: Replication Failure Simulation
+* Controlled test mein replication interrupt karo.
+* Replica lag / failure observe karo.
+* Failure identify karo.
+* Replication recover/re-sync karo.
+
+Lab 4: Primary Failure Simulation
+* Controlled environment mein primary database unavailable karo.
+* Standby/replica status verify karo.
+* Approved failover/promotion procedure execute karo.
+* Application ko promoted database se reconnect karo.
+* Read/write operations test karo.
+
+Lab 5: Recovery After Failover
+* Original primary ko recover/rebuild karo.
+* New replication relationship establish karo.
+* System ko stable state mein return karo.
+
+### ⚠️ CRITICAL DISTINCTIONS TO PRACTICE:
+
+Replication ≠ Backup
+Replication ≠ Restore
+Replication ≠ Automatic Failover
+Replica ≠ Independent Disaster Recovery Copy
+HA ≠ Zero Data Loss
+
+### ✅ VERIFICATION CHECKLIST:
+
+[ ] Replication healthy
+[ ] Replication lag observable
+[ ] Failure detected
+[ ] Replica promotion tested
+[ ] Application reconnect tested
+[ ] Read/write verified
+[ ] Original primary recovery tested
+[ ] New replication path verified
 
 ---
 
@@ -2268,6 +2462,71 @@ Section 30: Coolify API Automation
 * **Live Production Phase:** On-call/operator centralized observability se system health understand karta hai.
 * **Additional context:** Existing Sentinel, Metrics, Uptime Kuma aur Audit Logs ko ek coherent observability architecture mein connect kiya jayega.
 
+
+### 🧪 HANDS-ON OBSERVABILITY & ALERTING LAB:
+
+Lab 1: CPU / Memory Alert
+* CPU ya memory threshold define karo.
+* Controlled workload generate karo.
+* Metric rise observe karo.
+* Alert trigger verify karo.
+* Notification receive hone verify karo.
+
+Lab 2: Application Failure Alert
+* Test application intentionally stop/fail karo.
+* Health check / availability metric observe karo.
+* Alert trigger verify karo.
+* Application recover karo.
+* Alert resolution verify karo.
+
+Lab 3: HTTP Error Alert
+* Controlled 5xx responses generate karo.
+* Error rate metric observe karo.
+* Alert threshold trigger karo.
+* Root cause identify karo using logs + metrics.
+
+Lab 4: Database Dependency Failure
+* Controlled test environment mein DB connectivity interrupt karo.
+* Application errors observe karo.
+* Logs + metrics + health status correlate karo.
+* DB restore/reconnect ke baad recovery verify karo.
+
+Lab 5: End-to-End Incident Drill
+
+Incident:
+“Users are reporting checkout failures.”
+
+Process:
+Alert
+↓
+Dashboard
+↓
+Metrics
+↓
+Logs
+↓
+Trace (where available)
+↓
+Identify bottleneck
+↓
+Fix
+↓
+Verify recovery
+↓
+Document incident
+
+### ✅ VERIFICATION CHECKLIST:
+
+[ ] Alert created
+[ ] Alert intentionally triggered
+[ ] Notification received
+[ ] Dashboard used during incident
+[ ] Logs correlated with metrics
+[ ] Root cause identified
+[ ] Service recovered
+[ ] Alert automatically/explicitly resolved
+[ ] Incident documented
+
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -2306,6 +2565,71 @@ Section 31: Unified Production Observability
 * **Fixing/Iteration Phase:** Infrastructure-related changes ko controlled manner mein version-controlled configuration ke saath update kiya jata hai aur configuration drift identify ki jati hai.
 * **Live Production Phase:** Production environment known/reproducible configuration ke basis par operate hota hai; server replacement ya complete rebuild ke case mein same architecture ko systematically recreate kiya ja sakta hai.
 * **Additional context:** IaC ka primary goal unnecessary automation nahi, balki **reproducibility, consistency, auditability aur disaster recovery** hai.
+
+
+### 🧪 HANDS-ON OBSERVABILITY & ALERTING LAB:
+
+Lab 1: CPU / Memory Alert
+* CPU ya memory threshold define karo.
+* Controlled workload generate karo.
+* Metric rise observe karo.
+* Alert trigger verify karo.
+* Notification receive hone verify karo.
+
+Lab 2: Application Failure Alert
+* Test application intentionally stop/fail karo.
+* Health check / availability metric observe karo.
+* Alert trigger verify karo.
+* Application recover karo.
+* Alert resolution verify karo.
+
+Lab 3: HTTP Error Alert
+* Controlled 5xx responses generate karo.
+* Error rate metric observe karo.
+* Alert threshold trigger karo.
+* Root cause identify karo using logs + metrics.
+
+Lab 4: Database Dependency Failure
+* Controlled test environment mein DB connectivity interrupt karo.
+* Application errors observe karo.
+* Logs + metrics + health status correlate karo.
+* DB restore/reconnect ke baad recovery verify karo.
+
+Lab 5: End-to-End Incident Drill
+
+Incident:
+“Users are reporting checkout failures.”
+
+Process:
+Alert
+↓
+Dashboard
+↓
+Metrics
+↓
+Logs
+↓
+Trace (where available)
+↓
+Identify bottleneck
+↓
+Fix
+↓
+Verify recovery
+↓
+Document incident
+
+### ✅ VERIFICATION CHECKLIST:
+
+[ ] Alert created
+[ ] Alert intentionally triggered
+[ ] Notification received
+[ ] Dashboard used during incident
+[ ] Logs correlated with metrics
+[ ] Root cause identified
+[ ] Service recovered
+[ ] Alert automatically/explicitly resolved
+[ ] Incident documented
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Section 32: Infrastructure as Code / Configuration as Code
