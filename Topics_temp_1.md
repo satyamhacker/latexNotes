@@ -992,10 +992,33 @@ Subtopics: Git Forgejo, Build Strategy (Nixpacks/Docker), CI Actions, Container 
 * Live Production Phase: Coolify pulls the immutable digest/tag from the registry rather than compiling source code directly on the production node.
 
 --10--Production Delivery (Phase 4)--
-Topic 2: Release Engineering & Rollbacks
-Subtopics: Staging, Smoke Testing, Deployment Hooks, Deployment Types, Rolling Updates, Rollbacks
+Topic 2: Deep Dive: Forgejo Actions, Woodpecker & YAML (For Beginners)
+Subtopics: CI/CD Fundamentals, Jenkins Comparison, YAML Syntax Basics, Practical Pipeline Example
 
 [📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Practical
+* Transcript mein content volume: Detailed beginner-friendly breakdown of CI/CD concepts, tool comparisons, and YAML.
+* Key terms from transcript: Forgejo Actions, Woodpecker, CI/CD, Jenkins, Container-Native, Pipeline-as-Code, YAML, .woodpecker.yml
+* Explicit emphasis by speaker: Speaker clarifies why modern container-native CI (Woodpecker) is better than legacy systems (Jenkins), and how YAML simplifies configuration.
+* Speaker ne jo analogies/examples use kiye: "CI/CD tool ek robot ki tarah hai jo background mein test aur deploy karta hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Forgejo, Woodpecker, CI/CD, Jenkins, Container-Native, Pipeline-as-Code, YAML, data serialization, human-readable, .woodpecker.yml, npm test, webhook auto-deploy]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer ek simple `.woodpecker.yml` file likhta hai jo Jenkins ke complex UI configurations ko replace karti hai.
+* Fixing/Iteration Phase: Jab developer code Forgejo par push karta hai, Woodpecker ek isolated Docker container (jaise Node.js) banata hai aur usme automatically `npm test` run karta hai taaki errors pakde jaa sakein.
+* Live Production Phase: Test pass hone par Woodpecker ek curl webhook trigger karta hai, jo Coolify ko signal deta hai code ko production par auto-deploy karne ke liye.
+
+--10--Production Delivery (Phase 4)--
+Topic 3: Release Engineering & Rollbacks
+Subtopics: Staging, Smoke Testing, Deployment Hooks, Deployment Types, Rolling Updates, Rollbacks
+
+[📊 SCOPE SIGNAL for Topic 3:
 
 * Depth Level: Deep
 * Coverage Angle: Practical
@@ -1005,10 +1028,10 @@ Subtopics: Staging, Smoke Testing, Deployment Hooks, Deployment Types, Rolling U
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
-🔑 KEYWORDS DUMP for Topic 2:
+🔑 KEYWORDS DUMP for Topic 3:
 [Staging, sandboxed URL, Smoke Testing, Deployment Hooks, pre/post deployment commands, Deploy, Redeploy, Restart, Force Deploy, bypass build cache, Resource Operations, Clone vs Move, Rolling Semantics, Stop Grace Period, graceful SIGTERM, Docker Compose caveat, Dependency Pinning, Rollback, DB migrations]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
 * Testing/Offline Phase: Developer pins versions explicitly and deploys to a sandboxed Staging URL.
 * Fixing/Iteration Phase: Post-deploy hooks clear caches or prepare schemas. Developer learns the difference between Redeploy, Restart, and Force Deploy.
@@ -1232,7 +1255,8 @@ Topic 2: Reliability & Resource Management
 
 Section 10: Production Delivery (Phase 4)
 Topic 1: Build Strategy & CI/CD Pipeline
-Topic 2: Release Engineering & Rollbacks
+Topic 2: Deep Dive: Forgejo Actions, Woodpecker & YAML (For Beginners)
+Topic 3: Release Engineering & Rollbacks
 
 Section 11: Data Protection (Phase 5)
 Topic 1: Backup Workflows & DR Testing
