@@ -705,27 +705,27 @@ Subtopics: SSH Keys Concept, Keychain Usage, Key Generation, Public & Private Ke
 
 --6--Core Security with Coolify--
 Topic 3: Two-Factor Authentication (2FA) Implementation
-Subtopics: Two-Factor Authentication Concept, Google Authenticator App, PAM Installation, Authenticator Configuration, SSHD Configuration Updates
+Subtopics: Coolify Dashboard 2FA, TOTP Configuration, Recovery Codes
 
 [📊 SCOPE SIGNAL for Topic 3:
 
 * Depth Level: Deep
-* Coverage Angle: Both
-* Transcript mein content volume: Long explanation with live installation and SSH config modification
-* Key terms from transcript: two-factor authentication, google authentication app, verification code, sudo apt install, palm, sshd
+* Coverage Angle: Practical only
+* Transcript mein content volume: Long explanation (Note: Replaced with zero-CLI UI approach)
+* Key terms from transcript: two-factor authentication, verification code
 * Explicit emphasis by speaker: None
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 3:
-[two-factor authentication, google authentication app, ios, android, verification code, `sudo apt instal`, palm[unclear], PAM, `google-authenticator`, qr code, 828244, `sudo nano /etc/pam.d/sshd`, `include common-password`, `auth required pam_google_authenticator.so`, `ChallengeResponseAuthentication yes`, `AuthenticationMethods publickey,keyboard-interactive`, `sudo systemctl restart`]
+[Coolify Dashboard 2FA, Recovery Codes, Profile, Two-factor Authentication, Configure, TOTP]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
-* Testing/Offline Phase: Developer PAM library install karta hai aur server par Google Authenticator setup karke mobile app se QR code scan karta hai. Phir server ki config files (`pam.d/sshd` aur `sshd_config`) modify karke 2FA enforce karta hai.
-* Fixing/Iteration Phase: Developer reconnect karke verify karta hai ki ab login ke time system password bypass karne ke baad real-time verification code maang raha hai ya nahi.
-* Live Production Phase: Server par layer 2 security add ho jati hai. Ab agar kisi ke paas private key aa bhi jaye, tab bhi woh bina mobile app ke 6-digit OTP ke login nahi kar sakta.
-* Additional context: N/A
+* Testing/Offline Phase: Developer avoids PAM/sshd_config complexity and navigates to Coolify UI: Profile → Two-factor Authentication → Configure → TOTP.
+* Fixing/Iteration Phase: Developer secures and saves the recovery codes offline.
+* Live Production Phase: The Coolify control plane is secured natively via TOTP. Server SSH is hardened separately (SSH keys + disable password authentication).
+* Additional context: Coolify natively supports TOTP 2FA and recovery codes. ([coolify.io](https://coolify.io/docs/core/security/authentication/2fa?utm_source=chatgpt.com))
 
 --6--Core Security with Coolify--
 Topic 4: Fixing Coolify Connection Issues
