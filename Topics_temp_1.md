@@ -856,11 +856,12 @@ Securing the perimeter before any application data or code is deployed.
 * **8. Coolify Private Keys:** Essential distinction: Human SSH key ≠ Coolify server connection key ≠ API token. Keys & Tokens → Private Keys workflow for securing remote server connections.
 * **9. SSH Key Authentication:** Enforcing cryptographic login for the base server.
 * **10. Disable Password SSH:** Disable SSH password authentication to eliminate password-guessing/brute-force authentication as an attack path.
-* **11. Provider Firewall:** Utilizing the VPS provider's graphical firewall UI to strictly close all unused ports (never exposing DBs to the public internet).
+* **11. Provider Firewall:** Utilizing the VPS provider's graphical firewall UI to strictly close all unused ports (never exposing DBs to the public internet). **Post-Domain Firewall Hardening:** Close unused direct Coolify ports (e.g., 8000/6001/6002); retain only required ingress/SSH access once the domain is working.
 * **12. Coolify 2FA:** Securing the Coolify UI natively via `Profile → Two-factor Authentication → Configure → TOTP` and saving recovery codes offline.
 * **13. Team Access & RBAC:** Enforcing the `Owner / Admin / Member` model. `Member` is read-only.
 * **14. Coolify API Token / Least Privilege:** Creating deploy-only tokens restricted by IP for automation. Never use root tokens for CI.
 * **15. Secret Management & Rotation Lifecycle:** Secrets are not just created once. The required workflow: identify secret → generate upstream → replace in Coolify UI → save → redeploy → validate health → revoke old secret.
+  * **Shared Variables & Variable Scope:** Managing duplicated configuration across `Team → Project → Environment → Server`.
 
 ---
 
@@ -922,44 +923,45 @@ Day-2 operations, observability, and maintenance.
 * **45. Production Incident Runbook:** The Decision Tree: `RED alert → Logs → Healthcheck → Recent deployment? → Image Rollback? → DB impact? → DB Restore?` (Do not blindly troubleshoot).
 * **46. Docker Cleanup:** `Servers → Server → Docker Cleanup`. Prioritize image retention; leave "Delete Unused Volumes" disabled unless positively identified.
 * **47. OS Patching:** Server Patching workflow: `Detect → Review → Backup → Maintenance Window → Update → Validate`. (Not automatic security updates).
-* **48. Deployment Queue & Build Concurrency Control:** Managing `Servers → Configuration → Advanced` limits to prevent parallel builds from spiking CPU/RAM and starving the database/checkout.
-* **49. Resource Tags & Bulk Deployment:** Grouping applications for bulk operations and tag-level webhooks.
+* **48. Coolify Control-Plane Updates:** `Backup → Release Notes → Check Active Deployments → Update → Validate`. **⚠️ CRITICAL DISTINCTION:** Coolify update ≠ Application update ≠ Database update ≠ OS update.
+* **49. Deployment Queue & Build Concurrency Control:** Managing `Servers → Configuration → Advanced` limits to prevent parallel builds from spiking CPU/RAM and starving the database/checkout.
+* **50. Resource Tags & Bulk Deployment:** Grouping applications for bulk operations and tag-level webhooks.
 
 ---
 
 ## 💎 PHASE 7 — E-commerce Reliability
 Ensuring the platform handles real-world commerce anomalies safely.
 
-* **50. Payment Idempotency:** Ensuring payment gateway retries never create duplicate orders.
-* **51. Webhook Reconciliation:** Background reconciliation tasks for missed events.
-* **52. DB Migration Expand/Contract:** Ensuring schema changes are backward-compatible during rolling update overlap.
-* **53. DB Connection & Capacity Protection:** Handling connection exhaustion (e.g. 1000 requests → 1000 DB connections → checkout down). Implement application-side connection pooling before blindly increasing Coolify resource limits.
-* **54. Queue Retries / DLQ:** Handling poison messages safely.
-* **55. Log Redaction / PII:** Ensuring CVVs/Passwords never hit JSON logs.
-* **56. Load Testing (k6):** Proactively finding capacity limits.
+* **51. Payment Idempotency:** Ensuring payment gateway retries never create duplicate orders.
+* **52. Webhook Reconciliation:** Background reconciliation tasks for missed events.
+* **53. DB Migration Expand/Contract:** Ensuring schema changes are backward-compatible during rolling update overlap.
+* **54. DB Connection & Capacity Protection:** Handling connection exhaustion (e.g. 1000 requests → 1000 DB connections → checkout down). Implement application-side connection pooling before blindly increasing Coolify resource limits.
+* **55. Queue Retries / DLQ:** Handling poison messages safely.
+* **56. Log Redaction / PII:** Ensuring CVVs/Passwords never hit JSON logs.
+* **57. Load Testing (k6):** Proactively finding capacity limits.
 
 ---
 
 ## 📈 PHASE 8 — Scale-Up
 Scaling beyond a single server.
 
-* **57. Dedicated Build Server:** `Servers → Add → Build Server`. Isolating heavy Docker builds from the production API/DB nodes to protect CPU/RAM.
-* **58. Multi-Server Deployment (Experimental HA Path):** Coolify deploys apps to multiple nodes, but external load balancers and DB clustering remain your responsibility. (Persistent storage apps cannot use this!).
-* **59. External Load Balancer:** Distributing traffic across nodes.
-* **60. Stateless Horizontal Scaling:** Scaling web/API tiers via Coolify UI replicas.
-* **61. DB HA & MinIO HA:** Deploying DB replication or erasure coding.
-* **62. Centralized Logs & APM:** The evolution: `Coolify Logs → Native Log Drains → Centralized Logs (Winston/Loki) → APM (SigNoz)`.
-* **63. Security Scanning:** Trivy (Containers) and Gitleaks (Secrets) in CI pipelines.
+* **58. Dedicated Build Server:** `Servers → Add → Build Server`. Isolating heavy Docker builds from the production API/DB nodes to protect CPU/RAM.
+* **59. Multi-Server Deployment (Experimental HA Path):** Coolify deploys apps to multiple nodes, but external load balancers and DB clustering remain your responsibility. (Persistent storage apps cannot use this!).
+* **60. External Load Balancer:** Distributing traffic across nodes.
+* **61. Stateless Horizontal Scaling:** Scaling web/API tiers via Coolify UI replicas.
+* **62. DB HA & MinIO HA:** Deploying DB replication or erasure coding.
+* **63. Centralized Logs & APM:** The evolution: `Coolify Logs → Native Log Drains → Centralized Logs (Winston/Loki) → APM (SigNoz)`.
+* **64. Security Scanning:** Trivy (Containers) and Gitleaks (Secrets) in CI pipelines.
 
 ---
 
 ## 🧰 PHASE 9 — Optional / Specialized
 Non-critical add-ons for specific workflows.
 
-* **64. PR Previews:** Ephemeral environments for pull requests.
-* **65. Mobile CI/CD:** Using Fastlane for OTA updates and APK/IPA builds.
-* **66. Geo-testing / Browser Automation:** Selenium/Playwright testing matrix.
-* **67. Advanced Search:** Meilisearch/Typesense integration.
+* **65. PR Previews:** Ephemeral environments for pull requests.
+* **66. Mobile CI/CD:** Using Fastlane for OTA updates and APK/IPA builds.
+* **67. Geo-testing / Browser Automation:** Selenium/Playwright testing matrix.
+* **68. Advanced Search:** Meilisearch/Typesense integration.
 
 ---
 
