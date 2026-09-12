@@ -818,153 +818,420 @@ Sections: 1 | Topics: 5 | Subtopics: 33
 
 ==================================================================================
 
+===Section 7: Infrastructure Foundation (Phase 1)===
+Speaker yahan literal groundwork aur Coolify control plane set karne ka fundamental process explain karta hai, ensuring zero-CLI operations and correct architectural boundaries. `[⚠️ Derived]`
 
-# ---------Missing Topics need to be aded ---------------
+--7--Infrastructure Foundation (Phase 1)--
+Topic 1: VPS Sizing & Coolify Architecture
+Subtopics: VPS Capacity Selection, Coolify Bootstrap, Projects & Environments, Server Configuration
 
+[📊 SCOPE SIGNAL for Topic 1:
 
-Based on a deep analysis of the course curriculum provided, **the current syllabus is excellent for setting up a server, installing Coolify, hosting apps, and securing the VPS.** It covers foundational setup, routing, security, and deploying specific applications (Mautic, n8n, WordPress, MongoDB, MinIO).
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Practical
+* Transcript mein content volume: Explanation of initial node sizing and Project/Environment boundaries.
+* Key terms from transcript: VPS Capacity Selection, memory starvation, Coolify Installation, bootstrap script, Project, Environment, Resource, HA LIMITATION, single VPS, failure domain
+* Explicit emphasis by speaker: Emphasized that Project/Environment naming alone does not create network isolation; true networking relies on Docker.
+* Speaker ne jo analogies/examples use kiye: None
+]
 
-However, **NO, not all topics required for a complete, production-ready Platform as a Service (PaaS) experience are present.**
+🔑 KEYWORDS DUMP for Topic 1:
+[VPS Capacity Selection, memory starvation, Coolify Installation, bootstrap script, Ubuntu server, Project, Environment, Resource, E-Commerce project, Production, Staging, Server Configuration, localhost connection, HA LIMITATION, single VPS, failure domain]
 
-To truly turn your single VPS into an **"AWS-like Platform as a Service (PaaS)"** with a zero-command, error-free experience, we need to dig deeper into the operational boundaries of Coolify. 
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
-**Official Course Rule for "Zero CLI":** Zero manual CLI operations — not zero shell commands. 
-* Manual CLI (student SSH typing) creates typo risks. 
-* UI Automation (Coolify Scheduled Tasks executing predefined commands) is repeatable and safe. 
-* Emergency CLI (Coolify Web Terminal) is reserved solely for exceptional diagnosis/recovery.
+* Testing/Offline Phase: Developer provisions the initial Ubuntu server with enough capacity to prevent memory starvation, then runs the automated bootstrap script.
+* Fixing/Iteration Phase: Developer creates an E-Commerce project and separates it into Staging and Production environments.
+* Live Production Phase: Control plane and production workloads share the same failure domain, requiring careful resource allocation.
 
-Here is the definitive, **100% Final & Bulletproof E-Commerce Operating Playbook**, logically structured into 9 chronological phases.
+--7--Infrastructure Foundation (Phase 1)--
+Topic 2: Networking Boundaries & Edge Routing
+Subtopics: Destinations, Network Isolation, Domain & DNS, Traefik & Auto TLS
 
----
+[📊 SCOPE SIGNAL for Topic 2:
 
-## 🏗️ PHASE 1 — Infrastructure Foundation
-Setting the literal groundwork and the Coolify control plane.
+* Depth Level: Moderate
+* Coverage Angle: Practical
+* Transcript mein content volume: Explanation of network boundaries, DNS routing, and edge proxy setup.
+* Key terms from transcript: Destinations, Network Boundaries, Docker Network, private communication, isolation, global DNS records, public IP, Traefik, HTTPS, Edge Routing, Auto TLS, ALB/Ingress
+* Explicit emphasis by speaker: Let Coolify generate routes and TLS certs automatically using Traefik.
+* Speaker ne jo analogies/examples use kiye: None
+]
 
-* **1. VPS Capacity Selection:** Sizing the initial node to handle the Coolify control plane plus production workloads without memory starvation.
-* **2. Coolify Installation (VPS Account & Bootstrap):** Provisioning the initial Ubuntu server and running the automated bootstrap script.
-* **3. Coolify Dashboard + Projects/Environments:** Teaching the `Project → Environment → Resource` architecture. One E-Commerce project contains separate Production and Staging Environments, which then contain the DB/Web resources. **⚠️ CAVEAT:** Project/Environment naming alone does not create network isolation. Actual networking is Docker network/destination based.
-* **4. Server Configuration:** Managing the localhost connection. **⚠️ HA LIMITATION:** Single VPS = Coolify control-plane + workloads share same failure domain. This is not true HA.
-* **5. Destinations & Network Boundaries:** Coolify Destinations = Server + Docker Network. Teaching when to use the default destination vs custom destinations. Same destination = private communication; separate destination = isolation.
-* **6. Domain & DNS:** Pointing global DNS records to the single VPS public IP.
-* **7. Traefik + HTTPS (Edge Routing & Auto TLS):** Utilizing Coolify Proxy (Traefik) as the ALB/Ingress equivalent. `General → Domains`. Let Coolify generate routes and TLS certs automatically.
+🔑 KEYWORDS DUMP for Topic 2:
+[Destinations, Network Boundaries, Docker Network, default destination, custom destinations, private communication, isolation, global DNS records, single VPS public IP, Traefik, HTTPS, Edge Routing, Auto TLS, Coolify Proxy, ALB/Ingress equivalent]
 
----
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
-## 🔐 PHASE 2 — Security Before Production
-Securing the perimeter before any application data or code is deployed.
+* Testing/Offline Phase: Developer points global DNS records to the single VPS public IP.
+* Fixing/Iteration Phase: Developer maps destinations to ensure private communication via Docker networks.
+* Live Production Phase: Traefik automatically generates routes and TLS certificates for edge routing, acting as the ingress for live traffic.
 
-* **8. Coolify Private Keys:** Essential distinction: Human SSH key ≠ Coolify server connection key ≠ API token. Keys & Tokens → Private Keys workflow for securing remote server connections.
-* **9. SSH Key Authentication:** Enforcing cryptographic login for the base server.
-* **10. Disable Password SSH:** Disable SSH password authentication to eliminate password-guessing/brute-force authentication as an attack path.
-* **11. Provider Firewall:** Utilizing the VPS provider's graphical firewall UI to strictly close all unused ports (never exposing DBs to the public internet). **Post-Domain Firewall Hardening:** Close unused direct Coolify ports (e.g., 8000/6001/6002); retain only required ingress/SSH access once the domain is working.
-* **12. Coolify 2FA:** Securing the Coolify UI natively via `Profile → Two-factor Authentication → Configure → TOTP` and saving recovery codes offline.
-* **13. Team Access & RBAC:** Enforcing the `Owner / Admin / Member` model. `Member` is read-only.
-* **14. Coolify API Token / Least Privilege:** Creating deploy-only tokens restricted by IP for automation. Never use root tokens for CI.
-* **15. Secret Management & Rotation Lifecycle:** Secrets are not just created once. The required workflow: identify secret → generate upstream → replace in Coolify UI → save → redeploy → validate health → revoke old secret.
-  * **Shared Variables & Variable Scope:** Managing duplicated configuration across `Team → Project → Environment → Server`.
+===Section 8: Security Before Production (Phase 2)===
+Speaker perimeter security enforce karne ke liye SSH hardening, provider firewalls, RBAC, aur secret lifecycle management detail karta hai. `[⚠️ Derived]`
 
----
+--8--Security Before Production (Phase 2)--
+Topic 1: Server & Network Hardening
+Subtopics: Private Keys Distinction, SSH Key Authentication, Disable Password SSH, Provider Firewall Hardening
 
-## ⚙️ PHASE 3 — Application Runtime
-Deploying the stateless and stateful components of the application.
+[📊 SCOPE SIGNAL for Topic 1:
 
-* **16. Persistent Storage:** Mapping `/app/data` to a volume so redeployments do not destroy data. *(Note: Volume exists → Identify data → Backup data. A local volume is not a backup.)*
-* **17. Private Networking & Compose Caveat:** Connecting Apps to DBs privately without publishing host ports via internal Docker networks. **⚠️ COMPOSE CAVEAT:** Docker Compose apps use their own network by default. You MUST enable "Connect To Predefined Network" in the UI to allow them to talk to other Coolify resources (never use `localhost` or public IP).
-* **18. Database & Redis Deployment:** Provisioning the stateful database layer. **⚠️ ONE-CLICK CAVEAT:** One-click deployment ≠ automatic safe upgrade. Upgrade workflow: Backup → Read upstream release notes → Compare config → Update deliberately → Deploy → Verify. **Redis Durability & Recovery:** Handling cache vs queue/session state; configuring persistence + engine-specific backup/restore since it is not automatically backed up.
-* **19. Resource Limits:** Setting hard memory limits and CPU weights via the UI to prevent runaway workers from killing checkout.
-* **20. Health Checks & Readiness:** Defining HTTP endpoints to remove unhealthy containers from Traefik routing. **Crucial distinction:** Application readiness is defined via `Configuration → Healthcheck`, while Service readiness is defined via `Compose → healthcheck`.
-* **21. Automatic Restart Policy:** `Configuration → Advanced → Max Restart Count`. Temporary crashes will auto-recover; repeated crash loops hitting the limit must trigger alert/incident paths.
-* **22. Background Workers & Queues:** Processing heavy tasks (invoices, emails) off the main API thread.
-* **23. Scheduled Tasks:** Using the Coolify UI to automate repeatable shell commands safely inside containers.
+* Depth Level: Deep
+* Coverage Angle: Practical
+* Transcript mein content volume: Strict rules for SSH access and firewall port management.
+* Key terms from transcript: Coolify Private Keys, Human SSH key, API token, SSH Key Authentication, Disable Password SSH, brute-force, Provider Firewall, unused ports, Post-Domain Firewall Hardening
+* Explicit emphasis by speaker: Never expose DBs to the public internet; close unused direct Coolify ports (8000/6001/6002) once the domain is working.
+* Speaker ne jo analogies/examples use kiye: None
+]
 
----
+🔑 KEYWORDS DUMP for Topic 1:
+[Coolify Private Keys, Human SSH key, API token, Keys & Tokens, SSH Key Authentication, Disable Password SSH, brute-force authentication, attack path, Provider Firewall, unused ports, Post-Domain Firewall Hardening, ingress/SSH access]
 
-## 🚀 PHASE 4 — Production Delivery
-The CI/CD pipeline and release engineering.
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
-* **24. Git / Forgejo:** Deploying a self-hosted Git forge. **Coolify Auto Deploy + Watch Paths:** Utilizing monorepo watch paths (e.g., `apps/api/**`) to avoid unnecessary full-platform rebuilds.
-* **25. Build Strategy:** Nixpacks vs Railpack (Beta) vs Dockerfile vs Compose vs Docker Image. Teaching multi-stage Dockerfiles, non-root runtime, `.dockerignore`, and healthchecks.
-* **26. CI (Woodpecker/Forgejo Actions):** Building and testing the artifact. SCM/CI should live outside the critical production workload whenever practical.
-* **27. Container Registry:** Immutable image promotion. Forgejo/Docker Registry architecture: `Build → Registry → Tag/Digest → Coolify Deploy` instead of rebuilding from scratch in production.
-* **28. Staging:** Deploying to a sandboxed URL before production.
-* **29. Smoke Testing:** Validating basic functionality post-deployment.
-* **30. Deployment Hooks:** Using pre/post deployment commands in the Coolify UI for cache clearing or schema preparation.
-* **31. Deploy vs Redeploy vs Restart vs Force Deploy:**
-    * *Deploy:* First deployment.
-    * *Redeploy:* Normal release cycle.
-    * *Restart:* Recreate runtime without rebuild.
-    * *Force Deploy:* Bypass build cache for a fresh build.
-    * **Resource Operations (Clone vs Move):** Cloning configuration does NOT clone persistent data.
-* **32. Rolling / Stop-Start Semantics:** `healthy new container → old container removed`. Required operational controls: **Healthcheck + Stop Grace Period + graceful SIGTERM handling + backward-compatible DB/API** so in-flight requests finish cleanly. **⚠️ CRITICAL CAVEAT:** Coolify application-level rolling updates are NOT supported for Docker Compose applications.
-* **33. Dependency & Version Pinning:** Avoid `latest` tags. Pin versions explicitly in staging, test, and promote to production to guarantee reproducibility.
-* **34. Rollback:** Redeploying an older image. *(Warning: Application image rollback does NOT rollback database migrations).*
+* Testing/Offline Phase: Developer configures Coolify private keys for remote server connections and enforces human SSH key authentication.
+* Fixing/Iteration Phase: Password SSH is disabled to block brute-force attempts.
+* Live Production Phase: The provider firewall is locked down, closing ports 8000/6001/6002, ensuring only required ingress/SSH traffic reaches the production server.
 
----
+--8--Security Before Production (Phase 2)--
+Topic 2: UI Access Control & Secret Management
+Subtopics: Coolify 2FA, RBAC, API Tokens, Secret Lifecycle & Shared Variables
 
-## 🛡️ PHASE 5 — Data Protection
-**Rule:** Configure backup + external destination + test restores BEFORE launching production.
+[📊 SCOPE SIGNAL for Topic 2:
 
-* **35. DB Engine-Aware Backups:** Scheduled native Coolify dumps for PostgreSQL / MySQL / MariaDB / MongoDB / ClickHouse.
-* **36. Application Storage Backups:** Scheduled file-level archives of persistent storage (uploads, invoices).
-* **37. Coolify Instance Backup & APP_KEY Recovery:** Backing up the control plane configuration. **⚠️ CRITICAL RULE:** Instance backup alone is not enough. `APP_KEY` must be stored securely offline to decrypt private keys and credentials during disaster recovery.
-* **38. External S3/MinIO:** Replicating all backups to an offsite destination. Must use **retention + versioning/Object Lock/WORM** where required to guarantee a genuinely immutable backup.
-* **39. Full Disaster Recovery Drill:** Testing the complete chain: Coolify Instance + APP_KEY + Database + Persistent Storage + Application Recovery + RPO/RTO.
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Managing human and API access, plus the full lifecycle of secrets.
+* Key terms from transcript: Coolify 2FA, TOTP, recovery codes, Team Access, RBAC, Owner, Admin, Member, Least Privilege, API Token, Secret Management, Rotation Lifecycle, Shared Variables
+* Explicit emphasis by speaker: Secrets are not just created once; they require a strict rotation lifecycle. Never use root tokens for CI.
+* Speaker ne jo analogies/examples use kiye: None
+]
 
----
+🔑 KEYWORDS DUMP for Topic 2:
+[Coolify 2FA, TOTP, recovery codes offline, Team Access, RBAC, Owner / Admin / Member, read-only, Coolify API Token, Least Privilege, deploy-only tokens, Secret Management, Rotation Lifecycle, identify secret, generate upstream, replace in Coolify UI, save, redeploy, validate health, revoke old secret, Shared Variables, Variable Scope]
 
-## 📊 PHASE 6 — Production Operations
-Day-2 operations, observability, and maintenance.
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
-* **40. Coolify Sentinel:** Lightweight monitoring agent for server heartbeat + container health.
-* **41. Coolify Metrics:** Historic resource graphs (CPU/RAM usage).
-* **42. Uptime Kuma:** Tracking actual external HTTP availability (502 Bad Gateway).
-* **43. Notifications:** Native Coolify event routing. Preferred policy: SMTP or a FOSS incident webhook instead of Telegram/Discord.
-* **44. Native Audit Logs:** Using built-in Coolify UI audit trails for authentication/deployment tracking.
-* **45. Production Incident Runbook:** The Decision Tree: `RED alert → Logs → Healthcheck → Recent deployment? → Image Rollback? → DB impact? → DB Restore?` (Do not blindly troubleshoot).
-* **46. Docker Cleanup:** `Servers → Server → Docker Cleanup`. Prioritize image retention; leave "Delete Unused Volumes" disabled unless positively identified.
-* **47. OS Patching:** Server Patching workflow: `Detect → Review → Backup → Maintenance Window → Update → Validate`. (Not automatic security updates).
-* **48. Coolify Control-Plane Updates:** `Backup → Release Notes → Check Active Deployments → Update → Validate`. **⚠️ CRITICAL DISTINCTION:** Coolify update ≠ Application update ≠ Database update ≠ OS update.
-* **49. Deployment Queue & Build Concurrency Control:** Managing `Servers → Configuration → Advanced` limits to prevent parallel builds from spiking CPU/RAM and starving the database/checkout.
-* **50. Resource Tags & Bulk Deployment:** Grouping applications for bulk operations and tag-level webhooks.
+* Testing/Offline Phase: Developer enables TOTP 2FA, saves recovery codes offline, and sets up RBAC (Member as read-only).
+* Fixing/Iteration Phase: Deploy-only API tokens are created with IP restrictions for safe CI/CD automation.
+* Live Production Phase: Secrets are actively managed via a rotation lifecycle (generate → replace → redeploy → revoke) without manual server edits.
 
----
+===Section 9: Application Runtime (Phase 3)===
+Speaker yahan stateless aur stateful components deploy karne, private networking setup karne, aur auto-recovery mechanisms define karne ka breakdown deta hai. `[⚠️ Derived]`
 
-## 💎 PHASE 7 — E-commerce Reliability
-Ensuring the platform handles real-world commerce anomalies safely.
+--9--Application Runtime (Phase 3)--
+Topic 1: Storage, Networking & Databases
+Subtopics: Persistent Storage, Private Networking (Compose Caveat), Database & Redis Deployment
 
-* **51. Payment Idempotency:** Ensuring payment gateway retries never create duplicate orders.
-* **52. Webhook Reconciliation:** Background reconciliation tasks for missed events.
-* **53. DB Migration Expand/Contract:** Ensuring schema changes are backward-compatible during rolling update overlap.
-* **54. DB Connection & Capacity Protection:** Handling connection exhaustion (e.g. 1000 requests → 1000 DB connections → checkout down). Implement application-side connection pooling before blindly increasing Coolify resource limits.
-* **55. Queue Retries / DLQ:** Handling poison messages safely.
-* **56. Log Redaction / PII:** Ensuring CVVs/Passwords never hit JSON logs.
-* **57. Load Testing (k6):** Proactively finding capacity limits.
+[📊 SCOPE SIGNAL for Topic 1:
 
----
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Handling data persistence, Docker Compose networking traps, and database upgrade workflows.
+* Key terms from transcript: Persistent Storage, /app/data, Private Networking, Compose Caveat, internal Docker networks, Database & Redis Deployment, Upgrade workflow, Redis Durability
+* Explicit emphasis by speaker: One-click DB deployment ≠ automatic safe upgrade. You MUST enable "Connect To Predefined Network" in the UI for Compose apps.
+* Speaker ne jo analogies/examples use kiye: None
+]
 
-## 📈 PHASE 8 — Scale-Up
-Scaling beyond a single server.
+🔑 KEYWORDS DUMP for Topic 1:
+[Persistent Storage, /app/data, backup data, local volume, Private Networking, Compose Caveat, internal Docker networks, Connect To Predefined Network, localhost, Database & Redis Deployment, Upgrade workflow, Backup, upstream release notes, Compare config, Redis Durability, cache vs queue/session state]
 
-* **58. Dedicated Build Server:** `Servers → Add → Build Server`. Isolating heavy Docker builds from the production API/DB nodes to protect CPU/RAM.
-* **59. Multi-Server Deployment (Experimental HA Path):** Coolify deploys apps to multiple nodes, but external load balancers and DB clustering remain your responsibility. (Persistent storage apps cannot use this!).
-* **60. External Load Balancer:** Distributing traffic across nodes.
-* **61. Stateless Horizontal Scaling:** Scaling web/API tiers via Coolify UI replicas.
-* **62. DB HA & MinIO HA:** Deploying DB replication or erasure coding.
-* **63. Centralized Logs & APM:** The evolution: `Coolify Logs → Native Log Drains → Centralized Logs (Winston/Loki) → APM (SigNoz)`.
-* **64. Security Scanning:** Trivy (Containers) and Gitleaks (Secrets) in CI pipelines.
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
----
+* Testing/Offline Phase: Developer maps `/app/data` to a volume for persistence and deploys DB/Redis privately over internal Docker networks.
+* Fixing/Iteration Phase: Developer ensures Compose apps have "Connect To Predefined Network" checked so they don't expose public ports.
+* Live Production Phase: Database upgrades are manually gated through a strict Backup → Review → Update → Deploy workflow.
 
-## 🧰 PHASE 9 — Optional / Specialized
-Non-critical add-ons for specific workflows.
+--9--Application Runtime (Phase 3)--
+Topic 2: Reliability & Resource Management
+Subtopics: Resource Limits, Health Checks, Restart Policy, Background Workers, Scheduled Tasks
 
-* **65. PR Previews:** Ephemeral environments for pull requests.
-* **66. Mobile CI/CD:** Using Fastlane for OTA updates and APK/IPA builds.
-* **67. Geo-testing / Browser Automation:** Selenium/Playwright testing matrix.
-* **68. Advanced Search:** Meilisearch/Typesense integration.
+[📊 SCOPE SIGNAL for Topic 2:
 
----
+* Depth Level: Moderate
+* Coverage Angle: Practical
+* Transcript mein content volume: Setting constraints, health checks, and automating recurring commands.
+* Key terms from transcript: Resource Limits, CPU weights, Health Checks, Readiness, Auto-recover, Background Workers, Scheduled Tasks, zero-command
+* Explicit emphasis by speaker: Application readiness (Configuration) is distinct from Service readiness (Compose).
+* Speaker ne jo analogies/examples use kiye: Setting limits prevents "runaway workers from killing checkout".
+]
 
-**FINAL VERDICT:**
-By adhering to this 9-Phase lifecycle, enforcing the Backup-before-Production rule, maintaining strict Zero-CLI automation, and recognizing Coolify's orchestration boundaries, this syllabus constitutes a true **Production-Ready E-commerce Operating System.**
+🔑 KEYWORDS DUMP for Topic 2:
+[Resource Limits, hard memory limits, CPU weights, runaway workers, Health Checks, Readiness, HTTP endpoints, Traefik routing, Application readiness, Service readiness, Automatic Restart Policy, Max Restart Count, crash loops, Background Workers, Queues, heavy tasks, Scheduled Tasks, Coolify UI, safe automation]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer sets hard memory limits/CPU weights and defines HTTP endpoints for health checks.
+* Fixing/Iteration Phase: A Max Restart Count is configured to allow auto-recovery from temporary crashes without infinite looping.
+* Live Production Phase: Background queues handle heavy tasks (invoices/emails) while Scheduled Tasks run safe, UI-automated cron jobs without manual CLI typing.
+
+===Section 10: Production Delivery (Phase 4)===
+Speaker yahan Git integration, build strategies, CI/CD pipelines, aur safe release engineering (rollbacks/zero-downtime) ko cover karta hai. `[⚠️ Derived]`
+
+--10--Production Delivery (Phase 4)--
+Topic 1: Build Strategy & CI/CD Pipeline
+Subtopics: Git Forgejo, Build Strategy (Nixpacks/Docker), CI Actions, Container Registry
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Choosing build packs, using monorepos, and registry promotion.
+* Key terms from transcript: Git, Forgejo, monorepo watch paths, Build Strategy, Nixpacks, Railpack, Dockerfile, non-root runtime, CI, Woodpecker, Container Registry, Immutable image promotion
+* Explicit emphasis by speaker: SCM/CI should live outside the critical production workload. Build → Registry → Tag → Coolify Deploy is preferred over rebuilding in production.
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Git, Forgejo, Coolify Auto Deploy, monorepo watch paths, Build Strategy, Nixpacks, Railpack, Dockerfile, Compose, multi-stage, non-root runtime, .dockerignore, CI, Woodpecker, Forgejo Actions, artifact, Container Registry, Immutable image promotion, Tag/Digest]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer sets up Forgejo and configures monorepo watch paths to trigger partial rebuilds.
+* Fixing/Iteration Phase: The CI pipeline builds the Docker image and pushes it to a Container Registry.
+* Live Production Phase: Coolify pulls the immutable digest/tag from the registry rather than compiling source code directly on the production node.
+
+--10--Production Delivery (Phase 4)--
+Topic 2: Release Engineering & Rollbacks
+Subtopics: Staging, Smoke Testing, Deployment Hooks, Deployment Types, Rolling Updates, Rollbacks
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical
+* Transcript mein content volume: Semantic deployment operations, zero-downtime constraints, and version pinning.
+* Key terms from transcript: Staging, Smoke Testing, Deployment Hooks, Redeploy vs Restart, Force Deploy, Resource Operations, Rolling / Stop-Start Semantics, SIGTERM, Version Pinning, Rollback
+* Explicit emphasis by speaker: Rolling updates are NOT supported for Docker Compose apps in Coolify. Application rollback does NOT rollback DB migrations.
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Staging, sandboxed URL, Smoke Testing, Deployment Hooks, pre/post deployment commands, Deploy, Redeploy, Restart, Force Deploy, bypass build cache, Resource Operations, Clone vs Move, Rolling Semantics, Stop Grace Period, graceful SIGTERM, Docker Compose caveat, Dependency Pinning, Rollback, DB migrations]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer pins versions explicitly and deploys to a sandboxed Staging URL.
+* Fixing/Iteration Phase: Post-deploy hooks clear caches or prepare schemas. Developer learns the difference between Redeploy, Restart, and Force Deploy.
+* Live Production Phase: A rolling update replaces old containers only when the new ones are healthy. If an issue occurs, an image Rollback is triggered (while manually handling any DB schema incompatibilities).
+
+===Section 11: Data Protection (Phase 5)===
+Speaker yahan application data, database, aur Coolify instance configuration ka foolproof, immutable backup architecture samjhata hai. `[⚠️ Derived]`
+
+--11--Data Protection (Phase 5)--
+Topic 1: Backup Workflows & DR Testing
+Subtopics: DB Engine-Aware Backups, Application Storage Backups, Coolify Instance Backup, APP_KEY Recovery, External S3/MinIO, Full DR Drill
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Detailed rules for ensuring data survival via engine-specific dumps and immutable offsite storage.
+* Key terms from transcript: DB Engine-Aware Backups, file-level archives, Instance Backup, APP_KEY, External S3/MinIO, Object Lock, WORM, Disaster Recovery Drill, RPO/RTO
+* Explicit emphasis by speaker: CRITICAL RULE: Instance backup alone is not enough; APP_KEY must be stored offline. Configure backup BEFORE launching production.
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[DB Engine-Aware Backups, scheduled native dumps, PostgreSQL, MySQL, MariaDB, MongoDB, ClickHouse, Application Storage Backups, file-level archives, persistent storage, Coolify Instance Backup, APP_KEY Recovery, decrypt private keys, External S3/MinIO, offsite destination, retention, versioning, Object Lock, WORM, immutable backup, Full Disaster Recovery Drill, RPO/RTO]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer configures scheduled engine-aware database dumps and file-level volume archives.
+* Fixing/Iteration Phase: Backups are routed to an offsite S3/MinIO bucket with Object Lock (WORM) enabled for immutability. The `APP_KEY` is saved in an offline password manager.
+* Live Production Phase: A full DR drill is conducted to prove that the control plane, database, and persistent volumes can be restored within the RTO/RPO targets.
+
+===Section 12: Production Operations (Phase 6)===
+Speaker server observability, audit trails, patch management, aur safe troubleshooting techniques (Incident Runbooks) explain karta hai. `[⚠️ Derived]`
+
+--12--Production Operations (Phase 6)--
+Topic 1: Observability & Incident Response
+Subtopics: Coolify Sentinel, Metrics, Uptime Kuma, Notifications, Audit Logs, Incident Runbook
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual & Practical
+* Transcript mein content volume: Setting up monitoring tools and strict incident decision trees.
+* Key terms from transcript: Coolify Sentinel, Metrics, Uptime Kuma, Notifications, SMTP, webhook, Audit Logs, Incident Runbook
+* Explicit emphasis by speaker: Do not blindly troubleshoot. Follow the strict decision tree: RED alert → Logs → Healthcheck → Recent deployment? → Rollback.
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Coolify Sentinel, monitoring agent, server heartbeat, container health, Coolify Metrics, resource graphs, Uptime Kuma, 502 Bad Gateway, Notifications, event routing, SMTP, FOSS incident webhook, Native Audit Logs, authentication/deployment tracking, Production Incident Runbook, RED alert, Logs, Healthcheck, Image Rollback, DB Restore]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer sets up Uptime Kuma and Coolify Sentinel for external HTTP tracking and internal container health.
+* Fixing/Iteration Phase: Notifications are routed to an incident webhook/SMTP, and native audit logs are reviewed for team actions.
+* Live Production Phase: When an outage occurs, on-call staff follow the strict Decision Tree Runbook instead of blindly executing CLI commands.
+
+--12--Production Operations (Phase 6)--
+Topic 2: Maintenance & Queue Control
+Subtopics: Docker Cleanup, OS Patching, Coolify Updates, Build Concurrency, Bulk Deployment
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical
+* Transcript mein content volume: Workflows for cleaning disk space, patching systems safely, and preventing build starvation.
+* Key terms from transcript: Docker Cleanup, Unused Volumes, OS Patching, Maintenance Window, Coolify Control-Plane Updates, Deployment Queue, Build Concurrency Control, Resource Tags
+* Explicit emphasis by speaker: Coolify update ≠ Application update ≠ Database update ≠ OS update. Leave "Delete Unused Volumes" disabled unless explicitly identified.
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Docker Cleanup, image retention, Delete Unused Volumes, OS Patching, Maintenance Window, Coolify Control-Plane Updates, Release Notes, Active Deployments, Deployment Queue, Build Concurrency Control, parallel builds, spiking CPU/RAM, starving checkout, Resource Tags, Bulk Deployment, bulk operations]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer configures concurrency limits in the Advanced Settings to prevent parallel Docker builds from starving the database.
+* Fixing/Iteration Phase: During a maintenance window, the OS and Coolify Control-Plane are updated systematically (Backup → Review → Update → Validate).
+* Live Production Phase: Scheduled Docker Cleanup removes old images to reclaim disk space, strictly leaving volume data intact.
+
+===Section 13: E-commerce Reliability (Phase 7)===
+Speaker payment idiosyncrasies, schema migrations, aur high-traffic scenarios mein platform code aur database ko protect karne ki strategies discuss karta hai. `[⚠️ Derived]`
+
+--13--E-commerce Reliability (Phase 7)--
+Topic 1: Transaction & Database Protection
+Subtopics: Payment Idempotency, Webhook Reconciliation, DB Migration Strategy, Connection Exhaustion, Queue Retries
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual
+* Transcript mein content volume: Defensive programming and infrastructure guardrails for E-commerce.
+* Key terms from transcript: Payment Idempotency, Webhook Reconciliation, DB Migration Expand/Contract, Connection Exhaustion, connection pooling, Queue Retries, DLQ
+* Explicit emphasis by speaker: Implement application-side connection pooling before blindly increasing Coolify CPU/RAM resource limits.
+* Speaker ne jo analogies/examples use kiye: 1000 requests → 1000 DB connections → checkout down.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Payment Idempotency, duplicate orders, Webhook Reconciliation, background reconciliation, DB Migration Expand/Contract, backward-compatible, rolling update overlap, DB Connection Capacity Protection, Connection exhaustion, application-side connection pooling, Coolify resource limits, Queue Retries, DLQ, poison messages]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Code is structured for payment idempotency and webhook reconciliation to prevent duplicate billing.
+* Fixing/Iteration Phase: Schema migrations are designed using the Expand/Contract pattern to survive rolling update overlaps.
+* Live Production Phase: Application-level connection pooling protects the database from connection exhaustion during sudden traffic spikes, preventing checkout crashes.
+
+--13--E-commerce Reliability (Phase 7)--
+Topic 2: Security & Stress Testing
+Subtopics: Log Redaction, Load Testing (k6)
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Surface
+* Coverage Angle: Practical
+* Transcript mein content volume: Privacy controls and proactive traffic testing.
+* Key terms from transcript: Log Redaction, PII, Load Testing, k6
+* Explicit emphasis by speaker: None
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Log Redaction, PII, CVVs, Passwords, JSON logs, Load Testing, k6, capacity limits]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer configures log filters to strip PII and CVVs before they hit standard output.
+* Fixing/Iteration Phase: Load testing tools like k6 are used to proactively find the platform's breaking point.
+* Live Production Phase: The system operates safely under load, with customer data properly redacted from all observability platforms.
+
+===Section 14: Scale-Up (Phase 8)===
+Speaker yahan single server se aage badhkar dedicated build nodes, load balancers, aur centralized observability integrate karne ka roadmap batata hai. `[⚠️ Derived]`
+
+--14--Scale-Up (Phase 8)--
+Topic 1: Multi-Node Architecture
+Subtopics: Dedicated Build Server, External Load Balancer, Stateless Scaling, DB/MinIO HA
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual
+* Transcript mein content volume: Offloading build processes and distributing traffic horizontally.
+* Key terms from transcript: Dedicated Build Server, Multi-Server Deployment, External Load Balancer, Stateless Horizontal Scaling, DB HA, MinIO HA
+* Explicit emphasis by speaker: Coolify multi-server deploys apps, but external load balancers and DB clustering remain the user's responsibility.
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Dedicated Build Server, isolating heavy Docker builds, Multi-Server Deployment, Experimental HA Path, External Load Balancer, Distributing traffic, Stateless Horizontal Scaling, web/API tiers, Coolify UI replicas, DB HA, MinIO HA, DB replication, erasure coding]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer attaches a Dedicated Build Server to Coolify to isolate heavy CPU compilation away from the production database.
+* Fixing/Iteration Phase: An external Load Balancer is configured, and web tiers are scaled horizontally via Coolify replicas.
+* Live Production Phase: The infrastructure now spans multiple nodes, with highly available DB/MinIO clusters managing state externally.
+
+--14--Scale-Up (Phase 8)--
+Topic 2: Centralized Observability & Security Scanning
+Subtopics: Centralized Logs, APM, Security Scanning (Trivy/Gitleaks)
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Surface
+* Coverage Angle: Conceptual
+* Transcript mein content volume: Advancing from local logs to aggregated APM and CI security.
+* Key terms from transcript: Centralized Logs, Native Log Drains, APM, SigNoz, Security Scanning, Trivy, Gitleaks
+* Explicit emphasis by speaker: None
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Centralized Logs, APM, Coolify Logs, Native Log Drains, Winston/Loki, SigNoz, Security Scanning, Trivy, Containers, Gitleaks, Secrets, CI pipelines]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: CI pipelines are upgraded with Trivy and Gitleaks to block vulnerabilities and hardcoded secrets from being merged.
+* Fixing/Iteration Phase: Native log drains are configured to push Coolify logs to Loki.
+* Live Production Phase: Developers use centralized APM (SigNoz) to trace requests seamlessly across the multi-node microservices architecture.
+
+===Section 15: Optional / Specialized (Phase 9)===
+Speaker yahan advanced edge-case workflows like ephemeral preview environments aur mobile CI/CD cover karta hai. `[⚠️ Derived]`
+
+--15--Optional / Specialized (Phase 9)--
+Topic 1: Specialized CI & Advanced Integration
+Subtopics: PR Previews, Mobile CI/CD, Geo-testing, Advanced Search
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Surface
+* Coverage Angle: Conceptual
+* Transcript mein content volume: Brief overview of niche integrations.
+* Key terms from transcript: PR Previews, Mobile CI/CD, Fastlane, Geo-testing, Advanced Search, Meilisearch
+* Explicit emphasis by speaker: None
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[PR Previews, Ephemeral environments, pull requests, Mobile CI/CD, Fastlane, OTA updates, APK/IPA builds, Geo-testing, Browser Automation, Selenium, Playwright, Advanced Search, Meilisearch, Typesense integration]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer configures PR previews so every GitHub/Forgejo pull request spins up a temporary, isolated staging URL.
+* Fixing/Iteration Phase: Automated Playwright tests run against this preview URL, while Fastlane compiles mobile APKs simultaneously.
+* Live Production Phase: Features like Meilisearch are integrated to power advanced, lightning-fast product search for the end users.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 7: Infrastructure Foundation (Phase 1)
+Section 8: Security Before Production (Phase 2)
+Section 9: Application Runtime (Phase 3)
+Section 10: Production Delivery (Phase 4)
+Section 11: Data Protection (Phase 5)
+Section 12: Production Operations (Phase 6)
+Section 13: E-commerce Reliability (Phase 7)
+Section 14: Scale-Up (Phase 8)
+Section 15: Optional / Specialized (Phase 9)
+
+📊 PHASE SUMMARY:
+Sections: 9 | Topics: 18 | Subtopics: 71
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
 
