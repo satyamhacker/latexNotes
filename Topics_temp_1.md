@@ -891,7 +891,15 @@ Subtopics: Reverse Proxy Concept, Traffic Routing, TLS/SSL Certificates
 * Fixing/Iteration Phase: Traefik bina kisi manual config ke Let\'s Encrypt se HTTPS certificate issue aur renew karta hai.
 * Live Production Phase: Server par aane wala saara traffic pehle Traefik pe aata hai, aur phir wo use sahi Docker container (app) tak securely route kar deta hai.
 
-# Section 8: Security Before Production (Phase 2)===
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Section 7: Infrastructure Foundation (Phase 1)
+    Topic 1: VPS Sizing & Coolify Architecture
+    Topic 2: Networking Boundaries & Edge Routing
+    Topic 3: Deep Dive: Reverse Proxy, Traefik & Auto TLS (For Beginners)
+
+==================================================================================
+
+# Section 8: Security Before Production (Phase 2)
 Speaker perimeter security enforce karne ke liye SSH hardening, provider firewalls, RBAC, aur secret lifecycle management detail karta hai. `[⚠️ Derived]`
 
 --8--Security Before Production (Phase 2)--
@@ -940,7 +948,14 @@ Subtopics: Coolify 2FA, RBAC, API Tokens, Secret Lifecycle & Shared Variables
 * Fixing/Iteration Phase: Deploy-only API tokens are created with IP restrictions for safe CI/CD automation.
 * Live Production Phase: Secrets are actively managed via a rotation lifecycle (generate → replace → redeploy → revoke) without manual server edits.
 
-# Section 9: Application Runtime (Phase 3)===
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Section 8: Security Before Production (Phase 2)
+    Topic 1: Server & Network Hardening
+    Topic 2: UI Access Control & Secret Management
+
+==================================================================================
+
+# Section 9: Application Runtime (Phase 3)
 Speaker yahan stateless aur stateful components deploy karne, private networking setup karne, aur auto-recovery mechanisms define karne ka breakdown deta hai. `[⚠️ Derived]`
 
 --9--Application Runtime (Phase 3)--
@@ -989,7 +1004,15 @@ Subtopics: Resource Limits, Health Checks, Restart Policy, Background Workers, S
 * Fixing/Iteration Phase: A Max Restart Count is configured to allow auto-recovery from temporary crashes without infinite looping.
 * Live Production Phase: Background queues handle heavy tasks (invoices/emails) while Scheduled Tasks run safe, UI-automated cron jobs without manual CLI typing.
 
-# Section 10: Production Delivery (Phase 4)===
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Section 9: Application Runtime (Phase 3)
+    Topic 1: Storage, Networking & Databases
+    Topic 2: Reliability & Resource Management
+
+==================================================================================
+
+
+# Section 10: Production Delivery (Phase 4)
 Speaker yahan Git integration, build strategies, CI/CD pipelines, aur safe release engineering (rollbacks/zero-downtime) ko cover karta hai. `[⚠️ Derived]`
 
 --10--Production Delivery (Phase 4)--
@@ -1085,8 +1108,25 @@ Topic 3: Release Engineering & Rollbacks
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-==================================================================================
 
+Section 10: Production Delivery (Phase 4)
+    Topic 1: Build Strategy & CI/CD Pipeline
+    Topic 2: Deep Dive: Forgejo Actions, Woodpecker & YAML (For Beginners)
+    Topic 3: Release Engineering & Rollbacks
+    Topic 1: VPS Sizing & Coolify Architecture
+    Topic 2: Networking Boundaries & Edge Routing
+    Topic 1: Server & Network Hardening
+    Topic 2: UI Access Control & Secret Management
+    Topic 1: Storage, Networking & Databases
+    Topic 2: Reliability & Resource Management
+    Topic 1: Build Strategy & CI/CD Pipeline
+    Topic 2: Deep Dive: Forgejo Actions, Woodpecker & YAML (For Beginners)
+    Topic 3: Release Engineering & Rollbacks
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
 
 # Section 11: Data Protection (Phase 5)
 Speaker yahan application data, database, aur Coolify instance configuration ka foolproof, immutable backup architecture samjhata hai. `[⚠️ Derived]`
@@ -1114,7 +1154,15 @@ Subtopics: DB Engine-Aware Backups, Application Storage Backups, Coolify Instanc
 * Fixing/Iteration Phase: Backups are routed to an offsite S3/MinIO bucket with Object Lock (WORM) enabled for immutability. The `APP_KEY` is saved in an offline password manager.
 * Live Production Phase: A full DR drill is conducted to prove that the control plane, database, and persistent volumes can be restored within the RTO/RPO targets.
 
-===Section 12: Production Operations (Phase 6)===
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Section 11: Data Protection (Phase 5)
+    Topic 1: Backup Workflows & DR Testing
+
+
+==================================================================================
+
+
+# Section 12: Production Operations (Phase 6)
 Speaker server observability, audit trails, patch management, aur safe troubleshooting techniques (Incident Runbooks) explain karta hai. `[⚠️ Derived]`
 
 --12--Production Operations (Phase 6)--
@@ -1163,7 +1211,14 @@ Subtopics: Docker Cleanup, OS Patching, Coolify Updates, Build Concurrency, Bulk
 * Fixing/Iteration Phase: During a maintenance window, the OS and Coolify Control-Plane are updated systematically (Backup → Review → Update → Validate).
 * Live Production Phase: Scheduled Docker Cleanup removes old images to reclaim disk space, strictly leaving volume data intact.
 
-===Section 13: E-commerce Reliability (Phase 7)===
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Section 12: Production Operations (Phase 6)
+    Topic 1: Observability & Incident Response
+    Topic 2: Maintenance & Queue Control
+
+==================================================================================
+
+# Section 13: E-commerce Reliability (Phase 7)
 Speaker payment idiosyncrasies, schema migrations, aur high-traffic scenarios mein platform code aur database ko protect karne ki strategies discuss karta hai. `[⚠️ Derived]`
 
 --13--E-commerce Reliability (Phase 7)--
@@ -1212,7 +1267,14 @@ Subtopics: Log Redaction, Load Testing (k6)
 * Fixing/Iteration Phase: Load testing tools like k6 are used to proactively find the platform's breaking point.
 * Live Production Phase: The system operates safely under load, with customer data properly redacted from all observability platforms.
 
-===Section 14: Scale-Up (Phase 8)===
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Section 13: E-commerce Reliability (Phase 7)
+    Topic 1: Transaction & Database Protection
+    Topic 2: Security & Stress Testing
+
+==================================================================================
+
+# Section 14: Scale-Up (Phase 8)
 Speaker yahan single server se aage badhkar dedicated build nodes, load balancers, aur centralized observability integrate karne ka roadmap batata hai. `[⚠️ Derived]`
 
 --14--Scale-Up (Phase 8)--
@@ -1261,7 +1323,14 @@ Subtopics: Centralized Logs, APM, Security Scanning (Trivy/Gitleaks)
 * Fixing/Iteration Phase: Native log drains are configured to push Coolify logs to Loki.
 * Live Production Phase: Developers use centralized APM (SigNoz) to trace requests seamlessly across the multi-node microservices architecture.
 
-===Section 15: Optional / Specialized (Phase 9)===
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Section 14: Scale-Up (Phase 8)
+    Topic 1: Multi-Node Architecture
+    Topic 2: Centralized Observability & Security Scanning
+
+==================================================================================
+
+# Section 15: Optional / Specialized (Phase 9)
 Speaker yahan advanced edge-case workflows like ephemeral preview environments aur mobile CI/CD cover karta hai. `[⚠️ Derived]`
 
 --15--Optional / Specialized (Phase 9)--
@@ -1337,6 +1406,7 @@ Sections: 9 | Topics: 18 | Subtopics: 71
 
 ---
 
+
 # Section 16: Two-VPS Production Architecture
 
 ### --16--Two-VPS Production Architecture--
@@ -1394,6 +1464,14 @@ Sections: 9 | Topics: 18 | Subtopics: 71
 * **Additional context:** VPS 1 down aur VPS 2 down ke separate consequences aur recovery procedures document kiye jate hain.
 
 ---
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Section 16: Two-VPS Production Architecture
+    Topic 1: Practical 2-VPS Architecture & Workload Placement
+    Topic 2: Two-VPS Networking, Failure Scenarios & Public Exposure
+
+==================================================================================
+
 
 # Section 17: Infrastructure Snapshot & Full Recovery
 
@@ -1453,6 +1531,14 @@ Sections: 9 | Topics: 18 | Subtopics: 71
 
 ---
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Section 17: Infrastructure Snapshot & Full Recovery
+    Topic 1: Database, File & Server Snapshot Protection
+    Topic 2: Failure-to-Recovery Matrix & Disaster Restoration
+
+==================================================================================
+
+
 # Section 18: GUI-First / Zero-CLI Operations
 
 ### --18--GUI-First / Zero-CLI Operations--
@@ -1483,6 +1569,13 @@ Sections: 9 | Topics: 18 | Subtopics: 71
 * **Additional context:** Zero-CLI ka matlab zero Linux knowledge nahi; emergency recovery ke liye minimum Linux understanding maintain karni hai.
 
 ---
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Section 18: GUI-First / Zero-CLI Operations
+    Topic 1: GUI → API → SSH Operating Philosophy
+
+==================================================================================
+
 
 # Section 19: Frontend, Backend & Mobile Production Delivery
 
@@ -1569,6 +1662,15 @@ Sections: 9 | Topics: 18 | Subtopics: 71
 
 ---
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Section 19: Frontend, Backend & Mobile Production Delivery
+    Topic 1: Frontend Production Deployment
+    Topic 2: Backend/API Production Deployment
+    Topic 3: Mobile CI/CD with Jenkins
+
+==================================================================================
+
+
 # Section 20: Open-Source CI/CD & Container Registry
 
 ### --20--Open-Source CI/CD & Container Registry--
@@ -1626,6 +1728,14 @@ Sections: 9 | Topics: 18 | Subtopics: 71
 * **Additional context:** Registry itself must also be backed up because it is part of the delivery chain.
 
 ---
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Section 20: Open-Source CI/CD & Container Registry
+    Topic 1: Jenkins Self-Hosted CI/CD
+    Topic 2: Self-Hosted Container Registry
+
+==================================================================================
+
 
 # Section 21: E-Commerce Edge Protection
 
@@ -1685,6 +1795,14 @@ Sections: 9 | Topics: 18 | Subtopics: 71
 
 ---
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Section 21: E-Commerce Edge Protection
+    Topic 1: API Rate Limiting & Abuse Protection
+    Topic 2: WAF, DDoS & Edge Security
+
+==================================================================================
+
+
 # Section 22: Production Secrets & Sensitive Credentials
 
 ### --22--Production Secrets & Sensitive Credentials--
@@ -1715,6 +1833,13 @@ Sections: 9 | Topics: 18 | Subtopics: 71
 * **Additional context:** Root/admin credentials ko CI/CD pipelines mein reuse nahi karna.
 
 ---
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Section 22: Production Secrets & Sensitive Credentials
+    Topic 1: Self-Hosted Secret Management Lifecycle
+
+==================================================================================
+
 
 # Section 23: Object Storage, CDN & Media Delivery
 
@@ -1747,6 +1872,13 @@ Sections: 9 | Topics: 18 | Subtopics: 71
 
 ---
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Section 23: Object Storage, CDN & Media Delivery
+    Topic 1: Production Media Delivery with MinIO
+
+==================================================================================
+
+
 # Section 24: Environment & Release Isolation
 
 ### --24--Environment & Release Isolation--
@@ -1777,6 +1909,13 @@ Sections: 9 | Topics: 18 | Subtopics: 71
 * **Additional context:** Payment sandbox aur live credentials kabhi interchange nahi hone chahiye.
 
 ---
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Section 24: Environment & Release Isolation
+    Topic 1: Development → Staging → Production Separation
+
+==================================================================================
+
 
 # Section 25: E-Commerce Capacity & Scaling
 
@@ -1836,6 +1975,14 @@ Sections: 9 | Topics: 18 | Subtopics: 71
 
 ---
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Section 25: E-Commerce Capacity & Scaling
+    Topic 1: 1000-User Capacity Testing
+    Topic 2: Scaling Decision Policy
+
+==================================================================================
+
+
 # Section 26: E-Commerce Queue Architecture
 
 ### --26--E-Commerce Queue Architecture--
@@ -1894,6 +2041,14 @@ Sections: 9 | Topics: 18 | Subtopics: 71
 
 ---
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Section 26: E-Commerce Queue Architecture
+    Topic 1: Production Background Job System
+    Topic 2: Retry, DLQ & Graceful Worker Operations
+
+==================================================================================
+
+
 # Section 27: Production Logging & PII Protection
 
 ### --27--Production Logging & PII Protection--
@@ -1924,6 +2079,13 @@ Sections: 9 | Topics: 18 | Subtopics: 71
 * **Additional context:** Production logging ka goal debugging hona chahiye, secret/data leakage nahi.
 
 ---
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Section 27: Production Logging & PII Protection
+    Topic 1: Structured Logging & Sensitive Data Redaction
+
+==================================================================================
+
 
 # Section 28: Application-Specific Release Engineering
 
@@ -2010,6 +2172,15 @@ Sections: 9 | Topics: 18 | Subtopics: 71
 
 ---
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Section 28: Application-Specific Release Engineering
+    Topic 1: Backend Release Playbook
+    Topic 2: Frontend Release Playbook
+    Topic 3: Mobile Release Playbook
+
+==================================================================================
+
+
 # Section 29: Coolify Daily Operations Mastery
 
 ### --29--Coolify Daily Operations Mastery--
@@ -2068,6 +2239,14 @@ Sections: 9 | Topics: 18 | Subtopics: 71
 
 ---
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Section 29: Coolify Daily Operations Mastery
+    Topic 1: Frequently Used Coolify GUI Features
+    Topic 2: Coolify Deployment, Recovery & Resource Operations
+
+==================================================================================
+
+
 # Section 30: Coolify API Automation
 
 ### --30--Coolify API Automation--
@@ -2099,6 +2278,13 @@ Sections: 9 | Topics: 18 | Subtopics: 71
 
 ---
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Section 30: Coolify API Automation
+    Topic 1: API-Driven Production Deployment
+
+==================================================================================
+
+
 # Section 31: Unified Production Observability
 
 ### --31--Unified Production Observability--
@@ -2129,6 +2315,13 @@ Sections: 9 | Topics: 18 | Subtopics: 71
 * **Additional context:** Existing Sentinel, Metrics, Uptime Kuma aur Audit Logs ko ek coherent observability architecture mein connect kiya jayega.
 
 ---
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Section 31: Unified Production Observability
+    Topic 1: Metrics + Logs + Traces + Alerts
+
+==================================================================================
+
 
 # FINAL ADDITIONAL PHASE SUMMARY
 
@@ -2213,7 +2406,10 @@ Open-source + 2 VPS + GUI-first + frontend/backend/mobile
 Ye skeleton aapke existing master curriculum ke **next continuation** ke roop mein directly use kiya ja sakta hai. Original curriculum ke existing concepts—private networking, security, CI/CD, backups/DR, reliability, e-commerce protection, multi-node architecture aur observability—inke saath ye additions intentionally overlap ko minimum rakhte hue missing operational layer fill karte hain.  
 
 
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Section 31: Unified Production Observability
 
 ==================================================================================
+
 
