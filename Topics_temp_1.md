@@ -1302,3 +1302,416 @@ Aapne ab saare possible edges cover kar liye hain. Agar aap apne notes mein in *
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+Layer 6 — True Platform Resilience
+31. Externalized Disaster Recovery | AWS Backup + Multi-Region DR Equivalent
+
+Coolify/FOSS: Coolify instance backup + database backup + MinIO on a separate VPS/server.
+
+Zero-CLI workflow
+Deploy MinIO through Coolify.
+Preferably place MinIO on Server B, not the same production server.
+Create a dedicated backup bucket.
+In Coolify → S3 Storages, enter the MinIO endpoint/bucket/credentials.
+Validate the storage.
+For each supported database → Backups → add a scheduled backup.
+Set retention for both local and remote copies.
+Enable Coolify instance backup and point it at remote storage where appropriate.
+Keep the encryption material required to decrypt Coolify's stored secrets outside the VPS.
+
+Coolify currently supports MinIO and other S3-compatible destinations.
+
+Why this matters
+
+Putting MinIO on the same physical VPS as the database means:
+
+VPS dies → database dies → MinIO dies → backup dies.
+
+That is not disaster recovery.
+
+Impact
+
+This is the first step from “backup” to recoverability.
+
+32. 3-2-1 Backup Architecture | AWS Backup Vault Equivalent
+
+Tool: Coolify + MinIO + second independent storage location.
+
+Workflow
+
+Design three copies:
+
+Primary data
+
+→ local backup
+
+→ remote MinIO
+
+→ second independent copy
+
+The third copy can be another VPS or offline/exported storage.
+
+Why critical
+
+A ransomware event, filesystem corruption, provider failure or accidental deletion can destroy both production and its backup if they're colocated.
+
+Impact
+
+Introduces the fundamental DR rule:
+
+Backup location must fail independently from the workload.
+
+33. Restore Drills & RPO/RTO | AWS Disaster Recovery Equivalent
+
+Tool: Coolify Backups + disposable staging environment.
+
+Workflow
+Create a staging environment.
+Restore an actual production database backup.
+Restore persistent object/data storage.
+Deploy the matching application image.
+Point staging at restored data.
+Execute login, checkout, order, inventory and admin flows.
+Record recovery time.
+Document the maximum acceptable data loss.
+
+Coolify provides database import/restore workflows, but restore testing remains your responsibility.
+
+Production disaster prevented
+
+Having a backup that nobody has successfully restored.
+
+Impact
+
+Transforms:
+
+“We have backups.”
+
+into:
+
+“We know exactly how long recovery takes.”
+
+
+36. Database HA & Replication | AWS RDS Multi-AZ Equivalent
+
+Tool: PostgreSQL streaming replication / Patroni, MongoDB replica set, MariaDB Galera or equivalent FOSS topology.
+
+Workflow
+
+Deploy the required database topology as a multi-container/multi-server Service where supported, connect through private networks, and automate health/failover mechanisms.
+
+Critical warning
+
+Coolify provides the deployment/control layer; database high availability itself is not magically supplied by Coolify.
+
+Disaster prevented
+
+Single database host dies and the entire order system disappears.
+
+Impact
+
+This is one of the most important gaps in the existing “AWS-like” claim.
+
+37. MinIO High Availability | AWS S3 Durability Equivalent
+
+Your current curriculum teaches MinIO as though a single MinIO instance is an S3 replacement.
+
+That is only partially true.
+
+Production topic
+
+Study:
+
+distributed MinIO
+erasure coding
+multiple disks/nodes
+replication
+versioning
+object lifecycle policies
+recovery testing.
+Disaster prevented
+
+One MinIO container or VPS failure taking down images, product assets and backups.
+
+Impact
+
+Object storage becomes an actual storage subsystem instead of “another Docker container.”
+
+Layer 7 — Secure Software Supply Chain
+38. Self-Hosted Git Forge | AWS CodeCommit Equivalent
+
+Tool: Forgejo or Gitea
+
+Workflow
+Deploy Forgejo via Coolify.
+Attach persistent storage.
+Put it on a private/internal network.
+Create repositories through the web UI.
+Add developers and SSH/deploy keys.
+Configure Coolify's Git source against the forge.
+
+Coolify already supports Gitea integration and private repositories.
+
+Impact
+
+Removes GitHub as a mandatory SaaS dependency.
+
+39. Self-Hosted CI/CD | AWS CodeBuild/CodePipeline Equivalent
+
+Tool: Woodpecker CI, Forgejo Actions, or Jenkins.
+
+Your existing curriculum still uses GitHub Actions in the “ultimate architecture.”
+
+That contradicts your 100%-self-hosted requirement.
+
+Recommended architecture
+
+Forgejo → Woodpecker CI → tests/security scans → Coolify Deploy Webhook
+
+Coolify exposes authenticated deploy webhooks specifically for external CI/automation.
+
+Zero-CLI workflow
+
+Deploy CI as a Coolify service, configure repositories and secrets in its UI, store the Coolify deploy token as a CI secret, and trigger only after the pipeline succeeds.
+
+Impact
+
+Your CI system is yours.
+
+40. Deployment Credentials & Token Lifecycle | AWS IAM Access Keys Equivalent
+
+Native: Coolify API Tokens.
+
+Current Coolify API tokens support:
+
+team scoping
+expiration
+least-privilege permissions
+deploy-only tokens
+IP allowlists.
+Production workflow
+
+Create separate tokens for:
+
+ci-production-deploy
+
+monitoring-read
+
+backup-automation
+
+Never use a root token for normal automation.
+
+Impact
+
+A compromised CI job cannot automatically gain administrative control over the entire Coolify instance.
+
+42. Container Image Vulnerability Scanning | Amazon Inspector Equivalent
+
+Tool: Trivy
+
+Workflow
+
+Run Trivy in CI before the Coolify deploy webhook is invoked.
+
+Pipeline:
+
+commit → build → Trivy → tests → SBOM → policy gate → Coolify
+
+Disaster prevented
+
+Deploying a container carrying a known critical vulnerability.
+
+Impact
+
+Security becomes a deployment gate rather than an afterthought.
+
+
+44. Secret Scanning | GitHub Secret Scanning Equivalent
+
+Tool: Gitleaks
+
+Workflow
+
+Run Gitleaks before image build/deployment.
+
+Block deployment if a Stripe secret, database password, JWT signing key, MinIO key or Coolify token is committed.
+
+Impact
+
+Prevents a disastrous “API key pushed to Git” event.
+
+Layer 8 — Production E-commerce Reliability
+46. Expand/Contract Database Migrations | AWS Deployment Safety Equivalent
+
+Your Topic 22 is directionally correct but too simplistic.
+
+Production workflow
+
+Use:
+
+Expand
+→ add compatible schema
+
+Migrate
+→ backfill data
+
+Switch
+→ deploy code
+
+Contract
+→ remove obsolete schema later.
+
+Why
+
+Because old and new containers can overlap during rolling updates. Coolify explicitly requires releases to remain compatible during overlap.
+
+Impact
+
+Prevents production crashes caused by incompatible schema changes.
+
+
+50. Queue Reliability & Dead-Letter Queues | AWS SQS DLQ Equivalent
+
+Tool: RabbitMQ or Redis/BullMQ.
+
+Your existing Topic 21 introduces queues, but stops too early.
+
+Add:
+
+retries
+exponential backoff
+maximum attempts
+dead-letter queues
+poison message handling
+visibility timeout/claiming
+worker concurrency.
+Impact
+
+One malformed order does not repeatedly crash the worker.
+
+
+53. File Upload Security | S3 Secure Upload Equivalent
+
+Tool: MinIO + application presigned URLs + ClamAV.
+
+Workflow
+Browser requests upload authorization.
+Backend issues temporary upload permission.
+Browser uploads directly to MinIO.
+Worker scans file.
+Mark object available only after validation.
+Impact
+
+Large uploads don't consume API server memory and malicious files don't enter production directly.
+
+Layer 9 — Observability That Actually Diagnoses Production
+54. Metrics Stack | CloudWatch Metrics Equivalent
+
+Tools: Prometheus + Grafana.
+
+Coolify's Sentinel metrics are useful, but resource metrics have limitations, particularly for Compose applications/services.
+
+Monitor
+CPU
+RAM
+disk
+inode usage
+load
+network
+container restarts
+HTTP latency
+DB connections
+queue depth.
+Impact
+
+You observe the platform rather than just individual containers.
+
+56. Log Redaction & PII Controls | AWS CloudWatch Data Protection Equivalent
+
+This is critical for e-commerce.
+
+Never put these into logs:
+
+card numbers
+CVVs
+authentication secrets
+password-reset tokens
+full addresses unless justified
+access tokens.
+
+Use structured JSON logs, but with explicit field redaction.
+
+Impact
+
+Observability itself does not become a data breach.
+
+
+57. Audit Logging | AWS CloudTrail Equivalent
+
+Tool: Grafana/Loki, OpenSearch, Wazuh or dedicated audit store.
+
+Log:
+
+login
+privilege changes
+production deployment
+secret changes
+database access
+firewall modifications
+infrastructure changes.
+Impact
+
+You can determine:
+
+who changed production, what changed and when.
+
+
+72. Change Management & Deployment Approval | AWS CodePipeline Approval Equivalent
+
+Your CI pipeline currently jumps from passing tests directly to production.
+
+Add:
+
+development → staging → approval → production
+
+with automatic deployment evidence.
+
+Impact
+
+Separates:
+
+“tests passed”
+
+from
+
+“we have authorized this release.”
+
+
+74. Load Testing | AWS Distributed Load Testing Equivalent
+
+Tool: k6.
+
+Workflow
+
+Run a staging load test against:
+
+homepage
+login
+product search
+cart
+checkout
+order API.
+
+Measure:
+
+P50/P95/P99 latency
+throughput
+error rate
+CPU
+memory
+DB saturation
+queue depth.
+Impact
+
+You know capacity before customers discover it
+
+
