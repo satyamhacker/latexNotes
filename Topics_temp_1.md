@@ -1,4 +1,4 @@
-===Section 1: VPS Setup & Configuration===
+# Section 1: VPS Setup & Configuration
 Speaker yahan cheap aur powerful VPS server (Contabo) select aur setup karne ka process batata hai.
 
 --1--VPS Setup & Configuration--
