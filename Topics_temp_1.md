@@ -1161,7 +1161,47 @@ Subtopics: Dedicated Build Server, External Load Balancer, Stateless Scaling, DB
 * Fixing/Iteration Phase: An external Load Balancer is configured, and web tiers are scaled horizontally via Coolify replicas.
 * Live Production Phase: The infrastructure now spans multiple nodes, with highly available DB/MinIO clusters managing state externally.
 
-Topic 2: Centralized Observability & Security Scanning
+
+
+## Topic 2: Database Replication & HA Basics
+
+**Subtopics:** Primary-Replica Architecture, Streaming Replication, Replication Lag, Failover, Promotion, Read Replicas, Split-Brain Risk, HA vs Backup, Recovery Validation
+
+### [📊 SCOPE SIGNAL for Topic 2:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Conceptual & Practical
+* **Transcript mein content volume:** Database high-availability fundamentals required for multi-node production
+* **Key terms from curriculum:** Primary DB, Replica/Standby DB, Streaming Replication, WAL, Replication Lag, Failover, Promotion, Read Replica, Split-Brain, HA, Backup
+* **Explicit emphasis:** Database replication database ki second live copy provide karti hai, lekin replication backup ka replacement nahi hai.
+* **Speaker ne jo analogies/examples use kiye:** Primary database vs standby database
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 2:
+
+[Primary DB, Replica DB, Standby, Streaming Replication, WAL, Replication Lag, Synchronous Replication, Asynchronous Replication, Failover, Promotion, Read Replica, Split-Brain, HA, Backup, Restore, RPO, RTO]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* **Testing/Offline Phase:** Developer ek Primary DB aur ek Standby/Replica architecture design karta hai aur replication status verify karta hai.
+* **Fixing/Iteration Phase:** Replication lag, broken replication ya failed replica ko identify karke re-sync/recovery procedure perform ki jati hai.
+* **Live Production Phase:** Primary database fail hone par approved failover process ke through standby ko promote kiya jata hai.
+* **Additional context:** Replication failure se automatic safe failover guarantee nahi hota; failover mechanism, quorum/decision process aur application connection switching separately design karne padte hain.
+
+### 🧠 CORE CONCEPTS TO MASTER:
+
+* Replication ≠ Backup
+* Replication ≠ Automatic Disaster Recovery
+* Primary → Replica data flow
+* Replication lag ka effect
+* Failover vs switchover
+* Replica promotion
+* Read replica ka use
+* Split-brain risk
+* Recovery after primary failure
+* Application ko new primary DB tak kaise point karna hai
+
+Topic 3: Centralized Observability & Security Scanning
 Subtopics: Centralized Logs, APM, Security Scanning (Trivy/Gitleaks)
 
 [📊 SCOPE SIGNAL for Topic 2:
@@ -1186,7 +1226,8 @@ Subtopics: Centralized Logs, APM, Security Scanning (Trivy/Gitleaks)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Section 14: Scale-Up (Phase 8)
     Topic 1: Multi-Node Architecture
-    Topic 2: Centralized Observability & Security Scanning
+    Topic 2: Database Replication & HA Basics
+    Topic 3: Centralized Observability & Security Scanning
 
 ==================================================================================
 
@@ -1246,10 +1287,52 @@ Section 14: Scale-Up (Phase 8)
 
 ---
 
+
+
+## Topic 3: DNS Failover & Availability Strategy
+
+**Subtopics:** Primary/Secondary Endpoints, Health Checks, DNS Failover, TTL, Failover Detection, Active/Passive Architecture, Active/Active Awareness, DNS Propagation, Failback, Failure Testing
+
+### [📊 SCOPE SIGNAL for Topic 3:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Conceptual & Practical
+* **Transcript mein content volume:** Availability routing and failover logic for the two-VPS architecture
+* **Key terms from curriculum:** DNS Failover, Health Check, Primary VPS, Secondary VPS, TTL, Failover, Failback, Active/Passive, Active/Active
+* **Explicit emphasis:** Two VPS available hona automatic user-traffic failover create nahi karta.
+* **Speaker ne jo analogies/examples use kiye:** Primary road vs backup road
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 3:
+
+[DNS Failover, Primary VPS, Secondary VPS, Health Check, TTL, DNS Record, Failover, Failback, Active/Passive, Active/Active, Detection Time, Propagation, Availability, External Traffic Layer]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* **Testing/Offline Phase:** Primary VPS aur Secondary VPS ke public endpoints configure karke health-check based availability test ki jati hai.
+* **Fixing/Iteration Phase:** Primary VPS deliberately unavailable karke verify kiya jata hai ki failover mechanism secondary endpoint ki taraf traffic shift karta hai ya nahi.
+* **Live Production Phase:** Primary server healthy rahe toh normal traffic primary path par jata hai; failure detect hone par configured failover mechanism secondary path ko use karta hai.
+* **Additional context:** DNS failover instant nahi hota; TTL, resolver caching aur provider behavior failover detection/propagation ko affect kar sakte hain.
+
+### 🧠 CORE CONCEPTS TO MASTER:
+
+* DNS routing vs HTTP load balancing
+* Health-check based failover
+* TTL ka practical meaning
+* Active/Passive 2-VPS architecture
+* Active/Active ka basic concept
+* Failover detection
+* Failback
+* DNS caching limitations
+* What users may experience during failover
+* Why application state must already be recoverable/replicated
+* DNS failover alone does not replicate databases or files
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Section 15: Two-VPS Production Architecture
     Topic 1: Practical 2-VPS Architecture & Workload Placement
     Topic 2: Two-VPS Networking, Failure Scenarios & Public Exposure
+    Topic 3: DNS Failover & Availability Strategy
 
 ==================================================================================
 
@@ -2049,10 +2132,75 @@ Section 28: Application-Specific Release Engineering
 
 ---
 
+
+
+## Topic 3: Production Networking Troubleshooting
+
+**Subtopics:** DNS Troubleshooting, Domain Routing, TLS/SSL Issues, Firewall Checks, Port Mapping, Reverse Proxy Troubleshooting, Docker Network Troubleshooting, Health Check Failures, 404/403/502/504 Errors, Connection Refused, Timeout Diagnosis
+
+### [📊 SCOPE SIGNAL for Topic 3:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Practical
+* **Transcript mein content volume:** Production incident-oriented troubleshooting workflow for common networking failures
+* **Key terms from curriculum:** DNS, A Record, AAAA, TTL, Firewall, Port, Traefik, Reverse Proxy, Docker Network, Health Check, 404, 403, 502, 504, Timeout, Connection Refused, TLS
+* **Explicit emphasis:** Error message dekhkar random changes nahi karne; issue ko layer-by-layer isolate karna.
+* **Speaker ne jo analogies/examples use kiye:** Layered troubleshooting
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 3:
+
+[DNS, A Record, AAAA, TTL, DNS Propagation, Firewall, Provider Firewall, Port 80, Port 443, SSH Port, Traefik, Reverse Proxy, Docker Network, Internal Network, Health Check, 404, 403, 502, 504, Connection Refused, Timeout, TLS, Certificate, Routing, Service Discovery]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* **Testing/Offline Phase:** Developer ek known-good application ko domain, HTTPS, reverse proxy aur health-check ke saath configure karta hai.
+* **Fixing/Iteration Phase:** Problem ko DNS → Firewall → Port → Proxy → Container → Health Check → Application → Database dependency order mein isolate kiya jata hai.
+* **Live Production Phase:** Incident ke waqt dashboard logs, health status, DNS state aur network configuration dekhkar minimum-change troubleshooting perform ki jati hai.
+* **Additional context:** Har HTTP error ka same root cause nahi hota; response code ko diagnostic signal ki tarah use karna hai.
+
+### 🧠 TROUBLESHOOTING DECISION TREE:
+
+```text
+Domain not opening
+↓
+DNS resolve ho raha hai?
+↓
+Correct IP?
+↓
+Firewall allow kar raha hai?
+↓
+80/443 reachable?
+↓
+Traefik / Reverse Proxy healthy?
+↓
+Correct domain routing?
+↓
+Application container healthy?
+↓
+Health check passing?
+↓
+Application internally reachable?
+↓
+DB / Redis dependency healthy?
+```
+
+### 🔎 COMMON ERROR MAPPING:
+
+* 404 → Wrong route / hostname / resource routing
+* 403 → Access-control / application / proxy policy issue
+* 502 → Reverse proxy cannot successfully reach backend target
+* 504 → Upstream timeout / dependency or application slowness
+* Connection Refused → Nothing listening / wrong port / service unavailable / firewall path
+* Timeout → Network path, firewall, overloaded service or unreachable dependency
+* TLS Error → DNS/domain/certificate/proxy mismatch
+* DNS Error → Record / resolver / propagation / wrong target
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Section 29: Coolify Daily Operations Mastery
     Topic 1: Frequently Used Coolify GUI Features
     Topic 2: Coolify Deployment, Recovery & Resource Operations
+    Topic 3: Production Networking Troubleshooting
 
 ==================================================================================
 
