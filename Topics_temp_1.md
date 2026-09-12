@@ -1085,46 +1085,17 @@ Subtopics: Staging, Smoke Testing, Deployment Hooks, Deployment Types, Rolling U
 * Live Production Phase: A rolling update replaces old containers only when the new ones are healthy. If an issue occurs, an image Rollback is triggered (while manually handling any DB schema incompatibilities).
 
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-📋 EXTRACTED IN THIS PHASE:
-
-Section 7: Infrastructure Foundation (Phase 1)
-Topic 1: VPS Sizing & Coolify Architecture
-Topic 2: Networking Boundaries & Edge Routing
-
-Section 8: Security Before Production (Phase 2)
-Topic 1: Server & Network Hardening
-Topic 2: UI Access Control & Secret Management
-
-Section 9: Application Runtime (Phase 3)
-Topic 1: Storage, Networking & Databases
-Topic 2: Reliability & Resource Management
 
 Section 10: Production Delivery (Phase 4)
 Topic 1: Build Strategy & CI/CD Pipeline
 Topic 2: Deep Dive: Forgejo Actions, Woodpecker & YAML (For Beginners)
 Topic 3: Release Engineering & Rollbacks
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
-Section 10: Production Delivery (Phase 4)
-    Topic 1: Build Strategy & CI/CD Pipeline
-    Topic 2: Deep Dive: Forgejo Actions, Woodpecker & YAML (For Beginners)
-    Topic 3: Release Engineering & Rollbacks
-    Topic 1: VPS Sizing & Coolify Architecture
-    Topic 2: Networking Boundaries & Edge Routing
-    Topic 1: Server & Network Hardening
-    Topic 2: UI Access Control & Secret Management
-    Topic 1: Storage, Networking & Databases
-    Topic 2: Reliability & Resource Management
-    Topic 1: Build Strategy & CI/CD Pipeline
-    Topic 2: Deep Dive: Forgejo Actions, Woodpecker & YAML (For Beginners)
-    Topic 3: Release Engineering & Rollbacks
 
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ==================================================================================
 
