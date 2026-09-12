@@ -1219,14 +1219,38 @@ Subtopics: PR Previews, Mobile CI/CD, Geo-testing, Advanced Search
 📋 EXTRACTED IN THIS PHASE:
 
 Section 7: Infrastructure Foundation (Phase 1)
+Topic 1: VPS Sizing & Coolify Architecture
+Topic 2: Networking Boundaries & Edge Routing
+
 Section 8: Security Before Production (Phase 2)
+Topic 1: Server & Network Hardening
+Topic 2: UI Access Control & Secret Management
+
 Section 9: Application Runtime (Phase 3)
+Topic 1: Storage, Networking & Databases
+Topic 2: Reliability & Resource Management
+
 Section 10: Production Delivery (Phase 4)
+Topic 1: Build Strategy & CI/CD Pipeline
+Topic 2: Release Engineering & Rollbacks
+
 Section 11: Data Protection (Phase 5)
+Topic 1: Backup Workflows & DR Testing
+
 Section 12: Production Operations (Phase 6)
+Topic 1: Observability & Incident Response
+Topic 2: Maintenance & Queue Control
+
 Section 13: E-commerce Reliability (Phase 7)
+Topic 1: Transaction & Database Protection
+Topic 2: Security & Stress Testing
+
 Section 14: Scale-Up (Phase 8)
+Topic 1: Multi-Node Architecture
+Topic 2: Centralized Observability & Security Scanning
+
 Section 15: Optional / Specialized (Phase 9)
+Topic 1: Specialized CI & Advanced Integration
 
 📊 PHASE SUMMARY:
 Sections: 9 | Topics: 18 | Subtopics: 71
