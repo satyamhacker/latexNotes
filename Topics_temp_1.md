@@ -826,275 +826,128 @@ Based on a deep analysis of the course curriculum provided, **the current syllab
 
 However, **NO, not all topics required for a complete, production-ready Platform as a Service (PaaS) experience are present.**
 
-You specifically mentioned wanting to avoid running manual commands to reduce errors. To truly turn your single VPS into an **"AWS-like Platform as a Service (PaaS)"** with a zero-command, error-free experience, we need to dig deeper. 
+To truly turn your single VPS into an **"AWS-like Platform as a Service (PaaS)"** with a zero-command, error-free experience, we need to dig deeper into the operational boundaries of Coolify. 
 
-Here is the comprehensive, **100% Final & Bulletproof Syllabus** structured into distinct tiers. This structure ensures a strictly FOSS, Coolify-first, zero-CLI e-commerce architecture without introducing unnecessary "DevOps bloat."
+**Official Course Rule for "Zero CLI":** Zero manual CLI operations — not zero shell commands. 
+* Manual CLI (student SSH typing) creates typo risks. 
+* UI Automation (Coolify Scheduled Tasks executing predefined commands) is repeatable and safe. 
+* Emergency CLI (Coolify Web Terminal) is reserved solely for exceptional diagnosis/recovery.
 
----
-
-## 🏆 PART 1: MANDATORY CORE (The True Production Baseline)
-
-Everything required for: deploy → secure → backup → recover → monitor → update → rollback → process orders reliably.
-
-### 🚨 1. The Complete Backup & DR Progression
-A backup sitting on the same VPS is not meaningful disaster recovery.
-* **Coolify Instance Backup:** Understanding that an instance backup saves Coolify's state, NOT your application databases or persistent volumes.
-* **Database Engine-Aware Backup:** Linking PostgreSQL/MariaDB/MongoDB/ClickHouse to S3-compatible targets natively via Coolify UI.
-* **Application Persistent-Storage Backup:** Coolify now provides scheduled file-level backups for eligible application storage mounts (Note: these archives do not substitute for engine-aware backups).
-* **External S3-Compatible Copy:** Keeping backups outside the production VPS (e.g. Remote MinIO).
-* **Restore Drills / RPO / RTO (CRITICAL):** A backup being "successful" does not prove it is restorable. You must routinely test restoring backups to a disposable staging environment and record your recovery time.
-
-### 🚨 2. Scheduled Tasks & Infrastructure Cron Jobs
-Automating system and application-level maintenance through the UI.
-* **Coolify Scheduled Tasks:** Navigating to Application/Service → Configuration → Scheduled Tasks to run recurring commands inside containers.
-* **Application Cronjobs:** Managing business logic (like cart abandonment emails or subscription renewals) directly within Coolify's task interface instead of managing a separate server cron system.
-
-### 🚨 3. Self-Hosted CI/CD & The Secure Supply Chain
-Replacing SaaS dependencies (like GitHub/GitLab and GitHub Actions) with a 100% self-hosted pipeline.
-* **Self-Hosted Git Forge:** Deploying **Forgejo** (or Gitea) via Coolify, attaching persistent storage, and creating private repositories.
-* **Self-Hosted CI Runners:** Using **Woodpecker CI** or **Forgejo Actions** instead of Jenkins.
-* **The Canonical CI/CD Workflow:** `Forgejo → Woodpecker CI / Forgejo Actions → Tests → Coolify Deploy Webhook`.
-* **Zero-CLI Execution:** Triggering automated deployments via Coolify authenticated webhooks *only* after pipelines succeed.
-* **Production Rule:** SCM/CI should live outside the critical production workload whenever practical. The important property is that production receives a tested, immutable artifact and the Coolify deploy operation is least-privileged.
-
-### 🚨 4. Environment Variables & Secret Management
-* **Native Env Controls:** Utilizing Coolify's UI for Build vs Runtime variables, multiline secrets, and locked values.
-* **Environment Scoping:** Sharing variables across Team, Project, Environment, and Server scopes.
-
-### 🚨 5. Application Rollback ≠ Database Rollback
-A critical module clarifying disaster recovery limitations.
-* **Coolify's Rollback Mechanism:** Redeploying an older retained application image.
-* **State Persistence Warning:** Redeploying an image does NOT reverse database migrations, restore persistent storage, or undo external side effects. Application rollback ≠ database rollback.
-
-### 🚨 6. Server Maintenance & Controlled Cleanup
-* **Disk Monitoring:** Using Netdata/Coolify to monitor inode and disk usage.
-* **Controlled Cleanup (Servers → Server → Docker Cleanup):** Teach image retention first. Keep *Delete Unused Volumes* disabled unless the operator has positively identified every affected volume. Coolify's current cleanup workflow explicitly recommends verifying expected rollback images after cleanup. Never run dangerous blanket `docker system prune -a` commands.
-* **OS/Server Patching:** Utilizing current Coolify dashboard-based server patching to keep the underlying OS secure without manual CLI intervention.
-
-### 🚨 7. SSL Certificate Management
-* **HTTPS Troubleshooting:** Teaching DNS correctness → domain configuration → certificate status → Coolify proxy/HTTPS troubleshooting rather than promising that every SSL failure can be magically repaired by a single UI "force renew" action.
-
-### 🚨 8. Uptime Monitoring (Application Level)
-* **Deploying Uptime Kuma:** Server health (CPU/RAM) and Application HTTP availability (502 Bad Gateway) are different things. Use Uptime Kuma to track actual endpoint uptime.
-
-### 🚨 9. Storage Volumes & Persistent Data
-* **Storage Mounts UI:** Understanding persistent mounts (mapping `/app/data` to a volume) so container redeployments do not destroy your data. (Focus purely on volume design, not using Coolify as a universal file editor).
-
-### 🚨 10. Private Networking & DB Security (The #1 Correction)
-**⚠️ CRITICAL ARCHITECTURE RULE:** DevOps mein kabhi bhi databases ko publicly internet par expose nahi karte.
-* **Native Internal Docker Networks:** Connecting Apps to DBs privately without publishing host ports (supported natively in Coolify).
-* **The Production Routing Pattern:** `Internet → Cloudflare/edge → Coolify Proxy → Web/API` while `Web/API → private Docker network → DB/Redis`.
-* **VPS Firewalling:** Utilizing the VPS provider's graphical firewall/security-group UI to strictly close all unused ports.
-
-### 🚨 11. Basic Reverse Proxy & Redirect Rules
-* **Routing Basics:** Understanding domain → HTTPS → application routing for normal production operation. (Keep advanced proxy customization optional/advanced).
-
-### 🚨 12. Rolling Updates & Zero-Downtime Realities
-* **The Myth of Guaranteed Zero Downtime:** Rolling updates (`healthy new container → old container removed`) do not automatically equal zero downtime. 
-* **Application Readiness:** Your codebase *must* support readiness checks, graceful shutdowns, backward-compatible schema changes, and parallel instances to achieve true zero downtime.
-
-### 🚨 13. Vertical Scaling First; Horizontal Scaling Only for Stateless Workloads
-* **Scaling via UI:** Increasing stateless Web/API container replicas in Coolify.
-* **Vertical vs Horizontal:** Teach the distinction: Single VPS relies on vertical scaling + resource limits + application-level parallelism. For multiple VPS, Coolify deploys the application instances, but the external load balancer, shared state, sessions, uploads, databases and monitoring remain your responsibility (multi-server deployment does not distribute traffic by itself). Do not teach Docker Swarm.
-
-### 🚨 14. Deployment Notifications
-* **Native Alerts:** Utilizing Coolify's natively supported event-driven notifications for deployments, backups, scheduled tasks, containers and server events.
-* **Channel Policy:** Preferred FOSS baseline is SMTP you control or a generic webhook into a FOSS notification/incident system, rather than relying on proprietary services like Telegram/Discord.
-
-### 🚨 15. Background Workers & Queues
-* **The Baseline E-Commerce Queue:** `API + Worker + Redis/BullMQ`.
-* Processing heavy tasks (invoices, emails) off the main API thread.
-
-### 🚨 16. Database Migrations (Expand/Contract Pattern)
-* **Deployment Safety:** Because old and new containers overlap during rolling updates, schema changes must be backward-compatible.
-* **The Expand/Contract Workflow:** `Expand (add schema)` → `Migrate (backfill data)` → `Switch (deploy code)` → `Contract (remove obsolete schema)`.
-
-### 🚨 17. Custom Dockerfile & Practical Image Optimization
-* **Multi-stage Builds:** Shrinking image sizes for blazing-fast deployments.
-* **Practical Security:** Utilizing `.dockerignore`, running as a non-root user, and defining Docker healthchecks. No theoretical Docker bloat.
-
-### 🚨 18. Deployment Credentials & Token Lifecycle
-* **Coolify API Tokens:** Use tokens only where automation actually calls Coolify's API. A deploy token is appropriate for CI, while a read-only token is appropriate for monitoring integrations that genuinely query the API.
-* **Never use root tokens for automation:** Coolify explicitly recommends least privilege. A compromised CI job should not gain administrative control over the entire Coolify instance.
-
-### 🚨 19. Log Redaction & PII Controls
-* **Data Protection:** Never log card data, CVVs, passwords, or auth tokens. Use structured JSON logs with explicit field redaction to ensure observability doesn't become a data breach.
-
-### 🚨 20. Native Coolify Audit Logging + Retention Policy
-* **Tracking Changes:** Use the built-in structured audit logging for important API/authentication/authorization activity first. Only add external log retention (e.g. `login → privilege change → deployment → secret change → infrastructure change`) when regulatory requirements actually demand it.
-
-### 🚨 21. Change Management & Production Staging Gate
-"Tests passed" and "safe to release to customers" are two different decisions.
-* **The Workflow:** `Development → CI Tests → Staging → Smoke Test → Manual Approval → Production Deployment`.
-* Utilizing Coolify Environments and Forgejo to explicitly separate code pushes from production releases.
-
-### 🚨 22. Payment Idempotency & Webhook Reconciliation
-* **Payment Reliability:** Payment gateways retry webhooks, users retry checkout, and workers restart.
-* **The Workflow:** `Coolify API → Payment webhook → DB unique event ID → Worker → Reconciliation task`.
-* Implementing idempotency keys and unique constraints so retries never create duplicate orders or corrupt payment state.
+Here is the definitive, **100% Final & Bulletproof E-Commerce Operating Playbook**, logically structured into 9 chronological phases.
 
 ---
 
-## 🛠️ PART 2: ADVANCED / WHEN NEEDED (Scale-Up Stage)
+## 🏗️ PHASE 1 — Infrastructure Foundation
+Setting the literal groundwork and the Coolify control plane.
 
-Everything required only when: more servers / more users / more people / higher observability / HA / stronger security.
-
-### ⚡ 23. Multi-Server Deployment — Advanced / Experimental HA Path
-* Explicitly teach that Coolify deploys the application to multiple servers, while an external traffic layer performs load balancing.
-* Persistent-storage applications cannot currently use this application-level multi-server mechanism.
-
-### ⚡ 24. Team Access & IAM
-* **Teach the actual roles:** Owner / Admin / Member. Current Coolify documentation defines Member as read-only, while Admin and Owner can operate resources.
-* A deploy API token is separate from the human team-role model.
-
-### ⚡ 25. Advanced Reverse Proxy & Redirect Rules
-* Setting up custom proxy labels and advanced Traefik rules when basic domain routing is no longer sufficient.
-
-### ⚡ 26. Advanced Observability (Winston + SigNoz/Loki)
-* Moving beyond basic Coolify logs to deploy APM tracing tools (SigNoz/Loki) for deep JSON log analysis and historical tracing.
-
-### ⚡ 27. Database & MinIO High Availability
-* Deploying PostgreSQL streaming replication, MongoDB replica sets, or distributed MinIO (with erasure coding).
-* *Note: Coolify provides the deployment layer; high availability itself is an architectural configuration, not a magic Coolify feature.*
-
-### ⚡ 28. Container Image & Secret Scanning
-* **Trivy:** Running vulnerability scans in CI *before* the Coolify webhook is invoked.
-* **Gitleaks:** Blocking deployments if a Stripe secret, DB password, or Coolify token is accidentally committed.
-
-### ⚡ 29. Queue Reliability & Dead-Letter Queues (DLQ)
-* Adding retries, exponential backoff, visibility timeouts, and poison message handling (DLQ) to ensure a malformed order does not repeatedly crash the worker.
-
-### ⚡ 30. File Upload Security
-* For user-generated uploads: `Browser → Temporary Presigned URL → MinIO → ClamAV Worker Scan`. Large uploads shouldn't consume your API server memory.
-
-### ⚡ 31. Metrics Stack (Prometheus + Grafana)
-* Moving beyond Coolify/Netdata to observe the entire platform (inode usage, HTTP latency, DB connections, queue depth).
-
-### ⚡ 32. Load Testing (k6)
-* Running staging load tests against checkout and order APIs to measure P95/P99 latency before customers discover capacity limits.
+* **1. VPS Capacity Selection:** Sizing the initial node to handle the Coolify control plane plus production workloads without memory starvation.
+* **2. VPS Account & Bootstrap:** Provisioning the initial Ubuntu server.
+* **3. Coolify Installation:** Running the automated bootstrap script.
+* **4. Coolify Dashboard + Projects/Resources:** Structuring logical environments (Production vs Staging) using Coolify Projects.
+* **5. DNS + Domain:** Pointing global DNS records to the single VPS public IP.
+* **6. Traefik + HTTPS (Edge Routing & Auto TLS):** Utilizing Coolify Proxy (Traefik) as the ALB/Ingress equivalent. `General → Domains`. Let Coolify generate routes and TLS certs automatically.
 
 ---
 
-## 💡 PART 3: OPTIONAL / SPECIALIZED TRACKS
+## 🔐 PHASE 2 — Security Before Production
+Securing the perimeter before any application data or code is deployed.
 
-Everything that is: convenient, ecosystem-specific, or workload-dependent.
-
-* **33. PR Previews:** Ephemeral, auto-destroying environments for pull requests. Great for staging, but not a blocker for solo developers.
-* **34. Cloudflare CDN/WAF:** Orange-cloud proxying. Excellent for edge security, but optional if you are adhering to a strict 100% self-hosted/FOSS baseline.
-* **35. Mobile CI/CD & OTA Updates:** Using Fastlane for automated mobile app builds (APK/IPA). A specialized track for mobile DevOps, separate from Coolify backend PaaS.
-* **36. Advanced E-commerce Search (Meilisearch/Typesense):** Deploying lightning-fast search engines. Add this only when your catalog scale actually requires it; don't over-engineer early.
+* **7. SSH Key Authentication:** Enforcing cryptographic login for the base server.
+* **8. Disable Password SSH:** Removing the #1 target for automated botnets.
+* **9. Coolify 2FA:** Securing the Coolify UI natively via `Profile → Two-factor Authentication → Configure → TOTP` and saving recovery codes offline.
+* **10. Provider Firewall:** Utilizing the VPS provider's graphical firewall UI to strictly close all unused ports (never exposing DBs to the public internet).
+* **11. Coolify API Token / Least Privilege:** Creating deploy-only tokens restricted by IP for automation. Never use root tokens for CI.
+* **12. Secret Management & Rotation Lifecycle (NEW):** Secrets are not just created once. The required workflow: identify secret → generate upstream → replace in Coolify UI → save → redeploy → validate health → revoke old secret.
 
 ---
 
-## 🔍 PART 4: CRUCIAL MISSING COOLIFY FEATURES & DEVOPS TOPICS
+## ⚙️ PHASE 3 — Application Runtime
+Deploying the stateless and stateful components of the application.
 
-These are genuinely important operational gaps that showcase the true power of Coolify as an enterprise platform.
+* **13. Persistent Storage:** Mapping `/app/data` to a volume so redeployments do not destroy data. *(Note: Volume exists → Identify data → Backup data. A local volume is not a backup.)*
+* **14. Private Networking:** Connecting Apps to DBs privately without publishing host ports via internal Docker networks.
+* **15. DB + Redis Deployment:** Provisioning the stateful database layer.
+* **16. Resource Limits:** Setting hard memory limits and CPU weights via the UI to prevent runaway workers from killing checkout.
+* **17. Health Checks / Readiness:** Defining `/health` HTTP endpoints in Coolify. Unhealthy containers are removed from Traefik routing.
+* **18. Background Workers + Queues:** Processing heavy tasks (invoices, emails) off the main API thread.
+* **19. Scheduled Tasks:** Using the Coolify UI to automate repeatable shell commands safely inside containers (true Zero CLI operations).
 
-### ⚙️ 1. Traefik Edge Routing & Automatic TLS | AWS ALB / Ingress Equivalent
-**Coolify Native Feature:** Coolify Proxy / Traefik — application Configuration → General/Domains plus server proxy configuration.
-**Zero-CLI Workflow:**
-* Open the application.
-* Go to Configuration → General.
-* Add the production domain.
-* Set the internal application port.
-* Enable HTTPS/Force HTTPS as appropriate.
-* Ensure DNS points at the Coolify server.
-* Let Coolify generate the Traefik route and certificate.
-* Test the domain.
-*(Coolify uses Traefik as its default integrated reverse proxy, automatically generating routes and handling TLS.)*
-**Why It Is Used DAILY in Production:** This is the mechanism through which one VPS can expose dozens of applications, APIs, admin panels and subdomains without hand-writing reverse-proxy configuration. (Note: it does not give you multi-AZ HA by itself).
+---
 
-### ⚙️ 2. Application Health Checks & Readiness | AWS ALB Target Health / ECS Health Check Equivalent
-**Coolify Native Feature:** Application → Configuration → Healthcheck
-**Zero-CLI Workflow:**
-* Open the API/web application.
-* Go to Configuration → Healthcheck.
-* Choose HTTP or CMD.
-* Point it at an internal readiness endpoint such as `/health`.
-* Set port, timeout, retries and startup period.
-* Save and enable.
-* Redeploy/restart the application.
-* Verify the application reaches healthy.
-*(Coolify uses this signal during routing and rolling replacement; unhealthy containers can be removed from Traefik routing.)*
-**Why It Is Used DAILY in Production:** Without a real readiness check, “container is running” can mean “process exists but checkout is broken.” This is foundational to safe deployments.
+## 🚀 PHASE 4 — Production Delivery
+The CI/CD pipeline and release engineering.
 
-### ⚙️ 3. Resource Limits & CPU Priority | AWS ECS Task CPU/Memory Controls
-**Coolify Native Feature:** Application/Database → Configuration → Resource Limits
-**Zero-CLI Workflow:**
-* Open the API, worker, database or Redis resource.
-* Select Configuration → Resource Limits.
-* Set memory limit.
-* Set CPU limit where appropriate.
-* Use CPU weight when prioritization—not hard reservation—is desired.
-* Observe actual utilization before tightening limits.
-* Repeat for worker/API/database workloads.
-*(Coolify exposes CPU limits, CPU sets, CPU weight and memory limits directly in the dashboard.)*
-**Why It Is Used DAILY in Production:** On a low-cost VPS, one runaway worker, PHP process, Node process or database can kill checkout for everything else. Resource isolation is one of the most important “AWS-like” capabilities you can get from a single server.
+* **20. Git / Forgejo:** Deploying a self-hosted Git forge outside the critical production workload whenever practical.
+* **21. CI (Woodpecker/Forgejo Actions):** Building and testing the immutable artifact.
+* **22. Staging:** Deploying to a sandboxed URL before production.
+* **23. Smoke Testing:** Validating basic functionality post-deployment.
+* **24. Deployment Hooks:** Using pre/post deployment commands in the Coolify UI for cache clearing or schema preparation.
+* **25. Deployment History / Logs:** Using the Coolify UI to answer "What changed, what broke, and what version is serving customers?"
+* **26. Rolling Updates:** `healthy new container → old container removed`. **⚠️ CRITICAL CAVEAT:** Coolify application-level rolling updates are NOT supported for Docker Compose applications.
+* **27. Dependency & Version Pinning (NEW):** Avoid `latest` tags. Pin versions explicitly in staging, test, and promote to production to guarantee reproducibility.
+* **28. Rollback:** Redeploying an older image. *(Warning: Application image rollback does NOT rollback database migrations).*
 
-### ⚙️ 4. Pre/Post Deployment Hooks | AWS CodeDeploy Lifecycle Hooks Equivalent
-**Coolify Native Feature:** Application → Configuration → General/Advanced deployment commands
-**Zero-CLI Workflow:**
-* Open the application.
-* Go to Configuration.
-* Define the appropriate pre/post deployment command.
-* Make the command idempotent.
-* Test it in staging.
-* Deploy through the normal Coolify deployment workflow.
-* Inspect the deployment log.
-*(A failing pre-deployment command stops the deployment; a failing post-deployment command is logged after deployment has already been marked successful.)*
-**Why It Is Used DAILY in Production:** This is where repeatable database migrations, cache preparation and release-time tasks belong. Critical rule: never treat a post-deployment hook as the sole safety gate for a destructive schema change because Coolify can already consider the deployment successful.
+---
 
-### ⚙️ 5. Deployment History, Logs & Safe Failure Handling | AWS CodeDeploy Deployment History
-**Coolify Native Feature:** Application → Deployments and Logs
-**Zero-CLI Workflow:**
-* Open the application.
-* Select Deployments.
-* Open the failed/current deployment.
-* Inspect the build/deployment log.
-* Identify the first actual failure.
-* Open Logs for runtime failures.
-* Restart/redeploy or rollback from the dashboard as appropriate.
-* Verify application health before declaring recovery.
-*(Coolify records queued/in-progress/successful/failed/cancelled deployments, and a failed source build does not replace the running application.)*
-**Why It Is Used DAILY in Production:** This is the control-room workflow for answering: “What changed, what broke, and what version is currently serving customers?”
+## 🛡️ PHASE 5 — Data Protection
+**Rule:** Configure backup + external destination + test restores BEFORE launching production.
 
-### ⚙️ 6. Deploy Webhooks + Least-Privilege Deployment Tokens | AWS CodePipeline/CodeDeploy Trigger Equivalent
-**Coolify Native Feature:** Application → Configuration → Webhooks + Keys & Tokens → API Tokens
-**Zero-CLI Workflow:**
-* Enable API access only when required.
-* Create a dedicated token.
-* Select deploy permission rather than root.
-* Give it the shortest practical lifetime/rotation policy.
-* Restrict API access by source IP when practical.
-* Configure the CI pipeline to call the deploy webhook.
-* Do not give the CI job write/root permissions.
-*(Coolify explicitly provides a deploy-only permission and supports API IP allow-lists.)*
-**Why It Is Used DAILY in Production:** This turns `git push → tests → approval → production deploy` into an automated platform workflow without giving CI the keys to administer the entire Coolify instance.
+* **29. DB Engine-Aware Backups:** Scheduled PostgreSQL/MongoDB dumps natively via Coolify UI.
+* **30. Application Storage Backups:** Scheduled file-level archives of persistent storage (uploads, invoices).
+* **31. Coolify Instance Backup:** Backing up the control plane configuration (does not backup app data).
+* **32. External S3/MinIO:** Replicating all backups to an offsite, immutable destination.
+* **33. Restore Drill & RPO/RTO:** Testing backups by deploying a temporary DB and importing the dump to verify data integrity and recovery time.
 
-### ⚙️ 7. Persistent Storage Backup | AWS EBS/EFS Backup Concept
-**Coolify Native Feature:** Application → Backups or Configuration → Persistent Storage → Configure Backup
-**Zero-CLI Workflow:**
-* Open the application.
-* Ensure uploads/data are mounted under Persistent Storage.
-* Open Backups.
-* Add a scheduled backup.
-* Select the eligible volume/directory as the backup target.
-* Choose S3-compatible remote storage.
-* Set retention.
-* Execute Backup Now periodically during recovery testing.
-* Test restoring the archive in staging.
-*(Coolify explicitly warns that these are file-level archives and should not replace engine-aware database backups.)*
-**Why It Is Used DAILY in Production:** E-commerce content is not only in databases. Product images, invoices, exports, uploads and application files are equally capable of becoming a business outage.
+---
 
-### ⚙️ 8. Browser-Based Operational Access | AWS Systems Manager-style Operational Abstraction
-**Coolify Native Feature:** Coolify Web Terminal
-**Zero-CLI Workflow:**
-* Open Terminal in the Coolify dashboard.
-* Select the server or running container.
-* Connect.
-* Perform the rare diagnostic operation.
-* Close the terminal when finished.
-*(Coolify provides this directly in the UI and restricts it to Owners/Admins.)*
-**Why It Is Used DAILY in Production:** It centralizes the exceptional CLI work that cannot realistically be eliminated—emergency inspection, one-off diagnostics, recovery—without forcing every student/operator to maintain a separate terminal environment.
-**Permanent Policy:** No local CLI for routine operations. Web UI for normal operations. CLI only for bootstrap/recovery.
+## 📊 PHASE 6 — Production Operations
+Day-2 operations, observability, and maintenance.
+
+* **34. Coolify Metrics:** Monitoring server CPU/RAM usage.
+* **35. Uptime Kuma:** Tracking actual HTTP availability (502 Bad Gateway) vs just container health.
+* **36. Notifications:** Native Coolify event routing. Preferred policy: SMTP or a FOSS incident webhook instead of Telegram/Discord.
+* **37. Native Audit Logs:** Using built-in Coolify UI audit trails for authentication/deployment tracking before building custom logging stacks.
+* **38. Docker Cleanup:** `Servers → Server → Docker Cleanup`. Prioritize image retention; leave "Delete Unused Volumes" disabled unless positively identified.
+* **39. OS Patching:** Using the Coolify dashboard for safe, UI-driven OS security updates.
+* **40. Production Incident Runbook (NEW):** The Decision Tree: `RED alert → Logs → Healthcheck → Recent deployment? → Image Rollback? → DB impact? → DB Restore?` (Do not blindly troubleshoot; follow the path).
+
+---
+
+## 💎 PHASE 7 — E-commerce Reliability
+Ensuring the platform handles real-world commerce anomalies safely.
+
+* **41. Payment Idempotency:** Ensuring payment gateway retries never create duplicate orders.
+* **42. Webhook Reconciliation:** Background reconciliation tasks for missed events.
+* **43. DB Migration Expand/Contract:** Ensuring schema changes are backward-compatible during rolling update overlap.
+* **44. DB Connection/Capacity Protection (NEW):** Handling connection exhaustion (e.g. 1000 requests → 1000 DB connections → checkout down). Implement application-side connection pooling before increasing Coolify resource limits.
+* **45. Queue Retries / DLQ:** Handling poison messages safely.
+* **46. Log Redaction / PII:** Ensuring CVVs/Passwords never hit JSON logs.
+* **47. Load Testing (k6):** Proactively finding capacity limits.
+
+---
+
+## 📈 PHASE 8 — Scale-Up
+Scaling beyond a single server.
+
+* **48. Multi-Server Deployment (Experimental HA Path):** Coolify deploys apps to multiple nodes, but external load balancers and DB clustering remain your responsibility. (Persistent storage apps cannot use this!).
+* **49. External Load Balancer:** Distributing traffic across nodes.
+* **50. Stateless Horizontal Scaling:** Scaling web/API tiers via Coolify UI replicas.
+* **51. DB HA & MinIO HA:** Deploying DB replication or erasure coding.
+* **52. Advanced Observability:** Winston + SigNoz/Loki for distributed tracing.
+* **53. Security Scanning:** Trivy (Containers) and Gitleaks (Secrets) in CI pipelines.
+
+---
+
+## 🧰 PHASE 9 — Optional / Specialized
+Non-critical add-ons for specific workflows.
+
+* **54. PR Previews:** Ephemeral environments for pull requests.
+* **55. Mobile CI/CD:** Using Fastlane for OTA updates and APK/IPA builds.
+* **56. Geo-testing / Browser Automation:** Selenium/Playwright testing matrix.
+* **57. Advanced Search:** Meilisearch/Typesense integration.
+
+---
+
+**FINAL VERDICT:**
+By adhering to this 9-Phase lifecycle, enforcing the Backup-before-Production rule, maintaining strict Zero-CLI automation, and recognizing Coolify's multi-node architecture limits, this syllabus constitutes a true **Production-Ready E-commerce Operating System.**
 
