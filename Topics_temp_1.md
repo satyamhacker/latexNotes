@@ -843,7 +843,7 @@ Setting the literal groundwork and the Coolify control plane.
 * **1. VPS Capacity Selection:** Sizing the initial node to handle the Coolify control plane plus production workloads without memory starvation.
 * **2. Coolify Installation (VPS Account & Bootstrap):** Provisioning the initial Ubuntu server and running the automated bootstrap script.
 * **3. Coolify Dashboard + Projects/Environments:** Teaching the `Project → Environment → Resource` architecture. One E-Commerce project contains separate Production and Staging Environments, which then contain the DB/Web resources. **⚠️ CAVEAT:** Project/Environment naming alone does not create network isolation. Actual networking is Docker network/destination based.
-* **4. Server Configuration:** Managing the localhost connection.
+* **4. Server Configuration:** Managing the localhost connection. **⚠️ HA LIMITATION:** Single VPS = Coolify control-plane + workloads share same failure domain. This is not true HA.
 * **5. Destinations & Network Boundaries:** Coolify Destinations = Server + Docker Network. Teaching when to use the default destination vs custom destinations. Same destination = private communication; separate destination = isolation.
 * **6. Domain & DNS:** Pointing global DNS records to the single VPS public IP.
 * **7. Traefik + HTTPS (Edge Routing & Auto TLS):** Utilizing Coolify Proxy (Traefik) as the ALB/Ingress equivalent. `General → Domains`. Let Coolify generate routes and TLS certs automatically.
@@ -869,7 +869,7 @@ Deploying the stateless and stateful components of the application.
 
 * **16. Persistent Storage:** Mapping `/app/data` to a volume so redeployments do not destroy data. *(Note: Volume exists → Identify data → Backup data. A local volume is not a backup.)*
 * **17. Private Networking & Compose Caveat:** Connecting Apps to DBs privately without publishing host ports via internal Docker networks. **⚠️ COMPOSE CAVEAT:** Docker Compose apps use their own network by default. You MUST enable "Connect To Predefined Network" in the UI to allow them to talk to other Coolify resources (never use `localhost` or public IP).
-* **18. Database & Redis Deployment:** Provisioning the stateful database layer. **⚠️ ONE-CLICK CAVEAT:** One-click deployment ≠ automatic safe upgrade. Upgrade workflow: Backup → Read upstream release notes → Compare config → Update deliberately → Deploy → Verify.
+* **18. Database & Redis Deployment:** Provisioning the stateful database layer. **⚠️ ONE-CLICK CAVEAT:** One-click deployment ≠ automatic safe upgrade. Upgrade workflow: Backup → Read upstream release notes → Compare config → Update deliberately → Deploy → Verify. **Redis Durability & Recovery:** Handling cache vs queue/session state; configuring persistence + engine-specific backup/restore since it is not automatically backed up.
 * **19. Resource Limits:** Setting hard memory limits and CPU weights via the UI to prevent runaway workers from killing checkout.
 * **20. Health Checks & Readiness:** Defining HTTP endpoints to remove unhealthy containers from Traefik routing. **Crucial distinction:** Application readiness is defined via `Configuration → Healthcheck`, while Service readiness is defined via `Compose → healthcheck`.
 * **21. Automatic Restart Policy:** `Configuration → Advanced → Max Restart Count`. Temporary crashes will auto-recover; repeated crash loops hitting the limit must trigger alert/incident paths.
@@ -894,7 +894,7 @@ The CI/CD pipeline and release engineering.
     * *Restart:* Recreate runtime without rebuild.
     * *Force Deploy:* Bypass build cache for a fresh build.
     * **Resource Operations (Clone vs Move):** Cloning configuration does NOT clone persistent data.
-* **32. Rolling / Stop-Start Semantics:** `healthy new container → old container removed`. **⚠️ CRITICAL CAVEAT:** Coolify application-level rolling updates are NOT supported for Docker Compose applications.
+* **32. Rolling / Stop-Start Semantics:** `healthy new container → old container removed`. Required operational controls: **Healthcheck + Stop Grace Period + graceful SIGTERM handling + backward-compatible DB/API** so in-flight requests finish cleanly. **⚠️ CRITICAL CAVEAT:** Coolify application-level rolling updates are NOT supported for Docker Compose applications.
 * **33. Dependency & Version Pinning:** Avoid `latest` tags. Pin versions explicitly in staging, test, and promote to production to guarantee reproducibility.
 * **34. Rollback:** Redeploying an older image. *(Warning: Application image rollback does NOT rollback database migrations).*
 
@@ -903,11 +903,11 @@ The CI/CD pipeline and release engineering.
 ## 🛡️ PHASE 5 — Data Protection
 **Rule:** Configure backup + external destination + test restores BEFORE launching production.
 
-* **35. DB Engine-Aware Backups:** Scheduled PostgreSQL/MongoDB dumps natively via Coolify UI.
+* **35. DB Engine-Aware Backups:** Scheduled native Coolify dumps for PostgreSQL / MySQL / MariaDB / MongoDB / ClickHouse.
 * **36. Application Storage Backups:** Scheduled file-level archives of persistent storage (uploads, invoices).
 * **37. Coolify Instance Backup & APP_KEY Recovery:** Backing up the control plane configuration. **⚠️ CRITICAL RULE:** Instance backup alone is not enough. `APP_KEY` must be stored securely offline to decrypt private keys and credentials during disaster recovery.
-* **38. External S3/MinIO:** Replicating all backups to an offsite, immutable destination.
-* **39. Restore Drill & RPO/RTO:** Testing backups by deploying a temporary DB and importing the dump to verify data integrity and recovery time.
+* **38. External S3/MinIO:** Replicating all backups to an offsite destination. Must use **retention + versioning/Object Lock/WORM** where required to guarantee a genuinely immutable backup.
+* **39. Full Disaster Recovery Drill:** Testing the complete chain: Coolify Instance + APP_KEY + Database + Persistent Storage + Application Recovery + RPO/RTO.
 
 ---
 
