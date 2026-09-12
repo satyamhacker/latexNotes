@@ -1701,7 +1701,7 @@ Section 20: Open-Source CI/CD & Container Registry
 
 ---
 
-## Topic 2: WAF, DDoS & Edge Security
+## Topic 2: Open-Source WAF & Edge Security Implementation
 
 **Subtopics:** Edge Security, WAF, DDoS Awareness, Malicious Requests, Request Size Limits, Connection Limits, IP Blocking, Geo Rules, Admin Endpoint Protection
 
@@ -1731,7 +1731,7 @@ Section 20: Open-Source CI/CD & Container Registry
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Section 21: E-Commerce Edge Protection
     Topic 1: API Rate Limiting & Abuse Protection
-    Topic 2: WAF, DDoS & Edge Security
+    Topic 2: Open-Source WAF & Edge Security Implementation
 
 ==================================================================================
 
@@ -1774,7 +1774,7 @@ Section 22: Production Secrets & Sensitive Credentials
 ==================================================================================
 
 
-# Section 23: Object Storage, CDN & Media Delivery
+# Section 23: Object Storage, Static Asset Caching & Media Delivery
 
 ### --23--Object Storage, CDN & Media Delivery--
 
@@ -1806,7 +1806,7 @@ Section 22: Production Secrets & Sensitive Credentials
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 23: Object Storage, CDN & Media Delivery
+Section 23: Object Storage, Static Asset Caching & Media Delivery
     Topic 1: Production Media Delivery with MinIO
 
 ==================================================================================
