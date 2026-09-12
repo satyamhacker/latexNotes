@@ -1307,3 +1307,886 @@ Sections: 9 | Topics: 18 | Subtopics: 71
 ==================================================================================
 
 
+
+---
+
+# Section 16: Two-VPS Production Architecture
+
+### --16--Two-VPS Production Architecture--
+
+## Topic 1: Practical 2-VPS Architecture & Workload Placement
+
+**Subtopics:** VPS Role Assignment, Application Node, Data Node, Coolify Control Plane, Frontend Placement, Backend Placement, Database Placement, Redis Placement, MinIO Placement, Jenkins Placement, Worker Placement, Monitoring Placement, Backup Destination
+
+### [📊 SCOPE SIGNAL for Topic 1:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Conceptual & Practical
+* **Transcript mein content volume:** New dedicated architecture design for a real two-VPS production environment
+* **Key terms from curriculum:** VPS 1, VPS 2, Application Node, Data Node, Coolify Control Plane, Frontend, Backend/API, Database, Redis, MinIO, Jenkins, Workers, Monitoring, Backup Destination
+* **Explicit emphasis:** Exactly two VPS ko logically divide karke production workloads place karna; sirf “multiple servers available hain” nahi, balki responsibility-based placement samajhna.
+* **Speaker ne jo analogies/examples use kiye:** Application server vs Data/Infrastructure server
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 1:
+
+[2-VPS architecture, Application Node, Data Node, Coolify Control Plane, Frontend, Backend API, PostgreSQL/MySQL/MariaDB/MongoDB, Redis, MinIO, Jenkins, Workers, Monitoring, Backup Destination, workload placement, resource isolation, failure domain]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* **Testing/Offline Phase:** Developer dono VPS ka CPU/RAM/storage/network profile compare karta hai aur decide karta hai kis server par kaunsa workload rahega.
+* **Fixing/Iteration Phase:** Heavy workloads ko redistribute kiya jata hai taaki database ya application ek doosre ke resources starve na karein.
+* **Live Production Phase:** VPS 1 aur VPS 2 defined responsibilities ke saath continuously production workloads serve karte hain.
+* **Additional context:** Architecture ko “available servers” ke basis par nahi, failure domain, resource usage aur operational simplicity ke basis par design kiya jayega.
+
+---
+
+## Topic 2: Two-VPS Networking, Failure Scenarios & Public Exposure
+
+**Subtopics:** Inter-VPS Communication, Private Networking, Public IP Minimization, Firewall Rules, Server Failure, Data Server Failure, Region Risk, Provider Risk, Same Provider vs Separate Provider
+
+### [📊 SCOPE SIGNAL for Topic 2:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Both
+* **Transcript mein content volume:** Failure-oriented network architecture and recovery reasoning
+* **Key terms:** Private Network, Public IP, Provider Firewall, VPS Failure, Data Failure, Region Failure, Provider Failure, Attack Surface
+* **Explicit emphasis:** Databases and internal services ko unnecessarily public internet par expose nahi karna.
+* **Speaker ne jo analogies/examples use kiye:** None
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 2:
+
+[private networking, inter-VPS communication, public IP, internal network, firewall, network isolation, DB private access, Redis private access, MinIO private access, provider risk, region risk, failure domain, attack surface]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* **Testing/Offline Phase:** Application VPS se database VPS tak private communication verify ki jati hai.
+* **Fixing/Iteration Phase:** Publicly exposed ports ko identify karke firewall aur network rules tighten kiye jate hain.
+* **Live Production Phase:** Public traffic sirf required edge endpoints tak jata hai; internal services private network ke through communicate karti hain.
+* **Additional context:** VPS 1 down aur VPS 2 down ke separate consequences aur recovery procedures document kiye jate hain.
+
+---
+
+# Section 17: Infrastructure Snapshot & Full Recovery
+
+### --17--Infrastructure Snapshot & Full Recovery--
+
+## Topic 1: Database, File & Server Snapshot Protection
+
+**Subtopics:** Database Backups, Application Storage Backups, Persistent Volumes, Coolify Backup, VPS Snapshot, Configuration Protection, Offsite Storage
+
+### [📊 SCOPE SIGNAL for Topic 1:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Both
+* **Transcript mein content volume:** Complete multi-layer protection model
+* **Key terms:** Database Dump, Persistent Storage, `/app/data`, Coolify Backup, VPS Snapshot, Offsite Backup, Immutable Backup
+* **Explicit emphasis:** Snapshot, database backup aur file backup alag-alag protection layers hain.
+* **Speaker ne jo analogies/examples use kiye:** None
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 1:
+
+[database backup, engine-aware dump, file backup, persistent volume, /app/data, Coolify instance backup, server snapshot, VPS snapshot, configuration backup, offsite backup, MinIO, immutable backup, retention]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* **Testing/Offline Phase:** Scheduled database dumps, application/file backups aur VPS snapshots configure kiye jate hain.
+* **Fixing/Iteration Phase:** Backup restore karke verify kiya jata hai ki data actually recoverable hai.
+* **Live Production Phase:** Different failures ke liye appropriate backup layer automatically available rehti hai.
+* **Additional context:** Backup ka existence alone sufficient nahi; restore test mandatory hai.
+
+---
+
+## Topic 2: Failure-to-Recovery Matrix & Disaster Restoration
+
+**Subtopics:** Bad Deployment Recovery, Bad Configuration Recovery, Database Corruption Recovery, Deleted File Recovery, OS/Docker Failure Recovery, Complete VPS Loss, Complete Provider/Region Loss
+
+### [📊 SCOPE SIGNAL for Topic 2:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Practical
+* **Transcript mein content volume:** Explicit recovery decision tree and hands-on restore scenarios
+* **Key terms:** Rollback, DB Restore, Volume Restore, VPS Snapshot Restore, New VPS Provisioning, Offsite Recovery
+* **Explicit emphasis:** Har failure ke liye same recovery method use nahi hota.
+* **Speaker ne jo analogies/examples use kiye:** None
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 2:
+
+[bad deployment, rollback, bad configuration, previous version, DB corruption, database restore, deleted files, volume restore, Docker failure, OS failure, snapshot restore, VPS loss, rebuild server, offsite restore, full DR]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* **Testing/Offline Phase:** Deliberately controlled failure create karke restore path test kiya jata hai.
+* **Fixing/Iteration Phase:** Failure type identify karke correct recovery layer select ki jati hai.
+* **Live Production Phase:** Incident ke time “rollback vs restore vs rebuild” clearly decide kiya jata hai.
+* **Additional context:** Snapshot backup ka replacement nahi hai; DB dump ka bhi replacement nahi hai.
+
+---
+
+# Section 18: GUI-First / Zero-CLI Operations
+
+### --18--GUI-First / Zero-CLI Operations--
+
+## Topic 1: GUI → API → SSH Operating Philosophy
+
+**Subtopics:** GUI Operations, Coolify Dashboard, API Automation, SSH Break-Glass, CLI Minimization, Linux Survival Skills
+
+### [📊 SCOPE SIGNAL for Topic 1:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Conceptual & Practical
+* **Transcript mein content volume:** Course-wide operating philosophy rather than one isolated feature
+* **Key terms:** GUI First, API Second, SSH Last Resort, Zero-CLI, Break-Glass Access
+* **Explicit emphasis:** Routine operations ko GUI se perform karna; automation ke liye API; emergency recovery ke liye SSH.
+* **Speaker ne jo analogies/examples use kiye:** AWS-style managed experience
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 1:
+
+[GUI first, Coolify UI, API first, SSH last resort, zero CLI, break-glass, emergency recovery, Linux survival skills, dashboard operations, GUI automation]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* **Testing/Offline Phase:** Har required operation ke liye identify kiya jata hai ki GUI, API ya SSH mein se kaunsa preferred path hai.
+* **Fixing/Iteration Phase:** Unnecessary CLI commands ko GUI/API workflow se replace kiya jata hai.
+* **Live Production Phase:** Daily production management almost entirely GUI/API driven hoti hai.
+* **Additional context:** Zero-CLI ka matlab zero Linux knowledge nahi; emergency recovery ke liye minimum Linux understanding maintain karni hai.
+
+---
+
+# Section 19: Frontend, Backend & Mobile Production Delivery
+
+### --19--Frontend, Backend & Mobile Production Delivery--
+
+## Topic 1: Frontend Production Deployment
+
+**Subtopics:** SPA Deployment, SSR Deployment, Frontend Build, Environment Variables, API URL, Static Assets, Cache, Staging/Production
+
+### [📊 SCOPE SIGNAL for Topic 1:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Both
+* **Transcript mein content volume:** Dedicated frontend deployment workflow
+* **Key terms:** React, Next.js, SPA, SSR, Build, Static Assets, Environment Variables, Cache
+* **Explicit emphasis:** Frontend ko backend se alag production workload ke roop mein manage karna.
+* **Speaker ne jo analogies/examples use kiye:** None
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 1:
+
+[frontend, React, Next.js, SPA, SSR, build, deployment, environment variables, API URL, static assets, cache, staging, production, domain, HTTPS]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* **Testing/Offline Phase:** Frontend repository ko staging environment mein build karke API integration verify ki jati hai.
+* **Fixing/Iteration Phase:** Build/configuration/cache issues ko correct kiya jata hai.
+* **Live Production Phase:** Production frontend securely deploy hota hai aur backend API ke saath communicate karta hai.
+* **Additional context:** Frontend deployment backend deployment se logically separate hai.
+
+---
+
+## Topic 2: Backend/API Production Deployment
+
+**Subtopics:** API Deployment, Environment Configuration, Database Connection, Redis Connection, Workers, Health Checks, API Domains
+
+### [📊 SCOPE SIGNAL for Topic 2:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Both
+* **Transcript mein content volume:** Full production API workflow
+* **Key terms:** Backend API, Database, Redis, Queue, Worker, Health Check, Environment Variables
+* **Explicit emphasis:** Backend ko sirf container run karne ke bajaye DB, Redis, queues aur health systems ke saath production unit ke roop mein samajhna.
+* **Speaker ne jo analogies/examples use kiye:** None
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 2:
+
+[backend, REST API, API domain, DB connection, Redis, queue, worker, healthcheck, readiness, environment variables, staging, production]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* **Testing/Offline Phase:** Backend staging environment mein deploy karke DB, Redis aur worker connectivity test karta hai.
+* **Fixing/Iteration Phase:** Health checks, configuration aur resource settings tune ki jati hain.
+* **Live Production Phase:** Backend API, workers aur queues coordinated production workload ke roop mein run karte hain.
+* **Additional context:** Backend release pipeline later Jenkins aur Coolify API se automate hogi.
+
+---
+
+## Topic 3: Mobile CI/CD with Jenkins
+
+**Subtopics:** Android Build, APK/AAB, Signing, Artifact Storage, iOS Build, macOS Runner, Xcode, Code Signing, App Store Connect
+
+### [📊 SCOPE SIGNAL for Topic 3:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Both
+* **Transcript mein content volume:** Core mobile delivery workflow
+* **Key terms:** Jenkins, Fastlane, Android, APK, AAB, iOS, macOS Runner, Xcode, Signing, App Store Connect
+* **Explicit emphasis:** Mobile CI/CD ko optional feature nahi, core production delivery ka part treat karna.
+* **Speaker ne jo analogies/examples use kiye:** None
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 3:
+
+[Jenkins, Fastlane, Android, APK, AAB, Android signing, keystore, iOS, macOS runner, Xcode, provisioning, certificates, code signing, IPA, App Store Connect, artifact]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* **Testing/Offline Phase:** Git push Jenkins pipeline trigger karta hai.
+* **Fixing/Iteration Phase:** Automated build/test/signing failures identify aur correct kiye jate hain.
+* **Live Production Phase:** Signed Android/iOS artifacts release pipeline ke through publish hote hain.
+* **Additional context:** iOS build environment Linux VPS par directly assume nahi kiya jayega; macOS build requirement separately handle ki jayegi.
+
+---
+
+# Section 20: Open-Source CI/CD & Container Registry
+
+### --20--Open-Source CI/CD & Container Registry--
+
+## Topic 1: Jenkins Self-Hosted CI/CD
+
+**Subtopics:** Jenkins Deployment, Persistent Storage, Webhooks, Jenkinsfile, Credentials, Docker Build, Testing, Security Scanning, Deployment Trigger
+
+### [📊 SCOPE SIGNAL for Topic 1:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Both
+* **Transcript mein content volume:** Full open-source CI/CD implementation
+* **Key terms:** Jenkins, Forgejo, Webhook, Jenkinsfile, Docker Build, Credentials, Coolify API
+* **Explicit emphasis:** Paid CI/CD SaaS dependency avoid karna.
+* **Speaker ne jo analogies/examples use kiye:** None
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 1:
+
+[Jenkins, self-hosted CI, Forgejo, webhook, Jenkinsfile, credentials, Docker build, unit tests, integration tests, security scans, artifact, Coolify API, deployment]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* **Testing/Offline Phase:** Forgejo repository Jenkins ke saath webhook se connect hota hai.
+* **Fixing/Iteration Phase:** Jenkins code build, tests aur scans run karta hai.
+* **Live Production Phase:** Successful pipeline production deployment ko trigger karta hai.
+* **Additional context:** Production server par build karne ke bajaye CI → Registry → Deployment preferred architecture rahega.
+
+---
+
+## Topic 2: Self-Hosted Container Registry
+
+**Subtopics:** Private Registry, Registry Authentication, TLS, Image Retention, Cleanup, Immutable Tags, Digest Pinning, Registry Backup
+
+### [📊 SCOPE SIGNAL for Topic 2:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Both
+* **Transcript mein content volume:** Complete self-hosted image supply chain
+* **Key terms:** Container Registry, Private Images, Authentication, Digest, Immutable Tag, Retention, Backup
+* **Explicit emphasis:** Registry bhi external paid dependency nahi honi chahiye.
+* **Speaker ne jo analogies/examples use kiye:** None
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 2:
+
+[self-hosted container registry, private registry, authentication, TLS, image retention, image cleanup, immutable tag, digest, registry backup, registry availability]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* **Testing/Offline Phase:** Jenkins image build karke self-hosted registry mein push karta hai.
+* **Fixing/Iteration Phase:** Authentication, tag strategy aur retention rules validate kiye jate hain.
+* **Live Production Phase:** Coolify immutable image/digest pull karke production deploy karta hai.
+* **Additional context:** Registry itself must also be backed up because it is part of the delivery chain.
+
+---
+
+# Section 21: E-Commerce Edge Protection
+
+### --21--E-Commerce Edge Protection--
+
+## Topic 1: API Rate Limiting & Abuse Protection
+
+**Subtopics:** Per-IP Rate Limits, Login Protection, OTP Protection, Checkout Protection, Webhook Protection, API Quotas, Burst Control, Redis Rate Limiting
+
+### [📊 SCOPE SIGNAL for Topic 1:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Both
+* **Transcript mein content volume:** Production API protection for public e-commerce traffic
+* **Key terms:** Rate Limiting, Redis, API Quota, Burst, Login, OTP, Checkout, Webhook
+* **Explicit emphasis:** Sensitive endpoints ko unlimited public requests ke liye expose nahi karna.
+* **Speaker ne jo analogies/examples use kiye:** None
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 1:
+
+[rate limiting, Redis, per-IP limit, login limit, OTP limit, checkout limit, webhook limit, burst limit, quota, abuse protection, API protection]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* **Testing/Offline Phase:** k6 se normal aur abusive traffic generate karke limits test ki jati hain.
+* **Fixing/Iteration Phase:** Endpoint-wise thresholds tune kiye jate hain.
+* **Live Production Phase:** Excessive requests automatically throttle/block hoti hain without bringing down the backend.
+* **Additional context:** Login, OTP, payment, checkout aur search highest-priority protected endpoints hain.
+
+---
+
+## Topic 2: WAF, DDoS & Edge Security
+
+**Subtopics:** Edge Security, WAF, DDoS Awareness, Malicious Requests, Request Size Limits, Connection Limits, IP Blocking, Geo Rules, Admin Endpoint Protection
+
+### [📊 SCOPE SIGNAL for Topic 2:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Conceptual & Practical
+* **Transcript mein content volume:** Internet-facing security boundary
+* **Key terms:** WAF, DDoS, Edge, Reverse Proxy, Rate Limiting, IP Rules
+* **Explicit emphasis:** Provider firewall aur WAF ko same cheez na samajhna.
+* **Speaker ne jo analogies/examples use kiye:** None
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 2:
+
+[WAF, DDoS, edge security, reverse proxy, malicious requests, request size, connection limit, IP blocking, geo blocking, admin endpoint, attack surface]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* **Testing/Offline Phase:** Public application par controlled malicious/request-spike tests perform kiye jate hain.
+* **Fixing/Iteration Phase:** Edge rules, request limits aur blocking rules tune kiye jate hain.
+* **Live Production Phase:** Internet traffic edge protection layer se pass hokar application tak pahunchta hai.
+* **Additional context:** Provider firewall, reverse proxy, rate limiter aur WAF separate security layers hain.
+
+---
+
+# Section 22: Production Secrets & Sensitive Credentials
+
+### --22--Production Secrets & Sensitive Credentials--
+
+## Topic 1: Self-Hosted Secret Management Lifecycle
+
+**Subtopics:** Secret Storage, Access Control, Secret Rotation, Audit, Revocation, Jenkins Credentials, Payment Secrets, Database Credentials, Mobile Signing Secrets
+
+### [📊 SCOPE SIGNAL for Topic 1:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Both
+* **Transcript mein content volume:** Centralized secrets lifecycle for multi-system production
+* **Key terms:** Secret Manager, Rotation, Revocation, Audit, Least Privilege
+* **Explicit emphasis:** Secrets ko sirf environment variable mein daal kar permanently chhodna sufficient nahi.
+* **Speaker ne jo analogies/examples use kiye:** None
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 1:
+
+[secret management, secret storage, access, rotation, audit, revocation, DB password, payment secret, JWT secret, SMTP, Jenkins credentials, registry credentials, Apple certificate, Android keystore, Coolify token]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* **Testing/Offline Phase:** Secrets securely store aur access policies define ki jati hain.
+* **Fixing/Iteration Phase:** Expired/compromised secret ko rotate karke services redeploy ki jati hain.
+* **Live Production Phase:** Production systems least-privilege credentials use karte hain aur old secrets revoke kiye jate hain.
+* **Additional context:** Root/admin credentials ko CI/CD pipelines mein reuse nahi karna.
+
+---
+
+# Section 23: Object Storage, CDN & Media Delivery
+
+### --23--Object Storage, CDN & Media Delivery--
+
+## Topic 1: Production Media Delivery with MinIO
+
+**Subtopics:** Public Objects, Private Objects, Signed URLs, Upload URLs, CDN/Cache, Cache Headers, Image Optimization, Thumbnails, Lifecycle, Versioning
+
+### [📊 SCOPE SIGNAL for Topic 1:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Both
+* **Transcript mein content volume:** Extend existing MinIO knowledge into real e-commerce media architecture
+* **Key terms:** MinIO, CDN, Signed URL, Cache, Image Optimization, Object Lifecycle
+* **Explicit emphasis:** Product images/videos ko application server se directly serve karne ke bajaye proper object-storage architecture use karna.
+* **Speaker ne jo analogies/examples use kiye:** Object storage as media layer
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 1:
+
+[MinIO, object storage, CDN, cache, signed URL, upload URL, product images, videos, thumbnails, cache headers, image optimization, lifecycle, versioning, public object, private object]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* **Testing/Offline Phase:** Product images upload karke public/private access aur signed URLs test kiye jate hain.
+* **Fixing/Iteration Phase:** Cache-control, image size aur delivery performance tune ki jati hai.
+* **Live Production Phase:** Frontend/backend media MinIO/object-storage layer se efficiently serve hota hai.
+* **Additional context:** Application server ka CPU/RAM unnecessarily media delivery mein consume nahi karna.
+
+---
+
+# Section 24: Environment & Release Isolation
+
+### --24--Environment & Release Isolation--
+
+## Topic 1: Development → Staging → Production Separation
+
+**Subtopics:** Separate Databases, Separate Secrets, Separate Domains, Payment Sandbox, Payment Production, Separate Storage Buckets, Separate Queues, Separate Email Configuration
+
+### [📊 SCOPE SIGNAL for Topic 1:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Both
+* **Transcript mein content volume:** Formalized environment strategy for production systems
+* **Key terms:** Development, Staging, Production, Sandbox, Environment Isolation
+* **Explicit emphasis:** Production credentials/data ko staging/development ke saath mix nahi karna.
+* **Speaker ne jo analogies/examples use kiye:** None
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 1:
+
+[development, staging, production, separate DB, separate secrets, domain, sandbox payment, live payment, bucket, queue, email, environment variables]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* **Testing/Offline Phase:** Feature development development environment mein hoti hai.
+* **Fixing/Iteration Phase:** Staging mein smoke testing aur integration testing hoti hai.
+* **Live Production Phase:** Sirf validated release production secrets/data ke saath deploy hoti hai.
+* **Additional context:** Payment sandbox aur live credentials kabhi interchange nahi hone chahiye.
+
+---
+
+# Section 25: E-Commerce Capacity & Scaling
+
+### --25--E-Commerce Capacity & Scaling--
+
+## Topic 1: 1000-User Capacity Testing
+
+**Subtopics:** Load Testing, Concurrent Users, Requests/Second, p50, p95, p99, CPU, RAM, DB Connections, Redis, Queue Depth, Error Rate
+
+### [📊 SCOPE SIGNAL for Topic 1:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Both
+* **Transcript mein content volume:** Evidence-based capacity planning
+* **Key terms:** k6, Concurrent Users, RPS, Latency, p95, p99, CPU, RAM, Queue Depth
+* **Explicit emphasis:** “1000 users” ko direct hardware capacity assumption na banana.
+* **Speaker ne jo analogies/examples use kiye:** 100 → 200 → 500 → 1000 → 2000 user progression
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 1:
+
+[k6, load testing, concurrent users, RPS, p50, p95, p99, CPU, RAM, database connections, Redis, queue depth, error rate, bottleneck, capacity baseline]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* **Testing/Offline Phase:** Controlled traffic 100, 200, 500, 1000 aur beyond users par generate kiya jata hai.
+* **Fixing/Iteration Phase:** Bottleneck identify karke code, DB, Redis, worker ya infrastructure optimize kiya jata hai.
+* **Live Production Phase:** Real monitoring thresholds ke saath production capacity validated hoti hai.
+* **Additional context:** Users ki count alone capacity metric nahi hai; concurrency aur request workload measure kiya jayega.
+
+---
+
+## Topic 2: Scaling Decision Policy
+
+**Subtopics:** Vertical Scaling, Optimization First, Dedicated Database, Dedicated Worker, Second App Node, Load Balancer, Scaling Thresholds
+
+### [📊 SCOPE SIGNAL for Topic 2:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Conceptual & Practical
+* **Transcript mein content volume:** Explicit scale decision framework
+* **Key terms:** Vertical Scaling, Horizontal Scaling, CPU Threshold, RAM Threshold, Latency Threshold, Queue Depth
+* **Explicit emphasis:** Har performance issue ka solution “bigger VPS” nahi hota.
+* **Speaker ne jo analogies/examples use kiye:** None
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 2:
+
+[vertical scaling, optimization, dedicated DB, dedicated worker, app node, horizontal scaling, load balancer, CPU threshold, RAM threshold, p95 threshold, queue depth, DB utilization]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* **Testing/Offline Phase:** CPU/RAM/latency/queue/DB metrics ke thresholds define kiye jate hain.
+* **Fixing/Iteration Phase:** Pehle optimization, phir vertical scaling, phir workload separation, phir horizontal scaling.
+* **Live Production Phase:** Threshold breach par predefined scaling decision apply hota hai.
+* **Additional context:** Scale-up strategy guesswork ke bajaye measured metrics par based hogi.
+
+---
+
+# Section 26: E-Commerce Queue Architecture
+
+### --26--E-Commerce Queue Architecture--
+
+## Topic 1: Production Background Job System
+
+**Subtopics:** Queue, Workers, Email Worker, Image Worker, Invoice Worker, Payment Reconciliation, Notification Worker, Report Worker
+
+### [📊 SCOPE SIGNAL for Topic 1:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Both
+* **Transcript mein content volume:** Real e-commerce asynchronous architecture
+* **Key terms:** Queue, Worker, Background Job, Payment Reconciliation, Email, Invoice, Notification
+* **Explicit emphasis:** Heavy/background work ko synchronous checkout/API request ke andar nahi rakhna.
+* **Speaker ne jo analogies/examples use kiye:** None
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 1:
+
+[queue, worker, email worker, image worker, invoice worker, payment reconciliation, notification worker, report worker, async processing, background jobs]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* **Testing/Offline Phase:** API se background jobs enqueue karke workers verify kiye jate hain.
+* **Fixing/Iteration Phase:** Worker count, retries aur queue behavior tune kiya jata hai.
+* **Live Production Phase:** Heavy work background workers process karte hain aur API responsive rehti hai.
+* **Additional context:** Checkout-critical path ko unnecessary background dependency se block nahi karna.
+
+---
+
+## Topic 2: Retry, DLQ & Graceful Worker Operations
+
+**Subtopics:** Retry Policy, Exponential Backoff, Dead-Letter Queue, Poison Messages, Job Idempotency, Queue Monitoring, Graceful Shutdown, Worker Scaling
+
+### [📊 SCOPE SIGNAL for Topic 2:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Both
+* **Transcript mein content volume:** Production failure handling for asynchronous workloads
+* **Key terms:** Retry, Backoff, DLQ, Poison Message, Idempotency, Graceful Shutdown
+* **Explicit emphasis:** Failed jobs ko blindly infinite retry nahi karna.
+* **Speaker ne jo analogies/examples use kiye:** None
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 2:
+
+[retry, exponential backoff, DLQ, dead-letter queue, poison message, job idempotency, queue monitoring, worker scaling, graceful shutdown]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* **Testing/Offline Phase:** Intentionally failing jobs ke saath retry aur DLQ behavior test kiya jata hai.
+* **Fixing/Iteration Phase:** Retry count aur backoff policy tune hoti hai.
+* **Live Production Phase:** Permanent failures DLQ mein jati hain aur healthy jobs normally process hoti rehti hain.
+* **Additional context:** Worker shutdown graceful hona chahiye taaki in-flight jobs corrupt na hon.
+
+---
+
+# Section 27: Production Logging & PII Protection
+
+### --27--Production Logging & PII Protection--
+
+## Topic 1: Structured Logging & Sensitive Data Redaction
+
+**Subtopics:** JSON Logs, PII, Password Redaction, OTP Redaction, CVV Protection, Token Redaction, Private Key Protection, Log Retention
+
+### [📊 SCOPE SIGNAL for Topic 1:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Both
+* **Transcript mein content volume:** Formal logging-security policy
+* **Key terms:** Structured Logs, PII, Redaction, Retention
+* **Explicit emphasis:** Sensitive information observability systems mein leak nahi honi chahiye.
+* **Speaker ne jo analogies/examples use kiye:** None
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 1:
+
+[structured logging, JSON logs, PII, password, OTP, CVV, card data, API token, JWT secret, private key, redaction, retention]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* **Testing/Offline Phase:** Test requests generate karke logs inspect kiye jate hain.
+* **Fixing/Iteration Phase:** Sensitive fields detect karke filters/redaction rules add kiye jate hain.
+* **Live Production Phase:** Central observability stack mein sanitized logs hi collect/store hote hain.
+* **Additional context:** Production logging ka goal debugging hona chahiye, secret/data leakage nahi.
+
+---
+
+# Section 28: Application-Specific Release Engineering
+
+### --28--Application-Specific Release Engineering--
+
+## Topic 1: Backend Release Playbook
+
+**Subtopics:** Build, Test, Database Migration, Deploy, Health Check, Smoke Test, Rollback
+
+### [📊 SCOPE SIGNAL for Topic 1:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Practical
+* **Transcript mein content volume:** Backend-specific release workflow
+* **Key terms:** Build, Test, Migration, Deploy, Health Check, Smoke Test, Rollback
+* **Explicit emphasis:** Backend release mein database compatibility aur health validation critical hai.
+* **Speaker ne jo analogies/examples use kiye:** None
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 1:
+
+[backend release, build, test, migration, deploy, health check, smoke test, rollback, compatibility]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* **Testing/Offline Phase:** Staging backend build/test/migration run hota hai.
+* **Fixing/Iteration Phase:** Health checks aur smoke tests fail hone par release block hoti hai.
+* **Live Production Phase:** Validated release production mein deploy hoti hai.
+* **Additional context:** DB migration rollback ko application rollback ke equal nahi samjha jayega.
+
+---
+
+## Topic 2: Frontend Release Playbook
+
+**Subtopics:** Build, Assets, Deployment, Cache Validation, API Compatibility, Smoke Test, Rollback
+
+### [📊 SCOPE SIGNAL for Topic 2:
+
+* **Depth Level:** Moderate
+* **Coverage Angle:** Practical
+* **Transcript mein content volume:** Frontend-specific release lifecycle
+* **Key terms:** Build, Assets, Cache, API Compatibility, Smoke Test
+* **Explicit emphasis:** Frontend deployment mein asset caching aur backend compatibility validate karna.
+* **Speaker ne jo analogies/examples use kiye:** None
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 2:
+
+[frontend release, build, assets, cache, API compatibility, smoke test, rollback]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* **Testing/Offline Phase:** Frontend staging build API ke saath validate hota hai.
+* **Fixing/Iteration Phase:** Cache/asset mismatch issues resolve kiye jate hain.
+* **Live Production Phase:** Production frontend deploy hone ke baad smoke test run hota hai.
+* **Additional context:** Frontend deployment backend ke version compatibility ke saath coordinate ho sakta hai.
+
+---
+
+## Topic 3: Mobile Release Playbook
+
+**Subtopics:** Build, Automated Testing, Signing, Artifact Generation, Android Release, iOS Release
+
+### [📊 SCOPE SIGNAL for Topic 3:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Practical
+* **Transcript mein content volume:** Mobile-specific delivery lifecycle
+* **Key terms:** Build, Test, Sign, Artifact, Release
+* **Explicit emphasis:** Mobile release ko server deployment jaisa treat nahi karna.
+* **Speaker ne jo analogies/examples use kiye:** None
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 3:
+
+[mobile release, Android, iOS, build, test, sign, APK, AAB, IPA, artifact, release]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* **Testing/Offline Phase:** Automated mobile builds/tests run hote hain.
+* **Fixing/Iteration Phase:** Signing/build failures resolve kiye jate hain.
+* **Live Production Phase:** Signed artifact release channel par publish hota hai.
+* **Additional context:** Mobile deployment ka output container nahi, release artifact hota hai.
+
+---
+
+# Section 29: Coolify Daily Operations Mastery
+
+### --29--Coolify Daily Operations Mastery--
+
+## Topic 1: Frequently Used Coolify GUI Features
+
+**Subtopics:** Application Creation, Git Source, Branch, Build Settings, Environment Variables, Shared Variables, Domains, Redirects, Health Checks, Resource Limits, Persistent Storage, Private Networks
+
+### [📊 SCOPE SIGNAL for Topic 1:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Practical only
+* **Transcript mein content volume:** High-frequency daily Coolify operations
+* **Key terms:** Application, Git, Branch, Build, Environment Variables, Domain, Health Check, Storage, Network
+* **Explicit emphasis:** Frequently used operations ko CLI ke through nahi, Coolify UI se master karna.
+* **Speaker ne jo analogies/examples use kiye:** None
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 1:
+
+[application creation, Git source, branch, build settings, environment variables, shared variables, domains, redirects, health checks, resource limits, persistent storage, private network]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* **Testing/Offline Phase:** New application ko UI se create/configure kiya jata hai.
+* **Fixing/Iteration Phase:** Settings, domains, health checks aur resources UI se adjust kiye jate hain.
+* **Live Production Phase:** Daily application management entirely Coolify GUI se hota hai.
+* **Additional context:** This is the central “AWS-like GUI operations” chapter.
+
+---
+
+## Topic 2: Coolify Deployment, Recovery & Resource Operations
+
+**Subtopics:** Deploy, Redeploy, Restart, Force Deploy, Deployment Logs, Application Logs, Terminal, Backups, Clone, Move, Server Assignment, Maintenance Mode, Scheduled Tasks, Webhooks, Notifications
+
+### [📊 SCOPE SIGNAL for Topic 2:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Practical only
+* **Transcript mein content volume:** Repeated production operations
+* **Key terms:** Deploy, Redeploy, Restart, Force Deploy, Logs, Backup, Clone, Move, Maintenance
+* **Explicit emphasis:** Similar-looking operations ka actual difference samajhna.
+* **Speaker ne jo analogies/examples use kiye:** None
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 2:
+
+[deploy, redeploy, restart, force deploy, deployment logs, application logs, terminal, backups, clone, move, server assignment, maintenance mode, scheduled tasks, webhooks, notifications]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* **Testing/Offline Phase:** Developer different deployment operations ko staging mein test karta hai.
+* **Fixing/Iteration Phase:** Logs aur resource operations se issue identify/fix karta hai.
+* **Live Production Phase:** Routine deployment, recovery aur maintenance GUI-driven hoti hai.
+* **Additional context:** CLI ko routine operational tool nahi banana hai.
+
+---
+
+# Section 30: Coolify API Automation
+
+### --30--Coolify API Automation--
+
+## Topic 1: API-Driven Production Deployment
+
+**Subtopics:** API Tokens, Scoped Permissions, IP Restrictions, Deploy Trigger, Deployment Status, Health Verification, Jenkins Integration
+
+### [📊 SCOPE SIGNAL for Topic 1:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Both
+* **Transcript mein content volume:** Automation bridge between Jenkins and Coolify
+* **Key terms:** Coolify API, API Token, Jenkins, Deploy, Health Check, Scoped Access
+* **Explicit emphasis:** GUI ke baad automation API use kare; unnecessary SSH deployment avoid kare.
+* **Speaker ne jo analogies/examples use kiye:** None
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 1:
+
+[Coolify API, API token, scoped token, IP allowlist, Jenkins, deployment trigger, deploy status, health check, automation]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* **Testing/Offline Phase:** Jenkins test environment se Coolify API ko deployment request bhejta hai.
+* **Fixing/Iteration Phase:** API permissions aur failed deployment handling validate ki jati hai.
+* **Live Production Phase:** Jenkins build complete karta hai, registry push karta hai aur Coolify API se deployment trigger karta hai.
+* **Additional context:** Target architecture: **Build → Test → Registry → Coolify API → Deploy → Health Check**, without SSH deployment commands.
+
+---
+
+# Section 31: Unified Production Observability
+
+### --31--Unified Production Observability--
+
+## Topic 1: Metrics + Logs + Traces + Alerts
+
+**Subtopics:** Infrastructure Metrics, Application Metrics, Central Logs, APM, Alert Routing, Uptime Monitoring, Audit Logs, Incident Decision Tree
+
+### [📊 SCOPE SIGNAL for Topic 1:
+
+* **Depth Level:** Deep
+* **Coverage Angle:** Conceptual & Practical
+* **Transcript mein content volume:** Unified observability model over existing monitoring topics
+* **Key terms:** Metrics, Logs, Traces, APM, Alerts, Uptime, Audit Logs
+* **Explicit emphasis:** Monitoring tools ko isolated utilities nahi, ek unified operational system ke roop mein use karna.
+* **Speaker ne jo analogies/examples use kiye:** None
+  ]
+
+### 🔑 KEYWORDS DUMP for Topic 1:
+
+[metrics, logs, traces, APM, alerts, Uptime Kuma, Coolify Sentinel, audit logs, notification, incident runbook, RED alert, healthcheck, rollback, restore]
+
+### 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* **Testing/Offline Phase:** Metrics, logs, traces aur uptime checks configure kiye jate hain.
+* **Fixing/Iteration Phase:** Alert aane par Logs → Healthcheck → Recent Deployment → Rollback/Restore decision tree follow hota hai.
+* **Live Production Phase:** On-call/operator centralized observability se system health understand karta hai.
+* **Additional context:** Existing Sentinel, Metrics, Uptime Kuma aur Audit Logs ko ek coherent observability architecture mein connect kiya jayega.
+
+---
+
+# FINAL ADDITIONAL PHASE SUMMARY
+
+```text
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 ADDED TO ORIGINAL CURRICULUM:
+
+Section 16: Two-VPS Production Architecture
+    Topic 1: Practical 2-VPS Architecture & Workload Placement
+    Topic 2: Two-VPS Networking, Failure Scenarios & Public Exposure
+
+Section 17: Infrastructure Snapshot & Full Recovery
+    Topic 1: Database, File & Server Snapshot Protection
+    Topic 2: Failure-to-Recovery Matrix & Disaster Restoration
+
+Section 18: GUI-First / Zero-CLI Operations
+    Topic 1: GUI → API → SSH Operating Philosophy
+
+Section 19: Frontend, Backend & Mobile Production Delivery
+    Topic 1: Frontend Production Deployment
+    Topic 2: Backend/API Production Deployment
+    Topic 3: Mobile CI/CD with Jenkins
+
+Section 20: Open-Source CI/CD & Container Registry
+    Topic 1: Jenkins Self-Hosted CI/CD
+    Topic 2: Self-Hosted Container Registry
+
+Section 21: E-Commerce Edge Protection
+    Topic 1: API Rate Limiting & Abuse Protection
+    Topic 2: WAF, DDoS & Edge Security
+
+Section 22: Production Secrets & Sensitive Credentials
+    Topic 1: Self-Hosted Secret Management Lifecycle
+
+Section 23: Object Storage, CDN & Media Delivery
+    Topic 1: Production Media Delivery with MinIO
+
+Section 24: Environment & Release Isolation
+    Topic 1: Development → Staging → Production Separation
+
+Section 25: E-Commerce Capacity & Scaling
+    Topic 1: 1000-User Capacity Testing
+    Topic 2: Scaling Decision Policy
+
+Section 26: E-Commerce Queue Architecture
+    Topic 1: Production Background Job System
+    Topic 2: Retry, DLQ & Graceful Worker Operations
+
+Section 27: Production Logging & PII Protection
+    Topic 1: Structured Logging & Sensitive Data Redaction
+
+Section 28: Application-Specific Release Engineering
+    Topic 1: Backend Release Playbook
+    Topic 2: Frontend Release Playbook
+    Topic 3: Mobile Release Playbook
+
+Section 29: Coolify Daily Operations Mastery
+    Topic 1: Frequently Used Coolify GUI Features
+    Topic 2: Coolify Deployment, Recovery & Resource Operations
+
+Section 30: Coolify API Automation
+    Topic 1: API-Driven Production Deployment
+
+Section 31: Unified Production Observability
+    Topic 1: Metrics + Logs + Traces + Alerts
+
+📊 ADDITIONAL PHASE SUMMARY:
+Sections Added: 16
+Topics Added: 25
+Primary Goal:
+Open-source + 2 VPS + GUI-first + frontend/backend/mobile
++ e-commerce + ~1000-user capacity
++ Jenkins + self-hosted registry
++ backup/snapshot/recovery
++ production security + reliability
++ Coolify GUI/API operations
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+Ye skeleton aapke existing master curriculum ke **next continuation** ke roop mein directly use kiya ja sakta hai. Original curriculum ke existing concepts—private networking, security, CI/CD, backups/DR, reliability, e-commerce protection, multi-node architecture aur observability—inke saath ye additions intentionally overlap ko minimum rakhte hue missing operational layer fill karte hain.  
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
