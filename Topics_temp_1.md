@@ -2567,69 +2567,46 @@ Section 31: Unified Production Observability
 * **Additional context:** IaC ka primary goal unnecessary automation nahi, balki **reproducibility, consistency, auditability aur disaster recovery** hai.
 
 
-### 🧪 HANDS-ON OBSERVABILITY & ALERTING LAB:
+### 🧪 HANDS-ON IaC / REPRODUCIBILITY LAB:
 
-Lab 1: CPU / Memory Alert
-* CPU ya memory threshold define karo.
-* Controlled workload generate karo.
-* Metric rise observe karo.
-* Alert trigger verify karo.
-* Notification receive hone verify karo.
+Lab 1: Infrastructure Inventory
+* VPS roles document karo
+* Domains/DNS identify karo
+* Coolify resources document karo
+* Firewall rules document karo
+* Backup configuration document karo
+* Monitoring configuration document karo
 
-Lab 2: Application Failure Alert
-* Test application intentionally stop/fail karo.
-* Health check / availability metric observe karo.
-* Alert trigger verify karo.
-* Application recover karo.
-* Alert resolution verify karo.
+Lab 2: Version-Controlled Configuration
+* Infrastructure repository create karo
+* Docker Compose/configuration files store karo
+* Environment structure document karo
+* Production configuration changes commit karo
 
-Lab 3: HTTP Error Alert
-* Controlled 5xx responses generate karo.
-* Error rate metric observe karo.
-* Alert threshold trigger karo.
-* Root cause identify karo using logs + metrics.
+Lab 3: Configuration Drift Test
+* Controlled infrastructure setting change karo
+* Repository configuration se compare karo
+* Drift identify karo
+* Correct state restore karo
 
-Lab 4: Database Dependency Failure
-* Controlled test environment mein DB connectivity interrupt karo.
-* Application errors observe karo.
-* Logs + metrics + health status correlate karo.
-* DB restore/reconnect ke baad recovery verify karo.
-
-Lab 5: End-to-End Incident Drill
-
-Incident:
-“Users are reporting checkout failures.”
-
-Process:
-Alert
-↓
-Dashboard
-↓
-Metrics
-↓
-Logs
-↓
-Trace (where available)
-↓
-Identify bottleneck
-↓
-Fix
-↓
-Verify recovery
-↓
-Document incident
+Lab 4: Rebuild Test
+* Test VPS replace/recreate karo
+* Documented configuration use karke infrastructure rebuild karo
+* Applications/services restore karo
+* DNS, networking, backup aur monitoring validate karo
 
 ### ✅ VERIFICATION CHECKLIST:
 
-[ ] Alert created
-[ ] Alert intentionally triggered
-[ ] Notification received
-[ ] Dashboard used during incident
-[ ] Logs correlated with metrics
-[ ] Root cause identified
-[ ] Service recovered
-[ ] Alert automatically/explicitly resolved
-[ ] Incident documented
+[ ] Infrastructure documented
+[ ] Configuration version-controlled
+[ ] Drift identified
+[ ] Drift corrected
+[ ] New VPS rebuilt
+[ ] Application configuration restored
+[ ] Networking restored
+[ ] Backup restored/configured
+[ ] Monitoring restored
+[ ] Rebuild procedure documented
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Section 32: Infrastructure as Code / Configuration as Code
