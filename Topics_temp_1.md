@@ -891,7 +891,7 @@ Subtopics: Reverse Proxy Concept, Traffic Routing, TLS/SSL Certificates
 * Fixing/Iteration Phase: Traefik bina kisi manual config ke Let\'s Encrypt se HTTPS certificate issue aur renew karta hai.
 * Live Production Phase: Server par aane wala saara traffic pehle Traefik pe aata hai, aur phir wo use sahi Docker container (app) tak securely route kar deta hai.
 
-===Section 8: Security Before Production (Phase 2)===
+# Section 8: Security Before Production (Phase 2)===
 Speaker perimeter security enforce karne ke liye SSH hardening, provider firewalls, RBAC, aur secret lifecycle management detail karta hai. `[⚠️ Derived]`
 
 --8--Security Before Production (Phase 2)--
@@ -940,7 +940,7 @@ Subtopics: Coolify 2FA, RBAC, API Tokens, Secret Lifecycle & Shared Variables
 * Fixing/Iteration Phase: Deploy-only API tokens are created with IP restrictions for safe CI/CD automation.
 * Live Production Phase: Secrets are actively managed via a rotation lifecycle (generate → replace → redeploy → revoke) without manual server edits.
 
-===Section 9: Application Runtime (Phase 3)===
+# Section 9: Application Runtime (Phase 3)===
 Speaker yahan stateless aur stateful components deploy karne, private networking setup karne, aur auto-recovery mechanisms define karne ka breakdown deta hai. `[⚠️ Derived]`
 
 --9--Application Runtime (Phase 3)--
@@ -989,7 +989,7 @@ Subtopics: Resource Limits, Health Checks, Restart Policy, Background Workers, S
 * Fixing/Iteration Phase: A Max Restart Count is configured to allow auto-recovery from temporary crashes without infinite looping.
 * Live Production Phase: Background queues handle heavy tasks (invoices/emails) while Scheduled Tasks run safe, UI-automated cron jobs without manual CLI typing.
 
-===Section 10: Production Delivery (Phase 4)===
+# Section 10: Production Delivery (Phase 4)===
 Speaker yahan Git integration, build strategies, CI/CD pipelines, aur safe release engineering (rollbacks/zero-downtime) ko cover karta hai. `[⚠️ Derived]`
 
 --10--Production Delivery (Phase 4)--
@@ -1061,7 +1061,34 @@ Subtopics: Staging, Smoke Testing, Deployment Hooks, Deployment Types, Rolling U
 * Fixing/Iteration Phase: Post-deploy hooks clear caches or prepare schemas. Developer learns the difference between Redeploy, Restart, and Force Deploy.
 * Live Production Phase: A rolling update replaces old containers only when the new ones are healthy. If an issue occurs, an image Rollback is triggered (while manually handling any DB schema incompatibilities).
 
-===Section 11: Data Protection (Phase 5)===
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 7: Infrastructure Foundation (Phase 1)
+Topic 1: VPS Sizing & Coolify Architecture
+Topic 2: Networking Boundaries & Edge Routing
+
+Section 8: Security Before Production (Phase 2)
+Topic 1: Server & Network Hardening
+Topic 2: UI Access Control & Secret Management
+
+Section 9: Application Runtime (Phase 3)
+Topic 1: Storage, Networking & Databases
+Topic 2: Reliability & Resource Management
+
+Section 10: Production Delivery (Phase 4)
+Topic 1: Build Strategy & CI/CD Pipeline
+Topic 2: Deep Dive: Forgejo Actions, Woodpecker & YAML (For Beginners)
+Topic 3: Release Engineering & Rollbacks
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+
+# Section 11: Data Protection (Phase 5)
 Speaker yahan application data, database, aur Coolify instance configuration ka foolproof, immutable backup architecture samjhata hai. `[⚠️ Derived]`
 
 --11--Data Protection (Phase 5)--
