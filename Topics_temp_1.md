@@ -444,7 +444,7 @@ Topic 1: Wildcard Domains Concept & DNS Setup
 Topic 2: Coolify Wildcard Integration
 
 📊 PHASE SUMMARY:
-Sections: 3 | Topics: 7 | Subtopics: 29
+Sections: 3 | Topics: 6 | Subtopics: 24
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -570,7 +570,7 @@ Topic 3: Redis Setup & GUI Connection
 Topic 4: Redis Python Integration & Debugging
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 4 | Subtopics: 19
+Sections: 1 | Topics: 2 | Subtopics: 11
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -1301,48 +1301,9 @@ Section 14: Scale-Up (Phase 8)
 
 ==================================================================================
 
-# Section 15: Optional / Specialized (Phase 9)
-Speaker yahan advanced edge-case workflows like ephemeral preview environments aur mobile CI/CD cover karta hai. `[⚠️ Derived]`
+# Section 15: Two-VPS Production Architecture
 
---15--Optional / Specialized (Phase 9)--
-Topic 1: Specialized CI & Advanced Integration
-Subtopics: PR Previews, Mobile CI/CD, Geo-testing, Advanced Search
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Surface
-* Coverage Angle: Conceptual
-* Transcript mein content volume: Brief overview of niche integrations.
-* Key terms from transcript: PR Previews, Mobile CI/CD, Fastlane, Geo-testing, Advanced Search, Meilisearch
-* Explicit emphasis by speaker: None
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[PR Previews, Ephemeral environments, pull requests, Mobile CI/CD, Fastlane, OTA updates, APK/IPA builds, Geo-testing, Browser Automation, Selenium, Playwright, Advanced Search, Meilisearch, Typesense integration]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Testing/Offline Phase: Developer configures PR previews so every GitHub/Forgejo pull request spins up a temporary, isolated staging URL.
-* Fixing/Iteration Phase: Automated Playwright tests run against this preview URL, while Fastlane compiles mobile APKs simultaneously.
-* Live Production Phase: Features like Meilisearch are integrated to power advanced, lightning-fast product search for the end users.
-
-
-Section 15: Optional / Specialized (Phase 9)
-Topic 1: Specialized CI & Advanced Integration
-
-
-
-==================================================================================
-
-
-
----
-
-
-# Section 16: Two-VPS Production Architecture
-
-### --16--Two-VPS Production Architecture--
+### --15--Two-VPS Production Architecture--
 
 ## Topic 1: Practical 2-VPS Architecture & Workload Placement
 
@@ -1399,16 +1360,16 @@ Topic 1: Specialized CI & Advanced Integration
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 16: Two-VPS Production Architecture
+Section 15: Two-VPS Production Architecture
     Topic 1: Practical 2-VPS Architecture & Workload Placement
     Topic 2: Two-VPS Networking, Failure Scenarios & Public Exposure
 
 ==================================================================================
 
 
-# Section 17: Infrastructure Snapshot & Full Recovery
+# Section 16: Infrastructure Snapshot & Full Recovery
 
-### --17--Infrastructure Snapshot & Full Recovery--
+### --16--Infrastructure Snapshot & Full Recovery--
 
 ## Topic 1: Database, File & Server Snapshot Protection
 
@@ -1465,7 +1426,7 @@ Section 16: Two-VPS Production Architecture
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 17: Infrastructure Snapshot & Full Recovery
+Section 16: Infrastructure Snapshot & Full Recovery
     Topic 1: Database, File & Server Snapshot Protection
     Topic 2: Failure-to-Recovery Matrix & Disaster Restoration
 
@@ -1474,9 +1435,9 @@ Section 17: Infrastructure Snapshot & Full Recovery
 
 
 
-# Section 18: Data & Infrastructure Encryption
+# Section 17: Data & Infrastructure Encryption
 
-### --18--Data & Infrastructure Encryption--
+### --17--Data & Infrastructure Encryption--
 
 ## Topic 1: Encryption at Rest & Backup Protection
 
@@ -1522,14 +1483,14 @@ Test Encrypted Restore
 **Critical rule:** Encryption key ka backup/recovery mechanism khud production recovery architecture ka part hona chahiye.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 18: Data & Infrastructure Encryption
+Section 17: Data & Infrastructure Encryption
     Topic 1: Encryption at Rest & Backup Protection
 
 ==================================================================================
 
-# Section 19: GUI-First / Zero-CLI Operations
+# Section 18: GUI-First / Zero-CLI Operations
 
-### --19--GUI-First / Zero-CLI Operations--
+### --18--GUI-First / Zero-CLI Operations--
 
 ## Topic 1: GUI → API → SSH Operating Philosophy
 
@@ -1561,15 +1522,15 @@ Section 18: Data & Infrastructure Encryption
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
-Section 19: GUI-First / Zero-CLI Operations
+Section 18: GUI-First / Zero-CLI Operations
     Topic 1: GUI → API → SSH Operating Philosophy
 
 ==================================================================================
 
 
-# Section 20: Frontend, Backend & Mobile Production Delivery
+# Section 19: Frontend, Backend & Mobile Production Delivery
 
-### --20--Frontend, Backend & Mobile Production Delivery--
+### --19--Frontend, Backend & Mobile Production Delivery--
 
 ## Topic 1: Frontend Production Deployment
 
@@ -1653,7 +1614,7 @@ Section 19: GUI-First / Zero-CLI Operations
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 20: Frontend, Backend & Mobile Production Delivery
+Section 19: Frontend, Backend & Mobile Production Delivery
     Topic 1: Frontend Production Deployment
     Topic 2: Backend/API Production Deployment
     Topic 3: Mobile CI/CD with Jenkins
@@ -1661,9 +1622,9 @@ Section 20: Frontend, Backend & Mobile Production Delivery
 ==================================================================================
 
 
-# Section 21: Open-Source CI/CD & Container Registry
+# Section 20: Open-Source CI/CD & Container Registry
 
-### --21--Open-Source CI/CD & Container Registry--
+### --20--Open-Source CI/CD & Container Registry--
 
 ## Topic 1: Jenkins Self-Hosted CI/CD
 
@@ -1720,16 +1681,16 @@ Section 20: Frontend, Backend & Mobile Production Delivery
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 21: Open-Source CI/CD & Container Registry
+Section 20: Open-Source CI/CD & Container Registry
     Topic 1: Jenkins Self-Hosted CI/CD
     Topic 2: Self-Hosted Container Registry
 
 ==================================================================================
 
 
-# Section 22: E-Commerce Edge Protection
+# Section 21: E-Commerce Edge Protection
 
-### --22--E-Commerce Edge Protection--
+### --21--E-Commerce Edge Protection--
 
 ## Topic 1: API Rate Limiting & Abuse Protection
 
@@ -1786,16 +1747,16 @@ Section 21: Open-Source CI/CD & Container Registry
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 22: E-Commerce Edge Protection
+Section 21: E-Commerce Edge Protection
     Topic 1: API Rate Limiting & Abuse Protection
     Topic 2: Open-Source WAF & Edge Security Implementation
 
 ==================================================================================
 
 
-# Section 23: Production Secrets & Sensitive Credentials
+# Section 22: Production Secrets & Sensitive Credentials
 
-### --23--Production Secrets & Sensitive Credentials--
+### --22--Production Secrets & Sensitive Credentials--
 
 ## Topic 1: Self-Hosted Secret Management Lifecycle
 
@@ -1825,15 +1786,15 @@ Section 22: E-Commerce Edge Protection
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 23: Production Secrets & Sensitive Credentials
+Section 22: Production Secrets & Sensitive Credentials
     Topic 1: Self-Hosted Secret Management Lifecycle
 
 ==================================================================================
 
 
-# Section 24: Object Storage, Static Asset Caching & Media Delivery
+# Section 23: Object Storage, Static Asset Caching & Media Delivery
 
-### --24--Object Storage, CDN & Media Delivery--
+### --23--Object Storage, CDN & Media Delivery--
 
 ## Topic 1: Production Media Delivery with MinIO
 
@@ -1863,15 +1824,15 @@ Section 23: Production Secrets & Sensitive Credentials
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 24: Object Storage, Static Asset Caching & Media Delivery
+Section 23: Object Storage, Static Asset Caching & Media Delivery
     Topic 1: Production Media Delivery with MinIO
 
 ==================================================================================
 
 
-# Section 25: Environment & Release Isolation
+# Section 24: Environment & Release Isolation
 
-### --25--Environment & Release Isolation--
+### --24--Environment & Release Isolation--
 
 ## Topic 1: Development → Staging → Production Separation
 
@@ -1901,15 +1862,15 @@ Section 24: Object Storage, Static Asset Caching & Media Delivery
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 25: Environment & Release Isolation
+Section 24: Environment & Release Isolation
     Topic 1: Development → Staging → Production Separation
 
 ==================================================================================
 
 
-# Section 26: E-Commerce Capacity & Scaling
+# Section 25: E-Commerce Capacity & Scaling
 
-### --26--E-Commerce Capacity & Scaling--
+### --25--E-Commerce Capacity & Scaling--
 
 ## Topic 1: 1000-User Capacity Testing
 
@@ -1966,16 +1927,16 @@ Section 25: Environment & Release Isolation
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 26: E-Commerce Capacity & Scaling
+Section 25: E-Commerce Capacity & Scaling
     Topic 1: 1000-User Capacity Testing
     Topic 2: Scaling Decision Policy
 
 ==================================================================================
 
 
-# Section 27: E-Commerce Queue Architecture
+# Section 26: E-Commerce Queue Architecture
 
-### --27--E-Commerce Queue Architecture--
+### --26--E-Commerce Queue Architecture--
 
 ## Topic 1: Production Background Job System
 
@@ -2032,16 +1993,16 @@ Section 26: E-Commerce Capacity & Scaling
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 27: E-Commerce Queue Architecture
+Section 26: E-Commerce Queue Architecture
     Topic 1: Production Background Job System
     Topic 2: Retry, DLQ & Graceful Worker Operations
 
 ==================================================================================
 
 
-# Section 28: Production Logging & PII Protection
+# Section 27: Production Logging & PII Protection
 
-### --28--Production Logging & PII Protection--
+### --27--Production Logging & PII Protection--
 
 ## Topic 1: Structured Logging & Sensitive Data Redaction
 
@@ -2071,15 +2032,15 @@ Section 27: E-Commerce Queue Architecture
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 28: Production Logging & PII Protection
+Section 27: Production Logging & PII Protection
     Topic 1: Structured Logging & Sensitive Data Redaction
 
 ==================================================================================
 
 
-# Section 29: Application-Specific Release Engineering
+# Section 28: Application-Specific Release Engineering
 
-### --29--Application-Specific Release Engineering--
+### --28--Application-Specific Release Engineering--
 
 ## Topic 1: Backend Release Playbook
 
@@ -2163,7 +2124,7 @@ Section 28: Production Logging & PII Protection
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 29: Application-Specific Release Engineering
+Section 28: Application-Specific Release Engineering
     Topic 1: Backend Release Playbook
     Topic 2: Frontend Release Playbook
     Topic 3: Mobile Release Playbook
@@ -2171,9 +2132,9 @@ Section 29: Application-Specific Release Engineering
 ==================================================================================
 
 
-# Section 30: Coolify Daily Operations Mastery
+# Section 29: Coolify Daily Operations Mastery
 
-### --30--Coolify Daily Operations Mastery--
+### --29--Coolify Daily Operations Mastery--
 
 ## Topic 1: Frequently Used Coolify GUI Features
 
@@ -2230,16 +2191,16 @@ Section 29: Application-Specific Release Engineering
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 30: Coolify Daily Operations Mastery
+Section 29: Coolify Daily Operations Mastery
     Topic 1: Frequently Used Coolify GUI Features
     Topic 2: Coolify Deployment, Recovery & Resource Operations
 
 ==================================================================================
 
 
-# Section 31: Coolify API Automation
+# Section 30: Coolify API Automation
 
-### --31--Coolify API Automation--
+### --30--Coolify API Automation--
 
 ## Topic 1: API-Driven Production Deployment
 
@@ -2269,15 +2230,15 @@ Section 30: Coolify Daily Operations Mastery
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 31: Coolify API Automation
+Section 30: Coolify API Automation
     Topic 1: API-Driven Production Deployment
 
 ==================================================================================
 
 
-# Section 32: Unified Production Observability
+# Section 31: Unified Production Observability
 
-### --32--Unified Production Observability--
+### --31--Unified Production Observability--
 
 ## Topic 1: Metrics + Logs + Traces + Alerts
 
@@ -2307,7 +2268,7 @@ Section 31: Coolify API Automation
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 32: Unified Production Observability
+Section 31: Unified Production Observability
     Topic 1: Metrics + Logs + Traces + Alerts
 
 
@@ -2317,9 +2278,9 @@ Section 32: Unified Production Observability
 
 
 
-# Section 33: Infrastructure as Code / Configuration as Code
+# Section 32: Infrastructure as Code / Configuration as Code
 
-### --33--Infrastructure as Code / Configuration as Code--
+### --32--Infrastructure as Code / Configuration as Code--
 
 ## Topic 1: Infrastructure Configuration & Reproducible Production
 
@@ -2346,7 +2307,7 @@ Section 32: Unified Production Observability
 * **Additional context:** IaC ka primary goal unnecessary automation nahi, balki **reproducibility, consistency, auditability aur disaster recovery** hai.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Section 33: Infrastructure as Code / Configuration as Code
+Section 32: Infrastructure as Code / Configuration as Code
     Topic 1: Infrastructure Configuration & Reproducible Production
 
 ==================================================================================
