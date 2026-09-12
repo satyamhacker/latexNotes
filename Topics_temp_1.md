@@ -1,7 +1,6 @@
 # Section 1: VPS Setup & Configuration
 Speaker yahan cheap aur powerful VPS server (Contabo) select aur setup karne ka process batata hai.
 
---1--VPS Setup & Configuration--
 Topic 1: VPS Provider Selection
 Subtopics: Vultr Pricing, DigitalOcean Pricing, Contabo Specifications, Base Plan Selection
 
@@ -25,7 +24,6 @@ Subtopics: Vultr Pricing, DigitalOcean Pricing, Contabo Specifications, Base Pla
 * Live Production Phase: Production apps (jaise WordPress, Mautic) ko run karne ke liye aage chalkar high resources use hote hain.
 * Additional context: Speaker ne clear kiya ki Contabo baaki providers ke comparison mein much better specs deta hai $4/month mein.
 
---1--VPS Setup & Configuration--
 Topic 2: Account & Server Initialization
 Subtopics: Signup Process, Root Password Setup, Online Notepad Usage, VPS IP Address
 
@@ -49,10 +47,9 @@ Subtopics: Signup Process, Root Password Setup, Online Notepad Usage, VPS IP Add
 * Live Production Phase: Server ready hone ke baad developer VPS IP address copy karke save kar leta hai taaki future deployments (SSH access) ke liye use kar sake.
 * Additional context: None
 
-===Section 2: SSH Client & Coolify Installation===
+### Subsection 2: SSH Client & Coolify Installation
 Server ko remotely access karne aur us par Coolify platform instal karne ka step-by-step guide.
 
---2--SSH Client & Coolify Installation--
 Topic 1: Termius SSH Client
 Subtopics: Termius Installation, Multi-Platform Support, Mac Parallels Software, SSH Connection
 
@@ -76,7 +73,6 @@ Subtopics: Termius Installation, Multi-Platform Support, Mac Parallels Software,
 * Live Production Phase: (N/A — Termius mainly server config aur administration ke liye offline tool ki tarah use hota hai).
 * Additional context: Speaker ne as a side-note "Parallels" software mention kiya jo Mac par Windows/Linux run karne ke kaam aata hai.
 
---2--SSH Client & Coolify Installation--
 Topic 2: Coolify Installation & Architecture
 Subtopics: Coolify Installation Command, Localhost Access, Projects vs Resources, Application Grouping
 
@@ -100,10 +96,9 @@ Subtopics: Coolify Installation Command, Localhost Access, Projects vs Resources
 * Live Production Phase: Production environment mein developer alag-alag "Projects" (e.g., Cuckoo Courses) banata hai aur unke andar multiple "Resources" ya apps (WordPress website, Mautic for emails, n8n for automation) deploy karta hai real users ko serve karne ke liye.
 * Additional context: None
 
-===Section 3: Domain Configuration===
+### Subsection 3: Domain Configuration
 Coolify dashboard ko custom domain se link karne aur DNS records update karne ka setup.
 
---3--Domain Configuration--
 Topic 1: DNS Setup & Domain Linking
 Subtopics: Coolify Configurations, Advanced DNS Settings, A Record Setup, HTTPS Prefix, Resend Integration
 
@@ -154,10 +149,9 @@ Sections: 3 | Topics: 5 | Subtopics: 17
 # Section 2: Monitor Servers & WordPress Setup
 
 
-===Section 2: Monitor Servers & WordPress Setup===
+### Subsection 2: Monitor Servers & WordPress Setup
 Speaker yahan VPS monitoring ke liye Netdata setup karna aur Coolify ke through WordPress aur n8n jaisi applications ko subdomains par deploy karna sikhata hai.
 
---2--Monitor Servers & WordPress Setup--
 Topic 1: Netdata Server Monitoring
 Subtopics: Netdata Platform, Account Signup, Connection Code, Terminal Installation, Dashboard Metrics
 
@@ -181,7 +175,6 @@ Subtopics: Netdata Platform, Account Signup, Connection Code, Terminal Installat
 * Live Production Phase: Production server background mein continuously monitor hota rehta hai aur errors/overload aane par system alerts generate karta hai.
 * Additional context: Speaker ne bataya ki Coolify ke andar bhi in-built monitoring aayegi future mein, par as a beginner Netdata use karna best practice hai.
 
---2--Monitor Servers & WordPress Setup--
 Topic 2: WordPress Setup & Subdomain Routing
 Subtopics: WordPress with MariaDB, Resource Deployment, Subdomain Concept, DNS A Record, HTTPS Configuration, WordPress Initialization
 
@@ -205,7 +198,6 @@ Subtopics: WordPress with MariaDB, Resource Deployment, Subdomain Concept, DNS A
 * Live Production Phase: Subdomain live hone ke baad developer actual WordPress admin panel access karta hai, title/password set karta hai, aur real users ke liye website ready ho jati hai.
 * Additional context: Speaker ne clear kiya ki same single VPS aur domain par wp1, wp2 jaisi multiple independent websites host ki jaa sakti hain.
 
---2--Monitor Servers & WordPress Setup--
 Topic 3: n8n Automation Tool Deployment
 Subtopics: n8n Overview, Coolify Deployment, Subdomain Setup, SSL Troubleshooting, Danger Zone Reset, n8n Templates
 
@@ -249,35 +241,10 @@ Sections: 1 | Topics: 3 | Subtopics: 17
 # Section 3: Email Marketing Eco-System
 
 
-===Section 1: Email Marketing Eco-System & Mautic Installation===
+### Subsection 1: Email Marketing Eco-System & Mautic Installation
 [⚠️ Derived] Speaker is section mein free email marketing tools discuss karta hai aur Coolify ke through Mautic install karna sikhata hai.
 
---1--Email Marketing Eco-System & Mautic Installation--
-Topic 1: Email Marketing Basics & Free Courses
-Subtopics: Mautic Overview, MailChimp Comparison, KuKuCourses Platform, Available Free Courses, Membership Benefits
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Surface
-* Coverage Angle: Conceptual only
-* Transcript mein content volume: Short explanation with platform promotion
-* Key terms from transcript: Motik, email marketing, open source, MailChimp, expensive, KUKUcourses.com, Free Courses, Email Marketing Lead Generation for Beginners, Motik Email Automation, MailerLite, membership, Jupyter notebook, Power BI, Canva courses, Build AI tools, Google Analytics, WordPress
-* Explicit emphasis by speaker: None
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[Motik, email marketing, open source, MailChimp, expensive, KUKUcourses.com, Free Courses, Email Marketing Lead Generation for Beginners, Motik Email Automation, MailerLite, Start Course button, membership, lifetime deal, 50% discount, Jupyter notebook, Power BI, Database, W, Canva courses, Build AI tools, Google Analytics, WordPress, affiliate marketing system, dropshipping website, e-commerce]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Testing/Offline Phase: User KukuCourses platform visit karta hai aur free courses ya membership explore karta hai.
-* Fixing/Iteration Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
-* Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
-* Additional context: Speaker aggressively apne platform (KukuCourses) aur uski lifetime membership ko promote kar raha hai.
-
---1--Email Marketing Eco-System & Mautic Installation--
-Topic 2: Mautic Deployment via Coolify
+Topic 1: Mautic Deployment via Coolify
 Subtopics: New Project Creation, DNS A Record Setup, Mautic Resource Addition, Custom Domain Configuration, Database Password Retrieval, Admin Login
 
 [📊 SCOPE SIGNAL for Topic 2:
@@ -300,10 +267,9 @@ Subtopics: New Project Creation, DNS A Record Setup, Mautic Resource Addition, C
 * Live Production Phase: Admin credentials ban banane ke baad Mautic dashboard live ho jata hai email marketing campaigns ke liye.
 * Additional context: Speaker ne example domain `motik.lunaricloud.com` use kiya.
 
-===Section 2: Transactional Emails & SMTP Setup===
+### Subsection 2: Transactional Emails & SMTP Setup
 [⚠️ Derived] Speaker is section mein Resend API use karke Coolify aur Mautic ke liye transactional emails configure aur test karna sikhata hai.
 
---2--Transactional Emails & SMTP Setup--
 Topic 1: Resend API & Coolify Integration
 Subtopics: Transactional Emails Enablement, Resend Platform Sign Up, API Key Generation, From Address Configuration
 
@@ -327,7 +293,6 @@ Subtopics: Transactional Emails Enablement, Resend Platform Sign Up, API Key Gen
 * Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 * Additional context: Speaker mention karta hai ki Resend 3,000 free emails per month deta hai.
 
---2--Transactional Emails & SMTP Setup--
 Topic 2: Email Authentication DNS Records
 Subtopics: Add Domain Feature, TXT Records Setup, DMARC Record, Custom MX Record
 
@@ -351,7 +316,6 @@ Subtopics: Add Domain Feature, TXT Records Setup, DMARC Record, Custom MX Record
 * Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 * Additional context: None
 
---2--Transactional Emails & SMTP Setup--
 Topic 3: Mautic SMTP Configuration & Testing
 Subtopics: Mautic Email Settings, SMTP Credentials Input, Send Test Email Validation
 
@@ -375,10 +339,9 @@ Subtopics: Mautic Email Settings, SMTP Credentials Input, Send Test Email Valida
 * Live Production Phase: Naya user signups ya marketing campaigns aane pe Mautic inhi verified SMTP settings ke through real customers ko automated emails bhejta hai.
 * Additional context: None
 
-===Section 3: Wildcard Domain Configuration===
+### Subsection 3: Wildcard Domain Configuration
 [⚠️ Derived] Speaker is section mein Coolify ke andar wildcard domains ka concept samjhata hai aur setup karke dikhata hai.
 
---3--Wildcard Domain Configuration--
 Topic 1: Wildcard Domains Concept & DNS Setup
 Subtopics: Wildcard Domain Definition, ChatGPT Query, Wildcard Syntax Concept, DNS A Record Creation
 
@@ -402,7 +365,6 @@ Subtopics: Wildcard Domain Definition, ChatGPT Query, Wildcard Syntax Concept, D
 * Mastery Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 * Additional context: None
 
---3--Wildcard Domain Configuration--
 Topic 2: Coolify Wildcard Integration
 Subtopics: Localhost Server Settings, Wildcard Domain Assignment, Auto-generated URLs Demo
 
@@ -431,8 +393,7 @@ Subtopics: Localhost Server Settings, Wildcard Domain Assignment, Auto-generated
 📋 EXTRACTED IN THIS PHASE:
 
 Section 1: Email Marketing Eco-System & Mautic Installation
-Topic 1: Email Marketing Basics & Free Courses
-Topic 2: Mautic Deployment via Coolify
+Topic 1: Mautic Deployment via Coolify
 
 Section 2: Transactional Emails & SMTP Setup
 Topic 1: Resend API & Coolify Integration
@@ -455,13 +416,12 @@ Sections: 3 | Topics: 6 | Subtopics: 24
 # Section 4: Host Your Own MongoDB & Redis
 
 
-===Section 1: Host Your Own MongoDB & Redis===
+### Subsection 1: Host Your Own MongoDB & Redis
 Speaker yahan "pullify" ke through MongoDB aur Redis ko self-host karne, unhe GUI tools se connect karne, aur Python ke saath integrate karne ka complete process explain karta hai. `[⚠️ Derived]`
 
 > **[⚠️ CRITICAL CORRECTION]**
 > The speaker demonstrates exposing MongoDB and Redis on public ports (5432/5433). This is a serious architectural anti-pattern. **Databases should NEVER be exposed publicly.** Coolify explicitly supports private communication over Docker networks without publishing host ports. Use SSH tunneling to access databases via GUI tools locally.
 
---1--Host Your Own MongoDB & Redis--
 Topic 1: MongoDB Setup & GUI Connection
 Subtopics: MongoDB Concept, Pullify Deployment, Version Selection, Port Configuration, MongoDB Compass, Public URL Connection
 
@@ -485,32 +445,7 @@ Subtopics: MongoDB Concept, Pullify Deployment, Version Selection, Port Configur
 * Live Production Phase: (N/A — transcript mein is topic ke liye koi live production flow describe nahi kiya gaya)
 * Additional context: Speaker ne mention kiya ki cloud-based Atlas bahut expensive hota hai (hourly charge), isliye self-hosting money save karti hai.
 
---1--Host Your Own MongoDB & Redis--
-Topic 2: MongoDB Python Integration
-Subtopics: VS Code Setup, PyMongo Installation, Python Script Execution, Cuckoo Courses
-
-[📊 SCOPE SIGNAL for Topic 2:
-
-* Depth Level: Surface
-* Coverage Angle: Practical only
-* Transcript mein content volume: Short explanation + code execution demo
-* Key terms from transcript: Visual Studio Code, Python, mongodb.py, pip install py-mongo, Mongo client
-* Explicit emphasis by speaker: None
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 2:
-[Python, testing folder, IDE, Visual Studio Code, open folder, YouTube, Cuckoo Courses, mongodb.py, terminal, `pip instal`, `pip install py-mongo`, `py-mongo`, Mongo client, public URL]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Testing/Offline Phase: Developer VS Code open karta hai, `mongodb.py` file banata hai, terminal mein `pip install py-mongo` run karta hai, aur public URL paste karke python script ke through cloud MongoDB se connect karta hai.
-* Fixing/Iteration Phase: (N/A)
-* Live Production Phase: (N/A)
-* Additional context: Speaker ne basics seekhne ke liye apne YouTube channel "Cuckoo Courses" ka reference diya.
-
---1--Host Your Own MongoDB & Redis--
-Topic 3: Redis Setup & GUI Connection
+Topic 2: Redis Setup & GUI Connection
 Subtopics: Redis Caching Concept, Pullify Deployment, Port Configuration, Redis Insight, Database Connection
 
 [📊 SCOPE SIGNAL for Topic 3:
@@ -533,30 +468,6 @@ Subtopics: Redis Caching Concept, Pullify Deployment, Port Configuration, Redis 
 * Live Production Phase: (N/A)
 * Additional context: Speaker ne samjhaya ki slow database queries ka result cache karne se app next time instantly load hoti hai.
 
---1--Host Your Own MongoDB & Redis--
-Topic 4: Redis Python Integration & Debugging
-Subtopics: Redis Package Installation, File Naming Error, ChatGPT Debugging, Python Script Execution
-
-[📊 SCOPE SIGNAL for Topic 4:
-
-* Depth Level: Moderate
-* Coverage Angle: Practical only
-* Transcript mein content volume: Demo with live error fixing
-* Key terms from transcript: Redis.py, pip install Redis, pip3, redis_test.py, chat GPT
-* Explicit emphasis by speaker: None
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 4:
-[`Redis.py`, `pip install Redis`, `pip3`, Mac user, Windows, public URL, chat GPT, `input Redis`[unclear], `Redis.from URL`, screenshot, rename, `redis_test.py`, delete compiled files]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
-
-* Testing/Offline Phase: Developer VS Code mein `Redis.py` file banata hai, `pip install Redis` run karta hai, aur public URL daal kar script test karta hai.
-* Fixing/Iteration Phase: Script run karte time error aata hai (likely due to file name collision). Developer error ka screenshot ChatGPT ko deta hai aur uski advice par file ka naam rename karke `redis_test.py` karta hai, aur compiled files delete karke issue resolve karta hai.
-* Live Production Phase: (N/A)
-* Additional context: Speaker ne explicitly dikhaya ki as a developer, error aane par AI tools (ChatGPT) ka use karke issue ko kaise debug kiya jaata hai.
-
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -565,9 +476,9 @@ Subtopics: Redis Package Installation, File Naming Error, ChatGPT Debugging, Pyt
 
 Section 1: Host Your Own MongoDB & Redis
 Topic 1: MongoDB Setup & GUI Connection
-Topic 2: MongoDB Python Integration
-Topic 3: Redis Setup & GUI Connection
-Topic 4: Redis Python Integration & Debugging
+
+Topic 2: Redis Setup & GUI Connection
+
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 2 | Subtopics: 11
@@ -652,10 +563,9 @@ Sections: 1 | Topics: 2 | Subtopics: 12
 # Section 6: Core Security with Coolify
 
 
-===Section 6: Core Security with Coolify===
+### Subsection 6: Core Security with Coolify
 Speaker yahan server ko completely secure karne ke liye root login disable karne, SSH keys aur 2FA setup karne, Fail2Ban install karne, aur in sabke baad disconnect hue Coolify connection ko wapas fix karne ka end-to-end process sikhata hai. `[⚠️ Derived]`
 
---6--Core Security with Coolify--
 Topic 1: Creating Custom User & Disabling Root Login
 Subtopics: Root User Vulnerability, Add User Command, Password Setup, Usermod Command, Disabling Root Login Concept, Nano Editor Usage, SSH Service Restart
 
@@ -679,7 +589,6 @@ Subtopics: Root User Vulnerability, Add User Command, Password Setup, Usermod Co
 * Live Production Phase: Production server ab 95% automated bot attacks se safe ho jaata hai kyunki attackers ka default target (root user) exist hi nahi karta.
 * Additional context: Speaker ne explicitly samjhaya ki Linux terminal mein password type/paste karte waqt visible nahi hota, jo ki ek security feature hai.
 
---6--Core Security with Coolify--
 Topic 2: Securing Server with SSH Keys
 Subtopics: SSH Keys Concept, Keychain Usage, Key Generation, Public & Private Keys, Directory Creation, File Permissions, Disabling Password Authentication
 
@@ -703,7 +612,6 @@ Subtopics: SSH Keys Concept, Keychain Usage, Key Generation, Public & Private Ke
 * Live Production Phase: Production environment mein hacker server ka password guess ya crack nahi kar sakta, kyunki login sirf us developer ke local system mein rakhi "private key" se hi possible hai.
 * Additional context: N/A
 
---6--Core Security with Coolify--
 Topic 3: Two-Factor Authentication (2FA) Implementation
 Subtopics: Coolify Dashboard 2FA, TOTP Configuration, Recovery Codes
 
@@ -748,7 +656,6 @@ SSH keys + disable password authentication
 * Live Production Phase: The Coolify control plane is secured natively via TOTP. Server SSH is hardened separately (SSH keys + disable password authentication).
 * Additional context: Coolify natively supports TOTP 2FA and recovery codes. ([coolify.io](https://coolify.io/docs/core/security/authentication/2fa?utm_source=chatgpt.com))
 
---6--Core Security with Coolify--
 Topic 4: Fixing Coolify Connection Issues
 Subtopics: Localhost Connection Error, Dedicated System User Concept, Sudoers Configuration, Coolify Public Key Integration, SSH Match User Rule
 
@@ -772,7 +679,6 @@ Subtopics: Localhost Connection Error, Dedicated System User Concept, Sudoers Co
 * Live Production Phase: Backend applications (jaise WordPress sites) wapas smoothly start, stop aur deploy hone lagti hain kyunki server aur Coolify UI ke beech ka secure connection properly establish ho gaya hai.
 * Additional context: N/A
 
---6--Core Security with Coolify--
 Topic 5: Fail2Ban Installation & Protection
 Subtopics: Truecaller Analogy, Fail2Ban Concept, Installation Command, Jail Configuration, Service Enabling
 
@@ -821,7 +727,6 @@ Sections: 1 | Topics: 5 | Subtopics: 33
 # Section 7: Infrastructure Foundation (Phase 1)
 Speaker yahan literal groundwork aur Coolify control plane set karne ka fundamental process explain karta hai, ensuring zero-CLI operations and correct architectural boundaries. `[⚠️ Derived]`
 
---7--Infrastructure Foundation (Phase 1)--
 Topic 1: VPS Sizing & Coolify Architecture
 Subtopics: VPS Capacity Selection, Coolify Bootstrap, Projects & Environments, Server Configuration
 
@@ -844,7 +749,6 @@ Subtopics: VPS Capacity Selection, Coolify Bootstrap, Projects & Environments, S
 * Fixing/Iteration Phase: Developer creates an E-Commerce project and separates it into Staging and Production environments.
 * Live Production Phase: Control plane and production workloads share the same failure domain, requiring careful resource allocation.
 
---7--Infrastructure Foundation (Phase 1)--
 Topic 2: Networking Boundaries & Edge Routing
 Subtopics: Destinations, Network Isolation, Domain & DNS, Traefik & Auto TLS
 
@@ -868,7 +772,6 @@ Subtopics: Destinations, Network Isolation, Domain & DNS, Traefik & Auto TLS
 * Live Production Phase: Traefik automatically generates routes and TLS certificates for edge routing, acting as the ingress for live traffic.
 
 
---7--Infrastructure Foundation (Phase 1)--
 Topic 3: Deep Dive: Reverse Proxy, Traefik & Auto TLS (For Beginners)
 Subtopics: Reverse Proxy Concept, Traffic Routing, TLS/SSL Certificates
 
@@ -902,7 +805,6 @@ Section 7: Infrastructure Foundation (Phase 1)
 # Section 8: Security Before Production (Phase 2)
 Speaker perimeter security enforce karne ke liye SSH hardening, provider firewalls, RBAC, aur secret lifecycle management detail karta hai. `[⚠️ Derived]`
 
---8--Security Before Production (Phase 2)--
 Topic 1: Server & Network Hardening
 Subtopics: Private Keys Distinction, SSH Key Authentication, Disable Password SSH, Provider Firewall Hardening
 
@@ -925,7 +827,6 @@ Subtopics: Private Keys Distinction, SSH Key Authentication, Disable Password SS
 * Fixing/Iteration Phase: Password SSH is disabled to block brute-force attempts.
 * Live Production Phase: The provider firewall is locked down, closing ports 8000/6001/6002, ensuring only required ingress/SSH traffic reaches the production server.
 
---8--Security Before Production (Phase 2)--
 Topic 2: UI Access Control & Secret Management
 Subtopics: Coolify 2FA, RBAC, API Tokens, Secret Lifecycle & Shared Variables
 
@@ -958,7 +859,6 @@ Section 8: Security Before Production (Phase 2)
 # Section 9: Application Runtime (Phase 3)
 Speaker yahan stateless aur stateful components deploy karne, private networking setup karne, aur auto-recovery mechanisms define karne ka breakdown deta hai. `[⚠️ Derived]`
 
---9--Application Runtime (Phase 3)--
 Topic 1: Storage, Networking & Databases
 Subtopics: Persistent Storage, Private Networking (Compose Caveat), Database & Redis Deployment
 
@@ -981,7 +881,6 @@ Subtopics: Persistent Storage, Private Networking (Compose Caveat), Database & R
 * Fixing/Iteration Phase: Developer ensures Compose apps have "Connect To Predefined Network" checked so they don't expose public ports.
 * Live Production Phase: Database upgrades are manually gated through a strict Backup → Review → Update → Deploy workflow.
 
---9--Application Runtime (Phase 3)--
 Topic 2: Reliability & Resource Management
 Subtopics: Resource Limits, Health Checks, Restart Policy, Background Workers, Scheduled Tasks
 
@@ -1015,7 +914,6 @@ Section 9: Application Runtime (Phase 3)
 # Section 10: Production Delivery (Phase 4)
 Speaker yahan Git integration, build strategies, CI/CD pipelines, aur safe release engineering (rollbacks/zero-downtime) ko cover karta hai. `[⚠️ Derived]`
 
---10--Production Delivery (Phase 4)--
 Topic 1: Build Strategy & CI/CD Pipeline
 Subtopics: Git Forgejo, Build Strategy (Nixpacks/Docker), CI Actions, Container Registry
 
@@ -1038,7 +936,6 @@ Subtopics: Git Forgejo, Build Strategy (Nixpacks/Docker), CI Actions, Container 
 * Fixing/Iteration Phase: The CI pipeline builds the Docker image and pushes it to a Container Registry.
 * Live Production Phase: Coolify pulls the immutable digest/tag from the registry rather than compiling source code directly on the production node.
 
---10--Production Delivery (Phase 4)--
 Topic 2: Deep Dive: Forgejo Actions, Woodpecker & YAML (For Beginners)
 Subtopics: CI/CD Fundamentals, Jenkins Comparison, YAML Syntax Basics, Practical Pipeline Example
 
@@ -1061,7 +958,6 @@ Subtopics: CI/CD Fundamentals, Jenkins Comparison, YAML Syntax Basics, Practical
 * Fixing/Iteration Phase: Jab developer code Forgejo par push karta hai, Woodpecker ek isolated Docker container (jaise Node.js) banata hai aur usme automatically `npm test` run karta hai taaki errors pakde jaa sakein.
 * Live Production Phase: Test pass hone par Woodpecker ek curl webhook trigger karta hai, jo Coolify ko signal deta hai code ko production par auto-deploy karne ke liye.
 
---10--Production Delivery (Phase 4)--
 Topic 3: Release Engineering & Rollbacks
 Subtopics: Staging, Smoke Testing, Deployment Hooks, Deployment Types, Rolling Updates, Rollbacks
 
@@ -1102,7 +998,6 @@ Topic 3: Release Engineering & Rollbacks
 # Section 11: Data Protection (Phase 5)
 Speaker yahan application data, database, aur Coolify instance configuration ka foolproof, immutable backup architecture samjhata hai. `[⚠️ Derived]`
 
---11--Data Protection (Phase 5)--
 Topic 1: Backup Workflows & DR Testing
 Subtopics: DB Engine-Aware Backups, Application Storage Backups, Coolify Instance Backup, APP_KEY Recovery, External S3/MinIO, Full DR Drill
 
@@ -1136,7 +1031,6 @@ Section 11: Data Protection (Phase 5)
 # Section 12: Production Operations (Phase 6)
 Speaker server observability, audit trails, patch management, aur safe troubleshooting techniques (Incident Runbooks) explain karta hai. `[⚠️ Derived]`
 
---12--Production Operations (Phase 6)--
 Topic 1: Observability & Incident Response
 Subtopics: Coolify Sentinel, Metrics, Uptime Kuma, Notifications, Audit Logs, Incident Runbook
 
@@ -1159,7 +1053,6 @@ Subtopics: Coolify Sentinel, Metrics, Uptime Kuma, Notifications, Audit Logs, In
 * Fixing/Iteration Phase: Notifications are routed to an incident webhook/SMTP, and native audit logs are reviewed for team actions.
 * Live Production Phase: When an outage occurs, on-call staff follow the strict Decision Tree Runbook instead of blindly executing CLI commands.
 
---12--Production Operations (Phase 6)--
 Topic 2: Maintenance & Queue Control
 Subtopics: Docker Cleanup, OS Patching, Coolify Updates, Build Concurrency, Bulk Deployment
 
@@ -1192,7 +1085,6 @@ Section 12: Production Operations (Phase 6)
 # Section 13: E-commerce Reliability (Phase 7)
 Speaker payment idiosyncrasies, schema migrations, aur high-traffic scenarios mein platform code aur database ko protect karne ki strategies discuss karta hai. `[⚠️ Derived]`
 
---13--E-commerce Reliability (Phase 7)--
 Topic 1: Transaction & Database Protection
 Subtopics: Payment Idempotency, Webhook Reconciliation, DB Migration Strategy, Connection Exhaustion, Queue Retries
 
@@ -1215,7 +1107,6 @@ Subtopics: Payment Idempotency, Webhook Reconciliation, DB Migration Strategy, C
 * Fixing/Iteration Phase: Schema migrations are designed using the Expand/Contract pattern to survive rolling update overlaps.
 * Live Production Phase: Application-level connection pooling protects the database from connection exhaustion during sudden traffic spikes, preventing checkout crashes.
 
---13--E-commerce Reliability (Phase 7)--
 Topic 2: Security & Stress Testing
 Subtopics: Log Redaction, Load Testing (k6)
 
@@ -1248,7 +1139,6 @@ Section 13: E-commerce Reliability (Phase 7)
 # Section 14: Scale-Up (Phase 8)
 Speaker yahan single server se aage badhkar dedicated build nodes, load balancers, aur centralized observability integrate karne ka roadmap batata hai. `[⚠️ Derived]`
 
---14--Scale-Up (Phase 8)--
 Topic 1: Multi-Node Architecture
 Subtopics: Dedicated Build Server, External Load Balancer, Stateless Scaling, DB/MinIO HA
 
@@ -1271,7 +1161,6 @@ Subtopics: Dedicated Build Server, External Load Balancer, Stateless Scaling, DB
 * Fixing/Iteration Phase: An external Load Balancer is configured, and web tiers are scaled horizontally via Coolify replicas.
 * Live Production Phase: The infrastructure now spans multiple nodes, with highly available DB/MinIO clusters managing state externally.
 
---14--Scale-Up (Phase 8)--
 Topic 2: Centralized Observability & Security Scanning
 Subtopics: Centralized Logs, APM, Security Scanning (Trivy/Gitleaks)
 
@@ -1302,8 +1191,6 @@ Section 14: Scale-Up (Phase 8)
 ==================================================================================
 
 # Section 15: Two-VPS Production Architecture
-
-### --15--Two-VPS Production Architecture--
 
 ## Topic 1: Practical 2-VPS Architecture & Workload Placement
 
@@ -1368,8 +1255,6 @@ Section 15: Two-VPS Production Architecture
 
 
 # Section 16: Infrastructure Snapshot & Full Recovery
-
-### --16--Infrastructure Snapshot & Full Recovery--
 
 ## Topic 1: Database, File & Server Snapshot Protection
 
@@ -1437,8 +1322,6 @@ Section 16: Infrastructure Snapshot & Full Recovery
 
 # Section 17: Data & Infrastructure Encryption
 
-### --17--Data & Infrastructure Encryption--
-
 ## Topic 1: Encryption at Rest & Backup Protection
 
 **Subtopics:** Disk Encryption, Backup Encryption, Snapshot Encryption, Object-Storage Encryption, Encryption Keys, Key Management, Key Recovery, Key Rotation, Encrypted Restore Testing
@@ -1490,8 +1373,6 @@ Section 17: Data & Infrastructure Encryption
 
 # Section 18: GUI-First / Zero-CLI Operations
 
-### --18--GUI-First / Zero-CLI Operations--
-
 ## Topic 1: GUI → API → SSH Operating Philosophy
 
 **Subtopics:** GUI Operations, Coolify Dashboard, API Automation, SSH Break-Glass, CLI Minimization, Linux Survival Skills
@@ -1529,8 +1410,6 @@ Section 18: GUI-First / Zero-CLI Operations
 
 
 # Section 19: Frontend, Backend & Mobile Production Delivery
-
-### --19--Frontend, Backend & Mobile Production Delivery--
 
 ## Topic 1: Frontend Production Deployment
 
@@ -1624,8 +1503,6 @@ Section 19: Frontend, Backend & Mobile Production Delivery
 
 # Section 20: Open-Source CI/CD & Container Registry
 
-### --20--Open-Source CI/CD & Container Registry--
-
 ## Topic 1: Jenkins Self-Hosted CI/CD
 
 **Subtopics:** Jenkins Deployment, Persistent Storage, Webhooks, Jenkinsfile, Credentials, Docker Build, Testing, Security Scanning, Deployment Trigger
@@ -1689,8 +1566,6 @@ Section 20: Open-Source CI/CD & Container Registry
 
 
 # Section 21: E-Commerce Edge Protection
-
-### --21--E-Commerce Edge Protection--
 
 ## Topic 1: API Rate Limiting & Abuse Protection
 
@@ -1756,8 +1631,6 @@ Section 21: E-Commerce Edge Protection
 
 # Section 22: Production Secrets & Sensitive Credentials
 
-### --22--Production Secrets & Sensitive Credentials--
-
 ## Topic 1: Self-Hosted Secret Management Lifecycle
 
 **Subtopics:** Secret Storage, Access Control, Secret Rotation, Audit, Revocation, Jenkins Credentials, Payment Secrets, Database Credentials, Mobile Signing Secrets
@@ -1793,8 +1666,6 @@ Section 22: Production Secrets & Sensitive Credentials
 
 
 # Section 23: Object Storage, Static Asset Caching & Media Delivery
-
-### --23--Object Storage, CDN & Media Delivery--
 
 ## Topic 1: Production Media Delivery with MinIO
 
@@ -1832,8 +1703,6 @@ Section 23: Object Storage, Static Asset Caching & Media Delivery
 
 # Section 24: Environment & Release Isolation
 
-### --24--Environment & Release Isolation--
-
 ## Topic 1: Development → Staging → Production Separation
 
 **Subtopics:** Separate Databases, Separate Secrets, Separate Domains, Payment Sandbox, Payment Production, Separate Storage Buckets, Separate Queues, Separate Email Configuration
@@ -1869,8 +1738,6 @@ Section 24: Environment & Release Isolation
 
 
 # Section 25: E-Commerce Capacity & Scaling
-
-### --25--E-Commerce Capacity & Scaling--
 
 ## Topic 1: 1000-User Capacity Testing
 
@@ -1936,8 +1803,6 @@ Section 25: E-Commerce Capacity & Scaling
 
 # Section 26: E-Commerce Queue Architecture
 
-### --26--E-Commerce Queue Architecture--
-
 ## Topic 1: Production Background Job System
 
 **Subtopics:** Queue, Workers, Email Worker, Image Worker, Invoice Worker, Payment Reconciliation, Notification Worker, Report Worker
@@ -2002,8 +1867,6 @@ Section 26: E-Commerce Queue Architecture
 
 # Section 27: Production Logging & PII Protection
 
-### --27--Production Logging & PII Protection--
-
 ## Topic 1: Structured Logging & Sensitive Data Redaction
 
 **Subtopics:** JSON Logs, PII, Password Redaction, OTP Redaction, CVV Protection, Token Redaction, Private Key Protection, Log Retention
@@ -2039,8 +1902,6 @@ Section 27: Production Logging & PII Protection
 
 
 # Section 28: Application-Specific Release Engineering
-
-### --28--Application-Specific Release Engineering--
 
 ## Topic 1: Backend Release Playbook
 
@@ -2134,8 +1995,6 @@ Section 28: Application-Specific Release Engineering
 
 # Section 29: Coolify Daily Operations Mastery
 
-### --29--Coolify Daily Operations Mastery--
-
 ## Topic 1: Frequently Used Coolify GUI Features
 
 **Subtopics:** Application Creation, Git Source, Branch, Build Settings, Environment Variables, Shared Variables, Domains, Redirects, Health Checks, Resource Limits, Persistent Storage, Private Networks
@@ -2200,8 +2059,6 @@ Section 29: Coolify Daily Operations Mastery
 
 # Section 30: Coolify API Automation
 
-### --30--Coolify API Automation--
-
 ## Topic 1: API-Driven Production Deployment
 
 **Subtopics:** API Tokens, Scoped Permissions, IP Restrictions, Deploy Trigger, Deployment Status, Health Verification, Jenkins Integration
@@ -2237,8 +2094,6 @@ Section 30: Coolify API Automation
 
 
 # Section 31: Unified Production Observability
-
-### --31--Unified Production Observability--
 
 ## Topic 1: Metrics + Logs + Traces + Alerts
 
@@ -2279,8 +2134,6 @@ Section 31: Unified Production Observability
 
 
 # Section 32: Infrastructure as Code / Configuration as Code
-
-### --32--Infrastructure as Code / Configuration as Code--
 
 ## Topic 1: Infrastructure Configuration & Reproducible Production
 
