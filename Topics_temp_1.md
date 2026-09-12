@@ -818,7 +818,7 @@ Sections: 1 | Topics: 5 | Subtopics: 33
 
 ==================================================================================
 
-===Section 7: Infrastructure Foundation (Phase 1)===
+# Section 7: Infrastructure Foundation (Phase 1)
 Speaker yahan literal groundwork aur Coolify control plane set karne ka fundamental process explain karta hai, ensuring zero-CLI operations and correct architectural boundaries. `[⚠️ Derived]`
 
 --7--Infrastructure Foundation (Phase 1)--
