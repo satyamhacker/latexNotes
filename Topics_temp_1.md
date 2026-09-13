@@ -4,6 +4,12 @@ Speaker yahan cheap aur powerful VPS server (Contabo) select aur setup karne ka 
 Topic 1: VPS Provider Selection
 Subtopics: Vultr Pricing, DigitalOcean Pricing, Contabo Specifications, Base Plan Selection
 
+### ⚠️ PRICING DISCLAIMER
+
+Pricing/specifications are provider- and time-dependent.
+Treat numbers shown here as the example used during the course, not a permanent price reference.
+
+
 [📊 SCOPE SIGNAL for Topic 1:
 
 * Depth Level: Moderate
@@ -40,6 +46,14 @@ Subtopics: Signup Process, Root Password Setup, Online Notepad Usage, VPS IP Add
 🔑 KEYWORDS DUMP for Topic 2:
 [signup, USD, new.contabo.com, customer panel, email verify, cuckoo courses, online notepad, root password, no special character, tax, order and pay, VPS IP address, running status, display name, self-managed hosting]
 
+### 🔐 SECURITY NOTE — INITIAL ROOT CREDENTIAL
+
+- Root password ko online notepad/plain-text document mein permanently store mat karo.
+- Temporary use ke liye secure password manager use karo.
+- VPS create hote hi root access ko transition plan ke under custom user + SSH key authentication mein move karo.
+- Root credentials ko final production credential ke roop mein use nahi karna.
+- SSH hardening se pehle existing root login ko disable mat karo jab tak alternate admin access test na ho jaye.
+
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
 * Testing/Offline Phase: Developer online notepad use karke ek secure root password banata hai aur usko VPS signup process mein set karta hai.
@@ -69,6 +83,12 @@ Subtopics: Termius Installation, Multi-Platform Support, Mac Parallels Software,
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
 * Testing/Offline Phase: Developer Termius client instal karta hai taaki sabhi operating systems par ek unified terminal interface mile. New host create karke IP aur root password se server se connect karta hai.
+
+### ⚠️ PRODUCTION TRANSITION
+
+Initial bootstrap ke liye root/password access use ho sakta hai, lekin production workflow mein:
+Root → Custom admin user → SSH key authentication → Password SSH disabled
+
 * Fixing/Iteration Phase: (N/A)
 * Live Production Phase: (N/A — Termius mainly server config aur administration ke liye offline tool ki tarah use hota hai).
 * Additional context: Speaker ne as a side-note "Parallels" software mention kiya jo Mac par Windows/Linux run karne ke kaam aata hai.
@@ -196,6 +216,22 @@ Subtopics: WordPress with MariaDB, Resource Deployment, Subdomain Concept, DNS A
 * Testing/Offline Phase: Developer Coolify mein 'WordPress with MariaDB' select karke deploy karta hai. Phir Namecheap mein 'wp1' ka A record banakar VPS IP se link karta hai.
 * Fixing/Iteration Phase: Agar URL update karne ke baad site access na ho, toh developer Coolify panel se "restart service container" par click karke connection healthy karta hai.
 * Live Production Phase: Subdomain live hone ke baad developer actual WordPress admin panel access karta hai, title/password set karta hai, aur real users ke liye website ready ho jati hai.
+
+### 🔐 PRODUCTION CHECKPOINT
+
+WordPress live mark karne se pehle verify karo:
+
+[ ] Persistent storage configured
+[ ] Database persistence configured
+[ ] Backup configured
+[ ] Admin account protected
+[ ] HTTPS working
+[ ] Unused/public ports closed
+[ ] Health check passing
+[ ] Recovery/restore path known
+
+“Site opens” ≠ “Production-ready”
+
 * Additional context: Speaker ne clear kiya ki same single VPS aur domain par wp1, wp2 jaisi multiple independent websites host ki jaa sakti hain.
 
 Topic 3: n8n Automation Tool Deployment
@@ -217,7 +253,15 @@ Subtopics: n8n Overview, Coolify Deployment, Subdomain Setup, SSL Troubleshootin
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
 * Testing/Offline Phase: Developer Coolify mein n8n search karke direct deploy karta hai, uske liye 'n8n' subdomain ka A record banata hai, aur https prefix set karke container restart karta hai.
-* Fixing/Iteration Phase: Agar SSL propagate nahi hota ya system unhealthy show karta hai (kyunki n8n bada tool hai), toh developer ya toh wait karta hai (up to 24 hours), ya fir "Danger Zone" mein jaakar app delete karke reinstall karta hai.
+* Fixing/Iteration Phase:
+  1. Coolify deployment logs check karo.
+  2. Container health status check karo.
+  3. Domain DNS resolve verify karo.
+  4. HTTPS/SSL status verify karo.
+  5. Environment/configuration validate karo.
+  6. Persistent storage verify karo.
+  7. Temporary propagation issue ho toh wait karo.
+  8. Reinstall ko last-resort recovery step ke roop mein use karo.
 * Live Production Phase: Successfully live hone ke baad developer n8n dashboard login karta hai aur pre-built templates pull karke real-world automations run karta hai.
 * Additional context: Speaker ne assurance di ki SSL deployment errors normal hain nayi subdomain add karne ke baad, isliye ghabrane ki zaroorat nahi hai.
 
@@ -316,6 +360,20 @@ Subtopics: Add Domain Feature, TXT Records Setup, DMARC Record, Custom MX Record
 * Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 * Additional context: None
 
+### ✉️ EMAIL FLOW DISTINCTION
+
+Transactional sending:
+Application → SMTP/API → Email provider → Recipient
+
+Domain authentication:
+DNS TXT/CNAME/etc. → Provider verification
+
+Receiving/forwarding:
+MX records → Receiving mail service
+
+These are related but separate concerns.
+
+
 Topic 3: Mautic SMTP Configuration & Testing
 Subtopics: Mautic Email Settings, SMTP Credentials Input, Send Test Email Validation
 
@@ -361,6 +419,15 @@ Subtopics: Wildcard Domain Definition, ChatGPT Query, Wildcard Syntax Concept, D
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
 * Learning Phase: Speaker ChatGPT use karke wildcard domain ka matlab show karta hai aur explain karta hai ki wildcard prefix use karke infinite auto-generated subdomains kaise banaye jaate hain.
+
+### ⚠️ WILDCARD NAMESPACE MODEL
+
+Example:
+`apps.example.com`
+`*.apps.example.com`
+
+The wildcard matches subdomains under that specific namespace, not arbitrary unrelated domains.
+
 * Application Phase: Developer DNS provider (Namecheap) mein ja kar ek A record banata hai asterisk `*` symbol ke saath (`*.apps`) jo server IP pe point karta hai.
 * Mastery Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 * Additional context: None
@@ -423,7 +490,7 @@ Speaker yahan "pullify" ke through MongoDB aur Redis ko self-host karne, unhe GU
 > The speaker demonstrates exposing MongoDB and Redis on public ports (5432/5433). This is a serious architectural anti-pattern. **Databases should NEVER be exposed publicly.** Coolify explicitly supports private communication over Docker networks without publishing host ports. Use SSH tunneling to access databases via GUI tools locally.
 
 Topic 1: MongoDB Setup & GUI Connection
-Subtopics: MongoDB Concept, Pullify Deployment, Version Selection, Port Configuration, MongoDB Compass, Public URL Connection
+Subtopics: MongoDB Concept, Pullify Deployment, Version Selection, Port Configuration, MongoDB Compass, Private Network Connection / SSH Tunnel
 
 [📊 SCOPE SIGNAL for Topic 1:
 
@@ -436,11 +503,18 @@ Subtopics: MongoDB Concept, Pullify Deployment, Version Selection, Port Configur
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[MongoDB, NoSQL database, JSON like documents, traditional rows and columns, pullify, self-hosting pass, deploy apps, ChatGPT, ⭐8[version], public port 5432, public URL, MongoDB Compass, Atlas, cloud-based, expensive, admin templates, collections, self-installed]
+[MongoDB, NoSQL database, JSON like documents, traditional rows and columns, pullify, self-hosting pass, deploy apps, ChatGPT, ⭐8[version], internal database port, private Docker network, SSH tunnel, MongoDB Compass, Atlas, cloud-based, expensive, admin templates, collections, self-installed]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
-* Testing/Offline Phase: Developer server (pullify) par MongoDB deploy karta hai, port 5432 assign karta hai, aur public URL generate karta hai. Phir local system par MongoDB Compass install karke us URL ke through connection test karta hai taaki database ka interface dekh sake.
+* Testing/Offline Phase:
+* Developer MongoDB ko private network par deploy karta hai.
+* Local GUI access ke liye SSH tunnel create karta hai.
+* MongoDB Compass ko tunnel endpoint ke through connect karke verify karta hai.
+
+Production:
+* MongoDB ka public hostname/port expose nahi kiya jata.
+* Application private network se database ko access karti hai.
 * Fixing/Iteration Phase: (N/A — transcript mein is topic ke liye koi fixing phase describe nahi kiya gaya)
 * Live Production Phase: (N/A — transcript mein is topic ke liye koi live production flow describe nahi kiya gaya)
 * Additional context: Speaker ne mention kiya ki cloud-based Atlas bahut expensive hota hai (hourly charge), isliye self-hosting money save karti hai.
@@ -453,17 +527,20 @@ Subtopics: Redis Caching Concept, Pullify Deployment, Port Configuration, Redis 
 * Depth Level: Moderate
 * Coverage Angle: Both
 * Transcript mein content volume: Long explanation with demo
-* Key terms from transcript: redis, caching, RAM, lightweight, open source, port 5433, Redis Insight
-* Explicit emphasis by speaker: "we need to use a different public port" — speaker ne highlight kiya ki MongoDB ka port (5432) same nahi use karna, Redis ke liye 5433 use karna hai.
+* Key terms from transcript: redis, caching, RAM, lightweight, open source, internal Redis port, Redis Insight
+* Explicit emphasis by speaker: Redis must remain private; local GUI access uses an SSH tunnel.
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 3:
-[redis, caching, APIs backends, AI tools, RAM, lightweight, open source, cache frequently access data, faster, responsive, session store, background tax manager[unclear], real-time notification, ladies insights[unclear], Redis Insight, Linux, Mac OS, Intel based Silicon Macs, Windows, ⭐port 5433, Redis public URL, test connection, add database]
+[redis, caching, APIs backends, AI tools, RAM, lightweight, open source, cache frequently access data, faster, responsive, session store, background tax manager[unclear], real-time notification, ladies insights[unclear], Redis Insight, Linux, Mac OS, Intel based Silicon Macs, Windows, ⭐internal Redis port, SSH tunnel endpoint / private Redis access, test connection, add database]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
-* Testing/Offline Phase: Developer app ko fast banane aur API/backend ka data RAM mein cache karne ke liye Redis deploy karta hai (port 5433 par). Phir URL copy karke local system par Redis Insight open karta hai aur connection test karke database add karta hai.
+* Testing/Offline Phase:
+* Redis bhi private Docker network par run karega.
+* External Redis Insight access ke liye SSH tunnel use hoga.
+* Public Redis port expose nahi kiya jayega.
 * Fixing/Iteration Phase: (N/A)
 * Live Production Phase: (N/A)
 * Additional context: Speaker ne samjhaya ki slow database queries ka result cache karne se app next time instantly load hoti hai.
@@ -528,6 +605,21 @@ Subtopics: Firefox Features, Qlify Deployment, Mozilla VPN Partnership, Geo-test
 * Transcript mein content volume: Explanation with ChatGPT and live geo-testing demo
 * Key terms from transcript: firefox, open source web browser, Qlify, mozilla vpn, mula word, germany, quality compression levels
 * Explicit emphasis by speaker: "Firefox doesn't act as a vpn directly" — lekin jab server pe host hota hai toh yeh VPN ki tarah geo-location testing mein help karta hai.
+
+### ⚠️ IMPORTANT DISTINCTION
+
+Self-hosted Firefox ≠ VPN service.
+
+Server-hosted browser ka outbound traffic server ke network se originate ho sakta hai, isliye geo-testing possible ho sakti hai.
+
+It does NOT automatically provide:
+- device-wide VPN routing
+- encrypted tunnel for all device traffic
+- VPN privacy guarantees
+- guaranteed country-level IP behavior
+
+Use this primarily as a remote-browser / geo-testing technique.
+
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
@@ -584,9 +676,24 @@ Subtopics: Root User Vulnerability, Add User Command, Password Setup, Usermod Co
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
+### ⚠️ LOCKOUT PREVENTION
+
+Root login disable karne se pehle:
+1. New sudo-capable user create karo.
+2. New user se second SSH session open karke login test karo.
+3. Sudo access verify karo.
+4. SSH configuration syntax validate karo.
+5. Existing SSH session close kiye bina new login test complete karo.
+6. Tabhi root/password access disable karo.
+
 * Testing/Offline Phase: Developer server par `adduser` command se ek naya custom user banata hai (e.g., Kunal) aur usse `usermod` se permissions deta hai. Phir nano editor mein `PermitRootLogin` ke aage hash (`#`) laga kar root login disable karta hai aur service restart karta hai.
 * Fixing/Iteration Phase: Developer test karta hai ki root user se login fail ho raha hai aur naye user se login successful hai.
-* Live Production Phase: Production server ab 95% automated bot attacks se safe ho jaata hai kyunki attackers ka default target (root user) exist hi nahi karta.
+* Live Production Phase:
+  Root SSH login disabled hone se common automated attack path reduce hota hai.
+  Iske baad bhi server ko firewall, SSH keys, patching, least privilege, monitoring aur intrusion protection se secure karna zaroori hai.
+
+### Security Principle:
+Reduced attack surface ≠ complete security
 * Additional context: Speaker ne explicitly samjhaya ki Linux terminal mein password type/paste karte waqt visible nahi hota, jo ki ek security feature hai.
 
 Topic 2: Securing Server with SSH Keys
@@ -610,6 +717,17 @@ Subtopics: SSH Keys Concept, Keychain Usage, Key Generation, Public & Private Ke
 * Testing/Offline Phase: Developer Keychain tool ka use karke `ed25519` format mein public aur private keys generate karta hai. Public key ko server ke andar ek nayi `.ssh` directory bana kar `authorized_keys` file mein paste karta hai, aur server se Password Authentication disable kar deta hai.
 * Fixing/Iteration Phase: (N/A)
 * Live Production Phase: Production environment mein hacker server ka password guess ya crack nahi kar sakta, kyunki login sirf us developer ke local system mein rakhi "private key" se hi possible hai.
+
+### 🔐 SSH KEY OPERATIONS CHECKLIST
+
+[ ] Private key protected with passphrase
+[ ] Private key never uploaded to server
+[ ] Public key only stored in authorized_keys
+[ ] Backup/recovery copy available securely
+[ ] Lost device → key revoke/replace procedure known
+[ ] Multiple operators → separate keys, no shared private keys
+[ ] Periodic key rotation defined
+
 * Additional context: N/A
 
 Topic 3: Two-Factor Authentication (2FA) Implementation
@@ -619,28 +737,17 @@ Subtopics: Coolify Dashboard 2FA, TOTP Configuration, Recovery Codes
 
 * Depth Level: Deep
 * Coverage Angle: Practical only
-* Transcript mein content volume: Long explanation (Note: Replaced with zero-CLI UI approach)2. 🔴 Section 6 — SSH 2FA is still the old CLI/PAM implementation
+* Transcript mein content volume: Long explanation (Note: Replaced with zero-CLI UI approach)
 
-Target:
-Section 6 → Topic 3: Two-Factor Authentication (2FA) Implementation
+### Coolify Dashboard 2FA + Recovery Codes
 
-The Flaw:
-It still teaches PAM + sshd_config + Google Authenticator + manual SSH configuration.
+Profile → Two-factor Authentication → Configure → TOTP
 
-That is unnecessary complexity under your Coolify-first/zero-CLI operating philosophy.
+Save recovery codes securely offline.
 
-The Fix:
-Replace with:
+SSH hardening remains separate:
+SSH keys + disable password authentication.
 
-“Coolify Dashboard 2FA + Recovery Codes”
-
-Profile → Two-factor Authentication → Configure → TOTP → save recovery codes
-
-Coolify currently supports native TOTP 2FA and recovery codes. (coolify.io)
-
-Keep SSH hardening separately as:
-
-SSH keys + disable password authentication
 * Key terms from transcript: two-factor authentication, verification code
 * Explicit emphasis by speaker: None
 * Speaker ne jo analogies/examples use kiye: None
@@ -673,6 +780,22 @@ Subtopics: Localhost Connection Error, Dedicated System User Concept, Sudoers Co
 [localhost is not reachable, underlying server has problems, fix Qlify connection, Qlify service, dedicated system user, `sudo user mod`, `sudo visudo`, no password required, keys and tokens, deploy key, `sudo mkdir`, `sudo chown`, SSL permission, `Match User`, `sudo docker restart coolify-proxy`, wildcard domain, apps.one]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+### 🧭 TROUBLESHOOTING ORDER
+
+Before editing sudoers / Match User:
+
+1. Is Coolify service running?
+2. Is localhost reachable?
+3. Is the expected SSH user correct?
+4. Is the correct public key installed?
+5. Can that user authenticate?
+6. Does the user have required sudo permissions?
+7. Is SSH Match User configuration correct?
+8. Restart only the required Coolify proxy/service.
+9. Re-test from Coolify UI.
+
+Do not change multiple authentication layers at once.
 
 * Testing/Offline Phase: Security badhane ke karan Coolify ka connection break ho jata hai ("localhost not reachable"). Isko fix karne ke liye developer ek special `coolify-service` user banata hai, usse `visudo` mein NOPASSWD access deta hai, aur Coolify UI ki deploy key server par configure karta hai.
 * Fixing/Iteration Phase: Developer SSH config mein `Match User` rule add karta hai taaki ye specific Coolify user bina password aur 2FA ke authenticate kar sake. End mein docker proxy restart karke UI connection ko verify karta hai.
@@ -771,6 +894,28 @@ Subtopics: Destinations, Network Isolation, Domain & DNS, Traefik & Auto TLS
 * Fixing/Iteration Phase: Developer maps destinations to ensure private communication via Docker networks.
 * Live Production Phase: Traefik automatically generates routes and TLS certificates for edge routing, acting as the ingress for live traffic.
 
+### 🧪 HANDS-ON NETWORK VERIFICATION LAB
+
+1. Create application network.
+2. Attach application and dependency to private network.
+3. Confirm application can reach dependency by service name.
+4. Confirm dependency has no public port published.
+5. Confirm external user can reach only the public application endpoint.
+6. Confirm blocked direct DB/Redis access from internet.
+
+Expected architecture:
+
+Internet
+   ↓
+Traefik / HTTPS
+   ↓
+Application
+   ↓
+Private Docker Network
+   ↓
+DB / Redis
+
+
 
 Topic 3: Deep Dive: Reverse Proxy, Traefik & Auto TLS (For Beginners)
 Subtopics: Reverse Proxy Concept, Traffic Routing, TLS/SSL Certificates
@@ -827,6 +972,31 @@ Subtopics: Private Keys Distinction, SSH Key Authentication, Disable Password SS
 * Fixing/Iteration Phase: Password SSH is disabled to block brute-force attempts.
 * Live Production Phase: The provider firewall is locked down, closing ports 8000/6001/6002, ensuring only required ingress/SSH traffic reaches the production server.
 
+### 🔥 FIREWALL BASELINE
+
+Before applying production firewall rules, explicitly document:
+
+Allowed:
+- SSH management access
+- HTTP/HTTPS ingress
+- Required inter-server private traffic
+
+Denied:
+- Public database ports
+- Public Redis ports
+- Unused management ports
+- Internal-only service ports
+
+### ⚠️ Apply Order
+
+1. Verify domain works.
+2. Verify SSH access.
+3. Configure firewall.
+4. Keep recovery SSH session open.
+5. Test application.
+6. Confirm blocked ports externally.
+
+
 Topic 2: UI Access Control & Secret Management
 Subtopics: Coolify 2FA, RBAC, API Tokens, Secret Lifecycle & Shared Variables
 
@@ -848,6 +1018,21 @@ Subtopics: Coolify 2FA, RBAC, API Tokens, Secret Lifecycle & Shared Variables
 * Testing/Offline Phase: Developer enables TOTP 2FA, saves recovery codes offline, and sets up RBAC (Member as read-only).
 * Fixing/Iteration Phase: Deploy-only API tokens are created with IP restrictions for safe CI/CD automation.
 * Live Production Phase: Secrets are actively managed via a rotation lifecycle (generate → replace → redeploy → revoke) without manual server edits.
+
+### 🔄 SECRET ROTATION SAFETY
+
+Before revoking old secret:
+
+[ ] New secret generated
+[ ] New secret stored securely
+[ ] Coolify value updated
+[ ] Application redeployed
+[ ] Health check passed
+[ ] Functional test passed
+[ ] Only then revoke old secret
+
+Never revoke the old credential before confirming the replacement works.
+
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Section 8: Security Before Production (Phase 2)
@@ -881,6 +1066,20 @@ Subtopics: Persistent Storage, Private Networking (Compose Caveat), Database & R
 * Fixing/Iteration Phase: Developer ensures Compose apps have "Connect To Predefined Network" checked so they don't expose public ports.
 * Live Production Phase: Database upgrades are manually gated through a strict Backup → Review → Update → Deploy workflow.
 
+### ⚠️ STORAGE PATH RULE
+
+`/app/data` is an example, not a universal path.
+
+For every application document:
+
+Application:
+Persistent path:
+Volume name:
+Backup source:
+Restore method:
+Data classification:
+
+
 Topic 2: Reliability & Resource Management
 Subtopics: Resource Limits, Health Checks, Restart Policy, Background Workers, Scheduled Tasks
 
@@ -902,6 +1101,23 @@ Subtopics: Resource Limits, Health Checks, Restart Policy, Background Workers, S
 * Testing/Offline Phase: Developer sets hard memory limits/CPU weights and defines HTTP endpoints for health checks.
 * Fixing/Iteration Phase: A Max Restart Count is configured to allow auto-recovery from temporary crashes without infinite looping.
 * Live Production Phase: Background queues handle heavy tasks (invoices/emails) while Scheduled Tasks run safe, UI-automated cron jobs without manual CLI typing.
+
+### ✅ HEALTH CHECK DEFINITION
+
+Document for each application:
+
+Health endpoint:
+Expected HTTP status:
+Expected response time:
+Startup grace period:
+Failure threshold:
+Restart behavior:
+
+Example:
+GET /health
+→ HTTP 200
+→ application + required dependencies available
+
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Section 9: Application Runtime (Phase 3)
@@ -936,6 +1152,28 @@ Subtopics: Git Forgejo, Build Strategy (Nixpacks/Docker), CI Actions, Container 
 * Fixing/Iteration Phase: The CI pipeline builds the Docker image and pushes it to a Container Registry.
 * Live Production Phase: Coolify pulls the immutable digest/tag from the registry rather than compiling source code directly on the production node.
 
+### 🧪 MINIMUM CI/CD IMPLEMENTATION
+
+Pipeline must explicitly define:
+
+1. Checkout source
+2. Install dependencies
+3. Unit tests
+4. Integration tests
+5. Security scan
+6. Build image
+7. Tag image
+8. Push registry
+9. Trigger Coolify deployment
+10. Wait for deployment
+11. Health-check production
+12. Mark release success/failure
+
+### Failure Rule
+If any stage fails:
+→ do not deploy
+
+
 Topic 2: Deep Dive: Forgejo Actions, Woodpecker & YAML (For Beginners)
 Subtopics: CI/CD Fundamentals, Jenkins Comparison, YAML Syntax Basics, Practical Pipeline Example
 
@@ -968,6 +1206,19 @@ Subtopics: Staging, Smoke Testing, Deployment Hooks, Deployment Types, Rolling U
 * Transcript mein content volume: Semantic deployment operations, zero-downtime constraints, and version pinning.
 * Key terms from transcript: Staging, Smoke Testing, Deployment Hooks, Redeploy vs Restart, Force Deploy, Resource Operations, Rolling / Stop-Start Semantics, SIGTERM, Version Pinning, Rollback
 * Explicit emphasis by speaker: Rolling updates are NOT supported for Docker Compose apps in Coolify. Application rollback does NOT rollback DB migrations.
+
+### ⚠️ DEPLOYMENT SEMANTICS CLARIFICATION
+
+Do not generalize “rolling deployment” across all Coolify resource types.
+
+For standard application deployments:
+Understand the platform\'s actual replacement/availability behavior.
+
+For Docker Compose resources:
+Do NOT assume true rolling-update semantics.
+
+Always verify the deployment behavior of the specific Coolify resource type before promising zero-downtime deployment.
+
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
@@ -978,7 +1229,9 @@ Subtopics: Staging, Smoke Testing, Deployment Hooks, Deployment Types, Rolling U
 
 * Testing/Offline Phase: Developer pins versions explicitly and deploys to a sandboxed Staging URL.
 * Fixing/Iteration Phase: Post-deploy hooks clear caches or prepare schemas. Developer learns the difference between Redeploy, Restart, and Force Deploy.
-* Live Production Phase: A rolling update replaces old containers only when the new ones are healthy. If an issue occurs, an image Rollback is triggered (while manually handling any DB schema incompatibilities).
+* Live Production Phase:
+  Production deployment follows the deployment semantics supported by the specific Coolify resource type.
+  Image rollback can restore the previous application version, but DB schema changes require separate compatibility/recovery planning.
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1021,6 +1274,29 @@ Subtopics: DB Engine-Aware Backups, Application Storage Backups, Coolify Instanc
 * Fixing/Iteration Phase: Backups are routed to an offsite S3/MinIO bucket with Object Lock (WORM) enabled for immutability. The `APP_KEY` is saved in an offline password manager.
 * Live Production Phase: A full DR drill is conducted to prove that the control plane, database, and persistent volumes can be restored within the RTO/RPO targets.
 
+### 📋 BACKUP POLICY TABLE
+
+For every production workload define:
+
+| Item | Value |
+|---|---|
+| What is backed up? | DB / files / config |
+| Frequency | hourly / daily / etc. |
+| Retention | X days |
+| Offsite destination | ... |
+| Encryption | ... |
+| Immutable protection | ... |
+| Restore test frequency | ... |
+| RPO | ... |
+| RTO | ... |
+| Owner | ... |
+
+“Offsite” means independent failure domain—not merely a different VPS on the same provider/account/region.
+
+### Rule:
+A backup that has never been restored is an assumption, not proof of recoverability.
+
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Section 11: Data Protection (Phase 5)
     Topic 1: Backup Workflows & DR Testing
@@ -1053,6 +1329,27 @@ Subtopics: Coolify Sentinel, Metrics, Uptime Kuma, Notifications, Audit Logs, In
 * Testing/Offline Phase: Developer sets up Uptime Kuma and Coolify Sentinel for external HTTP tracking and internal container health.
 * Fixing/Iteration Phase: Notifications are routed to an incident webhook/SMTP, and native audit logs are reviewed for team actions.
 * Live Production Phase: When an outage occurs, on-call staff follow the strict Decision Tree Runbook instead of blindly executing CLI commands.
+
+### 🚨 INCIDENT LIFECYCLE
+
+Detect
+→ Triage
+→ Contain
+→ Recover
+→ Verify
+→ Communicate
+→ Document
+→ Prevent recurrence
+
+For every incident record:
+- Start time
+- Impact
+- Root cause
+- Mitigation
+- Recovery time
+- Customer impact
+- Follow-up action
+
 
 Topic 2: Maintenance & Queue Control
 Subtopics: Docker Cleanup, OS Patching, Coolify Updates, Build Concurrency, Bulk Deployment
@@ -1109,6 +1406,25 @@ Subtopics: Payment Idempotency, Webhook Reconciliation, DB Migration Strategy, C
 * Fixing/Iteration Phase: Schema migrations are designed using the Expand/Contract pattern to survive rolling update overlaps.
 * Live Production Phase: Application-level connection pooling protects the database from connection exhaustion during sudden traffic spikes, preventing checkout crashes.
 
+### 🧪 IMPLEMENTATION CHECKPOINT
+
+For each payment flow document:
+
+Request ID:
+Idempotency Key:
+Payment Provider Event ID:
+Order ID:
+Payment State:
+Allowed State Transitions:
+Retry Policy:
+Reconciliation Source:
+Duplicate Handling:
+Failure Recovery:
+
+Expected invariant:
+Same payment event must not create multiple successful order transitions.
+
+
 Topic 2: Security & Stress Testing
 Subtopics: Log Redaction, Load Testing (k6)
 
@@ -1162,6 +1478,28 @@ Subtopics: Dedicated Build Server, External Load Balancer, Stateless Scaling, DB
 * Testing/Offline Phase: Developer attaches a Dedicated Build Server to Coolify to isolate heavy CPU compilation away from the production database.
 * Fixing/Iteration Phase: An external Load Balancer is configured, and web tiers are scaled horizontally via Coolify replicas.
 * Live Production Phase: The infrastructure now spans multiple nodes, with highly available DB/MinIO clusters managing state externally.
+
+### 🗺️ MULTI-NODE TRAFFIC MODEL
+
+Client
+  ↓
+External Load Balancer
+  ↓
+App Node 1 / App Node 2
+  ↓
+Private Network
+  ├── Database
+  ├── Redis
+  └── Object Storage
+
+CI / Build Node
+  ↓
+Container Registry
+  ↓
+Production App Nodes
+
+Note: Database, Redis, and Object Storage are stateful components.
+
 
 
 
@@ -1241,6 +1579,26 @@ HA ≠ Zero Data Loss
 [ ] Original primary recovery tested
 [ ] New replication path verified
 
+### ⚠️ IMPLEMENTATION BOUNDARY
+
+Database HA is database-engine specific.
+
+Document:
+
+Database engine:
+Replication mechanism:
+Primary role:
+Replica role:
+Replication mode:
+Failover mechanism:
+Promotion mechanism:
+Application endpoint switch:
+Split-brain prevention:
+Backup relationship:
+Recovery test procedure:
+
+Do not treat “Primary + Replica” as a complete HA implementation by itself.
+
 ### 🧠 CORE CONCEPTS TO MASTER:
 
 * Replication ≠ Backup
@@ -1310,6 +1668,26 @@ Section 14: Scale-Up (Phase 8)
 * **Fixing/Iteration Phase:** Heavy workloads ko redistribute kiya jata hai taaki database ya application ek doosre ke resources starve na karein.
 * **Live Production Phase:** VPS 1 aur VPS 2 defined responsibilities ke saath continuously production workloads serve karte hain.
 * **Additional context:** Architecture ko “available servers” ke basis par nahi, failure domain, resource usage aur operational simplicity ke basis par design kiya jayega.
+
+### 🧱 FINAL 2-VPS PLACEMENT MATRIX
+
+| Workload | VPS 1 | VPS 2 | Public? | Persistent? |
+|---|---|---|---|---|
+| Frontend | ✓ | optional | Yes | maybe |
+| Backend/API | ✓ | optional | Yes | No |
+| Database | No | ✓ | No | Yes |
+| Redis | No | ✓ | No | Depends |
+| MinIO | No | ✓ | API only | Yes |
+| CI/Build | No | ✓ | No | Yes |
+| Workers | ✓ | optional | No | No |
+| Monitoring | ✓/✓ | ✓/✓ | limited | Yes |
+
+### ⚠️ FAILURE-DOMAIN RULE
+
+If VPS 1 and VPS 2 are the only copies of critical infrastructure data,
+loss of the provider, region, account or shared dependency can still affect both.
+
+Critical backups MUST have an independent offsite destination.
 
 
 ### 🧪 HANDS-ON RECOVERY LAB:
@@ -1585,6 +1963,30 @@ Section 15: Two-VPS Production Architecture
 * **Live Production Phase:** Incident ke time “rollback vs restore vs rebuild” clearly decide kiya jata hai.
 * **Additional context:** Snapshot backup ka replacement nahi hai; DB dump ka bhi replacement nahi hai.
 
+### 🧭 RECOVERY DECISION TREE
+
+Bad deployment
+→ Rollback
+
+Bad configuration
+→ Restore known-good configuration
+
+Database corruption
+→ Database restore
+
+Deleted application data
+→ File/volume restore
+
+Server failure
+→ Snapshot / rebuild
+
+Complete VPS loss
+→ New VPS + infrastructure rebuild + data restore
+
+Provider/region loss
+→ Independent offsite DR recovery
+
+
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1642,6 +2044,23 @@ Test Encrypted Restore
 
 **Critical rule:** Encryption key ka backup/recovery mechanism khud production recovery architecture ka part hona chahiye.
 
+### 🔐 ENCRYPTION MATRIX
+
+| Data | At Rest | In Transit | Key Location | Restore Tested? |
+|---|---|---|---|---|
+| DB | ✓ | ✓ | ... | ✓ |
+| Backups | ✓ | ✓ | ... | ✓ |
+| MinIO objects | ✓ | ✓ | ... | ✓ |
+| Secrets | ✓ | ✓ | ... | ✓ |
+| SSH keys | encrypted | n/a | ... | ✓ |
+
+### Critical distinction:
+Encryption protects stored data.
+TLS protects network transport.
+Authentication/authorization control access.
+They solve different problems.
+
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Section 17: Data & Infrastructure Encryption
     Topic 1: Encryption at Rest & Backup Protection
@@ -1674,6 +2093,21 @@ Section 17: Data & Infrastructure Encryption
 * **Fixing/Iteration Phase:** Unnecessary CLI commands ko GUI/API workflow se replace kiya jata hai.
 * **Live Production Phase:** Daily production management almost entirely GUI/API driven hoti hai.
 * **Additional context:** Zero-CLI ka matlab zero Linux knowledge nahi; emergency recovery ke liye minimum Linux understanding maintain karni hai.
+
+### 🎯 OPERATING POLICY
+
+GUI = routine operations
+API = repeatable automation
+SSH = break-glass / recovery / unsupported operation
+
+Zero-CLI does NOT mean:
+- no shell knowledge
+- no troubleshooting knowledge
+- no Linux knowledge
+
+It means:
+Do not use manual CLI commands for routine work when a supported GUI/API workflow exists.
+
 
 ---
 
@@ -1713,6 +2147,25 @@ Section 18: GUI-First / Zero-CLI Operations
 * **Live Production Phase:** Production frontend securely deploy hota hai aur backend API ke saath communicate karta hai.
 * **Additional context:** Frontend deployment backend deployment se logically separate hai.
 
+### 🧪 FRONTEND DEPLOYMENT DECISION
+
+SPA:
+Source → Build → Static assets → Web server → CDN/cache
+
+SSR:
+Source → Runtime server → Application process → Reverse proxy
+
+For every frontend document:
+Build command:
+Output directory:
+Runtime command:
+Port:
+API URL:
+Environment variables:
+Cache strategy:
+Health endpoint:
+
+
 ---
 
 ## Topic 2: Backend/API Production Deployment
@@ -1740,6 +2193,26 @@ Section 18: GUI-First / Zero-CLI Operations
 * **Live Production Phase:** Backend API, workers aur queues coordinated production workload ke roop mein run karte hain.
 * **Additional context:** Backend release pipeline later Jenkins aur Coolify API se automate hogi.
 
+### ✅ BACKEND PRODUCTION CONTRACT
+
+Document:
+
+Port:
+Health endpoint:
+Readiness endpoint:
+DB host:
+Redis host:
+Queue:
+Worker:
+Startup command:
+Migration strategy:
+Graceful shutdown:
+Memory limit:
+CPU limit:
+Logs:
+Metrics:
+
+
 ---
 
 ## Topic 3: Mobile CI/CD with Jenkins
@@ -1766,6 +2239,24 @@ Section 18: GUI-First / Zero-CLI Operations
 * **Fixing/Iteration Phase:** Automated build/test/signing failures identify aur correct kiye jate hain.
 * **Live Production Phase:** Signed Android/iOS artifacts release pipeline ke through publish hote hain.
 * **Additional context:** iOS build environment Linux VPS par directly assume nahi kiya jayega; macOS build requirement separately handle ki jayegi.
+
+### 📱 MOBILE RELEASE PIPELINE
+
+Android:
+Git → Test → Build → Sign → AAB/APK → Artifact Store → Release
+
+iOS:
+Git → Test → Build on macOS → Sign → IPA → App Store Connect
+
+Secrets required:
+- Android keystore
+- Keystore password
+- iOS certificates
+- Provisioning profile
+- App Store Connect credentials
+
+Never hard-code signing credentials in source control.
+
 
 ---
 
@@ -1805,6 +2296,22 @@ Section 19: Frontend, Backend & Mobile Production Delivery
 * **Live Production Phase:** Successful pipeline production deployment ko trigger karta hai.
 * **Additional context:** Production server par build karne ke bajaye CI → Registry → Deployment preferred architecture rahega.
 
+### 🧪 JENKINS MINIMUM SETUP
+
+1. Persistent Jenkins storage
+2. Admin account
+3. HTTPS
+4. Backup
+5. SCM webhook
+6. Credentials store
+7. Agent/worker strategy
+8. Build pipeline
+9. Security scanning
+10. Registry authentication
+11. Coolify deployment trigger
+12. Pipeline result notification
+
+
 ---
 
 ## Topic 2: Self-Hosted Container Registry
@@ -1831,6 +2338,24 @@ Section 19: Frontend, Backend & Mobile Production Delivery
 * **Fixing/Iteration Phase:** Authentication, tag strategy aur retention rules validate kiye jate hain.
 * **Live Production Phase:** Coolify immutable image/digest pull karke production deploy karta hai.
 * **Additional context:** Registry itself must also be backed up because it is part of the delivery chain.
+
+### 📦 REGISTRY OPERATIONS
+
+Document:
+
+Registry URL:
+Authentication:
+TLS:
+Image naming:
+Immutable tag policy:
+Digest policy:
+Retention:
+Garbage collection:
+Storage location:
+Backup:
+Restore:
+Registry outage behavior:
+
 
 ---
 
@@ -1869,6 +2394,19 @@ Section 20: Open-Source CI/CD & Container Registry
 * **Live Production Phase:** Excessive requests automatically throttle/block hoti hain without bringing down the backend.
 * **Additional context:** Login, OTP, payment, checkout aur search highest-priority protected endpoints hain.
 
+### 📊 RATE LIMIT POLICY TABLE
+
+| Endpoint | Limit | Window | Burst | Action |
+|---|---:|---:|---:|---|
+| Login | ... | ... | ... | 429 |
+| OTP | ... | ... | ... | 429 |
+| Checkout | ... | ... | ... | 429 |
+| Webhook | ... | ... | ... | ... |
+| Search | ... | ... | ... | ... |
+
+Never choose production thresholds without measuring normal traffic first.
+
+
 ---
 
 ## Topic 2: Open-Source WAF & Edge Security Implementation
@@ -1895,6 +2433,29 @@ Section 20: Open-Source CI/CD & Container Registry
 * **Fixing/Iteration Phase:** Edge rules, request limits aur blocking rules tune kiye jate hain.
 * **Live Production Phase:** Internet traffic edge protection layer se pass hokar application tak pahunchta hai.
 * **Additional context:** Provider firewall, reverse proxy, rate limiter aur WAF separate security layers hain.
+
+### 🛡️ EDGE SECURITY LAYERING
+
+Internet
+↓
+Provider / Network Firewall
+↓
+Reverse Proxy
+↓
+WAF
+↓
+Rate Limiting
+↓
+Application
+↓
+Private Dependencies
+
+For each layer document:
+What it blocks
+What it allows
+What it logs
+What bypasses it
+
 
 ---
 
@@ -1933,6 +2494,26 @@ Section 21: E-Commerce Edge Protection
 * **Live Production Phase:** Production systems least-privilege credentials use karte hain aur old secrets revoke kiye jate hain.
 * **Additional context:** Root/admin credentials ko CI/CD pipelines mein reuse nahi karna.
 
+### 🔐 IMPLEMENTATION DECISION
+
+Choose and document one actual secret-management mechanism.
+
+For this course, every secret must have:
+
+Secret name:
+Owner:
+Purpose:
+Application:
+Environment:
+Created:
+Last rotated:
+Rotation interval:
+Where stored:
+Who can access:
+How revoked:
+How recovered:
+
+
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1968,6 +2549,24 @@ Section 22: Production Secrets & Sensitive Credentials
 * **Fixing/Iteration Phase:** Cache-control, image size aur delivery performance tune ki jati hai.
 * **Live Production Phase:** Frontend/backend media MinIO/object-storage layer se efficiently serve hota hai.
 * **Additional context:** Application server ka CPU/RAM unnecessarily media delivery mein consume nahi karna.
+
+### 🪣 BUCKET DESIGN
+
+For each bucket define:
+
+Bucket name:
+Public/private:
+Allowed operations:
+Upload identity:
+Read identity:
+Signed URL required?:
+Object retention:
+Versioning:
+Lifecycle:
+Backup:
+CORS:
+Cache-Control:
+
 
 ---
 
@@ -2005,6 +2604,28 @@ Section 23: Object Storage, Static Asset Caching & Media Delivery
 * **Live Production Phase:** Sirf validated release production secrets/data ke saath deploy hoti hai.
 * **Additional context:** Payment sandbox aur live credentials kabhi interchange nahi hone chahiye.
 
+### 🚧 ENVIRONMENT BOUNDARY CHECK
+
+Development:
+- Test DB
+- Test secrets
+- Test payments
+- Test email
+- Test storage
+
+Staging:
+- Production-like architecture
+- Sandbox external services
+
+Production:
+- Real DB
+- Real secrets
+- Real payment credentials
+- Real customer data
+
+Never share production DB credentials with development/staging.
+
+
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -2041,6 +2662,22 @@ Section 24: Environment & Release Isolation
 * **Live Production Phase:** Real monitoring thresholds ke saath production capacity validated hoti hai.
 * **Additional context:** Users ki count alone capacity metric nahi hai; concurrency aur request workload measure kiya jayega.
 
+### ⚠️ LOAD TEST SAFETY
+
+Default:
+Load test against isolated staging / performance environment.
+
+Before test:
+[ ] Environment verified
+[ ] Test data generated
+[ ] Real payment disabled
+[ ] Email delivery isolated
+[ ] External webhooks isolated
+[ ] Resource limits understood
+[ ] Monitoring enabled
+[ ] Stop condition defined
+
+
 ---
 
 ## Topic 2: Scaling Decision Policy
@@ -2067,6 +2704,18 @@ Section 24: Environment & Release Isolation
 * **Fixing/Iteration Phase:** Pehle optimization, phir vertical scaling, phir workload separation, phir horizontal scaling.
 * **Live Production Phase:** Threshold breach par predefined scaling decision apply hota hai.
 * **Additional context:** Scale-up strategy guesswork ke bajaye measured metrics par based hogi.
+
+### 📈 SCALE DECISION RECORD
+
+Metric:
+Current:
+Threshold:
+Duration above threshold:
+Likely bottleneck:
+First action:
+Second action:
+Escalation condition:
+
 
 ---
 
@@ -2104,6 +2753,22 @@ Section 25: E-Commerce Capacity & Scaling
 * **Fixing/Iteration Phase:** Worker count, retries aur queue behavior tune kiya jata hai.
 * **Live Production Phase:** Heavy work background workers process karte hain aur API responsive rehti hai.
 * **Additional context:** Checkout-critical path ko unnecessary background dependency se block nahi karna.
+
+### 🧩 QUEUE CONTRACT
+
+Queue broker:
+Queue name:
+Producer:
+Consumer/worker:
+Retry count:
+Backoff:
+DLQ:
+Visibility timeout:
+Idempotency key:
+Max job duration:
+Concurrency:
+Monitoring metric:
+
 
 ---
 
@@ -2169,6 +2834,20 @@ Section 26: E-Commerce Queue Architecture
 * **Live Production Phase:** Central observability stack mein sanitized logs hi collect/store hote hain.
 * **Additional context:** Production logging ka goal debugging hona chahiye, secret/data leakage nahi.
 
+### 🔴 NEVER LOG
+
+Passwords
+OTP values
+CVV
+Private keys
+API secrets
+JWT signing secrets
+Raw authentication tokens
+
+Do not rely only on redaction.
+Prefer not generating/storing sensitive values in logs in the first place.
+
+
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -2205,6 +2884,24 @@ Section 27: Production Logging & PII Protection
 * **Live Production Phase:** Validated release production mein deploy hoti hai.
 * **Additional context:** DB migration rollback ko application rollback ke equal nahi samjha jayega.
 
+### RELEASE EXECUTION TEMPLATE
+
+Pre-check
+→ Build
+→ Test
+→ Migration check
+→ Deploy
+→ Health check
+→ Smoke test
+→ Monitor
+→ Rollback decision
+
+Rollback trigger:
+Rollback action:
+Rollback verification:
+Post-release monitoring window:
+
+
 ---
 
 ## Topic 2: Frontend Release Playbook
@@ -2232,6 +2929,24 @@ Section 27: Production Logging & PII Protection
 * **Live Production Phase:** Production frontend deploy hone ke baad smoke test run hota hai.
 * **Additional context:** Frontend deployment backend ke version compatibility ke saath coordinate ho sakta hai.
 
+### RELEASE EXECUTION TEMPLATE
+
+Pre-check
+→ Build
+→ Test
+→ Migration check
+→ Deploy
+→ Health check
+→ Smoke test
+→ Monitor
+→ Rollback decision
+
+Rollback trigger:
+Rollback action:
+Rollback verification:
+Post-release monitoring window:
+
+
 ---
 
 ## Topic 3: Mobile Release Playbook
@@ -2258,6 +2973,26 @@ Section 27: Production Logging & PII Protection
 * **Fixing/Iteration Phase:** Signing/build failures resolve kiye jate hain.
 * **Live Production Phase:** Signed artifact release channel par publish hota hai.
 * **Additional context:** Mobile deployment ka output container nahi, release artifact hota hai.
+
+### RELEASE EXECUTION TEMPLATE
+
+Pre-check
+→ Version/Build Number
+→ Dependency Check
+→ Test
+→ Sign
+→ Artifact Validation
+→ Internal/Beta Release
+→ Store Validation
+→ Production Release
+→ Post-release Monitoring
+→ Rollback / Hotfix Decision
+
+Rollback trigger:
+Rollback action:
+Rollback verification:
+Post-release monitoring window:
+
 
 ---
 
@@ -2296,6 +3031,22 @@ Section 28: Application-Specific Release Engineering
 * **Fixing/Iteration Phase:** Settings, domains, health checks aur resources UI se adjust kiye jate hain.
 * **Live Production Phase:** Daily application management entirely Coolify GUI se hota hai.
 * **Additional context:** This is the central “AWS-like GUI operations” chapter.
+
+### 🧭 UI LOCATION FORMAT
+
+For each feature, document:
+
+Coolify path:
+Example:
+Projects → Project Name → Environment → Resource → Configuration
+
+Then define:
+What it changes
+When to use
+When NOT to use
+Expected effect
+Rollback/recovery path
+
 
 ---
 
@@ -2352,6 +3103,23 @@ Section 28: Application-Specific Release Engineering
 * **Fixing/Iteration Phase:** Problem ko DNS → Firewall → Port → Proxy → Container → Health Check → Application → Database dependency order mein isolate kiya jata hai.
 * **Live Production Phase:** Incident ke waqt dashboard logs, health status, DNS state aur network configuration dekhkar minimum-change troubleshooting perform ki jati hai.
 * **Additional context:** Har HTTP error ka same root cause nahi hota; response code ko diagnostic signal ki tarah use karna hai.
+
+### 🧪 DIAGNOSTIC EVIDENCE RULE
+
+Before changing configuration, record:
+
+DNS result:
+Resolved IP:
+HTTP response:
+TLS status:
+Firewall state:
+Proxy state:
+Container health:
+Application logs:
+Dependency health:
+
+Troubleshoot from evidence, not guesswork.
+
 
 ### 🧠 TROUBLESHOOTING DECISION TREE:
 
@@ -2426,6 +3194,25 @@ Section 29: Coolify Daily Operations Mastery
 * **Live Production Phase:** Jenkins build complete karta hai, registry push karta hai aur Coolify API se deployment trigger karta hai.
 * **Additional context:** Target architecture: **Build → Test → Registry → Coolify API → Deploy → Health Check**, without SSH deployment commands.
 
+### 🧪 API IMPLEMENTATION CONTRACT
+
+Document:
+
+API base URL:
+Authentication:
+Token scope:
+Allowed IPs:
+HTTP method:
+Endpoint:
+Request body:
+Expected response:
+Deployment ID:
+Status polling:
+Timeout:
+Failure handling:
+Health-check endpoint:
+
+
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -2461,6 +3248,16 @@ Section 30: Coolify API Automation
 * **Fixing/Iteration Phase:** Alert aane par Logs → Healthcheck → Recent Deployment → Rollback/Restore decision tree follow hota hai.
 * **Live Production Phase:** On-call/operator centralized observability se system health understand karta hai.
 * **Additional context:** Existing Sentinel, Metrics, Uptime Kuma aur Audit Logs ko ek coherent observability architecture mein connect kiya jayega.
+
+### 📊 SIGNAL OWNERSHIP
+
+Metric → “Is something wrong?”
+Log → “What happened?”
+Trace → “Where is it slow/failing?”
+Alert → “Who needs to act?”
+Audit log → “Who changed what?”
+Uptime → “Can users reach it?”
+
 
 
 ### 🧪 HANDS-ON OBSERVABILITY & ALERTING LAB:
@@ -2566,6 +3363,27 @@ Section 31: Unified Production Observability
 * **Live Production Phase:** Production environment known/reproducible configuration ke basis par operate hota hai; server replacement ya complete rebuild ke case mein same architecture ko systematically recreate kiya ja sakta hai.
 * **Additional context:** IaC ka primary goal unnecessary automation nahi, balki **reproducibility, consistency, auditability aur disaster recovery** hai.
 
+### ⚠️ IA C vs DOCUMENTATION
+
+Documentation:
+“What is configured?”
+
+Configuration as Code:
+“What configuration is reproducibly stored/versioned?”
+
+Infrastructure as Code:
+“What infrastructure can be created/changed from code or declared configuration?”
+
+Not every GUI setting is automatically exportable as IaC.
+
+For every component classify it as:
+
+1. Code-controlled
+2. Configuration-controlled
+3. GUI-only/manual
+4. Secret/external state
+
+
 
 ### 🧪 HANDS-ON IaC / REPRODUCIBILITY LAB:
 
@@ -2607,6 +3425,18 @@ Lab 4: Rebuild Test
 [ ] Backup restored/configured
 [ ] Monitoring restored
 [ ] Rebuild procedure documented
+
+### 🔐 NEVER COMMIT
+
+[ ] Passwords
+[ ] API keys
+[ ] Private keys
+[ ] Payment secrets
+[ ] Production tokens
+[ ] Encryption recovery secrets
+
+Store secret references, not secret values.
+
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Section 32: Infrastructure as Code / Configuration as Code
