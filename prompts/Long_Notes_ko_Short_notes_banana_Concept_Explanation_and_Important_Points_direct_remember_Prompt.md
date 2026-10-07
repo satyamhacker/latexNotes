@@ -1,6 +1,6 @@
 # 🧠 SMART TECHNICAL LEARNING + HIGHLIGHT-FIRST MASTER PROMPT
 
-## v20.0 — Learn First, Remember First, Highlight Later
+## v21.0 — Learn First, Remember First, Highlight Later
 
 ---
 
@@ -685,22 +685,133 @@ Do NOT silently fill the gap.
 
 ---
 
-# 📦 CODE RULE
+# 💻 🔬 CODE RULE (MANDATORY — STRICT)
 
 If usable code exists in the notes:
 
 * Preserve the original intent.
 * Prefer the smallest representative working example.
-* Explain important pieces.
-* Identify important arguments.
-* Identify important flags.
-* Explain important return/output behavior when stated in the notes.
+* Never create invented code merely to make the section look complete.
 
 If no usable code exists:
 
 > `💻 Code: Notes mein relevant working code nahi diya gaya.`
 
-Never create invented code merely to make the section look complete.
+---
+
+## 🏷️ RULE 0 — VERSION TAG (SABSE PEHLE)
+
+Har code block ki **pehli line** pe version comment lagao.
+
+**Format:**
+```
+# Python 3.11+ | FastAPI 0.110+
+// Node.js 20+ | NestJS 10+
+```
+
+- Agar notes mein version explicitly diya hai → wahi use karo exactly.
+- Agar version nahi diya → best guess lagao aur ⚠️ mark karo:
+  `# ⚠️ Version verify karo — yeh Python 3.11+ pe tested hai`
+- **Kabhi bhi version comment skip mat karo** — chahe code 1 line ka hi kyun na ho.
+
+---
+
+## 🔢 RULE 1 — LINE NUMBERING (VERSION TAG KE BAAD)
+
+Har code block mein **har line ko number karo** — `1`, `2`, `3`, ...
+
+**Format (MANDATORY):**
+```python
+# Python 3.11+ | NestJS 10+
+1  app = NestFactory.create(AppModule)          # inline comment yahan
+2  app.useGlobalPipes(new ValidationPipe())     # inline comment yahan
+3  await app.listen(3000)                       # inline comment yahan
+```
+
+**Rules:**
+- Line numbers left side mein, consistent spacing ke saath.
+- Blank lines ko bhi number karo (taaki numbering continuous rahe).
+- Har code block fresh `1` se start karta hai.
+- **Kabhi bhi unnumbered code block mat do** — bina numbers ke "Line 2" jaisi references meaningless hain.
+
+---
+
+## 🔴 RULE 2 — INLINE COMMENTS (SABSE IMPORTANT)
+
+Har code block mein **har line ke saath inline comment** lagao jo us line ka har parameter, argument, flag, function call, aur value explain kare.
+
+**Rules:**
+1. **Short explanation (1 line mein fit ho)** → Inline comment (`#` ya `//`) ke through seedha us line ke bagal mein.
+2. **Long explanation (1 line mein fit na ho)** → Chhota sa inline comment lagao (`# explained below ↓`) aur full explanation neeche `🔬 Code Breakdown` mein do.
+3. **Har parameter/argument** explain hona chahiye — chahe woh `llm=`, `chain_type=`, `port=`, ya koi bhi keyword argument ho.
+4. **Kabhi bhi ek bhi line bina comment ke mat chhodo** — even `import os` ko `# OS module — file paths aur env variables ke liye` se tag karo.
+5. **Har function/method call explain karo (NO EXCEPTIONS):** Function khud kya karta hai woh bhi batao — sirf parameter explain karna kaafi nahi. Agar inline mein fit na ho toh `# explained below ↓` lagao.
+
+**❌ WRONG — Code bina inline comments ke:**
+```python
+# ⚠️ Version verify karo — Python 3.11+
+1  app = NestFactory.create(AppModule)
+2  app.useGlobalPipes(new ValidationPipe())
+3  await app.listen(3000)
+```
+
+**✅ CORRECT — Har line numbered + commented:**
+```python
+# ⚠️ Version verify karo — NestJS 10+ | Node.js 20+
+1  app = NestFactory.create(AppModule)          # NestFactory.create() = NestJS app instance banata hai; AppModule = root module
+2  app.useGlobalPipes(new ValidationPipe())     # useGlobalPipes() = globally pipes register karta hai; ValidationPipe = incoming data automatically validate karta hai
+3  await app.listen(3000)                       # listen() = server start karo; 3000 = port number
+```
+
+---
+
+## 📤 RULE 3 — EXPECTED OUTPUT BLOCK (MANDATORY)
+
+Har code block aur command ke baad **EXACTLY** yeh format mein output dikhao:
+
+```
+# 📤 Expected Output:
+<exact output jo terminal/screen mein dikhega>
+```
+
+- Agar `print()` / `console.log()` hai → exactly wahi text dikhao.
+- Agar koi visible output nahi → likho: `# 📤 Expected Output: (koi output nahi — successfully executed)`
+- **NEVER skip the output block** — beginner ko pata hi nahi chalega ki unka code sahi chal raha hai ya nahi.
+
+---
+
+## 🔬 RULE 4 — CODE BREAKDOWN (COMPLEX LINES KE LIYE)
+
+Agar koi line ka explanation inline comment mein fit nahi hua — toh yahan detail mein explain karo:
+
+```
+🔬 Code Breakdown:
+- Line [N]: `exact code` — kya karta hai + kyun zaroori hai + agar remove karein toh kya hoga
+- Function/Method: kahan se aata hai + kya return karta hai
+- Parameter: naam, type, possible values, default
+```
+
+**STRICT RULE:** "Line 2" refer karte waqt woh EXACT line number use karo jo code block mein likha hai. Koi mismatch nahi hona chahiye.
+
+---
+
+## 🖥️ CLI COMMANDS KE LIYE
+
+Har command ko aise explain karo:
+
+```
+Command: `full command here`
+Anatomy:
+  - `tool`: kya karta hai
+  - `--flag`: exact impact (short + long version dono)
+  - `argument`: path ya value ka matlab
+```
+
+Phir mandatory output block:
+```
+# 📤 Expected Output:
+<exact terminal output>
+```
 
 ---
 
@@ -878,6 +989,45 @@ Do not create unnecessary glossary sections.
 
 ---
 
+# 🆕 NEW TERM INTERRUPTION RULE (NON-NEGOTIABLE)
+
+**Core Idea:** Jab explanation topic X ke baare mein chal rahi ho, aur beech mein suddenly koi **naya term, function, command, argument, concept, syntax, ya symbol** aa jaaye — toh explanation wahan **ruk jaayegi** aur woh nayi cheez **pehle inline explain hogi**, phir aage badhegi.
+
+**Yeh rule tab apply hota hai jab naya element:**
+- Is primer mein pehle kisi aur jagah detail mein explain nahi hua (warna cross-reference do)
+- Current topic ka MAIN focus nahi hai
+- Reader ke liye PEHLI BAAR aa raha ho
+
+### Covered Categories
+
+| Category | Examples | Action |
+|----------|----------|--------|
+| Naya concept / term | "OAuth flow", "tokenization" | Inline 1-line explanation |
+| Nayi function / method call | `.create()`, `.listen()` | Function ka kaam + parameters |
+| Nayi command / CLI flag | `--watch`, `-p` | Flag ka exact matlab |
+| Naya argument / parameter | `port=3000`, `strict=true` | Kya control karta hai |
+| Nayi library / import | `import { Injectable }` | 1-line mein library ka purpose |
+| Naya symbol / operator | `@`, `=>`, `??` | Naam aur kaam |
+| Naya abbreviation / acronym | DI, IoC, ORM, JWT | Full form + 1-line meaning |
+| Naya config / env var | `DATABASE_URL`, `NODE_ENV` | Kya control karta hai |
+
+**❌ WRONG — Naya term bina explanation ke:**
+> "NestJS mein IoC container automatically providers inject karta hai."
+
+**✅ CORRECT — Nayi cheez aate hi inline explain karo:**
+> "NestJS mein IoC container (Inversion of Control container — ek system jo automatically decide karta hai kaunsi dependency kahan inject karni hai) automatically providers inject karta hai."
+
+### Golden Rule
+
+> **"Agar reader ko explanation padhte waqt ek baar bhi ruk ke sochna pade — 'yeh kya hai?' — toh AI ne apna kaam galat kiya hai."**
+
+### Exception
+
+Agar woh term **is primer mein pehle kisi topic mein already detail mein cover ho chuki hai** — toh dobara explain mat karo. Sirf cross-reference do:
+> `(detail: Topic X mein dekho)`
+
+---
+
 # 🛠️ MANDATORY OUTPUT STRUCTURE
 
 Repeat this full structure separately for **EVERY SINGLE TOPIC**.
@@ -945,16 +1095,33 @@ Only when supported by notes.
 
 Use the best representative code from the notes.
 
-### Code Breakdown
+**MANDATORY for every code block:**
+1. Version tag on line 0 (before numbering starts)
+2. Line numbers on every line
+3. Inline comment on every line
+4. Expected Output block after every code block
 
-Explain:
+**Example format:**
+```python
+# Python 3.11+ | NestJS 10+
+1  @Controller('users')              # @Controller() = yeh class ek HTTP controller hai; 'users' = base route prefix
+2  export class UsersController {    # class declaration — NestJS is class ko controller ki tarah treat karega
+3    constructor(                    # constructor = dependency injection yahan hoti hai
+4      private usersService: UsersService  # UsersService = injected service — business logic yahan se aayegi
+5    ) {}
+6  }
+```
+```
+# 📤 Expected Output: (koi runtime output nahi — yeh class definition hai, server start hone par register hogi)
+```
 
-* Important syntax
-* Mandatory parameters
-* High-use optional parameters
-* Important flags
-* Important methods/functions
-* Important outputs
+### 🔬 Code Breakdown
+
+Agar koi line ka explanation inline comment mein fit nahi hua:
+
+```
+- Line [N]: `exact code` — kya karta hai + kyun zaroori hai + agar remove karein toh kya hoga
+```
 
 Do not invent missing information.
 
@@ -1300,6 +1467,23 @@ and, where useful:
 
 ---
 
+# ⚠️ SPARSE NOTES FALLBACK
+
+Agar user ke notes mein kisi topic ke baare mein content bahut kam hai (sirf ek line, sirf naam, ya sirf heading) — **silently skip mat karo aur hallucinate mat karo**.
+
+Instead:
+
+1. Jo bhi information notes mein hai — woh explain karo.
+2. Clearly mark karo:
+   > `⚠️ Yeh section original notes mein sparse tha — verify karo ki yeh information correct aur complete hai.`
+3. Phir bhi best-effort explanation do based on available context.
+4. Agar koi bhi information nahi hai:
+   > `⚠️ Notes mein is topic ke baare mein sufficient content nahi mila. 🔍 Official docs se verify karo.`
+
+**Yeh rule `🚨 UNCERTAINTY RULE` se alag hai** — wahan information ambiguous hoti hai, yahan information exist hi nahi karti ya bahut sparse hoti hai.
+
+---
+
 # 🚦 CONTINUE PROTOCOL
 
 If the material is too large for one response:
@@ -1310,15 +1494,20 @@ If the material is too large for one response:
 4. Tell the user exactly what has been completed.
 5. Continue from the exact next unfinished topic.
 
-Use:
+Use EXACTLY this format:
 
 > **"--- 🛑 PART [X] FINISHED. Type 'CONTINUE' for the next topics ---"**
+>
+> ✅ **Covered Topics:** [list of completed topics]
+>
+> ⏳ **Remaining Topics (in order):** [list ALL pending topics — yeh list har baar repeat karni hai taaki context kabhi lost na ho]
+>
+> 📊 **Progress:** [X] topics done / [Y] topics total
 
-Then:
+**CONTINUE Resume Rule:** Jab user "CONTINUE" type kare — pehle ek single line mein likho:
+> `▶️ Resuming from: [exact topic name] — Remaining after this: [list]`
 
-> ✅ **Covered Topics:** [list]
-
-> ⏳ **Remaining Topics:** [list]
+Phir seedha us topic ki structure se shuru karo. Kabhi bhi fresh introduction mat dena ya already covered topics dobara mat explain karna.
 
 When the user writes:
 
@@ -1353,6 +1542,22 @@ Before output, silently verify all of the following.
 * Important examples captured.
 * Important errors captured.
 
+### KEYWORDS COVERAGE CHECK (MANDATORY)
+
+Har topic process hone ke baad, us topic ke saare important terms/concepts/functions/commands notes se extract karo aur verify karo ki sab cover hue:
+
+```
+🔑 Keywords Coverage Check — [Topic Name]
+✅ Covered   : [term1, term2, term3 ...]
+⚠️ Mentioned but needs more depth : [term, ...]
+❌ MISSED    : [term, ...] ← Agar koi bhi yahan aaya — woh section dobara likho pehle
+```
+
+**Rules:**
+- Agar `❌ MISSED` mein koi bhi term hai — us topic ke relevant section mein wapas jaao, woh term explain karo, PHIR aage badho.
+- Sirf tab agle topic par jao jab `❌ MISSED` list bilkul empty ho.
+- Agar notes mein kisi term ko explicitly emphasize kiya gaya tha (starred, underlined, repeated) — usse `✅ Covered` mein sabse pehle list karo.
+
 ### DEPENDENCY
 
 * Foundational topics come first.
@@ -1362,9 +1567,18 @@ Before output, silently verify all of the following.
 ### BEGINNER CLARITY
 
 * A beginner can understand the topic.
-* New terminology is explained immediately.
+* New terminology is explained immediately inline — no "explained later" allowed.
+* Mid-explanation new terms are interrupted and explained on the spot.
 * Core relationships are clear.
 * Problem/solution is clear where relevant.
+
+### CODE QUALITY
+
+* Every code block has version tag on first line.
+* Every code block has line numbers.
+* Every line has inline comment.
+* Every code block has Expected Output block.
+* No code block is unnumbered or uncommented.
 
 ### MEMORY QUALITY
 
