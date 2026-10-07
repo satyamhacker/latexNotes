@@ -1,153 +1,208 @@
 import os
+import sys
 
-def extract_and_clean_highlights(input_file, output_file):
-    print(f"Reading file: {input_file}")
-    with open(input_file, 'r', encoding='utf-8') as f:
+SEPARATOR = '\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n'
+
+
+def _safe_path(path: str) -> str:
+    """Resolve and return absolute path; raise ValueError if empty."""
+    if not path or not path.strip():
+        raise ValueError(f"Invalid path: {path!r}")
+    return os.path.realpath(os.path.abspath(path.strip()))
+
+
+def _commit_block(block_lines: list, start_idx: int, end_idx: int,
+                  extracted: list, last_idx_ref: list) -> None:
+    """Append a highlighted block (with separator if needed) to extracted."""
+    if not block_lines:
+        return
+    last = last_idx_ref[0]
+    if last != -1 and start_idx > last + 1:
+        extracted.append(SEPARATOR)
+    extracted.extend(block_lines)
+    extracted.append('\n')
+    last_idx_ref[0] = end_idx
+
+
+def _process_code_block(lines: list, i: int, extracted: list,
+                        last_idx_ref: list):
+    """Collect a fenced code block; commit if it contains a highlight."""
+    current = [lines[i]]
+    has_hl = "[[HL::" in lines[i]
+    j = i + 1
+    while j < len(lines):
+        line = lines[j]
+        current.append(line)
+        if "[[HL::" in line:
+            has_hl = True
+        if line.strip().startswith("```"):
+            if has_hl:
+                _commit_block(current, i, j, extracted, last_idx_ref)
+            return j + 1
+        j += 1
+    # EOF without closing fence — commit if highlighted
+    if has_hl:
+        _commit_block(current, i, j - 1, extracted, last_idx_ref)
+    return j
+
+
+def _flush_context_block(block: list, start_i: int, end_i: int,
+                         has_hl: bool, extracted: list,
+                         last_idx_ref: list) -> None:
+    """Commit a table or blockquote block if it contained a highlight."""
+    if has_hl:
+        _commit_block(block, start_i, end_i, extracted, last_idx_ref)
+
+
+def _clean_lines(raw: list) -> list:
+    """Strip [[HL:: / ::HL]] tags and collapse consecutive blank lines."""
+    result = []
+    prev_empty = False
+    for line in raw:
+        is_empty = line.strip() == ''
+        if is_empty and prev_empty:
+            continue
+        result.append(line.replace("[[HL::", "").replace("::HL]]", ""))
+        prev_empty = is_empty
+    return result
+
+
+def extract_and_clean_highlights(input_file: str, output_file: str) -> None:
+    input_path = _safe_path(input_file)
+    output_path = _safe_path(output_file)
+
+    print(f"Reading file: {input_path}")
+    with open(input_path, 'r', encoding='utf-8') as f:
         lines = f.readlines()
-        
-    extracted_content = []
-    
-    # State tracking variables for context awareness
-    inside_code_block = False
-    current_code_block = []
-    has_highlight_in_code = False
-    
-    inside_table = False
-    current_table = []
-    has_highlight_in_table = False
-    
-    inside_blockquote = False
-    current_blockquote = []
-    has_highlight_in_blockquote = False
-    
+
+    extracted: list = []
+    last_idx_ref = [-1]   # mutable reference so helpers can update it
+
+    # Context state
+    in_code = False
+    in_table = False
+    table_buf: list = []
+    table_start = 0
+    table_has_hl = False
+    in_quote = False
+    quote_buf: list = []
+    quote_start = 0
+    quote_has_hl = False
     hl_balance = 0
-    last_extracted_index = -1
-    
-    # Ye separator hum har naye extraction block ke beech daalenge
-    separator = '\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n'
-    
-    def commit_block(block_lines, start_idx, end_idx):
-        nonlocal last_extracted_index
-        if last_extracted_index != -1 and start_idx > last_extracted_index + 1:
-            extracted_content.append(separator)
-        extracted_content.extend(block_lines)
-        extracted_content.append('\n')
-        last_extracted_index = end_idx
+    i = 0
 
-    for i, line in enumerate(lines):
-        is_table_line = line.strip().startswith('|')
-        is_blockquote_line = line.strip().startswith('>')
-        is_code_fence = line.strip().startswith("```")
+    while i < len(lines):
+        line = lines[i]
+        stripped = line.strip()
         has_hl = "[[HL::" in line
-        
-        # 1. Handle Code Blocks (` ``` `)
-        if is_code_fence:
-            if not inside_code_block:
-                inside_code_block = True
-                current_code_block = [line]
-                has_highlight_in_code = has_hl
-            else:
-                current_code_block.append(line)
-                has_highlight_in_code = has_highlight_in_code or has_hl
-                
-                if has_highlight_in_code:
-                    start_idx = i - len(current_code_block) + 1
-                    commit_block(current_code_block, start_idx, i)
-                
-                inside_code_block = False
-                current_code_block = []
-                has_highlight_in_code = False
-            continue
-            
-        if inside_code_block:
-            current_code_block.append(line)
-            has_highlight_in_code = has_highlight_in_code or has_hl
+
+        # ── Code blocks ──────────────────────────────────────────────────
+        if stripped.startswith("```"):
+            # Flush any open table/quote first
+            if in_table:
+                _flush_context_block(table_buf, table_start, i - 1,
+                                     table_has_hl, extracted, last_idx_ref)
+                in_table = False; table_buf = []; table_has_hl = False
+            if in_quote:
+                _flush_context_block(quote_buf, quote_start, i - 1,
+                                     quote_has_hl, extracted, last_idx_ref)
+                in_quote = False; quote_buf = []; quote_has_hl = False
+
+            if not in_code:
+                in_code = True
+                i = _process_code_block(lines, i, extracted, last_idx_ref)
+                in_code = False
+                continue
+            # Shouldn't reach here normally
+            i += 1
             continue
 
-        # 2. Handle Tables
-        if is_table_line:
-            if not inside_table:
-                inside_table = True
-                current_table = [line]
-                has_highlight_in_table = has_hl
+        # ── Tables ───────────────────────────────────────────────────────
+        if stripped.startswith('|'):
+            if in_quote:
+                _flush_context_block(quote_buf, quote_start, i - 1,
+                                     quote_has_hl, extracted, last_idx_ref)
+                in_quote = False; quote_buf = []; quote_has_hl = False
+            if not in_table:
+                in_table = True; table_buf = [line]
+                table_start = i; table_has_hl = has_hl
             else:
-                current_table.append(line)
-                has_highlight_in_table = has_highlight_in_table or has_hl
+                table_buf.append(line)
+                table_has_hl = table_has_hl or has_hl
+            i += 1
             continue
         else:
-            if inside_table:
-                if has_highlight_in_table:
-                    start_idx = i - len(current_table)
-                    commit_block(current_table, start_idx, i - 1)
-                inside_table = False
-                current_table = []
-                has_highlight_in_table = False
+            if in_table:
+                _flush_context_block(table_buf, table_start, i - 1,
+                                     table_has_hl, extracted, last_idx_ref)
+                in_table = False; table_buf = []; table_has_hl = False
 
-        # 3. Handle Blockquotes
-        if is_blockquote_line:
-            if not inside_blockquote:
-                inside_blockquote = True
-                current_blockquote = [line]
-                has_highlight_in_blockquote = has_hl
+        # ── Blockquotes ──────────────────────────────────────────────────
+        if stripped.startswith('>'):
+            if not in_quote:
+                in_quote = True; quote_buf = [line]
+                quote_start = i; quote_has_hl = has_hl
             else:
-                current_blockquote.append(line)
-                has_highlight_in_blockquote = has_highlight_in_blockquote or has_hl
+                quote_buf.append(line)
+                quote_has_hl = quote_has_hl or has_hl
+            i += 1
             continue
         else:
-            if inside_blockquote:
-                if has_highlight_in_blockquote:
-                    start_idx = i - len(current_blockquote)
-                    commit_block(current_blockquote, start_idx, i - 1)
-                inside_blockquote = False
-                current_blockquote = []
-                has_highlight_in_blockquote = False
+            if in_quote:
+                _flush_context_block(quote_buf, quote_start, i - 1,
+                                     quote_has_hl, extracted, last_idx_ref)
+                in_quote = False; quote_buf = []; quote_has_hl = False
 
-        # 4. Handle Prose, Bullets and Multi-line highlights
+        # ── Prose / bullets (multi-line highlight balance) ───────────────
         opens = line.count("[[HL::")
         closes = line.count("::HL]]")
-        
         if hl_balance > 0 or opens > 0 or closes > 0:
-            if hl_balance == 0 and last_extracted_index != -1 and i > last_extracted_index + 1:
-                extracted_content.append(separator)
-                
-            extracted_content.append(line)
-            last_extracted_index = i
-            
+            if hl_balance == 0 and last_idx_ref[0] != -1 and i > last_idx_ref[0] + 1:
+                extracted.append(SEPARATOR)
+            extracted.append(line)
+            last_idx_ref[0] = i
         hl_balance += (opens - closes)
         if hl_balance < 0:
             hl_balance = 0
+        i += 1
 
-    # Catch remaining blocks at EOF
-    if inside_table and has_highlight_in_table:
-        commit_block(current_table, len(lines) - len(current_table), len(lines) - 1)
-    if inside_blockquote and has_highlight_in_blockquote:
-        commit_block(current_blockquote, len(lines) - len(current_blockquote), len(lines) - 1)
+    # EOF flush
+    if in_table and table_has_hl:
+        _flush_context_block(table_buf, table_start, len(lines) - 1,
+                             True, extracted, last_idx_ref)
+    if in_quote and quote_has_hl:
+        _flush_context_block(quote_buf, quote_start, len(lines) - 1,
+                             True, extracted, last_idx_ref)
 
-    # Clean up empty lines AND remove the [[HL:: tags
-    final_content = []
-    prev_empty = False
-    for line in extracted_content:
-        is_empty = (line.strip() == '')
-        if is_empty and prev_empty:
-            continue
-        
-        cleaned_line = line.replace("[[HL::", "").replace("::HL]]", "")
-        final_content.append(cleaned_line)
-        
-        prev_empty = is_empty
+    final = _clean_lines(extracted)
 
-    with open(output_file, 'w', encoding='utf-8') as f:
-        f.writelines(final_content)
-        
-    print(f"Extraction and cleanup successful! Total extracted lines: {len(final_content)}")
-    print(f"File saved to: {output_file}")
+    with open(output_path, 'w', encoding='utf-8') as f:
+        f.writelines(final)
+
+    print(f"Done! Extracted lines: {len(final)}")
+    print(f"Saved to: {output_path}")
+
 
 if __name__ == "__main__":
-    # 👇 Yaha par aap apne input aur output files ka path change kar sakte hain 👇
-    input_path = r"e:\latexNotes\Code_with_harry_data_analytis_course\Code_with_harry_data_analytis_course_notes.md"
-    output_path = r"e:\latexNotes\Code_with_harry_data_analytis_course\Code_with_harry_data_analytis_course_notes_Highlights.md"
-    
-    if os.path.exists(input_path):
-        extract_and_clean_highlights(input_path, output_path)
+    # Usage: python Highlight_Extractor_Cleaner.py [input_path] [output_path]
+    # Falls back to hardcoded defaults if no args given.
+    if len(sys.argv) == 3:
+        inp = sys.argv[1]
+        out = sys.argv[2]
     else:
-        print(f"Error: Input file '{input_path}' nahi mili.")
+        # 👇 Change these defaults as needed
+        inp = r"e:\latexNotes\Code_with_harry_data_analytis_course\Code_with_harry_data_analytis_course_notes.md"
+        out = r"e:\latexNotes\Code_with_harry_data_analytis_course\Code_with_harry_data_analytis_course_notes_Highlights.md"
+
+    try:
+        inp_safe = _safe_path(inp)
+        out_safe = _safe_path(out)
+    except ValueError as e:
+        print(f"Error: {e}")
+        sys.exit(1)
+
+    if not os.path.exists(inp_safe):
+        print(f"Error: Input file not found — '{inp_safe}'")
+        sys.exit(1)
+
+    extract_and_clean_highlights(inp_safe, out_safe)
