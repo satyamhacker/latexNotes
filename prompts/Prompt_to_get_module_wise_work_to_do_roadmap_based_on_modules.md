@@ -490,6 +490,11 @@ The goal is NOT to memorize the entire flag. Extract only the high-value recall 
 - mission has 2+ meaningful flags, AND
 - the combined concepts can realistically form an integration challenge.
 
+**Boss Battle SKIP karo jab:**
+1. Mission mein sirf 1 flag hai.
+2. Flags ke concepts independently kaam karte hain aur combine karna forced lagta hai (e.g., ek flag pure theory hai aur doosra unrelated tool hai).
+3. Notes mein koi real-world integration scenario nahi tha jo dono concepts ko ek saath use kare.
+
 If the mission's concepts are independent or too small to combine meaningfully:
 → SKIP Boss and go directly to Mission Complete Screen.
 

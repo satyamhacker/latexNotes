@@ -727,7 +727,7 @@ Compare with the closest confusing topic using a markdown table.
 - **Application Phase:** Is concept ko real problems pe kaise apply karte hain — examples, exercises, pattern recognition.
 - **Mastery/Production Phase:** Expert level pe yeh concept kaise use hota hai — optimization, edge cases, interview-level depth.
 
-*(CRITICAL RULE: N/A likhna FORBIDDEN hai sirf tab jab concept genuinely koi lifecycle nahi rakhta — jo almost kabhi nahi hota. Agar concept ke liye teen-phase flow exactly applicable nahi — toh keywords aur context se ek logical real-world flow INFER karo aur clearly mark karo: `⚠️ Flow inferred — no explicit source for this.` Har concept ka ek lifecycle hota hi hai — chahe practical ho ya theoretical.)*
+*(CRITICAL RULE — N/A Handling: Agar concept ke liye koi meaningful real-world flow genuinely nahi ban sakta — toh clearly likho: `(N/A — is concept ka koi meaningful production lifecycle nahi hai)` aur skip karo. Forced ya invented flow mat do — yeh hallucination hai. Agar concept ke liye flow possible hai lekin teen phases exactly fit nahi karte — toh phases ko adapt karo (Learning/Application/Mastery) aur clearly mark karo: `⚠️ Phases adapted — standard 3-phase flow is concept pe directly applicable nahi tha.`)*
 
 
 #### 🎨 16. Visual Diagram (ASCII Art)
@@ -804,6 +804,7 @@ Structure complete hone ke baad — yeh verify karo ki is subtopic ke saare impo
 - Sirf tab agle subtopic par jao jab `❌ MISSED` list bilkul empty ho.
 - **Yeh self-extracted list hai** (skeleton nahi diya tha) — isliye clearly mark karo:
   > `⚠️ Yeh terms maine khud is subtopic se extract kiye hain — koi external keywords dump nahi tha.`
+- **Keywords quality rule:** Self-extracted list mein sirf woh terms include karo jo is subtopic ke **core concepts, functions, commands, important parameters, aur technical terms** hain. Generic English words jaise `use`, `create`, `important`, `example`, `note` — inhe keywords list mein mat daalo. Sirf technically meaningful terms count karte hain.
 
 > ✅ Verified: Structure complete + Content coverage confirmed. Proceeding to next subtopic.
 

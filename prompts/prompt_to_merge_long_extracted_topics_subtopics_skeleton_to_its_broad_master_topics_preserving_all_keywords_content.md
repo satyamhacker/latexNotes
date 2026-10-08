@@ -133,11 +133,11 @@ Agar koi bhi check fail ho — dobara skeleton padho aur plan fix karo. Tabhi re
   - **Agar kisi field ka data kisi merged topic mein nahi tha** → `— (not specified in that source)` likho. Invent mat karo.
   - 🚨 **SCOPE SIGNAL HALLUCINATION GUARD:** Har field mein sirf wahi likho jo original skeleton ke SCOPE SIGNAL blocks mein literally tha. "Logically related" terms apni knowledge se mat add karo. `Key terms`, `Explicit emphasis`, `Analogies` — sirf original content, zero invention.
 
-- **🔄 REAL-WORLD FLOW SIGNAL:** Merged topics ke flows ko padhkar **ek unified, cohesive story** banao:
+- **🔄 REAL-WORLD FLOW SIGNAL:** Merged topics ke flows ko padhkar **ek sequential combined list** banao:
   - Teen phases mein: Testing/Offline Phase → Fixing/Iteration Phase → Live Production Phase
-  - Sab merged topics ka real-world context is story mein naturally include karo.
-  - Agar kisi phase ka data nahi tha — `(N/A — merged topics mein yeh phase describe nahi tha)` likho.
-  - 🚨 **REAL-WORLD FLOW HALLUCINATION GUARD:** Sirf wahi likho jo original skeleton ke REAL-WORLD FLOW SIGNAL blocks mein literally tha. Apni knowledge se koi bhi phase INVENT mat karo. Agar kisi merged topic ka ek phase N/A tha — woh N/A hi rahega, "cohesive story" ke naam pe fill mat karo. **N/A likhna correct hai. Invented flow likhna incorrect hai.**
+  - Sab merged topics ka real-world context in phases mein naturally include karo.
+  - Agar kisi phase ka data kisi bhi merged topic mein nahi tha — `(N/A — merged topics mein yeh phase describe nahi tha)` likho. **Gap fill mat karo — N/A likhna correct hai.**
+  - 🚨 **REAL-WORLD FLOW HALLUCINATION GUARD:** Sirf wahi likho jo original skeleton ke REAL-WORLD FLOW SIGNAL blocks mein literally tha. Apni knowledge se koi bhi phase INVENT mat karo. "Cohesive" banane ke chakkar mein N/A gaps fill karna FORBIDDEN hai — yeh hallucination hai. **N/A likhna correct hai. Invented flow likhna incorrect hai.**
 
 
 ### Rule 5: Output Language
@@ -258,7 +258,6 @@ Phir yeh line add karo:
 After all Master Topics have been output, print this MANDATORY summary:
 
 ```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 📊 MERGE COMPLETE — Summary Report
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -287,9 +286,12 @@ Data Loss Check:
   ✅ All REAL-WORLD FLOW phases accounted for
 
 📋 MERGED MASTER TOPICS:
-(🚨 Print ONLY ONE format below based on section count. Do NOT print the "Format A / Format B" labels or any IF instruction lines in your actual output.)
+```
 
-Format A — use this if multiple sections exist:
+**⚠️ Print the correct format below based on your output — choose ONE:**
+
+**If multiple sections exist — use this format:**
+```
 Section [X]: [Section Name]
   Master Topic [N]: [Master Topic Name]
   Master Topic [N]: [Master Topic Name]
@@ -299,13 +301,17 @@ Section [X]: [Section Name]
   Master Topic [N]: [Master Topic Name]
   Master Topic [N]: [Master Topic Name]
   ...
+```
 
-Format B — use this if only 1 section OR original skeleton had no sections (list flat, no section header):
+**If only 1 section OR original skeleton had no sections — use this format (flat list, no section header):**
+```
   Master Topic [N]: [Master Topic Name]
   Master Topic [N]: [Master Topic Name]
   Master Topic [N]: [Master Topic Name]
   ...
+```
 
+```
 📊 MERGE SUMMARY:
 Sections: [X] | Master Topics: [A] (from [Y] original) | Subtopics: [B] (deduplicated)
 

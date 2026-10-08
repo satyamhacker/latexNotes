@@ -266,6 +266,8 @@ Har **Topic** ke KEYWORDS DUMP ke baad ek mandatory `🔄 REAL-WORLD FLOW SIGNAL
   - **Mastery Phase:** Expert level pe kaise use hota hai.
 - Agar transcript mein is topic ke liye koi real-world flow nahi bataya gaya — likho: `(N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)`
 
+🚨 **THEORETICAL TOPICS — STRICT N/A RULE:** Agar topic theoretical/foundational hai (e.g., Ohm's Law, Big-O, OSI Model) aur speaker ne koi real-world flow explicitly describe nahi kiya — toh **teeno phases N/A** likho. Learning/Application/Mastery phases **automatically mat banana** — yeh Notes Guru ka kaam hai, extractor ka nahi. Extractor ka kaam sirf transcript ka content preserve karna hai. Invented phases = hallucination.
+
 🚨 **REAL-WORLD FLOW HALLUCINATION GUARD — SABSE IMPORTANT:**
 - **Apni knowledge se koi bhi phase INVENT mat karo.** Agar speaker ne Testing Phase describe nahi kiya — toh `(N/A)` likho, apna version mat banana.
 - **Har phase mein sirf wahi likho jo speaker ne literally kaha** — exact words/context preserve karo.

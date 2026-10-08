@@ -79,6 +79,8 @@ In regular text (outside code blocks), match whole words only. Do NOT highlight 
 
 **Code block exception:** Inside triple-backtick code blocks, substring matching IS allowed because code is not natural language. If the user asks to highlight `-sV` and the code has `nmap -sV -sC`, highlight `-sV` exactly as it appears.
 
+**Rule 35 override:** Rule 35 (Fuzzy Matching — missing middle words) overrides Rule 5 when the user's term is clearly a subset of a longer phrase in the same sentence or paragraph. In that case, highlight the full unbroken phrase as it appears in the document. Rule 5 applies only for standalone single-word matching.
+
 ### Rule 6 — OVERLAPPING TERMS — LONGER MATCH WINS
 If the user requests two terms that overlap (e.g., `SQL Injection` AND `Blind SQL Injection`), always apply the **longer match** first. Do NOT apply the shorter term's highlight inside an already-highlighted longer term.
 
