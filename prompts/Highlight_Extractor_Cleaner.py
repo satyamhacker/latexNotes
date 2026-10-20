@@ -6,8 +6,6 @@ SEPARATOR = '\n━━━━━━━━━━━━━━━━━━━━━�
 
 # Regex to detect a complete, well-formed [[HL::...::HL]] pair (non-greedy, single-line)
 _HL_PAIR_RE = re.compile(r'\[\[HL::.*?::HL\]\]')
-# Broken table separator row: | [[HL::---::HL]] | (Rule 23)
-_BROKEN_TABLE_SEP_RE = re.compile(r'\|\s*\[\[HL::(-+|:?-+:?)::HL\]\]\s*\|')
 
 
 def _safe_path(path: str) -> str:
@@ -32,6 +30,14 @@ def _is_separator_line(line: str) -> bool:
     return bool(re.match(r'^(━+|={3,}|-{3,})$', s))
 
 
+def _is_table_separator_row(line: str) -> bool:
+    """Return True if line (ignoring [[HL:: / ::HL]] tags) is a Markdown table separator row."""
+    stripped_tags = line.replace("[[HL::", "").replace("::HL]]", "").strip()
+    if not stripped_tags.startswith('|') or '-' not in stripped_tags:
+        return False
+    return bool(re.match(r'^\|[\s|:-]+\|?\s*$', stripped_tags))
+
+
 def _commit_block(block_lines: list, start_idx: int, end_idx: int,
                   extracted: list, last_idx_ref: list) -> None:
     """Append a highlighted block (with separator if needed) to extracted."""
@@ -50,13 +56,13 @@ def _is_closing_fence(line: str) -> bool:
     
     Opening fences have a language identifier: ```bash, ```python, ```text.
     Closing fences are exactly ``` (optionally with surrounding whitespace).
-    This prevents premature closure on nested opening fences (Issue 3).
+    This prevents premature closure on nested opening fences.
     """
     return bool(re.match(r'^\s*```\s*$', line))
 
 
 def _process_code_block(lines: list, i: int, extracted: list,
-                        last_idx_ref: list):
+                        last_idx_ref: list) -> int:
     """Collect a fenced code block; commit if it contains a highlight.
     
     The opening fence line (```lang) is NEVER checked for [[HL:: tags —
@@ -117,9 +123,9 @@ def _heal_broken_table_separators(lines: list) -> tuple:
     healed = []
     count = 0
     for line in lines:
-        if _BROKEN_TABLE_SEP_RE.search(line):
+        if ("[[HL::" in line or "::HL]]" in line) and _is_table_separator_row(line):
             # Strip all [[HL:: / ::HL]] tags from this separator row entirely
-            fixed = re.sub(r'\[\[HL::(.*?)::HL\]\]', r'\1', line)
+            fixed = line.replace("[[HL::", "").replace("::HL]]", "")
             healed.append(fixed)
             count += 1
         else:
@@ -130,19 +136,19 @@ def _heal_broken_table_separators(lines: list) -> tuple:
 def _clean_lines(raw: list) -> list:
     """Strip [[HL:: / ::HL]] tags and collapse consecutive blank lines.
     
-    Uses regex to remove only COMPLETE well-formed pairs (single-line).
-    Multi-line orphan tags (open on one line, close on another) are left as-is
-    and will be caught by the post-flight tag balance check.
-    Also strips SEPARATOR lines (━━━) from the output (Rule 14).
+    Preserves intentional SEPARATOR lines inserted between extracted blocks.
     """
+    # Flatten any multi-line chunks (like SEPARATOR) into individual lines first
+    flat_lines = []
+    for chunk in raw:
+        flat_lines.extend(chunk.splitlines(keepends=True))
+
     result = []
     prev_empty = False
-    for line in raw:
-        # Strip the separator marker lines from extracted output
-        if _is_separator_line(line):
-            continue
-        # Remove complete [[HL::...::HL]] pairs only (non-greedy, single-line)
+    for line in flat_lines:
+        # Remove complete [[HL::...::HL]] pairs first, then any leftover multi-line/orphan tags
         cleaned = re.sub(r'\[\[HL::(.*?)::HL\]\]', r'\1', line)
+        cleaned = cleaned.replace("[[HL::", "").replace("::HL]]", "")
         is_empty = cleaned.strip() == ''
         if is_empty and prev_empty:
             continue
@@ -177,7 +183,7 @@ def extract_and_clean_highlights(input_file: str, output_file: str) -> None:
         print(f"   [[HL:: opens : {in_opens}")
         print(f"   ::HL]] closes: {in_closes}")
         print(f"   Difference   : {abs(in_opens - in_closes)} orphan tag(s)")
-        print(f"   Proceeding with extraction — orphan tags will be preserved as-is.")
+        print(f"   Proceeding with extraction — orphan tags will be cleaned after verification.")
 
     extracted: list = []
     last_idx_ref = [-1]   # mutable reference so helpers can update it
@@ -205,7 +211,7 @@ def extract_and_clean_highlights(input_file: str, output_file: str) -> None:
         stripped = line.strip()
         has_hl = "[[HL::" in line
 
-        # ── Separator lines: skip entirely (Rule 14) ─────────────────────────
+        # ── Separator lines: skip entirely from source document (Rule 14) ────
         if _is_separator_line(stripped):
             # Flush any open context blocks before skipping
             if in_table:
@@ -326,7 +332,6 @@ def extract_and_clean_highlights(input_file: str, output_file: str) -> None:
         f.writelines(final)
 
     # ── Coverage summary (Rule 48 spirit) ────────────────────────────────────
-    # Use single-line _HL_PAIR_RE (no DOTALL) — correct for line-by-line counting
     hl_count = sum(len(_HL_PAIR_RE.findall(line)) for line in extracted)
     print(f"\n📊 Extraction Summary:")
     print(f"   Total input lines      : {len(lines)}")
@@ -338,8 +343,6 @@ def extract_and_clean_highlights(input_file: str, output_file: str) -> None:
 
 
 if __name__ == "__main__":
-    # Usage: python Highlight_Extractor_Cleaner.py [input_path] [output_path]
-    # Falls back to hardcoded defaults if no args given.
     if len(sys.argv) == 3:
         inp = sys.argv[1]
         out = sys.argv[2]
