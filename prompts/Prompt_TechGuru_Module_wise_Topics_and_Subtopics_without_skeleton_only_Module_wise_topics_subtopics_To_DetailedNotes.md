@@ -532,6 +532,13 @@ Har code block mein **har line ke saath inline comment** lagao jo us line ka har
 ```
 
 
+### ⚠️ Non-Commentable & Strict Config Format Exception
+- **Strict formats (JSON, strict YAML, TOML, XML, CSV, `.env`, lockfiles):** Jahan inline `#` ya `//` comments invalid syntax hote hain ya parser crash karte hain, unmein code block ke andar comments ya raw numbering prefixes inject mat karo.
+- Original valid syntax intact aur copy-paste runnable preserve karo.
+- Explanation code block ke theek turant baad numbered bullets (`Line 1: ...`, `Line 2: ...`) mein do.
+- **Rule:** Copy-paste runnable validity > inline-comment requirement.
+
+
 ---
 
 
@@ -549,7 +556,7 @@ Har code block mein **har line ke saath inline comment** lagao jo us line ka har
 - **Format (JS/frontend):** `// Node.js 20+ | React 18` ya `// TypeScript 5.x | Next.js 14+`
 - **Agar user ne version specify kiya hai** → wahi use karo exactly.
 - **Agar version specify nahi kiya** → best guess lagao based on syntax/APIs used, aur ⚠️ mark karo:
-  `# ⚠️ Version verify karo — yeh Python 3.11+ pe tested hai, aapke environment mein confirm karo`
+  `# ⚠️ Version verify karo — example Python 3.11+ syntax ke liye likha gaya hai; apne installed environment ke saath confirm karo`
 - **Yeh comment code block ki line 1 hogi** — line numbering (RULE MINUS ONE) iske baad line 2 se shuru hogi, ya alternatively version comment ko line 0 treat karo aur actual code 1 se number karo.
 - **Kabhi bhi version comment skip mat karo** — chahe code 1 line ka hi kyun na ho.
 
@@ -562,7 +569,7 @@ Har code block mein **har line ke saath inline comment** lagao jo us line ka har
 
 ```python
 # ✅ CORRECT — version unknown, best guess with warning:
-# ⚠️ Version verify karo — yeh Python 3.10+ pe tested hai
+# ⚠️ Version verify karo — example Python 3.10+ syntax ke liye target kiya gaya hai; apne installed environment se confirm karo
 1  match command:                         # match-case = Python 3.10+ ka structural pattern matching
 2      case "quit": exit()               # agar command == "quit" toh program band karo
 ```
@@ -588,7 +595,7 @@ Sirf code mat do, uska DNA khol kar rakh do:
    - Agar code deterministic output print karta hai (e.g., `print()`) → clean expected text dikhao (spacing, brackets, quotes accurate hon).
    - Agar dynamic timestamps, random IDs, environment variables, ya network response ho → representative expected output dikhao aur local execution verify karne ko bolo.
    - Agar koi visible output nahi → likho: `# 📤 Expected Output: (koi output nahi aayega — matlab command/code silently succeed ho gaya)`
-   - Install commands ke liye → last 3-4 lines of install log jo success confirm karein dikhao.
+   - Install commands ya network tools ke liye → clean representative success logs dikhao (fake hashes ya arbitrary download metrics invent mat karo; environment-dependent hone par illustrative output do).
    - **NEVER write a code block without its Expected Output block.**
 
 
@@ -686,7 +693,7 @@ Agar output nahi hai → `# 📤 Expected Output: (koi output nahi — successfu
 Agar koi line ka explanation inline comment mein fit nahi hua (RULE ZERO ke point 2 ke mutabiq) — toh yahan detail mein explain karo:
 - **Line [number]:** `exact code` — What it does + **Why it's needed** + What happens if removed. (Line number wahi use karo jo code block mein diya hai — koi mismatch nahi hona chahiye.)
 - **Function/Method:** Kya karta hai, kahan se aata hai (library/module), aur agar na ho toh kya hoga.
-- **Parameters:** Har parameter ka naam, type, possible values, aur default value explain karo.
+- **Parameters:** Har parameter ka purpose explain karo. Type, possible values, range, aur default value tabhi claim karo jab reliably standard/known ho — arbitrary guessing mat karo (agar version-dependent ho toh note karo: `(Version-dependent default — official docs verify karo)`).
 - **Return Value:** Function kya return karta hai — type aur meaning dono batao.
 
 
@@ -697,8 +704,8 @@ If CLI is used:
 - **Exit Codes:** What does success/failure look like?
 - **MANDATORY — Expected Output:**
 ```
-# 📤 Expected Output:
-<exact terminal output after running the command>
+# 📤 Expected Output (Terminal / Console) — local execution verify karo:
+<representative expected terminal output after running the command>
 ```
 
 
@@ -723,7 +730,7 @@ Agar subtopic purely mathematical/theoretical hai aur koi direct security surfac
 - **🤦 Why:** Why people do it wrong.
 - **✅ The 'Pro' Way:** Correct implementation.
 - **⚡ Consequences:** Agar yeh galat tarika use kiya toh real-world mein kya toot sakta hai? Specific batao — vague mat raho (e.g., "Data leak hoga", "Server crash karega under load", "Race condition hogi concurrent requests mein").
-(3-4 mistakes minimum cover karo — har mistake ke saath uski consequence MANDATORY hai)
+(Practical coding/engineering topics ke liye 3-4 mistakes minimum cover karo — har mistake ke saath uski consequence MANDATORY hai. Agar purely theoretical/foundational topic ho jahan practical implementation mistake applicable na ho, genuine conceptual pitfalls/misinterpretations do ya N/A with reason do — fake filler invent mat karo.)
 
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
@@ -755,13 +762,13 @@ Har confusion ke liye yeh exact format follow karo:
 
 
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
-**Minimum 3 common errors** jo beginner actually face karta hai. Har entry ke liye yeh format:
+**Minimum 3 common errors** jo beginner actually face karta hai (code, CLI, tools, ya configuration topics ke liye). Har entry ke liye yeh format:
 
 - **`[Exact error message ya symptom]`**
   - **Root Cause:** [Kyun hota hai — 1-2 lines, specific]
   - **Fix:** [Exact step jo lena hai — "check karo" ya "dekho" likhna FORBIDDEN. Seedha action do: "Line X mein Y karo", "Flag --Z add karo", "Config file mein A = B set karo"]
 
-*(Agar exact error message pata nahi — behavior describe karo: e.g., "Server starts but requests timeout silently", "API returns 200 but response body empty")*
+*(Agar exact error message pata nahi — behavior describe karo: e.g., "Server starts but requests timeout silently", "API returns 200 but response body empty". Agar topic purely theoretical/historical hai jahan koi runtime error possible nahi, likho: `(N/A — purely conceptual topic, runtime errors applicable nahi hain)`)*
 
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
@@ -770,7 +777,7 @@ Compare with the closest confusing topic using a markdown table.
 
 
 #### 🌍 14. Real-World Use Case (Production Application)
-**Instruction:** Where is this used in real tech companies? Give a specific scenario with company/product name if possible.
+**Instruction:** Where is this used in real tech companies? Give a specific scenario with company/product name if verified/confidently known. Agar exact company use-case verified na ho, realistic production/industry scenario do — fake company claims mat banao.
 
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
@@ -826,11 +833,11 @@ Agle subtopic pe jaane se pehle — **DONO parts** silently verify karo aur prin
 ✅ Point 7  — Runnable code + VERSION TAG + inline comments on every line + expected output block
 ✅ Point 8  — Security check done (or N/A explicitly stated)
 ✅ Point 9  — Scalability / complexity context given
-✅ Point 10 — Anti-patterns (3-4 minimum), each with consequence
+✅ Point 10 — Anti-patterns (3-4 minimum ya genuine conceptual traps, each with consequence)
 ✅ Point 11 — Confusion Clarifier (min 3, max 8, each with "Prove karo")
-✅ Point 12 — Troubleshooting (min 3 errors, each with exact Fix action)
+✅ Point 12 — Troubleshooting (min 3 errors, ya N/A stated for pure theory)
 ✅ Point 13 — Comparison table (or N/A explicitly stated)
-✅ Point 14 — Real-world use case (company/product name included)
+✅ Point 14 — Real-world use case (verified company/product ya realistic production scenario)
 ✅ Point 15 — 3-Phase flow (or adapted phases for theory topics)
 ✅ Point 16 — Visual diagram (or N/A explicitly stated)
 ✅ Point 17 — Interview Q&A (5-8 questions, each answer 3-4 lines minimum)

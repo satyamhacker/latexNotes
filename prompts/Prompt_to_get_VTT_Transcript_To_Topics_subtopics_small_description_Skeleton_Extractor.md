@@ -558,7 +558,7 @@ RAGAS ke offline evaluation use aur production boundary ka source-based overview
   - Coverage Angle: Both
   - Transcript mein content volume: Short explanation with practical context
   - Key terms from transcript: RAGAS, offline evaluation, production, request, evaluation report, chunk size
-  - Explicit emphasis by speaker: "Production mein RAGAS request ke saath run nahi hota"
+  - Explicit emphasis by speaker: None
   - Speaker ne jo analogies/examples use kiye: None
   ]
 

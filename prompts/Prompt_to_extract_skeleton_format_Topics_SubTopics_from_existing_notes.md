@@ -392,7 +392,7 @@ Ek hi term ko baar-baar repeat mat karo, except jab:
 **Example:**
 ```
 🔑 KEYWORDS DUMP for Topic 1.1:
-[variable, labeled box, age=25, store value, changeable, rigid, hardcode, memory, assignment operator, ⭐"without variables code rigid"[emphasized in notes]]
+[variables, labeled box, `age=25`, store value, can change later, ⭐"without variables code rigid"]
 ```
 
 
@@ -482,8 +482,8 @@ VERBATIM LITERALS for Topic [X.Y]:
 ```
 Example:
 ```
-=====Section 1: Electronics Foundation (Safety First)=====
-Hardware engineer banne ki pehli shart: Board Jalna Nahi Chahiye.
+=====Section 1: Electronics Foundation [⚠️ Derived]=====
+Board safety aur component selection ka source-based overview. [⚠️ Derived]
 ```
 - Agar notes mein explicit section/module naam hai — wahi use karo.
 - Agar nahi hai — related topics ko group karke logical section naam derive karo aur `[⚠️ Derived]` tag lagao.
@@ -505,7 +505,7 @@ Example:
     Topic Flags: [none]
 
   Topic 1.2: Electricity Basics & Component Selection
-    Subtopics: Voltage Current Power, Ohm's Law, LED Current Limiting, Power Ratings (1/4W vs 1W)
+    Subtopics: Voltage Current Power, Ohm's Law, LED Current Limiting, Power Ratings, Wattage Comparison
     Topic Flags: [none]
 ```
 
