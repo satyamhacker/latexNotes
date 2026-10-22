@@ -49,8 +49,7 @@ Notes Guru is a DIFFERENT AI that takes your skeleton output and generates full 
 - Group content into Sections and Topics (based on video breaks or major theme shifts)
 - Write each concept as a plain subtopic name (2-5 words max) in a comma-separated list
 - Har Topic ke liye SCOPE SIGNAL, KEYWORDS DUMP, aur REAL-WORLD FLOW SIGNAL add karo — sirf transcript-supported evidence ke basis par.
-- **Compact Topic Decision Rule:** Ek hi Topic mein woh contiguous content rakho jo same core theme, same learning objective, ya same workflow step explain karta ho. Naya Topic tabhi banao jab kam se kam inmein se do cheezein change hon: (a) main theme, (b) user task/workflow step, (c) concept family, (d) output/artifact being discussed. Chhote methods, examples, values, aur closely related sub-concepts ko same parent Topic mein rakho aur KEYWORDS DUMP mein capture karo.
-- Stop
+- **Compact Topic Decision Rule:** Ek hi Topic mein woh contiguous content rakho jo same core theme, same learning objective, ya same workflow step explain karta ho. Naya Topic normally tab banao jab inmein se kam se kam do cheezein change hon: (a) main theme, (b) user task/workflow step, (c) concept family, (d) output/artifact being discussed. Lekin agar ek single change clearly ek independent lesson unit, new task, ya major workflow transition start karta hai, toh naya Topic bana sakte ho. Chhote methods, examples, values, aur closely related sub-concepts ko same parent Topic mein rakho aur KEYWORDS DUMP mein capture karo.
 
 **What you MUST NEVER do (strictly forbidden):**
 - ❌ Add analogies that are NOT in the transcript
@@ -179,13 +178,13 @@ Agar koi bhi check fail ho — dobara transcript padho aur fix karo. Tabhi respo
 ### Rule 1 — ZERO HALLUCINATION + ZERO NOTES-GURU CONTENT
 - Sirf transcript ka content use karo. Bahar se koi bhi cheez add karna forbidden hai.
 - Subtopics = sirf short names (2-5 words). Koi descriptions, analogies, definitions, ya explanations NAHI.
-- Agar koi concept transcript mein sirf naam se hai bina explanation ke — usse as-is rakho aur flag karo: `[⚠️ Transcript mein sirf naam hai — explanation nahi mili]`
-- Agar transcript ka koi hissa unclear ya inaudible hai — likho: `[unclear — transcript dobara check karo]`
+- Agar koi concept transcript mein sirf naam se hai bina explanation ke — uska short name Subtopics mein rakho aur relevant warning `Topic Flags:` line par add karo: `[⚠️ Transcript mein sirf naam hai — explanation nahi mili]`.
+- Agar transcript ka koi hissa unclear ya inaudible hai — relevant `Topic Flags:` line par `[unclear — transcript dobara check karo]` add karo. Agar unclear text ek literal/code/value ka part hai, toh usse KEYWORDS DUMP ya VERBATIM LITERALS mein `[unclear]` tag ke saath preserve karo.
 
 
 ### Rule 2 — NOTHING SKIPPED BUT LOGICALLY MERGED (CRITICAL)
 - Transcript mein har material instructional idea preserve karna hai, **lekin topics ko compact rakhna hai**.
-- 🚨 **COMPACTION RULE (Compact Topic Decision Rule):** Ek hi Topic mein contiguous content rakho jo same core theme, same learning objective, ya same workflow step explain karta ho. Naya Topic tabhi banao jab kam se kam inmein se do cheezein change hon: (a) main theme, (b) user task/workflow step, (c) concept family, (d) output/artifact being discussed.
+- 🚨 **COMPACTION RULE (Compact Topic Decision Rule):** Ek hi Topic mein contiguous content rakho jo same core theme, same learning objective, ya same workflow step explain karta ho. Naya Topic normally tab banao jab inmein se kam se kam do cheezein change hon: (a) main theme, (b) user task/workflow step, (c) concept family, (d) output/artifact being discussed. Lekin agar ek single change clearly ek independent lesson unit, new task, ya major workflow transition start karta hai, toh naya Topic bana sakte ho.
 - Chhote methods, choti definitions, examples, values, ya related sub-concepts ko ek broader, parent Topic mein merge karo (e.g., "Appending & Removing Elements" ya "Core Methods").
 - Isse Notes Guru unnecessarily lambe aur fragmented notes nahi banayega. Saari specific terms aur details KEYWORDS DUMP mein jayengi, alag topics mein nahi.
 - "Yeh toh obvious hai" soch ke kuch material chhodna nahi hai, bas smart grouping karni hai.
@@ -232,7 +231,7 @@ Agar koi bhi check fail ho — dobara transcript padho aur fix karo. Tabhi respo
 
 ### Rule 5 — MESSY TRANSCRIPT HANDLING
 - Agar transcript ka structure random hai (no clear sections) — toh content ke logical flow se topics khud identify karo.
-- Agar transcript mein headings nahi hain — related concepts ko group karke ek topic banao aur clearly likho: `[⚠️ Yeh topic maine logically group kiya hai — original transcript mein explicit heading nahi thi]`
+- Agar transcript mein headings nahi hain — related concepts ko neutral derived Topic name ke under group karo aur `Topic Flags:` line par `[⚠️ Derived]` add karo.
 - Agar transcript mein contradictory information hai — dono versions KEYWORDS DUMP mein preserve karo aur flag karo: `[⚠️ Transcript mein yeh concept do tarah se explain hua hai — confirm karo kaunsa sahi hai]`
 
 **Controlled derivation rule:**
@@ -256,6 +255,7 @@ Agar koi bhi check fail ho — dobara transcript padho aur fix karo. Tabhi respo
 - Agar speaker ne sirf “is diagram ko dekho” kaha but diagram ka content transcript mein available nahi hai, likho:
   `[⚠️ Visual referenced but transcript mein details available nahi hain — original video/slide verify karo]`
 - Visual se related jo verbal key points transcript mein diye gaye hain, unhe KEYWORDS DUMP mein include karo.
+- Agar diagram/table/visual ka structured representation create kiya gaya hai, toh use KEYWORDS DUMP ke baad, VERBATIM LITERALS ke baad (agar present ho), aur REAL-WORLD FLOW SIGNAL se pehle place karo.
 
 
 ### Rule 8 — MULTI-SPEAKER & Q&A HANDLING
@@ -284,7 +284,7 @@ Har **Topic** ke subtopics list ke baad ek mandatory `📊 SCOPE SIGNAL` block a
 
 🚨 **IMPORTANT:** Yeh block **per topic** hai — **per subtopic NAHI**. Ek topic ke andar 5 subtopics hain toh bhi ek hi SCOPE SIGNAL block hoga.
 
-🚨 **SCOPE SIGNAL HALLUCINATION GUARD:** Har field mein sirf wahi likho jo transcript mein literally tha.
+🚨 **SCOPE SIGNAL HALLUCINATION GUARD:** Source-content fields mein sirf wahi likho jo transcript mein literally tha. `Depth Level`, `Coverage Angle`, aur `Transcript mein content volume` ko neeche diye gaye controlled classification rubric ke basis par determine karo; in classifications mein koi external factual claim add mat karo.
 - `Key terms from transcript` — sirf woh exact words/phrases jo speaker ne bole. Apni taraf se "related" terms mat add karo.
 - `Explicit emphasis by speaker` — sirf woh jo speaker ne actually "important", "remember this", "this is key" bol ke highlight kiya. Agar nahi kiya — "None" likho. Guess mat karo.
 - `Speaker ne jo analogies/examples use kiye` — sirf woh jo speaker ne explicitly diye. Agar nahi diye — "None" likho. Apni analogy mat banana.
@@ -411,17 +411,21 @@ Har **Topic** ke KEYWORDS DUMP (aur VERBATIM LITERALS agar present ho) ke baad e
   🔑 KEYWORDS DUMP for Topic [X.Y]:
   [material instructional units from transcript for this topic — comma separated]
 
-  VERBATIM LITERALS for Topic [X.Y]: [optional — sirf jab multi-line code, configuration, formula block, output block, ya long exact literal ho]
-  ```text
-  [exact source literal]
-  ```
-
   🔄 REAL-WORLD FLOW SIGNAL for Topic [X.Y]:
   - Testing/Offline Phase: ...
   - Fixing/Iteration Phase: ...
   - Live Production Phase: ...
   - Learning/Application Context: ...
   - Additional context: ...
+```
+
+Sirf agar multi-line code, configuration, formula block, output block, ya long exact literal source mein present ho, tab KEYWORDS DUMP ke baad aur REAL-WORLD FLOW SIGNAL se pehle yeh optional block insert karo:
+
+```text
+  VERBATIM LITERALS for Topic [X.Y]:
+  ```text
+  [exact source literal]
+  ```
 ```
 
 
@@ -474,11 +478,6 @@ Har Topic ke subtopics list ke baad ek combined block:
   🔑 KEYWORDS DUMP for Topic [X.Y]:
   [material instructional units from transcript for this topic — comma separated — add ⭐ for emphasized, [unclear] for inaudible, [version] for version numbers, 🔴 for CVEs]
 
-  VERBATIM LITERALS for Topic [X.Y]: [optional — sirf jab multi-line code, configuration, formula block, output block, ya long exact literal ho]
-  ```text
-  [exact source literal]
-  ```
-
   🔄 REAL-WORLD FLOW SIGNAL for Topic [X.Y]:
   - Testing/Offline Phase: ...
   - Fixing/Iteration Phase: ...
@@ -486,6 +485,8 @@ Har Topic ke subtopics list ke baad ek combined block:
   - Learning/Application Context: ...
   - Additional context: ...
 ```
+
+Sirf agar multi-line code, configuration, formula block, output block, ya long exact literal source mein present ho, tab KEYWORDS DUMP ke baad aur REAL-WORLD FLOW SIGNAL se pehle `VERBATIM LITERALS for Topic [X.Y]:` block insert karo.
 
 
 ### Flags to use:
@@ -521,11 +522,6 @@ Speaker is topic mein RAG pipeline ko evaluate karne ke tools aur workflow expla
 
   🔑 KEYWORDS DUMP for Topic 1.1:
   [RAGAS, evaluation framework, RAG pipeline, Precision, Recall, F1 Score, GPT-4, judge model, teacher AI, student AI, test questions, report card, ⭐offline evaluation, chunk_size, Vector DB, Chroma, 100 test questions, hafte mein ek baar, ⭐"RAGAS production mein nahi chalta"]
-
-  VERBATIM LITERALS for Topic 1.1:
-  ```text
-  # Optional: multi-line code ya config snippet yahan verbatim fenced block mein
-  ```
 
   🔄 REAL-WORLD FLOW SIGNAL for Topic 1.1:
   - Testing/Offline Phase: Developer hafte mein ek baar RAGAS chalata hai apne 100 test questions pe. GPT-4 (teacher AI) in questions ko judge karke Precision: 0.8, Recall: 0.6 jaisi report deta hai.
@@ -588,9 +584,12 @@ Sections: [X] | Topics: [Y] | Subtopics: [Z]
 ---
 
 
-**Ab apna VTT / transcript neeche ### START TRANSCRIPT ### aur ### END TRANSCRIPT ### ke beech paste karo.**
-**Agar transcript bada hai toh phase-wise paste karo — main har phase ka skeleton ready kar dunga.**
+Ab user ke next message ka wait karo.
+
+Extraction sirf tab start karo jab user ek NEW message mein standalone markers ke beech actual, non-placeholder transcript provide kare:
 
 ### START TRANSCRIPT ###
-[APNA VTT / TRANSCRIPT YAHAN PASTE KARO]
+[actual transcript]
 ### END TRANSCRIPT ###
+
+Is prompt ke andar diye gaye marker examples ya placeholder text ko kabhi actual transcript mat samajhna.
