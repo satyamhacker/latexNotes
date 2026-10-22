@@ -181,7 +181,7 @@ Agar skeleton mein specific flags hain — unhe aise handle karo:
    
    **Rule:** Is tarah ki har nayi cheez ke aate hi — seedha wahan INLINE explain karo. Reader ko scroll nahi karna chahiye, assume nahi karna chahiye — explanation khud-ba-khud unke saath chalni chahiye. "Main baad mein explain karunga" FORBIDDEN hai.
 
-*Isse hallucination kam hoga, skeleton ka 100% coverage guarantee hoga, aur original notes ka har ek word final notes mein zaroor aayega.*
+*Isse hallucination kam hoga, skeleton ke material concepts aur keywords ki faithful coverage ensure hogi, aur critical details notes mein zaroor aayengi.*
 
 
 ---
@@ -192,25 +192,25 @@ Agar skeleton mein specific flags hain — unhe aise handle karo:
 
 AI models have output limits. To avoid truncation:
 
-1. Generate notes for **one or two subtopics at a time or as much as you can fit in the model's output limit** (following the full 19-point structure for each).
-2. At the end of a section, if more subtopics remain, write EXACTLY this:
+1. Generate notes for **one Topic at a time** (or as much as fits within the model's output limit), applying the 19-point structure at the Topic level and naturally covering all its comma-separated subtopics inside the 19 points.
+2. At the end of a response, if more Topics remain in the section/video, write EXACTLY this:
 
-> **"--- 🛑 PART [X] FINISHED. Type 'CONTINUE' for the next subtopic ---"**
-> ✅ **Topics Covered in this message:** [List what you just explained]
-> ⏳ **Remaining Topics (in order):** [List ALL pending subtopics in exact sequence — yeh list har baar repeat karni hai taaki context kabhi lost na ho]
-> 📊 **Progress:** [X] subtopics done / [Y] subtopics total
-> 🔑 **Keywords so far:** [Total keywords covered across completed subtopics] / [Total keywords in full skeleton if known]
+> **"--- 🛑 PART [X] FINISHED. Type 'CONTINUE' for the next Topic ---"**
+> ✅ **Topics Covered in this message:** [List Topic(s) you just completed]
+> ⏳ **Remaining Topics (in order):** [List ALL pending Topics in exact sequence — yeh list har baar repeat karni hai taaki context kabhi lost na ho]
+> 📊 **Progress:** [X] Topics done / [Y] Topics total
+> 🔑 **Keywords so far:** [Total keywords covered across completed Topics] / [Total keywords in full skeleton if known]
 
 3. Do NOT stop or shorten the depth just to fit everything in one go. **Depth > Brevity.**
 
 4. **CONTINUE Resume Rule:** Jab user "CONTINUE" type kare — pehle ek single line mein likho:
-   > "▶️ Resuming from: [exact subtopic name] — Remaining after this: [list]"
+   > "▶️ Resuming from: [exact Topic name] — Remaining after this: [list]"
 
-   Phir seedha us subtopic ki **19-point structure** se shuru karo. Kabhi bhi fresh introduction mat dena ya already covered topics dobara mat explain karna.
+   Phir seedha us Topic ki **19-point structure** se shuru karo. Kabhi bhi fresh introduction mat dena ya already covered topics dobara mat explain karna.
 
-5. **Single Subtopic Edge Case:** Agar skeleton mein sirf ek hi subtopic hai — CONTINUE protocol use karne ki zaroorat nahi. Seedha poora topic 19-point structure mein generate karo.
+5. **Single Topic Edge Case:** Agar user ne sirf ek hi Topic provide kiya hai — CONTINUE protocol use karne ki zaroorat nahi. Seedha poora Topic 19-point structure mein generate karo.
 
-6. **Consolidation Mode Exception:** Agar Consolidation Mode active hai (neeche dekho), toh poora topic (ya logical group of subtopics) ek saath generate karo, lekin depth compromise mat karo. Agar topic size limit cross kar raha ho, toh group-level CONTINUE use karo (e.g., "Continuing with next 3 subtopics in consolidated style — Remaining: [list]").
+6. **Exceptionally Large Topic Edge Case:** Agar ek Topic ke andar bohot zyada subtopics hain (15+ subtopics) aur model ka output token limit exceed hone ka risk ho, toh us ek Topic ko 2 parts mein split karo (e.g., "Topic X (Part 1 of 2: Points 1 to 9)" aur agle message mein "Topic X (Part 2 of 2: Points 10 to 19)"). Kabhi bhi 19 points ke depth ko compress karke surface-level mat banao.
 
 
 ---
