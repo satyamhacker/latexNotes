@@ -37,6 +37,7 @@ Agar same concept ke rules prompt mein multiple jagah repeat hue hon, toh:
 3. `OUTPUT FORMAT` final formatting define karta hai.
 4. Examples sirf illustrative hain; agar example aur formal rule mein conflict ho, formal rule follow hoga.
 5. Final Checklist verification aid hai; woh new behavior create nahi karta.
+6. `Determinism & Conservative Invariant`: Identical transcript input ke liye hamesha consistent structural boundaries prefer karo. Jab multiple valid interpretations possible hon, hamesha most conservative option chuno jo topic fragmentation ko minimize kare aur exact source vocabulary se anchored rahe.
 
 
 ---
@@ -385,6 +386,7 @@ Ek hi term ko baar-baar repeat mat karo, except jab:
 - **CVE numbers** — inhe `🔴` prefix ke saath capture karo. Example: `🔴CVE-2021-44228`, `🔴CVE-2017-0144`. Notes Guru inhe mandatory explain karega.
 - **Version numbers jo speaker ne explicitly mention kiye hain** unhe `[version]` tag ke saath capture karo. `⭐` sirf unhi terms ke liye use karo jinhe speaker ne explicitly emphasize kiya ho.
   Example: `Python 3.11[version]`, `React 18[version]`, `⭐"RAGAS production mein nahi chalta"`
+- **First-Appearance Stream Order:** KEYWORDS DUMP ke andar terms ko unke transcript mein appear hone ke sequence (chronological order) mein maintain karo. Unhe importance, category, ya assumed grouping ke basis par reorder mat karo.
 - Bahar se koi keyword mat add karo — sirf transcript ka content.
 
 **Format:**
@@ -654,7 +656,7 @@ Before responding, keep this 10-point execution core active:
 4. **Subtopics:** flat comma-separated short names only (2-5 words max, strictly zero descriptions).
 5. **Zero literal loss:** exact commands, flags, configs, URLs, formulas must be preserved in KEYWORDS DUMP or VERBATIM LITERALS.
 6. **Scope Signal:** select exact canonical enums for Depth, Angle, and Content Volume (no free-text additions).
-7. **Keywords Dump:** capture every material instructional unit with canonical inline tags (`⭐`, `🔴`, `[version]`, `[unclear]`).
+7. **Keywords Dump:** capture every material instructional unit in first-appearance sequence with canonical inline tags (`⭐`, `🔴`, `[version]`, `[unclear]`).
 8. **Real-World Flow Signal:** fill Testing / Iteration / Production only if verbally stated; else strictly `(N/A)`.
 9. **Zero hallucination:** no external examples, no unmentioned analogies, no "typically/usually" assumptions.
 10. **Output purity:** zero conversational preamble or reasoning in output; first token must strictly be `=====` (Section Header) or `--- ⏸️` (Continuation Banner).
