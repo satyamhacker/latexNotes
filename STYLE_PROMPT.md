@@ -1,695 +1,1380 @@
-# Prompt — Premium Dark Mode Notes Viewer
+# Prompt — Premium Dark Mode Notes Viewer & High-Definition Precision Highlighter
 
 **Prompt Start:**
 
-You are an expert Frontend Developer.
+You are an expert Frontend Developer and UI/UX Architect.
 
-**CRITICAL INSTRUCTION FOR AI:** 
+**CRITICAL INSTRUCTIONS FOR AI:** 
 1. When generating the JavaScript code, **DO NOT escape backticks (\`) or dollar signs ($)** in your template literals.
 2. Include the full `fetch` block provided in the logic below, handling `response.status !== 0` so local `file:///` viewing works without a server.
+3. **NEVER use washed-out pastel text inside highlights in print or on screen.** Follow the High-Definition Contrast specification below:
+   - In PDF / Print view: code and badges inside `<mark class="yellow-highlight">` MUST render as **clean white pills with bold jet-black or deep-saturated dark ink** (`#0f172a`) so text is 100% crystal-clear.
+   - On Screen: code and badges inside highlights MUST render as **solid deep dark chips (`#070a10`)** to prevent muddy color bleeding on the golden gradient.
+4. **Prevent all PDF clipping and scrollbar marks**: Code blocks in `@media print` MUST enforce `white-space: pre-wrap !important; word-break: break-all !important; overflow: visible !important;` and strip all scrollbars completely (`*::-webkit-scrollbar { display: none !important; }`).
 
-Your task is to create a single-file `notes_viewer.html` that dynamically renders a Markdown file (e.g., `React_Native_Notes.md`) with a **Premium Dark UI**.
-The rendering must look identical to a high-end documentation site (like Stripe or Tailwind docs) and support **Print-to-PDF** with the dark theme preserved.
+Your task is to create a single-file `notes_viewer.html` that dynamically renders a Markdown file (e.g., `NestJs_Course_Notes.md`) with a **State-of-the-Art Premium Dark UI**, interactive **Highlights HUD & Navigation**, **Semantic Micro-Badges**, and **Zero-Loss Print-to-PDF fidelity**.
+
+---
 
 ## 🛠️ Required Dependencies
 - **Marked.js**: `https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js` (MUST be v4.3.0)
 - **Highlight.js**: `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js`
 - **Highlight CSS**: `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark-reasonable.min.css`
-- **Fonts**: Inter, Fira Code, Outfit.
-- **Icons**: FontAwesome 6.4.0.
+- **Fonts**: Inter, Fira Code, Outfit (Google Fonts).
+- **Icons**: FontAwesome 6.4.0 (`https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css`).
 
-## 🎨 HTML Structure & CSS (Critical)
+---
 
-You MUST use this specific wrapper structure and print CSS to ensure the dark theme prints correctly.
+## 🎨 HTML Architecture (Mandatory Wrapper Structure)
 
 ```html
 <body>
-    <div id="loader">Loading...</div>
+    <div id="loader">
+        <div class="spinner"></div>
+        <div>Loading Course Notes...</div>
+    </div>
     
     <!-- WRAPPER IS MANDATORY FOR PRINTING BACKGROUNDS -->
     <div class="print-wrapper">
         <div class="layout">
             <nav class="sidebar" id="sidebar">
-                <!-- TOC goes here -->
+                <div class="sidebar-header">
+                    <div class="sidebar-title">
+                        <i class="fas fa-cubes"></i> Notes Viewer
+                    </div>
+                </div>
+
+                <!-- Highlight & Reading Controls HUD -->
+                <div class="hl-hud">
+                    <div class="hl-hud-top">
+                        <span><i class="fas fa-highlighter"></i> Highlights</span>
+                        <span id="hl-count-badge" class="hl-badge">0</span>
+                    </div>
+                    <div class="hl-nav-btns">
+                        <button class="hl-btn" id="prev-hl-btn" title="Previous Highlight (Shortcut: K)">
+                            <i class="fas fa-chevron-up"></i> Prev
+                        </button>
+                        <button class="hl-btn" id="next-hl-btn" title="Next Highlight (Shortcut: J)">
+                            <i class="fas fa-chevron-down"></i> Next
+                        </button>
+                    </div>
+                    <button class="hl-btn" id="wrap-all-btn" title="Toggle line wrapping on all code blocks across notes">
+                        <i class="fas fa-align-left"></i> Wrap All Code
+                    </button>
+                </div>
+
+                <input type="text" class="toc-search" id="toc-search" placeholder="Filter sections & topics...">
+                <div class="toc-list" id="toc"></div>
             </nav>
+
             <main class="main-content" id="content-area">
-                <!-- Markdown content goes here -->
+                <!-- Notes will be dynamically injected here -->
             </main>
         </div>
+    </div>
+
+    <!-- Floating Back-to-Top -->
+    <div class="floating-controls">
+        <button class="float-btn" id="scroll-top-btn" title="Back to Top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
     </div>
 </body>
 ```
 
-**CSS Rules (Include these exactly):**
+---
+
+## 💎 Master CSS Stylesheet (Include Exactly)
 
 ```css
 :root {
-    /* Color Palette - Deep Dark Theme */
-    --bg-primary: #0f1115;
-    --bg-secondary: #161b22;
-    --text-primary: #ffffff; /* Pure white for better readability */
-    --text-secondary: #e6edf3; /* Much brighter grey */
-    --accent-blue: #58a6ff;
-    --accent-gradient: linear-gradient(135deg, #61dafb 0%, #4facfe 100%);
-    --border-color: #30363d;
+    /* Color Palette - Deep Dark Theme with Calibrated Softness */
+    --bg-primary: #0b0f17;
+    --bg-secondary: #121824;
+    --bg-card: #162032;
+    --text-primary: #f8fafc; /* Luminous soft white, not blinding 255 */
+    --text-secondary: #cbd5e1; /* Slate-300: High-contrast comfortable study reading */
+    --text-muted: #94a3b8;
+    --accent-blue: #38bdf8;
+    --accent-nest: #ea2845;
+    --accent-gradient: linear-gradient(135deg, #e0234e 0%, #ff4b72 50%, #38bdf8 100%);
+    --border-color: #233044;
+    --sidebar-width: 320px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
     background-color: var(--bg-primary);
-    color: var(--text-primary);
-    font-family: 'Inter', sans-serif;
-    margin: 0;
+    color: var(--text-secondary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow-x: hidden;
+    line-height: 1.75;
 }
 
-h1 {
-    font-family: 'Outfit', sans-serif;
-    background: var(--accent-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 3rem;
-    border-bottom: 3px solid var(--border-color);
-}
-
-h2 {
-    color: var(--text-primary);
-    font-size: 2rem;
-    margin-top: 2.5rem;
-    margin-bottom: 1rem;
-    border-bottom: 2px solid var(--border-color);
-    padding-bottom: 0.5rem;
-}
-
-/* Module Sections - Big Bold Blue */
-.module-section {
-    font-family: 'Outfit', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #4facfe;
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    border-left: 6px solid #4facfe;
-    padding-left: 1rem;
-    margin-top: 4rem;
-    margin-bottom: 2rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* Topic Sections - Distinct Vibrant Gradient */
-.topic-section {
-    font-family: 'Outfit', sans-serif;
-    font-size: 1.7rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); /* Orange-ish gradient */
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    border-left: 4px solid #fda085;
-    padding-left: 1rem;
-    margin-top: 2.5rem;
-    margin-bottom: 1.2rem;
-    padding-top: 0.2rem;
-    padding-bottom: 0.2rem;
-    background-color: rgba(253, 160, 133, 0.05); /* very subtle background for depth */
-    border-radius: 0 8px 8px 0;
-    display: inline-block; /* Makes background fit the text width + padding */
-    width: 100%;
-    box-sizing: border-box;
-}
-
-/* Ensure normal H3 looks standard */
-h3:not(.topic-section) {
-    color: var(--text-primary);
-    font-size: 1.4rem;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 0.4rem;
-}
-
-/* Mac-Style Code Blocks */
-pre.mac-window {
-    background: #0d1115;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    margin: 2rem 0;
-    
-    overflow-x: auto !important;
-    white-space: pre !important; 
-    word-break: normal !important;
-}
-
-.code-header {
-    background: #161b22;
-    padding: 8px 15px;
-    border-bottom: 1px solid var(--border-color);
-    display: flex; justify-content: space-between;
+/* Loader Overlay */
+#loader {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(11, 15, 23, 0.98);
+    backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-}
-
-/* Dots helper (add these classes too) */
-.control { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 6px; }
-.red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
-
-code {
-    font-family: 'Fira Code', monospace;
-    white-space: inherit !important; 
-    word-wrap: normal !important;
-}
-
-/* Inline Code Styling */
-p code, li code, td code {
-    background-color: rgba(88, 166, 255, 0.15);
-    color: #79c0ff;
-    padding: 0.2em 0.4em;
-    border-radius: 6px;
-    font-size: 0.9em;
-    font-family: 'Fira Code', monospace;
-    border: 1px solid rgba(88, 166, 255, 0.2);
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 2rem 0;
-    background: var(--bg-secondary);
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-th, td {
-    padding: 1rem;
-    text-align: left;
-    border: 1px solid var(--border-color);
-}
-
-th {
-    background: #1c2128;
+    gap: 1.2rem;
+    font-size: 1.25rem;
     color: var(--accent-blue);
+    z-index: 99999;
+    font-family: 'Outfit', sans-serif;
     font-weight: 600;
 }
 
-tr:hover {
-    background: rgba(88, 166, 255, 0.1);
+.spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid rgba(56, 189, 248, 0.2);
+    border-top-color: var(--accent-blue);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
 }
 
-/* Sidebar */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Layout */
+.layout {
+    display: flex;
+    min-height: 100vh;
+    background: var(--bg-primary);
+}
+
+/* Sidebar Navigation */
 .sidebar {
-    width: 260px;
+    width: var(--sidebar-width);
     height: 100vh;
     background: var(--bg-secondary);
     border-right: 1px solid var(--border-color);
-    padding: 2rem 1rem;
+    padding: 1.5rem 1rem;
     position: sticky;
     top: 0;
     overflow-y: auto;
     flex-shrink: 0;
-    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
 }
 
-.sidebar h3 {
-    margin-top: 0;
-    color: var(--text-primary);
-    font-size: 1.2rem;
-    padding-bottom: 0.5rem;
+.sidebar::-webkit-scrollbar { width: 5px; }
+.sidebar::-webkit-scrollbar-thumb { background: #233044; border-radius: 4px; }
+
+.sidebar-header {
+    padding-bottom: 1.2rem;
+    margin-bottom: 0.8rem;
     border-bottom: 1px solid var(--border-color);
 }
 
-.sidebar a {
-    display: block;
-    color: var(--text-secondary);
-    text-decoration: none;
-    padding: 0.4rem 0.75rem;
-    border-radius: 6px;
-    font-size: 0.875rem;
-    transition: background 0.2s, color 0.2s;
-}
-
-.sidebar a:hover {
-    background: rgba(88, 166, 255, 0.12);
-    color: var(--accent-blue);
-}
-
-.layout {
+.sidebar-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 800;
     display: flex;
-    min-height: 100vh;
-    background: #090a0c; /* Darker backdrop for pages */
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.main-content {
-    flex: 1;
-    padding: 2rem 0;
-    margin: 0;
-    line-height: 1.7;
-    font-size: 1.05rem;
-}
-
-/* UI Page Simulation */
-.a4-page {
-    width: 210mm;
-    height: 297mm;
-    background: var(--bg-primary);
-    margin: 0 auto 2rem auto;
-    padding: 20mm;
-    box-sizing: border-box;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-    border: 1px solid var(--border-color);
+/* Highlight Controller HUD */
+.hl-hud {
+    background: rgba(245, 158, 11, 0.08);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    border-radius: 8px;
+    padding: 0.75rem 0.85rem;
+    margin: 0.6rem 0;
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
 }
 
-.page-content {
-    flex: 1;
-    overflow-y: auto; /* Handle oversized elements like massive code blocks */
-    padding-right: 5px;
-}
-
-/* Custom scrollbar for page-content */
-.page-content::-webkit-scrollbar { width: 6px; }
-.page-content::-webkit-scrollbar-thumb { background: #30363d; border-radius: 4px; }
-
-.page-footer {
-    height: 10mm;
+.hl-hud-top {
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fde047;
+}
+
+.hl-badge {
+    background: rgba(245, 158, 11, 0.2);
+    color: #fde047;
+    padding: 0.2rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-family: 'Fira Code', monospace;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.hl-nav-btns {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.hl-btn {
+    background: #1a2333;
     color: var(--text-secondary);
-    font-size: 0.9rem;
-    font-family: 'Inter', sans-serif;
-    border-top: 1px solid var(--border-color);
-    padding-top: 5mm;
-    margin-top: 5mm;
-}
-
-/* Content Links */
-.main-content a {
-    color: #58a6ff;
-    text-decoration: none;
-    border-bottom: 1px dashed rgba(88, 166, 255, 0.5);
-    transition: all 0.2s;
-}
-.main-content a:hover {
-    color: #79c0ff;
-    border-bottom: 1px solid #79c0ff;
-}
-
-/* Images */
-img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-    margin: 1.5rem 0;
     border: 1px solid var(--border-color);
-}
-
-/* Task Lists / Checkboxes */
-input[type="checkbox"] {
-    accent-color: #58a6ff;
-    width: 1.2rem;
-    height: 1.2rem;
-    margin-right: 0.5rem;
+    padding: 0.35rem 0.65rem;
+    border-radius: 6px;
     cursor: pointer;
-    position: relative;
-    top: 2px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: all 0.15s ease;
+    flex: 1;
+    justify-content: center;
 }
 
-/* Blockquote */
-blockquote {
+.hl-btn:hover {
+    background: rgba(56, 189, 248, 0.15);
+    color: var(--accent-blue);
+    border-color: rgba(56, 189, 248, 0.4);
+}
+
+.hl-btn.active-toggle {
+    background: rgba(52, 211, 153, 0.2);
+    color: #34d399;
+    border-color: rgba(52, 211, 153, 0.4);
+}
+
+/* TOC Search */
+.toc-search {
+    width: 100%;
+    background: #0b0f17;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    margin-bottom: 0.8rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.toc-search:focus {
+    border-color: var(--accent-blue);
+}
+
+.toc-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.toc-item {
+    display: block;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 0.45rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.toc-item:hover {
+    background: rgba(56, 189, 248, 0.1);
+    color: var(--text-primary);
+}
+
+.toc-item.module {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    color: #38bdf8;
+    margin-top: 0.85rem;
+    font-size: 0.9rem;
+    border-left: 2px solid #38bdf8;
+    border-radius: 0 6px 6px 0;
+    padding-left: 0.6rem;
+}
+
+.toc-item.topic {
+    padding-left: 1.5rem;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+}
+
+/* Main Content Area */
+.main-content {
+    flex: 1;
+    padding: 3rem 4.5rem;
+    max-width: 1040px;
+    margin: 0 auto;
+}
+
+/* Headings */
+h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 800;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.8rem;
+    margin-bottom: 2rem;
+    line-height: 1.25;
+}
+
+h2 {
+    font-family: 'Outfit', sans-serif;
+    color: #f8fafc;
+    font-size: 2rem;
+    margin-top: 3.5rem;
+    margin-bottom: 1.2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.6rem;
+}
+
+.module-section {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ff4b72 0%, #e0234e 40%, #38bdf8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border-left: 6px solid #e0234e;
+    padding-left: 1.2rem;
+    margin-top: 4.5rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.topic-section {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.55rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fde047 0%, #fb923c 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border-left: 4px solid #fb923c;
+    padding: 0.35rem 1rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.2rem;
+    background-color: rgba(251, 146, 60, 0.05);
+    border-radius: 0 8px 8px 0;
+    display: block;
+    width: 100%;
+}
+
+h3:not(.topic-section) {
+    font-family: 'Outfit', sans-serif;
+    color: #e2e8f0;
+    font-size: 1.35rem;
+    margin-top: 2rem;
+    margin-bottom: 0.8rem;
+}
+
+h4 {
+    font-family: 'Outfit', sans-serif;
+    color: #38bdf8;
+    font-size: 1.15rem;
+    margin-top: 1.8rem;
+    margin-bottom: 0.6rem;
+}
+
+p {
+    margin-bottom: 1.2rem;
+    color: var(--text-secondary);
+}
+
+ul, ol {
+    margin-bottom: 1.3rem;
+    padding-left: 1.6rem;
+}
+
+li {
+    margin-bottom: 0.55rem;
+    color: var(--text-secondary);
+}
+
+/* 🏷️ =========================================================================
+   SEMANTIC TECHNICAL BADGES (Fixes harsh white Q, A, Root Cause, Mistakes)
+   ========================================================================= */
+.badge-lbl {
+    display: inline-block;
+    font-size: 0.84em;
+    font-weight: 700;
+    padding: 0.16em 0.52em;
+    border-radius: 5px;
+    margin-right: 0.35rem;
+    letter-spacing: 0.25px;
+    vertical-align: baseline;
+    line-height: 1.35;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+/* Q: Question Badge (Electric Sky) */
+.badge-lbl.badge-q {
+    background: rgba(56, 189, 248, 0.14);
+    color: #38bdf8;
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.12);
+}
+
+/* A: Answer Badge (Mint Emerald) */
+.badge-lbl.badge-a {
+    background: rgba(52, 211, 153, 0.14);
+    color: #34d399;
+    border: 1px solid rgba(52, 211, 153, 0.35);
+    box-shadow: 0 0 8px rgba(52, 211, 153, 0.12);
+}
+
+/* Root Cause / Problem / Mistake / Galat Soch / Risk (Warm Coral / Crimson) */
+.badge-lbl.badge-danger {
+    background: rgba(248, 113, 113, 0.14);
+    color: #f87171;
+    border: 1px solid rgba(248, 113, 113, 0.35);
+    box-shadow: 0 0 8px rgba(248, 113, 113, 0.12);
+}
+
+/* Actually / Solution / Fix / Security Fix / The 'Pro' Way (Jade Green) */
+.badge-lbl.badge-success {
+    background: rgba(16, 185, 129, 0.14);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.12);
+}
+
+/* Confusion / Caution (Warm Amber) */
+.badge-lbl.badge-warning {
+    background: rgba(245, 158, 11, 0.14);
+    color: #fbbf24;
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.12);
+}
+
+/* Prove Karo / Precise English / Hinglish Simplification / Why (Lavender / Violet) */
+.badge-lbl.badge-info {
+    background: rgba(167, 139, 250, 0.14);
+    color: #c084fc;
+    border: 1px solid rgba(167, 139, 250, 0.35);
+    box-shadow: 0 0 8px rgba(167, 139, 250, 0.12);
+}
+
+/* Standard Bold Text (Softened from stark pure white) */
+strong:not(.badge-lbl) {
+    color: #f1f5f9;
+    font-weight: 700;
+}
+
+/* 🟡 =========================================================================
+   PREMIUM HIGH-CONTRAST HIGHLIGHT STYLING (LUMINOUS GOLD AESTHETIC)
+   ========================================================================= */
+mark.yellow-highlight {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.26) 0%, rgba(245, 158, 11, 0.36) 100%) !important;
+    color: #ffffff !important; /* Pure white text for razor-sharp legibility */
+    padding: 0.15em 0.45em;
+    border-radius: 4px;
+    font-weight: 600;
+    border-bottom: 2px solid rgba(245, 158, 11, 0.9);
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.18), inset 0 0 4px rgba(255, 255, 255, 0.08);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+    display: inline;
+    line-height: inherit;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+mark.yellow-highlight:hover {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.42) 0%, rgba(245, 158, 11, 0.52) 100%) !important;
+    color: #ffffff !important;
+    border-bottom-color: #fde047;
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.5), inset 0 0 6px rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+}
+
+/* Active highlight pulse (when jumped to via Prev/Next or J/K) */
+mark.yellow-highlight.active-target {
+    outline: 2px solid #38bdf8 !important;
+    outline-offset: 3px;
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.8), inset 0 0 8px rgba(255, 255, 255, 0.3) !important;
+    animation: targetPulse 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes targetPulse {
+    0% { transform: scale(1.02); outline-color: #fde047; }
+    50% { transform: scale(1.04); outline-color: #38bdf8; }
+    100% { transform: scale(1); outline-color: #38bdf8; }
+}
+
+/* Code block highlights: Preserve monospaced horizontal metrics */
+pre mark.yellow-highlight, 
+code mark.yellow-highlight {
+    padding: 0.1em 0.25em !important;
+    background: rgba(251, 191, 36, 0.28) !important;
+    color: #ffffff !important;
+    border-radius: 3px;
+    border-bottom: 1.5px solid rgba(245, 158, 11, 0.9);
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.25);
+    font-weight: 600;
+}
+
+/* Bold inside highlights */
+strong mark.yellow-highlight,
+mark.yellow-highlight strong {
+    color: #ffffff !important;
+    font-weight: 800;
+}
+
+/* 🚀 High-Contrast Inline Code inside Highlights on Screen (Solid Dark Chip) */
+mark.yellow-highlight code {
+    background: #070a10 !important; /* Solid dark base to eliminate color muddying */
+    color: #38bdf8 !important; /* Bright Electric Sky Cyan */
+    border: 1px solid #0284c7 !important;
+    padding: 0.15em 0.45em !important;
+    border-radius: 4px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6) !important;
+    text-shadow: none !important;
+}
+
+/* 🚀 High-Contrast Badges inside Highlights on Screen (Solid Dark Chip) */
+mark.yellow-highlight .badge-lbl {
+    background: #070a10 !important; /* Solid dark base */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6) !important;
+    border-width: 1px !important;
+    border-style: solid !important;
+    padding: 0.15em 0.52em !important;
+    font-weight: 700 !important;
+    text-shadow: none !important;
+}
+mark.yellow-highlight .badge-lbl.badge-q {
+    color: #38bdf8 !important;
+    border-color: #0284c7 !important;
+}
+mark.yellow-highlight .badge-lbl.badge-a {
+    color: #4ade80 !important;
+    border-color: #16a34a !important;
+}
+mark.yellow-highlight .badge-lbl.badge-danger {
+    color: #fb7185 !important;
+    border-color: #e11d48 !important;
+}
+mark.yellow-highlight .badge-lbl.badge-success {
+    color: #4ade80 !important;
+    border-color: #16a34a !important;
+}
+mark.yellow-highlight .badge-lbl.badge-warning {
+    color: #fde047 !important;
+    border-color: #ca8a04 !important;
+}
+mark.yellow-highlight .badge-lbl.badge-info {
+    color: #e879f9 !important;
+    border-color: #a855f7 !important;
+}
+
+/* 💻 =========================================================================
+   MAC-STYLE CODE BLOCKS WITH INTERACTIVE WRAP & SLEEK SCROLLBARS
+   ========================================================================= */
+pre.mac-window {
+    background: #090d14 !important;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55);
+    margin: 2rem 0;
+    overflow: hidden;
+}
+
+.code-header {
+    background: #111722;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.window-controls {
+    display: flex;
+    gap: 7px;
+}
+
+.control {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.red { background: #ff5f56; }
+.yellow { background: #ffbd2e; }
+.green { background: #27c93f; }
+
+.code-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.lang-badge {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.72rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+}
+
+.code-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.code-action-btn {
+    background: rgba(56, 189, 248, 0.12);
+    color: var(--accent-blue);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    padding: 4px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: all 0.2s ease;
+}
+.code-action-btn:hover {
+    background: rgba(56, 189, 248, 0.25);
+    color: #ffffff;
+    border-color: var(--accent-blue);
+}
+.code-action-btn.active {
+    background: rgba(52, 211, 153, 0.2);
+    color: #34d399;
+    border-color: rgba(52, 211, 153, 0.4);
+}
+
+pre.mac-window code {
+    padding: 1.25rem 1.5rem !important;
+    display: block;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.92rem;
+    line-height: 1.65;
+    background: transparent !important;
+    overflow-x: auto;
+    white-space: pre;
+}
+
+/* Code wrap class (applied per-block or globally) */
+pre.mac-window code.wrapped {
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    word-wrap: break-word !important;
+}
+
+/* Sleek scrollbar for on-screen code blocks */
+pre.mac-window code::-webkit-scrollbar {
+    height: 6px;
+}
+pre.mac-window code::-webkit-scrollbar-track {
+    background: #090d14;
+}
+pre.mac-window code::-webkit-scrollbar-thumb {
+    background: #233044;
+    border-radius: 4px;
+}
+pre.mac-window code::-webkit-scrollbar-thumb:hover {
+    background: #38bdf8;
+}
+
+/* Inline Code */
+p code, li code, td code {
+    background: rgba(56, 189, 248, 0.12);
+    color: #7dd3fc;
+    padding: 0.2em 0.45em;
+    border-radius: 5px;
+    font-size: 0.88em;
+    font-family: 'Fira Code', monospace;
+    border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 2rem 0;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+th, td {
+    padding: 0.9rem 1.2rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+}
+th:last-child, td:last-child {
+    border-right: none;
+}
+tr:last-child td {
+    border-bottom: none;
+}
+
+th {
+    background: #162032;
+    color: var(--accent-blue);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+}
+
+tr:hover td {
+    background: rgba(56, 189, 248, 0.04);
+}
+
+/* GitHub-Style Alerts / Callouts */
+.alert-callout {
+    border-left: 4px solid var(--alert-color);
+    background: var(--alert-bg);
+    padding: 1.1rem 1.5rem;
+    margin: 1.8rem 0;
+    border-radius: 0 8px 8px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+.alert-header {
+    color: var(--alert-color);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
+}
+
+/* Blockquotes */
+blockquote:not(.alert-callout) {
     border-left: 4px solid var(--accent-blue);
-    background: rgba(88, 166, 255, 0.06);
+    background: rgba(56, 189, 248, 0.06);
     margin: 1.5rem 0;
-    padding: 1rem 1.5rem;
+    padding: 1rem 1.4rem;
     border-radius: 0 8px 8px 0;
     color: var(--text-secondary);
     font-style: italic;
 }
 
-/* CRITICAL PRINT STYLES - DO NOT MODIFY */
+/* Links */
+.main-content a {
+    color: var(--accent-blue);
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(56, 189, 248, 0.4);
+    transition: all 0.2s ease;
+}
+.main-content a:hover {
+    color: #7dd3fc;
+    border-bottom-style: solid;
+}
+
+/* Floating Back-To-Top */
+.floating-controls {
+    position: fixed;
+    bottom: 2rem;
+    right: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    z-index: 999;
+}
+
+.float-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1rem;
+}
+.float-btn:hover {
+    background: var(--accent-blue);
+    color: #0b0f17;
+    transform: translateY(-2px);
+    border-color: var(--accent-blue);
+}
+
+/* 🖨️ =========================================================================
+   CRITICAL PRINT-TO-PDF RULES (ZERO SCROLLBARS & HIGH-DEFINITION LEGIBILITY)
+   ========================================================================= */
 @media print {
-    /* Set page margins so browser can inject page numbers (Headers & Footers) */
     @page {
-        margin-top: 10mm;
-        margin-bottom: 15mm;
+        margin: 12mm 15mm;
+        size: auto;
     }
 
     * {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
         color-adjust: exact !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
     }
 
-    body { margin: 0; padding: 0; }
-    
-    .print-wrapper {
-        background-color: #0f1115 !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-        min-height: 100vh;
-        width: 100%;
-        margin: 0; padding: 0;
-    }
-
-    /* Force white text for readability */
-    .main-content, p, li, h1, h2, h3, h4, h5, h6, td, th {
-        color: #ffffff !important;
-    }
-
-    /* Keep code blocks distinct */
-    pre {
-        border: 1px solid #444;
-        page-break-inside: avoid;
-    }
-
-    .sidebar, .copy-btn, .window-controls, #loader {
+    *::-webkit-scrollbar {
         display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+
+    html, body {
+        background: #0f1115 !important;
+        color: #e2e8f0 !important;
+        overflow: visible !important;
+        height: auto !important;
+        min-height: auto !important;
+    }
+
+    .print-wrapper {
+        background: #0f1115 !important;
+        overflow: visible !important;
+        width: 100% !important;
     }
 
     .layout {
-        display: block;
-        background: none;
+        display: block !important;
+        min-height: auto !important;
+        background: transparent !important;
     }
-    
-    .a4-page {
-        margin: 0 !important;
-        box-shadow: none !important;
-        border: none !important;
-        width: 100% !important;
-        height: auto !important;
-        page-break-after: auto !important;
+
+    .sidebar, .floating-controls, #loader, .code-actions, .window-controls {
+        display: none !important;
+    }
+
+    .main-content {
         padding: 0 !important;
-        display: block !important;
-    }
-    
-    .page-content {
-        display: block !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
         overflow: visible !important;
     }
-    
-    .page-footer {
-        display: none !important; /* Let the browser print its own page numbers, or hide this if it conflicts */
-    }
-    
-    .main-content { padding: 0 !important; margin: 0 auto; max-width: 100%; }
-    
-    a { text-decoration: none !important; border-bottom: none !important; color: #79c0ff !important; }
 
-    /* PDF Page Breaking Rules */
-    .module-section {
-        page-break-before: always; /* Each new section starts on a fresh page */
-        margin-top: 0 !important;
-    }
-    
-    h1, h2, h3, h4, h5, h6 {
-        page-break-after: avoid; /* Prevent header at the bottom of a page */
-    }
-    
-    pre.mac-window, pre.mac-window code {
-        white-space: pre-wrap !important;
-        word-break: break-all !important; 
-        overflow-x: hidden !important;
-        font-size: 11px !important; /* Shrink to fit ~120 chars per line so ASCII art doesn't wrap */
-        line-height: 1.4 !important;
-    }
-    
-    pre, blockquote, img {
-        page-break-inside: avoid; /* Prevent code blocks from splitting across pages */
-    }
-    
-    table {
-        page-break-inside: avoid;
-        table-layout: fixed !important; /* Force table to respect 100% width and not bleed off page */
-        width: 100% !important;
-    }
-    
-    td, th {
-        word-wrap: break-word !important; /* Break long strings inside table cells */
-        overflow-wrap: break-word !important;
-    }
-}
-
-/* 🟡 PREMIUM HIGHLIGHT STYLES */
-mark.yellow-highlight {
-    background-color: rgba(253, 224, 71, 0.2) !important;
-    color: #fde047 !important;
-    padding: 0.15em 0.4em;
-    border-radius: 4px;
-    font-weight: 600;
-    box-shadow: 0 0 8px rgba(253, 224, 71, 0.1);
-}
-
-/* Fix ASCII alignment by removing horizontal padding in code blocks */
-pre mark.yellow-highlight {
-    padding: 0.15em 0 !important;
-}
-
-@media print {
-    mark.yellow-highlight {
-        background-color: #fff000 !important;
-        color: #000000 !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
+    /* Code Blocks: Wrap fully, NO scrollbars, NO horizontal clipping */
+    pre.mac-window {
+        overflow: visible !important;
         box-shadow: none !important;
+        border: 1px solid #233044 !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        margin: 1.5rem 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        white-space: pre-wrap !important;
+    }
+
+    pre.mac-window code {
+        white-space: pre-wrap !important;
+        word-wrap: break-word !important;
+        word-break: break-all !important;
+        overflow: visible !important;
+        overflow-x: visible !important;
+        font-size: 10px !important;
+        line-height: 1.4 !important;
+        padding: 0.8rem 1rem !important;
+        max-width: 100% !important;
+    }
+
+    /* Tables: Fixed width and word-wrapping */
+    table {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        table-layout: fixed !important;
+        width: 100% !important;
+        overflow: visible !important;
+        margin: 1.5rem 0 !important;
+    }
+
+    td, th {
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        word-break: break-word !important;
+        white-space: normal !important;
+        padding: 0.6rem 0.8rem !important;
+        font-size: 0.85rem !important;
+    }
+
+    .alert-callout, blockquote {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        overflow: visible !important;
+    }
+
+    .module-section {
+        page-break-before: always !important;
+    }
+
+    h1, h2, h3, h4 {
+        page-break-after: avoid !important;
+    }
+
+    /* 🖨️ Print / PDF Highlight Styling: High-Definition Legibility */
+    mark.yellow-highlight {
+        background-color: #fde047 !important;
+        color: #000000 !important; /* Pure black text on yellow */
+        border-bottom: 2px solid #b45309 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    pre mark.yellow-highlight, code mark.yellow-highlight {
+        background-color: #fde047 !important;
+        color: #000000 !important;
+        padding: 0.1em 0 !important;
+    }
+
+    mark.yellow-highlight strong {
+        color: #000000 !important;
+        font-weight: 800 !important;
+    }
+
+    /* 🖨️ Inline Code inside Highlights in PDF: Clean white pill with dark black ink */
+    mark.yellow-highlight code {
+        background-color: #ffffff !important;
+        color: #0f172a !important; /* Solid dark text */
+        border: 1.5px solid #334155 !important;
+        font-weight: 700 !important;
+        padding: 0.1em 0.4em !important;
+        border-radius: 3px !important;
+        text-shadow: none !important;
+    }
+
+    /* 🖨️ Badges inside Highlights in PDF: Clean white pill with deep saturated dark ink */
+    mark.yellow-highlight .badge-lbl {
+        background-color: #ffffff !important;
+        border-width: 1.5px !important;
+        border-style: solid !important;
+        font-weight: 800 !important;
+        padding: 0.1em 0.5em !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+    mark.yellow-highlight .badge-lbl.badge-q {
+        color: #0369a1 !important; /* Deep Blue */
+        border-color: #0284c7 !important;
+    }
+    mark.yellow-highlight .badge-lbl.badge-a {
+        color: #047857 !important; /* Deep Green */
+        border-color: #059669 !important;
+    }
+    mark.yellow-highlight .badge-lbl.badge-danger {
+        color: #b91c1c !important; /* Deep Red */
+        border-color: #dc2626 !important;
+    }
+    mark.yellow-highlight .badge-lbl.badge-success {
+        color: #047857 !important; /* Deep Green */
+        border-color: #059669 !important;
+    }
+    mark.yellow-highlight .badge-lbl.badge-warning {
+        color: #92400e !important; /* Deep Amber */
+        border-color: #b45309 !important;
+    }
+    mark.yellow-highlight .badge-lbl.badge-info {
+        color: #6b21a8 !important; /* Deep Royal Purple */
+        border-color: #7e22ce !important;
+    }
+
+    /* General Semantic Badges in Print (Outside highlights) */
+    .badge-lbl {
+        border-width: 1px !important;
+        print-color-adjust: exact !important;
+        -webkit-print-color-adjust: exact !important;
     }
 }
 
-#loader {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: var(--bg-primary);
-    color: var(--text-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    z-index: 9999;
+/* Mobile Responsive */
+@media (max-width: 900px) {
+    .sidebar {
+        position: fixed;
+        left: -330px;
+        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .sidebar.open {
+        left: 0;
+    }
+    .main-content {
+        padding: 2rem 1.5rem;
+    }
 }
 ```
 
-## 🧠 Javascript Logic (Copy this logic)
+---
 
-Use this specific logic to handle the Markdown parsing. It fixes common bugs and handling specific indented headers.
+## 🧠 Javascript Logic (Copy This Exact Engine)
 
 ```javascript
 document.addEventListener("DOMContentLoaded", () => {
     const contentArea = document.getElementById("content-area");
     const loader = document.getElementById("loader");
+    const hlBadge = document.getElementById("hl-count-badge");
+    let allHighlights = [];
+    let currentHlIndex = -1;
 
-    // Fetch MD logic (with local file support)
+    // Fetch Markdown file (supports both HTTP server and local file:/// viewing)
     fetch("YOUR_MARKDOWN_FILE.md")
         .then(response => {
-            // Support local file:/// protocols where status is 0
             if (!response.ok && response.status !== 0) {
-                throw new Error("Failed to load markdown file");
+                throw new Error(`Failed to load markdown file (status: ${response.status})`);
             }
             return response.text();
         })
         .then(markdown => {
-    
-    // 1. Pre-process Markdown (Universal Module & Topic Catcher)
-    // Catch explicit headers like "# Section 1...", "### ⚛️ Module 1..."
-    let processed = markdown.replace(/^#+\s*(?:.*?\s)?(Module\s+\d+|Section\s+\d+)(.*)/gim, '## MODULE_MARKER $1$2');
-    
-    // Catch implicitly indented modules like "  Module 1: ..."
-    processed = processed.replace(/^\s*(Module\s+\d+.*)/gim, '## MODULE_MARKER $1');
-    
-    // Convert remaining h3 and h4 headers into properly styled Topics
-    processed = processed.replace(/^#{3,4}\s+(?!MODULE_MARKER)(.*)/gm, '### TOPIC_MARKER $1');
-    
-    // Converts "1.1:" to bold for better readability
-    processed = processed.replace(/^\s*(\d+\.\d+:)/gm, '**$1**');
+            // 1. Pre-process Markdown (Universal Module & Topic Catcher)
+            let processed = markdown.replace(/^#+\s*(?:.*?\s)?(Module\s+\d+|Section\s+\d+)(.*)/gim, '## MODULE_MARKER $1$2');
+            processed = processed.replace(/^\s*(Module\s+\d+.*)/gim, '## MODULE_MARKER $1');
+            processed = processed.replace(/^#{3,4}\s+(?!MODULE_MARKER)(.*)/gm, '### TOPIC_MARKER $1');
+            processed = processed.replace(/^\s*(\d+\.\d+:)/gm, '**$1**');
 
-    // 2. Configure Renderer
-    const renderer = new marked.Renderer();
-    
-    // Safety check: Cast code to string to avoid [object Object] crash
-    renderer.code = function(code, language) {
-        const safeCode = code ? String(code) : '';
-        
-        // 🟡 1. Extract highlights BEFORE hljs runs to protect them
-        let hlCount = 0;
-        let hlMap = {};
-        let rawCode = safeCode.replace(/\[\[HL::([\s\S]*?)::HL\]\]/g, function(match, p1) {
-            let key = `HLTOKEN${hlCount}ENDHL`;
-            // Escape HTML entities to prevent DOM breakout inside <pre>
-            let escaped = p1.replace(/&/g, "&amp;")
-                            .replace(/</g, "&lt;")
-                            .replace(/>/g, "&gt;")
-                            .replace(/"/g, "&quot;")
-                            .replace(/'/g, "&#039;");
-            hlMap[key] = escaped;
-            hlCount++;
-            return key;
-        });
+            // 2. Configure Custom Marked Renderer
+            const renderer = new marked.Renderer();
 
-        // 2. Robust highlighting with Auto-detection
-        let highlighted = rawCode;
-        // If language is provided and valid, use it
-        if (language && hljs.getLanguage(language)) {
-            try {
-                highlighted = hljs.highlight(rawCode, { language: language }).value;
-            } catch (e) { highlighted = hljs.highlightAuto(rawCode).value; }
-        } else {
-            // Otherwise, or if 'plaintext', force auto-detection
-            highlighted = hljs.highlightAuto(rawCode).value;
-        }
-        
-        // 🟡 3. Restore highlights as HTML tags safely
-        for (let i = 0; i < hlCount; i++) {
-            let key = `HLTOKEN${i}ENDHL`;
-            highlighted = highlighted.replace(key, `<mark class="yellow-highlight">${hlMap[key]}</mark>`);
-        }
-        
-        return `
-        <pre class="mac-window">
-            <div class="code-header">
-                <div class="window-controls">
-                    <span class="control red"></span>
-                    <span class="control yellow"></span>
-                    <span class="control green"></span>
-                </div>
-                <button style="background:none; border:none; color:var(--accent-blue); cursor:pointer;" onclick="navigator.clipboard.writeText(this.parentElement.nextElementSibling.innerText)">Copy</button>
-            </div>
-            <code class="hljs language-${language || 'plaintext'}">${highlighted}</code>
-        </pre>`;
-    };
-    
-    renderer.heading = function(text, level) {
-         const safeText = text ? String(text) : '';
-         let id = safeText.toLowerCase().replace(/[^\w]+/g, '-');
-         let classStr = '';
-         let cleanText = safeText;
-         
-         if (safeText.includes('MODULE_MARKER ')) {
-             cleanText = safeText.replace(/MODULE_MARKER /g, '');
-             id = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
-             classStr = ' class="module-section"';
-             level = 2; // enforce level 2
-         }
-         else if (safeText.includes('TOPIC_MARKER ')) {
-             cleanText = safeText.replace(/TOPIC_MARKER /g, '');
-             id = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
-             classStr = ' class="topic-section"';
-             level = 3; // enforce level 3
-         }
-         
-         return `<h${level}${classStr} id="${id}">${cleanText}</h${level}>`;
-    };
+            // Code Block Renderer with Highlight protection & Interactive Wrap
+            renderer.code = function(code, language) {
+                const safeCode = code ? String(code) : '';
+                
+                // 🟡 1. Extract [[HL::...::HL]] tokens BEFORE hljs runs
+                let hlCount = 0;
+                let hlMap = {};
+                let rawCode = safeCode.replace(/\[\[HL::([\s\S]*?)::HL\]\]/g, function(match, p1) {
+                    let key = `HLTOKEN${hlCount}ENDHL`;
+                    let escaped = p1.replace(/&/g, "&amp;")
+                                    .replace(/</g, "&lt;")
+                                    .replace(/>/g, "&gt;")
+                                    .replace(/"/g, "&quot;")
+                                    .replace(/'/g, "&#039;");
+                    hlMap[key] = escaped;
+                    hlCount++;
+                    return key;
+                });
 
-    // GitHub-Style Alerts (Callouts)
-    renderer.blockquote = function(quote) {
-        const text = quote ? String(quote) : '';
-        let color = '#58a6ff'; // Default Blue (Note)
-        let bg = 'rgba(88, 166, 255, 0.08)';
-        let title = 'Note';
-        let icon = 'fa-info-circle';
-        
-        let isAlert = false;
-        
-        if (text.includes('[!WARNING]')) { color = '#d29922'; bg = 'rgba(210, 153, 34, 0.1)'; title = 'Warning'; icon = 'fa-triangle-exclamation'; isAlert = true; }
-        else if (text.includes('[!IMPORTANT]')) { color = '#8957e5'; bg = 'rgba(137, 87, 229, 0.1)'; title = 'Important'; icon = 'fa-circle-exclamation'; isAlert = true; }
-        else if (text.includes('[!TIP]') || text.includes('[!SUCCESS]')) { color = '#238636'; bg = 'rgba(35, 134, 54, 0.1)'; title = 'Tip'; icon = 'fa-lightbulb'; isAlert = true; }
-        else if (text.includes('[!CAUTION]') || text.includes('[!DANGER]')) { color = '#da3633'; bg = 'rgba(218, 54, 51, 0.1)'; title = 'Caution'; icon = 'fa-skull-crossbones'; isAlert = true; }
-        else if (text.includes('[!NOTE]')) { isAlert = true; }
-        
-        if (isAlert) {
-            // Strip out the tag whether it's wrapped in a <p> or standalone
-            const cleanText = text.replace(/(<p>)?\s*\[!(NOTE|WARNING|IMPORTANT|TIP|SUCCESS|CAUTION|DANGER)\]\s*(<\/p>|<br>)?/i, '<p>');
-            return `<div style="border-left: 4px solid ${color}; background: ${bg}; padding: 1rem 1.5rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; page-break-inside: avoid;">
-                <div style="color: ${color}; font-weight: bold; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-family: 'Outfit', sans-serif;">
-                    <i class="fa-solid ${icon}"></i> ${title}
-                </div>
-                <div style="color: var(--text-secondary); margin: 0;">${cleanText}</div>
-            </div>`;
-        }
-        
-        // Default blockquote behavior
-        return `<blockquote>${text}</blockquote>`;
-    };
+                // 2. Syntax highlight with Highlight.js
+                let highlighted = rawCode;
+                if (language && hljs.getLanguage(language)) {
+                    try {
+                        highlighted = hljs.highlight(rawCode, { language: language }).value;
+                    } catch (e) {
+                        highlighted = hljs.highlightAuto(rawCode).value;
+                    }
+                } else {
+                    highlighted = hljs.highlightAuto(rawCode).value;
+                }
 
-    // 3. Render
-    let finalHtml = marked.parse(processed, { renderer: renderer });
-    
-    // Replace remaining [[HL::text::HL]] outside of code blocks
-    // Fix hanging newline tags that break HTML blocks
-    finalHtml = finalHtml.replace(/\n::HL\]\]/g, '::HL]]\n');
-    
-    // Replace remaining [[HL::text::HL]] outside of code blocks
-    finalHtml = finalHtml.replace(/\[\[HL::([\s\S]*?)::HL\]\]/g, '<mark class="yellow-highlight">$1</mark>');
-    
-    // HEALING OVERLAPPING HTML DOM TAGS
-    // Fix cases where <mark> starts inside a <strong> tag but ends outside it
-    // Ex: <strong><mark>Text:</strong> More Text</mark> -> <mark><strong>Text:</strong> More Text</mark>
-    // Since browser DOM fixes overlap destructively, we fix it in the raw HTML string first
-    finalHtml = finalHtml.replace(/<strong>([^<]*?)<mark class="yellow-highlight">/g, '<mark class="yellow-highlight"><strong>$1');
-    finalHtml = finalHtml.replace(/<em>([^<]*?)<mark class="yellow-highlight">/g, '<mark class="yellow-highlight"><em>$1');
-    finalHtml = finalHtml.replace(/<\/mark>([^<]*?)<\/strong>/g, '$1</strong></mark>');
-    finalHtml = finalHtml.replace(/<\/mark>([^<]*?)<\/em>/g, '$1</em></mark>');
-    
-    // UI Pagination Logic
-    contentArea.innerHTML = '';
-    
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = finalHtml;
-    
-    let pageNumber = 1;
-    let currentPage, currentContent;
-    
-    function createNewPage(num) {
-        const page = document.createElement('div');
-        page.className = 'a4-page';
-        page.innerHTML = `
-            <div class="page-content"></div>
-            <div class="page-footer">Page ${num}</div>
-        `;
-        contentArea.appendChild(page);
-        return page;
-    }
-    
-    currentPage = createNewPage(pageNumber);
-    currentContent = currentPage.querySelector('.page-content');
-    
-    const children = Array.from(tempDiv.children);
-    for (let i = 0; i < children.length; i++) {
-        const el = children[i];
-        currentContent.appendChild(el);
-        
-        // Force synchronous layout calculation
-        if (currentContent.scrollHeight > currentContent.clientHeight) {
-            // If the page was not empty before adding this element, move it to a new page
-            if (currentContent.children.length > 1) {
-                currentContent.removeChild(el);
-                pageNumber++;
-                currentPage = createNewPage(pageNumber);
-                currentContent = currentPage.querySelector('.page-content');
-                currentContent.appendChild(el);
-            }
-        }
-    }
+                // 🟡 3. Restore highlights safely as <mark class="yellow-highlight">
+                for (let i = 0; i < hlCount; i++) {
+                    let key = `HLTOKEN${i}ENDHL`;
+                    highlighted = highlighted.replace(key, `<mark class="yellow-highlight">${hlMap[key]}</mark>`);
+                }
 
-    // Generate TOC
-    const headings = contentArea.querySelectorAll('h1, h2.module-section, h3.topic-section');
-    const tocContainer = document.getElementById('toc');
-    let tocHTML = '';
-    headings.forEach(h => {
-        let indent = '0';
-        if(h.tagName === 'H2') indent = '1rem';
-        if(h.tagName === 'H3') indent = '2rem';
-        tocHTML += `<a href="#${h.id}" style="margin-left: ${indent}">${h.innerText}</a>`;
-    });
-    tocContainer.innerHTML = tocHTML;
+                const langLabel = language ? language.toUpperCase() : 'TEXT';
 
-    // Hide loader
-    loader.style.display = 'none';
+                return `
+                <pre class="mac-window">
+                    <div class="code-header">
+                        <div class="window-controls">
+                            <span class="control red"></span>
+                            <span class="control yellow"></span>
+                            <span class="control green"></span>
+                        </div>
+                        <div class="code-meta">
+                            <span class="lang-badge">${langLabel}</span>
+                            <div class="code-actions">
+                                <button class="code-action-btn wrap-btn" onclick="toggleWrap(this)" title="Toggle line wrap (no scrolling)">
+                                    <i class="fas fa-align-left"></i> Wrap
+                                </button>
+                                <button class="code-action-btn copy-btn" onclick="copySnippet(this)">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <code class="hljs language-${language || 'plaintext'}">${highlighted}</code>
+                </pre>`;
+            };
 
+            // 🏷️ Semantic Technical Labels Renderer (Solves harsh white Q, A, Root Cause, Mistakes)
+            renderer.strong = function(text) {
+                const raw = text ? String(text) : '';
+                const clean = raw.trim();
+                // Strip leading emojis and colon
+                const stripped = clean.replace(/^[❌⚠️💡🤔🚨✅📌🎯💬🛠️👉\s]+/, '').trim();
+                const core = stripped.replace(/:$/, '').trim();
+
+                if (/^(?:Q|Question)$/i.test(core)) {
+                    return `<span class="badge-lbl badge-q">${raw}</span>`;
+                } else if (/^(?:A|Answer)$/i.test(core)) {
+                    return `<span class="badge-lbl badge-a">${raw}</span>`;
+                } else if (/^(?:Root Cause|Problem|Mistake|Galat soch|Risk|Error)$/i.test(core)) {
+                    return `<span class="badge-lbl badge-danger">${raw}</span>`;
+                } else if (/^(?:Actually|Solution|Fix|Security Fix|The 'Pro' Way|Correct Way)$/i.test(core)) {
+                    return `<span class="badge-lbl badge-success">${raw}</span>`;
+                } else if (/^Confusion\s+\d+.*/i.test(core)) {
+                    return `<span class="badge-lbl badge-warning">${raw}</span>`;
+                } else if (/^(?:Prove karo|Precise English|Hinglish Simplification|Anatomy|Why|Context)$/i.test(core)) {
+                    return `<span class="badge-lbl badge-info">${raw}</span>`;
+                }
+                return `<strong>${raw}</strong>`;
+            };
+
+            // Heading Renderer
+            renderer.heading = function(text, level) {
+                const safeText = text ? String(text) : '';
+                let id = safeText.toLowerCase().replace(/[^\w]+/g, '-');
+                let classStr = '';
+                let cleanText = safeText;
+
+                if (safeText.includes('MODULE_MARKER ')) {
+                    cleanText = safeText.replace(/MODULE_MARKER /g, '');
+                    id = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
+                    classStr = ' class="module-section"';
+                    level = 2;
+                } else if (safeText.includes('TOPIC_MARKER ')) {
+                    cleanText = safeText.replace(/TOPIC_MARKER /g, '');
+                    id = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
+                    classStr = ' class="topic-section"';
+                    level = 3;
+                }
+
+                return `<h${level}${classStr} id="${id}">${cleanText}</h${level}>`;
+            };
+
+            // GitHub-Style Alerts
+            renderer.blockquote = function(quote) {
+                const text = quote ? String(quote) : '';
+                let color = '#38bdf8';
+                let bg = 'rgba(56, 189, 248, 0.08)';
+                let title = 'Note';
+                let icon = 'fa-info-circle';
+                let isAlert = false;
+
+                if (text.includes('[!WARNING]')) { color = '#f59e0b'; bg = 'rgba(245, 158, 11, 0.1)'; title = 'Warning'; icon = 'fa-triangle-exclamation'; isAlert = true; }
+                else if (text.includes('[!IMPORTANT]')) { color = '#a855f7'; bg = 'rgba(168, 85, 247, 0.1)'; title = 'Important'; icon = 'fa-circle-exclamation'; isAlert = true; }
+                else if (text.includes('[!TIP]') || text.includes('[!SUCCESS]')) { color = '#10b981'; bg = 'rgba(16, 185, 129, 0.1)'; title = 'Tip'; icon = 'fa-lightbulb'; isAlert = true; }
+                else if (text.includes('[!CAUTION]') || text.includes('[!DANGER]')) { color = '#ef4444'; bg = 'rgba(239, 68, 68, 0.1)'; title = 'Caution'; icon = 'fa-skull-crossbones'; isAlert = true; }
+                else if (text.includes('[!NOTE]')) { isAlert = true; }
+
+                if (isAlert) {
+                    const cleanText = text.replace(/(<p>)?\s*\[!(NOTE|WARNING|IMPORTANT|TIP|SUCCESS|CAUTION|DANGER)\]\s*(<\/p>|<br>)?/i, '<p>');
+                    return `<div class="alert-callout" style="--alert-color: ${color}; --alert-bg: ${bg};">
+                        <div class="alert-header">
+                            <i class="fa-solid ${icon}"></i> ${title}
+                        </div>
+                        <div style="color: var(--text-secondary); margin: 0;">${cleanText}</div>
+                    </div>`;
+                }
+
+                return `<blockquote>${text}</blockquote>`;
+            };
+
+            // 3. Render HTML
+            let finalHtml = marked.parse(processed, { renderer: renderer });
+
+            // Fix hanging newline tags that break HTML blocks
+            finalHtml = finalHtml.replace(/
+::HL\]\]/g, '::HL]]
+');
+
+            // 🟡 Replace remaining [[HL::text::HL]] outside code blocks
+            finalHtml = finalHtml.replace(/\[\[HL::([\s\S]*?)::HL\]\]/g, '<mark class="yellow-highlight">$1</mark>');
+
+            // 🟡 Heal overlapping HTML DOM tags
+            finalHtml = finalHtml.replace(/<strong>([^<]*?)<mark class="yellow-highlight">/g, '<mark class="yellow-highlight"><strong>$1');
+            finalHtml = finalHtml.replace(/<em>([^<]*?)<mark class="yellow-highlight">/g, '<mark class="yellow-highlight"><em>$1');
+            finalHtml = finalHtml.replace(/<\/mark>([^<]*?)<\/strong>/g, '$1</strong></mark>');
+            finalHtml = finalHtml.replace(/<\/mark>([^<]*?)<\/em>/g, '$1</em></mark>');
+
+            contentArea.innerHTML = finalHtml;
+
+            // 4. Initialize Highlights HUD & Index
+            allHighlights = Array.from(contentArea.querySelectorAll('mark.yellow-highlight'));
+            hlBadge.textContent = allHighlights.length.toLocaleString();
+
+            // 5. Generate Table of Contents
+            const headings = contentArea.querySelectorAll('h1, h2.module-section, h3.topic-section');
+            const tocContainer = document.getElementById('toc');
+            let tocHTML = '';
+            headings.forEach(h => {
+                let indentClass = '';
+                if (h.classList.contains('module-section')) indentClass = 'module';
+                else if (h.classList.contains('topic-section')) indentClass = 'topic';
+                
+                tocHTML += `<a href="#${h.id}" class="toc-item ${indentClass}">${h.innerText}</a>`;
+            });
+            tocContainer.innerHTML = tocHTML;
+
+            // Search Filter for TOC
+            const tocSearch = document.getElementById("toc-search");
+            tocSearch.addEventListener("input", (e) => {
+                const term = e.target.value.toLowerCase();
+                const items = tocContainer.querySelectorAll(".toc-item");
+                items.forEach(item => {
+                    if (item.innerText.toLowerCase().includes(term)) {
+                        item.style.display = "block";
+                    } else {
+                        item.style.display = "none";
+                    }
+                });
+            });
+
+            // Hide Loader
+            loader.style.display = 'none';
         })
         .catch(err => {
             console.error(err);
-            loader.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>&nbsp;Error loading notes (Is CORS blocking local files?)';
+            loader.innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; color: #ef4444; margin-bottom: 1rem;"></i>
+                    <div style="color: #ffffff; font-size: 1.3rem; margin-bottom: 0.5rem;">Could not load notes</div>
+                    <div style="color: #94a3b8; font-size: 0.95rem;">${err.message}</div>
+                </div>
+            `;
         });
+
+    // Highlight Jump Helper
+    function jumpToHighlight(index) {
+        if (allHighlights.length === 0) return;
+        if (index < 0) index = allHighlights.length - 1;
+        if (index >= allHighlights.length) index = 0;
+        
+        // Clear previous active target
+        if (currentHlIndex >= 0 && allHighlights[currentHlIndex]) {
+            allHighlights[currentHlIndex].classList.remove('active-target');
+        }
+
+        currentHlIndex = index;
+        const target = allHighlights[currentHlIndex];
+        target.classList.add('active-target');
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Update badge text
+        hlBadge.textContent = `${currentHlIndex + 1} / ${allHighlights.length.toLocaleString()}`;
+    }
+
+    // Button Event Listeners
+    document.getElementById('next-hl-btn').addEventListener('click', () => jumpToHighlight(currentHlIndex + 1));
+    document.getElementById('prev-hl-btn').addEventListener('click', () => jumpToHighlight(currentHlIndex - 1));
+
+    // Global Wrap All Code Toggle in HUD
+    const wrapAllBtn = document.getElementById('wrap-all-btn');
+    let isAllWrapped = false;
+    wrapAllBtn.addEventListener('click', () => {
+        isAllWrapped = !isAllWrapped;
+        const allCodeBlocks = contentArea.querySelectorAll('pre.mac-window code');
+        const allWrapBtns = contentArea.querySelectorAll('.wrap-btn');
+        
+        allCodeBlocks.forEach(c => {
+            if (isAllWrapped) c.classList.add('wrapped');
+            else c.classList.remove('wrapped');
+        });
+
+        allWrapBtns.forEach(b => {
+            if (isAllWrapped) {
+                b.classList.add('active');
+                b.innerHTML = '<i class="fas fa-check"></i> Wrapped';
+            } else {
+                b.classList.remove('active');
+                b.innerHTML = '<i class="fas fa-align-left"></i> Wrap';
+            }
+        });
+
+        if (isAllWrapped) {
+            wrapAllBtn.classList.add('active-toggle');
+            wrapAllBtn.innerHTML = '<i class="fas fa-check"></i> Code Wrapped';
+        } else {
+            wrapAllBtn.classList.remove('active-toggle');
+            wrapAllBtn.innerHTML = '<i class="fas fa-align-left"></i> Wrap All Code';
+        }
+    });
+
+    // Keyboard Shortcuts: 'J' = Next Highlight, 'K' = Prev Highlight
+    window.addEventListener('keydown', (e) => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        if (e.key === 'j' || e.key === 'J') {
+            e.preventDefault();
+            jumpToHighlight(currentHlIndex + 1);
+        } else if (e.key === 'k' || e.key === 'K') {
+            e.preventDefault();
+            jumpToHighlight(currentHlIndex - 1);
+        }
+    });
+
+    // Back to top button
+    document.getElementById('scroll-top-btn').addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 });
+
+// Individual snippet wrap toggle
+function toggleWrap(button) {
+    const pre = button.closest('pre');
+    const code = pre.querySelector('code');
+    code.classList.toggle('wrapped');
+    button.classList.toggle('active');
+    if (code.classList.contains('wrapped')) {
+        button.innerHTML = '<i class="fas fa-check"></i> Wrapped';
+    } else {
+        button.innerHTML = '<i class="fas fa-align-left"></i> Wrap';
+    }
+}
+
+// Snippet copy function
+function copySnippet(button) {
+    const pre = button.closest('pre');
+    const code = pre.querySelector('code');
+    const rawText = code.innerText;
+    navigator.clipboard.writeText(rawText).then(() => {
+        const originalHtml = button.innerHTML;
+        button.innerHTML = '<i class="fas fa-check" style="color: #10b981;"></i> Copied!';
+        setTimeout(() => {
+            button.innerHTML = originalHtml;
+        }, 1800);
+    });
+}
 ```
+
+---
+
+**Prompt End.**
