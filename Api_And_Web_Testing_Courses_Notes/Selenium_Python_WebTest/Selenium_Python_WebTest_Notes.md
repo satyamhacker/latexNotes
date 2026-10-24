@@ -16,14 +16,14 @@ Socho tumhe 1000 logon ko hath se likhe hue birthday cards bhejne hain (yeh **Ma
 
 #### 📖 3. Technical Definition
 
-* **Precise English:** Automation testing uses specialized tools and scripts to execute predefined test cases systematically, while manual testing involves human testers exploring the application to identify edge cases and usability issues.
-* **Hinglish Simplification:** Automation testing mein hum scripts (code) likhte hain jo software ko khud test karta hai, jabki manual testing mein ek insaan khud click karke software ko check karta hai.
+* **[[HL::Precise English::HL]]:** Automation testing uses specialized tools and scripts to execute predefined test cases systematically, while manual testing involves human testers exploring the application to identify edge cases and usability issues.
+* **[[HL::Hinglish Simplification:** Automation testing mein hum scripts (code) likhte hain jo software ko khud test karta hai, jabki manual testing mein ek insaan khud click karke software ko check karta hai::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Insaan baar-baar same test cases run karke thak jata hai (repetitive task), aur speed slow hoti hai.
-* **Solution:** Automation testing **raftaar (Speed)** aur **bharosa (Reliability)** deti hai, aur insaan ki creativity ko bacha kar rakhti hai taaki woh complex bugs dhundh sake.
-* **What breaks if we don't use it?** Har naye feature ke aane par purana feature tootna (regression) check karne mein mahino lag jayenge, aur release cycle delay ho jayegi.
+* **[[HL::Problem:** Insaan baar-baar same test cases run karke thak jata hai (repetitive task), aur speed slow hoti hai.::HL]]
+* [[HL::**Solution:** Automation testing **raftaar (Speed)** aur **bharosa (Reliability)** deti hai, aur insaan ki creativity ko bacha kar rakhti hai taaki woh complex bugs dhundh sake.::HL]]
+* [[HL::**What breaks if we don't use it?** Har naye feature ke aane par purana feature tootna (regression) check karne mein mahino lag jayenge, aur release cycle delay ho jayegi::HL]].
 * **✅ Kab use karo (Use this when):** - **⭐Regression Testing** (jab check karna ho ki naye code ne purane code ko toh nahi toda) mein automation best hai.
 * **Data-Driven Testing** (jab ek hi form ko 1000 alag-alag data sets ke saath check karna ho).
 * **⭐Load/Performance Testing** (jab check karna ho ki 1 lakh users aane par app crash toh nahi hogi).
@@ -77,10 +77,10 @@ Industry mein companies 100% automation kabhi nahi karti. **Initial Cost** (auto
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** Har ek cheez ko automate karne ki koshish karna (100% automation goal).
-* **🤦 Why:** Beginners ko lagta hai ki manual tester ki job replace karni hai.
-* **✅ The 'Pro' Way:** Sirf repetitive tasks ko automate karo, usability aur design human intelligence pe chhodo.
-* **⚡ Consequences:** UI design ya colors check karne ke liye automation script likhoge toh script baar-baar fail hogi (flaky tests) aur maintenance cost bohot badh jayega.
+* **❌ [[HL::Mistake:** Har ek cheez ko automate karne ki koshish karna (100% automation goal).::HL]]
+* [[HL::**🤦 Why:** Beginners ko lagta hai ki manual tester ki job replace karni hai.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Sirf repetitive tasks ko automate karo, usability aur design human intelligence pe chhodo.::HL]]
+* [[HL::**⚡ Consequences:** UI design ya colors check karne ke liye automation script likhoge toh script baar-baar fail hogi (flaky tests) aur maintenance cost bohot badh jayega::HL]].
 * **❌ Mistake:** ⭐Exploratory Testing aur Ad-hoc testing ko automate karne ka sochna.
 * **🤦 Why:** Insaan ka dimag random scenarios generate karta hai, machines sirf rule follow karti hain.
 * **✅ The 'Pro' Way:** Human testers ko freedom do taaki woh creativity se system break karein.
@@ -524,8 +524,8 @@ Selenium Suite Family:
 * **A:** WebDriver architecture 4 main pillars par based hai: 1. Selenium Client Libraries (jo hum Python/Java mein likhte hain). 2. Protocol (ab W3C WebDriver Protocol use hota hai HTTP request bhejne ke liye). 3. Browser Driver (jaise chromedriver jo code aur browser ke beech middleman hai). 4. Real Browser (Chrome/Firefox jo actual native calls execute karta hai).
 * **Q:** W3C WebDriver Protocol kya hai aur isne JSON Wire Protocol ko replace kyun kiya?
 * **A:** Pehle hum JSON Wire Protocol use karte the jo ek non-standard way tha browsers ko control karne ka. W3C WebDriver ek globally accepted standard hai. W3C ke aane se ab API aur browser directly same language samajhte hain, encoding/decoding ka overhead khatam ho gaya hai, jisse tests fast aur zyada reliable ban gaye hain.
-* **Q:** Appium aur Selenium mein kya connection hai?
-* **A:** Appium ek open-source tool hai jo mobile applications (iOS/Android) ko test karne ke kaam aata hai. Interestingly, Appium puri tarah se Selenium ke architecture (WebDriver API) par hi based hai. Isliye agar aapko Selenium aata hai, toh aap mobile automation (Appium) bohot easily seekh sakte hain.
+* **[[HL::Q:** Appium aur Selenium mein kya connection hai?::HL]]
+* [[HL::**A:** Appium ek open-source tool hai jo mobile applications (iOS/Android) ko test karne ke kaam aata hai. Interestingly, Appium puri tarah se Selenium ke architecture (WebDriver API) par hi based hai. Isliye agar aapko Selenium aata hai, toh aap mobile automation (Appium) bohot easily seekh sakte hain::HL]].
 * **Q:** Browser Driver (jaise chromedriver.exe) ki exactly zaroorat hi kyun hai?
 * **A:** Har browser ka internal architecture aur code (engine) alag hota hai (Chrome ka V8, Firefox ka SpiderMonkey). Python script in sabki internal bhasha nahi jaanti. Browser Driver us specific browser ke developers dwara banaya jata hai taaki woh standard W3C commands ko lekar us specific browser ke internal 'Native Calls' mein safely convert kar sake.
 * **Q:** Selenium RC kyun deprecate (band) ho gaya?
@@ -563,17 +563,17 @@ Setup ko do hisso mein samjho:
 #### 📖 3. Technical Definition
 
 * **Precise English:** Environment setup involves creating an isolated Python virtual environment (venv) to manage project dependencies. The Selenium Manager, introduced in Selenium 4.6, is a built-in CLI tool that automatically handles the discovery, downloading, and configuration of the necessary browser drivers (like chromedriver) required for WebDriver execution.
-* **Hinglish Simplification:** Hum Python ka ek isolated folder (venv) banayenge jisme sirf Selenium install hoga. Aur ab hume alag se driver download nahi karna padega kyunki naya Selenium Manager khud-ba-khud sahi driver internet se utha leta hai.
+* **[[HL::Hinglish Simplification:** Hum Python ka ek isolated folder (venv) banayenge jisme sirf Selenium install hoga. Aur ab hume alag se driver download nahi karna padega kyunki naya Selenium Manager khud-ba-khud sahi driver internet se utha leta hai::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Bina `virtualenv` ke tumhare saare Python projects ek doosre ke versions overwrite kar denge. Aur bina `Selenium Manager` ke, har 15 din mein jab Chrome update hoga, tumhara code toot jayega `SessionNotCreatedException` ki wajah se.
-* **Solution:** `virtualenv` dependency isolation deta hai, aur Built-in Selenium Manager driver management ko zero-touch (fully automatic) bana deta hai.
+* **[[HL::Problem:** Bina `virtualenv` ke tumhare saare Python projects ek doosre ke versions overwrite kar denge. Aur bina `Selenium Manager` ke, har 15 din mein jab Chrome update hoga, tumhara code toot jayega `SessionNotCreatedException` ki wajah se.::HL]]
+* [[HL::**Solution:** `virtualenv` dependency isolation deta hai, aur Built-in Selenium Manager driver management ko zero-touch (fully automatic) bana deta hai::HL]].
 * **What breaks if we don't use it?** "It works on my machine but not yours" wali problem aayegi, aur continuous integration pipelines (CI/CD) fail hongi driver mismatch ki wajah se.
 * **✅ Kab use karo (Use this when):**
-* **virtualenv / venv:** Hamesha! Har naye Python project ke liye ek naya venv banana industry standard hai.
+* **[[HL::virtualenv / venv:** Hamesha! Har naye Python project ke liye ek naya venv banana industry standard hai::HL]].
 * **⭐Selenium Manager:** Default tareeke se! Ab explicitly koi path ya webdriver-manager use karne ki zaroorat nahi hai.
-* **Headless New Mode (`--headless=new`):** Jab tum code CI/CD server pe chala rahe ho jahan actually screen (monitor) nahi hoti, ya jab speed zyada chahiye.
+* **[[HL::Headless New Mode (`--headless=new`):** Jab tum code CI/CD server pe chala rahe ho jahan actually screen (monitor) nahi hoti, ya jab speed zyada chahiye::HL]].
 
 
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):**
@@ -604,15 +604,15 @@ Project Folder/
 **Step 1: Install Python & Setup IDE**
 Python official website se install karo, par install karte waqt ek checkbox aata hai: **⭐"Add Python to PATH"** — isey TICK karna **sabse zyada important** hai, warna terminal commands nahi chalenge! Editor ke liye **VS Code** download karo.
 
-**Step 2: Create Virtual Environment**
-Terminal/Command Prompt open karo aur apne project folder mein jao:
+**[[HL::Step 2: Create Virtual Environment**::HL]]
+[[HL::Terminal/Command Prompt open karo aur apne project folder mein jao:::HL]]
 
-* **Command:** `python -m venv my_env`
-* **Anatomy:**
-* `python`: Python interpreter ko bula raha hai.
-* `-m`: "module" flag — hum venv naam ke built-in module ko run kar rahe hain.
-* `venv`: Module ka naam jo isolated environment banata hai.
-* `my_env`: Tumhare environment folder ka naam (kuch bhi rakh sakte ho).
+* [[HL::**Command:** `python -m venv my_env`::HL]]
+* [[HL::**Anatomy:**::HL]]
+* [[HL::`python`: Python interpreter ko bula raha hai.::HL]]
+* [[HL::`-m`: "module" flag — hum venv naam ke built-in module ko run kar rahe hain.::HL]]
+* [[HL::`venv`: Module ka naam jo isolated environment banata hai.::HL]]
+* [[HL::`my_env`: Tumhare environment folder ka naam (kuch bhi rakh sakte ho::HL]]).
 
 
 
@@ -653,23 +653,23 @@ Apne VS Code mein ek nayi file banao `test_browser.py` aur yeh code likho.
 
 ```python
 # Python 3.11+ | Selenium 4.6+ (Using built-in Selenium Manager)
-1  import time                                          # time module — code ko rokne (pause) karne ke liye use hota hai
-2  from selenium import webdriver                       # webdriver — Selenium ka main component jo browser ko control karega
-3  
-4  # Setup Chrome Options for modern headless mode
-5  options = webdriver.ChromeOptions()                  # ChromeOptions() = Chrome browser ki specific settings/flags set karne ka class
-6  options.add_argument("--headless=new")               # add_argument() = naya flag lagao. --headless=new = bina UI ke browser background mein chalao (modern rendering)
-7  
-8  # ⭐ "Ab webdriver-manager ki zaroorat nahi hai"
-9  driver = webdriver.Chrome(options=options)           # Chrome() = Chrome browser start karo. (Selenium Manager khud driver download karega yahan!)
-10 
-11 driver.get("https://www.google.com")                 # .get() = Browser address bar mein yeh URL dalo aur page load hone ka wait karo
-12 
-13 print("Page ka title hai:", driver.title)            # .title = Current loaded page ka title <title> tag nikal ke laata hai
-14 
-15 time.sleep(5)                                        # sleep(5) = Execution ko 5 seconds ke liye rok do taaki hum script ko immediately band na karein
-16 
-17 driver.quit()                                        # .quit() = Browser window band karo aur background driver processes ko clean up (kill) karo
+1  import time                                          # [[HL::time module — code ko rokne (pause) karne ke liye use hota hai::HL]]
+[[HL::2  from selenium import webdriver                       # webdriver — Selenium ka main component jo browser ko control karega::HL]]
+[[HL::3  ::HL]]
+[[HL::4  # Setup Chrome Options for modern headless mode::HL]]
+[[HL::5  options = webdriver.ChromeOptions()                  # ChromeOptions() = Chrome browser ki specific settings/flags set karne ka class::HL]]
+[[HL::6  options.add_argument("--headless=new")               # add_argument() = naya flag lagao. --headless=new = bina UI ke browser background mein chalao (modern rendering)::HL]]
+[[HL::7  ::HL]]
+[[HL::8  # ⭐ "Ab webdriver-manager ki zaroorat nahi hai"::HL]]
+[[HL::9  driver = webdriver.Chrome(options=options)           # Chrome() = Chrome browser start karo. (Selenium Manager khud driver download karega yahan!)::HL]]
+[[HL::10 ::HL]]
+[[HL::11 driver.get("https://www.google.com")                 # .get() = Browser address bar mein yeh URL dalo aur page load hone ka wait karo::HL]]
+[[HL::12 ::HL]]
+[[HL::13 print("Page ka title hai:", driver.title)            # .title = Current loaded page ka title <title> tag nikal ke laata hai::HL]]
+[[HL::14 ::HL]]
+[[HL::15 time.sleep(5)                                        # sleep(5) = Execution ko 5 seconds ke liye rok do taaki hum script ko immediately band na karein::HL]]
+[[HL::16 ::HL]]
+[[HL::17 driver.quit()                                        # .quit() = Browser window band karo aur background driver processes ko clean up (kill) karo::HL]]
 
 ```
 
@@ -683,7 +683,7 @@ Page ka title hai: Google
 
 * **Line 6:** `options.add_argument("--headless=new")` — `--headless` mode ka matlab hai browser chalega par screen pe dikhega nahi (ghost mode). Pehle purana `--headless` use hota tha jo web pages ko theek se render nahi kar pata tha. 2026 mein standards update hue, ab hamesha `--headless=new` flag lagana padta hai taaki backend mein bhi Chrome bilkul real browser jaisa behave kare (full rendering engine ke sath). Agar yeh hata doge toh browser UI ke sath pop-up hoga (visually dikhega).
 * **Line 9:** `driver = webdriver.Chrome(options=options)` — Yehi woh jaadu wali line hai. Jab tum `Chrome()` function bina kisi driver path ke call karte ho, toh **⭐Selenium 4.6+** ka built-in **Selenium Manager** activate ho jata hai. Agar yeh nahi hota, toh `executable_path='path/to/driver'` likhna padta.
-* **Line 17:** `driver.quit()` — Yeh function poora WebDriver session khatam kar deta hai. Agar ise nahi likhoge, toh script khatam hone ke baad bhi background mein Chrome process (task manager mein) zinda rahegi aur dheere-dheere tumhara RAM full (memory leak) ho jayega. `driver.close()` sirf current tab band karta hai, par `.quit()` poora browser terminate karta hai.
+* **[[HL::Line 17:** `driver.quit()` — Yeh function poora WebDriver session khatam kar deta hai. Agar ise nahi likhoge, toh script khatam hone ke baad bhi background mein Chrome process (task manager mein) zinda rahegi aur dheere-dheere tumhara RAM full (memory leak) ho jayega. `driver.close()` sirf current tab band karta hai, par `.quit()` poora browser terminate karta hai::HL]].
 
 #### 🔒 8. Security-First Check
 
@@ -691,7 +691,7 @@ Kyunki Selenium ek external binary (`chromedriver`) download karta hai internet 
 
 #### 🏗️ 9. Scalability & Industry Context
 
-Industry mein "Zero-Setup" environments prefer kiye jate hain. **⭐Selenium Manager** ka sabse bada scalable fayda yeh hai ki Docker containers ya GitHub Actions (CI/CD) mein hume manually driver setup ka code nahi likhna padta. Image boot hoti hai, script chalti hai, aur manager dynamic environment ke hisaab se sab manage kar leta hai.
+[[HL::Industry mein "Zero-Setup" environments prefer kiye jate hain. **⭐Selenium Manager** ka sabse bada scalable fayda yeh hai ki Docker containers ya GitHub Actions (CI/CD) mein hume manually driver setup ka code nahi likhna padta. Image boot hoti hai, script chalti hai, aur manager dynamic environment ke hisaab se sab manage kar leta hai::HL]].
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
@@ -868,9 +868,9 @@ Socho tum ek car chala rahe ho. **"Car ki Chabhi aur Steering"** analogy yahan p
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Agar hume 100 pages test karne hain, toh manually URL type karna aur back/forward click karna impossible aur slow hai.
-* **Solution:** WebDriver commands ye sab microseconds mein automate kar dete hain.
-* **What breaks if we don't use it?** Agar script sahi se navigate nahi karegi, toh galat page par tests run honge aur fail ho jayenge. Agar end mein browser quit nahi kiya, toh computer ki **memory full** ho jayegi (RAM crash).
+* **[[HL::Problem:** Agar hume 100 pages test karne hain, toh manually URL type karna aur back/forward click karna impossible aur slow hai.::HL]]
+* [[HL::**Solution:** WebDriver commands ye sab microseconds mein automate kar dete hain.::HL]]
+* [[HL::**What breaks if we don't use it?** Agar script sahi se navigate nahi karegi, toh galat page par tests run honge aur fail ho jayenge. Agar end mein browser quit nahi kiya, toh computer ki **memory full** ho jayegi (RAM crash::HL]]).
 * **✅ Kab use karo:** Har ek automation script mein (navigation aur closing mandatory hai).
 * **❌ Kab mat karo / Alternative prefer karo:** (Yeh concept har situation mein applicable hai — browser control ke bina Selenium chal hi nahi sakta).
 
@@ -922,8 +922,8 @@ Abhi hum yahan hain: https://www.google.com/
 
 ##### 🔬 Code Explanation (LINE-BY-LINE)
 
-* **Line 4:** `webdriver.Chrome()` — Yeh ek naya instance (fresh session) banata hai. Agar yeh nahi likha toh browser open hi nahi hoga.
-* **Line 20:** `driver.quit()` — ⭐ **"Yeh sabse zaroori hai"** (original notes emphasis). Agar isko skip kiya, toh background mein Chrome processes chalti rahengi aur RAM full ho jayegi.
+* **[[HL::Line 4:** `webdriver.Chrome()` — Yeh ek naya instance (fresh session) banata hai. Agar yeh nahi likha toh browser open hi nahi hoga.::HL]]
+* [[HL::**Line 20:** `driver.quit()` — ⭐ **"Yeh sabse zaroori hai"** (original notes emphasis). Agar isko skip kiya, toh background mein Chrome processes chalti rahengi aur RAM full ho jayegi::HL]].
 
 #### 🔒 8. Security-First Check
 
@@ -935,22 +935,22 @@ Local machine par 1-2 open browsers RAM slow karte hain, but server par agar 500
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes
 
-* **❌ Mistake:** Test ke end mein `driver.close()` use karna instead of `driver.quit()`.
-* **🤦 Why:** Beginners ko lagta hai 'close' ka matlab sab band karna hai.
-* **✅ The 'Pro' Way:** Hamesha `driver.quit()` use karo end mein.
-* **⚡ Consequences:** `close()` sirf active tab band karta hai. ChromeDriver.exe process background mein zinda rehti hai, jo memory leak (RAM full) ka sabse bada kaaran banti hai.
+* **❌ [[HL::Mistake:** Test ke end mein `driver.close()` use karna instead of `driver.quit()`.::HL]]
+* [[HL::**🤦 Why:** Beginners ko lagta hai 'close' ka matlab sab band karna hai.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Hamesha `driver.quit()` use karo end mein.::HL]]
+* [[HL::**⚡ Consequences:** `close()` sirf active tab band karta hai. ChromeDriver.exe process background mein zinda rehti hai, jo memory leak (RAM full) ka sabse bada kaaran banti hai::HL]].
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "close() aur quit() mein exact kya farq hai?"**
-* **Galat soch:** Dono same tarike se browser band karte hain.
-* **Actually:** `close()` sirf wahi ek TAB band karta hai jo abhi active hai. `quit()` saare 10 tabs band karta hai aur invisible background software (ChromeDriver) ko bhi maar deta hai.
-* **Prove karo:** Script mein 3 tabs open karo aur `driver.close()` likho — tum dekhoge ki 1 tab band hua but baaki browser abhi bhi khula hai.
+* **[[HL::Confusion 1 — "close() aur quit() mein exact kya farq hai?"**::HL]]
+* [[HL::**Galat soch:** Dono same tarike se browser band karte hain.::HL]]
+* [[HL::**Actually:** `close()` sirf wahi ek TAB band karta hai jo abhi active hai. `quit()` saare 10 tabs band karta hai aur invisible background software (ChromeDriver) ko bhi maar deta hai.::HL]]
+* [[HL::**Prove karo:** Script mein 3 tabs open karo aur `driver.close()` likho — tum dekhoge ki 1 tab band hua but baaki browser abhi bhi khula hai.::HL]]
 
 
-* **Confusion 2 — "get() vs navigate().to() (Java)?"**
-* **Galat soch:** Kuch alag karte honge.
-* **Actually:** Python mein sirf `driver.get()` hota hai. Java mein `driver.navigate().to()` (jaise `Maps().to()`) bhi hota hai, but dono ka kaam exactly same hai — URL par jaana.
+* [[HL::**Confusion 2 — "get() vs navigate().to() (Java)?"**::HL]]
+* [[HL::**Galat soch:** Kuch alag karte honge.::HL]]
+* [[HL::**Actually:** Python mein sirf `driver.get()` hota hai. Java mein `driver.navigate().to()` (jaise `Maps().to()`) bhi hota hai, but dono ka kaam exactly same hai — URL par jaana::HL]].
 
 
 
@@ -980,7 +980,7 @@ Amazon ki QA team jab "Payment Gateway" test karti hai, toh woh `driver.back()` 
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Tester script likhta hai, `webdriver.Chrome()` se browser launch karta hai, URL navigate karta hai, aur manually screen dekh kar check karta hai ki navigation sahi chal raha hai (time.sleep laga kar). Test ke aakhir mein manually verify karta hai ki `quit()` chala ya nahi.
+* **Testing/Offline Phase:** Tester script likhta hai, `webdriver.Chrome()` se browser launch karta hai, URL navigate karta hai, aur manually screen dekh kar check karta hai ki navigation sahi [[HL::chal raha hai::HL]] (time.sleep laga kar). Test ke aakhir mein manually verify karta hai ki `quit()` chala ya nahi.
 * **Fixing/Iteration Phase:** (N/A for basic navigation)
 * **Live Production Phase:** (N/A for basic navigation)
 
@@ -1003,8 +1003,8 @@ Python Script
 
 * **Q:** Selenium automation script mein `driver.quit()` likhna kyun mandatory hota hai?
 * **A:** Jab hum browser launch karte hain, toh ChromeDriver memory mein space (RAM) leta hai. `driver.close()` sirf active window tab ko destroy karta hai but driver process chalti rehti hai. `driver.quit()` saare tabs aur OS-level driver process dono ko safely terminate karta hai, jisse memory leak aur "memory full" crash se bacha ja sake.
-* **Q:** Ek page se dusre page pe aage-peeche jaane ke liye kaunse commands use hote hain?
-* **A:** Browser history mein aage peeche jaane ke liye `driver.back()` (pichle page par) aur `driver.forward()` (agle page par) use karte hain. Page ko reload karne ke liye `driver.refresh()` use hota hai.
+* **[[HL::Q:** Ek page se dusre page pe aage-peeche jaane ke liye kaunse commands use hote hain?::HL]]
+* [[HL::**A:** Browser history mein aage peeche jaane ke liye `driver.back()` (pichle page par) aur `driver.forward()` (agle page par) use karte hain. Page ko reload karne ke liye `driver.refresh()` use hota hai::HL]].
 * **Q:** Java mein `Maps().to()` hota hai, Python mein iska alternative kya hai?
 * **A:** Python Selenium binding mein `Maps().to()` available nahi hai, iska exact equivalent `driver.get(url)` hi hai. Dono ka backend mechanism same hai (HTTP request bhejna).
 
@@ -1043,11 +1043,11 @@ Python Script
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Normal browser run hone mein UI (Graphical User Interface — buttons, images jo screen pe dikhte hain) render karta hai, jo slow hota hai aur RAM khata hai. Plus, normal mode purani history yaad rakhta hai jo naye tests kharab kar sakti hai.
-* **Solution:** `Options` use karke hum browser ko UI-less (Headless) bana sakte hain aur Incognito use karke fresh environment de sakte hain.
-* **What breaks if we don't use it?** Agar CI/CD server (jaise Jenkins) par run kar rahe ho jahan monitor/screen hi nahi hoti, toh bina Headless ke tumhari script crash ho jayegi.
-* **✅ Kab use karo:** - **Headless:** Jab test pipeline (server) mein fast run karna ho.
-* **Incognito:** Jab tumhe completely fresh session chahiye bina purani login cookies ke.
+* **[[HL::Problem:** Normal browser run hone mein UI (Graphical User Interface — buttons, images jo screen pe dikhte hain) render karta hai, jo slow hota hai aur RAM khata hai. Plus, normal mode purani history yaad rakhta hai jo naye tests kharab kar sakti hai.::HL]]
+* [[HL::**Solution:** `Options` use karke hum browser ko UI-less (Headless) bana sakte hain aur Incognito use karke fresh environment de sakte hain.::HL]]
+* [[HL::**What breaks if we don't use it?** Agar CI/CD server (jaise Jenkins) par run kar rahe ho jahan monitor/screen hi nahi hoti, toh bina Headless ke tumhari script crash ho jayegi.::HL]]
+* [[HL::**✅ Kab use karo:** - **Headless:** Jab test pipeline (server) mein fast run karna ho.::HL]]
+* [[HL::**Incognito:** Jab tumhe completely fresh session chahiye bina purani login cookies ke::HL]].
 
 
 * **❌ Kab mat karo / Alternative prefer karo:** Development / Debugging phase mein Headless use mat karo — kyunki tumhe dekhna hota hai ki code click kahan kar raha hai. Tab normal mode prefer karo.
@@ -1069,19 +1069,19 @@ Python Script
 
 ```python
 # Python 3.11+ | Selenium 4.x
-1  from selenium import webdriver                               # selenium tools import
-2  from selenium.webdriver.chrome.options import Options        # Options class import — browser customize karne ke liye
-3  
-4  my_options = Options()                                       # Options ka ek blank object/form banaya
-5  
-6  # --- Chromium Arguments (add_argument) ---
-7  my_options.add_argument("--incognito")                       # --incognito = private mode mein kholo (no cache/history)
-8  my_options.add_argument("--headless")                        # --headless = invisible car, UI disable kardo (⭐ fast execution)
-9  my_options.add_argument("--start-maximized")                 # --start-maximized = khulte hi full screen kardo
-10 my_options.add_argument("--ignore-certificate-errors")       # --ignore-certificate-errors = SSL/HTTPS warnings ko bypass karo
-11 
-12 # --- Experimental Options ---
-13 my_options.add_experimental_option("excludeSwitches", ["enable-automation"]) # excludeSwitches = 'Chrome is being controlled' wala infobar hatao
+1  from selenium import webdriver                               # [[HL::selenium tools import::HL]]
+[[HL::2  from selenium.webdriver.chrome.options import Options        # Options class import — browser customize karne ke liye::HL]]
+[[HL::3  ::HL]]
+[[HL::4  my_options = Options()                                       # Options ka ek blank object/form banaya::HL]]
+[[HL::5  ::HL]]
+[[HL::6  # --- Chromium Arguments (add_argument) ---::HL]]
+[[HL::7  my_options.add_argument("--incognito")                       # --incognito = private mode mein kholo (no cache/history)::HL]]
+[[HL::8  my_options.add_argument("--headless")                        # --headless = invisible car, UI disable kardo (⭐ fast execution)::HL]]
+[[HL::9  my_options.add_argument("--start-maximized")                 # --start-maximized = khulte hi full screen kardo::HL]]
+[[HL::10 my_options.add_argument("--ignore-certificate-errors")       # --ignore-certificate-errors = SSL/HTTPS warnings ko bypass karo::HL]]
+[[HL::11 ::HL]]
+[[HL::12 # --- Experimental Options ---::HL]]
+[[HL::13 my_options.add_experimental_option("excludeSwitches", ["enable-automation"]) # excludeSwitches = 'Chrome is being controlled' wala infobar hatao::HL]]
 14 
 15 mobile_emulation = {"deviceName": "Nexus 5"}                 # dictionary banayi mobile mode simulate karne ke liye
 16 my_options.add_experimental_option("mobileEmulation", mobile_emulation)      # browser ko bolo mobile view mein khule
@@ -1089,9 +1089,9 @@ Python Script
 18 # Browser launch karte waqt yeh rules (my_options) pass karo
 19 driver = webdriver.Chrome(options=my_options)                # options= : customize kiye hue rules browser ko pass kiye
 20 
-21 driver.get("https://www.google.com")                         # headless mode mein URL load hoga
-22 print("Title hai:", driver.title)                            # driver.title = page ka heading print karo (proof ki invisible browser chal raha hai)
-23 driver.quit()                                                # memory clear karo
+21 [[HL::driver.get("https://www.google.com")                         # headless mode mein URL load hoga::HL]]
+[[HL::22 print("Title hai:", driver.title)                            # driver.title = page ka heading print karo (proof ki invisible browser chal raha hai)::HL]]
+[[HL::23 driver.quit::HL]]()                                                # memory clear karo
 
 ```
 
@@ -1106,7 +1106,7 @@ Title hai: Google
 ##### 🔬 Code Explanation (LINE-BY-LINE)
 
 * **Line 2 & 4:** `Options` — "Aaj kal, Options object hi sab kuch handle kar leta hai" (purane versions mein Capabilities alag se likhte the, ab options mein hi sab merged hai).
-* **Line 8:** `--headless` flag chrome UI (Graphical User Interface) engine ko band kar deta hai. Sirf DOM (HTML data) memory mein load hota hai isliye yeh ⭐ **bahut fast hota hai**.
+* **[[HL::Line 8:** `--headless` flag chrome UI (Graphical User Interface) engine ko band kar deta hai. Sirf DOM (HTML data) memory mein load hota hai isliye yeh ⭐ **bahut fast hota hai::HL]]**.
 * **Line 13:** `add_experimental_option` — Yeh options abhi official arguments nahi bane hain isliye "experimental" kehlata hain. `excludeSwitches` list pass karta hai ki konsi default cheezein Chrome se nikalni hain (yahan `"enable-automation"` nikal rahe hain taaki security warning hat jaye).
 
 #### 🔒 8. Security-First Check
@@ -1190,8 +1190,8 @@ Netflix apne CI/CD pipelines (Jenkins) mein headless mode aur `--incognito` use 
 
 #### ❓ 17. Interview Q&A
 
-* **Q:** Headless browser testing kya hoti hai aur CI/CD pipelines mein kyun zaroori hai?
-* **A:** Headless browser GUI (Graphical User Interface) load nahi karta, yeh sirf background mein chalta hai. CI/CD pipelines (jaise Jenkins, GitHub Actions) par jo servers hote hain unme display monitors ya graphics drivers nahi hote. Wahan UI render karna impossible hai, isliye headless mode mandatory hota hai aur yeh execution ko ⭐ fast bhi banata hai.
+* **[[HL::Q:** Headless browser testing kya hoti hai aur CI/CD pipelines mein kyun zaroori hai?::HL]]
+* [[HL::**A:** Headless browser GUI (Graphical User Interface) load nahi karta, yeh sirf background mein chalta hai. CI/CD pipelines (jaise Jenkins, GitHub Actions) par jo servers hote hain unme display monitors ya graphics drivers nahi hote. Wahan UI render karna impossible hai, isliye headless mode mandatory hota hai aur yeh execution ko ⭐ fast bhi banata hai::HL]].
 * **Q:** Browser mein "Chrome is being controlled by automated test software" ki warning kaise hatate hain?
 * **A:** Yeh warning ek default Chrome switch `enable-automation` ke karan aati hai. Ise hatane ke liye hum Options object mein `add_experimental_option` use karte hain aur `excludeSwitches` list mein `["enable-automation"]` pass kar dete hain.
 * **Q:** Selenium 4 mein Options aur Capabilities ke beech kya relation hai?
@@ -1264,27 +1264,27 @@ Locators bilkul aise hi web page ke elements ka address batate hain.
 #### 📖 3. Technical Definition
 
 * **Precise English:** Locators are query strings used by WebDriver to identify and interact with HTML elements on a web page. CSS Selectors use browser-native styling language syntax to target elements efficiently.
-* **Hinglish Simplification:** Locators woh unique address hain jinki madad se automation script web page par kisi specific button ya textbox ko pehchanti hai.
+* **[[HL::Hinglish Simplification:** Locators woh unique address hain jinki madad se automation script web page par kisi specific button ya textbox ko pehchanti hai::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Script ke paas aankhein nahi hoti. Agar tum kahoge "Login button par click karo", toh script ko nahi pata ki woh HTML document mein kahan hai.
-* **Solution:** Hum script ko element ka exact attribute (jaise ID ya Class) batate hain.
-* **What breaks if we don't use it?** Script galat button par click kar degi, ya `NoSuchElementException` (jab element na mile toh aane wala error) phek kar crash ho jayegi.
-* **✅ Kab use karo:** Har baar jab kisi element ke sath interact (click, type) karna ho. Hamesha **ID** ko first preference do.
+* **[[HL::Problem:** Script ke paas aankhein nahi hoti. Agar tum kahoge "Login button par click karo", toh script ko nahi pata ki woh HTML document mein kahan hai.::HL]]
+* [[HL::**Solution:** Hum script ko element ka exact attribute (jaise ID ya Class) batate hain.::HL]]
+* [[HL::**What breaks if we don't use it?** Script galat button par click kar degi, ya `NoSuchElementException` (jab element na mile toh aane wala error) phek kar crash ho jayegi.::HL]]
+* [[HL::**✅ Kab use karo:** Har baar jab kisi element ke sath interact (click, type) karna ho. Hamesha **ID** ko first preference do::HL]].
 * **❌ Kab mat karo / Alternative prefer karo:** **Class Name** tab avoid karo jab class mein spaces hon (jaise `btn btn-primary`). Aise case mein **CSS Selector** use karo.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
-Browser mein right-click karke **Inspect** (Dev Tools — developer mode jahan page ka code dikhta hai) kholne par tumhe **HTML code** dikhega:
-`<input type="text" id="username" name="email" class="login-field">`
+[[HL::Browser mein right-click karke **Inspect** (Dev Tools — developer mode jahan page ka code dikhta hai) kholne par tumhe **HTML code** dikhega:::HL]]
+[[HL::`<input type="text" id="username" name="email" class="login-field::HL]]">`
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. Tum code mein `driver.find_element()` call karte ho.
-2. WebDriver browser ke DOM (Document Object Model — HTML elements ka tree structure) ko scan karta hai.
-3. Jis element ka attribute tumhare diye gaye Locator se match hota hai, WebDriver us element ka ek reference/object return karta hai.
-4. Us reference par hum `click()` ya `send_keys()` perform karte hain.
+1. [[HL::Tum code mein `driver.find_element()` call karte ho.::HL]]
+2. [[HL::WebDriver browser ke DOM (Document Object Model — HTML elements ka tree structure) ko scan karta hai.::HL]]
+3. [[HL::Jis element ka attribute tumhare diye gaye Locator se match hota hai, WebDriver us element ka ek reference/object return karta hai.::HL]]
+4. [[HL::Us reference par hum `click()` ya `send_keys()` perform karte hain::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
 
@@ -1296,46 +1296,46 @@ Browser mein right-click karke **Inspect** (Dev Tools — developer mode jahan p
 4  driver = webdriver.Chrome()
 5  driver.get("https://example.com/login")
 6  
-7  # --- Basic Locators ---
-8  # ID: ⭐ Sabse best, sabse fast (Kyunki ID hamesha unique hota hai)
-9  user_box = driver.find_element(By.ID, "username")                  # find_element() = pehla element dhoondho jo match kare
-10 
-11 # Name
-12 email_box = driver.find_element(By.NAME, "email")
-13 
-14 # Class Name
-15 button = driver.find_element(By.CLASS_NAME, "button")
-16 
-17 # Tag Name (list return karega agar find_elements use kiya)
-18 all_inputs = driver.find_elements(By.TAG_NAME, "input")            # find_elements() = saare matching elements ki list return karta hai
-19 print(f"Total inputs: {len(all_inputs)}")
-20 
-21 # Link Text & Partial Link Text (Sirf <a> tags ke liye)
-22 forgot_pwd = driver.find_element(By.LINK_TEXT, "Forgot Password")  # exact text match
-23 help_link = driver.find_element(By.PARTIAL_LINK_TEXT, "Help")      # thoda sa text match ho toh bhi chalega
-24 
-25 # --- CSS Selectors (styling language ka syntax) ---
-26 # ID in CSS (# lagate hain)
-27 css_id = driver.find_element(By.CSS_SELECTOR, "#username")         # same as By.ID, "username"
-28 
-29 # Class in CSS (. lagate hain)
-30 css_class = driver.find_element(By.CSS_SELECTOR, ".button")
-31 
-32 # Class with spaces (.btn.btn-primary)
-33 css_multi_class = driver.find_element(By.CSS_SELECTOR, ".btn.btn-primary") # spaces ko dot (.) se replace karo
-34 
-35 # Attribute CSS
-36 css_attr = driver.find_element(By.CSS_SELECTOR, "[name='email']")  
+7  # --- [[HL::Basic Locators ---::HL]]
+[[HL::8  # ID: ⭐ Sabse best, sabse fast (Kyunki ID hamesha unique hota hai)::HL]]
+[[HL::9  user_box = driver.find_element(By.ID, "username")                  # find_element() = pehla element dhoondho jo match kare::HL]]
+[[HL::10 ::HL]]
+[[HL::11 # Name::HL]]
+[[HL::12 email_box = driver.find_element(By.NAME, "email")::HL]]
+[[HL::13 ::HL]]
+[[HL::14 # Class Name::HL]]
+[[HL::15 button = driver.find_element(By.CLASS_NAME, "button")::HL]]
+[[HL::16 ::HL]]
+[[HL::17 # Tag Name (list return karega agar find_elements use kiya)::HL]]
+[[HL::18 all_inputs = driver.find_elements(By.TAG_NAME, "input")            # find_elements() = saare matching elements ki list return karta hai::HL]]
+[[HL::19 print(f"Total inputs: {len(all_inputs)}")::HL]]
+[[HL::20 ::HL]]
+[[HL::21 # Link Text & Partial Link Text (Sirf <a> tags ke liye)::HL]]
+[[HL::22 forgot_pwd = driver.find_element(By.LINK_TEXT, "Forgot Password")  # exact text match::HL]]
+[[HL::23 help_link = driver.find_element(By.PARTIAL_LINK_TEXT, "Help")      # thoda sa text match ho toh bhi chalega::HL]]
+[[HL::24 ::HL]]
+[[HL::25 # --- CSS Selectors (styling language ka syntax) ---::HL]]
+[[HL::26 # ID in CSS (# lagate hain)::HL]]
+[[HL::27 css_id = driver.find_element(By.CSS_SELECTOR, "#username")         # same as By.ID, "username"::HL]]
+[[HL::28 ::HL]]
+[[HL::29 # Class in CSS (. lagate hain)::HL]]
+[[HL::30 css_class = driver.find_element(By.CSS_SELECTOR, ".button")::HL]]
+[[HL::31 ::HL]]
+[[HL::32 # Class with spaces (.btn.btn-primary)::HL]]
+[[HL::33 css_multi_class = driver.find_element(By.CSS_SELECTOR, ".btn.btn-primary") # spaces ko dot (.) se replace karo::HL]]
+[[HL::34 ::HL]]
+[[HL::35 # Attribute CSS::HL]]
+[[HL::36 css_attr = driver.find_element(By.CSS_SELECTOR, "[name='email::HL]]']")  
 37 
-38 # Combined Selectors (Tag + ID, Tag + Class)
-39 combo_1 = driver.find_element(By.CSS_SELECTOR, "input#username")
-40 combo_2 = driver.find_element(By.CSS_SELECTOR, "button.btn-primary")
-41 combo_3 = driver.find_element(By.CSS_SELECTOR, "#user.login-field") # ID 'user' aur class 'login-field' ek sath
-42 
-43 # Parent-Child CSS (descendant ko space se denote karte hain)
-44 parent_child = driver.find_element(By.CSS_SELECTOR, "#login-form .pass-field") # pehle #login-form dhoondho, fir uske andar .pass-field
-45 
-46 driver.quit()
+38 # [[HL::Combined Selectors (Tag + ID, Tag + Class)::HL]]
+[[HL::39 combo_1 = driver.find_element(By.CSS_SELECTOR, "input#username")::HL]]
+[[HL::40 combo_2 = driver.find_element(By.CSS_SELECTOR, "button.btn-primary")::HL]]
+[[HL::41 combo_3 = driver.find_element(By.CSS_SELECTOR, "#user.login-field") # ID 'user' aur class 'login-field' ek sath::HL]]
+[[HL::42 ::HL]]
+[[HL::43 # Parent-Child CSS (descendant ko space se denote karte hain)::HL]]
+[[HL::44 parent_child = driver.find_element(By.CSS_SELECTOR, "#login-form .pass-field") # pehle #login-form dhoondho, fir uske andar .pass-field::HL]]
+[[HL::45 ::HL]]
+[[HL::46 driver.quit::HL]]()
 
 ```
 
@@ -1347,12 +1347,12 @@ Total inputs: 5
 
 ```
 
-##### 🔬 Code Explanation (LINE-BY-LINE)
+##### 🔬 [[HL::Code Explanation (LINE-BY-LINE)::HL]]
 
-* **Line 2:** `By` — Yeh Selenium ki ek inbuilt class hai jo batati hai ki locator kis type ka hai (`By.ID`, `By.NAME`, etc.).
-* **Line 18:** `find_elements()` (S lagaya hai) — Yeh ek element nahi balki ek **list return** karta hai. Agar page par 10 inputs hain, toh 10 ki list milegi. `find_element` sirf pehla match return karta hai.
-* **Line 33:** `.btn.btn-primary` — HTML mein class `btn btn-primary` thi. CSS Selector mein spaces allowed nahi hain (space ka matlab descendant / bacha hota hai), isliye humne space ko hata kar ek aur dot `.` laga diya.
-* **Line 44:** `#login-form .pass-field` — Yeh ek descendant (child/grandchild) relation dikhata hai. Pehle parent dhoondha jiska id `login-form` hai, uske andar element dhoondha jiski class `pass-field` hai.
+* [[HL::**Line 2:** `By` — Yeh Selenium ki ek inbuilt class hai jo batati hai ki locator kis type ka hai (`By.ID`, `By.NAME`, etc.).::HL]]
+* [[HL::**Line 18:** `find_elements()` (S lagaya hai) — Yeh ek element nahi balki ek **list return** karta hai. Agar page par 10 inputs hain, toh 10 ki list milegi. `find_element` sirf pehla match return karta hai.::HL]]
+* [[HL::**Line 33:** `.btn.btn-primary` — HTML mein class `btn btn-primary` thi. CSS Selector mein spaces allowed nahi hain (space ka matlab descendant / bacha hota hai), isliye humne space ko hata kar ek aur dot `.` laga diya.::HL]]
+* [[HL::**Line 44:** `#login-form .pass-field` — Yeh ek descendant (child/grandchild) relation dikhata hai. Pehle parent dhoondha jiska id `login-form` hai, uske andar element dhoondha jiski class `pass-field` hai::HL]].
 
 #### 🔒 8. Security-First Check
 
@@ -1360,9 +1360,9 @@ Total inputs: 5
 
 #### 🏗️ 9. Scalability & Industry Context
 
-Industry mein ⭐ **Priority Order** strictly follow hota hai:
-`ID > CSS Selector > Name > XPath`.
-ID sabse best aur fast hota hai kyunki browser ka internal engine ID index ko 1 millisecond mein dhoondh leta hai. CSS Selectors native hone ki wajah se XPath se thode fast hote hain.
+[[HL::Industry mein ⭐ **Priority Order** strictly follow hota hai:::HL]]
+[[HL::`ID > CSS Selector > Name > XPath`.::HL]]
+[[HL::ID sabse best aur fast hota hai kyunki browser ka internal engine ID index ko 1 millisecond mein dhoondh leta hai. CSS Selectors native hone ki wajah se XPath se thode fast hote hain::HL]].
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes
 
@@ -1373,9 +1373,9 @@ ID sabse best aur fast hota hai kyunki browser ka internal engine ID index ko 1 
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "find_element aur find_elements mein kya fark hai?"**
-* **Galat soch:** Dono same kaam karte hain, bs naam ka fark hai.
-* **Actually:** `find_element` sirf 1 element (pehla match) lata hai aur agar na mile toh `NoSuchElementException` de kar crash ho jata hai. `find_elements` ek **list** lata hai. Agar kuch na mile, toh crash nahi hota, balki ek empty list `[]` return karta hai.
+* **[[HL::Confusion 1 — "find_element aur find_elements mein kya fark hai?"**::HL]]
+* [[HL::**Galat soch:** Dono same kaam karte hain, bs naam ka fark hai.::HL]]
+* [[HL::**Actually:** `find_element` sirf 1 element (pehla match) lata hai aur agar na mile toh `NoSuchElementException` de kar crash ho jata hai. `find_elements` ek **list** lata hai. Agar kuch na mile, toh crash nahi hota, balki ek empty list `[]` return karta hai::HL]].
 * **Prove karo:** Page par ek aisi ID dhoondho jo exist nahi karti. `find_element` phekega error, `find_elements` dega `[]`.
 
 
@@ -1425,9 +1425,9 @@ DOM Tree Navigation (CSS Selector: form#login .pass-field)
 
 #### ❓ 17. Interview Q&A
 
-* **Q:** Selenium mein Locators ki Priority Order kya hoti hai?
-* **A:** Sabse zyada priority `ID` ko milti hai kyunki yeh unique aur sabse fast hota hai. Agar ID nahi hai, toh `CSS Selector` ko prefer karte hain. Uske baad `Name`, aur sabse last mein `XPath` use karte hain.
-* **Q:** `find_element` aur `find_elements` mein kya main difference hai jab element page par na ho?
+* **[[HL::Q:** Selenium mein Locators ki Priority Order kya hoti hai?::HL]]
+* [[HL::**A:** Sabse zyada priority `ID` ko milti hai kyunki yeh unique aur sabse fast hota hai. Agar ID nahi hai, toh `CSS Selector` ko prefer karte hain. Uske baad `Name`, aur sabse last mein `XPath` use karte hain.::HL]]
+* [[HL::**Q:** `find_element` aur::HL]] `find_elements` mein kya main difference hai jab element page par na ho?
 * **A:** Agar element page par maujood nahi hai, toh `find_element` ek `NoSuchElementException` error raise kar dega aur script fail ho jayegi. Lekin `find_elements` fail nahi hoga, woh simply ek empty list `[]` return kar dega.
 * **Q:** Agar HTML mein class="btn btn-large submit" hai, toh usko CSS selector se kaise likhenge?
 * **A:** CSS selector mein spaces allowed nahi hote kyunki woh child node darshate hain. Hum spaces ko dot (`.`) se replace kar denge. Sahi syntax hoga: `.btn.btn-large.submit`.
@@ -1462,27 +1462,27 @@ DOM Tree Navigation (CSS Selector: form#login .pass-field)
 
 #### 📖 3. Technical Definition
 
-* **Precise English:** XPath (XML Path Language) is a query language used for selecting nodes from an XML document. In Selenium, it is used to dynamically navigate the HTML DOM tree using relative paths and functional axes.
-* **Hinglish Simplification:** XPath ek rasta (path) hai jo HTML code (jise XML document ki tarah treat kiya jata hai) ke andar upar-neeche navigate karke exact element dhoondhne mein madad karta hai.
+* **[[HL::Precise English:** XPath (XML Path Language) is a query language used for selecting nodes from an XML document. In Selenium, it is used to dynamically navigate the HTML DOM tree using relative paths and functional axes.::HL]]
+* [[HL::**Hinglish Simplification:** XPath ek rasta (path) hai jo HTML code (jise XML document ki tarah treat kiya jata hai) ke andar upar-neeche navigate karke exact element dhoondhne mein madad karta hai::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Modern websites (React, Angular — frontend frameworks jo websites fast banate hain) par elements ke IDs baar-baar change hote rehte hain (dynamic ids, e.g., `user_7891`, refresh karne par `user_8123`). CSS selectors inme fail ho jate hain.
-* **Solution:** XPath ke advanced functions (`contains()`, `starts-with()`) aur Axes (`following-sibling`) se hum in dynamically changing elements ko aasani se pakad sakte hain.
-* **What breaks if we don't use it?** Hardcoded IDs wali script production mein agli hi baar fail ho jayegi kyunki IDs change ho jayenge.
-* **✅ Kab use karo:** Jab element ka koi unique ID na ho, ya ID dynamically badal raha ho, ya tumhe ek element (Label) se doosre element (Input field) tak navigate karna ho.
-* **❌ Kab mat karo / Alternative prefer karo:** Agar page par static unique ID available hai, toh CSS prefer karo (XPath thoda slow hota hai). Aur ⭐ **Absolute XPath** ko toh **"Ise KABHI use mat karo"**!
+* **[[HL::Problem:** Modern websites (React, Angular — frontend frameworks jo websites fast banate hain) par elements ke IDs baar-baar change hote rehte hain (dynamic ids, e.g., `user_7891`, refresh karne par `user_8123`). CSS selectors inme fail ho jate hain.::HL]]
+* [[HL::**Solution:** XPath ke advanced functions (`contains()`, `starts-with()`) aur Axes (`following-sibling`) se hum in dynamically changing elements ko aasani se pakad sakte hain.::HL]]
+* [[HL::**What breaks if we don't use it?** Hardcoded IDs wali script production mein agli hi baar fail ho jayegi kyunki IDs change ho jayenge.::HL]]
+* [[HL::**✅ Kab use karo:** Jab element ka koi unique ID na ho, ya ID dynamically badal raha ho, ya tumhe ek element (Label) se doosre element (Input field) tak navigate karna ho.::HL]]
+* [[HL::**❌ Kab mat karo / Alternative prefer karo:** Agar page par static unique ID available hai, toh CSS prefer karo (XPath thoda slow hota hai). Aur ⭐ **Absolute XPath** ko toh **"Ise KABHI use mat karo::HL]]"**!
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
-DevTools ke Elements tab mein `Ctrl+F` dabane par neeche ek search bar aayega. Wahan apna XPath (jaise `//input[@id='user']`) likhne par HTML code mein element yellow highlight hoga.
+[[HL::DevTools ke Elements tab mein `Ctrl+F` dabane par neeche ek search bar aayega. Wahan apna XPath (jaise `//input[@id='user']`) likhne par HTML code mein element yellow highlight hoga::HL]].
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. `/` (Single slash): Root node se exactly direct child dhoondhta hai.
-2. `//` (Double slash): Poore document mein kahin bhi (descendant) element dhoondhta hai.
-3. `.//` (Dot double slash): Dot ka matlab hai "current node" — sirf usi specific context ke andar dhoondho.
-4. WebDriver ka XPath parsing engine DOM ko tree ki tarah evaluate karta hai aur exact node location par click fire karta hai.
+1. [[HL::`/` (Single slash): Root node se exactly direct child dhoondhta hai.::HL]]
+2. [[HL::`//` (Double slash): Poore document mein kahin bhi (descendant) element dhoondhta hai.::HL]]
+3. [[HL::`.//` (Dot double slash): Dot ka matlab hai "current node" — sirf usi specific context ke andar dhoondho.::HL]]
+4. [[HL::WebDriver ka XPath parsing engine DOM ko tree ki tarah evaluate karta hai aur exact node location par click fire karta hai::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
 
@@ -1491,38 +1491,38 @@ DevTools ke Elements tab mein `Ctrl+F` dabane par neeche ek search bar aayega. W
 1  from selenium import webdriver
 2  from selenium.webdriver.common.by import By
 3  
-4  driver = webdriver.Chrome()
-5  driver.get("https://example.com/complex-form")
-6  
-7  # 1. Absolute XPath (Root se shuru /) -> ⭐ "Ise KABHI use mat karo", bohot fragile hai
-8  # abs_path = driver.find_element(By.XPATH, "/html/body/div[1]/form/div[2]/input")
-9  
-10 # 2. ⭐ Relative XPath (Kahin se bhi shuru //)
-11 basic_xpath = driver.find_element(By.XPATH, "//input[@id='user']")               # //tagname[@attribute='value']
-12 
-13 # 3. Advanced Functions (React/Angular dynamic elements ke liye)
-14 # contains() — agar value ka kuch hissa fix ho (e.g., user_123, user_456)
-15 partial_id = driver.find_element(By.XPATH, "//input[contains(@id, 'user_')]")      # jiska id 'user_' se start hota ho
-16 
-17 # starts-with() — agar shuruwat fix ho
-18 start_id = driver.find_element(By.XPATH, "//input[starts-with(@id, 'user_')]")     
-19 
-20 # text() — ⭐ "Sabse Powerful" jab tag ke andar ka text match karna ho
-21 login_btn = driver.find_element(By.XPATH, "//button[text()='Login']")              # woh button jiska text exactly 'Login' ho
-22 
-23 # 4. XPath Axes (⭐ "XPath ki super-power!")
-24 # following-sibling — apne bhai-behen mein apne se aage wale ko dhoondhna
-25 # Scenario: Label ke aage ka input field nikalna
-26 sibling = driver.find_element(By.XPATH, "//span[text()='Username']/following-sibling::input[1]")
+4  [[HL::driver = webdriver.Chrome()::HL]]
+[[HL::5  driver.get("https://example.com/complex-form")::HL]]
+[[HL::6  ::HL]]
+[[HL::7  # 1. Absolute XPath (Root se shuru /) -> ⭐ "Ise KABHI use mat karo", bohot fragile hai::HL]]
+[[HL::8  # abs_path = driver.find_element(By.XPATH, "/html/body/div[1]/form/div[2]/input")::HL]]
+[[HL::9  ::HL]]
+[[HL::10 # 2. ⭐ Relative XPath (Kahin se bhi shuru //)::HL]]
+[[HL::11 basic_xpath = driver.find_element(By.XPATH, "//input[@id='user']")               # //tagname[@attribute='value']::HL]]
+[[HL::12 ::HL]]
+[[HL::13 # 3. Advanced Functions (React/Angular dynamic elements ke liye)::HL]]
+[[HL::14 # contains() — agar value ka kuch hissa fix ho (e.g., user_123, user_456)::HL]]
+[[HL::15 partial_id = driver.find_element(By.XPATH, "//input[contains(@id, 'user_')]")      # jiska id 'user_' se start hota ho::HL]]
+[[HL::16 ::HL]]
+[[HL::17 # starts-with() — agar shuruwat fix ho::HL]]
+[[HL::18 start_id = driver.find_element(By.XPATH, "//input[starts-with(@id, 'user_')]")     ::HL]]
+[[HL::19 ::HL]]
+[[HL::20 # text() — ⭐ "Sabse Powerful" jab tag ke andar ka text match karna ho::HL]]
+[[HL::21 login_btn = driver.find_element(By.XPATH, "//button[text()='Login']")              # woh button jiska text exactly 'Login' ho::HL]]
+[[HL::22 ::HL]]
+[[HL::23 # 4. XPath Axes (⭐ "XPath ki super-power!")::HL]]
+[[HL::24 # following-sibling — apne bhai-behen mein apne se aage wale ko dhoondhna::HL]]
+[[HL::25 # Scenario: Label ke aage ka input field nikalna::HL]]
+[[HL::26 sibling = driver.find_element(By.XPATH, "//span[text()='Username']/following-sibling::input[1::HL]]]")
 27 
-28 # parent / ancestor — bachhe se parent (ulta) jana
-29 parent_node = driver.find_element(By.XPATH, "//input[@id='user']/parent::div")     # input se uske parent <div> tak gaye
-30 ancestor_node = driver.find_element(By.XPATH, "//input[@id='user']/ancestor::form") # form uske pure khandan ka root parent hai
-31 
-32 # 5. Context Node (.)
-33 # Agar kisi specific form ke andar hi kuch dhoondhna ho
-34 form_area = driver.find_element(By.XPATH, "//form[@id='login']")
-35 inner_input = form_area.find_element(By.XPATH, ".//input")                         # .// = sirf is form_area (current node) ke andar dekho
+28 # [[HL::parent / ancestor — bachhe se parent (ulta) jana::HL]]
+[[HL::29 parent_node = driver.find_element(By.XPATH, "//input[@id='user']/parent::div")     # input se uske parent <div> tak gaye::HL]]
+[[HL::30 ancestor_node = driver.find_element(By.XPATH, "//input[@id='user']/ancestor::form") # form uske pure khandan ka root parent hai::HL]]
+[[HL::31 ::HL]]
+[[HL::32 # 5. Context Node (.)::HL]]
+[[HL::33 # Agar kisi specific form ke andar hi kuch dhoondhna ho::HL]]
+[[HL::34 form_area = driver.find_element(By.XPATH, "//form[@id='login']")::HL]]
+[[HL::35 inner_input = form_area.find_element(By.XPATH, ".//input::HL]]")                         # .// = sirf is form_area (current node) ke andar dekho
 36 
 37 driver.quit()
 
@@ -1537,9 +1537,9 @@ DevTools ke Elements tab mein `Ctrl+F` dabane par neeche ek search bar aayega. W
 
 ##### 🔬 Code Explanation (LINE-BY-LINE)
 
-* **Line 8:** `/html/body...` — Yeh Absolute XPath hai. Agar kal developer ne body ke andar ek naya `<div>` add kar diya, toh yeh poora rasta break (fragile) ho jayega.
-* **Line 26:** `following-sibling::input[1]` — Hum pehle us `<span>` par gaye jiska text 'Username' hai. Fir humne kaha "Iske baad jo sabse pehla (`[1]`) input bhai/behen hai usko select karo".
-* **Line 35:** `.//input` — Yahan shuru mein dot `.` hai. Iska matlab hai ki poore HTML page par input mat dhoondho, sirf `form_area` element ke andar jo inputs hain wahi lao.
+* **[[HL::Line 8:** `/html/body...` — Yeh Absolute XPath hai. Agar kal developer ne body ke andar ek naya `<div>` add kar diya, toh yeh poora rasta break (fragile) ho jayega.::HL]]
+* [[HL::**Line 26:** `following-sibling::input[1]` — Hum pehle us `<span>` par gaye jiska text 'Username' hai. Fir humne kaha "Iske baad jo sabse pehla (`[1]`) input bhai/behen hai usko select karo".::HL]]
+* [[HL::**Line 35:** `.//input` — Yahan shuru mein dot `.` hai. Iska matlab hai ki poore HTML page par input mat dhoondho, sirf `form_area` element ke andar jo inputs hain wahi lao::HL]].
 
 #### 🔒 8. Security-First Check
 
@@ -1551,22 +1551,22 @@ DevTools ke Elements tab mein `Ctrl+F` dabane par neeche ek search bar aayega. W
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes
 
-* **❌ Mistake:** Browser ke DevTools par right-click karke "Copy full XPath" (Absolute XPath) use karna.
-* **🤦 Why:** Beginners ko lagta hai yeh aasan shortcut hai.
-* **✅ The 'Pro' Way:** Hamesha Relative XPath (`//`) manually banaiye elements ke unique attributes dekh kar.
-* **⚡ Consequences:** Ek din baad test fail ho jayega kyunki developer ek chhote se UI update mein HTML tree ka structure badal dega aur tumhara absolute path toot jayega.
+* **❌ [[HL::Mistake:** Browser ke DevTools par right-click karke "Copy full XPath" (Absolute XPath) use karna.::HL]]
+* [[HL::**🤦 Why:** Beginners ko lagta hai yeh aasan shortcut hai.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Hamesha Relative XPath (`//`) manually banaiye elements ke unique attributes dekh kar.::HL]]
+* [[HL::**⚡ Consequences:** Ek din baad test fail ho jayega kyunki developer ek chhote se UI update mein HTML tree ka structure badal dega aur tumhara absolute path toot jayega::HL]].
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "/ (Single slash) aur // (Double slash) mein kya fark hai?"**
-* **Galat soch:** Dono ka kaam same hai.
-* **Actually:** `/` ka matlab hai "sirf apne direct bachhe (immediate child) mein dekho". `//` ka matlab hai "poore khandan (descendants) mein kahin bhi dhoondh lo".
+* **[[HL::Confusion 1 — "/ (Single slash) aur // (Double slash) mein kya fark hai?"**::HL]]
+* [[HL::**Galat soch:** Dono ka kaam same hai.::HL]]
+* [[HL::**Actually:** `/` ka matlab hai "sirf apne direct bachhe (immediate child) mein dekho". `//` ka matlab hai "poore khandan (descendants) mein kahin bhi dhoondh lo::HL]]".
 * **Prove karo:** `//form/input` sirf form ke theek niche wale input layega. `//form//input` form ke andar kisi bhi level (div ke andar div ke andar input) par pada input utha layega.
 
 
-* **Confusion 2 — ".// aur // mein dot (.) kya karta hai?"**
-* **Galat soch:** Dot ka koi khas use nahi hai.
-* **Actually:** Jab hum kisi Parent element par `find_element` call karte hain (jaise `parent.find_element(By.XPATH, "//input")`), toh agar tumne `.` nahi lagaya, toh woh parent ko bhool jayega aur phirse poore page par dhoondhne lagega! `.//` lagane se woh baandh jata hai ki "sirf isi parent ke andar dhoondhna hai".
+* **[[HL::Confusion 2 — ".// aur // mein dot (.) kya karta hai?"**::HL]]
+* [[HL::**Galat soch:** Dot ka koi khas use nahi hai.::HL]]
+* [[HL::**Actually:** Jab hum kisi Parent element par `find_element` call karte hain (jaise `parent.find_element(By.XPATH, "//input")`), toh agar tumne `.` nahi lagaya, toh woh parent ko bhool jayega aur phirse poore page par dhoondhne lagega! `.//` lagane se woh baandh jata hai ki "sirf isi parent ke andar dhoondhna hai::HL]]".
 
 
 
@@ -1596,7 +1596,7 @@ Flight booking sites (MakeMyTrip, Yatra) par jab seat matrix dikhti hai, wahan k
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Learning Phase:** Absolute vs Relative XPath ka structure samajhna aur kyu Absolute XPath turant break hote hain yeh janna (DevTools mein `Ctrl+F` karke manual testing).
+* **[[HL::Learning Phase:** Absolute vs Relative XPath ka structure samajhna aur kyu Absolute XPath turant break hote hain yeh janna (DevTools mein `Ctrl+F` karke manual testing::HL]]).
 * **Application Phase:** React/Angular jaisi modern dynamic apps mein jahan IDs badalte hain, wahan `contains()` aur `starts-with()` use karke smart locators banana.
 * **Mastery/Production Phase:** Jab element ke paas koi class ya id nahi hoti, tab uske label ka text dhoondh kar uske aadhar par `following-sibling` (Axes) ke zariye form input fields ko interact karna.
 
@@ -1620,8 +1620,8 @@ Flow: //span[text()='Name'] / following-sibling::input
 
 #### ❓ 17. Interview Q&A
 
-* **Q:** Absolute aur Relative XPath mein kya difference hai?
-* **A:** Absolute XPath HTML ke root node (`/html`) se shuru hota hai. Yeh bahut fragile hota hai kyunki thoda sa bhi UI change is path ko break kar deta hai. Relative XPath double slash (`//`) se shuru hota hai aur poore DOM mein seedhe us element ko target karta hai. Yeh stable aur robust hota hai.
+* **[[HL::Q:** Absolute aur Relative XPath mein kya difference hai?::HL]]
+* [[HL::**A:** Absolute XPath HTML ke root node (`/html`) se shuru hota hai. Yeh bahut fragile hota hai kyunki thoda sa bhi UI change is path ko break kar deta hai. Relative XPath double slash (`//`) se shuru hota hai aur poore DOM mein seedhe us element ko target karta hai. Yeh stable aur robust hota hai::HL]].
 * **Q:** XPath Axes kya hote hain aur unka use kab kiya jata hai?
 * **A:** XPath Axes (jaise `parent`, `following-sibling`, `ancestor`) DOM tree mein elements ke relationships ke base par unhe dhoondhne mein madad karte hain. Yeh tab use hote hain jab target element ka koi unique attribute na ho, lekin uske padosi (sibling) ya parent element ka unique attribute ho.
 * **Q:** Dynamic web pages (React/Angular) par elements handle karne ki best strategy kya hai?
@@ -1651,43 +1651,43 @@ Flow: //span[text()='Name'] / following-sibling::input
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
-* **SelectorHub / ChroPath:** Jaise ek "Expert Guide" jo complex map (HTML code) dekh kar tumhe shortcut (XPath) bata deta hai.
-* **Fake Filler:** Jaise "Hotel check-in form Helper" — agar tumhe 50 fields ka form test karna hai, toh yeh tool 1 second mein dummy data (kachra data jo form ko satisfy kare) bhar deta hai.
+* **[[HL::SelectorHub / ChroPath:** Jaise ek "Expert Guide" jo complex map (HTML code) dekh kar tumhe shortcut (XPath) bata deta hai.::HL]]
+* [[HL::**Fake Filler:** Jaise "Hotel check-in form Helper" — agar tumhe 50 fields ka form test karna hai, toh yeh tool 1 second mein dummy data (kachra data jo form ko satisfy kare) bhar deta hai::HL]].
 
 #### 📖 3. Technical Definition
 
 * **Precise English:** Automation helper plugins are browser extensions integrated with DevTools that assist developers in writing, generating, and validating robust CSS selectors and XPaths, while also offering utilities to populate forms automatically.
-* **Hinglish Simplification:** Yeh Chrome/Firefox ke chhote plugins hain jo automatically tumhare liye XPath generate kar dete hain ya tumhare likhe manually XPath ko verify karte hain ki woh sahi hai ya galat.
+* **[[HL::Hinglish Simplification:** Yeh Chrome/Firefox ke chhote plugins hain jo automatically tumhare liye XPath generate kar dete hain ya tumhare likhe manually XPath ko verify karte hain ki woh sahi hai ya galat::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Ek lamba complex XPath (e.g., parent -> sibling -> descendant) manually verify karna ki usme typo (spelling mistake) toh nahi hai, bahut time khata hai. Ek lamba form test karte waqt har field mein khud type karna bore aur slow hai.
-* **Solution:** Extensions (plugins) jaise SelectorHub aur Fake Filler yeh process automated aur visual bana dete hain.
+* **[[HL::Problem:** Ek lamba complex XPath (e.g., parent -> sibling -> descendant) manually verify karna ki usme typo (spelling mistake) toh nahi hai, bahut time khata hai. Ek lamba form test karte waqt har field mein khud type karna bore aur slow hai.::HL]]
+* [[HL::**Solution:** Extensions (plugins) jaise SelectorHub aur Fake Filler yeh process automated aur visual bana dete hain::HL]].
 * **What breaks if we don't use it?** Break kuch nahi hota, bas developer ki productivity slow ho jati hai.
 * **✅ Kab use karo:** Jab XPath complex ho aur tumhe verify karna ho ki jo tumne likha hai woh page par sach mein kitne elements ko target kar raha hai.
 * **❌ Kab mat karo / Alternative prefer karo:** **Pehle seekho... phir tool use karo.** Beginners ko pehle manually XPath likhna sikhna chahiye. Directly tools se copy-paste karoge toh debugging (error solve karna) nahi seekh paoge.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
-DevTools kholne par elements tab ke side mein ek naya tab ban jayega (SelectorHub ka). Wahan apna XPath likhoge toh woh clearly batayega: "1 element matching" ya "0 element matching" with green/red colors.
+[[HL::DevTools kholne par elements tab ke side mein ek naya tab ban jayega (SelectorHub ka). Wahan apna XPath likhoge toh woh clearly batayega: "1 element matching" ya "0 element matching" with green/red colors::HL]].
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. Plugin DOM ko parse karke apna algorithm lagata hai sabse chhota aur best possible XPath/CSS nikalne ke liye.
-2. Fake filler DOM mein `<input>` types pehchanta hai (email, number, text) aur fake libraries se automatically dummy data dal deta hai Javascript inject karke.
+1. [[HL::Plugin DOM ko parse karke apna algorithm lagata hai sabse chhota aur best possible XPath/CSS nikalne ke liye.::HL]]
+2. [[HL::Fake filler DOM mein `<input>` types pehchanta hai (email, number, text) aur fake libraries se automatically dummy data dal deta hai Javascript inject karke::HL]].
 
 #### 💡 7. Concept Visualization (Theory Topic ke liye)
 
 *(Yeh purely conceptual topic hai — Tools ka interaction browser GUI mein hota hai, code mein nahi. Isliye Hands-On section ki jagah Concept Visualization de raha hoon.)*
 
-**Step-by-Step Tool Workflow:**
+**[[HL::Step-by-Step Tool Workflow:**::HL]]
 
-1. **Chrome Web Store** ya **Firefox Add-ons** pe jao.
-2. **SelectorHub** extension install karo aur DevTools restart karo.
-3. Kisi element par right-click karo aur "Inspect" chuno.
-4. DevTools mein SelectorHub pane kholo.
-5. Apna **manual XPath** wahan paste karo -> Agar typo hoga toh tool red mark dega aur exact error batayega. Agar sahi hoga toh list dikhayega.
-6. **Fake Filler** icon par click karte hi poora dummy test form automatically data se bhar jayega.
+1. [[HL::**Chrome Web Store** ya **Firefox Add-ons** pe jao.::HL]]
+2. [[HL::**SelectorHub** extension install karo aur DevTools restart karo.::HL]]
+3. [[HL::Kisi element par right-click karo aur "Inspect" chuno.::HL]]
+4. [[HL::DevTools mein SelectorHub pane kholo.::HL]]
+5. [[HL::Apna **manual XPath** wahan paste karo -> Agar typo hoga toh tool red mark dega aur exact error batayega. Agar sahi hoga toh list dikhayega.::HL]]
+6. [[HL::**Fake Filler** icon par click karte hi poora dummy test form automatically data se bhar jayega::HL]].
 
 #### 🔒 8. Security-First Check
 
@@ -1729,7 +1729,7 @@ Senior automation engineers 100% time manually locators likhte hain (bina tools 
 
 #### 🌍 14. Real-World Use Case
 
-Form validation testing mein jahan 20 fields (Name, Address, DOB, Pincode) hain, tester ko har baar check karna hota hai "Submit" dabane ke baad DB mein kya gaya. Woh Fake Filler extension use karta hai jo 1 click mein sab mein valid type ka **dummy data** daal deta hai, tester ka aadha ghanta bachata hai.
+[[HL::Form validation testing mein jahan 20 fields (Name, Address, DOB, Pincode) hain, tester ko har baar check karna hota hai "Submit" dabane ke baad DB mein kya gaya. Woh Fake Filler extension use karta hai jo 1 click mein sab mein valid type ka **dummy data** daal deta hai, tester ka aadha ghanta bachata hai::HL]].
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
@@ -1809,42 +1809,42 @@ Normal `click()` ek simple "tap" (ungli se ek baar chhuna) hai. Lekin **ActionCh
 
 #### 📖 3. Technical Definition
 
-* **Precise English:** `ActionChains` is a low-level interface in Selenium used to automate complex user interactions like mouse movements, button actions, and key presses by queueing them up and executing them together.
-* **Hinglish Simplification:** `ActionChains` ek aisi class hai jo multiple mouse aur keyboard actions ko ek line (queue) mein lagati hai aur phir unhe ek saath browser par chala deti hai.
+* **[[HL::Precise English:** `ActionChains` is a low-level interface in Selenium used to automate complex user interactions like mouse movements, button actions, and key presses by queueing them up and executing them together.::HL]]
+* [[HL::**Hinglish Simplification:** `ActionChains` ek aisi class hai jo multiple mouse aur keyboard actions ko ek line (queue) mein lagati hai aur phir unhe ek saath browser par chala deti hai.::HL]]
 
-#### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
+#### [[HL::🧠 4. Why This Matters (Zaroorat Kyun Hai?)::HL]]
 
-* **Problem:** Normal `element.click()` se tum drop-down menus nahi khol sakte jo sirf mouse "hover" karne par open hote hain, aur na hi koi slider drag kar sakte ho.
-* **Solution:** `ActionChains` se hum exactly wahi simulate karte hain jo ek real user apna physical mouse hila kar karta hai.
-* **What breaks if we don't use it?** E-commerce websites ke navigation menus (jahan mouse le jaane pe sub-menu khulta hai) test nahi ho payenge, test fail ho jayega.
-* **✅ Kab use karo:** Jab Hover (mouse over), Right Click (context menu), ya Drag & Drop test karna ho.
-* **❌ Kab mat karo / Alternative prefer karo:** Simple form submit ya normal button click ke liye. Wahan standard `element.click()` fast aur reliable hai. ActionChains wahan unnecessary complexity (overkill) hai.
+* [[HL::**Problem:** Normal `element.click()` se tum drop-down menus nahi khol sakte jo sirf mouse "hover" karne par open hote hain, aur na hi koi slider drag kar sakte ho.::HL]]
+* [[HL::**Solution:** `ActionChains` se hum exactly wahi simulate karte hain jo ek real user apna physical mouse hila kar karta hai.::HL]]
+* [[HL::**What breaks if we don't use it?** E-commerce websites ke navigation menus (jahan mouse le jaane pe sub-menu khulta hai) test nahi ho payenge, test fail ho jayega.::HL]]
+* [[HL::**✅ Kab use karo:** Jab Hover (mouse over), Right Click (context menu), ya Drag & Drop test karna ho.::HL]]
+* [[HL::**❌ Kab mat karo / Alternative prefer karo:** Simple form submit ya normal button click ke liye. Wahan standard `element.click()` fast aur reliable hai. ActionChains wahan unnecessary complexity (overkill) hai::HL]].
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
-Jab code run hoga, toh browser mein mouse cursor physically move hota hua toh nahi dikhega, lekin uska effect dikhega—jaise ek hidden menu achanak se open ho jayega, ya ek box drag hokar doosre box mein gir jayega.
+[[HL::Jab code run hoga, toh browser mein mouse cursor physically move hota hua toh nahi dikhega, lekin uska effect dikhega—jaise ek hidden menu achanak se open ho jayega, ya ek box drag hokar doosre box mein gir jayega::HL]].
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. **Queue Creation:** Jab tum `ActionChains` ke methods (jaise `move_to_element()`) call karte ho, action turant execute nahi hota. Woh ek internal queue (list) mein add (build) ho jata hai.
-2. **The Execution Trigger:** Jab tum end mein `.perform()` call karte ho, tab Selenium us queue ko **execute** karta hai aur saare actions browser par sequentially bhejta hai.
-3. **Flow:** `Action 1` -> `Action 2` -> `build` (queue ready) -> `.perform()` (fire!).
+1. [[HL::**Queue Creation:** Jab tum `ActionChains` ke methods (jaise `move_to_element()`) call karte ho, action turant execute nahi hota. Woh ek internal queue (list) mein add (build) ho jata hai.::HL]]
+2. [[HL::**The Execution Trigger:** Jab tum end mein `.perform()` call karte ho, tab Selenium us queue ko **execute** karta hai aur saare actions browser par sequentially bhejta hai.::HL]]
+3. [[HL::**Flow:** `Action 1` -> `Action 2` -> `build` (queue ready) -> `.perform()` (fire::HL]]!).
 
 #### 💻 7. Hands-On — Runnable Example
 
-**Example 1: Hover (Mouse Over) and Right Click**
+**[[HL::Example 1: Hover (Mouse Over) and Right Click::HL]]**
 
 ```python
-# Python 3.10+ | Selenium 4.x
-1  from selenium.webdriver.common.action_chains import ActionChains  # ActionChains class import ki (complex mouse actions ke liye)
-2  
-3  actions = ActionChains(driver)                                    # actions = ActionChains ka object banaya, driver ko pass kiya
-4  menu_element = driver.find_element(By.ID, "nav-menu")             # menu_element = web page ka woh hissa jahan hover karna hai
-5  
-6  # Hover karke right click karna
-7  actions.move_to_element(menu_element)\
-8         .context_click()\
-9         .perform()                                                 # perform() = queue kiye hue saare actions ab browser par run karo
+# [[HL::Python 3.10+ | Selenium 4.x::HL]]
+[[HL::1  from selenium.webdriver.common.action_chains import ActionChains  # ActionChains class import ki (complex mouse actions ke liye)::HL]]
+[[HL::2  ::HL]]
+[[HL::3  actions = ActionChains(driver)                                    # actions = ActionChains ka object banaya, driver ko pass kiya::HL]]
+[[HL::4  menu_element = driver.find_element(By.ID, "nav-menu")             # menu_element = web page ka woh hissa jahan hover karna hai::HL]]
+[[HL::5  ::HL]]
+[[HL::6  # Hover karke right click karna::HL]]
+[[HL::7  actions.move_to_element(menu_element)\::HL]]
+[[HL::8         .context_click()\::HL]]
+[[HL::9         .perform()                                                 # perform() = queue kiye hue saare actions ab browser par run karo::HL]]
 
 ```
 
@@ -1876,8 +1876,8 @@ Jab code run hoga, toh browser mein mouse cursor physically move hota hua toh na
 
 ##### 🔬 Code Explanation Rule (LINE-BY-LINE)
 
-* **Example 1, Line 7-9 (`move_to_element().context_click().perform()`):** Yahan chaining use hui hai. Pehle `move_to_element(menu_element)` ne mouse ko target tak pahunchne ka command queue mein daala. Phir `context_click()` (jo right-click ka technical naam hai) queue mein gaya. Aakhri mein **⭐ "Bina .perform() ke kuch nahi hoga"** — `.perform()` ne in dono commands ko browser par execute kar diya.
-* **Example 2, Line 8-11:** Yeh exactly woh steps hain jo real drag-and-drop mein hote hain. `click_and_hold` (element ko click karke dabaye rakhna) -> `move_to_element` (target tak le jana, yeh move-to-target ka kaam karta hai) -> `release` (mouse button chhod dena). In sabko `build` karke `execute` karne ka kaam `.perform()` karta hai.
+* **[[HL::Example 1, Line 7-9 (`move_to_element().context_click().perform()`):** Yahan chaining use hui hai. Pehle `move_to_element(menu_element)` ne mouse ko target tak pahunchne ka command queue mein daala. Phir `context_click()` (jo right-click ka technical naam hai) queue mein gaya. Aakhri mein **⭐ "Bina .perform() ke kuch nahi hoga"** — `.perform()` ne in dono commands ko browser par execute kar diya.::HL]]
+* [[HL::**Example 2, Line 8-11:** Yeh exactly woh steps hain jo real drag-and-drop mein hote hain. `click_and_hold` (element ko click karke dabaye rakhna) -> `move_to_element` (target tak le jana, yeh move-to-target ka kaam karta hai) -> `release` (mouse button chhod dena). In sabko `build` karke `execute` karne ka kaam `.perform()` karta hai::HL]].
 
 #### 🔒 8. Security-First Check
 
@@ -1889,9 +1889,9 @@ Large frameworks mein `ActionChains` ka excessive use test execution ko thoda sl
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** Code mein `actions.move_to_element(ele)` likh dena aur sochna ki kaam ho gaya.
-* **🤦 Why:** Beginners ko lagta hai ki function call karne se directly click ho jayega.
-* **✅ The 'Pro' Way:** Hamesha end mein `.perform()` lagao. (e.g., `actions.move_to_element(ele).perform()`)
+* **❌ [[HL::Mistake:** Code mein `actions.move_to_element(ele)` likh dena aur sochna ki kaam ho gaya.::HL]]
+* [[HL::**🤦 Why:** Beginners ko lagta hai ki function call karne se directly click ho jayega.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Hamesha end mein `.perform()` lagao. (e.g., `actions.move_to_element(ele).perform::HL]]()`)
 * **⚡ Consequences:** Agar `.perform()` miss kiya, toh code bina error diye pass ho jayega, lekin browser mein koi click ya hover execute hi nahi hoga! False positive test pass.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
@@ -1946,20 +1946,20 @@ The ActionChains Queue System:
 
 [ Action 1: Hover ] --> [ Action 2: Right Click ] --> [ Action 3: Wait ]
          |                       |                         |
-(Added to memory)       (Added to memory)         (Added to memory)
-                                                           |
-                                                   .perform() trigger!
-                                                           |
-                                               [ Browser executes all ]
+([[HL::Added to memory)       (Added to memory)         (Added to memory)::HL]]
+[[HL::                                                           |::HL]]
+[[HL::                                                   .perform() trigger!::HL]]
+[[HL::                                                           |::HL]]
+[[HL::                                               [ Browser executes all ]::HL]]
 
-```
+[[HL::```::HL]]
 
-#### ❓ 17. Interview Q&A (FAQ)
+#### [[HL::❓ 17. Interview Q&A (FAQ)::HL]]
 
-* **Q:** What is the difference between `click()` and `ActionChains` click?
-* **A:** `element.click()` direct DOM element par event fire karta hai. Jabki `ActionChains` mouse cursor ko screen par physically element ke coordinates (x, y) par move karta hai aur wahan OS-level click simulate karta hai. Agar DOM mein element chupa hai par interactable hai toh `click()` chal sakta hai, par ActionChains wahi fail hoga.
-* **Q:** How do you simulate a Right-Click in Selenium?
-* **A:** Right-click ko Selenium mein `context_click()` kehte hain. Hume `ActionChains(driver).context_click(element).perform()` use karna hota hai.
+* [[HL::**Q:** What is the difference between `click()` and `ActionChains` click?::HL]]
+* [[HL::**A:** `element.click()` direct DOM element par event fire karta hai. Jabki `ActionChains` mouse cursor ko screen par physically element ke coordinates (x, y) par move karta hai aur wahan OS-level click simulate karta hai. Agar DOM mein element chupa hai par interactable hai toh `click()` chal sakta hai, par ActionChains wahi fail hoga.::HL]]
+* [[HL::**Q:** How do you simulate a Right-Click in Selenium?::HL]]
+* [[HL::**A:** Right-click ko Selenium mein `context_click()` kehte hain. Hume `ActionChains(driver).context_click(element).perform()` use karna hota hai::HL]].
 * **Q:** Why do my ActionChains commands do nothing? (No errors shown)
 * **A:** Yeh sabse common mistake hai — aap command end mein `.perform()` likhna bhool gaye hain. Jab tak `.perform()` call nahi hota, actions sirf queue (list) mein build hote hain, execute nahi hote.
 * **Q:** `drag_and_drop` internally kaise kaam karta hai?
@@ -1995,44 +1995,44 @@ Normal typing mein hum text boxes mein "A", "B", "C" likhte hain (jo `send_keys(
 
 #### 📖 3. Technical Definition
 
-* **Precise English:** The `Keys` class in Selenium provides standard keyboard keys (like ENTER, TAB, CONTROL, SHIFT) as static constants, allowing scripts to simulate non-alphanumeric keyboard events on web elements.
-* **Hinglish Simplification:** `Keys` class Selenium ka virtual keyboard hai jiske through hum 'Enter', 'Tab', ya 'Shift' jaise physical keyboard buttons press karte hain.
+* **[[HL::Precise English:** The `Keys` class in Selenium provides standard keyboard keys (like ENTER, TAB, CONTROL, SHIFT) as static constants, allowing scripts to simulate non-alphanumeric keyboard events on web elements.::HL]]
+* [[HL::**Hinglish Simplification:** `Keys` class Selenium ka virtual keyboard hai jiske through hum 'Enter', 'Tab', ya 'Shift' jaise physical keyboard buttons press karte hain::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Kabhi kabhi web pages par submit/login button nahi hota (jaise Google search bar), wahan tumhe sirf 'Enter' dabana padta hai result laane ke liye.
-* **Solution:** Hum search box ko find karke usme seedha `Keys.ENTER` bhej (send) sakte hain.
-* **What breaks if we don't use it?** Jin websites par keyboard accessibility/tab navigation test karni hoti hai, ya auto-complete dropdowns mein arrow keys se select karna hota hai — woh test nahi ho payenge.
-* **✅ Kab use karo:** Jab form submit karne ke liye button available na ho, ya Tab key dabakar form filling flow test karna ho.
-* **❌ Kab mat karo / Alternative prefer karo:** **⭐ Hamesha `login_btn.click()` behtar hai.** Jab page par explicit Submit ya Login button maujood ho, toh `Keys.ENTER` par bharosa mat karo, seedha button par click karo. Button click visually predictable aur less flaky hota hai.
+* **[[HL::Problem:** Kabhi kabhi web pages par submit/login button nahi hota (jaise Google search bar), wahan tumhe sirf 'Enter' dabana padta hai result laane ke liye.::HL]]
+* [[HL::**Solution:** Hum search box ko find karke usme seedha `Keys.ENTER` bhej (send) sakte hain.::HL]]
+* [[HL::**What breaks if we don't use it?** Jin websites par keyboard accessibility/tab navigation test karni hoti hai, ya auto-complete dropdowns mein arrow keys se select karna hota hai — woh test nahi ho payenge.::HL]]
+* [[HL::**✅ Kab use karo:** Jab form submit karne ke liye button available na ho, ya Tab key dabakar form filling flow test karna ho::HL]].
+* **❌ Kab mat karo / Alternative prefer karo:** **⭐ Hamesha `[[HL::login_btn.click()` behtar hai.** Jab page par explicit Submit ya Login button maujood ho, toh `Keys.ENTER` par bharosa mat karo, seedha button par click karo. Button click visually predictable aur less flaky hota hai.::HL]]
 
-#### 🔍 5. Visual / Editor Mein Kya Dikhega
+#### [[HL::🔍 5. Visual / Editor Mein Kya Dikhega::HL]]
 
-Aankhon se dekhne par, input box ke andar koi text type hota hua nahi dikhega, balki achanak se page submit ho jayega (Enter dabne par) ya cursor (focus) ek dabbe se doosre dabbe mein jump karega (Tab dabne par).
+[[HL::Aankhon se dekhne par, input box ke andar koi text type hota hua nahi dikhega, balki achanak se page submit ho jayega (Enter dabne par) ya cursor (focus) ek dabbe se doosre dabbe mein jump karega (Tab dabne par).::HL]]
 
-#### ⚙️ 6. Under the Hood (Deep Dive)
+#### [[HL::⚙️ 6. Under the Hood (Deep Dive)::HL]]
 
-1. Jab tum `send_keys(Keys.ENTER)` call karte ho.
-2. Selenium browser ko ek OS-level "Key Down" event aur "Key Up" event bhejta hai specifically KeyCode 13 (Enter key ka standard number) ke liye.
-3. Browser is event ko intercept karta hai aur default form submission trigger kar deta hai.
+1. [[HL::Jab tum `send_keys(Keys.ENTER)` call karte ho.::HL]]
+2. [[HL::Selenium browser ko ek OS-level "Key Down" event aur "Key Up" event bhejta hai specifically KeyCode 13 (Enter key ka standard number) ke liye.::HL]]
+3. [[HL::Browser is event ko intercept karta hai aur default form submission trigger kar deta hai.::HL]]
 
-#### 💻 7. Hands-On — Runnable Example
+#### [[HL::💻 7. Hands-On — Runnable Example::HL]]
 
 ```python
 # Python 3.10+ | Selenium 4.x
-1  from selenium.webdriver.common.keys import Keys                       # Keys class import ki — special keyboard buttons ke liye
+1  [[HL::from selenium.webdriver.common.keys import Keys                       # Keys class import ki — special keyboard buttons ke liye::HL]]
 2  
-3  # Scenario 1: Hitting Enter on a Search Bar
-4  search_box = driver.find_element(By.NAME, "q")                        # Google ka search box pakda
-5  search_box.send_keys("Selenium Tutorial", Keys.ENTER)                 # text likha AUR turant Enter daba diya
-6  
-7  # Scenario 2: Pressing Tab to change focus (from Username to Password)
-8  user_box = driver.find_element(By.ID, "username")                     # user input field
-9  user_box.send_keys("admin")                                           # 'admin' type kiya
-10 user_box.send_keys(Keys.TAB)                                          # TAB dabaya — isse cursor (focus) next input field pe chala jayega
-11 
-12 # Scenario 3: Ctrl + A (Select All)
-13 user_box.send_keys(Keys.CONTROL, "a")                                 # CONTROL daba ke 'a' dabaya (Select all text)
+3  # [[HL::Scenario 1: Hitting Enter on a Search Bar::HL]]
+[[HL::4  search_box = driver.find_element(By.NAME, "q")                        # Google ka search box pakda::HL]]
+[[HL::5  search_box.send_keys("Selenium Tutorial", Keys.ENTER)                 # text likha AUR turant Enter daba diya::HL]]
+[[HL::6  ::HL]]
+[[HL::7  # Scenario 2: Pressing Tab to change focus (from Username to Password)::HL]]
+[[HL::8  user_box = driver.find_element(By.ID, "username")                     # user input field::HL]]
+[[HL::9  user_box.send_keys("admin")                                           # 'admin' type kiya::HL]]
+[[HL::10 user_box.send_keys(Keys.TAB)                                          # TAB dabaya — isse cursor (focus) next input field pe chala jayega::HL]]
+[[HL::11 ::HL]]
+[[HL::12 # Scenario 3: Ctrl + A (Select All)::HL]]
+[[HL::13 user_box.send_keys(Keys.CONTROL, "a")                                 # CONTROL daba ke 'a' dabaya (Select all text::HL]])
 
 ```
 
@@ -2042,9 +2042,9 @@ Aankhon se dekhne par, input box ke andar koi text type hota hua nahi dikhega, b
 
 ##### 🔬 Code Explanation Rule (LINE-BY-LINE)
 
-* **Line 5 (`search_box.send_keys(..., Keys.ENTER)`):** Yahan humne `send_keys()` (jo normal text bhejta hai) ke andar ek comma lagakar `Keys.ENTER` bhej diya. Isse pehle "Selenium Tutorial" type hoga aur instantly Enter press ho jayega.
-* **Line 10 (`user_box.send_keys(Keys.TAB)`):** Yeh line cursor (jise hum technical bhasha mein **focus** kehte hain) ko current `user_box` se hatakar HTML structure ke next interactable element (mostly password box) par shift kar degi.
-* **Line 13:** Keyboard shortcuts lagane ke liye dono keys ko comma se pass karte hain. Note karo ki `Keys.CONTROL` ek constant modifier key hai.
+* **[[HL::Line 5 (`search_box.send_keys(..., Keys.ENTER)`):** Yahan humne `send_keys()` (jo normal text bhejta hai) ke andar ek comma lagakar `Keys.ENTER` bhej diya. Isse pehle "Selenium Tutorial" type hoga aur instantly Enter press ho jayega.::HL]]
+* [[HL::**Line 10 (`user_box.send_keys(Keys.TAB)`):** Yeh line cursor (jise hum technical bhasha mein **focus** kehte hain) ko current `user_box` se hatakar HTML structure ke next interactable element (mostly password box) par shift kar degi.::HL]]
+* [[HL::**Line 13:** Keyboard shortcuts lagane ke liye dono keys ko comma se pass karte hain. Note karo ki `Keys.CONTROL` ek constant modifier key hai::HL]].
 
 #### 🔒 8. Security-First Check
 
@@ -2069,9 +2069,9 @@ Industry mein QA automation engineers `Keys.ENTER` ka heavily use karte hain tes
 * **Prove karo:** Try `search_box.send_keys("Enter")` — browser enter dabane ke bajaye letters type karega.
 
 
-* **Confusion 2 — "Focus kya hota hai?"**
-* **Galat soch:** Mouse jahan hota hai, focus wahan hota hai.
-* **Actually:** Focus (blinking cursor) woh field hoti hai jo us waqt active hoti hai aur tumhare keyboard ke keystrokes receive kar rahi hoti hai. Jab hum `Keys.TAB` dabate hain, toh "focus" next field par switch hota hai.
+* **[[HL::Confusion 2 — "Focus kya hota hai?"**::HL]]
+* [[HL::**Galat soch:** Mouse jahan hota hai, focus wahan hota hai.::HL]]
+* [[HL::**Actually:** Focus (blinking cursor) woh field hoti hai jo us waqt active hoti hai aur tumhare keyboard ke keystrokes receive kar rahi hoti hai. Jab hum `Keys.TAB` dabate hain, toh "focus" next field par switch hota hai::HL]].
 
 
 
@@ -2149,7 +2149,7 @@ Google ya Amazon jaisi sites par home page search functionality test karna. Waha
 
 ### 🎯 Topic: 7. JavaScript Execution (execute_script) [⚠️ Derived]
 
-Is topic mein hum seekhenge ki jab Selenium ke normal commands kaam na karein, toh hum seedha JavaScript (web pages ki core language) ke through browser ko kaise control kar sakte hain.
+[[HL::Is topic mein hum seekhenge ki jab Selenium ke normal commands kaam na karein, toh hum seedha JavaScript (web pages ki core language) ke through browser ko kaise control kar sakte hain::HL]].
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
@@ -2159,15 +2159,15 @@ Yahan **execute_script** wahi "circuit board par taar jodna" hai. Yeh user jaisa
 
 #### 📖 3. Technical Definition
 
-* **Precise English:** `execute_script` is a WebDriver method that allows you to execute raw, synchronous JavaScript code directly within the current context of the browser window or frame.
-* **Hinglish Simplification:** `execute_script` ek aisa function hai jisse hum Selenium script ke andar se seedha JavaScript code browser par chala sakte hain.
+* **[[HL::Precise English:** `execute_script` is a WebDriver method that allows you to execute raw, synchronous JavaScript code directly within the current context of the browser window or frame.::HL]]
+* [[HL::**Hinglish Simplification:** `execute_script` ek aisa function hai jisse hum Selenium script ke andar se seedha JavaScript code browser par chala sakte hain::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Kai baar button technically screen par hota hai, lekin uske upar koi transparent ad ya loading spinner aa jata hai. Aise mein normal `click()` `ElementNotInteractableException` (element chupa hua hai) throw kar deta hai.
-* **Solution:** **JS Click** kisi overlap ya ad ki parwah nahi karta. Woh seedha DOM (Document Object Model — webpage ka HTML tree structure) mein jaa kar us element par click event fire kar deta hai.
-* **What breaks if we don't use it?** Unstable UI overlays ki wajah se tumhare tests fail hote rahenge, bhale hi underlying functionality perfectly kaam kar rahi ho.
-* **✅ Kab use karo:** Jab element technically maujood ho par 'Hidden Elements' ya overlaps ki wajah se normal click fail ho raha ho. Ya phir jab DOM properties (jaise scroll positions) directly fetch karni ho.
+* **[[HL::Problem:** Kai baar button technically screen par hota hai, lekin uske upar koi transparent ad ya loading spinner aa jata hai. Aise mein normal `click()` `ElementNotInteractableException` (element chupa hua hai) throw kar deta hai.::HL]]
+* [[HL::**Solution:** **JS Click** kisi overlap ya ad ki parwah nahi karta. Woh seedha DOM (Document Object Model — webpage ka HTML tree structure) mein jaa kar us element par click event fire kar deta hai.::HL]]
+* [[HL::**What breaks if we don't use it?** Unstable UI overlays ki wajah se tumhare tests fail hote rahenge, bhale hi underlying functionality perfectly kaam kar rahi ho.::HL]]
+* [[HL::**✅ Kab use karo:** Jab element technically maujood ho par 'Hidden Elements' ya overlaps ki wajah se normal click fail ho raha ho. Ya phir jab DOM properties (jaise scroll positions) directly fetch karni ho::HL]].
 * **❌ Kab mat karo / Alternative prefer karo:** Jab normal `element.click()` chal raha ho. Agar JS Click use karoge toh tum real user behavior test nahi kar rahe ho (user ad ke through click nahi kar sakta). Hamesha standard Selenium methods ko prefer karo.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -2186,19 +2186,19 @@ Aankhon ko farq nahi pata chalega. Ek popup ad screen par hoga, aur bina us ad k
 ```python
 # Python 3.10+ | Selenium 4.x
 1  # Example 1: JS Click (Jab normal click fail ho jaye)
-2  login_btn = driver.find_element(By.ID, "login")                       # button ko dhoondha
-3  # login_btn.click()  <-- Maan lo yeh ad ki wajah se fail ho gaya
-4  driver.execute_script("arguments[0].click();", login_btn)             # execute_script() = JS chalao; arguments[0] = login_btn, .click() = JS level click
-5  
-6  # Example 2: Fetching Hidden Text
-7  hidden_msg = driver.find_element(By.ID, "secret")                     # ek hidden paragraph
-8  # normal hidden_msg.text khali aayega kyunki element visible nahi hai
-9  text1 = driver.execute_script("return arguments[0].textContent;", hidden_msg) # textContent = CSS/visibility ignore karke saara text laata hai
-10 text2 = driver.execute_script("return arguments[0].innerText;", hidden_msg)   # innerText = sirf woh text laata hai jo screen par visual hai
-11 
-12 # Example 3: Returning standard JS properties
-13 page_title = driver.execute_script("return document.title;")          # return document.title = current page ka title wapas Python mein bhejo
-14 print(page_title)                                                     # Python mein print kiya
+2  [[HL::login_btn = driver.find_element(By.ID, "login")                       # button ko dhoondha::HL]]
+[[HL::3  # login_btn.click()  <-- Maan lo yeh ad ki wajah se fail ho gaya::HL]]
+[[HL::4  driver.execute_script("arguments[0].click();", login_btn)             # execute_script() = JS chalao; arguments[0] = login_btn, .click() = JS level click::HL]]
+[[HL::5  ::HL]]
+[[HL::6  # Example 2: Fetching Hidden Text::HL]]
+[[HL::7  hidden_msg = driver.find_element(By.ID, "secret")                     # ek hidden paragraph::HL]]
+[[HL::8  # normal hidden_msg.text khali aayega kyunki element visible nahi hai::HL]]
+[[HL::9  text1 = driver.execute_script("return arguments[0].textContent;", hidden_msg) # textContent = CSS/visibility ignore karke saara text laata hai::HL]]
+[[HL::10 text2 = driver.execute_script("return arguments[0].innerText;", hidden_msg)   # innerText = sirf woh text laata hai jo screen par visual hai::HL]]
+[[HL::11 ::HL]]
+[[HL::12 # Example 3: Returning standard JS properties::HL]]
+[[HL::13 page_title = driver.execute_script("return document.title;")          # return document.title = current page ka title wapas Python mein bhejo::HL]]
+[[HL::14 print(page_title)                                                     # Python mein print kiya::HL]]
 
 ```
 
@@ -2213,7 +2213,7 @@ Welcome to Test Dashboard
 
 ##### 🔬 Code Explanation Rule (LINE-BY-LINE)
 
-* **Line 4:** `"arguments[0].click();"` ek JS code hai. Yahan `arguments[0]` ka matlab hai ki jo parameter comma ke baad pehle number par paas hua hai (yaani `login_btn`), us par JS ka `.click()` laga do.
+* **[[HL::Line 4:** `"arguments[0].click();"` ek JS code hai. Yahan `arguments[0]` ka matlab hai ki jo parameter comma ke baad pehle number par paas hua hai (yaani `login_btn`), us par JS ka `.click()` laga do::HL]].
 * **Line 9:** JS mein `textContent` property DOM mein likha hua saara text nikal leti hai, bhale hi element CSS se `display: none` (hidden) kyu na ho. Humne shuru mein `return` lagaya hai taaki JS yeh data wapas Python variable `text1` ko bhej de.
 
 #### 🔒 8. Security-First Check
@@ -2233,9 +2233,9 @@ Senior QA engineers `execute_script` ka istemaal test suite execution speed up k
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — `textContent` aur `innerText` mein kya fark hai?**
-* **Galat soch:** Dono same hi toh text laate hain.
-* **Actually:** `innerText` exactly wahi laata hai jo human user ko screen par dikhta hai (jaise CSS mein uppercase kiya ho toh uppercase aayega, hidden ho toh blank aayega). Lekin `textContent` source HTML mein jaisa raw text likha hai, pura ka pura laata hai — hidden elements ka bhi.
+* **[[HL::Confusion 1 — `textContent` aur `innerText` mein kya fark hai?**::HL]]
+* [[HL::**Galat soch:** Dono same hi toh text laate hain.::HL]]
+* [[HL::**Actually:** `innerText` exactly wahi laata hai jo human user ko screen par dikhta hai (jaise CSS mein uppercase kiya ho toh uppercase aayega, hidden ho toh blank aayega). Lekin `textContent` source HTML mein jaisa raw text likha hai, pura ka pura laata hai — hidden elements ka bhi::HL]].
 * **Prove karo:** Ek tag banao `<span style="display:none;">Secret</span>`. Normal `element.text` ya `innerText` blank dega. Lekin JS `textContent` "Secret" nikal laayega.
 
 
@@ -2287,12 +2287,12 @@ Selenium --> execute_script --> JS Engine --> Direct to HTML DOM --> CLICK!
 
 #### ❓ 17. Interview Q&A (FAQ)
 
-* **Q:** When do we use JavascriptExecutor (execute_script) in Selenium?
-* **A:** Jab normal Selenium interactions (jaise click ya send_keys) fail ho jate hain due to UI overlaps, scrolling issues, ya element visibility, tab hum `execute_script` se direct DOM level interactions karte hain.
-* **Q:** What is the difference between `element.text`, `textContent` and `innerText`?
-* **A:** `element.text` (Selenium) aur `innerText` (JS) dono sirf wahi text dete hain jo human visible hota hai. Lekin `textContent` (JS) saara raw text laata hai jo HTML code mein hai, chahe woh screen par hidden kyu na ho.
-* **Q:** JS execution mein variables kaise pass karte hain?
-* **A:** `arguments` array ke through. `execute_script("arguments[0].click();", my_element)` mein `my_element` internally `arguments[0]` ban jata hai JS ke andar.
+* **[[HL::Q:** When do we use JavascriptExecutor (execute_script) in Selenium?::HL]]
+* [[HL::**A:** Jab normal Selenium interactions (jaise click ya send_keys) fail ho jate hain due to UI overlaps, scrolling issues, ya element visibility, tab hum `execute_script` se direct DOM level interactions karte hain.::HL]]
+* [[HL::**Q:** What is the difference between `element.text`, `textContent` and `innerText`?::HL]]
+* [[HL::**A:** `element.text` (Selenium) aur `innerText` (JS) dono sirf wahi text dete hain jo human visible hota hai. Lekin `textContent` (JS) saara raw text laata hai jo HTML code mein hai, chahe woh screen par hidden kyu na ho.::HL]]
+* [[HL::**Q:** JS execution mein variables kaise pass karte hain?::HL]]
+* [[HL::**A:** `arguments` array ke through. `execute_script("arguments[0].click();", my_element)` mein `my_element` internally `arguments[0]` ban jata hai JS ke andar::HL]].
 
 #### 📝 18. One-Line Memory Hook
 
@@ -2314,7 +2314,7 @@ Selenium --> execute_script --> JS Engine --> Direct to HTML DOM --> CLICK!
 
 ### 🎯 Topic: 8. Scrolling Techniques [⚠️ Derived]
 
-Is topic mein hum browser ke andar upar-neeche scroll karne ke 3 alag-alag tarike seekhenge. Kyunki agar web page lamba hai aur tumhara button screen ke bahar (viewport ke bahar) hai, toh kabhi kabhi us par click fail ho jata hai.
+[[HL::Is topic mein hum browser ke andar upar-neeche scroll karne ke 3 alag-alag tarike seekhenge. Kyunki agar web page lamba hai aur tumhara button screen ke bahar (viewport ke bahar) hai, toh kabhi kabhi us par click fail ho jata hai::HL]].
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
@@ -2327,14 +2327,14 @@ Socho tum ek lamba newspaper padh rahe ho.
 #### 📖 3. Technical Definition
 
 * **Precise English:** Scrolling in Selenium involves moving the browser's viewport down or up to bring hidden or off-screen elements into the visible area before interacting with them.
-* **Hinglish Simplification:** Scrolling ka matlab hai browser window ko upar ya neeche khiskana taaki jo cheezein screen ke bahar (hidden) hain, woh saamne aa jayein.
+* **[[HL::Hinglish Simplification:** Scrolling ka matlab hai browser window ko upar ya neeche khiskana taaki jo cheezein screen ke bahar (hidden) hain, woh saamne aa jayein::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Kai aisi modern websites hain jahan **lazy loading** (page tabhi load hota hai jab aap scroll karte ho, jaise Instagram ki feed) hoti hai. Bina scroll kiye woh elements HTML mein aate hi nahi. Ya phir `ElementNotInteractableException` aa jata hai kyunki element view mein nahi hai.
-* **Solution:** Hum page ko scroll karke us element ko **viewport** (browser ka woh hissa jo screen par directly dikh raha hai) ke andar le aate hain.
-* **What breaks if we don't use it?** Footer links ya dynamically load hone wale grid items test nahi ho payenge.
-* **✅ Kab use karo:** Infinite scroll pages (e.g., social media feeds) mein data load karne ke liye, ya page ke sabse bottom waale "Accept Terms" button ko dekhne ke liye.
+* **[[HL::Problem:** Kai aisi modern websites hain jahan **lazy loading** (page tabhi load hota hai jab aap scroll karte ho, jaise Instagram ki feed) hoti hai. Bina scroll kiye woh elements HTML mein aate hi nahi. Ya phir `ElementNotInteractableException` aa jata hai kyunki element view mein nahi hai.::HL]]
+* [[HL::**Solution:** Hum page ko scroll karke us element ko **viewport** (browser ka woh hissa jo screen par directly dikh raha hai) ke andar le aate hain.::HL]]
+* [[HL::**What breaks if we don't use it?** Footer links ya dynamically load hone wale grid items test nahi ho payenge.::HL]]
+* [[HL::**✅ Kab use karo:** Infinite scroll pages (e.g., social media feeds) mein data load karne ke liye, ya page ke sabse bottom waale "Accept Terms" button ko dekhne ke liye::HL]].
 * **❌ Kab mat karo / Alternative prefer karo:** Un websites par jahan Selenium khud automatically scroll kar leta hai. (Note: Modern Selenium 4 versions kai baar element ko click karne se pehle khud screen par scroll-into-view kar lete hain, agar auto-scroll kaam kar raha hai toh extra scroll code mat likho).
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -2349,21 +2349,21 @@ Browser sirf utna hi page render (draw) karta hai jitna zaroori hai memory bacha
 
 ```python
 # Python 3.10+ | Selenium 4.x
-1  # Method 1: Scroll by Pixel (Blind scrolling)
-2  # window.scrollTo(X, Y) — X left/right ke liye, Y up/down ke liye
-3  driver.execute_script("window.scrollTo(0, 1000);")                    # 1000 pixels neeche scroll karo
-4  
-5  # Method 2: Scroll to end of page
-6  driver.execute_script("window.scrollTo(0, document.body.scrollHeight);") # scrollHeight = pure page ki total height, matlab sabse neeche jao
-7  
-8  # Method 3: Scroll to Element (BEST & PREFERRED METHOD)
-9  target_element = driver.find_element(By.ID, "submit-button")          # element dhundho
-10 # scrollIntoView(true) = element ko top par align karke screen mein le aao
-11 driver.execute_script("arguments[0].scrollIntoView(true);", target_element)
-12 
-13 # Method 4: ActionChains (Selenium's built-in scrolling - Python 3.10+ / Selenium 4.2+)
-14 from selenium.webdriver.common.action_chains import ActionChains
-15 ActionChains(driver).scroll_to_element(target_element).perform()      # scroll_to_element() = natively element tak scroll karo
+1  # [[HL::Method 1: Scroll by Pixel (Blind scrolling)::HL]]
+[[HL::2  # window.scrollTo(X, Y) — X left/right ke liye, Y up/down ke liye::HL]]
+[[HL::3  driver.execute_script("window.scrollTo(0, 1000);")                    # 1000 pixels neeche scroll karo::HL]]
+[[HL::4  ::HL]]
+[[HL::5  # Method 2: Scroll to end of page::HL]]
+[[HL::6  driver.execute_script("window.scrollTo(0, document.body.scrollHeight);") # scrollHeight = pure page ki total height, matlab sabse neeche jao::HL]]
+[[HL::7  ::HL]]
+[[HL::8  # Method 3: Scroll to Element (BEST & PREFERRED METHOD)::HL]]
+[[HL::9  target_element = driver.find_element(By.ID, "submit-button")          # element dhundho::HL]]
+[[HL::10 # scrollIntoView(true) = element ko top par align karke screen mein le aao::HL]]
+[[HL::11 driver.execute_script("arguments[0].scrollIntoView(true);", target_element)::HL]]
+[[HL::12 ::HL]]
+[[HL::13 # Method 4: ActionChains (Selenium's built-in scrolling - Python 3.10+ / Selenium 4.2+)::HL]]
+[[HL::14 from selenium.webdriver.common.action_chains import ActionChains::HL]]
+[[HL::15 ActionChains(driver).scroll_to_element(target_element).perform()      # scroll_to_element() = natively element tak scroll karo::HL]]
 
 ```
 
@@ -2371,11 +2371,11 @@ Browser sirf utna hi page render (draw) karta hai jitna zaroori hai memory bacha
 
 *(Browser viewport jump karke target element ko screen par le aayega)*
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
+##### 🔬 [[HL::Code Explanation Rule (LINE-BY-LINE)::HL]]
 
-* **Line 6 (`document.body.scrollHeight`):** Yeh JavaScript property hai jo dynamically calculate karti hai ki pura page kitna lamba hai. Toh `scrollTo(0, max_height)` page ke ekdum end mein (footer par) pahuncha deta hai.
-* **Line 11 (`scrollIntoView`):** Yeh element level JS function hai. `true` paas karne se yeh koshish karta hai ki element viewport ke top border ke saath align ho jaye, taaki safely click ho sake.
-* **Line 15 (`ActionChains.scroll_to_element`):** Yeh Selenium 4.2+ ka native function hai. Isme raw JS likhne ki zaroorat nahi padti, yeh directly perform ho jata hai.
+* [[HL::**Line 6 (`document.body.scrollHeight`):** Yeh JavaScript property hai jo dynamically calculate karti hai ki pura page kitna lamba hai. Toh `scrollTo(0, max_height)` page ke ekdum end mein (footer par) pahuncha deta hai.::HL]]
+* [[HL::**Line 11 (`scrollIntoView`):** Yeh element level JS function hai. `true` paas karne se yeh koshish karta hai ki element viewport ke top border ke saath align ho jaye, taaki safely click ho sake.::HL]]
+* [[HL::**Line 15 (`ActionChains.scroll_to_element`):** Yeh Selenium 4.2+ ka native function hai. Isme raw JS likhne ki zaroorat nahi padti, yeh directly perform ho jata hai::HL]].
 
 #### 🔒 8. Security-First Check
 
@@ -2455,8 +2455,8 @@ After `.scrollIntoView(true)`
 
 #### ❓ 17. Interview Q&A (FAQ)
 
-* **Q:** How do you scroll down to the bottom of a web page in Selenium?
-* **A:** Hum JavascriptExecutor use karte hain aur yeh script pass karte hain: `window.scrollTo(0, document.body.scrollHeight);`. Yeh browser ko batata hai ki Y-axis par page ki total height tak scroll kar jao.
+* **[[HL::Q:** How do you scroll down to the bottom of a web page in Selenium?::HL]]
+* [[HL::**A:** Hum JavascriptExecutor use karte hain aur yeh script pass karte hain: `window.scrollTo(0, document.body.scrollHeight);`. Yeh browser ko batata hai ki Y-axis par page ki total height tak scroll kar jao::HL]].
 * **Q:** Why do we prefer `scrollIntoView` over pixel scrolling?
 * **A:** Kyunki pixels screen sizes aur resolutions (jaise 4K vs 1080p) par depend karte hain, jisse test alag-alag machines par flaky ho jate hain. `scrollIntoView` seedha element ko viewport mein laata hai irrespective of ki uski height ya pixels kitne bhi hon, isliye yeh 100% reliable hai.
 
@@ -2480,69 +2480,69 @@ After `.scrollIntoView(true)`
 
 ### 🎯 Topic: 9. Synchronization & Waits (Most Important) [⚠️ Derived]
 
-Yeh Selenium ka sabse bada aur important concept hai. Scripts bahot fast execute hoti hain par real websites dheere load hoti hain (images, API calls). Is speed ke mismatch ko handle karne ko hi Synchronization (ya Waits) kehte hain.
+[[HL::Yeh Selenium ka sabse bada aur important concept hai. Scripts bahot fast execute hoti hain par real websites dheere load hoti hain (images, API calls). Is speed ke mismatch ko handle karne ko hi Synchronization (ya Waits) kehte hain::HL]].
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
-Socho tumne Domino's se Pizza order kiya:
+[[HL::Socho tumne Domino's se Pizza order kiya:::HL]]
 
-1. **No Wait:** Tum order karte hi darwaze par jaate ho, koi nahi milta, aur tum fail (nirash) ho jate ho. (Fast Script vs Slow Web).
-2. **`time.sleep(30)`:** Tum so jate ho aur exactly 30 min baad darwaza kholte ho. Agar pizza 10 min mein aaya tha, toh 20 min waste ho gaye! (Worst Approach).
-3. **Implicit Wait:** Tum har 30 second mein darwaza khol kar dekhte ho ek fixed time (say 30 min) tak. Jaise hi pizza dikha, tum le lete ho. (Better).
-4. **Explicit Wait:** Tum Domino's app par track karte ho specific condition — "Out for Delivery" status. Jab exact condition meet hoti hai, tabhi darwaza kholte ho. Yeh sabse best aur smart tarika hai!
+1. [[HL::**No Wait:** Tum order karte hi darwaze par jaate ho, koi nahi milta, aur tum fail (nirash) ho jate ho. (Fast Script vs Slow Web).::HL]]
+2. [[HL::**`time.sleep(30)`:** Tum so jate ho aur exactly 30 min baad darwaza kholte ho. Agar pizza 10 min mein aaya tha, toh 20 min waste ho gaye! (Worst Approach).::HL]]
+3. [[HL::**Implicit Wait:** Tum har 30 second mein darwaza khol kar dekhte ho ek fixed time (say 30 min) tak. Jaise hi pizza dikha, tum le lete ho. (Better).::HL]]
+4. [[HL::**Explicit Wait:** Tum Domino's app par track karte ho specific condition — "Out for Delivery" status. Jab exact condition meet hoti hai, tabhi darwaza kholte ho. Yeh sabse best aur smart tarika hai::HL]]!
 
 #### 📖 3. Technical Definition
 
-* **Precise English:** Synchronization is the mechanism that ensures the test script execution pauses and waits until the web application achieves a specific state (like an element becoming visible or clickable) before proceeding, preventing false failures.
-* **Hinglish Simplification:** Synchronization ka matlab hai apne fast code ko website ki slow loading speed ke saath match karana (wait karna) taaki code bina wajah fail (flaky tests) na ho.
+* **[[HL::Precise English:** Synchronization is the mechanism that ensures the test script execution pauses and waits until the web application achieves a specific state (like an element becoming visible or clickable) before proceeding, preventing false failures.::HL]]
+* [[HL::**Hinglish Simplification:** Synchronization ka matlab hai apne fast code ko website ki slow loading speed ke saath match karana (wait karna) taaki code bina wajah fail (flaky tests) na ho::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Code execution milliseconds mein hota hai, jabki webpage ka server se response aane mein seconds lag jate hain. Code turant element find karega, nahi milega, aur `NoSuchElementException` de kar crash ho jayega. Isey automation ki duniya mein **flaky tests** (kabhi pass, kabhi fail) kehte hain.
-* **Solution:** Selenium ko "Wait" (intezaar karne ka) tarika dena padta hai.
-* **What breaks if we don't use it?** 99% automation scripts real-world environment mein bina wait ke chal hi nahi sakti. Code humesha timeout fail dega.
-* **✅ Kab use karo:** Har baar jab page reload ho, koi naya popup open ho, AJAX call (background data load) complete ho, ya kisi click ke baad naya element render hone wala ho.
-* **❌ Kab mat karo / Alternative prefer karo:** **⭐ "time.sleep(5) KABHI use mat karo"**. Yeh static hai aur automation execution time ko totally barbaad kar deta hai. **⭐ "time.sleep() ko bhool jao"** — iski jagah hamesha smart Explicit ya Implicit waits use karo.
+* **[[HL::Problem:** Code execution milliseconds mein hota hai, jabki webpage ka server se response aane mein seconds lag jate hain. Code turant element find karega, nahi milega, aur `NoSuchElementException` de kar crash ho jayega. Isey automation ki duniya mein **flaky tests** (kabhi pass, kabhi fail) kehte hain.::HL]]
+* [[HL::**Solution:** Selenium ko "Wait" (intezaar karne ka) tarika dena padta hai.::HL]]
+* [[HL::**What breaks if we don't use it?** 99% automation scripts real-world environment mein bina wait ke chal hi nahi sakti. Code humesha timeout fail dega.::HL]]
+* [[HL::**✅ Kab use karo:** Har baar jab page reload ho, koi naya popup open ho, AJAX call (background data load) complete ho, ya kisi click ke baad naya element render hone wala ho.::HL]]
+* [[HL::**❌ Kab mat karo / Alternative prefer karo:** **⭐ "time.sleep(5) KABHI use mat karo"**. Yeh static hai aur automation execution time ko totally barbaad kar deta hai. **⭐ "time.sleep() ko bhool jao"** — iski jagah hamesha smart Explicit ya Implicit waits use karo::HL]].
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
-Jab wait laga hoga, terminal par code ruka rahega jab tak browser mein woh element physically load ho kar screen par dikhne nahi lagta. Jaise hi element aata hai, script instantly resume hoti hai.
+[[HL::Jab wait laga hoga, terminal par code ruka rahega jab tak browser mein woh element physically load ho kar screen par dikhne nahi lagta. Jaise hi element aata hai, script instantly resume hoti hai::HL]].
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. **Implicit Wait:** Yeh ek global (pure test ke liye) setting hai. Jab bhi script `find_element` call karti hai, Selenium internally ek loop chalata hai. Woh HTML DOM (Document Object Model) ko check karta hai (polling), agar element nahi mila, toh woh 500ms (default) ruk kar wapas check karta hai. Aisa tab tak karta hai jab tak maximum timeout (e.g., 10s) cross na ho jaye.
-2. **Explicit Wait:** Yeh specific element par target hota hai. Yahan `WebDriverWait` class `ExpectedConditions` (EC) function ke saath mil kar kaam karti hai. Yeh bhi DOM ko bar-bar poll karti hai, lekin sirf element present hone ka nahi, balki uski specific "State" (jaise visible hai ya clickable hai) hone ka intezar karti hai. Jab state true (success) return karti hai, wait khatam ho jata hai.
+1. **[[HL::Implicit Wait:** Yeh ek global (pure test ke liye) setting hai. Jab bhi script `find_element` call karti hai, Selenium internally ek loop chalata hai. Woh HTML DOM (Document Object Model) ko check karta hai (polling), agar element nahi mila, toh woh 500ms (default) ruk kar wapas check karta hai. Aisa tab tak karta hai jab tak maximum timeout (e.g., 10s) cross na ho jaye.::HL]]
+2. [[HL::**Explicit Wait:** Yeh specific element par target hota hai. Yahan `WebDriverWait` class `ExpectedConditions` (EC) function ke saath mil kar kaam karti hai. Yeh bhi DOM ko bar-bar poll karti hai, lekin sirf element present hone ka nahi, balki uski specific "State" (jaise visible hai ya clickable hai) hone ka intezar karti hai. Jab state true (success) return karti hai, wait khatam ho jata hai::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
 
 ```python
 # Python 3.10+ | Selenium 4.x
-1  import time                                                           # Basic python time module
-2  from selenium.webdriver.support.ui import WebDriverWait               # WebDriverWait = Explicit wait ka engine
-3  from selenium.webdriver.support import expected_conditions as EC      # EC = ExpectedConditions (jaise visible, clickable)
-4  
-5  # --- BAD APPROACH (Never do this in production) ---
-6  # time.sleep(5)                                                       # 5 second ke liye pura execution pause kar dega (chahe button 1 sec mein aa jaye)
-7  
-8  # --- METHOD 1: IMPLICIT WAIT (Global setup) ---
-9  driver.implicitly_wait(10)                                            # 10s maximum. Agar element 2 sec mein aaya, toh aage badh jayega (8 sec bacha lega)
-10 
-11 # --- METHOD 2: EXPLICIT WAIT (The Pro Way) ---
-12 try:
-13     # WebDriverWait engine ko bola: max 15 sec wait karo
-14     # EC class ki madad se condition check ki: element screen par 'visible' hona chahiye
-15     element = WebDriverWait(driver, 15).until(
-16         EC.visibility_of_element_located((By.ID, "delayed-button"))   # visibility_of_element_located = DOM mein bhi ho aur screen par bhi dikhe
-17     )
-18     
-19     # Agar clickable condition chahiye toh:
-20     button = WebDriverWait(driver, 10).until(
-21         EC.element_to_be_clickable((By.ID, "submit-btn"))             # element_to_be_clickable = button disable se enable ho jaye tab tak wait karo
-22     )
-23     button.click()                                                    # Condition meet hui, ab safely click karo
-24     
-25 except TimeoutException:                                              # Agar 15 sec mein bhi nahi aaya toh script fail nahi hogi, error gracefully catch hogi
-26     print("Element load nahi hua time par!")                          # TimeoutException = Selenium ka error jab maximum wait time cross ho jaye
+1  import time                                                           # [[HL::Basic python time module::HL]]
+[[HL::2  from selenium.webdriver.support.ui import WebDriverWait               # WebDriverWait = Explicit wait ka engine::HL]]
+[[HL::3  from selenium.webdriver.support import expected_conditions as EC      # EC = ExpectedConditions (jaise visible, clickable)::HL]]
+[[HL::4  ::HL]]
+[[HL::5  # --- BAD APPROACH (Never do this in production) ---::HL]]
+[[HL::6  # time.sleep(5)                                                       # 5 second ke liye pura execution pause kar dega (chahe button 1 sec mein aa jaye)::HL]]
+[[HL::7  ::HL]]
+[[HL::8  # --- METHOD 1: IMPLICIT WAIT (Global setup) ---::HL]]
+[[HL::9  driver.implicitly_wait(10)                                            # 10s maximum. Agar element 2 sec mein aaya, toh aage badh jayega (8 sec bacha lega)::HL]]
+[[HL::10 ::HL]]
+[[HL::11 # --- METHOD 2: EXPLICIT WAIT (The Pro Way) ---::HL]]
+[[HL::12 try:::HL]]
+[[HL::13     # WebDriverWait engine ko bola: max 15 sec wait karo::HL]]
+[[HL::14     # EC class ki madad se condition check ki: element screen par 'visible' hona chahiye::HL]]
+[[HL::15     element = WebDriverWait(driver, 15).until(::HL]]
+[[HL::16         EC.visibility_of_element_located((By.ID, "delayed-button"))   # visibility_of_element_located = DOM mein bhi ho aur screen par bhi dikhe::HL]]
+[[HL::17     )::HL]]
+[[HL::18     ::HL]]
+[[HL::19     # Agar clickable condition chahiye toh:::HL]]
+[[HL::20     button = WebDriverWait(driver, 10).until(::HL]]
+[[HL::21         EC.element_to_be_clickable((By.ID, "submit-btn"))             # element_to_be_clickable = button disable se enable ho jaye tab tak wait karo::HL]]
+[[HL::22     )::HL]]
+[[HL::23     button.click()                                                    # Condition meet hui, ab safely click karo::HL]]
+[[HL::24     ::HL]]
+[[HL::25 except TimeoutException:                                              # Agar 15 sec mein bhi nahi aaya toh script fail nahi hogi, error gracefully catch hogi::HL]]
+[[HL::26     print("Element load nahi hua time par!")                          # TimeoutException = Selenium ka error jab maximum wait time cross ho jaye::HL]]
 
 ```
 
@@ -2557,8 +2557,8 @@ Jab wait laga hoga, terminal par code ruka rahega jab tak browser mein woh eleme
 
 ##### 🔬 Code Explanation Rule (LINE-BY-LINE)
 
-* **Line 9 (`implicitly_wait`):** Yeh driver object banne ke baad sirf ek baar setup hota hai. Iska asar pure script mein har `find_element` call par automatically apply ho jata hai. Lekin yeh sirf dekhta hai ki HTML code mein (DOM mein) element aaya ya nahi.
-* **Line 15-17 (`WebDriverWait...until...EC`):** Yeh Explicit Wait ka standard formula hai. `.until()` loop chalata hai, aur `EC` (ExpectedConditions) us condition ko check karta hai. Yahan `visibility_of_element_located` pass kiya hai — jo yeh verify karta hai ki element DOM mein toh hai hi, saath hi screen par uski height/width 0 se badi hai (yaani insaan ko dikh raha hai). Note karo ki locator ko double bracket `((By.ID, ...))` mein diya gaya hai kyunki yeh ek single Tuple argument accept karta hai.
+* **[[HL::Line 9 (`implicitly_wait`):** Yeh driver object banne ke baad sirf ek baar setup hota hai. Iska asar pure script mein har `find_element` call par automatically apply ho jata hai. Lekin yeh sirf dekhta hai ki HTML code mein (DOM mein) element aaya ya nahi.::HL]]
+* [[HL::**Line 15-17 (`WebDriverWait::HL]]...until...[[HL::EC`):** Yeh Explicit Wait ka standard formula hai. `.until()` loop chalata hai, aur `EC` (ExpectedConditions) us condition ko check karta hai. Yahan `visibility_of_element_located` pass kiya hai — jo yeh verify karta hai ki element DOM mein toh hai hi, saath hi screen par uski height/width 0 se badi hai (yaani insaan ko dikh raha hai). Note karo ki locator ko double bracket `((By.ID, ...))` mein diya gaya hai kyunki yeh ek single Tuple argument accept karta hai::HL]].
 * **Line 25 (`try...except`):** Waits timeouts de sakte hain. `TimeoutException` ko pakadne se framework crash hone se bach jata hai aur tum custom error log likh sakte ho.
 
 #### 🔒 8. Security-First Check
@@ -2582,23 +2582,23 @@ Industry mein "flaky tests" sabse badi problem hain. Senior automation developer
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "`presence_of_element_located` aur `visibility_of_element_located` mein kya farq hai?"**
-* **Galat soch:** Dono ka matlab hai element screen par aa gaya hai.
-* **Actually:** `presence_of_element_located` sirf check karta hai ki element HTML (DOM) ke andar aa gaya hai — chahe us element par `display: none` (hidden) kyu na laga ho! Jabki `visibility_of_element_located` confirm karta hai ki HTML mein bhi hai, AUR aam insaan ki aankhon se screen par bhi dikh raha hai.
+* **[[HL::Confusion 1 — "`presence_of_element_located` aur `visibility_of_element_located` mein kya farq hai?"**::HL]]
+* [[HL::**Galat soch:** Dono ka matlab hai element screen par aa gaya hai.::HL]]
+* [[HL::**Actually:** `presence_of_element_located` sirf check karta hai ki element HTML (DOM) ke andar aa gaya hai — chahe us element par `display: none` (hidden) kyu na laga ho! Jabki `visibility_of_element_located` confirm karta hai ki HTML mein bhi hai, AUR aam insaan ki aankhon se screen par bhi dikh raha hai::HL]].
 * **Prove karo:** Ek hidden element HTML mein daalo. Presence wala wait turant pass ho jayega, par visibility wala fail ho kar timeout dega. Hamesha UI actions (click) ke liye visibility ya clickable use karo!
 
 
-* **Confusion 2 — "Agar explicit wait 15 second ka hai, toh kya 15 sec rukna hi padega?"**
-* **Galat soch:** Yeh `time.sleep(15)` jaisa hi toh hai.
-* **Actually:** Nahi! Explicit wait "dynamic" hota hai. Agar element 2nd second mein hi dikh gaya, toh code baaki ke 13 second ignore karke aage badh jayega. 15 sec "maximum" limit hoti hai fail hone se pehle.
+* **[[HL::Confusion 2 — "Agar explicit wait 15 second ka hai, toh kya 15 sec rukna hi padega?"**::HL]]
+* [[HL::**Galat soch:** Yeh `time.sleep(15)` jaisa hi toh hai.::HL]]
+* [[HL::**Actually:** Nahi! Explicit wait "dynamic" hota hai. Agar element 2nd second mein hi dikh gaya, toh code baaki ke 13 second ignore karke aage badh jayega. 15 sec "maximum" limit hoti hai fail hone se pehle::HL]].
 
 
 
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
 
-* **Wait ke bawajood `ElementNotInteractableException` aa raha hai**
-* **Root Cause:** Tumne condition galat chuni hai. Tum shayad `presence` check kar rahe ho jabki tumhe `clickable` check karna chahiye tha (ho sakta hai button visible ho par disable ho).
-* **Fix:** Wait condition ko change karke `EC.element_to_be_clickable(...)` lagao.
+* **[[HL::Wait ke bawajood `ElementNotInteractableException` aa raha hai**::HL]]
+* [[HL::**Root Cause:** Tumne condition galat chuni hai. Tum shayad `presence` check kar rahe ho jabki tumhe `clickable` check karna chahiye tha (ho sakta hai button visible ho par disable ho).::HL]]
+* [[HL::**Fix:** Wait condition ko change karke `EC.element_to_be_clickable::HL]](...)` lagao.
 
 
 * **TimeoutException aa gaya (Test fail)**
@@ -2644,16 +2644,16 @@ Travel websites (jaise MakeMyTrip) par jab tum flight search karte ho, toh loadi
 
 #### ❓ 17. Interview Q&A (FAQ)
 
-* **Q:** What is the difference between Implicit Wait and Explicit Wait?
-* **A:** Implicit wait global hota hai aur pure driver session ke liye apply hota hai — yeh sirf DOM mein element ki "maujudgi" (presence) ka wait karta hai. Explicit wait specific elements par lagta hai aur yeh element ki specific "State" (jaise visible hai, ya click hone ke layaq hai) ka wait karta hai ExpectedConditions ka use karke. Explicit wait zyada smart aur robust hai.
+* **[[HL::Q:** What is the difference between Implicit Wait and Explicit Wait?::HL]]
+* [[HL::**A:** Implicit wait global hota hai aur pure driver session ke liye apply hota hai — yeh sirf DOM mein element ki "maujudgi" (presence) ka wait karta hai. Explicit wait specific elements par lagta hai aur yeh element ki specific "State" (jaise visible hai, ya click hone ke layaq hai) ka wait karta hai ExpectedConditions ka use karke. Explicit wait zyada smart aur robust hai::HL]].
 * **Q:** Why should we not mix Implicit and Explicit Waits?
 * **A:** Dono mix karne se wait times add (sum up) ho jate hain ya unpredictable behave karte hain, jisse browser timeouts erratic ho jate hain. Industry standard hai ki implicit wait ko 0 set karo aur sirf zarurat padne par explicit wait use karo.
-* **Q:** What is Fluent Wait in Selenium?
-* **A:** Fluent Wait Explicit Wait ka hi ek type hai, jisme hum do cheezein specifically control karte hain: 1) Maximum wait time, 2) Polling frequency (kitne interval baad check karna hai, jaise har 2 seconds mein). Isme hum certain exceptions (jaise NoSuchElementException) ko ignore karne ki rule bhi daal sakte hain during the wait loop.
-* **Q:** Agar ek element screen par dikh raha hai par `element_to_be_clickable` timeout de raha hai, kyun?
-* **A:** Kyunki element visible (opacity/display) toh hai, lekin shayad uspe koi transparent overlay (ad) chada hua hai, ya fir koi JS event (loading spinner) ki wajah se HTML level pe `disabled="true"` attribute set hai.
-* **Q:** Kaunsi EC use karu dropdown list load hone ke wait ke liye?
-* **A:** `EC.visibility_of_element_located` for the dropdown itself, and sometimes you can wait for `presence_of_all_elements_located` agar list tags (`<li>`) ka collection aana baki hai.
+* **Q:** [[HL::What is Fluent Wait in Selenium?::HL]]
+* [[HL::**A:** Fluent Wait Explicit Wait ka hi ek type hai, jisme hum do cheezein specifically control karte hain: 1) Maximum wait time, 2) Polling frequency (kitne interval baad check karna hai, jaise har 2 seconds mein). Isme hum certain exceptions (jaise NoSuchElementException) ko ignore karne ki rule bhi daal sakte hain during the wait loop.::HL]]
+* [[HL::**Q:** Agar ek element screen par dikh raha hai par `element_to_be_clickable` timeout de raha hai, kyun?::HL]]
+* [[HL::**A:** Kyunki element visible (opacity/display) toh hai, lekin shayad uspe koi transparent overlay (ad) chada hua hai, ya fir koi JS event (loading spinner) ki wajah se HTML level pe `disabled="true"` attribute set hai.::HL]]
+* [[HL::**Q:** Kaunsi EC use karu dropdown list load hone ke wait ke liye?::HL]]
+* [[HL::**A:** `EC.visibility_of_element_located` for the dropdown itself, and sometimes you can wait for `presence_of_all_elements_located` agar list tags (`<li>`) ka collection aana baki hai::HL]].
 
 #### 📝 18. One-Line Memory Hook
 
@@ -2690,31 +2690,31 @@ Is topic mein hum seekhenge ki WebDriverWait ke andar hum inbuilt conditions (EC
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
-Socho tum ek restaurant mein Waiter ko order de rahe ho.
+[[HL::Socho tum ek restaurant mein Waiter ko order de rahe ho.::HL]]
 
-* **Standard EC:** Yeh basic instructions hain, jaise "Jab customer table par dikhe, tabhi pani dena" (`visibility_of`).
-* **Custom Lambda:** Yeh ekdum special instruction hai, jaise "Jab customer ke haath mein menu ho AUR usne red shirt pehni ho, tabhi uske paas jana."
-**⭐ "Hamesha EC se shuru karo"**. Agar tumhara kaam basic instruction se ho raha hai, toh special instruction mat do. Agar condition EC list mein nahi hai, tabhi `lambda` ka use karo.
+* [[HL::**Standard EC:** Yeh basic instructions hain, jaise "Jab customer table par dikhe, tabhi pani dena" (`visibility_of`).::HL]]
+* [[HL::**Custom Lambda:** Yeh ekdum special instruction hai, jaise "Jab customer ke haath mein menu ho AUR usne red shirt pehni ho, tabhi uske paas jana."::HL]]
+[[HL::**⭐ "Hamesha EC se shuru karo"**. Agar tumhara kaam basic instruction se ho raha hai, toh special instruction mat do. Agar condition EC list mein nahi hai, tabhi `lambda` ka use karo::HL]].
 
 #### 📖 3. Technical Definition
 
-* **Precise English:** `ExpectedConditions` (EC) is a set of predefined conditions provided by Selenium for `WebDriverWait`. A `lambda` function is a small, anonymous inline function in Python used to evaluate custom boolean logic when standard ECs are insufficient.
-* **Hinglish Simplification:** `ExpectedConditions` Selenium ke bane-banaye rules hain wait karne ke liye. Jabki `lambda` Python ka ek chhota function hai jisse hum apna khud ka wait rule bana sakte hain.
+* **[[HL::Precise English:** `ExpectedConditions` (EC) is a set of predefined conditions provided by Selenium for `WebDriverWait`. A `lambda` function is a small, anonymous inline function in Python used to evaluate custom boolean logic when standard ECs are insufficient.::HL]]
+* [[HL::**Hinglish Simplification:** `ExpectedConditions` Selenium ke bane-banaye rules hain wait karne ke liye. Jabki `lambda` Python ka ek chhota function hai jisse hum apna khud ka wait rule bana sakte hain::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Selenium mein 95% waits basic hote hain (visible hai, clickable hai), jiske liye EC perfect hai. Par bache hue 5% cases mein (jaise "Shopping cart ka number 2 se 3 kab hua?") EC fail ho jata hai kyunki uske paas aisi specific condition nahi hoti.
-* **Solution:** Hum `wait.until()` ke andar ek custom `lambda` function bhejte hain jo continuously page ki state check karta hai jab tak woh specific requirement true na ho jaye.
-* **What breaks if we don't use it?** Complex UI interactions (jaise counter update hona, ya specific CSS class lagna) ko test karte waqt tumhare tests flaky ho jayenge kyunki normal wait sahi time pe execute nahi hoga.
-* **✅ Kab use karo:** - Standard form submissions ke liye hamesha `EC` use karo.
-* Jab UI flow mein koi complex state check karna ho (jaise kisi table mein rows ki length exactly 10 hona) tab custom `lambda` condition deploy karo.
+* **[[HL::Problem:** Selenium mein 95% waits basic hote hain (visible hai, clickable hai), jiske liye EC perfect hai. Par bache hue 5% cases mein (jaise "Shopping cart ka number 2 se 3 kab hua?") EC fail ho jata hai kyunki uske paas aisi specific condition nahi hoti.::HL]]
+* [[HL::**Solution:** Hum `wait.until()` ke andar ek custom `lambda` function bhejte hain jo continuously page ki state check karta hai jab tak woh specific requirement true na ho jaye.::HL]]
+* [[HL::**What breaks if we don't use it?** Complex UI interactions (jaise counter update hona, ya specific CSS class lagna) ko test karte waqt tumhare tests flaky ho jayenge kyunki normal wait sahi time pe execute nahi hoga.::HL]]
+* [[HL::**✅ Kab use karo:** - Standard form submissions ke liye hamesha `EC` use karo.::HL]]
+* [[HL::Jab UI flow mein koi complex state check karna ho (jaise kisi table mein rows ki length exactly 10 hona) tab custom `lambda` condition deploy karo::HL]].
 
 
 * **❌ Kab mat karo / Alternative prefer karo:** Jab `EC.visibility_of_element_located` ya `EC.element_to_be_clickable` se kaam ho raha ho, toh wahan `lambda` likhna over-engineering (faltu ki complexity) hai. Avoid it.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
-Browser screen par element physically maujood hoga, par script tab tak ruki rahegi (terminal pe koi error nahi aayega) jab tak lambda wali specific logic (jaise count update hona) visually poori nahi ho jati.
+[[HL::Browser screen par element physically maujood hoga, par script tab tak ruki rahegi (terminal pe koi error nahi aayega) jab tak lambda wali specific logic (jaise count update hona) visually poori nahi ho jati::HL]].
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
@@ -2727,29 +2727,29 @@ Browser screen par element physically maujood hoga, par script tab tak ruki rahe
 
 ```python
 # Python 3.10+ | Selenium 4.x
-1  from selenium.webdriver.support.ui import WebDriverWait               # Explicit Wait class
-2  from selenium.webdriver.support import expected_conditions as EC      # Built-in conditions
-3  from selenium.webdriver.common.by import By
-4  
-5  wait = WebDriverWait(driver, 10)                                      # 10 second ka maximum wait setup kiya
-6  
-7  # ---------------------------------------------------------
-8  # METHOD 1: Using Standard EC (ExpectedConditions)
-9  # ---------------------------------------------------------
-10 # alert_is_present() = check karta hai ki JS popup alert aaya ya nahi
-11 wait.until(EC.alert_is_present())                                     
-12 
-13 # text_to_be_present_in_element() = check karta hai ki us element mein specific text aaya ya nahi
-14 wait.until(EC.text_to_be_present_in_element((By.ID, "status"), "Complete"))
-15 
-16 # ---------------------------------------------------------
-17 # METHOD 2: Using Custom Lambda (Anonymous Function)
-18 # ---------------------------------------------------------
-19 # Scenario: Hame tab tak rukna hai jab tak list mein exactly 5 items na aa jayein.
-20 # lambda d: (ek anonymous function hai jisme 'd' matlab driver hai)
-21 wait.until(lambda d: len(d.find_elements(By.TAG_NAME, "li")) == 5)    # wait karo jab tak 'li' elements ki length exactly 5 na ho jaye
-22 
-23 print("All items loaded successfully!")                               # 5 items aate hi yeh line run hogi
+1  from selenium.webdriver.support.ui import WebDriverWait               # [[HL::Explicit Wait class::HL]]
+[[HL::2  from selenium.webdriver.support import expected_conditions as EC      # Built-in conditions::HL]]
+[[HL::3  from selenium.webdriver.common.by import By::HL]]
+[[HL::4  ::HL]]
+[[HL::5  wait = WebDriverWait(driver, 10)                                      # 10 second ka maximum wait setup kiya::HL]]
+[[HL::6  ::HL]]
+[[HL::7::HL]]  # ---------------------------------------------------------
+[[HL::8  # METHOD 1: Using Standard EC (ExpectedConditions)::HL]]
+[[HL::9::HL]]  # ---------------------------------------------------------
+[[HL::10 # alert_is_present() = check karta hai ki JS popup alert aaya ya nahi::HL]]
+[[HL::11 wait.until(EC.alert_is_present())                                     ::HL]]
+[[HL::12 ::HL]]
+[[HL::13 # text_to_be_present_in_element() = check karta hai ki us element mein specific text aaya ya nahi::HL]]
+[[HL::14 wait.until(EC.text_to_be_present_in_element((By.ID, "status"), "Complete"))::HL]]
+[[HL::15 ::HL]]
+[[HL::16::HL]] # ---------------------------------------------------------
+[[HL::17 # METHOD 2: Using Custom Lambda (Anonymous Function)::HL]]
+[[HL::18::HL]] # ---------------------------------------------------------
+[[HL::19 # Scenario: Hame tab tak rukna hai jab tak list mein exactly 5 items na aa jayein.::HL]]
+[[HL::20 # lambda d: (ek anonymous function hai jisme 'd' matlab driver hai)::HL]]
+[[HL::21 wait.until(lambda d: len(d.find_elements(By.TAG_NAME, "li")) == 5)    # wait karo jab tak 'li' elements ki length exactly 5 na ho jaye::HL]]
+[[HL::22 ::HL]]
+[[HL::23 print("All items loaded successfully!")                               # 5 items aate hi yeh line run hogi::HL]]
 
 ```
 
@@ -2764,29 +2764,29 @@ All items loaded successfully!
 
 ##### 🔬 Code Explanation Rule (LINE-BY-LINE)
 
-* **Line 11 & 14:** Yeh standard `EC` methods hain. Inke naam se hi inka kaam clear hai (alert aana, ya text present hona).
-* **Line 21 (`wait.until(lambda d: ...)`):** Yahan `lambda` (Python ka ek line ka chhota function jiska koi naam nahi hota) use hua hai. `d` yahan par `driver` object hai jo `until` internally pass karta hai. Yeh lambda boolean evaluate karega: Kya list ke elements ki length 5 hai? Agar nahi, toh False return hoga aur `until` fir se wait karega. Agar 5 ho gayi, toh True return hoke wait khatam ho jayega.
+* **[[HL::Line 11 & 14:** Yeh standard `EC` methods hain. Inke naam se hi inka kaam clear hai (alert aana, ya text present hona).::HL]]
+* [[HL::**Line 21 (`wait.until(lambda d::HL]]: ...)`):** [[HL::Yahan `lambda` (Python ka ek line ka chhota function jiska koi naam nahi hota) use hua hai. `d` yahan par `driver` object hai jo `until` internally pass karta hai. Yeh lambda boolean evaluate karega: Kya list ke elements ki length 5 hai? Agar nahi, toh False return hoga aur `until` fir se wait karega. Agar 5 ho gayi, toh True return hoke wait khatam ho jayega.::HL]]
 
-#### 🔒 8. Security-First Check
+#### [[HL::🔒 8. Security-First Check::HL]]
 
-(N/A — is concept mein direct security surface nahi hai, yeh sirf execution delays handle karta hai).
+[[HL::(N/A — is concept mein direct security surface nahi hai, yeh sirf execution delays handle karta hai).::HL]]
 
-#### 🏗️ 9. Scalability & Industry Context
+#### [[HL::🏗️ 9. Scalability & Industry Context::HL]]
 
-Large frameworks mein senior developers `lambda` conditions ke custom wrapper functions banate hain taaki code clean rahe. Har jagah raw lambda likhna code readability (samajhne mein aasaani) ko ghatata hai. Industry rule: 95% cases mein `EC.visibility_of` aur `EC.element_to_be_clickable` (jo safely check karte hain) pe rely karo.
+[[HL::Large frameworks mein senior developers `lambda` conditions ke custom wrapper functions banate hain taaki code clean rahe. Har jagah raw lambda likhna code readability (samajhne mein aasaani) ko ghatata hai. Industry rule: 95% cases mein `EC.visibility_of` aur `EC.element_to_be_clickable` (jo safely check karte hain) pe rely karo.::HL]]
 
-#### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
+#### [[HL::⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)::HL]]
 
-* **❌ Mistake:** Basic visible check ke liye bhi `wait.until(lambda d: d.find_element(By.ID, 'btn').is_displayed())` likhna.
-* **🤦 Why:** Naye developers ko lagta hai lambda se code cool ya advanced lag raha hai.
-* **✅ The 'Pro' Way:** `wait.until(EC.visibility_of_element_located(...))` use karo.
+* [[HL::**❌ Mistake:** Basic visible check ke liye bhi `wait.until(lambda d: d.find_element(By.ID, 'btn').is_displayed())` likhna.::HL]]
+* [[HL::**🤦 Why:** Naye developers ko lagta hai lambda se code cool ya advanced lag raha hai.::HL]]
+* [[HL::**✅ The 'Pro' Way:** `wait.until(EC.visibility_of_element_located::HL]](...))` use karo.
 * **⚡ Consequences:** Agar element DOM mein nahi hoga toh lambda directly `NoSuchElementException` de kar script crash kar dega, jabki `EC.visibility_of_element_located` us error ko internally catch karke ignore karta hai jab tak timeout na ho jaye.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Yeh `lambda d:` mein `d` kahan se aaya?"**
-* **Galat soch:** Mujhe test file mein kahin `d` variable pehle define karna padega.
-* **Actually:** Nahi! `WebDriverWait.until()` function inherently apne andar maujood `driver` object ko us function (lambda) mein argument ke roop mein bhejta hai. `d` sirf ek parameter name hai, tum usko `lambda driver:` ya `lambda x:` bhi likh sakte ho, automatically usme browser instance aayega.
+* **[[HL::Confusion 1 — "Yeh `lambda d:` mein `d` kahan se aaya?"**::HL]]
+* [[HL::**Galat soch:** Mujhe test file mein kahin `d` variable pehle define karna padega.::HL]]
+* [[HL::**Actually:** Nahi! `WebDriverWait.until()` function inherently apne andar maujood `driver` object ko us function (lambda) mein argument ke roop mein bhejta hai. `d` sirf ek parameter name hai, tum usko `lambda driver:` ya `lambda x:` bhi likh sakte ho, automatically usme browser instance aayega::HL]].
 * **Prove karo:** `wait.until(lambda xyz: print(xyz.title))` likh ke dekho, page ka title print hoga, matlab `xyz` asal mein `driver` hai.
 
 
@@ -2854,8 +2854,8 @@ How `wait.until()` evaluates logic:
 
 #### ❓ 17. Interview Q&A (FAQ)
 
-* **Q:** What is the ExpectedConditions class in Selenium?
-* **A:** `ExpectedConditions` (ya EC) Selenium me ek class hai jisme pre-defined wait rules hote hain (jaise `element_to_be_clickable`, `visibility_of_element_located`). Hum inko WebDriverWait ke `.until()` method mein pass karte hain taaki browser exact element state aane tak script ko roke rakhe.
+* **[[HL::Q:** What is the ExpectedConditions class in Selenium?::HL]]
+* [[HL::**A:** `ExpectedConditions` (ya EC) Selenium me ek class hai jisme pre-defined wait rules hote hain (jaise `element_to_be_clickable`, `visibility_of_element_located`). Hum inko WebDriverWait ke `.until()` method mein pass karte hain taaki browser exact element state aane tak script ko roke rakhe::HL]].
 * **Q:** When do we use a lambda function in Selenium waits?
 * **A:** Jab standard ExpectedConditions humari UI automation requirements (e.g., checking specific array length, custom element attributes match, ya dynamic text changes) ko meet nahi kar paati, toh hum apni requirement ko ek chhoti anonymous lambda function ke roop mein `until()` ko pass karte hain.
 * **Q:** Does lambda handle `NoSuchElementException` automatically like EC does?
@@ -2885,22 +2885,22 @@ Is topic mein hum seekhenge ki HTML data grids (tables) ko Selenium ke through k
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
-HTML table bilkul Excel sheet jaisa format hota hai — rows aur columns hote hain.
-Maan lo ek attendance register (table) hai.
+[[HL::HTML table bilkul Excel sheet jaisa format hota hai — rows aur columns hote hain.::HL]]
+[[HL::Maan lo ek attendance register (table) hai.::HL]]
 
-* **Table Loop Strategy:** Tum page 1 se ek-ek naam padhte ho, check karte ho "Kya yeh Rohan hai?", agar nahi toh agla padhte ho. Yeh lamba aur boring tarika hai.
-* **Dynamic XPath Strategy:** Tum register se seedha index me dekhte ho "Rohan row 5 mein hai", aur seedha wahan pahunch kar uske samne (Action column mein) Edit button daba dete ho.
-**⭐ "Agar aapko 'specific' data chahiye, toh Dynamic XPath use karo"** (Loop lagane ki zaroorat nahi hai).
+* [[HL::**Table Loop Strategy:** Tum page 1 se ek-ek naam padhte ho, check karte ho "Kya yeh Rohan hai?", agar nahi toh agla padhte ho. Yeh lamba aur boring tarika hai.::HL]]
+* [[HL::**Dynamic XPath Strategy:** Tum register se seedha index me dekhte ho "Rohan row 5 mein hai", aur seedha wahan pahunch kar uske samne (Action column mein) Edit button daba dete ho.::HL]]
+[[HL::**⭐ "Agar aapko 'specific' data chahiye, toh Dynamic XPath use karo"** (Loop lagane ki zaroorat nahi hai::HL]]).
 
 #### 📖 3. Technical Definition
 
 * **Precise English:** Web tables are HTML structures defined by `<table>`, `<tr>` (rows), and `<td>`/`<th>` (cells) tags. In Selenium, extracting data from tables involves either iterating through all elements (Looping) or locating specific cells dynamically using advanced relative locators like XPath Axes.
-* **Hinglish Simplification:** Web Tables HTML ki sheets hain jahan rows aur columns mein data rakha jata hai. Selenium mein inse data nikalne ke do tarike hain: ya toh ek-ek karke sab padho (loop), ya seedha smart XPath se target ko hit karo.
+* **[[HL::Hinglish Simplification:** Web Tables HTML ki sheets hain jahan rows aur columns mein data rakha jata hai. Selenium mein inse data nikalne ke do tarike hain: ya toh ek-ek karke sab padho (loop), ya seedha smart XPath se target ko hit karo::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** CRM (Customer Relationship Management) ya e-commerce backend panels mein sara data lists/tables mein hota hai. Agar list dynamic hai (jaise sorting se order change ho jata hai), toh hardcoded row number (`tr[3]`) kabhi theek record pe click nahi karega.
-* **Solution:** Hum relative / Dynamic XPath (Axes) use karte hain jahan hum text dhoondhte hain aur wahan se horizontally navigate karke us specific row ka action button pakadte hain.
+* **[[HL::Problem:** CRM (Customer Relationship Management) ya e-commerce backend panels mein sara data lists/tables mein hota hai. Agar list dynamic hai (jaise sorting se order change ho jata hai), toh hardcoded row number (`tr[3]`) kabhi theek record pe click nahi karega.::HL]]
+* [[HL::**Solution:** Hum relative / Dynamic XPath (Axes) use karte hain jahan hum text dhoondhte hain aur wahan se horizontally navigate karke us specific row ka action button pakadte hain::HL]].
 * **What breaks if we don't use it?** Admin dashboards se report extraction test karna impossible ho jayega, aur kisi specific user ko table list se delete karne ka automation test randomly kisi aur user ko delete kar dega.
 * **✅ Kab use karo:** - Saara report data database validation ke liye extract karna ho (Loop method).
 * Kisi specific invoice number ke saamne wala 'Download' ya 'Delete' button click karna ho (Dynamic XPath method).
@@ -2914,9 +2914,9 @@ Browser screen par ek Excel-style grid hogi. Terminal mein script successfully u
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-* **HTML DOM hierarchy:** `<table>` (parent) -> `<thead>`/`<tbody>` (sections) -> `<tr>` (table row) -> `<th>` (table header cell) ya `<td>` (table data cell).
-* **Loop Strategy:** `find_elements` poori table ki rows (`tr`) ka ek array (list) banata hai. Hum for loop chalate hain, har row mein column (`td`) check karte hain.
-* **XPath Axes (following-sibling):** Yeh DOM traversal technique hai. Tum ek text search karte ho (`//td[text()='Rohan']`), DOM pointer wahan khada ho jata hai. Fir `following-sibling::td` bolte hi pointer usi row mein aage waley dabbe mein khisak jata hai, bina poori list scan kiye (O(1) search at logic logic level).
+* **[[HL::HTML DOM hierarchy:** `<table>` (parent) -> `<thead>`/`<tbody>` (sections) -> `<tr>` (table row) -> `<th>` (table header cell) ya `<td>` (table data cell).::HL]]
+* [[HL::**Loop Strategy:** `find_elements` poori table ki rows (`tr`) ka ek array (list) banata hai. Hum for loop chalate hain, har row mein column (`td`) check karte hain.::HL]]
+* [[HL::**XPath Axes (following-sibling):** Yeh DOM traversal technique hai. Tum ek text search karte ho (`//td[text()='Rohan']`), DOM pointer wahan khada ho jata hai. Fir `following-sibling::td` bolte hi pointer usi row mein aage waley dabbe mein khisak jata hai, bina poori list scan kiye (O(1) search at logic logic level::HL]]).
 
 #### 💻 7. Hands-On — Runnable Example
 
@@ -2932,25 +2932,25 @@ Browser screen par ek Excel-style grid hogi. Terminal mein script successfully u
 8  # ---------------------------------------------------------
 9  # Strategy 1: Table Loop Strategy (Saara data extract karna)
 10 # ---------------------------------------------------------
-11 rows = driver.find_elements(By.XPATH, "//table//tr")                  # find_elements() = array return karega saari rows ka
-12 
-13 for row in rows[1:]:                                                  # [1:] matlab pehli row (headers 'th') chhod kar baaki loop karo
-14     cols = row.find_elements(By.TAG_NAME, "td")                       # har row mein 'td' (columns) dhoondho
-15     if len(cols) > 0:
-16         name = cols[0].text                                           # pehla column Name hai
-17         role = cols[1].text                                           # dusra column Role hai
-18         print(f"Name: {name}, Role: {role}")
-19 
-20 # ---------------------------------------------------------
-21 # Strategy 2: Dynamic XPath Strategy (Specific target - The Pro Way)
-22 # ---------------------------------------------------------
-23 # XPath Axes = 'Rohan' wale box se uske aage wale sibling box (Action column) me jao
-24 target_name = "Rohan"
-25 # XPath explanation below ↓
-26 dynamic_xpath = f"//td[text()='{target_name}']/following-sibling::td//button"
-27 
-28 edit_button = driver.find_element(By.XPATH, dynamic_xpath)            # Bina kisi loop ke direct element mil gaya
-29 edit_button.click()
+11 [[HL::rows = driver.find_elements(By.XPATH, "//table//tr")                  # find_elements() = array return karega saari rows ka::HL]]
+[[HL::12 ::HL]]
+[[HL::13 for row in rows[1:]:                                                  # [1:] matlab pehli row (headers 'th') chhod kar baaki loop karo::HL]]
+[[HL::14     cols = row.find_elements(By.TAG_NAME, "td")                       # har row mein 'td' (columns) dhoondho::HL]]
+[[HL::15     if len(cols) > 0:::HL]]
+[[HL::16         name = cols[0].text                                           # pehla column Name hai::HL]]
+[[HL::17         role = cols[1].text                                           # dusra column Role hai::HL]]
+[[HL::18         print(f"Name: {name}, Role: {role}")::HL]]
+[[HL::19 ::HL]]
+[[HL::20::HL]] # ---------------------------------------------------------
+[[HL::21 # Strategy 2: Dynamic XPath Strategy (Specific target - The Pro Way)::HL]]
+[[HL::22::HL]] # ---------------------------------------------------------
+[[HL::23 # XPath Axes = 'Rohan' wale box se uske aage wale sibling box (Action column) me jao::HL]]
+[[HL::24 target_name = "Rohan"::HL]]
+[[HL::25 # XPath explanation below ↓::HL]]
+[[HL::26 dynamic_xpath = f"//td[text()='{target_name}']/following-sibling::td//button"::HL]]
+[[HL::27 ::HL]]
+[[HL::28 edit_button = driver.find_element(By.XPATH, dynamic_xpath)            # Bina kisi loop ke direct element mil gaya::HL]]
+[[HL::29 edit_button.click::HL]]()
 
 ```
 
@@ -2966,8 +2966,8 @@ Name: Rohan, Role: User
 
 ##### 🔬 Code Explanation Rule (LINE-BY-LINE)
 
-* **Line 11-14:** `find_elements` (dhyaan do, plural hai 's' ke saath) list return karta hai. Hum slicing `[1:]` isliye use kar rahe hain kyunki table ki pehli row hamesha Headers (`<th>`) hoti hai, data nahi. Phir har row (`tr`) ke andar jake hum dubara `.find_elements` lagate hain columns (`td`) nikalne ke liye.
-* **Line 26 (`dynamic_xpath`):** Yeh line magic hai. `//td[text()='Rohan']` -> pehle woh dabbi dhoondho jisme exactly 'Rohan' likha hai. `/following-sibling::td` -> (yeh **XPath Axes** kehlata hai) us dabbi ke theek aage wali dabbi mein kudo jo usi same `tr` (row) mein maujood hai. `//button` -> aur us dabbi ke andar rakhe button par jao. Humne Python f-string ka use karke isko completely dynamic (reusable) bana diya hai.
+* **[[HL::Line 11-14:** `find_elements` (dhyaan do, plural hai 's' ke saath) list return karta hai. Hum slicing `[1:]` isliye use kar rahe hain kyunki table ki pehli row hamesha Headers (`<th>`) hoti hai, data nahi. Phir har row (`tr`) ke andar jake hum dubara `.find_elements` lagate hain columns (`td`) nikalne ke liye.::HL]]
+* [[HL::**Line 26 (`dynamic_xpath`):** Yeh line magic hai. `//td[text()='Rohan']` -> pehle woh dabbi dhoondho jisme exactly 'Rohan' likha hai. `/following-sibling::td` -> (yeh **XPath Axes** kehlata hai) us dabbi ke theek aage wali dabbi mein kudo jo usi same `tr` (row) mein maujood hai. `//button` -> aur us dabbi ke andar rakhe button par jao. Humne Python f-string ka use karke isko completely dynamic (reusable) bana diya hai::HL]].
 
 #### 🔒 8. Security-First Check
 
@@ -2979,10 +2979,10 @@ Industry (production environment) mein "Table Loop Strategy" ko tabhi use kiya j
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** Hardcode XPath lagana, e.g., `//table/tr[3]/td[4]/button`.
-* **🤦 Why:** Inspector se copy karne par aisa hi "Absolute" rasta nikalta hai.
-* **✅ The 'Pro' Way:** Relative XPath with attributes, e.g., `//td[text()='Rohan']/following-sibling::td/button`.
-* **⚡ Consequences:** Agar developer ne website update ki aur list mein 'Rohan' ki position row 3 se row 5 ho gayi (dynamic sorting ki wajah se), toh hardcoded script fail hogi (Flaky test), par Dynamic XPath hamesha sahi dhoondhega.
+* **❌ [[HL::Mistake:** Hardcode XPath lagana, e.g., `//table/tr[3]/td[4]/button`.::HL]]
+* [[HL::**🤦 Why:** Inspector se copy karne par aisa hi "Absolute" rasta nikalta hai.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Relative XPath with attributes, e.g., `//td[text()='Rohan']/following-sibling::td/button`.::HL]]
+* [[HL::**⚡ Consequences:** Agar developer ne website update ki aur list mein 'Rohan' ki position row 3 se row 5 ho gayi (dynamic sorting ki wajah se), toh hardcoded script fail hogi (Flaky test), par Dynamic XPath hamesha sahi dhoondhega::HL]].
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
@@ -3297,13 +3297,13 @@ Test Discovery ek strict Teacher ki tarah hai jo exam copies check kar raha hai.
 #### 📖 3. Technical Definition
 
 * **Precise English:** Test discovery is the automatic process by which PyTest locates test files and functions based on specific naming conventions. Assertions are statements that validate whether the actual outcome of a test matches the expected outcome.
-* **Hinglish Simplification:** Test Discovery PyTest ka auto-search engine hai jo specific naam wali files aur functions ko dhundhta hai. Assertion test ki checking mechanism hai jo match karti hai ki jo output aaya, kya wohi output aana chahiye tha.
+* **[[HL::Hinglish Simplification:** Test Discovery PyTest ka auto-search engine hai jo specific naam wali files aur functions ko dhundhta hai. Assertion test ki checking mechanism hai jo match karti hai ki jo output aaya, kya wohi output aana chahiye tha::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Agar main hazar functions likh du, toh framework ko kaise pata chalega ki konsa function test hai aur konsa helper function? Dusra, bina check kiye test hamesha pass dikhega bhale hi login fail ho gaya ho.
-* **Solution:** Test discovery naming convention se tests identify karti hai, aur **⭐"test ki aatma"** (Assertion) sachhai batati hai ki test actually pass hua ya fail.
-* **What breaks if we don't use it?** Bina `assert` ke test hamesha pass dikhega, chahe website crash hi kyun na ho gayi ho. Test discovery rule follow na karne par PyTest ko koi test milega hi nahi aur output aayega `collected 0 items`.
+* **[[HL::Problem:** Agar main hazar functions likh du, toh framework ko kaise pata chalega ki konsa function test hai aur konsa helper function? Dusra, bina check kiye test hamesha pass dikhega bhale hi login fail ho gaya ho.::HL]]
+* [[HL::**Solution:** Test discovery naming convention se tests identify karti hai, aur **⭐"test ki aatma"** (Assertion) sachhai batati hai ki test actually pass hua ya fail.::HL]]
+* [[HL::**What breaks if we don't use it?** Bina `assert` ke test hamesha pass dikhega, chahe website crash hi kyun na ho gayi ho. Test discovery rule follow na karne par PyTest ko koi test milega hi nahi aur output aayega::HL]] `collected 0 items`.
 * **✅ Kab use karo:** Har single test function mein ek assertion hona hi chahiye taaki expected aur actual behavior match ho sake.
 * **❌ Kab mat karo / Alternative prefer karo:** `if...else` block lagakar pass/fail print karna ek bad practice hai. Hamesha `assert` use karo kyunki `if...else` test ko official fail mark nahi karta framework ki nazron mein.
 
@@ -3321,10 +3321,10 @@ project_folder/
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. Tum terminal mein `pytest` command run karte ho.
-2. PyTest folder mein dhundhta hai: Kya kisi file ka naam `test_*.py` ya `*_test.py` hai?
-3. Us file ke andar ghus kar dekhta hai: Kya kisi function ka naam `test_*` se shuru ho raha hai?
-4. Un functions ko execute karta hai. Jab execution `assert` keyword par pahunchta hai, toh condition evaluate hoti hai. Agar True mili toh aage badho, agar False mili toh wahi test fail karke `AssertionError` phek do aur agle test par jao.
+1. [[HL::Tum terminal mein `pytest` command run karte ho.::HL]]
+2. [[HL::PyTest folder mein dhundhta hai: Kya kisi file ka naam `test_*.py` ya `*_test.py` hai?::HL]]
+3. [[HL::Us file ke andar ghus kar dekhta hai: Kya kisi function ka naam `test_*` se shuru ho raha hai?::HL]]
+4. [[HL::Un functions ko execute karta hai. Jab execution `assert` keyword par pahunchta hai, toh condition evaluate hoti hai. Agar True mili toh aage badho, agar False mili toh wahi test fail karke `AssertionError` phek do aur agle test par jao::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
 
@@ -3332,24 +3332,24 @@ Chalo ek file banate hain `test_login_suite.py` jisme hum `actual_url` aur `expe
 
 ```python
 # Python 3.10+ | Selenium 4.x
-1  from selenium import webdriver      # Selenium library se webdriver module laao
-2
-3  def test_valid_login():             # test_ prefix zaroori hai Test Discovery ke liye
-4      driver = webdriver.Chrome()     # Chrome browser open karo
-5      driver.get("https://example.com/login") # Website par jao
-6      
-7      actual_url = driver.current_url # Browser se current URL fetch karo
-8      expected_url = "https://example.com/dashboard" # Jo URL hume chahiye (Answer Key)
-9      
-10     # ⭐ assert actual_url == expected_url
-11     assert actual_url == expected_url, "Custom message: Login fail ho gaya bhai!" 
-12     
-13     driver.quit()                   # Browser close karo session end karne ke liye
-14
-15 def test_invalid_login():           # Ek aur test function
-16     actual_error_msg = "Invalid User" # Maan lo UI se ye error message aaya
-17     expected_error_msg = "Invalid User"
-18     assert actual_error_msg == expected_error_msg # Condition True hogi, test pass
+[[HL::1  from selenium import webdriver      # Selenium library se webdriver module laao::HL]]
+[[HL::2::HL]]
+[[HL::3  def test_valid_login():             # test_ prefix zaroori hai Test Discovery ke liye::HL]]
+[[HL::4      driver = webdriver.Chrome()     # Chrome browser open karo::HL]]
+[[HL::5      driver.get("https://example.com/login") # Website par jao::HL]]
+[[HL::6      ::HL]]
+[[HL::7      actual_url = driver.current_url # Browser se current URL fetch karo::HL]]
+[[HL::8      expected_url = "https://example.com/dashboard" # Jo URL hume chahiye (Answer Key)::HL]]
+[[HL::9      ::HL]]
+[[HL::10     # ⭐ assert actual_url == expected_url::HL]]
+[[HL::11     assert actual_url == expected_url, "Custom message: Login fail ho gaya bhai!" ::HL]]
+[[HL::12     ::HL]]
+[[HL::13     driver.quit()                   # Browser close karo session end karne ke liye::HL]]
+[[HL::14::HL]]
+[[HL::15 def test_invalid_login():           # Ek aur test function::HL]]
+[[HL::16     actual_error_msg = "Invalid User" # Maan lo UI se ye error message aaya::HL]]
+[[HL::17     expected_error_msg = "Invalid User"::HL]]
+[[HL::18     assert actual_error_msg == expected_error_msg # Condition True hogi, test pass::HL]]
 
 ```
 
@@ -3397,10 +3397,10 @@ Industry mein assert statements ko bahut descriptive rakha jata hai. Agar CI/CD 
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Test file ka naam mytests.py kyun nahi rakh sakte?"**
-* **Galat soch:** Main file ka koi bhi naam rakhunga, PyTest run karte waqt sab chala dega.
-* **Actually:** PyTest ki Test Discovery strict hai. File ka naam ya toh `test_*.py` hona chahiye ya `*_test.py`.
-* **Prove karo:** Ek file banao `login.py` usme test function likho. Run karo `pytest login.py`, output aayega `collected 0 items`. Phir rename karo `test_login.py`, ab run karo, test mil jayega!
+* **[[HL::Confusion 1 — "Test file ka naam mytests.py kyun nahi rakh sakte?"**::HL]]
+* [[HL::**Galat soch:** Main file ka koi bhi naam rakhunga, PyTest run karte waqt sab chala dega.::HL]]
+* [[HL::**Actually:** PyTest ki Test Discovery strict hai. File ka naam ya toh `test_*.py` hona chahiye ya `*_test.py`.::HL]]
+* [[HL::**Prove karo:** Ek file banao `login.py` usme test function likho. Run karo::HL]] `pytest login.py`, output aayega `collected 0 items`. Phir rename karo `test_login.py`, ab run karo, test mil jayega!
 
 
 * **Confusion 2 — "Kya assert sirf equals (==) check kar sakta hai?"**
@@ -3465,8 +3465,8 @@ Is file named test_*.py or *_test.py?
 
 #### ❓ 17. Interview Q&A
 
-* **Q:** PyTest ki test discovery rules kya hain?
-* **A:** PyTest by default unhi files ko dhundhta hai jinka naam `test_` se shuru ho ya `_test.py` par khatam ho. File ke andar, woh un classes ko dhundhta hai jo `Test` se shuru hoti hain (bina **init** ke), aur functions/methods jo `test_` se shuru hote hain.
+* **[[HL::Q:** PyTest ki test discovery rules kya hain?::HL]]
+* [[HL::**A:** PyTest by default unhi files ko dhundhta hai jinka naam `test_` se shuru ho ya `_test.py` par khatam ho. File ke andar, woh un classes ko dhundhta hai jo `Test` se shuru hoti hain (bina **init** ke), aur functions/methods jo `test_` se shuru hote hain::HL]].
 * **Q:** Assertion fail hone par kya hota hai, aur execution kaise behave karta hai?
 * **A:** Jab kisi test mein `assert` condition `False` evaluate hoti hai, toh Python ek `AssertionError` throw karta hai. Is point par us particular test ka execution wahin ruk jata hai (stop execution of that function) aur PyTest report mein usse FAILED mark karke immediately next test function par move kar jata hai.
 * **Q:** Custom assertion message kaise add karte hain?
@@ -3521,7 +3521,7 @@ Section 3: Advanced Execution & Configuration (Topic 7, Topic 8, Topic 9, Topic 
 
 ### 🎯 Topic 3: Fixtures Setup & Teardown
 
-Is topic mein hum seekhenge ki kaise test se pehle ki taiyari (Setup) aur baad ki safai (Teardown) ko ek smart helper function ke through manage karein taaki humara code DRY (Don't Repeat Yourself) rahe.
+[[HL::Is topic mein hum seekhenge ki kaise test se pehle ki taiyari (Setup) aur baad ki safai (Teardown) ko ek smart helper function ke through manage karein taaki humara code DRY (Don't Repeat Yourself) rahe::HL]].
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
@@ -3530,12 +3530,12 @@ Socho tumhare ghar party hai aur 10 mehmaan (tests) aane wale hain. Bina fixture
 #### 📖 3. Technical Definition
 
 * **Precise English:** Fixtures are helper functions in PyTest used to establish a reliable and repeatable baseline state (Setup) before tests execute, and perform cleanup (Teardown) after they finish.
-* **Hinglish Simplification:** Fixtures PyTest ke smart Helpers hain jo test chalne se pehle environment ready karte hain, beech mein test ko run hone dete hain, aur test khatam hone par safai (cleanup) karte hain.
+* **[[HL::Hinglish Simplification:** Fixtures PyTest ke smart Helpers hain jo test chalne se pehle environment ready karte hain, beech mein test ko run hone dete hain, aur test khatam hone par safai (cleanup) karte hain::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Har test file mein `driver = webdriver.Chrome()` aur end mein `driver.quit()` likhna padta hai. Agar 100 tests hain, toh 100 baar code repeat hoga. Agar kal Chrome ki jagah Firefox use karna ho, toh 100 jagah change karna padega.
-* **Solution:** Fixture is code ko ek jagah extract kar leta hai. Yeh DRY (Don't Repeat Yourself — code ko duplicate karne se bachana) principle follow karta hai.
+* **[[HL::Problem:** Har test file mein `driver = webdriver.Chrome()` aur end mein `driver.quit()` likhna padta hai. Agar 100 tests hain, toh 100 baar code repeat hoga. Agar kal Chrome ki jagah Firefox use karna ho, toh 100 jagah change karna padega.::HL]]
+* [[HL::**Solution:** Fixture is code ko ek jagah extract kar leta hai. Yeh DRY (Don't Repeat Yourself — code ko duplicate karne se bachana) principle follow karta hai::HL]].
 * **What breaks if we don't use it?** Code maintenance nightmare ban jayega. Browser sessions memory mein khule reh jayenge (zombie processes) kyunki error aane par test `driver.quit()` tak nahi pahunchega.
 * **✅ Kab use karo:** Jab multiple tests ko same preparation chahiye (e.g., database connection banana, browser open karna, user login karna).
 * **❌ Kab mat karo / Alternative prefer karo:** Agar koi logic sirf ek specific test ke andar ka part hai (jaise ek specific form fill karna) aur kisi aur test ko nahi chahiye, toh usse fixture mat banao. Seedha test function ke andar likho.
@@ -3554,38 +3554,38 @@ def test_valid_login(driver_setup):
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. PyTest jab test function dekhta hai, toh uske arguments (brackets ke andar ke variables) padhta hai.
-2. Agar argument ka naam kisi fixture se match karta hai (e.g., `driver_setup`), toh PyTest pehle us fixture ko call karta hai.
-3. Fixture ka Setup part run hota hai.
-4. Jab execution `yield` keyword par pahunchta hai, fixture **Pause** ho jata hai aur apna banaya hua object (jaise driver) test ko de deta hai.
-5. Test apna kaam karta hai.
-6. Test pass ho ya fail, PyTest wapas us fixture par aata hai aur **Resume** karke `yield` ke baad wala Teardown part run karta hai.
+1. [[HL::PyTest jab test function dekhta hai, toh uske arguments (brackets ke andar ke variables) padhta hai.::HL]]
+2. [[HL::Agar argument ka naam kisi fixture se match karta hai (e.g., `driver_setup`), toh PyTest pehle us fixture ko call karta hai.::HL]]
+3. [[HL::Fixture ka Setup part run hota hai.::HL]]
+4. [[HL::Jab execution `yield` keyword par pahunchta hai, fixture **Pause** ho jata hai aur apna banaya hua object (jaise driver) test ko de deta hai.::HL]]
+5. [[HL::Test apna kaam karta hai.::HL]]
+6. [[HL::Test pass ho ya fail, PyTest wapas us fixture par aata hai aur **Resume** karke `yield` ke baad wala Teardown part run karta hai::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
 
-Chalo ek file banate hain `test_login_with_fixture.py`. Is baar run karne ke liye hum `pytest -v -s` command use karenge. `-v` (Verbose = detailed output) aur `-s` (Print statements ko terminal pe dikhana).
+[[HL::Chalo ek file banate hain `test_login_with_fixture.py`. Is baar run karne ke liye hum `pytest -v -s` command use karenge. `-v` (Verbose = detailed output::HL]]) aur `-s` ([[HL::Print statements ko terminal pe dikhana::HL]]).
 
 ```python
-# Python 3.10+ | pytest 7.x | Selenium 4.x
-1  import pytest                       # PyTest library import karo
-2  from selenium import webdriver      # Selenium import karo
-3
-4  # Decorator — yeh normal function ko PyTest fixture bana deta hai
-5  @pytest.fixture(scope="function")   # scope="function" : har test ke liye naya browser khulega
-6  def driver_setup():                 # Fixture ka naam jo tests use karenge
-7      print("\n[SETUP] Browser Start")# Terminal mein dikhane ke liye print
-8      driver = webdriver.Chrome()     # Actual browser launch
-9      
-10     # ⭐ yield hi pause aur resume kar sakta hai
-11     yield driver                    # PAUSE: Driver test ko de do aur yahan ruk jao
-12     
-13     print("\n[TEARDOWN] Browser Close") # RESUME: Test khatam hone ke baad yeh chalega
-14     driver.quit()                   # Browser permanently close
-15
-16 # Test function — argument mein fixture ka naam likhna padega
-17 def test_title(driver_setup):       # PyTest dekhega: "Accha isko driver_setup chahiye"
-18     driver_setup.get("https://google.com") # driver_setup argument mein actual driver object aa gaya hai
-19     assert "Google" in driver_setup.title  # Check karo title
+[[HL::# Python 3.10+ | pytest 7.x | Selenium 4.x::HL]]
+[[HL::1  import pytest                       # PyTest library import karo::HL]]
+[[HL::2  from selenium import webdriver      # Selenium import karo::HL]]
+[[HL::3::HL]]
+[[HL::4  # Decorator — yeh normal function ko PyTest fixture bana deta hai::HL]]
+[[HL::5  @pytest.fixture(scope="function")   # scope="function" : har test ke liye naya browser khulega::HL]]
+[[HL::6  def driver_setup():                 # Fixture ka naam jo tests use karenge::HL]]
+[[HL::7      print("\n[SETUP] Browser Start")# Terminal mein dikhane ke liye print::HL]]
+[[HL::8      driver = webdriver.Chrome()     # Actual browser launch::HL]]
+[[HL::9      ::HL]]
+[[HL::10     # ⭐ yield hi pause aur resume kar sakta hai::HL]]
+[[HL::11     yield driver                    # PAUSE: Driver test ko de do aur yahan ruk jao::HL]]
+[[HL::12     ::HL]]
+[[HL::13     print("\n[TEARDOWN] Browser Close") # RESUME: Test khatam hone ke baad yeh chalega::HL]]
+[[HL::14     driver.quit()                   # Browser permanently close::HL]]
+[[HL::15::HL]]
+[[HL::16 # Test function — argument mein fixture ka naam likhna padega::HL]]
+[[HL::17 def test_title(driver_setup):       # PyTest dekhega: "Accha isko driver_setup chahiye"::HL]]
+[[HL::18     driver_setup.get("https://google.com") # driver_setup argument mein actual driver object aa gaya hai::HL]]
+[[HL::19     assert "Google" in driver_setup.title  # Check karo title::HL]]
 
 ```
 
@@ -3601,9 +3601,9 @@ PASSED
 
 ##### 🔬 Code Explanation
 
-* **Line 5:** `@pytest.fixture` — Yeh ek Decorator (Python ka special syntax jo kisi function ki power badha deta hai) hai. Iske bina yeh ek aam function hota. `scope="function"` ka matlab hai ki yeh setup har test se pehle naye sire se chalega.
-* **Line 11:** `yield driver` — Yeh `return` ka bhai hai, par alag hai. `return` function ko hamesha ke liye khatam kar deta hai. `yield` function ko *pause* karta hai. Jo value `yield` ke aage hai (`driver`), woh test ko pass ho jati hai. (Pause & Resume concept).
-* **Line 17:** `def test_title(driver_setup)` — Humne fixture ka naam seedha yahan daal diya. Is tarike se tests ko unki zaroorat ki cheezein milna **Dependency Injection** (framework khud objects banakar tests ko deta hai) kehlata hai.
+* **[[HL::Line 5:** `@pytest.fixture` — Yeh ek Decorator (Python ka special syntax jo kisi function ki power badha deta hai) hai. Iske bina yeh ek aam function hota. `scope="function"` ka matlab hai ki yeh setup har test se pehle naye sire se chalega.::HL]]
+* [[HL::**Line 11:** `yield driver` — Yeh `return` ka bhai hai, par alag hai. `return` function ko hamesha ke liye khatam kar deta hai. `yield` function ko *pause* karta hai. Jo value `yield` ke aage hai (`driver`), woh test ko pass ho jati hai. (Pause & Resume concept).::HL]]
+* [[HL::**Line 17:** `def test_title(driver_setup)` — Humne fixture ka naam seedha yahan daal diya. Is tarike se tests ko unki zaroorat ki cheezein milna **Dependency Injection** (framework khud objects banakar tests ko deta hai) kehlata hai::HL]].
 
 #### 🔒 8. Security-First Check
 
@@ -3611,19 +3611,19 @@ Fixtures mein kabhi bhi database ke passwords ya API tokens hardcode (plain text
 
 #### 🏗️ 9. Scalability & Industry Context
 
-Industry mein tests ko fast karne ke liye **Scope** ka aggressively use hota hai:
+[[HL::Industry mein tests ko fast karne ke liye **Scope** ka aggressively use hota hai:::HL]]
 
-* `scope="function"`: Default. Har test par naya setup (Slowest, but safest).
-* `scope="module"`: Ek poori `test_*.py` file ke liye ek baar chalega.
-* `scope="session"`: Poore project/test run mein sirf ek baar chalega (Fastest).
-Agar 100 tests ko same website par testing karni hai, toh `scope="session"` lagakar hum 100 baar browser open/close hone ka time (lagbhag 5-10 minutes) bacha lete hain. Yeh 10x fast hota hai.
+* [[HL::`scope="function"`: Default. Har test par naya setup (Slowest, but safest).::HL]]
+* [[HL::`scope="module"`: Ek poori `test_*.py` file ke liye ek baar chalega.::HL]]
+* [[HL::`scope="session"`: Poore project/test run mein sirf ek baar chalega (Fastest).::HL]]
+[[HL::Agar 100 tests ko same website par testing karni hai, toh `scope="session"` lagakar hum 100 baar browser open/close hone ka time (lagbhag 5-10 minutes) bacha lete hain. Yeh 10x fast hota hai::HL]].
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** Fixture mein `yield` ki jagah `return` use kar lena jab teardown karna ho.
-* **🤦 Why:** Log Python ke normal functions ki aadat se majboor hote hain.
-* **✅ The 'Pro' Way:** Hamesha `yield` use karo agar end mein kuch cleanup karna hai (jaise `driver.quit()`).
-* **⚡ Consequences:** Agar `return` likh diya, toh PyTest us function se bahar aa jayega, uske neeche ki `driver.quit()` line kabhi chalegi hi nahi, aur tumhare RAM mein hazaron Chrome browsers khul kar system hang kar denge.
+* **❌ [[HL::Mistake:** Fixture mein `yield` ki jagah `return` use kar lena jab teardown karna ho.::HL]]
+* [[HL::**🤦 Why:** Log Python ke normal functions ki aadat se majboor hote hain.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Hamesha `yield` use karo agar end mein kuch cleanup karna hai (jaise `driver.quit()`)::HL]].
+* **⚡ [[HL::Consequences:** Agar `return` likh diya, toh PyTest us function se bahar aa jayega, uske neeche ki `driver.quit()` line kabhi chalegi hi nahi, aur tumhare RAM mein hazaron Chrome browsers khul kar system hang kar denge::HL]].
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
@@ -3633,9 +3633,9 @@ Agar 100 tests ko same website par testing karni hai, toh `scope="session"` laga
 * **Prove karo:** Test mein `driver_setup()` call karne ki koshish karo, PyTest error dega ya naya object bana dega jo setup/teardown properly follow nahi karega.
 
 
-* **Confusion 2 — "Kya ek test do fixtures use kar sakta hai?"**
-* **Galat soch:** Ek test ke argument mein sirf ek hi fixture daal sakte hain.
-* **Actually:** Tum jitne chaho utne fixtures pass kar sakte ho (e.g., `def test_login(driver_setup, db_connection, user_data):`). PyTest sabko line se chala dega.
+* **[[HL::Confusion 2 — "Kya ek test do fixtures use kar sakta hai?"**::HL]]
+* [[HL::**Galat soch:** Ek test ke argument mein sirf ek hi fixture daal sakte hain.::HL]]
+* [[HL::**Actually:** Tum jitne chaho utne fixtures pass kar sakte ho (e.g., `def test_login(driver_setup, db_connection, user_data):`). PyTest sabko line se chala dega::HL]].
 
 
 
@@ -3680,10 +3680,10 @@ def my_setup():
 
 #### ❓ 17. Interview Q&A
 
-* **Q:** `@pytest.fixture` mein `yield` aur `return` mein kya difference hai?
-* **A:** `return` execution ko terminate kar deta hai, jiske baad likha code kabhi nahi chalta. Isliye teardown (cleanup) possible nahi hota. **⭐"yield hi pause aur resume kar sakta hai"**. PyTest yield ke paas aake pause hota hai, test chalata hai, aur phir wapis yield ke baad wali lines ko (resume karke) as a Teardown execute karta hai.
-* **Q:** Dependency Injection PyTest mein kaise kaam karti hai?
-* **A:** PyTest ka framework test functions ke parameters (arguments) ko scan karta hai. Agar wahan kisi fixture ka naam milta hai, toh PyTest khud-ba-khud us fixture ko invoke karke uska generated result test ke andar inject (pass) kar deta hai. Developer ko manually initialize nahi karna padta.
+* **[[HL::Q:** `@pytest.fixture` mein `yield` aur `return` mein kya difference hai?::HL]]
+* [[HL::**A:** `return` execution ko terminate kar deta hai, jiske baad likha code kabhi nahi chalta. Isliye teardown (cleanup) possible nahi hota. **⭐"yield hi pause aur resume kar sakta hai"**. PyTest yield ke paas aake pause hota hai, test chalata hai, aur phir wapis yield ke baad wali lines ko (resume karke) as a Teardown execute karta hai.::HL]]
+* [[HL::**Q:** Dependency Injection PyTest mein kaise kaam karti hai?::HL]]
+* [[HL::**A:** PyTest ka framework test functions ke parameters (arguments) ko scan karta hai. Agar wahan kisi fixture ka naam milta hai, toh PyTest khud-ba-khud us fixture ko invoke karke uska generated result test ke andar inject (pass) kar deta hai. Developer ko manually initialize nahi karna padta::HL]].
 * **Q:** Agar mujhe 100 tests fast run karne hain jinme login page test ho raha hai, kaunsa scope use karoge?
 * **A:** Agar tests ek doosre par depend nahi karte, toh main `scope="session"` (ya at least `scope="module"`) use karunga. Isse 100 baar browser khulne ka time bachega aur execution drastically fast ho jayegi.
 
@@ -3707,7 +3707,7 @@ def my_setup():
 
 ### 🎯 Topic 4: Function vs Fixture Parameterization & request.param
 
-Is topic mein hum Data-Driven Testing (DDT) seekhenge. Yani ek hi test ko alag-alag inputs ya alag-alag browsers (jaise Chrome, Firefox) par kaise lagatar run karein bina code duplicate kiye.
+[[HL::Is topic mein hum Data-Driven Testing (DDT) seekhenge. Yani ek hi test ko alag-alag inputs ya alag-alag browsers (jaise Chrome, Firefox) par kaise lagatar run karein bina code duplicate kiye::HL]].
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
@@ -3727,8 +3727,8 @@ Isko do alag analogies se samjho:
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Agar tumhe ek login form 5 alag-alag usernames ke saath test karna hai, toh kya 5 alag functions likhoge? Aur agar un 5 tests ko Chrome, Firefox aur Edge teeno pe chalana ho toh 15 functions? Code completely unmanageable ho jayega.
-* **Solution:** Parameterization se hum sirf 1 function likhte hain aur values ki list de dete hain. PyTest khud uski combinations (Execution Matrix) banakar run kar deta hai.
+* **[[HL::Problem:** Agar tumhe ek login form 5 alag-alag usernames ke saath test karna hai, toh kya 5 alag functions likhoge? Aur agar un 5 tests ko Chrome, Firefox aur Edge teeno pe chalana ho toh 15 functions? Code completely unmanageable ho jayega.::HL]]
+* [[HL::**Solution:** Parameterization se hum sirf 1 function likhte hain aur values ki list de dete hain. PyTest khud uski combinations (Execution Matrix) banakar run kar deta hai::HL]].
 * **What breaks if we don't use it?** Duplicate code ki wajah se aage chal kar agar ek UI element badla, toh 15 jagah change karna padega. Code maintenance fail ho jayegi.
 * **✅ Kab use karo:** Jab ek hi test logic alag-alag data sets par verify karna ho (DDT - Data-Driven Testing), ya app ko alag environments (Dev, QA, Prod) / Browsers pe chalana ho.
 * **❌ Kab mat karo / Alternative prefer karo:** Jab data bahut zyada complex ho (jaise poora JSON object 100 lines ka). Tab list mein daalne ki bajay `.json` file se read karne ka logic lagao, parameterize mein directly mat bharo.
@@ -3739,42 +3739,42 @@ Execution ke time terminal mein dikhega ki test ek hai, par result mein PyTest u
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-Jab hum `@pytest.fixture(params=["chrome", "firefox"])` likhte hain:
+[[HL::Jab hum `@pytest.fixture(params=["chrome", "firefox"])` likhte hain:::HL]]
 
-1. **Introspection Engine:** PyTest run hone se pehle function signatures ko dekhta hai.
-2. **Fixture Discovery:** Woh dekhta hai fixture par `params` list hai.
-3. PyTest ek **Execution Context** banata hai aur internally **Cartesian Product** (sare possible combinations multiply karna) lagata hai. Agar 2 browser hain aur 3 test inputs hain, toh 2x3 = 6 test runs auto-generate honge.
-4. Har run mein ek naya `FixtureRequest` object (Waiter) banta hai, jisme current value `request.param` mein stored hoti hai.
-5. Fixture is `request.param` ko read karke apna state badalta hai.
+1. [[HL::**Introspection Engine:** PyTest run hone se pehle function signatures ko dekhta hai.::HL]]
+2. [[HL::**Fixture Discovery:** Woh dekhta hai fixture par `params` list hai.::HL]]
+3. [[HL::PyTest ek **Execution Context** banata hai aur internally **Cartesian Product** (sare possible combinations multiply karna) lagata hai. Agar 2 browser hain aur 3 test inputs hain, toh 2x3 = 6 test runs auto-generate honge.::HL]]
+4. [[HL::Har run mein ek naya `FixtureRequest` object (Waiter) banta hai, jisme current value `request.param` mein stored hoti hai.::HL]]
+5. [[HL::Fixture is `request.param` ko read karke apna state badalta hai::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
 
-Chalo Fixture Parameterization dekhte hain jisse humara ek hi test Chrome aur Firefox dono pe chalega.
+[[HL::Chalo Fixture Parameterization dekhte hain jisse humara ek hi test Chrome aur Firefox dono pe chalega::HL]].
 
 ```python
 # ⭐ Python 3.11+ | ⭐ pytest 8.x
 1  import pytest
 2  from selenium import webdriver
 3
-4  # Fixture param: params list banayi (plural) aur ids se unka friendly naam diya
-5  @pytest.fixture(params=["chrome", "firefox"], ids=["ChromeBrowser", "FirefoxBrowser"])
-6  def dynamic_driver(request):             # request = built-in Waiter object, isko pass karna zaroori hai
-7      
-8      # ⭐ request.param (singular) se Waiter se pucho ki list mein se abhi kya mila hai?
-9      browser_type = request.param         
-10     
-11     if browser_type == "chrome":
-12         driver = webdriver.Chrome()      # Agar chrome hai toh Chrome launch karo
-13     elif browser_type == "firefox":
-14         driver = webdriver.Firefox()     # Agar firefox hai toh Firefox launch karo
-15         
-16     yield driver                         # Jo bhi browser open hua, test ko de do (Pause)
-17     driver.quit()                        # Teardown (Resume)
-18
-19 # Test function sirf fixture mangega, PyTest isko 2 baar chalayega
-20 def test_google_title(dynamic_driver):
-21     dynamic_driver.get("https://google.com")
-22     assert "Google" in dynamic_driver.title
+4  # [[HL::Fixture param: params list banayi (plural) aur ids se unka friendly naam diya::HL]]
+[[HL::5  @pytest.fixture(params=["chrome", "firefox"], ids=["ChromeBrowser", "FirefoxBrowser"])::HL]]
+[[HL::6  def dynamic_driver(request):             # request = built-in Waiter object, isko pass karna zaroori hai::HL]]
+[[HL::7      ::HL]]
+[[HL::8      # ⭐ request.param (singular) se Waiter se pucho ki list mein se abhi kya mila hai?::HL]]
+[[HL::9      browser_type = request.param         ::HL]]
+[[HL::10     ::HL]]
+[[HL::11     if browser_type == "chrome":::HL]]
+[[HL::12         driver = webdriver.Chrome()      # Agar chrome hai toh Chrome launch karo::HL]]
+[[HL::13     elif browser_type == "firefox":::HL]]
+[[HL::14         driver = webdriver.Firefox()     # Agar firefox hai toh Firefox launch karo::HL]]
+[[HL::15         ::HL]]
+[[HL::16     yield driver                         # Jo bhi browser open hua, test ko de do (Pause)::HL]]
+[[HL::17     driver.quit()                        # Teardown (Resume)::HL]]
+[[HL::18::HL]]
+[[HL::19 # Test function sirf fixture mangega, PyTest isko 2 baar chalayega::HL]]
+[[HL::20 def test_google_title(dynamic_driver):::HL]]
+[[HL::21     dynamic_driver.get("https://google.com")::HL]]
+[[HL::22     assert "Google" in dynamic_driver.title::HL]]
 
 ```
 
@@ -3783,17 +3783,17 @@ Chalo Fixture Parameterization dekhte hain jisse humara ek hi test Chrome aur Fi
 # 📤 Expected Output:
 collected 2 items
 
-test_file.py::test_google_title[ChromeBrowser] PASSED            [ 50%]
-test_file.py::test_google_title[FirefoxBrowser] PASSED           [100%]
+test_file.py::test_google_title[ChromeBrowser] PASSED            [ [[HL::50%]::HL]]
+[[HL::test_file.py::test_google_title[FirefoxBrowser] PASSED           [100%]::HL]]
 
-```
+[[HL::```::HL]]
 
-##### 🔬 Code Explanation
+##### [[HL::🔬 Code Explanation::HL]]
 
-* **Line 5:** `params=["chrome", "firefox"]` — Dhyan do, yeh plural `params` hai. Yeh ek list leta hai. `ids=` argument output console mein default naam (jaise `[chrome]`) ki jagah sundar naam dikhane ke liye use hota hai.
-* **Line 6:** `def dynamic_driver(request)` — Jab hum `params` use karte hain, toh argument mein PyTest ka apna special `request` (FixtureRequest) object aana hi chahiye. Iske bina kaam nahi hoga. PyTest automatically isse Inject (Dependency Injection) karta hai.
-* **Line 9:** **⭐"request.param"** — Dhyan do, yeh singular `param` hai. `request` object Waiter hai, aur `.param` woh plate hai jisme woh ek-ek karke list se item laata hai (pehle "chrome", dusri baar "firefox").
-* **Line 19-20:** Test ko bilkul nahi pata ki peeche 2 browser open ho rahe hain. PyTest isko automatically 2 baar execute karega.
+* [[HL::**Line 5:** `params=["chrome", "firefox"]` — Dhyan do, yeh plural `params` hai. Yeh ek list leta hai. `ids=` argument output console mein default naam (jaise `[chrome]`) ki jagah sundar naam dikhane ke liye use hota hai.::HL]]
+* [[HL::**Line 6:** `def dynamic_driver(request)` — Jab hum `params` use karte hain, toh argument mein PyTest ka apna special `request` (FixtureRequest) object aana hi chahiye. Iske bina kaam nahi hoga. PyTest automatically isse Inject (Dependency Injection) karta hai.::HL]]
+* [[HL::**Line 9:** **⭐"request.param"** — Dhyan do, yeh singular `param` hai. `request` object Waiter hai, aur `.param` woh plate hai jisme woh ek-ek karke list se item laata hai (pehle "chrome", dusri baar "firefox").::HL]]
+* [[HL::**Line 19-20:** Test ko bilkul nahi pata ki peeche 2 browser open ho rahe hain. PyTest isko automatically 2 baar execute karega::HL]].
 
 #### 🔒 8. Security-First Check
 
@@ -3812,9 +3812,9 @@ Large frameworks (Environment/Config automation) mein log alag-alag Environment 
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Mujhe kaise decide karna hai ki Function Param (parametrize decorator) use karu ya Fixture Param?"**
-* **Galat soch:** Dono same cheez hain, koi bhi use kar lo.
-* **Actually:** Dono alag level par kaam karte hain. Agar sirf data badal raha hai (jaise user1, user2) aur baki environment same hai, toh Function param (`@pytest.mark.parametrize`) use karo. Agar pura execution background badal raha hai (jaise Browser, ya QA server vs Prod server), toh Fixture param (`request.param`) use karo.
+* **[[HL::Confusion 1 — "Mujhe kaise decide karna hai ki Function Param (parametrize decorator) use karu ya Fixture Param?"**::HL]]
+* [[HL::**Galat soch:** Dono same cheez hain, koi bhi use kar lo.::HL]]
+* [[HL::**Actually:** Dono alag level par kaam karte hain. Agar sirf data badal raha hai (jaise user1, user2) aur baki environment same hai, toh Function param (`@pytest.mark.parametrize`) use karo. Agar pura execution background badal raha hai (jaise Browser, ya QA server vs Prod server), toh Fixture param (`request.param`) use karo::HL]].
 * **Prove karo:** Socho agar tum Function param mein browser ka naam pass karoge, toh tumhe har test function ke andar `webdriver.Chrome()` likhna padega. Fixture param se code bahar nikal jata hai.
 
 
@@ -4108,22 +4108,22 @@ Jenkins / CI Pipeline ───────────────> PyTest Fixt
 
 ### 🎯 Topic 6: conftest.py (Global Fixtures)
 
-Ab tak fixtures hum ussi file mein likh rahe the jahan test the. Is topic mein hum un fixtures ko ek "Global" jagah rakhna seekhenge taaki poore project mein koi bhi test unhe automatically use kar sake.
+[[HL::Ab tak fixtures hum ussi file mein likh rahe the jahan test the. Is topic mein hum un fixtures ko ek "Global" jagah rakhna seekhenge taaki poore project mein koi bhi test unhe automatically use kar sake::HL]].
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
-`conftest.py` aapke project ki "Central Kitchen" (restaurant ka main rasoi ghar) hai. Bina iske, har party (test file) mein apna alag stove aur rasoiya lagana padta hai (duplicate fixtures). Lekin jab aap `conftest.py` bana dete ho, toh khaana (fixture) is Central Kitchen mein ek hi jagah banta hai aur wahan se project ki kisi bhi file mein automatically serve ho jata hai bina order place (import) kiye!
+`[[HL::conftest.py` aapke project ki "Central Kitchen" (restaurant ka main rasoi ghar) hai. Bina iske, har party (test file) mein apna alag stove aur rasoiya lagana padta hai (duplicate fixtures). Lekin jab aap `conftest.py` bana dete ho, toh khaana (fixture) is Central Kitchen mein ek hi jagah banta hai aur wahan se project ki kisi bhi file mein automatically serve ho jata hai bina order place (import) kiye::HL]]!
 
 #### 📖 3. Technical Definition
 
 * **Precise English:** `conftest.py` is a special PyTest configuration file that acts as a local plugin. Any fixtures defined inside it are automatically discovered and made available globally to all test files within its directory and subdirectories without requiring explicit imports.
-* **Hinglish Simplification:** `conftest.py` ek jaadui file hai jisme rakhe hue fixtures poore project ke saare tests ke liye directly available ho jate hain, tumhe file ko `import` karne ki bhi zaroorat nahi padti.
+* **[[HL::Hinglish Simplification:** `conftest.py` ek jaadui file hai jisme rakhe hue fixtures poore project ke saare tests ke liye directly available ho jate hain, tumhe file ko `import` karne ki bhi zaroorat nahi padti::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Agar tumhare paas 20 test files hain (jaise `test_login.py`, `test_cart.py`), toh kya tum 20 baar `driver_setup` fixture copy-paste karoge? Isse file size bada hoga aur code duplicate hoga.
-* **Solution:** Fixture ko `conftest.py` mein daal do. PyTest usse automatically discover kar lega.
-* **What breaks if we don't use it?** Agar URL change karna hua, toh 20 test files mein jaakar manually URL fix karna padega, jisse errors aayenge.
+* **[[HL::Problem:** Agar tumhare paas 20 test files hain (jaise `test_login.py`, `test_cart.py`), toh kya tum 20 baar `driver_setup` fixture copy-paste karoge? Isse file size bada hoga aur code duplicate hoga.::HL]]
+* [[HL::**Solution:** Fixture ko `conftest.py` mein daal do. PyTest usse automatically discover kar lega.::HL]]
+* [[HL::**What breaks if we don't use it?** Agar URL change karna hua, toh 20 test files mein jaakar manually URL fix karna padega, jisse errors aayenge::HL]].
 * **✅ Kab use karo:** Har medium-to-large project mein jahan ek hi fixture (like DB connection, API auth token, WebDriver init) multiple test files ko chahiye ho.
 * **❌ Kab mat karo / Alternative prefer karo:** Agar ek fixture sirf aur sirf ek hi test file ke andar use ho raha hai, toh use `conftest.py` mein mat daalo. Usse wahi us file ke andar rakho taaki `conftest.py` faltu mein bhari na ho.
 
@@ -4143,42 +4143,42 @@ my_framework/
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-Jab PyTest execution start karta hai:
+[[HL::Jab PyTest execution start karta hai:::HL]]
 
-1. **Auto-magic Discovery:** PyTest sabse pehle us root folder (main folder) mein dekhta hai kahan `conftest.py` padi hai.
-2. Agar mil gayi, toh usko memory mein as a local plugin load kar leta hai.
-3. Uske andar ke saare `@pytest.fixture` project ke registry mein register ho jate hain.
-4. Ab jab `test_cart.py` mein PyTest ko `driver_setup` argument milta hai, aur woh us file mein nahi hota, toh PyTest apne global registry (conftest) mein check karta hai aur wahan se supply kar deta hai.
+1. [[HL::**Auto-magic Discovery:** PyTest sabse pehle us root folder (main folder) mein dekhta hai kahan `conftest.py` padi hai.::HL]]
+2. [[HL::Agar mil gayi, toh usko memory mein as a local plugin load kar leta hai.::HL]]
+3. [[HL::Uske andar ke saare `@pytest.fixture` project ke registry mein register ho jate hain.::HL]]
+4. [[HL::Ab jab `test_cart.py` mein PyTest ko `driver_setup` argument milta hai, aur woh us file mein nahi hota, toh PyTest apne global registry (conftest) mein check karta hai aur wahan se supply kar deta hai::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
 
-Ek root folder mein hum `conftest.py` banayenge aur usme ek `scope="session"` fixture daalenge.
+[[HL::Ek root folder mein hum `conftest.py` banayenge aur usme ek `scope="session"` fixture daalenge.::HL]]
 
-**File 1: `conftest.py` (Isi exact naam se banani hai)**
+[[HL::**File 1: `conftest.py` (Isi exact naam se banani hai)**::HL]]
 
 ```python
-# Python 3.10+
-1  import pytest
-2  from selenium import webdriver
-3
-4  @pytest.fixture(scope="session")         # session = poore project run ke liye ek baar
-5  def global_browser():                    # Ye fixture ab globally available hai
-6      print("\n[GLOBAL SETUP] Chrome Start")
-7      driver = webdriver.Chrome()
-8      yield driver
-9      print("\n[GLOBAL TEARDOWN] Chrome Closed")
-10     driver.quit()
+[[HL::# Python 3.10+::HL]]
+[[HL::1  import pytest::HL]]
+[[HL::2  from selenium import webdriver::HL]]
+[[HL::3::HL]]
+[[HL::4  @pytest.fixture(scope="session")         # session = poore project run ke liye ek baar::HL]]
+[[HL::5  def global_browser():                    # Ye fixture ab globally available hai::HL]]
+[[HL::6      print("\n[GLOBAL SETUP] Chrome Start")::HL]]
+[[HL::7      driver = webdriver.Chrome()::HL]]
+[[HL::8      yield driver::HL]]
+[[HL::9      print("\n[GLOBAL TEARDOWN] Chrome Closed")::HL]]
+[[HL::10     driver.quit()::HL]]
 
 ```
 
-**File 2: `test_demo.py` (Kisi bhi folder mein)**
+**File 2: `[[HL::test_demo.py` (Kisi bhi folder mein::HL]])**
 
 ```python
-1  # Dekho, yahan humne conftest ko import NAHI kiya hai!
-2
-3  def test_google(global_browser):         # PyTest automatically conftest.py se isko inject kar dega
-4      global_browser.get("https://google.com")
-5      assert "Google" in global_browser.title
+[[HL::1  # Dekho, yahan humne conftest ko import NAHI kiya hai!::HL]]
+[[HL::2::HL]]
+[[HL::3  def test_google(global_browser):         # PyTest automatically conftest.py se isko inject kar dega::HL]]
+[[HL::4      global_browser.get("https://google.com")::HL]]
+[[HL::5      assert "Google" in global_browser.title::HL]]
 
 ```
 
@@ -4194,8 +4194,8 @@ PASSED
 
 ##### 🔬 Code Explanation
 
-* **Line 4 (conftest.py):** `scope="session"`. Kyunki yeh Central Kitchen mein hai, hum mostly yahan database connections ya heavy browsers open karte hain, isliye session scope best hai taaki execution fast ho.
-* **Line 1 (test_demo.py):** Dhyan dene wali baat yeh hai ki file mein `from conftest import global_browser` jaisi koi line nahi hai. PyTest ka Auto-magic discovery ise behind the scenes link kar deta hai.
+* **[[HL::Line 4 (conftest.py):** `scope="session"`. Kyunki yeh Central Kitchen mein hai, hum mostly yahan database connections ya heavy browsers open karte hain, isliye session scope best hai taaki execution fast ho.::HL]]
+* [[HL::**Line 1 (test_demo.py):** Dhyan dene wali baat yeh hai ki file mein `from conftest import global_browser` jaisi koi line nahi hai. PyTest ka Auto-magic discovery ise behind the scenes link kar deta hai::HL]].
 
 #### 🔒 8. Security-First Check
 
@@ -4207,17 +4207,17 @@ Kya hum multiple `conftest.py` files bana sakte hain? Yes! Industry mein ek `con
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** File ka naam `config_test.py` ya `conftests.py` rakh dena.
-* **🤦 Why:** Log sochte hain file ka naam thoda aage piche chalega.
-* **✅ The 'Pro' Way:** **⭐"conftest.py hi hona zaroori hai, galat likha toh PyTest ignore kar dega"**. Exact spelling `c-o-n-f-t-e-s-t.p-y` honi chahiye.
-* **⚡ Consequences:** Agar ek letter bhi galat hua, PyTest file padhega hi nahi, aur tumhare saare tests `fixture not found` error ke saath completely crash ho jayenge.
+* **❌ [[HL::Mistake:** File ka naam `config_test.py` ya `conftests.py` rakh dena.::HL]]
+* [[HL::**🤦 Why:** Log sochte hain file ka naam thoda aage piche chalega.::HL]]
+* [[HL::**✅ The 'Pro' Way:** **⭐"conftest.py hi hona zaroori hai, galat likha toh PyTest ignore kar dega"**. Exact spelling `c-o-n-f-t-e-s-t.p-y` honi chahiye.::HL]]
+* [[HL::**⚡ Consequences:** Agar ek letter bhi galat hua, PyTest::HL]] file padhega hi nahi, aur tumhare saare tests `fixture not found` error ke saath completely crash ho jayenge.
 * **❌ Mistake 2:** `conftest.py` ke andar test functions (`def test_xyz()`) likh dena. (Isme sirf fixtures aur hooks hone chahiye, test nahi).
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Mujhe kaise pata chalega ki test kis file ka fixture utha raha hai?"**
-* **Galat soch:** Agar mere paas 3 conftest files hain, toh PyTest random kisi se bhi utha lega.
-* **Actually:** PyTest bottom-up approach follow karta hai. Pehle woh test file ke andar dekhega, agar nahi mila toh us folder ki `conftest.py` mein dekhega, agar wahan bhi nahi mila toh bahar root folder ki `conftest.py` mein jayega. Nearest match jeet-ta hai.
+* **[[HL::Confusion 1 — "Mujhe kaise pata chalega ki test kis file ka fixture utha raha hai?"**::HL]]
+* [[HL::**Galat soch:** Agar mere paas 3 conftest files hain, toh PyTest random kisi se bhi utha lega.::HL]]
+* [[HL::**Actually:** PyTest bottom-up approach follow karta hai. Pehle woh test file ke andar dekhega, agar nahi mila toh us folder ki `conftest.py` mein dekhega, agar wahan bhi nahi mila toh bahar root folder ki `conftest.py` mein jayega. Nearest match jeet-ta hai::HL]].
 * **Prove karo:** Terminal mein `pytest --fixtures` command chalao, yeh tumhe poori list dikha dega ki kaunsa fixture kahan se aa raha hai.
 
 
@@ -4253,7 +4253,7 @@ API automation testing projects mein, ek Auth Token generate karne ka code hames
 ```text
 PyTest Auto-magic Discovery Tree:
 
-project_root/
+[[HL::project_root::HL]]/
  ├── conftest.py [GLOBAL FIXTURES (e.g. DB Auth)]
  │
  ├── UI_Tests/
@@ -4322,25 +4322,25 @@ Total keywords across all subtopics in this section: 61
 
 ### 🎯 Topic 7: Markers for Test Grouping
 
-Is topic mein hum tests par "tags" ya "labels" lagana seekhenge jisse hum PyTest ko bata sakein ki aaj sirf specific gaane (tests) bajane hain, ya kisi broken test ko kaise skip karna hai.
+[[HL::Is topic mein hum tests par "tags" ya "labels" lagana seekhenge jisse hum PyTest ko bata sakein ki aaj sirf specific gaane (tests) bajane hain, ya kisi broken test ko kaise skip karna hai::HL]].
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
-Isko ek Spotify playlist ki tarah samjho. Tumhare library mein hazaron gaane hain.
+[[HL::Isko ek Spotify playlist ki tarah samjho. Tumhare library mein hazaron gaane hain.::HL]]
 
-* **Smoke Marker (`@pytest.mark.smoke`)** = "My Favorites" playlist. Sirf wahi gaane bajenge jo is playlist mein hain.
-* **Skip Marker (`@pytest.mark.skip`)** = Jab tumhe pata hai ki gaana (test) kharab hai ya incomplete hai, toh tum uspe skip tag lagate ho taaki woh automatically jump ho jaye aur mood kharab na kare.
-* **Xfail Marker (`@pytest.mark.xfail`)** = Jab tumhe pata hai ki audio kharab hai par check karne ke liye play karna pad raha hai ki actual mein kaisa sound kar raha hai (Expected Fail).
+* [[HL::**Smoke Marker (`@pytest.mark.smoke`)** = "My Favorites" playlist. Sirf wahi gaane bajenge jo is playlist mein hain.::HL]]
+* [[HL::**Skip Marker (`@pytest.mark.skip`)** = Jab tumhe pata hai ki gaana (test) kharab hai ya incomplete hai, toh tum uspe skip tag lagate ho taaki woh automatically jump ho jaye aur mood kharab na kare.::HL]]
+* [[HL::**Xfail Marker (`@pytest.mark.xfail`)** = Jab tumhe pata hai ki audio kharab hai par check karne ke liye play karna pad raha hai ki actual mein kaisa sound kar raha hai (Expected Fail::HL]]).
 
 #### 📖 3. Technical Definition
 
 * **Precise English:** PyTest markers are decorators used to categorize tests (Custom Markers) or modify their execution behavior using built-in markers like skip or xfail.
-* **Hinglish Simplification:** Markers tests par lagaye gaye tags ya labels hote hain jinse hum tests ki grouping karte hain (jaise smoke, regression) ya PyTest ko unhe skip karne ki instruction dete hain.
+* **[[HL::Hinglish Simplification:** Markers tests par lagaye gaye tags ya labels hote hain jinse hum tests ki grouping karte hain (jaise smoke, regression) ya PyTest ko unhe skip karne ki instruction dete hain::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Agar 500 tests hain aur tumne ek chhota sa UI color change kiya hai, toh kya poore 500 tests (jinhe run hone mein 1 ghanta lagta hai) chalaoge sirf ek chhote change ko verify karne ke liye?
-* **Solution:** Hum tests ko group kar dete hain using Custom Markers (jaise `@pytest.mark.smoke`). Phir terminal mein command dekar sirf wahi 10-15 tests run karte hain jo 2 minute mein chal jate hain.
+* **[[HL::Problem:** Agar 500 tests hain aur tumne ek chhota sa UI color change kiya hai, toh kya poore 500 tests (jinhe run hone mein 1 ghanta lagta hai) chalaoge sirf ek chhote change ko verify karne ke liye?::HL]]
+* [[HL::**Solution:** Hum tests ko group kar dete hain using Custom Markers (jaise `@pytest.mark.smoke`). Phir terminal mein command dekar sirf wahi 10-15 tests run karte hain jo 2 minute mein chal jate hain::HL]].
 * **What breaks if we don't use it?** Bina markers ke, broken tests fail hote rahenge aur CI/CD pipeline (code automatically test aur deploy karne ka server) ko block kar denge (kyunki ek bhi fail = red build). Humein un broken tests ko `#` lagakar comment out karna padega jo ek buri practice hai.
 * **✅ Kab use karo:** Tests ko logically categorize karne ke liye, ya kisi known bug wale test ko skip/xfail karne ke liye jab tak bug fix na ho.
 * **❌ Kab mat karo / Alternative prefer karo:** Har single test par alag-alag ajeeb naam ke markers mat lagao. Isse categories itni zyada ho jayengi ki unhe track karna impossible ho jayega.
@@ -4358,38 +4358,38 @@ def test_login():
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. Jab hum `-m` flag (marker flag — CLI mein specify karne ke liye ki konsa marker chalana hai) ke saath `pytest` run karte hain, toh PyTest ka Collection Phase activate hota hai.
-2. Woh saare tests ko scan karta hai, par unhe execute nahi karta.
-3. Woh AST (Abstract Syntax Tree — code ko samajhne ka internal structure) ko parse karke decorators check karta hai.
-4. Jo tests `-m` flag ki condition match karte hain (jaise `smoke`), sirf unhe execution queue mein rakhta hai, baakiyon ko "Deselected" mark karke ignore kar deta hai.
+1. [[HL::Jab hum `-m` flag (marker flag — CLI mein specify karne ke liye ki konsa marker chalana hai) ke saath `pytest` run karte hain, toh PyTest ka Collection Phase activate hota hai.::HL]]
+2. [[HL::Woh saare tests ko scan karta hai, par unhe execute nahi karta.::HL]]
+3. [[HL::Woh AST (Abstract Syntax Tree — code ko samajhne ka internal structure) ko parse karke decorators check karta hai.::HL]]
+4. [[HL::Jo tests `-m` flag ki condition match karte hain (jaise `smoke`), sirf unhe execution queue mein rakhta hai, baakiyon ko "Deselected" mark karke ignore kar deta hai::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
 
-Chalo ek file banate hain `test_marked_tests.py` jisme hum saare markers cover karenge. Yahan hum command mein `-m smoke` use karenge taaki sirf smoke tests chalein.
+[[HL::Chalo ek file banate hain `test_marked_tests.py` jisme hum saare markers cover karenge. Yahan hum command mein `-m smoke` use karenge taaki sirf smoke tests chalein::HL]].
 
 ```python
 # Python 3.10+ | PyTest 7.x+
-1  import pytest                       # Markers use karne ke liye pytest import karna zaroori hai
-2
-3  # Custom Marker: smoke
-4  @pytest.mark.smoke                  # Ye tag lagane se ye test "smoke" group ka hissa ban gaya
-5  def test_login_valid():             
-6      assert True                     # Dummy test
-7
-8  # Custom Marker: regression (is run mein ye ignore hoga)
-9  @pytest.mark.regression             
-10 def test_payment_gateway():
-11     assert True
-12
-13 # Built-in Marker: skip
-14 @pytest.mark.skip(reason="Yeh feature abhi incomplete hai") # PyTest isko completely ignore kar dega (yellow 's')
-15 def test_new_feature():
-16     assert False                    # Fail hai par skip ho jayega
-17
-18 # Built-in Marker: xfail (Expected Fail)
-19 @pytest.mark.xfail(reason="Bug #1234 open hai, isliye fail hona tay hai") 
-20 def test_broken_feature():
-21     assert False                    # PyTest isko fail nahi manega, xfail (yellow 'x') manega
+1  import pytest                       # [[HL::Markers use karne ke liye pytest import karna zaroori hai::HL]]
+[[HL::2::HL]]
+[[HL::3  # Custom Marker: smoke::HL]]
+[[HL::4  @pytest.mark.smoke                  # Ye tag lagane se ye test "smoke" group ka hissa ban gaya::HL]]
+[[HL::5  def test_login_valid():             ::HL]]
+[[HL::6      assert True                     # Dummy test::HL]]
+[[HL::7::HL]]
+[[HL::8  # Custom Marker: regression (is run mein ye ignore hoga)::HL]]
+[[HL::9  @pytest.mark.regression             ::HL]]
+[[HL::10 def test_payment_gateway():::HL]]
+[[HL::11     assert True::HL]]
+[[HL::12::HL]]
+[[HL::13 # Built-in Marker: skip::HL]]
+[[HL::14 @pytest.mark.skip(reason="Yeh feature abhi incomplete hai") # PyTest isko completely ignore kar dega (yellow 's')::HL]]
+[[HL::15 def test_new_feature():::HL]]
+[[HL::16     assert False                    # Fail hai par skip ho jayega::HL]]
+[[HL::17::HL]]
+[[HL::18 # Built-in Marker: xfail (Expected Fail)::HL]]
+[[HL::19 @pytest.mark.xfail(reason="Bug #1234 open hai, isliye fail hona tay hai") ::HL]]
+[[HL::20 def test_broken_feature():::HL]]
+[[HL::21     assert False                    # PyTest isko fail nahi manega, xfail (yellow 'x') manega::HL]]
 
 ```
 
@@ -4404,13 +4404,13 @@ test_marked_tests.py::test_login_valid PASSED            [100%]
 
 ```
 
-*(Notice karo: regression, skip, aur xfail wale deselected ho gaye kyunki humne sirf `-m smoke` chalaya tha)*
+*(Notice karo: regression, skip, aur xfail wale deselected ho gaye kyunki humne sirf `-[[HL::m smoke` chalaya tha)*::HL]]
 
-##### 🔬 Code Explanation
+##### [[HL::🔬 Code Explanation::HL]]
 
-* **Line 4:** `@pytest.mark.smoke` — Hum apna koi bhi custom naam de sakte hain.
-* **Line 14:** `@pytest.mark.skip` — Bahut useful jab humein pata hai code ready nahi hai. Isko run hi nahi kiya jata. Report mein iska status `s` (skipped) aata hai.
-* **Line 19:** `@pytest.mark.xfail` — Test execute hoga. PyTest ko pata hai ki yeh fail hoga. Agar yeh fail hua toh report `XFAIL` (Expected Fail) aayegi aur pipeline green rahegi. Par ek twist hai: agar test magically Pass ho gaya, toh report `XPASS` aayegi (matlab bug shayad kisi ne fix kar diya hai).
+* [[HL::**Line 4:** `@pytest.mark.smoke` — Hum apna koi bhi custom naam de sakte hain.::HL]]
+* [[HL::**Line 14:** `@pytest.mark.skip` — Bahut useful jab humein pata hai code ready nahi hai. Isko run hi nahi kiya jata. Report mein iska status `s` (skipped) aata hai.::HL]]
+* [[HL::**Line 19:** `@pytest.mark.xfail` — Test execute hoga. PyTest ko pata hai ki yeh fail hoga. Agar yeh fail hua toh report `XFAIL` (Expected Fail) aayegi aur pipeline green rahegi. Par ek twist hai: agar test magically Pass ho gaya, toh report `XPASS` aayegi (matlab bug shayad kisi ne fix kar diya hai::HL]]).
 
 #### 🔒 8. Security-First Check
 
@@ -4418,7 +4418,7 @@ test_marked_tests.py::test_login_valid PASSED            [100%]
 
 #### 🏗️ 9. Scalability & Industry Context
 
-`pytest.ini registration` — Industry mein agar aap custom markers (jaise `smoke`) banate hain, toh unhe `pytest.ini` (PyTest ki configuration file) mein officially register karna padta hai. Agar nahi kiya, toh PyTest console mein ek badi si warning dega `PytestUnknownMarkWarning` (yeh rokne ke liye ki kahin aapne tag naam ki spelling galat toh nahi likh di). CI/CD pipelines mein daily build runs mein regression chalta hai, par PR (Pull Request) merges par sirf smoke chalta hai taaki fast feedback mile.
+`[[HL::pytest.ini registration` — Industry mein agar aap custom markers (jaise `smoke`) banate hain, toh unhe `pytest.ini` (PyTest ki configuration file) mein officially register karna padta hai. Agar nahi kiya, toh PyTest console mein ek badi si warning dega `PytestUnknownMarkWarning` (yeh rokne ke liye ki kahin aapne tag naam ki spelling galat toh nahi likh di). CI/CD pipelines mein daily build runs mein regression chalta hai, par PR (Pull Request) merges par sirf smoke chalta hai taaki fast feedback mile::HL]].
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
@@ -4429,18 +4429,18 @@ test_marked_tests.py::test_login_valid PASSED            [100%]
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Skip aur xfail mein kya antar hai, dono mein test fail nahi hota na?"**
-* **Galat soch:** Dono exact same cheez karte hain.
-* **Actually:** `skip` test ko touch bhi nahi karta. Woh us function ke andar ghusta hi nahi hai. Par `xfail` test ko completely run karta hai, time leta hai, aur dekhta hai ki crash kahan ho raha hai. Iska goal hai track karna ki bug abhi zinda hai ya nahi.
+* **[[HL::Confusion 1 — "Skip aur xfail mein kya antar hai, dono mein test fail nahi hota na?"**::HL]]
+* [[HL::**Galat soch:** Dono exact same cheez karte hain.::HL]]
+* [[HL::**Actually:** `skip` test ko touch bhi nahi karta. Woh us function ke andar ghusta hi nahi hai. Par `xfail` test ko completely run karta hai, time leta hai, aur dekhta hai ki crash kahan ho raha hai. Iska goal hai track karna ki bug abhi zinda hai ya nahi::HL]].
 * **Prove karo:** Ek test mein `print("Hello")` likho aur `assert False`. Ek baar `skip` lagao, ek baar `xfail`. Terminal (with `-s`) mein dekhna, skip wale mein print nahi chalega, xfail wale mein print chalega!
 
 
 
 #### 🛠️ 12. Troubleshooting Flowchart
 
-* **`PytestUnknownMarkWarning: Unknown pytest.mark.smoke`**
-* **Root Cause:** Tumne custom marker use kiya par usko `pytest.ini` mein register nahi kiya. PyTest ko lag raha hai ki tumne spelling mistake ki hai.
-* **Fix:** Apne project root mein `pytest.ini` file banao aur wahan mark register karo (Topic 10 mein detail hai).
+* **`[[HL::PytestUnknownMarkWarning: Unknown pytest.mark.smoke`**::HL]]
+* [[HL::**Root Cause:** Tumne custom marker use kiya par usko `pytest.ini` mein register nahi kiya. PyTest ko lag raha hai ki tumne spelling mistake ki hai.::HL]]
+* [[HL::**Fix:** Apne project root::HL]] mein `pytest.ini` [[HL::file banao aur wahan mark register karo (Topic 10 mein detail hai::HL]]).
 
 
 
@@ -4479,12 +4479,12 @@ Microsoft ki QA team jab Windows ka naya internal build test karti hai, toh CI/C
 
 #### ❓ 17. Interview Q&A
 
-* **Q:** PyTest mein `-m` flag kya karta hai?
-* **A:** `-m` flag Custom Markers ke saath use hota hai (jaise `-m smoke`). Yeh Test Discovery phase mein ek filter ki tarah kaam karta hai aur sirf unhi tests ko execute karta hai jinpar woh specific marker (decorator) laga ho.
-* **Q:** `@pytest.mark.xfail` aur `@pytest.mark.skip` mein exact technical farq kya hai?
-* **A:** `skip` test ko execution phase mein poori tarah ignore kar deta hai, isse execution time fast hota hai jab code ready na ho. `xfail` (Expected Fail) test ko execute karta hai. PyTest expect karta hai ki test `AssertionError` throw karega. Agar wo throw karta hai, toh test `XFAIL` mark hota hai (no pipeline failure). Par agar wo randomly pass ho jaye, toh report mein `XPASS` aata hai, indicating ki issue resolve ho chuka hai.
-* **Q:** Custom Markers banate waqt warning kyu aati hai?
-* **A:** PyTest tyops (spelling mistakes) rokne ke liye strict hai. Agar aapne `pytest.ini` mein mark ko configure/register nahi kiya hai, toh PyTest `PytestUnknownMarkWarning` throw karta hai taaki developer check kare ki usne galti se built-in keyword ki spelling galat toh nahi likhi.
+* **[[HL::Q:** PyTest mein `-m` flag kya karta hai?::HL]]
+* [[HL::**A:** `-m` flag Custom Markers ke saath use hota hai (jaise `-m smoke`). Yeh Test Discovery phase mein ek filter ki tarah kaam karta hai aur sirf unhi tests ko execute karta hai jinpar woh specific marker (decorator) laga ho.::HL]]
+* [[HL::**Q:** `@pytest.mark.xfail` aur `@pytest.mark.skip` mein exact technical farq kya hai?::HL]]
+* [[HL::**A:** `skip` test ko execution phase mein poori tarah ignore kar deta hai, isse execution time fast hota hai jab code ready na ho. `xfail` (Expected Fail) test ko execute karta hai. PyTest expect karta hai ki test `AssertionError` throw karega. Agar wo throw karta hai, toh test `XFAIL` mark hota hai (no pipeline failure). Par agar wo randomly pass ho jaye, toh report mein `XPASS` aata hai, indicating ki issue resolve ho chuka hai.::HL]]
+* [[HL::**Q:** Custom Markers banate waqt warning kyu aati hai?::HL]]
+* [[HL::**A:** PyTest tyops (spelling mistakes) rokne ke liye strict hai. Agar aapne `pytest.ini` mein mark ko configure/register nahi kiya hai, toh PyTest `PytestUnknownMarkWarning` throw karta hai taaki developer check kare ki usne galti se built-in keyword ki spelling galat toh nahi likhi::HL]].
 
 #### 📝 18. One-Line Memory Hook
 
@@ -4508,7 +4508,7 @@ Microsoft ki QA team jab Windows ka naya internal build test karti hai, toh CI/C
 
 *(Note: Skeleton mein is topic ka SCOPE SIGNAL mistakenly Topic 9 ke naam se tha, par content Parallel Execution ka hai. Hum isse Topic 8 ke logic se cover kar rahe hain.)*
 
-Is topic mein hum tests ko sequentially (ek ke baad ek) chalane ki jagah, ek saath parallel chala kar execution time ko drastically kam karna seekhenge using `pytest-xdist` plugin.
+[[HL::Is topic mein hum tests ko sequentially (ek ke baad ek) chalane ki jagah, ek saath parallel chala kar execution time ko drastically kam karna seekhenge using `pytest-xdist` plugin::HL]].
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
@@ -4520,15 +4520,15 @@ Supermarket shopping analogy ko samjho:
 #### 📖 3. Technical Definition
 
 * **Precise English:** `pytest-xdist` is a PyTest plugin that extends the framework to support distributed testing, allowing test suites to execute concurrently across multiple CPU workers, significantly reducing total test execution time.
-* **Hinglish Simplification:** `pytest-xdist` PyTest ka ek plugin (ek extra library jo nayi powers add karti hai) hai jo tumhare tests ko tumhare computer ke multiple CPU cores mein baant kar ek saath (parallel) chalata hai, jisse test bohot jaldi khatam hote hain.
+* **[[HL::Hinglish Simplification:** `pytest-xdist` PyTest ka ek plugin (ek extra library jo nayi powers add karti hai) hai jo tumhare tests ko tumhare computer ke multiple CPU cores mein baant kar ek saath (parallel) chalata hai, jisse test bohot jaldi khatam hote hain::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** UI tests bahut slow hote hain. Ek Selenium test average 5-10 seconds leta hai. Agar tumhare paas 500 tests hain, toh 500 * 10 = 5000 seconds (lagbhag 1.5 ghante) wait karna padega ek report dekhne ke liye. Developer frustration badh jayega.
-* **Solution:** Parallel execution se hum time ko workers ki ginti se divide kar dete hain. 500 tests 1.5 ghante ki jagah 15-20 mins mein khatam ho jate hain.
-* **What breaks if we don't use it?** Development cycle (feedback loop) itna slow ho jayega ki developers code test karna hi chhod denge.
-* **✅ Kab use karo:** Jab test suite ka execution time 5-10 minute se zyada hone lage, aur saare tests Independent Tests (test 1 ka data test 2 par asar na daale) hon.
-* **❌ Kab mat karo / Alternative prefer karo:** Jab tests ek dusre par depend karte hon (e.g. test A user banata hai aur test B us user ko delete karta hai). Parallel mein test B pehle chal gaya toh fail ho jayega.
+* **[[HL::Problem:** UI tests bahut slow hote hain. Ek Selenium test average 5-10 seconds leta hai. Agar tumhare paas 500 tests hain, toh 500 * 10 = 5000 seconds (lagbhag 1.5 ghante) wait karna padega ek report dekhne ke liye. Developer frustration badh jayega.::HL]]
+* [[HL::**Solution:** Parallel execution se hum time ko workers ki ginti se divide kar dete hain. 500 tests 1.5 ghante ki jagah 15-20 mins mein khatam ho jate hain.::HL]]
+* [[HL::**What breaks if we don't use it?** Development cycle (feedback loop) itna slow ho jayega ki developers code test karna hi chhod denge.::HL]]
+* [[HL::**✅ Kab use karo:** Jab test suite ka execution time 5-10 minute se zyada hone lage, aur saare tests Independent Tests (test 1 ka data test 2 par asar na daale) hon.::HL]]
+* [[HL::**❌ Kab mat karo / Alternative prefer karo:** Jab tests ek dusre par depend karte hon (e.g. test A user banata hai aur test B us user ko delete karta hai). Parallel mein test B pehle chal gaya toh fail ho jayega::HL]].
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
@@ -4543,20 +4543,20 @@ gw0 [100] / gw1 [100] / gw2 [100] / gw3 [100]
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. Tum command chalate ho `pytest -n 4`.
-2. `pytest-xdist` master process banata hai.
-3. Master process computer ke CPU cores se 4 naye worker processes (`gw0` se `gw3`) (Python ke naye instances) fork (create) karta hai.
+1. [[HL::Tum command chalate ho `pytest -n 4`.::HL]]
+2. [[HL::`pytest-xdist` master process banata hai.::HL]]
+3. [[HL::Master process computer ke CPU cores se 4 naye worker processes (`gw0` se `gw3`) (Python ke naye instances) fork (create) karta hai::HL]].
 4. Master tests ki list ko un workers mein randomly distribute karta hai.
 5. Workers apna result (pass/fail) master ko message karte hain.
 6. Master end mein un sab results ko merge karke ek final report dikhata hai.
 
 #### 💻 7. Hands-On — Runnable Example (CLI Commands)
 
-Iske liye pehle plugin install karna padta hai: `pip install pytest-xdist`.
+[[HL::Iske liye pehle plugin install karna padta hai: `pip install pytest-xdist`.::HL]]
 
-* **Command:** `pytest -n 4`
-* `pytest`: Framework chalana.
-* `-n 4`: `xdist` ka flag jo bolta hai ki 4 parallel workers (CPU cores ka use karke) banakar tests unme baant do.
+* [[HL::**Command:** `pytest -n 4`::HL]]
+* [[HL::`pytest`: Framework chalana.::HL]]
+* [[HL::`-n 4`: `xdist` ka flag jo bolta hai ki 4 parallel workers (CPU cores ka use karke) banakar tests unme baant do::HL]].
 
 
 
@@ -4572,8 +4572,8 @@ gw0 [4] / gw1 [4] / gw2 [4] / gw3 [4]
 
 ```
 
-* **Command:** `pytest -n auto`
-* `-n auto`: Yeh flag tumhare system ke hardware ko check karta hai. Agar laptop mein 8 CPU cores hain, toh yeh apne aap 8 workers bana dega aur maximum possible speed dega.
+* **[[HL::Command:** `pytest -n auto`::HL]]
+* [[HL::`-n auto`: Yeh flag tumhare system ke hardware ko check karta hai. Agar laptop mein 8 CPU cores hain, toh yeh apne aap 8 workers bana dega aur maximum possible speed dega::HL]].
 
 
 
@@ -4702,8 +4702,8 @@ Socho tum ek Manager ho aur tumhara framework tumhara employee hai. Tum use alag
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** By default, PyTest test ke andar likhe gaye `print()` statements ko terminal par nahi dikhata. Dusra, code mein chhota sa change karke har baar terminal mein `pytest` type karna bahut irritating aur time-consuming hai.
-* **Solution:** Flags (`-s`, `-v`) hume test ka control dete hain, aur Watcher auto-run karke instant feedback deta hai.
+* **[[HL::Problem:** By default, PyTest test ke andar likhe gaye `print()` statements ko terminal par nahi dikhata. Dusra, code mein chhota sa change karke har baar terminal mein `pytest` type karna bahut irritating aur time-consuming hai.::HL]]
+* [[HL::**Solution:** Flags (`-s`, `-v`) hume test ka control dete hain, aur Watcher auto-run karke instant feedback deta hai::HL]].
 * **What breaks if we don't use it?** Debugging mushkil ho jayegi kyunki variables ki value print nahi hogi. Code likhne ka flow tutega agar baar-baar terminal par jaana pade.
 * **✅ Kab use karo:** Development aur debugging ke dauran, jab tum code likh aur test kar rahe ho.
 * **❌ Kab mat karo / Alternative prefer karo:** CI/CD pipeline (jaise Jenkins/GitHub Actions) par Watcher (`ptw`) mat chalao, kyunki wahan ek hi baar test run hona chahiye, continuously wait nahi karna chahiye.
@@ -4852,16 +4852,16 @@ Open-source contributors jab kisi library ka code badalte hain, toh dusre monito
 
 ### 🎯 Topic 10: PyTest Configuration (pytest.ini)
 
-Is topic mein hum framework ki master settings file, `pytest.ini` banana seekhenge, jisse hume har baar lambe commands type na karne padein aur humare project ki rules universally apply hon.
+[[HL::Is topic mein hum framework ki master settings file, `pytest.ini` banana seekhenge, jisse hume har baar lambe commands type na karne padein aur humare project ki rules universally apply hon.::HL]]
 
-#### 🐣 2. Simple Analogy (Hinglish)
+#### [[HL::🐣 2. Simple Analogy (Hinglish::HL]])
 
 Socho tum roz ek Coffee Shop jaate ho aur kehte ho: "Mujhe Venti size, non-fat milk, caramel macchiato dena without foam." Yeh roz bolna (har baar lamba command likhna) thaka dene wala hai. `pytest.ini` ek "Standing Order Card" hai jo tum Waiter ko de dete ho. Ab tum jaakar sirf "Coffee de do" (`pytest`) bolte ho, aur Waiter tumhare us card mein se baaki saari settings (`-v`, `-s`, etc.) default order ke roop mein apne aap apply kar leta hai. Yeh **⭐Zero-Configuration** automation ki taraf ek kadam hai.
 
 #### 📖 3. Technical Definition
 
 * **Precise English:** `pytest.ini` is the primary configuration file for PyTest. It allows developers to specify default command-line options (`addopts`), register custom markers, customize test discovery paths, and define environment variables, ensuring consistent execution behavior across all environments.
-* **Hinglish Simplification:** `pytest.ini` project ki setting file hai. Tum isme ek baar flags aur rules define kar dete ho, uske baad bina koi lamba command diye sirf `pytest` type karne par framework tumhari saari conditions automatically follow karta hai.
+* **[[HL::Hinglish Simplification:** `pytest.ini` project ki setting file hai. Tum isme ek baar flags aur rules define kar dete ho, uske baad bina koi lamba command diye sirf `pytest` type karne par framework tumhari saari conditions automatically follow karta hai::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
@@ -4885,39 +4885,39 @@ project_root/
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-Jab tum terminal mein sirf `pytest` command run karte ho:
+[[HL::Jab tum terminal mein sirf `pytest` command run karte ho:::HL]]
 
-1. PyTest ka Initialization phase start hota hai.
-2. Woh project ki root directory scan karta hai kisi INI format config file ke liye (yeh `pytest.ini`, `tox.ini`, ya `setup.cfg` ho sakti hai).
-3. Agar `pytest.ini` milti hai, toh woh uske `[pytest]` block (INI file ka header) ko parse karta hai.
-4. `addopts` variable read karke un saare flags ko tumhari run command ke aage automatically append kar deta hai (Default variables override).
-5. Markers aur custom discovery rules ko internal registry mein load kar leta hai. Phir test discovery start hoti hai.
+1. [[HL::PyTest ka Initialization phase start hota hai.::HL]]
+2. [[HL::Woh project ki root directory scan karta hai kisi INI format config file ke liye (yeh `pytest.ini`, `tox.ini`, ya `setup.cfg` ho sakti hai).::HL]]
+3. [[HL::Agar `pytest.ini` milti hai, toh woh uske `[pytest]` block (INI file ka header) ko parse karta hai.::HL]]
+4. [[HL::`addopts` variable read karke un saare flags ko tumhari run command ke aage automatically append kar deta hai (Default variables override).::HL]]
+5. [[HL::Markers aur custom discovery rules ko internal registry mein load kar leta hai. Phir test discovery start hoti hai::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
 
-Chalo ek professional `pytest.ini` file banate hain. File exactly root directory mein honi chahiye. (Galat naam jaise `config.ini` ya `pytest.config` use mat karna).
+[[HL::Chalo ek professional `pytest.ini` file banate hain. File exactly root directory mein honi chahiye. (Galat naam jaise `config.ini` ya `pytest.config` use mat karna).::HL]]
 
-**File: `pytest.ini**`
+[[HL::**File: `pytest.ini`**::HL]]
 
 ```ini
-# Yeh ek INI format file hai, isme Python code nahi hota
-1  [pytest]
-2  # Default CLI arguments jo har baar khud apply ho jayenge
-3  addopts = -v -s --strict-markers
-4
-5  # Markers Registration - taaki Unknown Warning na aaye
-6  markers =
-7      smoke: "Bohot fast chalne wale basic sanity tests"
-8      regression: "Release se pehle chalne wale saare tests"
-9
-10 # Test Discovery Customization (Agar apne custom names use karne hain)
-11 python_files = check_*.py test_*.py
-12 python_classes = Suite* Test*
-13 python_functions = verify_* test_*
-14
-15 # Terminal mein Logs dikhane ki settings
-16 log_cli = true
-17 log_file = pytest_logs.txt
+[[HL::# Yeh ek INI format file hai, isme Python code nahi hota::HL]]
+[[HL::1  [pytest]::HL]]
+[[HL::2  # Default CLI arguments jo har baar khud apply ho jayenge::HL]]
+[[HL::3  addopts = -v -s --strict-markers::HL]]
+[[HL::4::HL]]
+[[HL::5  # Markers Registration - taaki Unknown Warning na aaye::HL]]
+[[HL::6  markers =::HL]]
+[[HL::7      smoke: "Bohot fast chalne wale basic sanity tests"::HL]]
+[[HL::8      regression: "Release se pehle chalne wale saare tests"::HL]]
+[[HL::9::HL]]
+[[HL::10 # Test Discovery Customization (Agar apne custom names use karne hain)::HL]]
+[[HL::11 python_files = check_*.py test_*.py::HL]]
+[[HL::12 python_classes = Suite* Test*::HL]]
+[[HL::13 python_functions = verify_* test_*::HL]]
+[[HL::14::HL]]
+[[HL::15 # Terminal mein Logs dikhane ki settings::HL]]
+[[HL::16 log_cli = true::HL]]
+[[HL::17 log_file = pytest_logs.txt::HL]]
 
 ```
 
@@ -4935,9 +4935,9 @@ test_login.py::verify_login PASSED
 
 * **Line 1:** `[pytest]` — INI Format mein yeh section header bahut zaroori hai. Iske bina PyTest setting ignore kar dega.
 * **Line 3:** `addopts` (Additional Options). Jab bhi tum sirf `pytest` likhoge, piche background mein `pytest -v -s --strict-markers` chal jayega. `--strict-markers` ensure karta hai ki unregistered marker completely crash ho jaye (warning ki jagah).
-* **Line 6-8:** Yahan markers register hote hain. Ab `PytestUnknownMarkWarning` kabhi nahi aayegi.
-* **Line 11-13:** PyTest sirf `test_*.py` dhundhta tha. Humne customization de di ki ab woh un files ko bhi dhundhega jo `check_*.py` se shuru hoti hain. Functions ab `verify_*` bhi ho sakte hain. (Lekin generally standard `test_` hi best rehta hai).
-* **Line 16-17:** `logging` setup. Agar error aati hai toh log file mein automatically save ho jayegi.
+* **Line 6-8:** Yahan markers register hote hain. Ab `[[HL::PytestUnknownMarkWarning` kabhi nahi aayegi.::HL]]
+* [[HL::**Line 11-13:** PyTest sirf `test_*.py` dhundhta tha. Humne customization de di ki ab woh un files ko bhi dhundhega jo `check_*.py` se shuru hoti hain. Functions ab `verify_*` bhi ho sakte hain. (Lekin generally standard `test_` hi best rehta hai).::HL]]
+* [[HL::**Line 16-17:** `logging` setup. Agar error aati hai toh log file mein automatically save ho jayegi::HL]].
 
 #### 🔒 8. Security-First Check
 
@@ -4957,9 +4957,9 @@ Jab team badi hoti hai, toh hum chahte hain "Zero-Configuration" onboarding ho. 
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "`pytest.ini` aur `conftest.py` mein kya difference hai? Dono config hi toh hain."**
-* **Galat soch:** Main flags ko `conftest.py` mein likh dunga aur fixtures ko `pytest.ini` mein.
-* **Actually:** Dono bilkul alag hain. `pytest.ini` ek plain text configuration file hai (jisme Python code NAHI chalta). Isme flags, markers aur settings hoti hain. Dusri taraf, `conftest.py` ek Python script hai (jisme actually Python code chalta hai). Isme Setup/Teardown fixtures aur hooks likhe jate hain. Dono ka hona zaroori hai.
+* **[[HL::Confusion 1 — "`pytest.ini` aur `conftest.py` mein kya difference hai? Dono config hi toh hain."**::HL]]
+* [[HL::**Galat soch:** Main flags ko `conftest.py` mein likh dunga aur fixtures ko `pytest.ini` mein.::HL]]
+* [[HL::**Actually:** Dono bilkul alag hain. `pytest.ini` ek plain text configuration file hai (jisme Python code NAHI chalta). Isme flags, markers aur settings hoti hain. Dusri taraf, `conftest.py` ek Python script hai (jisme actually Python code chalta hai). Isme Setup/Teardown fixtures aur hooks likhe jate hain. Dono ka hona zaroori hai::HL]].
 
 
 * **Confusion 2 — "Kya main `addopts` ko command line flag se overrule kar sakta hu?"**
@@ -5097,12 +5097,12 @@ Ek restaurant ka example lo. Tumhara **Chef** (Tester) hai, **Masala Box** (Page
 #### 📖 3. Technical Definition
 
 * **Precise English:** The Page Object Model (POM) is a design pattern in test automation that creates an object repository for web UI elements. It dictates that every web page should have its own corresponding class, separating the test logic from the page-specific actions and locators.
-* **Hinglish Simplification:** POM ek design pattern (code likhne ka standard tarika) hai jisme hum har web page ki ek alag file banate hain. Iska main rule yeh hai ki test cases aur web elements (locators) ko mix mat karo.
+* **[[HL::Hinglish Simplification:** POM ek design pattern (code likhne ka standard tarika) hai jisme hum har web page ki ek alag file banate hain. Iska main rule yeh hai ki test cases aur web elements (locators) ko mix mat karo::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Agar hum `driver.find_element` ko seedha apne test cases (`test_*.py`) mein hardcode kar dein, aur kal ko website ka UI change ho jaaye (jaise login button ka ID badal gaya), toh hume 100 test files mein jaakar use dhundhna aur fix karna padega. Code Reusability zero ho jaati hai aur Readability (code padhne mein aasani) khrab ho jaati hai.
-* **Solution:** POM use karke hum ek `LoginPage.py` (Home Page ya kisi bhi page ke liye) banate hain jisme saare locators ek jagah hote hain. Kal ko UI change ho, toh sirf ek file mein update karna hoga.
+* **[[HL::Problem:** Agar hum `driver.find_element` ko seedha apne test cases (`test_*.py`) mein hardcode kar dein, aur kal ko website ka UI change ho jaaye (jaise login button ka ID badal gaya), toh hume 100 test files mein jaakar use dhundhna aur fix karna padega. Code Reusability zero ho jaati hai aur Readability (code padhne mein aasani) khrab ho jaati hai.::HL]]
+* [[HL::**Solution:** POM use karke hum ek `LoginPage.py` (Home Page ya kisi bhi page ke liye) banate hain jisme saare locators ek jagah hote hain. Kal ko UI change ho, toh sirf ek file mein update karna hoga::HL]].
 * **What breaks if we don't use it?** Without POM, tumhara framework "Spaghetti code" (uljha hua code) ban jayega. Maintenance almost impossible ho jayegi jab tests 100 se cross karenge.
 * **✅ Kab use karo (Use this when):** Jab tumhara project scale kar raha ho, jisme 10+ tests hon, ya jab multiple log ek hi automation suite pe kaam kar rahe hon.
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** Agar tum sirf ek 1-page ka quick throwaway script likh rahe ho (jaise sirf 1-2 elements scrape karne ke liye), tab POM banana overkill/time-waste ho sakta hai. Wahan linear scripting (seedha code) theek hai.
@@ -5110,43 +5110,43 @@ Ek restaurant ka example lo. Tumhara **Chef** (Tester) hai, **Masala Box** (Page
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
 ```text
-project_root/
-├── pages/
-│   ├── LoginPage.py    ← Sirf locators aur unpe click/type karne ke functions
-│   └── HomePage.py     
-├── tests/
-│   └── test_login.py   ← Sirf test logic (e.g., user login hua ya nahi check karna)
+[[HL::project_root/::HL]]
+[[HL::├── pages/::HL]]
+[[HL::│   ├── LoginPage.py    ← Sirf locators aur unpe click/type karne ke functions::HL]]
+[[HL::│   └── HomePage.py     ::HL]]
+[[HL::├── tests/::HL]]
+[[HL::│   └── test_login.py   ← Sirf test logic (e.g., user login hua ya nahi check karna::HL]])
 
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. Jab test run hota hai, `test_login.py` ek naya instance (object) banata hai `LoginPage` class ka.
-2. Test script bolta hai: `login_page.do_login(user, pass)`.
-3. Test ko nahi pata ki login button ka HTML ID kya hai. Woh bus action call karta hai.
-4. `LoginPage` class internally `driver.find_element` use karta hai locators ko dhundhne aur interact karne ke liye.
-5. Action complete hone ke baad, agar verification karni hai toh `is_welcome_message_displayed()` jaisa function true/false return karta hai test ko.
+1. [[HL::Jab test run hota hai, `test_login.py` ek naya instance (object) banata hai `LoginPage` class ka.::HL]]
+2. [[HL::Test script bolta hai: `login_page.do_login(user, pass)`.::HL]]
+3. [[HL::Test ko nahi pata ki login button ka HTML ID kya hai. Woh bus action call karta hai.::HL]]
+4. [[HL::`LoginPage` class internally `driver.find_element` use karta hai locators ko dhundhne aur interact karne ke liye.::HL]]
+5. [[HL::Action complete hone ke baad, agar verification karni hai toh `is_welcome_message_displayed()` jaisa function true/false return karta hai test ko::HL]].
 
 #### 💡 7. Concept Visualization (Theory Topic ke liye)
 
 *(Yeh purely conceptual topic hai — Hands-On section ki jagah Concept Visualization de raha hoon.)*
 
 ```text
-❌ WITHOUT POM (Messy!):
-[ test_login.py ] 
-  --> driver.find_element(By.ID, "user").send_keys("admin")
-  --> driver.find_element(By.ID, "pass").send_keys("123")
-  --> assert driver.find_element(By.ID, "welcome").is_displayed()
+❌ [[HL::WITHOUT POM (Messy!):::HL]]
+[[HL::[ test_login.py ] ::HL]]
+[[HL::  --> driver.find_element(By.ID, "user").send_keys("admin")::HL]]
+[[HL::  --> driver.find_element(By.ID, "pass").send_keys("123")::HL]]
+[[HL::  --> assert driver.find_element(By.ID, "welcome").is_displayed()::HL]]
 
-✅ WITH POM (Clean & Modular):
-[ test_login.py ] (Test Logic)
-  --> login_page.do_login("admin", "123")
-  --> assert home_page.is_welcome_message_displayed()
-         |
-         v
-[ LoginPage.py & HomePage.py ] (Page Logic)
-  --> self.USERNAME = (By.ID, "user")
-  --> def do_login(): ...
+[[HL::✅ WITH POM (Clean & Modular):::HL]]
+[[HL::[ test_login.py ] (Test Logic)::HL]]
+[[HL::  --> login_page.do_login("admin", "123")::HL]]
+[[HL::  --> assert home_page.is_welcome_message_displayed()::HL]]
+[[HL::         |::HL]]
+[[HL::         v::HL]]
+[[HL::[ LoginPage.py & HomePage.py ] (Page Logic)::HL]]
+[[HL::  --> self.USERNAME = (By.ID, "user")::HL]]
+[[HL::  --> def do_login::HL]](): ...
 
 ```
 
@@ -5156,7 +5156,7 @@ project_root/
 
 #### 🏗️ 9. Scalability & Industry Context
 
-Industry mein "Maintenance" sabse bada cost hota hai. Agar POM use na kiya jaaye, toh QA engineers apna 80% time sirf toote hue locators theek karne mein nikal denge. POM scalable isliye hai kyunki agar kal ko "Home Page" ka design poora change ho jaye, toh tumhe sirf ek file (`HomePage.py`) update karni hai, baaki 500 tests jo us page ko use karte hain woh bina touch kiye pass ho jayenge.
+[[HL::Industry mein "Maintenance" sabse bada cost hota hai. Agar POM use na kiya jaaye, toh QA engineers apna 80% time sirf toote hue locators theek karne mein nikal denge. POM scalable isliye hai kyunki agar kal ko "Home Page" ka design poora change ho jaye, toh tumhe sirf ek file (`HomePage.py`) update karni hai, baaki 500 tests jo us page ko use karte hain woh bina touch kiye pass ho jayenge::HL]].
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
@@ -5202,7 +5202,7 @@ Industry mein "Maintenance" sabse bada cost hota hai. Agar POM use na kiya jaaye
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
-Amazon jaisi e-commerce company ke automation mein hazaaron tests hote hain. Unke paas `CartPage.py`, `CheckoutPage.py`, aur `ProductPage.py` hote hain. Agar Amazon apna "Add to Cart" button ka color/ID change karta hai, toh QA team sirf `ProductPage.py` mein us element ka locator update karti hai, aur saare hazaron tests automatically theek ho jate hain.
+[[HL::Amazon jaisi e-commerce company ke automation mein hazaaron tests hote hain. Unke paas `CartPage.py`, `CheckoutPage.py`, aur `ProductPage.py` hote hain. Agar Amazon apna "Add to Cart" button ka color/ID change karta hai, toh QA team sirf `ProductPage.py` mein us element ka locator update karti hai, aur saare hazaron tests automatically theek ho jate hain::HL]].
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
@@ -5225,10 +5225,10 @@ Amazon jaisi e-commerce company ke automation mein hazaaron tests hote hain. Unk
 
 #### ❓ 17. Interview Q&A (FAQ)
 
-* **Q: What is POM and why is it so popular?**
-* **A:** POM (Page Object Model) is a design pattern where web pages are represented as classes, and elements are variables within that class. It is popular because it separates test logic from page locators, making the code highly reusable, readable, and easy to maintain when the UI changes.
-* **Q: Can we put assertions inside the Page Class?**
-* **A:** No. As a best practice, Page Classes should only contain locators and actions (methods to interact with elements or return state). Assertions (pass/fail logic) belong purely to the Test Class. This maintains the strict separation of concerns.
+* **[[HL::Q: What is POM and why is it so popular?**::HL]]
+* [[HL::**A:** POM (Page Object Model) is a design pattern where web pages are represented as classes, and elements are variables within that class. It is popular because it separates test logic from page locators, making the code highly reusable, readable, and easy to maintain when the UI changes.::HL]]
+* [[HL::**Q: Can we put assertions inside the Page Class?**::HL]]
+* [[HL::**A:** No. As a best practice, Page Classes should only contain locators and actions (methods to interact with elements or return state). Assertions (pass/fail logic) belong purely to the Test Class. This maintains the strict separation of concerns::HL]].
 * **Q: What happens if you don't use POM in a large project?**
 * **A:** Without POM, locators are scattered across all test scripts. If a single frequently-used element (like a login button) changes its ID, you would have to manually find and update it in dozens or hundreds of test files, leading to high maintenance costs and fragile tests.
 * **Q: Have you ever used `pip install pom`?**
@@ -5268,13 +5268,13 @@ Jab tum Page Class banate ho, tum yahi do cheezein define karte ho — elements 
 
 #### 📖 3. Technical Definition
 
-* **Precise English:** A Page Class is a Python class representing a specific web page. It encapsulates two main components: Locators (defined as class-level or instance-level variables, often using tuples) which store element addresses, and Actions (methods) which perform operations on those elements using the WebDriver.
-* **Hinglish Simplification:** Page class ek simple Python blueprint hai jisme kisi ek web page ke saare locators (jaise ID, XPath) variables mein store hote hain, aur un buttons pe click ya type karne ke functions (actions) hote hain.
+* **[[HL::Precise English:** A Page Class is a Python class representing a specific web page. It encapsulates two main components: Locators (defined as class-level or instance-level variables, often using tuples) which store element addresses, and Actions (methods) which perform operations on those elements using the WebDriver.::HL]]
+* [[HL::**Hinglish Simplification:** Page class ek simple Python blueprint hai jisme kisi ek web page ke saare locators (jaise ID, XPath) variables mein store hote hain, aur un buttons pe click ya type karne ke functions (actions) hote hain::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Elements ko bar bar find karna aur actions likhna repetitive hota hai.
-* **Solution:** Page class locators ko ek jagah bandh deti hai (encapsulate karti hai) aur actions ko functions mein wrap kar deti hai, jisse test code saaf lagta hai.
+* **[[HL::Problem:** Elements ko bar bar find karna aur actions likhna repetitive hota hai.::HL]]
+* [[HL::**Solution:** Page class locators ko ek jagah bandh deti hai (encapsulate karti hai) aur actions ko functions mein wrap kar deti hai, jisse test code saaf lagta hai::HL]].
 * **What breaks if we don't use it?** Code duplication. Ek hi login button ko click karne ka code 10 tests mein likhna padega.
 * **✅ Kab use karo (Use this when):** Har naye web page ke liye jo tum automate kar rahe ho (e.g., Registration Page, Dashboard Page).
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** Agar web page pe ek hi element hai ya page bohot dynamic hai jo specific UI pattern follow nahi karta (though POM tab bhi mostly useful hi hai). (Yeh concept lagbhag har automation situation mein applicable hai — koi genuine avoid-scenario nahi hai jab framework scale ho raha ho).
@@ -5283,53 +5283,53 @@ Jab tum Page Class banate ho, tum yahi do cheezein define karte ho — elements 
 
 ```python
 # VS Code UI
-pages/LoginPage.py  ← Is file ke andar ek Class hogi jiske top pe tuples honge
-tests/test_login.py ← Yahan LoginPage ka object/instance banega
+[[HL::pages/LoginPage.py  ← Is file ke andar ek Class hogi jiske top pe tuples honge::HL]]
+[[HL::tests/test_login.py ← Yahan LoginPage ka object/instance banega::HL]]
 
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. Hum page class define karte hain: `class LoginPage:`.
-2. Uske constructor `__init__` mein ek `driver` parameter pass karte hain taaki yeh class web browser ko control kar sake.
-3. Locators ko hum `tuple` (Python ka data structure jisme values change nahi hoti — parentheses `()` mein likhte hain) ke roop mein store karte hain. Eg: `(By.ID, "user-name")`.
-4. Jab action function chalate hain (e.g., `do_login`), toh woh `find_element` ko call karta hai, par tuple ko directly pass nahi kar sakte. Yahan ⭐ **`*` (star) unpacking operator** kaam aata hai jo tuple ko tod kar `strategy` (`By.ID`) aur `value` (`"user-name"`) mein alag-alag karke function ko deta hai.
+1. [[HL::Hum page class define karte hain: `class LoginPage:`.::HL]]
+2. [[HL::Uske constructor `__init__` mein ek `driver` parameter pass karte hain taaki yeh class web browser ko control kar sake.::HL]]
+3. [[HL::Locators ko hum `tuple` (Python ka data structure jisme values change nahi hoti — parentheses `()` mein likhte hain) ke roop mein store karte hain. Eg: `(By.ID, "user-name")`.::HL]]
+4. [[HL::Jab action function chalate hain (e.g., `do_login`), toh woh `find_element` ko call karta hai, par tuple ko directly pass nahi kar sakte. Yahan ⭐ **`*` (star) unpacking operator** kaam aata hai jo tuple ko tod kar `strategy` (`By.ID`) aur `value` (`"user-name"`) mein alag-alag karke function ko deta hai::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
 
 ```python
 # Python 3.10+ | Selenium 4.x
-1  from selenium.webdriver.common.by import By      # By class — elements ko dhundhne ki strategy ke liye
-2  
-3  class LoginPage:                                 # class declaration
-4      # 1. Locators (Tuples format mein store karte hain)
-5      USERNAME_INPUT = (By.ID, "user-name")        # username field ka locator tuple
-6      LOGIN_BUTTON = (By.ID, "login-button")       # login button ka locator tuple
-7      ERROR_MESSAGE = (By.TAG_NAME, "h3")          # error text ka tag name locator tuple
-8      
-9      # 2. Constructor
-10     def __init__(self, driver):                  # __init__ = constructor, jab bhi object banega yeh auto-run hoga
-11         self.driver = driver                     # self.driver = instance variable, taaki poori class mein driver use ho sake
-12         
-13     # 3. Actions (Methods)
-14     def do_login(self, username, password):      # login action function
-15         # ⭐ * (star) unpacking operator tuple ko open kar deta hai find_element ke andar
-16         self.driver.find_element(*self.USERNAME_INPUT).send_keys(username) # send_keys() = text type karna
-17         self.driver.find_element(*self.LOGIN_BUTTON).click()               # click() = button dabana
-18         
-19     def get_error_message(self):                 # error message text nikalne ka function
-20         return self.driver.find_element(*self.ERROR_MESSAGE).text          # .text property se element ke andar ka text milta hai
+1  [[HL::from selenium.webdriver.common.by import By      # By class — elements ko dhundhne ki strategy ke liye::HL]]
+[[HL::2  ::HL]]
+[[HL::3  class LoginPage:                                 # class declaration::HL]]
+[[HL::4      # 1. Locators (Tuples format mein store karte hain)::HL]]
+[[HL::5      USERNAME_INPUT = (By.ID, "user-name")        # username field ka locator tuple::HL]]
+[[HL::6      LOGIN_BUTTON = (By.ID, "login-button")       # login button ka locator tuple::HL]]
+[[HL::7      ERROR_MESSAGE = (By.TAG_NAME, "h3")          # error text ka tag name locator tuple::HL]]
+[[HL::8      ::HL]]
+[[HL::9      # 2. Constructor::HL]]
+[[HL::10     def __init__(self, driver):                  # __init__ = constructor, jab bhi object banega yeh auto-run hoga::HL]]
+[[HL::11         self.driver = driver                     # self.driver = instance variable, taaki poori class mein driver use ho sake::HL]]
+[[HL::12         ::HL]]
+[[HL::13     # 3. Actions (Methods)::HL]]
+[[HL::14     def do_login(self, username, password):      # login action function::HL]]
+[[HL::15         # ⭐ * (star) unpacking operator tuple ko open kar deta hai find_element ke andar::HL]]
+[[HL::16         self.driver.find_element(*self.USERNAME_INPUT).send_keys(username) # send_keys() = text type karna::HL]]
+[[HL::17         self.driver.find_element(*self.LOGIN_BUTTON).click()               # click() = button dabana::HL]]
+[[HL::18         ::HL]]
+[[HL::19     def get_error_message(self):                 # error message text nikalne ka function::HL]]
+[[HL::20         return self.driver.find_element(*self.ERROR_MESSAGE).text          # .text property se element ke andar ka text milta hai::HL]]
 
 # -----------------
-# 📤 Expected Output: (koi output nahi aayega — yeh sirf ek blueprint class hai jise test call karega)
+# 📤 [[HL::Expected Output: (koi output nahi aayega — yeh sirf ek blueprint class hai jise test call karega::HL]])
 
 ```
 
 ##### 🔬 Code Explanation Rule (LINE-BY-LINE)
 
-* **Line 5:** `USERNAME_INPUT = (By.ID, "user-name")` — Humne ek `tuple` banaya hai. First part `By.ID` ek `strategy` (tarika) hai, aur `"user-name"` uski `value`. Tuple isliye use karte hain kyunki locators change nahi hone chahiye script run hone ke beech mein.
-* **Line 10-11:** `def __init__(self, driver):` — Yeh ek constructor hai. Jab test file mein hum likhenge `lp = LoginPage(driver)`, toh test file apna webdriver is class ko de degi taaki yeh class browser ko interact kar sake.
-* **Line 16:** `self.driver.find_element(*self.USERNAME_INPUT)` — `find_element` hamesha do arguments leta hai `(by, value)`. Humare paas ek hi tuple object hai. Toh humne ⭐ `*` (unpacking operator) lagaya jisse `(By.ID, "user-name")` unpack hoke `By.ID, "user-name"` (do alag values) bankar `find_element` ko mil jaate hain.
+* **[[HL::Line 5:** `USERNAME_INPUT = (By.ID, "user-name")` — Humne ek `tuple` banaya hai. First part `By.ID` ek `strategy` (tarika) hai, aur `"user-name"` uski `value`. Tuple isliye use karte hain kyunki locators change nahi hone chahiye script run hone ke beech mein.::HL]]
+* [[HL::**Line 10-11:** `def __init__(self, driver):` — Yeh ek constructor hai. Jab test file mein hum likhenge `lp = LoginPage(driver)`, toh test file apna webdriver is class ko de degi taaki yeh class browser ko interact kar sake.::HL]]
+* [[HL::**Line 16:** `self.driver.find_element(*self.USERNAME_INPUT)` — `find_element` hamesha do arguments leta hai `(by, value)`. Humare paas ek hi tuple object hai. Toh humne ⭐ `*` (unpacking operator) lagaya jisse `(By.ID, "user-name")` unpack hoke `By.ID, "user-name"` (do alag values) bankar `find_element` ko mil jaate hain::HL]].
 
 #### 🔒 8. Security-First Check
 
@@ -5337,13 +5337,13 @@ tests/test_login.py ← Yahan LoginPage ka object/instance banega
 
 #### 🏗️ 9. Scalability & Industry Context
 
-Jab project badhta hai, toh Page Classes mein hundreds of locators ho sakte hain. Senior engineers locators ko class-level variables (jaise UPPERCASE variables `USERNAME_INPUT`) banate hain, methods ke andar hardcode nahi karte. Isse top pe saare locators ek glossary ki tarah dikhte hain aur edit karna aasaan hota hai.
+[[HL::Jab project badhta hai, toh Page Classes mein hundreds of locators ho sakte hain. Senior engineers locators ko class-level variables (jaise UPPERCASE variables `USERNAME_INPUT`) banate hain, methods ke andar hardcode nahi karte. Isse top pe saare locators ek glossary ki tarah dikhte hain aur edit karna aasaan hota hai::HL]].
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** Actions (methods) ke andar locators ko directly likhna: `self.driver.find_element(By.ID, "user").click()`.
-* **🤦 Why:** Aalsi (lazy) coding — tuple variable banane ka time bachane ke liye.
-* **✅ The 'Pro' Way:** Hamesha pehle tuple variable banao class ke top pe, phir us variable ko action method mein `*` operator se use karo.
+* **❌ [[HL::Mistake:** Actions (methods) ke andar locators ko directly likhna: `self.driver.find_element(By.ID, "user").click()`.::HL]]
+* [[HL::**🤦 Why:** Aalsi (lazy) coding — tuple variable banane ka time bachane ke liye.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Hamesha pehle tuple variable banao class ke top pe, phir us variable ko action method mein `*` operator se use karo::HL]].
 * **⚡ Consequences:** Agar ek hi ID (jaise submit button) 5 methods mein use ho raha hai aur woh badal gaya, toh tumhe 5 jagah change karna padega instead of 1.
 * **❌ Mistake:** Constructor mein `self.driver = driver` bhool jaana.
 * **🤦 Why:** Beginners Python OOPs mein self ka concept bhool jaate hain.
@@ -5352,15 +5352,15 @@ Jab project badhta hai, toh Page Classes mein hundreds of locators ho sakte hain
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Yeh `*` (star) unpacking operator ka kya chakkar hai?"**
-* **Galat soch:** Yeh math ka multiply `*` operator hai ya pointer hai jaise C/C++ mein hota hai.
-* **Actually:** Python mein list/tuple ke aage `*` lagane se uske andar ke items bahar nikal (unpack ho) aate hain. Example: `tup = (1, 2)`. Agar ek function ko do values chahiye `def add(a, b):`, tum `add(*tup)` likhoge toh woh `add(1, 2)` ban jayega. `find_element` function ko do values (by, value) chahiye thi, isliye humne `*` lagaya.
-* **Prove karo:** Python console kholo: `tup = (1, 2)`; `print(tup)` → `(1, 2)` aayega. Ab `print(*tup)` run karo → `1 2` aayega (without brackets).
+* **[[HL::Confusion 1 — "Yeh `*` (star) unpacking operator ka kya chakkar hai?"**::HL]]
+* [[HL::**Galat soch:** Yeh math ka multiply `*` operator hai ya pointer hai jaise C/C++ mein hota hai.::HL]]
+* [[HL::**Actually:** Python mein list/tuple ke aage `*` lagane se uske andar ke items bahar nikal (unpack ho) aate hain. Example: `tup = (1, 2)`. Agar ek function ko do values chahiye `def add(a, b):`, tum `add(*tup)` likhoge toh woh `add(1, 2)` ban jayega. `find_element` function ko do values (by, value) chahiye thi, isliye humne `*` lagaya.::HL]]
+* [[HL::**Prove karo:** Python console kholo: `tup = (1, 2)`; `print(tup)` → `(1, 2)` aayega. Ab `print(*tup)` run karo → `1 2` aayega (without brackets).::HL]]
 
 
-* **Confusion 2 — "Kya `__init__` call karna padta hai test file se?"**
-* **Galat soch:** Mujhe `login_page.__init__(driver)` manually likhna padega.
-* **Actually:** Nahi! Jab tum class ka instance (object) banate ho `login_page = LoginPage(driver)`, tab `__init__` automatically run ho jaata hai. Yeh "magic method" hai.
+* [[HL::**Confusion 2 — "Kya `__init__` call karna padta hai test file se?"**::HL]]
+* [[HL::**Galat soch:** Mujhe `login_page.__init__(driver)` manually likhna padega.::HL]]
+* [[HL::**Actually:** Nahi! Jab tum class ka instance (object) banate ho `login_page = LoginPage(driver)`, tab `__init__` automatically run ho jaata hai. Yeh "magic method" hai::HL]].
 * **Prove karo:** Constructor ke andar `print("Class generated!")` likho. Test script se sirf object create karo, bina method call kiye print trigger ho jayega.
 
 
@@ -5417,10 +5417,10 @@ Agar tum ek banking app automate kar rahe ho jisme Dashboard page pe check balan
 
 #### ❓ 17. Interview Q&A (FAQ)
 
-* **Q: Why do we store locators as Tuples in Page Classes?**
-* **A:** Tuples are immutable data structures in Python, meaning once created, they cannot be accidentally changed during execution. Since locators representing a web element's address shouldn't change dynamically during a test, storing them as `(strategy, value)` tuples ensures data integrity and pairs the search type directly with its target string.
-* **Q: What does the `*` (star) operator do in `find_element(*locator)`?**
-* **A:** The `*` operator in Python unpacks an iterable (like a tuple or list). The Selenium `find_element` method expects two separate positional arguments: the strategy (`by`) and the `value`. Since our locator is stored as a single tuple `(By.ID, "username")`, the `*` unpacks it into two arguments so `find_element` can process it correctly.
+* **Q: [[HL::Why do we store locators as Tuples in Page Classes?**::HL]]
+* [[HL::**A:** Tuples are immutable data structures in Python, meaning once created, they cannot be accidentally changed during execution. Since locators representing a web element's address shouldn't change dynamically during a test, storing them as `(strategy, value)` tuples ensures data integrity and pairs the search type directly with its target string.::HL]]
+* [[HL::**Q: What does the `*` (star) operator do in `find_element(*locator)`?**::HL]]
+* [[HL::**A:** The `*` operator in Python unpacks an iterable (like a tuple or list). The Selenium `find_element` method expects two separate positional arguments: the strategy (`by`) and the `value`. Since our locator is stored as a single tuple `(By.ID, "username")`, the `*` unpacks it into two arguments so `find_element` can process it correctly::HL]].
 * **Q: What is the purpose of the constructor (`__init__`) in a Page Class?**
 * **A:** The `__init__` constructor initializes the state of the Page Class object. Specifically in POM, it's used to receive the `WebDriver` instance from the test script and bind it to the class via `self.driver = driver`. This ensures that all action methods within the class have access to the browser session.
 * **Q: How does `test_login.py` (the test script) interact with `LoginPage.py`?**
@@ -5487,12 +5487,12 @@ Isko ek family ki **Dadaji analogy** se samjho. Dadaji (BasePage) ke paas zameen
 #### 📖 3. Technical Definition
 
 * **Precise English:** The `BasePage` is a parent class that contains common WebDriver actions (like custom click, send keys, and explicit waits). Page Classes inherit from `BasePage` to reuse these methods. `TestBase` (traditionally) was a parent class for test setup/teardown, but modern frameworks use Pytest fixtures for this purpose.
-* **Hinglish Simplification:** `BasePage` ek aisi main class hai jisme saare general Selenium actions (click, type, wait) likhe hote hain, jise baaki saari page classes inherit karti hain taaki code duplicate na ho.
+* **[[HL::Hinglish Simplification:** `BasePage` ek aisi main class hai jisme saare general Selenium actions (click, type, wait) likhe hote hain, jise baaki saari page classes inherit karti hain taaki code duplicate na ho::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Agar hume element pe click karne se pehle wait lagana hai, toh kya hum har Page class (`LoginPage`, `HomePage`, etc.) mein 100 baar `WebDriverWait` ka code likhenge? Yeh DRY (Don't Repeat Yourself — code duplication avoid karne ka rule) ke khilaaf hai.
-* **Solution:** Hum ek `BasePage.py` banate hain. Usme ek smart `do_click` function banate hain jo pehle wait karta hai aur fir click karta hai. Baaki classes sirf isko call karti hain.
+* **[[HL::Problem:** Agar hume element pe click karne se pehle wait lagana hai, toh kya hum har Page class (`LoginPage`, `HomePage`, etc.) mein 100 baar `WebDriverWait` ka code likhenge? Yeh DRY (Don't Repeat Yourself — code duplication avoid karne ka rule) ke khilaaf hai.::HL]]
+* [[HL::**Solution:** Hum ek `BasePage.py` banate hain. Usme ek smart `do_click` function banate hain jo pehle wait karta hai aur fir click karta hai. Baaki classes sirf isko call karti hain::HL]].
 * **What breaks if we don't use it?** Framework bohot bulky ho jayega. Agar kal ko wait time 10 sec se 15 sec karna ho, toh tumhe 50 files modify karni padengi.
 * **✅ Kab use karo (Use this when):** Jab tumhare framework mein multiple page classes hon aur sab mein common Selenium actions (wait, click, hover) repeat ho rahe hon.
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** Agar project ekdum chhota (1 script) hai toh over-engineering mat karo. *(Alternative: Seedha test mein likh do)*.
@@ -5501,13 +5501,13 @@ Isko ek family ki **Dadaji analogy** se samjho. Dadaji (BasePage) ke paas zameen
 
 ```text
 project_root/
-├── pages/
-│   ├── BasePage.py     ← Parent class (Dadaji)
-│   ├── LoginPage.py    ← Child class (Papa - inherits BasePage)
-│   └── HomePage.py     ← Child class (Chacha - inherits BasePage)
-├── tests/
-│   ├── conftest.py     ← Setup/Teardown (Modern TestBase)
-│   └── test_login.py
+├── [[HL::pages/::HL]]
+[[HL::│   ├── BasePage.py     ← Parent class (Dadaji)::HL]]
+[[HL::│   ├── LoginPage.py    ← Child class (Papa - inherits BasePage)::HL]]
+[[HL::│   └── HomePage.py     ← Child class (Chacha - inherits BasePage)::HL]]
+[[HL::├── tests/::HL]]
+[[HL::│   ├── conftest.py     ← Setup/Teardown (Modern TestBase)::HL]]
+[[HL::│   └── test_login.py::HL]]
 
 ```
 
@@ -5654,14 +5654,14 @@ Salesforce jaisi complex applications mein, sometimes click turant register nahi
 
 #### ❓ 17. Interview Q&A (FAQ)
 
-* **Q: What is the purpose of a BasePage in POM?**
-* **A:** The BasePage is a parent class that encapsulates common Selenium actions like click, send_keys, and get_text wrapped with Explicit Waits. It helps achieve the DRY (Don't Repeat Yourself) principle by allowing all child Page Classes to inherit these robust actions instead of duplicating wait logic everywhere.
+* **[[HL::Q: What is the purpose of a BasePage in POM?**::HL]]
+* [[HL::**A:** The BasePage is a parent class that encapsulates common Selenium actions like click, send_keys, and get_text wrapped with Explicit Waits. It helps achieve the DRY (Don't Repeat Yourself) principle by allowing all child Page Classes to inherit these robust actions instead of duplicating wait logic everywhere::HL]].
 * **Q: How is `TestBase` different from `BasePage` in modern Python automation?**
 * **A:** Traditionally, `BasePage` is for web element interactions (Page logic), while `TestBase` was for driver setup/teardown (Test logic). However, in modern Python (Pytest) frameworks, we don't use `TestBase` class anymore; we use `conftest.py` with fixtures to handle setup/teardown elegantly.
 * **Q: Why do we use `super().__init__(driver)` in the child class?**
 * **A:** When a child class (like LoginPage) is instantiated, it needs to pass the `driver` instance up to the parent class (BasePage). `super().__init__(driver)` calls the constructor of the BasePage, ensuring the parent class has the browser context required to execute its explicit waits.
-* **Q: What happens if an element is present in the DOM but hidden, and you use `EC.element_to_be_clickable`?**
-* **A:** `element_to_be_clickable` checks if the element is both visible and enabled. If the element is hidden (e.g., `display: none` in CSS), the explicit wait will time out and throw a `TimeoutException` because a hidden element cannot be clicked by a real user.
+* **[[HL::Q: What happens if an element is present in the DOM but hidden, and you use `EC.element_to_be_clickable`?**::HL]]
+* [[HL::**A:** `element_to_be_clickable` checks if the element is both visible and enabled. If the element is hidden (e.g., `display: none` in CSS), the explicit wait will time out and throw a `TimeoutException` because a hidden element cannot be clicked by a real user::HL]].
 * **Q: Why avoid `time.sleep()` in Page classes?**
 * **A:** `time.sleep()` is a static wait that halts execution for exactly the given seconds, wasting time even if the element is ready early. BasePage uses `WebDriverWait` (explicit wait), which polls the DOM and proceeds immediately once the condition is met, saving massive execution time across large suites.
 
@@ -5694,15 +5694,15 @@ Python ki duniya mein, `__init__.py` file us **Address Plate** ka kaam karti hai
 
 #### 📖 3. Technical Definition
 
-* **Precise English:** In Python, a module is a single `.py` file, whereas a package is a directory containing multiple modules. The `__init__.py` file acts as an identifier that tells the Python interpreter to treat the directory as a Package, allowing modules within it to be imported across different directories.
-* **Hinglish Simplification:** Ek single Python file ko Module kehte hain, aur un files ke folder ko Package kehte hain. `__init__.py` (jise init dunder file bolte hain) folder ko officially ek Python Package banati hai.
+* **[[HL::Precise English:** In Python, a module is a single `.py` file, whereas a package is a directory containing multiple modules. The `__init__.py` file acts as an identifier that tells the Python interpreter to treat the directory as a Package, allowing modules within it to be imported across different directories.::HL]]
+* [[HL::**Hinglish Simplification:** Ek single Python file ko Module kehte hain, aur un files ke folder ko Package kehte hain. `__init__.py` (jise init dunder file bolte hain) folder ko officially ek Python Package banati hai::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Jab tumhara test script `tests` folder mein hai aur tum `pages` folder se `LoginPage.py` import karna chahte ho, toh Python by default dusre folders ko normal directories maanta hai aur import fail ho jaata hai.
-* **Solution:** `pages` folder mein ek empty `__init__.py` bana do. Ab Python use normal folder nahi, "Package" manega.
-* **What breaks if we don't use it?** Import fails `ModuleNotFoundError` ke saath.
-* **✅ Kab use karo (Use this when):** Jab bhi tum framework mein naye folders banao (jaise `pages`, `utils`, `config`, `tests`) aur unhe doosre folders mein import karna ho.
+* **[[HL::Problem:** Jab tumhara test script `tests` folder mein hai aur tum `pages` folder se `LoginPage.py` import karna chahte ho, toh Python by default dusre folders ko normal directories maanta hai aur import fail ho jaata hai.::HL]]
+* [[HL::**Solution:** `pages` folder mein ek empty `__init__.py` bana do. Ab Python use normal folder nahi, "Package" manega.::HL]]
+* [[HL::**What breaks if we don't use it?** Import fails `ModuleNotFoundError` ke saath.::HL]]
+* [[HL::**✅ Kab use karo (Use this when):** Jab bhi tum framework mein naye folders banao (jaise `pages`, `utils`, `config`, `tests`) aur unhe doosre folders mein import karna ho::HL]].
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** (Yeh concept har jagah applicable hai for custom imports, avoid karne ka koi reason nahi hai.)
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -5721,10 +5721,10 @@ project_root/
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. Jab tum likhte ho `from pages.LoginPage import LoginPage`, Python `sys.path` mein directories scan karta hai.
-2. Jab usse `pages` naam ka folder milta hai, woh dekhta hai kya andar `__init__.py` hai?
-3. Agar hai, toh woh usse ek regular package manta hai aur import allow karta hai.
-4. **Important History:** ⭐ **Python 3.3** ke baad se, Python ne "Implicit Namespace Packages" introduce kiye. Matlab technically bina `__init__.py` ke bhi import *chal sakta hai*, par best practice aur compatibility ke liye aaj bhi saare professional frameworks mein ise empty file ke roop mein add karna zaroori mana jaata hai (jaise Postman jaisa tool bhi package imports aise hi process karta hai internally jab scripts share hoti hain).
+1. [[HL::Jab tum likhte ho `from pages.LoginPage import LoginPage`, Python `sys.path` mein directories scan karta hai.::HL]]
+2. [[HL::Jab usse `pages` naam ka folder milta hai, woh dekhta hai kya andar `__init__.py` hai?::HL]]
+3. [[HL::Agar hai, toh woh usse ek regular package manta hai aur import allow karta hai.::HL]]
+4. [[HL::**Important History:** ⭐ **Python 3.3** ke baad se, Python ne "Implicit Namespace Packages" introduce kiye. Matlab technically bina `__init__.py` ke bhi import *chal sakta hai*, par best practice aur compatibility ke liye aaj bhi saare professional frameworks mein ise empty file ke roop mein add karna zaroori mana jaata hai (jaise Postman jaisa tool bhi package imports aise hi process karta hai internally jab scripts share hoti hain::HL]]).
 
 #### 💡 7. Concept Visualization (Theory Topic ke liye)
 
@@ -5755,9 +5755,9 @@ Large frameworks mein `__init__.py` hamesha khali nahi rehti. Senior developers 
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** File ka naam galat likhna — jaise `_init_.py` (single underscore) ya `init.py`.
-* **🤦 Why:** Beginners ko dunder (double underscore) syntax pata nahi hota.
-* **✅ The 'Pro' Way:** Hamesha double underscore aage aur peeche: `__init__.py`.
+* **❌ [[HL::Mistake:** File ka naam galat likhna — jaise `_init_.py` (single underscore) ya `init.py`.::HL]]
+* [[HL::**🤦 Why:** Beginners ko dunder (double underscore) syntax pata nahi hota.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Hamesha double underscore aage aur peeche: `__init__.py::HL]]`.
 * **⚡ Consequences:** Python single underscore wali file ko ignore kar dega aur `ModuleNotFoundError` aa jayega.
 * **❌ Mistake:** Har single file ke andar `__init__.py` banane ki koshish karna.
 * **🤦 Why:** Confusion ki yeh kahan banani hai.
@@ -5806,17 +5806,17 @@ Jab tum kisi bade Python tool (jaise Django, Flask, ya Selenium khud) ka code Gi
 |   |-- __init__.py
 |   |-- database.py      <-- This is a MODULE
 |
-|-- data/                <-- This is a NORMAL DIRECTORY (No __init__.py)
-|   |-- testdata.json
+|-- data/                <-- [[HL::This is a NORMAL DIRECTORY (No __init__.py)::HL]]
+[[HL::|   |-- testdata.json::HL]]
 
-```
+[[HL::```::HL]]
 
-#### ❓ 17. Interview Q&A (FAQ)
+#### [[HL::❓ 17. Interview Q&A (FAQ)::HL]]
 
-* **Q: What is the difference between a Module and a Package in Python?**
-* **A:** A Module is a single Python script (`.py` file) that contains code. A Package is a directory that contains multiple modules along with a special `__init__.py` file, which tells Python to treat the directory as an importable package.
-* **Q: What is the exact role of `__init__.py`?**
-* **A:** It acts as an identifier or "address plate". ⭐ "**init.py** file (bhale hi khaali ho) Pages folder mein daalne se Python use ek Package maan leta hai", allowing you to safely import modules from that directory into other parts of your framework.
+* [[HL::**Q: What is the difference between a Module and a Package in Python?**::HL]]
+* [[HL::**A:** A Module is a single Python script (`.py` file) that contains code. A Package is a directory that contains multiple modules along with a special `__init__.py` file, which tells Python to treat the directory as an importable package.::HL]]
+* [[HL::**Q: What is the exact role of::HL]] `__init__.py`?**
+* **[[HL::A:** It acts as an identifier or "address plate". ⭐ "**init.py** file (bhale hi khaali ho) Pages folder mein daalne se Python use ek Package maan leta hai", allowing you to safely import modules from that directory into other parts of your framework::HL]].
 * **Q: Is `__init__.py` strictly required in Python 3?**
 * **A:** Not strictly. Since Python 3.3, Python introduced Implicit Namespace Packages, meaning directories without `__init__.py` can sometimes be imported. However, for robust test discovery (especially with Pytest) and backward compatibility with various IDEs and tools, creating an empty `__init__.py` is still the industry standard.
 
@@ -5876,13 +5876,13 @@ Socho tumhe apni shaadi mein 500 logo ko bulana hai. Ek tarika yeh hai ki tum 50
 #### 📖 3. Technical Definition
 
 * **Precise English:** Data-Driven Testing (DDT) is a software testing methodology where test scripts pull data from external sources (like Excel, CSV, or JSON) instead of having variables hard-coded within the script itself.
-* **Hinglish Simplification:** DDT ek aisa tarika hai jisme hum data (usernames, passwords) ko code ke andar likhne (hard-code karne) ki jagah, bahar ki files se test script mein bhejte hain.
+* **[[HL::Hinglish Simplification:** DDT ek aisa tarika hai jisme hum data (usernames, passwords) ko code ke andar likhne (hard-code karne) ki jagah, bahar ki files se test script mein bhejte hain::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Agar test script mein `do_login("admin", "123")` likh diya, aur tumhe 10 alag-alag users ke saath login test karna hai, toh tumhe poora test code 10 baar copy-paste karna padega (Hard-coding).
-* **Solution:** Ek `TestData` folder banao jisme `.csv` ya `.xlsx` file ho, aur apne test script ko bolo ki wahan se data padhe.
-* **What breaks if we don't use it?** Code maintenance impossible ho jayegi. Agar kal data change hua (jaise password expire ho gaya), toh tumhe code modify karna padega, jo risky hai.
+* **[[HL::Problem:** Agar test script mein `do_login("admin", "123")` likh diya, aur tumhe 10 alag-alag users ke saath login test karna hai, toh tumhe poora test code 10 baar copy-paste karna padega (Hard-coding).::HL]]
+* [[HL::**Solution:** Ek `TestData` folder banao jisme `.csv` ya `.xlsx` file ho, aur apne test script ko bolo ki wahan se data padhe.::HL]]
+* [[HL::**What breaks if we don't use it?** Code maintenance impossible ho jayegi. Agar kal data change hua (jaise password expire ho gaya), toh tumhe code modify karna padega, jo risky hai::HL]].
 * **✅ Kab use karo (Use this when):** Jab ek hi test flow (jaise Login, Search) ko multiple alag-alag data sets ke saath test karna ho.
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** Jab sirf ek hi specific configuration check karni ho jo static (fixed) hai, wahan data file banana unnecessary overhead hoga.
 
@@ -5900,10 +5900,10 @@ project_root/
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. Test execution start hota hai.
-2. Test code directly browser open nahi karta. Pehle woh bahar ki CSV/Excel/JSON file ko open karta hai.
-3. Us file se data ko memory mein list/array format mein load karta hai.
-4. Python ke frameworks (jaise `@pytest.mark.parametrize` — jo aage detail mein dekhnge) ek loop chalate hain aur us test function ko har data set ke liye alag se run karte hain.
+1. [[HL::Test execution start hota hai.::HL]]
+2. [[HL::Test code directly browser open nahi karta. Pehle woh bahar ki CSV/Excel/JSON file ko open karta hai.::HL]]
+3. [[HL::Us file se data ko memory mein list/array format mein load karta hai.::HL]]
+4. [[HL::Python ke frameworks (jaise `@pytest.mark.parametrize` — jo aage detail mein dekhnge) ek loop chalate hain aur us test function ko har data set ke liye alag se run karte hain::HL]].
 
 #### 💡 7. Concept Visualization (Theory Topic ke liye)
 
@@ -5934,7 +5934,7 @@ Test data files mein kabhi bhi production (asli) database ke passwords ya credit
 
 #### 🏗️ 9. Scalability & Industry Context
 
-Industry mein "1 test, 1000 data sets" ka rule chalta hai. Agar Amazon apne search bar ko test karta hai, toh ek `test_search()` function hota hai, par uske peeche ek Excel sheet hoti hai jisme 50,000 search terms (shoes, laptops, phones) likhe hote hain.
+[[HL::Industry mein "1 test, 1000 data sets" ka rule chalta hai. Agar Amazon apne search bar ko test karta hai, toh ek `test_search()` function hota hai, par uske peeche ek Excel sheet hoti hai jisme 50,000 search terms (shoes, laptops, phones) likhe hote hain::HL]].
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
@@ -5945,9 +5945,9 @@ Industry mein "1 test, 1000 data sets" ka rule chalta hai. Agar Amazon apne sear
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "POM aur DDT mein kya fark hai?"**
-* **Galat soch:** Dono ka kaam code saaf karna hai toh ek hi baat hogi.
-* **Actually:** POM (Page Object Model) *UI elements* (locators) ko test logic se alag karta hai. DDT *Test data* (credentials, input text) ko test logic se alag karta hai. Dono saath mein use hote hain ek perfect framework mein!
+* **[[HL::Confusion 1 — "POM aur DDT mein kya fark hai?"**::HL]]
+* [[HL::**Galat soch:** Dono ka kaam code saaf karna hai toh ek hi baat hogi.::HL]]
+* [[HL::**Actually:** POM (Page Object Model) *UI elements* (locators) ko test logic se alag karta hai. DDT *Test data* (credentials, input text) ko test logic se alag karta hai. Dono saath mein use hote hain ek perfect framework mein::HL]]!
 * **Prove karo:** `LoginPage.py` (POM) mein `By.ID` hai, aur `users.csv` (DDT) mein "admin" likha hai. Test file donon ko use karta hai.
 
 
@@ -6260,60 +6260,60 @@ Total keywords across covered subtopics in this response: 34
 #### 🐣 2. Simple Analogy (Hinglish)
 
 Ek Teacher (Test Runner) ko 5 baccho (Guests) ko bulana hai.
-Agar teacher khud ek `for loop` lagata hai: "Jab tak list khatam na ho, bulate raho". Agar teesra baccha nahi aaya (test fail hua), toh loop wahi toot jayega aur aage ke bacche nahi aayenge.
-Lekin agar teacher **Parametrize** (Decorator) use karta hai: Woh 5 alag-alag invitations bhejta hai. Agar teesra fail hota hai, toh baaki 4 fir bhi aayenge (independent execution). PyTest ka parametrize precisely yahi independent invitations bhejne ka kaam karta hai.
+Agar teacher khud ek `[[HL::for loop` lagata hai: "Jab tak list khatam na ho, bulate raho". Agar teesra baccha nahi aaya (test fail hua), toh loop wahi toot jayega aur aage ke bacche nahi aayenge.::HL]]
+[[HL::Lekin agar teacher **Parametrize** (Decorator) use karta hai: Woh 5 alag-alag invitations bhejta hai. Agar teesra fail hota hai, toh baaki 4 fir bhi aayenge (independent execution). PyTest ka parametrize precisely yahi independent invitations bhejne ka kaam karta hai.::HL]]
 
-#### 📖 3. Technical Definition
+#### [[HL::📖 3. Technical Definition::HL]]
 
-* **Precise English:** `@pytest.mark.parametrize` is a built-in Pytest decorator that allows a single test function to be run multiple times with different sets of arguments. When combined with data-reading utilities, it enables true Data-Driven Testing where each row of data acts as an independent test case.
-* **Hinglish Simplification:** Yeh Pytest ka ek special tag (decorator) hai jisse hum test function ke upar lagate hain. Yeh data list ke har item ke liye us test ko ek naya (aur independent) test maan kar run karta hai.
+* [[HL::**Precise English:** `@pytest.mark.parametrize` is a built-in Pytest decorator that allows a single test function to be run multiple times with different sets of arguments. When combined with data-reading utilities, it enables true Data-Driven Testing where each row of data acts as an independent test case.::HL]]
+* [[HL::**Hinglish Simplification:** Yeh Pytest ka ek special tag (decorator) hai jisse hum test function ke upar lagate hain. Yeh data list ke har item ke liye us test ko ek naya (aur independent) test maan kar run karta hai::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Normal `for loop` test function ke andar lagane se problem yeh hai ki agar ek data set fail hua, toh Python ka loop break ho jayega (ya exception aayegi) aur baaki data sets test nahi honge.
-* **Solution:** `@pytest.mark.parametrize` decorator list of tuples ko as an input leta hai aur Pytest engine ko bolta hai: "Is function ko 5 baar alag-alag run karo".
-* **What breaks if we don't use it?** Ek fail hone par saare subsequent tests block ho jayenge, jisse false report generate hogi.
-* **✅ Kab use karo (Use this when):** Jab multiple variations (jaise 3 valid logins, 2 invalid logins) ek hi script se test karne hon.
+* **[[HL::Problem:** Normal `for loop` test function ke andar lagane se problem yeh hai ki agar ek data set fail hua, toh Python ka loop break ho jayega (ya exception aayegi) aur baaki data sets test nahi honge.::HL]]
+* [[HL::**Solution:** `@pytest.mark.parametrize` decorator list of tuples ko as an input leta hai aur Pytest engine ko bolta hai: "Is function ko 5 baar alag-alag run karo".::HL]]
+* [[HL::**What breaks if we don't use it?** Ek fail hone par saare subsequent tests block ho jayenge, jisse false report generate hogi.::HL]]
+* [[HL::**✅ Kab use karo (Use this when):** Jab multiple variations (jaise 3 valid logins, 2 invalid logins) ek hi script se test karne hon::HL]].
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** Jab sequence of actions test karna ho (jaise data1 se add, data2 se update, data3 se delete) jahan states dependent hon. (Parametrize independent tests ke liye hota hai).
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
 ```text
-@pytest.mark.parametrize("user, pwd", [("admin", "123"), ("guest", "abc")])
-def test_login(user, pwd):
-    # Yeh function automatically 2 baar run hoga!
+@[[HL::pytest.mark.parametrize("user, pwd", [("admin", "123"), ("guest", "abc")])::HL]]
+[[HL::def test_login(user, pwd):::HL]]
+    # [[HL::Yeh function automatically 2 baar run hoga::HL]]!
 
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. PyTest run start hota hai.
-2. Woh test function ke upar `@pytest.mark.parametrize` dekhta hai.
-3. Uske andar diye gaye data (e.g., `get_csv_data()`) ko evaluate karta hai jisse ek `list of tuples` milti hai.
-4. Argument Mapping hoti hai: Tuple ki pehli value test function ke pehle argument (`username`) mein, aur doosri value doosre argument (`password`) mein map hoti hai.
-5. Pytest internally utne test instances bana leta hai (jaise `test_login[admin]` aur `test_login[guest]`) aur unhe independently execute karta hai.
+1. [[HL::PyTest run start hota hai.::HL]]
+2. [[HL::Woh test function ke upar `@pytest.mark.parametrize` dekhta hai.::HL]]
+3. [[HL::Uske andar diye gaye data (e.g., `get_csv_data()`) ko evaluate karta hai jisse ek `list of tuples` milti hai.::HL]]
+4. [[HL::Argument Mapping hoti hai: Tuple ki pehli value test function ke pehle argument (`username`) mein, aur doosri value doosre argument (`password`) mein map hoti hai.::HL]]
+5. [[HL::Pytest internally utne test instances bana leta hai (jaise `test_login[admin]` aur `test_login[guest]`) aur unhe independently execute karta hai::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
 
 ```python
 # Python 3.10+ | pytest 7.x+
-1  import pytest                                                # pytest framework
-2  from utils.data_reader import get_csv_data                   # pichle topic ka function jo data layega
-3  from pages.LoginPage import LoginPage                        # POM class
-4  
-5  # --- Direct Data Parameterization (Hardcoded array - avoid in PROD) ---
-6  @pytest.mark.parametrize("username, password", [("admin", "123"), ("user", "456")])
-7  def test_login_direct(setup, username, password):            # yeh function 2 baar run hoga
-8      pass
-9
-10 # --- Real DDT Implementation with CSV ---
-11 # get_csv_data() return karega: [('admin', '123', 'Pass'), ('baduser', '000', 'Fail')]
-12 @pytest.mark.parametrize("username, password, expected_result", get_csv_data("TestData/users.csv"))
-13 def test_login_ddt(setup, username, password, expected_result): # setup = driver fixture
-14     lp = LoginPage(setup)                                    # POM object banaya
-15     lp.do_login(username, password)                          # login action kiya
-16     
-17     try:                                                     # try...except taaki script phate nahi
+1  import pytest                                                # [[HL::pytest framework::HL]]
+[[HL::2  from utils.data_reader import get_csv_data                   # pichle topic ka function jo data layega::HL]]
+[[HL::3  from pages.LoginPage import LoginPage                        # POM class::HL]]
+[[HL::4  ::HL]]
+[[HL::5  # --- Direct Data Parameterization (Hardcoded array - avoid in PROD) ---::HL]]
+[[HL::6  @pytest.mark.parametrize("username, password", [("admin", "123"), ("user", "456")])::HL]]
+[[HL::7  def test_login_direct(setup, username, password):            # yeh function 2 baar run hoga::HL]]
+[[HL::8      pass::HL]]
+[[HL::9::HL]]
+[[HL::10 # --- Real DDT Implementation with CSV ---::HL]]
+[[HL::11 # get_csv_data() return karega: [('admin', '123', 'Pass'), ('baduser', '000', 'Fail')]::HL]]
+[[HL::12 @pytest.mark.parametrize("username, password, expected_result", get_csv_data("TestData/users.csv"))::HL]]
+[[HL::13 def test_login_ddt(setup, username, password, expected_result): # setup = driver fixture::HL]]
+[[HL::14     lp = LoginPage(setup)                                    # POM object banaya::HL]]
+[[HL::15     lp.do_login(username, password)                          # login action kiya::HL]]
+[[HL::16     ::HL]]
+[[HL::17::HL]]     try:                                                     # try...except taaki script phate nahi
 18         actual_msg = lp.get_error_message()                  # UI se msg nikala
 19         if expected_result == "Fail":                        # Agar humari Excel kehti hai yeh fail hona chahiye
 20             assert "Invalid" in actual_msg                   # toh error msg aana chahiye
@@ -6423,8 +6423,8 @@ def test_login(user, pass):
 
 * **Q: Why avoid normal 'for loops' inside a test case for multiple data inputs?**
 * **A:** If you use a `for loop` inside a test and one iteration fails, an exception is thrown, breaking the loop. The remaining data sets will not be tested. PyTest `parametrize` treats each data set as an independent test execution.
-* **Q: Explain how argument mapping works in `@pytest.mark.parametrize`.**
-* **A:** The decorator takes a comma-separated string of variable names (e.g., `"username, password"`) as its first argument. For each tuple in the data list (second argument), it maps the values positionally to these variable names and passes them directly to the test function's arguments.
+* **Q: [[HL::Explain how argument mapping works in `@pytest.mark.parametrize`.**::HL]]
+* [[HL::**A:** The decorator takes a comma-separated string of variable names (e.g., `"username, password"`) as its first argument. For each tuple in the data list (second argument), it maps the values positionally to these variable names and passes them directly to the test function's arguments::HL]].
 * **Q: Can we stack multiple `@pytest.mark.parametrize` decorators on a single test?**
 * **A:** Yes. Stacking them creates a Cartesian product (matrix) of the data. For example, if you parameterize `browser` with `["chrome", "firefox"]` and `user` with `["admin", "guest"]`, the test will run 4 times covering all combinations.
 
@@ -6457,13 +6457,13 @@ Agar tum hardcoded data (jaise `test@test.com`) use karoge, toh server pehchan l
 
 #### 📖 3. Technical Definition
 
-* **Precise English:** Faker is a Python library used to generate dynamic synthetic data (like names, emails, addresses, and phone numbers). It replaces static PII (Personally Identifiable Information) in automated tests to ensure privacy compliance (GDPR) and to prevent state-conflict errors like duplicate accounts.
-* **Hinglish Simplification:** Faker ek library hai jo real-time mein random lekin asli jaisa dikhne wala data banati hai. Isse hum real users ke asli data (PII) ko tests mein use karne se bachte hain.
+* **[[HL::Precise English:** Faker is a Python library used to generate dynamic synthetic data (like names, emails, addresses, and phone numbers). It replaces static PII (Personally Identifiable Information) in automated tests to ensure privacy compliance (GDPR) and to prevent state-conflict errors like duplicate accounts.::HL]]
+* [[HL::**Hinglish Simplification:** Faker ek library hai jo real-time mein random lekin asli jaisa dikhne wala data banati hai. Isse hum real users ke asli data (PII) ko tests mein use karne se bachte hain::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Agar main Excel mein `user1@gmail.com` likh dun signup test ke liye, toh pehli baar test pass hoga. Doosri baar jab test run hoga, toh application kahegi "Email already exists" aur test fail ho jayega (State Conflict). Sath hi, ⭐ **"Production (asli) customer data automation mein use karna ek crime hai!"** (Privacy breach / GDPR violation).
-* **Solution:** Faker library dynamically `fake.email()` generate karti hai. Har baar run karne pe ek naya aur unique email milta hai (e.g., `robert45@example.net`).
+* **[[HL::Problem:** Agar main Excel mein `user1@gmail.com` likh dun signup test ke liye, toh pehli baar test pass hoga. Doosri baar jab test run hoga, toh application kahegi "Email already exists" aur test fail ho jayega (State Conflict). Sath hi, ⭐ **"Production (asli) customer data automation mein use karna ek crime hai!"** (Privacy breach / GDPR violation).::HL]]
+* [[HL::**Solution:** Faker library dynamically `fake.email()` generate karti hai. Har baar run karne pe ek naya aur unique email milta hai (e.g., `robert45@example.net::HL]]`).
 * **What breaks if we don't use it?** Tests data-dependency ki wajah se lagatar fail honge, aur PII (Personally Identifiable Information) leak hone par company pe legal cases ho sakte hain.
 * **✅ Kab use karo (Use this when):** Registration, Signup, Lead Generation, ya Form submission testing mein jahan unique constraints (unique email, phone) required hote hain.
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** Login testing ke liye. Login mein tumhe wahi username chahiye jo pehle se database mein saved ho. Faker wahan `User not found` de dega!
@@ -6471,41 +6471,41 @@ Agar tum hardcoded data (jaise `test@test.com`) use karoge, toh server pehchan l
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
 ```text
-tests/
-  ├── test_registration.py
-  └── conftest.py  ← (Yahan hum Faker ka fixture define kar sakte hain)
+[[HL::tests/::HL]]
+[[HL::  ├── test_registration.py::HL]]
+[[HL::  └── conftest.py  ← (Yahan hum Faker ka fixture define kar sakte hain)::HL]]
 
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. Tum `fake = Faker()` call karke ek generator object banate ho.
-2. Jab tum `fake.name()` call karte ho, Faker apni internal dictionary aur algorithms use karke ek random but logically correct First + Last name assemble karta hai.
-3. Is library ke paas internal logic hoti hai valid credit card numbers aur phone numbers generate karne ki jo Luhn algorithm pass karte hain (isliye system inhe reject nahi karta).
+1. [[HL::Tum `fake = Faker()` call karke ek generator object banate ho.::HL]]
+2. [[HL::Jab tum `fake.name()` call karte ho, Faker apni internal dictionary aur algorithms use karke ek random but logically correct First + Last name assemble karta hai.::HL]]
+3. [[HL::Is library ke paas internal logic hoti hai valid credit card numbers aur phone numbers generate karne ki jo Luhn algorithm pass karte hain (isliye system inhe reject nahi karta).::HL]]
 
 #### 💻 7. Hands-On — Runnable Example
 
 ```python
-# Python 3.10+ | Faker 18.x+
-1  from faker import Faker                                     # pip install Faker required
-2  import pytest
-3  
-4  # 1. Basic Faker usage
-5  fake = Faker()                                              # Faker class ka instance banaya
-6  print(fake.name())                                          # print karega "John Doe" (random)
-7  print(fake.email())                                         # print karega "john.doe@example.com"
-8  print(fake.credit_card_number())                            # print karega "4532XXXXXXXXXXXX" (valid pattern)
-9  
-10 # 2. Using Faker in Pytest Fixtures
-11 @pytest.fixture                                             # fixture = code block jo test se pehle khud chalta hai
-12 def fake_user():
-13     f = Faker()
-14     return {                                                # dictionary return ki
-15         "full_name": f.name(),
-16         "email": f.email(),
-17         "phone": f.phone_number(),
-18         "address": f.address()
-19     }
+[[HL::# Python 3.10+ | Faker 18.x+::HL]]
+[[HL::1  from faker import Faker                                     # pip install Faker required::HL]]
+[[HL::2  import pytest::HL]]
+[[HL::3  ::HL]]
+[[HL::4  # 1. Basic Faker usage::HL]]
+[[HL::5  fake = Faker()                                              # Faker class ka instance banaya::HL]]
+[[HL::6  print(fake.name())                                          # print karega "John Doe" (random)::HL]]
+[[HL::7  print(fake.email())                                         # print karega "john.doe@example.com"::HL]]
+[[HL::8  print(fake.credit_card_number())                            # print karega "4532XXXXXXXXXXXX" (valid pattern)::HL]]
+[[HL::9  ::HL]]
+[[HL::10 # 2. Using Faker in Pytest Fixtures::HL]]
+[[HL::11 @pytest.fixture                                             # fixture = code block jo test se pehle khud chalta hai::HL]]
+[[HL::12 def fake_user():::HL]]
+[[HL::13     f = Faker()::HL]]
+[[HL::14     return {                                                # dictionary return ki::HL]]
+[[HL::15         "full_name": f.name(),::HL]]
+[[HL::16         "email": f.email(),::HL]]
+[[HL::17         "phone": f.phone_number(),::HL]]
+[[HL::18         "address": f.address()::HL]]
+[[HL::19     }::HL]]
 20 
 21 # 3. Actual Test
 22 def test_registration(setup, fake_user):                    # test ko fake_user dictionary mili
@@ -6525,7 +6525,7 @@ Registering user with email: robert.smith99@dummy.com
 
 ##### 🔬 Code Explanation Rule (LINE-BY-LINE)
 
-* **Line 1:** `from faker import Faker` — Faker standard library nahi hai. Tumhe terminal mein `pip install Faker` chalana hoga pehle. (Capital 'F' hai class name mein).
+* **[[HL::Line 1:** `from faker import Faker` — Faker standard library nahi hai. Tumhe terminal mein `pip install Faker` chalana hoga pehle. (Capital 'F' hai class name mein::HL]]).
 * **Line 11-19:** `@pytest.fixture` — Humne ek fixture banaya jo ek dictionary return karta hai jisme saari fake details hain. Aisa isliye kiya taaki 50 alag tests agar user banate hain, toh sab yahi fixture reuse kar sakein bina baar baar `Faker()` ko initialize kiye. (Note: Market mein `pytest-faker` naam ka plugin bhi hai jo seedha `faker` fixture deta hai bina manually banaye).
 * **Line 22:** `def test_registration(setup, fake_user):` — Yahan hume unique email per test chahiye tha. `fake_user` fixture se data aaya, UI mein gaya, aur DB mein insert ho gaya bina kisi duplicate error ke.
 
@@ -6539,10 +6539,10 @@ As I highlighted: ⭐ **"Production data automation mein use karna crime hai!"**
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** Login tests mein Faker use karna: `login(fake.email(), fake.password())`.
-* **🤦 Why:** Beginners ko maza aata hai fake data dekhne mein, sab jagah laga dete hain.
-* **✅ The 'Pro' Way:** Faker sirf un tests mein use hota hai jo NAYA data banate hain (e.g., Signup, New Lead). Jo already existing data expect karte hain (e.g., Login, Checkout), unke liye static DDT (Excel/CSV) hi use karo.
-* **⚡ Consequences:** Tumhara Login test 100% fail hoga kyunki woh fake banda database mein exist hi nahi karta!
+* **❌ [[HL::Mistake:** Login tests mein Faker use karna: `login(fake.email(), fake.password())`.::HL]]
+* [[HL::**🤦 Why:** Beginners ko maza aata hai fake data dekhne mein, sab jagah laga dete hain.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Faker sirf un tests mein use hota hai jo NAYA data banate hain (e.g., Signup, New Lead). Jo already existing data expect karte hain (e.g., Login, Checkout), unke liye static DDT (Excel/CSV) hi use karo.::HL]]
+* [[HL::**⚡ Consequences:** Tumhara Login test 100% fail hoga kyunki woh fake banda database mein exist hi nahi karta::HL]]!
 * **❌ Mistake:** Loop ke bahar `fake_email = fake.email()` likh dena.
 * **🤦 Why:** Global variable bana dete hain code chhota karne ke liye.
 * **✅ The 'Pro' Way:** Variable creation hamesha test execution loop/fixture ke *andar* hona chahiye.
@@ -6679,14 +6679,14 @@ Socho ek hawai jahaz (Flight) ud raha hai. Agar Pilot continuously mic par chill
 #### 📖 3. Technical Definition
 
 * **Precise English:** The `logging` module in Python is a built-in library that tracks events, errors, and variable states during software execution, saving them persistently in a structured file.
-* **Hinglish Simplification:** `logging` ek built-in Python tool hai jo aapke test execution ke har step aur error ko ek log file mein time ke saath save karta rehta hai, taaki baad mein debugging aasaan ho.
+* **[[HL::Hinglish Simplification:** `logging` ek built-in Python tool hai jo aapke test execution ke har step aur error ko ek log file mein time ke saath save karta rehta hai, taaki baad mein debugging aasaan ho::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** `print()` terminal par output dikhata hai, par jaise hi terminal band hota hai, history gayab ho jaati hai.
-* **Solution:** `logging` sab kuch ek `automation.log` (text file jisme saare records save hote hain) mein permanently store karta hai.
-* **What breaks if we don't use it?** Agar CI/CD pipeline (e.g., Jenkins — code automatically run aur deploy karne wala server) par raat ke 2 baje test fail hua, toh subah aapke paas koi error history nahi hogi.
-* **✅ Kab use karo:** Har framework aur real-world project mein. BasePage ke common functions (jaise `do_click`, `do_send_keys`) mein `log.info` daalna best practice hai.
+* **[[HL::Problem:** `print()` terminal par output dikhata hai, par jaise hi terminal band hota hai, history gayab ho jaati hai::HL]].
+* **Solution:** `logging` [[HL::sab kuch ek `automation.log` (text file jisme saare records save hote hain) mein permanently store karta hai.::HL]]
+* [[HL::**What breaks if we don't use it?** Agar CI/CD pipeline (e.g., Jenkins — code automatically run aur deploy karne wala server) par raat ke 2 baje test fail hua, toh subah aapke paas koi error history nahi hogi.::HL]]
+* [[HL::**✅ Kab use karo:** Har framework aur real-world project mein. BasePage ke common functions (jaise `do_click`, `do_send_keys`) mein `log.info` daalna best practice hai::HL]].
 * **❌ Kab mat karo / Alternative prefer karo:** Jab aap sirf ek quick 2-line ki disposable (throwaway) script likh rahe ho jise aap test karke delete kar doge — wahan `print()` chalega.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -6703,7 +6703,7 @@ Project Folder/
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. **(1) Logger (The Brain):** Message create hota hai (e.g., `log.info("Button clicked")`).
+1. **(1) [[HL::Logger (The Brain):** Message create hota hai (e.g::HL]]., `log.info("Button clicked")`).
 2. **(2) Formatter:** Message ko design milta hai (e.g., Date + Time + Level + Message).
 3. **(3) Handler (FileHandler):** Yeh un formatted messages ko utha kar directly `automation.log` file ke andar push/write (save) karta hai.
 
@@ -6763,29 +6763,29 @@ Yahan hum ek custom `get_logger` helper function banayenge jo test run hone par 
 
 ##### 🔬 Code Explanation (LINE-BY-LINE)
 
-* **Line 6:** `logger_name = inspect.stack()[1][3]` — `inspect.stack()` ek list deta hai ki kis function ne kisko call kiya. `[1]` ka matlab "jis function ne is `get_logger()` ko call kiya hai (i.e., `my_test_function`)" aur `[3]` us function ka actual naam (string format) nikalta hai. Agar yeh nahi lagaya toh log mein hamesha "root" likha aayega, caller ka naam nahi.
-* **Line 18:** `asctime`, `levelname`, aur `message` built-in variables hain `logging` library ke jo automatically time aur details inject karte hain.
+* **[[HL::Line 6:** `logger_name = inspect.stack()[1][3]` — `inspect.stack()` ek list deta hai ki kis function ne kisko call kiya. `[1]` ka matlab "jis function ne is `get_logger()` ko call kiya hai (i.e., `my_test_function`)" aur `[3]` us function ka actual naam (string format) nikalta hai. Agar yeh nahi lagaya toh log mein hamesha "root" likha aayega, caller ka naam nahi.::HL]]
+* [[HL::**Line 18:** `asctime`, `levelname`, aur `message` built-in variables hain `logging` library ke jo automatically time aur details inject karte hain.::HL]]
 
-#### 🔒 8. Security-First Check
+#### [[HL::🔒 8. Security-First Check::HL]]
 
-Logs mein kabhi bhi real user ke `passwords`, `credit_card_numbers`, ya `API_keys` (secret tokens) record mat karo. Agar log file compromise (chori) hui, toh data leak ho jayega. Sensitive data ko log hone se pehle mask (`***`) karna zaroori hai.
+[[HL::Logs mein kabhi bhi real user ke::HL]] `passwords`, `credit_card_numbers`, ya `API_keys` (secret tokens) record mat karo. Agar log file compromise (chori) hui, toh data leak ho jayega. Sensitive data ko log hone se pehle mask (`***`) karna zaroori hai.
 
 #### 🏗️ 9. Scalability & Industry Context
 
-Local test mein ek `automation.log` file kaafi hai. Par jab production (live server) par hazaaron tests roz chalte hain, toh text files handle nahi hoti. Tab Senior Engineers DataDog (cloud monitoring service) ya ELK Stack (Elasticsearch, Logstash, Kibana — logs search aur visualize karne ka ecosystem) use karte hain jahan logs direct cloud par bheje jate hain.
+[[HL::Local test mein ek `automation.log` file kaafi hai. Par jab production (live server) par hazaaron tests roz chalte hain, toh text files handle nahi hoti. Tab Senior Engineers DataDog (cloud monitoring service) ya ELK Stack (Elasticsearch, Logstash, Kibana — logs search aur visualize karne ka ecosystem) use karte hain jahan logs direct cloud par bheje jate hain::HL]].
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** ⭐ **"print() ko apne framework se nikaal do"** (Beginners debug karne ke liye har jagah `print("clicking here")` use karte hain).
-* **🤦 Why:** Unhe lagta hai console output kaafi hai.
-* **✅ The 'Pro' Way:** Hamesha `log.info()` ya `log.debug()` use karo.
+* **❌ [[HL::Mistake:** ⭐ **"print() ko apne framework se nikaal do"** (Beginners debug karne ke liye har jagah `print("clicking here")` use karte hain).::HL]]
+* [[HL::**🤦 Why:** Unhe lagta hai console output kaafi hai.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Hamesha `log.info()` ya `log.debug()` use karo::HL]].
 * **⚡ Consequences:** Agar CI/CD server pe pipeline chali, `print` command terminal buffer mein lost ho jayega. Koi file generate nahi hogi, aur fail hone par aap andhe (blind) ho jaoge.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "CRITICAL, WARNING, INFO kya hain?"**
-* **Galat soch:** Log levels bas color change karne ke liye hote hain.
-* **Actually:** Yeh severity levels hain (Order: `DEBUG` < `INFO` < `WARNING` < `ERROR` < `CRITICAL`). Agar aap logger.setLevel(logging.WARNING) karte ho, toh INFO aur DEBUG waale messages ignore ho jayenge.
+* **[[HL::Confusion 1 — "CRITICAL, WARNING, INFO kya hain?"**::HL]]
+* [[HL::**Galat soch:** Log levels bas color change karne ke liye hote hain.::HL]]
+* [[HL::**Actually:** Yeh severity levels hain (Order: `DEBUG` < `INFO` < `WARNING` < `ERROR` < `CRITICAL`). Agar aap logger.setLevel(logging.WARNING) karte ho, toh INFO aur DEBUG waale messages ignore ho jayenge::HL]].
 * **Prove karo:** `setLevel` ko `WARNING` karke `log.info("test")` chalao — log file empty rahegi kyunki `INFO` ignore ho gaya.
 
 
@@ -6818,7 +6818,7 @@ Local test mein ek `automation.log` file kaafi hai. Par jab production (live ser
 
 #### 🌍 14. Real-World Use Case
 
-Swiggy jaisi apps mein, jab user ka payment fail hota hai, toh unka system automatically ek `ERROR` log generate karta hai: `[2026-06-29 12:00:00] - ERROR - PaymentGateway : Timeout error for UserID 123`. Developers iss log ko dekh kar issue resolve karte hain.
+[[HL::Swiggy jaisi apps mein, jab user ka payment fail hota hai, toh unka system automatically ek `ERROR` log generate karta hai: `[2026-06-29 12:00:00] - ERROR - PaymentGateway : Timeout error for UserID 123`. Developers iss log ko dekh kar issue resolve karte hain::HL]].
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
@@ -6853,10 +6853,10 @@ Swiggy jaisi apps mein, jab user ka payment fail hota hai, toh unka system autom
 
 #### ❓ 17. Interview Q&A
 
-* **Q:** `print()` ki jagah `logging` kyun use karein?
-* **A:** `print()` console par data dikhata hai jo permanently save nahi hota. `logging` data ko ek structure ke saath (time, level, file name) ek `.log` file mein save karta hai. Iske bina CI/CD environments mein headless (bina UI) execution ko debug karna lagbhag impossible hai.
-* **Q:** `inspect.stack()[1][3]` kya achieve karta hai?
-* **A:** Yeh Python ka code execution stack check karta hai aur us exact function ka naam return karta hai jisne logger ko call kiya hai (e.g., `test_login`). Isse log files mein trace karna aasaan hota hai ki kaunsa step kis method se trigger hua.
+* **[[HL::Q:** `print()` ki jagah `logging` kyun use karein?::HL]]
+* [[HL::**A:** `print()` console par data dikhata hai jo permanently save nahi hota. `logging` data ko ek structure ke saath (time, level, file name) ek `.log` file mein save karta hai. Iske bina CI/CD environments mein headless (bina UI) execution ko debug karna lagbhag impossible hai.::HL]]
+* [[HL::**Q:** `inspect.stack()[1][3]` kya achieve karta hai?::HL]]
+* [[HL::**A:** Yeh Python ka code execution stack check karta hai aur us exact function ka naam return karta hai jisne logger ko call kiya hai (e.g., `test_login`). Isse log files mein trace karna aasaan hota hai ki kaunsa step kis method se trigger hua::HL]].
 * **Q:** Handler aur Formatter mein kya fark hai?
 * **A:** Formatter yeh decide karta hai ki log *dikhega kaisa* (Date, Text format). Handler yeh decide karta hai ki woh log *jayega kahan* (File mein jayega, Terminal par jayega, ya cloud server par jayega).
 
@@ -6880,7 +6880,7 @@ Swiggy jaisi apps mein, jab user ka payment fail hota hai, toh unka system autom
 
 ### 🎯 Topic: 2. Screenshot Capture (Full Page / Element / On Failure Hook)
 
-Yeh topic sikhata hai ki automated tests fail hone par automatically screenshot kaise kheenche, taaki error aane ka visual proof humare paas hamesha maujood ho.
+[[HL::Yeh topic sikhata hai ki automated tests fail hone par automatically screenshot kaise kheenche, taaki error aane ka visual proof humare paas hamesha maujood ho::HL]].
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
@@ -6889,15 +6889,15 @@ Ek factory mein accident hota hai. Agar aap agle din aakar pucho "kya hua tha?" 
 #### 📖 3. Technical Definition
 
 * **Precise English:** Screenshot capture in automation involves taking programmatic snapshots of the browser window or specific elements. PyTest hooks can automate this process to capture the browser state precisely when an assertion fails.
-* **Hinglish Simplification:** Jab bhi code kehte hue fail ho ki "Element nahi mila", toh PyTest ka hook (background process) browser ki screen ka photo kheenchar save kar leta hai taaki aap error ko apni aankhon se dekh sakein.
+* **[[HL::Hinglish Simplification:** Jab bhi code kehte hue fail ho ki "Element nahi mila", toh PyTest ka hook (background process) browser ki screen ka photo kheenchar save kar leta hai taaki aap error ko apni aankhon se dekh sakein::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Log files yeh batati hain ki test "NoSuchElement" ke kaaran fail hua, par yeh nahi batati ki us waqt screen par koi unexpected pop-up aaya tha ya page load nahi hua tha.
-* **Solution:** Failure ke waqt ki screenshot exact visual state capture karti hai.
-* **What breaks if we don't use it?** Aapko issue reproduce (dobara create) karne ke liye bar-bar locally test run karna padega, jo kaafi time-consuming hai.
+* **[[HL::Problem:** Log files yeh batati hain ki test "NoSuchElement" ke kaaran fail hua, par yeh nahi batati ki us waqt screen par koi unexpected pop-up aaya tha ya page load nahi hua tha.::HL]]
+* [[HL::**Solution:** Failure ke waqt ki screenshot exact visual state capture karti hai.::HL]]
+* [[HL::**What breaks if we don't use it?** Aapko issue reproduce (dobara create) karne ke liye bar-bar locally test run karna padega, jo kaafi time-consuming hai::HL]].
 * **✅ Kab use karo:** ⭐ **"Jab Test Fail Ho."** (Always on failures).
-* **❌ Kab mat karo / Alternative prefer karo:** Har single step (`click`, `type`) par screenshot mat lo. Isse execution bohot slow ho jayega aur folder storage full ho jayegi. Sirf errors par focus karo.
+* **❌ [[HL::Kab mat karo / Alternative prefer karo:** Har single step (`click`, `type`) par screenshot mat lo. Isse execution bohot slow ho jayega aur folder storage full ho jayegi. Sirf errors par focus karo::HL]].
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
@@ -6969,7 +6969,7 @@ Screenshot saved to screenshots/test_login_page.png
 
 ##### 🔬 Code Explanation (LINE-BY-LINE)
 
-* **Line 6:** `@pytest.hookimpl(tryfirst=True, hookwrapper=True)` — `hookwrapper` ka matlab hai ki yeh hook test start hone se pehle execute hona shuru hoga, beech mein `yield` pe pause karke test chalne dega, aur jab test apna result dega, toh dobara resume (aage badhega) karke capture karega.
+* **Line 6:** `@pytest.[[HL::hookimpl(tryfirst=True, hookwrapper=True)` — `hookwrapper` ka matlab hai ki yeh hook test start hone se pehle execute hona shuru hoga, beech mein `yield` pe pause karke test chalne::HL]] dega, aur jab test apna result dega, toh dobara resume (aage badhega) karke capture karega.
 * **Line 14:** `if report.when == 'call' and report.failed:` — PyTest test ko 3 phases mein chalata hai (`setup`, `call`, `teardown`). `call phase` matlab actual test script. Hum sirf tab screenshot lenge jab actual test (call phase) fail hua ho.
 * **Line 20:** `driver = item.funcargs['driver_setup']` — Hook ek alag function hai jisko directly `driver` nahi pata. Par kyunki humne browser open karne ke liye `driver_setup` fixture (a tool that provides test context) banaya hoga, `funcargs` se hum us active browser connection (driver) ko nikal rahe hain.
 
@@ -6983,16 +6983,16 @@ Local machine par screenshots folder bharna issue nahi hai, par CI/CD pipelines 
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** Har test ke `except` block mein `driver.save_screenshot()` likhna.
-* **🤦 Why:** Code bohot repetitive (DRY principle violate) aur ganda ho jata hai.
-* **✅ The 'Pro' Way:** `conftest.py` mein hook likho (jo humne upar kiya). Isse 1000 tests bhi honge toh automatic ek jagah se control honge.
+* **❌ [[HL::Mistake:** Har test ke `except` block mein `driver.save_screenshot()` likhna.::HL]]
+* [[HL::**🤦 Why:** Code bohot repetitive (DRY principle violate) aur ganda ho jata hai.::HL]]
+* [[HL::**✅ The 'Pro' Way:** `conftest.py` mein hook likho (jo humne upar kiya). Isse 1000 tests bhi honge toh automatic ek jagah se control honge::HL]].
 * **⚡ Consequences:** Agar hook use nahi kiya, toh code maintainability zero ho jayegi. Ek naya logic (jaise Allure attachment) add karne ke liye 100 files modify karni padengi.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Full Page Screenshot vs Viewport Screenshot"**
-* **Galat soch:** `save_screenshot()` se upar se neeche tak pura scroll karke screenshot aayega.
-* **Actually:** `save_screenshot()` sirf utna hi photo leta hai jitna us waqt screen (viewport) pe dikh raha ho. Poora scrolling page screenshot lene ke liye special third-party tools ya heavy Javascript (`execute_script`) execution chahiye hoti hai (jaise `get_full_page_screenshot_as_file()` in some bindings).
+* **[[HL::Confusion 1 — "Full Page Screenshot vs Viewport Screenshot"**::HL]]
+* [[HL::**Galat soch:** `save_screenshot()` se upar se neeche tak pura scroll karke screenshot aayega.::HL]]
+* [[HL::**Actually:** `save_screenshot()` sirf utna hi photo leta hai jitna us waqt screen (viewport) pe dikh raha ho. Poora scrolling page screenshot lene ke liye special third-party tools ya heavy Javascript (`execute_script`) execution chahiye hoti hai (jaise `get_full_page_screenshot_as_file()` in some bindings::HL]]).
 * **Prove karo:** Ek bohot lamba web page open karo aur test chalao. Screenshot mein aapko footer nahi dikhega.
 
 
@@ -7004,7 +7004,7 @@ Local machine par screenshots folder bharna issue nahi hai, par CI/CD pipelines 
 
 #### 🛠️ 12. Troubleshooting Flowchart
 
-* **`AttributeError: 'item' has no attribute 'funcargs'`**
+* ** `AttributeError: 'item' has no attribute 'funcargs'`**
 * **Root Cause:** Aap hook mein driver access karne ki koshish kar rahe ho par string nam galat diya hai (e.g., fixture ka naam `get_browser` hai aur hook mein `driver_setup` likha hai).
 * **Fix:** Line 18 check karo: `'driver_setup'` exactly wahi hona chahiye jo aapne apne `@pytest.fixture` ke neeche function ka naam likha hai.
 
@@ -7017,20 +7017,20 @@ Local machine par screenshots folder bharna issue nahi hai, par CI/CD pipelines 
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-| Aspect | Element Screenshot (`element.screenshot()`) | Full Viewport (`driver.save_screenshot()`) |
+| [[HL::Aspect::HL]] | [[HL::Element Screenshot (`element.screenshot()`)::HL]] | [[HL::Full Viewport (`driver.save_screenshot()`)::HL]] |
 | --- | --- | --- |
-| Focus | Sirf ek specific button ya form input | Pura browser window area jo dikh raha hai |
-| Speed | Fast | Slightly slower |
-| Use Case | Checking exact size/visual of a small logo | Capturing failure state to see the big picture |
+| [[HL::Focus::HL]] | [[HL::Sirf ek specific button ya form input::HL]] | [[HL::Pura browser window area jo dikh raha hai::HL]] |
+| [[HL::Speed::HL]] | [[HL::Fast::HL]] | [[HL::Slightly slower::HL]] |
+| [[HL::Use Case::HL]] | [[HL::Checking exact size/visual of a small logo::HL]] | [[HL::Capturing failure state to see the big picture::HL]] |
 
-#### 🌍 14. Real-World Use Case
+#### [[HL::🌍 14. Real-World Use Case::HL]]
 
-Cloud execution platforms jaise BrowserStack ya SauceLabs. Wahan pe aap test chalate ho aur fail hone par unke dashboard mein exact visual CCTV footage (screenshot + video) milti hai, jisse unki value badhti hai. Yeh hook uska local equivalent hai.
+[[HL::Cloud execution platforms jaise BrowserStack ya SauceLabs. Wahan pe aap test chalate ho aur fail hone par unke dashboard mein exact visual CCTV footage (screenshot + video) milti hai, jisse unki value badhti hai. Yeh hook uska local equivalent hai.::HL]]
 
-#### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
+#### [[HL::🔄 15. Real-World Flow (End-to-End 3-Phase Picture)::HL]]
 
-* **Testing/Offline Phase:** Tester framework (`conftest.py`) ko configure karta hai ki koi bhi test (naya ya purana) fail ho, hook activate ho jaye.
-* **Fixing/Iteration Phase:** Tester terminal dekhta hai `FAILED test_cart`. Woh code mein debug nahi karta, seedha `screenshots/test_cart.png` kholta hai, dekhta hai ki "Oh, promotional banner ne button cover kar liya tha", aur turant samajh jata hai kyun fail hua.
+* [[HL::**Testing/Offline Phase:** Tester framework (`conftest.py`) ko configure karta hai ki koi bhi test (naya ya purana) fail ho, hook activate ho jaye.::HL]]
+* [[HL::**Fixing/Iteration Phase:** Tester terminal dekhta hai `FAILED test_cart`. Woh code mein debug nahi karta, seedha::HL]] `screenshots/test_cart.png` kholta hai, dekhta hai ki "Oh, promotional banner ne button cover kar liya tha", aur turant samajh jata hai kyun fail hua.
 * **Live Production Phase:** (N/A — test failure artifacts mainly QA and Dev review cycle ke liye hote hain).
 
 #### 🎨 16. Visual Diagram (ASCII Art)
@@ -7104,7 +7104,7 @@ Cloud execution platforms jaise BrowserStack ya SauceLabs. Wahan pe aap test cha
 
 ### 🎯 Topic: 3. PyTest HTML Reports (`pytest-html`)
 
-Yeh topic sikhata hai ki terminal ke messy output ko ek clean, visually appealing web page (HTML) mein kaise convert karein, jise non-technical log (Managers/Clients) aasani se padh sakein.
+[[HL::Yeh topic sikhata hai ki terminal ke messy output ko ek clean, visually appealing web page (HTML) mein kaise convert karein, jise non-technical log (Managers/Clients) aasani se padh sakein::HL]].
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
@@ -7112,15 +7112,15 @@ Jab aap school mein rough copy mein notes banate ho (cutting, scribbling ke saat
 
 #### 📖 3. Technical Definition
 
-* **Precise English:** `pytest-html` is a plugin for the PyTest framework that generates a single, stylized HTML report summarizing the test execution results, execution times, and errors.
-* **Hinglish Simplification:** `pytest-html` ek add-on tool hai jo aapke test results ko ek sundar web page (HTML file) mein badal deta hai, jisme red/green colors mein clearly dikhta hai ki kya pass hua aur kya fail.
+* **Precise English:** `pytest-html` [[HL::is a plugin for the PyTest framework that generates a single, stylized HTML report summarizing the test execution results, execution times, and errors.::HL]]
+* [[HL::**Hinglish Simplification:** `pytest-html` ek add-on tool hai jo aapke test results ko ek sundar web page (HTML file) mein badal deta hai, jisme red/green colors mein clearly dikhta hai ki kya pass hua aur kya fail::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Managers, Team Leads, ya Clients terminal open karke black screen par logs padhna pasand nahi karte.
-* **Solution:** Ek HTML link ya file bhejna professional lagta hai aur instantly overall health (Pass % vs Fail %) bata deta hai.
-* **What breaks if we don't use it?** Team communication gap aayega. Devs aur QA ko chhodkar project ka status kisi ko easily samajh nahi aayega.
-* **✅ Kab use karo:** Jab project chhota/medium ho aur test summary quickly email par kisi ko bhejni ho.
+* **[[HL::Problem:** Managers, Team Leads, ya Clients terminal open karke black screen par logs padhna pasand nahi karte.::HL]]
+* [[HL::**Solution:** Ek HTML link ya file bhejna professional lagta hai aur instantly overall health (Pass % vs Fail %) bata deta hai.::HL]]
+* [[HL::**What breaks if we don't use it?** Team communication gap aayega. Devs aur QA ko chhodkar project ka status kisi ko easily samajh nahi aayega.::HL]]
+* [[HL::**✅ Kab use karo:** Jab project chhota/medium ho aur test summary quickly email par kisi ko bhejni ho::HL]].
 * **❌ Kab mat karo / Alternative prefer karo:** Jab aapko historical data (pichle 10 dino mein kya fail hua) ka trend dekhna ho. Wahan yeh fail ho jayega kyunki har run par purani file overwrite (delete) ho jaati hai. Wahan Allure Reports (next topic) prefer karo.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -7157,13 +7157,13 @@ Successfully installed pytest-html-4.1.1 pytest-metadata-3.1.1
 
 ```
 
-**Step 2: Run Tests & Generate Report**
+**[[HL::Step 2: Run Tests & Generate Report**::HL]]
 
-* **Command:** `pytest tests/ --html=Reports/report.html --self-contained-html`
-* **Anatomy:**
-* `pytest tests/`: Tests folder ke saare tests run karo.
-* `--html=Reports/report.html`: Report ko is path par save karo.
-* `--self-contained-html`: (⭐ Sabse Zaroori Flag) Saari CSS aur styling ko ek hi file ke andar embed kar do.
+* [[HL::**Command:** `pytest tests/ --html=Reports/report.html --self-contained-html`::HL]]
+* [[HL::**Anatomy:**::HL]]
+* [[HL::`pytest tests/`: Tests folder ke saare tests run karo.::HL]]
+* [[HL::`--html=Reports/report.html`: Report ko is path par save karo.::HL]]
+* [[HL::`--self-contained-html`: (⭐ Sabse Zaroori Flag) Saari CSS aur styling ko ek hi file ke andar embed kar::HL]] do.
 
 
 
@@ -7178,16 +7178,16 @@ generated html file: file:///Users/project/Reports/report.html
 
 #### 🔒 8. Security-First Check
 
-HTML reports aksar email ke through third parties ya clients ko bheji jaati hain. Agar aapka error message (stack trace) kisi test fail hone par database ka password ya AWS (cloud server) keys print kar deta hai, toh woh HTML mein permanently save ho jayega. PII/Secrets leak hone ka khatra hai. Code exception handling secure honi chahiye.
+[[HL::HTML reports aksar email ke through third parties ya clients ko bheji jaati hain. Agar aapka error message (stack trace::HL]]) kisi test fail hone par database ka password ya AWS (cloud server) keys print kar deta hai, toh woh HTML mein permanently save ho jayega. PII/Secrets leak hone ka khatra hai. Code exception handling secure honi chahiye.
 
 #### 🏗️ 9. Scalability & Industry Context
 
-`pytest-html` lightweight hai aur CI/CD pipeline (jaise GitHub Actions ya Jenkins) mein "post-build artifact" (execution ke baad download karne wali file) ki tarah bohot popular hai. Isme `--css` flag lagakar companiess apne brand ke custom colors aur logo bhi laga sakti hain.
+[[HL::`pytest-html` lightweight hai aur CI/CD pipeline (jaise GitHub Actions ya Jenkins) mein "post-build artifact" (execution ke baad download karne wali file) ki tarah bohot popular hai. Isme `--css` flag lagakar companiess apne brand ke custom colors aur logo bhi laga sakti hain.::HL]]
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** `--html=report.html` chalana bina `--self-contained-html` flag ke.
-* **🤦 Why:** Agar `--self-contained-html` nahi diya, toh PyTest ek alag se `assets folder` banata hai CSS ke liye.
+* **❌ [[HL::Mistake:** `--html=report.html` chalana bina `--self-contained-html` flag ke.::HL]]
+* [[HL::**🤦 Why:** Agar `--self-contained-html` nahi diya, toh PyTest ek alag se `assets folder` banata hai CSS ke liye::HL]].
 * **✅ The 'Pro' Way:** Hamesha ⭐ **`--self-contained-html`** flag lagao.
 * **⚡ Consequences:** Jab aap bina is flag ke bani `report.html` ko email par bhejoge, receiver ke paas assets folder nahi jayega. Unhe report ekdam tooti-footi, bina colors aur styling (pure white screen with plain text) ki dikhegi.
 
@@ -7217,7 +7217,7 @@ HTML reports aksar email ke through third parties ya clients ko bheji jaati hain
 * **Fix:** Terminal mein dobara `pip install pytest-html` chalao aur ensure karo virtual environment active hai.
 
 
-* **`Report looks ugly and unstyled on another laptop`**
+* ** `Report looks ugly and unstyled on another laptop`**
 * **Root Cause:** Aapne `--self-contained-html` flag miss kar diya. CSS assets aapke laptop par reh gaye.
 * **Fix:** Command ko `--self-contained-html` ke saath dobara run karo.
 
@@ -7259,8 +7259,8 @@ Freelance automation projects mein, client (jisko code samajh nahi aata) ye dekh
 
 #### ❓ 17. Interview Q&A
 
-* **Q:** `pytest-html` mein `--self-contained-html` flag kyun zaroori hai?
-* **A:** Is flag ke bina, report ki CSS styling ek alag "assets" folder mein save hoti hai. Agar HTML file kisi ko email karni ho, toh bina assets folder ke report unstyled (broken) dikhti hai. Is flag ko lagane se styling directly HTML file ke andar embed ho jaati hai (ek single portable file ban jaati hai).
+* **[[HL::Q:** `pytest-html` mein `--self-contained-html` flag kyun zaroori hai?::HL]]
+* [[HL::**A:** Is flag ke bina, report ki CSS styling ek alag "assets" folder mein save hoti hai. Agar HTML file kisi ko email karni ho, toh bina assets folder ke report unstyled (broken) dikhti hai. Is flag ko lagane se styling directly HTML file ke andar embed ho jaati hai (ek single portable file ban jaati hai::HL]]).
 * **Q:** Agar mujhe report ka title change karna ho toh kaise karunga?
 * **A:** `conftest.py` mein `pytest_html_report_title(report)` hook ko override karke hum title customize kar sakte hain. E.g., `report.title = "My Project Test Report"`.
 * **Q:** Kya `pytest-html` past executions ki history maintain karta hai?
@@ -7296,14 +7296,14 @@ PyTest HTML ek PDF mark-sheet ki tarah hai — jo dikh gaya, bas wahi hai. **All
 
 #### 📖 3. Technical Definition
 
-* **Precise English:** Allure is an open-source, multi-language test report framework that generates highly interactive web-based dashboards from XML/JSON results, offering detailed steps, attachments, and historical trend analysis.
-* **Hinglish Simplification:** Allure ek advanced, Java-based reporting tool hai jo aapke test results se JSON (data files) banata hai, aur un files ko padh kar ek shaandaar website/dashboard khada kar deta hai jisme graphs aur charts hote hain.
+* **[[HL::Precise English:** Allure is an open-source, multi-language test report framework that generates highly interactive web-based dashboards from XML/JSON results, offering detailed steps, attachments, and historical trend analysis.::HL]]
+* [[HL::**Hinglish Simplification:** Allure ek advanced, Java-based reporting tool hai jo aapke test results se JSON (data files) banata hai, aur un files ko padh kar ek shaandaar website/dashboard khada kar deta hai jisme graphs aur charts hote hain::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** HTML report overwite ho jati hai (kal kya hua tha pata nahi), aur badi teams mein test fail hone par exact step-by-step detail nahi milti.
-* **Solution:** Allure Interactive Dashboard history (trends) rakhta hai, aur bata deta hai fail kis wajah se hua (Bug hai, ya random flaky issue hai).
-* **What breaks if we don't use it?** Enterprise level pe, jahan 5000+ tests roz chalte hain, bina graphs aur trends ke quality maintain karna andhere mein teer maarne jaisa hai.
+* **[[HL::Problem:** HTML report overwite ho jati hai (kal kya hua tha pata nahi), aur badi teams mein test fail hone par exact step-by-step detail nahi milti.::HL]]
+* [[HL::**Solution:** Allure Interactive Dashboard history (trends) rakhta hai, aur bata deta hai fail kis wajah se hua (Bug hai, ya random flaky issue hai).::HL]]
+* [[HL::**What breaks if we don't use it?** Enterprise level pe, jahan 5000+ tests roz chalte hain, bina graphs aur trends ke quality maintain karna andhere mein teer maarne jaisa hai::HL]].
 * **✅ Kab use karo:** Har serious automation project mein (especially Jenkins jaisi CI/CD pipelines mein).
 * **❌ Kab mat karo / Alternative prefer karo:** Jab aapke system mein Java install nahi ho sakta ya bohot lightweight quick run chahiye (wahan `pytest-html` use karo).
 
@@ -7330,8 +7330,8 @@ Yeh 2-step process hai (Sabse important farq):
 **Step 1: Install Tools (2 cheezein chahiye)**
 
 ```text
-# 1. Python plugin install karo
-pip install allure-pytest
+# 1. [[HL::Python plugin install karo::HL]]
+[[HL::pip install allure-pytest::HL]]
 
 # 2. Allure CLI system par install karo (Requires Java installed)
 # Mac: brew install allure
@@ -7346,18 +7346,18 @@ pip install allure-pytest
 1  import pytest                                        # PyTest module
 2  import allure                                        # Allure module — magic annotations ke liye
 3  
-4  @allure.title("Login Test with Valid Credentials")   # Allure dashboard mein test ka sundar naam dikhega
-5  @allure.description("This test verifies user can login successfully") # Test ki summary
-6  def test_login():
-7      # ⭐ "Yeh hai Allure ka jaadu." - allure.step() test ko logical blocks mein todta hai
-8      with allure.step("Step 1: Navigate to Login Page"): # Dashboard pe clickable step banega
-9          print("Opening browser...")                  # Actual Selenium code yahan aayega
-10         
-11     with allure.step("Step 2: Enter Username and Password"):
-12         print("Typing credentials...")               # Typing logic
-13         
-14     with allure.step("Step 3: Verify Success Dashboard"):
-15         # allure.attach() = custom screenshot/text dashboard ke us step mein chipkane ke liye
+4  @[[HL::allure.title("Login Test with Valid Credentials")   # Allure dashboard mein test ka sundar naam dikhega::HL]]
+[[HL::5  @allure.description("This test verifies user can login successfully") # Test ki summary::HL]]
+[[HL::6  def test_login():::HL]]
+[[HL::7      # ⭐ "Yeh hai Allure ka jaadu." - allure.step() test ko logical blocks mein todta hai::HL]]
+[[HL::8      with allure.step("Step 1: Navigate to Login Page"): # Dashboard pe clickable step banega::HL]]
+[[HL::9          print("Opening browser::HL]]...")                  # [[HL::Actual Selenium code yahan aayega::HL]]
+[[HL::10         ::HL]]
+[[HL::11     with allure.step("Step 2: Enter Username and Password"):::HL]]
+[[HL::12         print("Typing credentials::HL]]...")               # [[HL::Typing logic::HL]]
+[[HL::13         ::HL]]
+[[HL::14     with allure.step("Step 3: Verify Success Dashboard"):::HL]]
+[[HL::15::HL]]         # allure.attach() = custom screenshot/text dashboard ke us step mein chipkane ke liye
 16         allure.attach("Login Success", name="Status", attachment_type=allure.attachment_type.TEXT)
 17         # driver.get_screenshot_as_png() bhi attach kar sakte hain
 18         assert True                                  # Pass the test
@@ -7385,13 +7385,13 @@ Server started at <http://192.168.1.5:54321/>
 
 ```
 
-##### 🔬 Code Explanation (LINE-BY-LINE)
+##### 🔬 [[HL::Code Explanation (LINE-BY-LINE)::HL]]
 
-* **Line 4:** `@allure.title` — PyTest mein test ka naam `test_login` hota hai jo boring hai. Yeh decorator dashboard par "Login Test with Valid Credentials" dikhayega.
-* **Line 8:** `with allure.step("..."):` — ⭐ **Yeh hai Allure ka jaadu.** Agar test fail hua, toh Allure clearly batayega ki Step 1 paas hua, Step 2 paas hua, aur crash *Step 3* mein hua. Isse debugging 10x fast ho jati hai.
-* **Line 16:** `allure.attach` — Iski madad se failure hone par screenshot, log files, ya JSON responses directly dashboard mein embed kar sakte ho.
+* [[HL::**Line 4:** `@allure.title` — PyTest mein test ka naam `test_login` hota hai jo boring hai. Yeh decorator dashboard par "Login Test with Valid Credentials" dikhayega.::HL]]
+* [[HL::**Line 8:** `with allure.step::HL]]("..."):` — ⭐ **[[HL::Yeh hai Allure ka jaadu.** Agar test fail hua, toh Allure clearly batayega ki Step 1 paas hua, Step 2 paas hua, aur crash *Step 3* mein hua. Isse debugging 10x fast ho jati hai.::HL]]
+* [[HL::**Line 16:** `allure.attach` — Iski madad se failure hone par screenshot, log files, ya JSON responses directly dashboard mein embed kar sakte ho.::HL]]
 
-#### 🔒 8. Security-First Check
+#### [[HL::🔒 8. Security-First Check::HL]]
 
 `allure.attach()` bohot powerful hai. Agar aap API testing kar rahe ho aur poora HTTP response attach kar dete ho jisme user ki bank details ya auth token hain, toh woh Allure dashboard pe hamesha ke liye expose ho jayega. Attach karne se pehle sensitive data (tokens) ko mask/redact zaroor karein.
 
@@ -7401,9 +7401,9 @@ Industry mein Allure local machine pe nahi dekhte. Jenkins (CI/CD server) par "A
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** Browser mein HTML file dhundne ki koshish karna.
-* **🤦 Why:** `pytest-html` ki aadat hoti hai, toh logo ko lagta hai Allure bhi `report.html` dega.
-* **✅ The 'Pro' Way:** Allure `JSON files` banata hai. Unhe dekhne ke liye **hamesha** `allure serve` command chalani padegi.
+* **❌ [[HL::Mistake:** Browser mein HTML file dhundne ki koshish karna.::HL]]
+* [[HL::**🤦 Why:** `pytest-html` ki aadat hoti hai, toh logo ko lagta hai Allure bhi `report.html` dega.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Allure `JSON files` banata hai. Unhe dekhne ke liye **hamesha** `allure serve` command chalani padegi::HL]].
 * **⚡ Consequences:** Agar aap JSON file ko Notepad mein khologe, toh kuch samajh nahi aayega aur frustation hogi ki "report kahan hai".
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
@@ -7525,14 +7525,14 @@ Socho aapne apne dost ko call kiya. Pehli baar mein "Network busy" aaya aur call
 
 #### 📖 3. Technical Definition
 
-* **Precise English:** A Flaky Test is an automated test that yields both passing and failing results on the same code. The `pytest-rerunfailures` plugin mitigates this by automatically retrying failed tests a specified number of times before registering a hard failure.
-* **Hinglish Simplification:** Flaky test ek dhokebaaz test hai jo mood ke hisaab se pass ya fail hota hai. `pytest-rerunfailures` ek tool hai jo fail hone wale test ko automatically 2-3 baar wapas chalata hai taaki confirm ho sake ki asli bug hai ya sirf network ka nakhra.
+* **[[HL::Precise English:** A Flaky Test is an automated test that yields both passing and failing results on the same code. The `pytest-rerunfailures` plugin mitigates this by automatically retrying failed tests a specified number of times before registering a hard failure.::HL]]
+* [[HL::**Hinglish Simplification:** Flaky test ek dhokebaaz test hai jo mood ke hisaab se pass ya fail hota hai. `pytest-rerunfailures` ek tool hai jo fail hone wale test ko automatically 2-3 baar wapas chalata hai taaki confirm ho sake ki asli bug hai ya sirf network ka nakhra::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** ⭐ **"Flaky tests aapke framework ka bharosa (trust) khatam kar dete hain."** Agar 100 mein se 5 tests roz random fail hon, toh developers alert dekhna band kar dete hain (The Boy Who Cried Wolf syndrome).
-* **Solution:** Retries ensure karte hain ki CI/CD pipeline (Continuous Integration/Continuous Deployment — code merge aur deploy karne ka automated system) mein RED build (failed run) sirf tab aaye jab genuinely code toota ho.
-* **What breaks if we don't use it?** Har false alarm par qa team ka time waste hoga debug karne mein, jabki asal mein sirf `network delay` tha.
+* **[[HL::Problem:** ⭐ **"Flaky tests aapke framework ka bharosa (trust) khatam kar dete hain."** Agar 100 mein se 5 tests roz random fail hon, toh developers alert dekhna band kar dete hain (The Boy Who Cried Wolf syndrome).::HL]]
+* [[HL::**Solution:** Retries ensure karte hain ki CI/CD pipeline (Continuous Integration/Continuous Deployment — code merge aur deploy karne ka automated system) mein RED build (failed run) sirf tab aaye jab genuinely code toota ho.::HL]]
+* [[HL::**What breaks if we don't use it?** Har false alarm par qa team ka time waste hoga debug karne mein, jabki asal mein sirf::HL]] `network delay` tha.
 * **✅ Kab use karo:** UI testing aur end-to-end testing mein jahan external dependencies hain (jaise third-party APIs, slow databases, browser rendering issues).
 * **❌ Kab mat karo / Alternative prefer karo:** Unit tests (jo database/UI se connect nahi hote) mein. Agar unit test fail ho raha hai, toh woh flaky nahi hai, logic galat hai. Wahan retry use karna issue chhupana (masking) hai.
 
@@ -7554,12 +7554,12 @@ tests/test_cart.py R .       ← (R = Retry, . = Pass on 2nd attempt!)
 
 #### 💻 7. Hands-On — CLI Commands (Runnable Example)
 
-Code mein kuch khas nahi badalna, yeh poora CLI (Command Line Interface) configuration ka game hai.
+[[HL::Code mein kuch khas nahi badalna, yeh poora CLI (Command Line Interface) configuration ka game hai.::HL]]
 
-**Step 1: Install the Plugin**
+[[HL::**Step 1: Install the Plugin**::HL]]
 
-* **Command:** `pip install pytest-rerunfailures`
-* **Anatomy:** - `pytest-rerunfailures`: PyTest ka official plugin fail tests ko rerun karne ke liye.
+[[HL::* **Command:** `pip install pytest-rerunfailures`::HL]]
+[[HL::* **Anatomy:** - `pytest-rerunfailures`: PyTest ka official plugin fail tests ko rerun karne ke liye.::HL]]
 
 ```text
 # 📤 Expected Output:
@@ -7567,12 +7567,12 @@ Successfully installed pytest-rerunfailures-12.0
 
 ```
 
-**Step 2: Run Tests with Retry Flags**
+**[[HL::Step 2: Run Tests with Retry Flags**::HL]]
 
-* **Command:** `pytest tests/test_ui.py --reruns 2 --reruns-delay 5`
-* **Anatomy:**
-* `--reruns 2`: Agar test fail ho, toh maximum 2 aur baar koshish karo (total 3 attempts).
-* `--reruns-delay 5`: Har koshish ke beech mein 5 seconds ka break lo (taaki server thik ho sake).
+* [[HL::**Command:** `pytest tests/test_ui.py --reruns 2 --reruns-delay 5`::HL]]
+* [[HL::**Anatomy:**::HL]]
+* [[HL::`--reruns 2`: Agar test fail ho, toh maximum 2 aur baar koshish karo (total 3 attempts).::HL]]
+* [[HL::`--reruns-delay 5`: Har koshish ke beech mein 5 seconds ka break lo (taaki server thik ho sake::HL]]).
 
 
 
@@ -7620,12 +7620,12 @@ Jenkins pipelines mein flaky tests ek nightmare (bura sapna) hote hain. Teams ak
 
 #### 🛠️ 12. Troubleshooting Flowchart
 
-* **`pytest: error: unrecognized arguments: --reruns`**
+* ** `pytest: error: unrecognized arguments: --reruns`**
 * **Root Cause:** Ya toh plugin install nahi hai, ya virtual environment active nahi hai jahan install kiya tha.
 * **Fix:** `pip list` chala kar check karo ki `pytest-rerunfailures` list mein hai ya nahi. Agar nahi, toh install karo.
 
 
-* **`Test retries immediately without waiting, crashing again`**
+* ** `Test retries immediately without waiting, crashing again`**
 * **Root Cause:** Aapne `--reruns 2` lagaya par `--reruns-delay` miss kar diya. Delay ke bina server/app ko recover hone ka time nahi mila.
 * **Fix:** Hamesha `--reruns-delay 5` (kam se kam 2-5 seconds) saath mein lagao.
 
@@ -7708,12 +7708,12 @@ Socho aapka dost Rohan hamesha **Red Shirt** (Primary ID) pehanta hai. Ek din us
 #### 📖 3. Technical Definition
 
 * **Precise English:** Auto-Healing is an AI-driven mechanism in modern testing frameworks that dynamically updates broken locators during runtime by leveraging secondary attributes (XPath, CSS, relative position) learned from previous successful executions.
-* **Hinglish Simplification:** Auto-healing matlab jab developer website ka design/code change kar de aur aapka purana locator (find_element) fail ho jaye, toh AI-tool khud-ba-khud us button ko kisi doosre nishaan (attribute) se dhoondh kar test paas karwa deta hai.
+* **[[HL::Hinglish Simplification:** Auto-healing matlab jab developer website ka design/code change kar de aur aapka purana locator (find_element) fail ho jaye, toh AI-tool khud-ba-khud us button ko kisi doosre nishaan (attribute) se dhoondh kar test paas karwa deta hai::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** UI development bohot tezi se hoti hai. Developers ID ya class names change kar dete hain aur raat mein saare test fail ho jate hain (maintenance nightmare).
-* **Solution:** Auto-healing tools runtime par test bacha lete hain, element dhundh lete hain aur automation engineers ka maintenance time bachate hain.
+* **[[HL::Problem:** UI development bohot tezi se hoti hai. Developers ID ya class names change kar dete hain aur raat mein saare test fail ho jate hain (maintenance nightmare).::HL]]
+* [[HL::**Solution:** Auto-healing tools runtime par test bacha lete hain, element dhundh lete hain aur automation engineers ka maintenance time bachate hain::HL]].
 * **What breaks if we don't use it?** Har chhotey UI change ke baad tester ko POM (Page Object Model — files jahan sabhi elements ke paths store hote hain) mein jaa kar locator manually update karna padega.
 * **✅ Kab use karo:** Jab project highly dynamic ho (jaise A/B testing chal rahi ho) aur third-party AI tools (Testim, Mabl) ka budget ho.
 * **❌ Kab mat karo / Alternative prefer karo:** Jab accuracy 100% chahiye ho aur false positives risk na le sako. ⭐ **"Manually POM ko update karna zyada reliable maana jaata hai"** kyunki usme exact pata hota hai ki test kahan click kar raha hai.
@@ -7722,26 +7722,26 @@ Socho aapka dost Rohan hamesha **Red Shirt** (Primary ID) pehanta hai. Ek din us
 
 *(Yeh purely conceptual topic hai — isliye Hands-On section ki jagah Concept Visualization de raha hoon.)*
 
-**The 2-Phase Working Model of Auto-Healing:**
+**[[HL::The 2-Phase Working Model of Auto-Healing:**::HL]]
 
-1. **Phase 1: Learning Phase (Background Recording)**
-* Jab test pehli baar paas hota hai, tool (jaise Healenium) sirf ek ID save nahi karta.
-* Woh us element ke 10+ attributes capture karta hai:
-* `ID: "submit-btn"`
-* `Text: "Login Now"`
-* `Tag: <button>`
-* `Color: Blue`
-* `Position: X=100, Y=200`
-
-
+1. [[HL::**Phase 1: Learning Phase (Background Recording)**::HL]]
+* [[HL::Jab test pehli baar paas hota hai, tool (jaise Healenium) sirf ek ID save nahi karta.::HL]]
+* [[HL::Woh us element ke 10+ attributes capture karta hai:::HL]]
+* [[HL::`ID: "submit-btn"`::HL]]
+* [[HL::`Text: "Login Now"`::HL]]
+* [[HL::`Tag: <button>`::HL]]
+* [[HL::`Color: Blue`::HL]]
+* [[HL::`Position: X=100, Y=200`::HL]]
 
 
-2. **Phase 2: Healing Phase (The AI Magic)**
-* Agle hafte developer ne ID change karke `ID: "login-submit-new"` kar diya.
-* Standard Selenium crash hoke `NoSuchElementException` dega.
-* Par Healenium rukk jayega. Woh apne ML (Machine Learning) engine se poochega: "Mujhe aisi cheez do jo `<button>` ho, jiska text 'Login Now' ho aur screen par neeche ho."
-* Button mil jata hai! Test silently paas ho jata hai (Healing successful).
-* End mein report aati hai: "Test Passed, but I healed 1 locator. Please update your code."
+
+
+2. [[HL::**Phase 2: Healing Phase (The AI Magic)**::HL]]
+* [[HL::Agle hafte developer ne ID change karke `ID: "login-submit-new"` kar diya.::HL]]
+* [[HL::Standard Selenium crash hoke `NoSuchElementException` dega.::HL]]
+* [[HL::Par Healenium rukk jayega. Woh apne ML (Machine Learning) engine se poochega: "Mujhe aisi cheez do jo `<button>` ho, jiska text 'Login Now' ho aur screen par neeche ho."::HL]]
+* [[HL::Button mil jata hai! Test silently paas ho jata hai (Healing successful).::HL]]
+* [[HL::End mein report aati hai: "Test Passed, but I healed 1 locator. Please update your code::HL]]."
 
 
 
@@ -7751,21 +7751,21 @@ Socho aapka dost Rohan hamesha **Red Shirt** (Primary ID) pehanta hai. Ek din us
 
 #### 🏗️ 9. Scalability & Industry Context
 
-Industry mein Healenium (Open source wrapper on Selenium), Mabl, aur Testim bohot popular hain. Scalability ke terms mein yeh maintenance efforts 30-40% tak ghata dete hain. Lekin banks aur healthcare jaisi enterprise companiess mein isey thoda shak ki nazar se dekha jata hai kyunki agar AI ne "Submit Payment" ki jagah galti se "Cancel Payment" heal karke click kar diya (False Positive), toh bhari nuksan ho sakta hai.
+[[HL::Industry mein Healenium (Open source wrapper on Selenium), Mabl, aur Testim bohot popular hain. Scalability ke terms mein yeh maintenance efforts 30-40% tak ghata dete hain. Lekin banks aur healthcare jaisi enterprise companiess mein isey thoda shak ki nazar se dekha jata hai kyunki agar AI ne "Submit Payment" ki jagah galti se "Cancel Payment" heal karke click kar diya (False Positive), toh bhari nuksan ho sakta hai::HL]].
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** Auto-healing tools par 100% depend ho jaana aur Page Object Model maintenance chhod dena.
-* **🤦 Why:** AI perfect nahi hai. Kabhi-kabhi tool ek jaise dikhne wale kisi galat element par click kar deta hai (jise **False Positives** ya **False Alarm** kehte hain).
+* **❌ [[HL::Mistake:** Auto-healing tools par 100% depend ho jaana aur Page Object Model maintenance chhod dena.::HL]]
+* [[HL::**🤦 Why:** AI perfect nahi hai. Kabhi-kabhi tool ek jaise dikhne wale kisi galat element par click kar deta hai (jise **False Positives** ya **False Alarm** kehte hain::HL]]).
 * **✅ The 'Pro' Way:** ⭐ **Manually POM ko update karna zyada reliable maana jaata hai**. Auto-healing ko sirf as a temporary fallback (cushion) use karo taaki night build fail na ho, agle din subah manually locator update zaroor karo.
 * **⚡ Consequences:** Agar false positive hua, toh test "Green" (Pass) dikhayega jabki asal flow toota hua ho sakta hai. Isse production mein aise bugs chale jayenge jo QA ko pata hi nahi the.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Kya auto-healing apne aap mere Python code ko edit kar dega?"**
-* **Galat soch:** Tool mere file ko khol ke locator badal dega.
-* **Actually:** Nahi. Tool runtime mein (RAM ke andar) naya locator dhoondhta hai. Test pass hone ke baad, woh dashboard par suggestion deta hai ki "Yeh ID ab badal gaya hai, apne POM mein jaakar change kar lo."
-* **Prove karo:** Healenium use karne ke baad apni `.py` file dekho, wahan ID wahi purana hi likha hoga, jabki test naye button par paas hua hoga.
+* **[[HL::Confusion 1 — "Kya auto-healing apne aap mere Python code ko edit kar dega?"**::HL]]
+* [[HL::**Galat soch:** Tool mere file ko khol ke locator badal dega.::HL]]
+* [[HL::**Actually:** Nahi. Tool runtime mein (RAM ke andar) naya locator dhoondhta hai. Test pass hone ke baad, woh dashboard par suggestion deta hai ki "Yeh ID ab badal gaya hai, apne POM mein jaakar change kar lo."::HL]]
+* [[HL::**Prove karo:** Healenium use karne ke baad apni `.py` file dekho, wahan ID wahi purana hi likha hoga, jabki test naye button par paas hua hoga::HL]].
 
 
 * **Confusion 2 — "False Positives kya bimari hai?"**
@@ -7825,8 +7825,8 @@ Startups jahan roz UI update hoti hai, wahan Testim jaisi commercial tools use h
 
 * **Q:** Locator Auto-healing ka main concept kya hai?
 * **A:** Auto-healing ek AI/ML technique hai jahan agar kisi element ka primary locator (jaise ID ya XPath) UI changes ki wajah se fail ho jata hai, toh tool automatically uske secondary attributes (text, position, neighbor tags) ko use karke naya locator find karta hai aur test fail hone se bacha leta hai.
-* **Q:** Testim ya Healenium jaise tools kaam kaise karte hain?
-* **A:** Yeh 2 phases mein kaam karte hain: Learning phase (jab test pass hota hai, yeh element ki saari properties ek database mein capture karte hain) aur Healing phase (jab next run mein original locator fail ho, yeh database pattern match karke replacement element nikalte hain).
+* **[[HL::Q:** Testim ya Healenium jaise tools kaam kaise karte hain?::HL]]
+* [[HL::**A:** Yeh 2 phases mein kaam karte hain: Learning phase (jab test pass hota hai, yeh element ki saari properties ek database mein capture karte hain) aur Healing phase (jab next run mein original locator fail ho, yeh database pattern match karke replacement element nikalte hain::HL]]).
 * **Q:** Industry mein abhi bhi Manual POM update ko kyu better mana jata hai?
 * **A:** Kyunki Auto-healing tools mein "False Positives" ka risk hota hai — tool kisi galat element (jo visually similar ho) par click karke test paas karwa sakta hai. Manual POM (Page Object Model) update 100% deterministic (sure) hai, aapko exactly pata hota hai test kahan execute ho raha hai.
 
@@ -7966,11 +7966,11 @@ tests/
 # Command 1: Chrome par chalana (Default)
 pytest -v 
 
-# Command 2: Firefox par chalana
-pytest -v --browser firefox
+# [[HL::Command 2: Firefox par chalana::HL]]
+[[HL::pytest -v --browser firefox::HL]]
 
-# Command 3: Parallel execution (pytest-xdist plugin ke sath)
-pytest -n 2 --browser edge
+# [[HL::Command 3: Parallel execution (pytest-xdist plugin ke sath)::HL]]
+[[HL::pytest -n 2 --browser edge::HL]]
 
 ```
 
@@ -8020,12 +8020,12 @@ Industry/Senior Engineers CI/CD pipelines (jaise Jenkins ya GitHub Actions) mein
 
 #### 🛠️ 12. Troubleshooting Flowchart
 
-* **`pytest: error: unrecognized arguments: --browser`**
+* ** `pytest: error: unrecognized arguments: --browser`**
 * **Root Cause:** Tumne `--browser` flag CLI par pass kiya, par `conftest.py` mein `pytest_addoption` function nahi likha ya uski spelling galat hai.
 * **Fix:** `conftest.py` mein spelling check karo, strictly `def pytest_addoption(parser):` hi hona chahiye.
 
 
-* **`SessionNotCreatedException: This version of ChromeDriver only supports Chrome version X`**
+* ** `SessionNotCreatedException: This version of ChromeDriver only supports Chrome version X`**
 * **Root Cause:** Tumhare system par jo Google Chrome browser install hai, aur jo driver download hua hai, unka version match nahi kar raha. (Zero-Config mein kam hota hai, par caching issue ho sakti hai).
 * **Fix:** Apne Google Chrome browser ko update karo, ya Selenium library ka latest version install karo `pip install --upgrade selenium`.
 
@@ -8220,7 +8220,7 @@ Industry mein raw `java -jar` rarely local machines par manually chalaya jata ha
 
 #### 🛠️ 12. Troubleshooting Flowchart
 
-* **`urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=4444): Max retries exceeded`**
+* ** `urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=4444): Max retries exceeded`**
 * **Root Cause:** Tumhari Python script Hub se connect karne ki koshish kar rahi hai, par Hub start hi nahi hua hai ya galat port par hai.
 * **Fix:** Terminal check karo, `java -jar selenium-server... hub` successfully chal raha hai ya nahi.
 
@@ -8331,13 +8331,13 @@ Docker approach: Yeh aisa hai jaise Amazon se "Mini-PC-in-a-Box" order karna. Bo
 #### 📖 3. Technical Definition
 
 * **Precise English:** Containerizing Selenium Grid involves using Docker to deploy the Hub and Nodes as lightweight, isolated, and pre-configured containers using a `docker-compose.yml` file.
-* **Hinglish Simplification:** Docker ki madad se Hub aur alag-alag browsers (Chrome/Firefox) ko chhote-chhote isolated dibbon (containers) mein run karna, jisme sab kuch pehle se install aur set hota hai.
+* **[[HL::Hinglish Simplification:** Docker ki madad se Hub aur alag-alag browsers (Chrome/Firefox) ko chhote-chhote isolated dibbon (containers) mein run karna, jisme sab kuch pehle se install aur set hota hai::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Topic 2 mein humne dekha ki Node machine par browser version aur driver version mismatch ho jata hai. Java install karo, paths set karo — yeh sab maintain karna bohot mushkil aur error-prone hai.
-* **Solution:** Docker image (ek blueprint jisme browser, driver, aur OS sab pack hota hai) ka use karke hum version mismatch ki problem hamesha ke liye khatam kar dete hain.
-* **What breaks if we don't use it?** Ek dev ke laptop par Grid chalega, doosre ke laptop par "Java Not Found" ya "ChromeDriver error" aayega. "It works on my machine" wala excuse paida hoga.
+* **[[HL::Problem:** Topic 2 mein humne dekha ki Node machine par browser version aur driver version mismatch ho jata hai. Java install karo, paths set karo — yeh sab maintain karna bohot mushkil aur error-prone hai.::HL]]
+* [[HL::**Solution:** Docker image (ek blueprint jisme browser, driver, aur OS sab pack hota hai) ka use karke hum version mismatch ki problem hamesha ke liye khatam kar dete hain.::HL]]
+* [[HL::**What breaks if we don't use it?** Ek dev ke laptop par Grid chalega, doosre ke laptop par "Java Not Found" ya "ChromeDriver error" aayega. "It works on my machine" wala excuse paida hoga::HL]].
 * **✅ Kab use karo:** Jab tumhe consistent test environment chahiye jo kisi bhi machine par 1 min mein setup ho jaye, aur jab tumhe parallel testing easily scale karni ho.
 * **❌ Kab mat karo / Alternative prefer karo:** Agar tumhari company cloud (BrowserStack) ka paisa de sakti hai aur infra maintain nahi karna chahti, toh wahan jao. Local setup mein system par Docker Desktop (UI tool to manage containers) install hona mandatory hai.
 
@@ -8353,8 +8353,8 @@ project-folder/
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. Jab tum terminal mein `docker-compose up` chalate ho, Docker registry (internet par image store) se `selenium/hub` aur `selenium/node-chrome` ki images download karta hai.
-2. Un images se live containers (chalti hui machines) bante hain.
+1. [[HL::Jab tum terminal mein `docker-compose up` chalate ho, Docker registry (internet par image store) se `selenium/hub` aur `selenium/node-chrome` ki images download karta hai.::HL]]
+2. [[HL::Un images se live containers (chalti hui machines) bante hain::HL]].
 3. Hub port `4444` par start hota hai. Node containers internal network ke through event bus (message passing system) se Hub se connect ho jate hain.
 4. Tumhari Python script Hub ko request bhejti hai, aur sab kuch isolate environment mein smoothly chalta hai.
 
@@ -8439,9 +8439,9 @@ Containers by default `root` (admin) privileges ke sath run hote hain jo securit
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Image aur Container mein kya fark hai?"**
-* **Galat soch:** Dono same hote hain.
-* **Actually:** Image ek "blueprint" ya recipe hai (jaise Class in Python). Container us blueprint se bani hui asli chalti machine hai (jaise Object). Ek image se 100 containers ban sakte hain.
+* **[[HL::Confusion 1 — "Image aur Container mein kya fark hai?"**::HL]]
+* [[HL::**Galat soch:** Dono same hote hain.::HL]]
+* [[HL::**Actually:** Image ek "blueprint" ya recipe hai (jaise Class in Python). Container us blueprint se bani hui asli chalti machine hai (jaise Object). Ek image se 100 containers ban sakte hain::HL]].
 * **Prove karo:** Run `docker images` (sirf file dikhegi). Phir `docker ps` (chalti hui machine dikhegi).
 
 
@@ -8507,10 +8507,10 @@ Spotify ke QA engineers jab code commit karte hain, tab Jenkins (CI/CD tool — 
 * **A:** Traditional setup mein dependency hell hota hai (Java version, browser updates, driver mismatches). Docker ek isolated environment provide karta hai jahan pre-configured images (`selenium/node-chrome`) milti hain. Setup reproducible hota hai aur `docker-compose` se infra start/stop karna ek single command ka kaam ban jata hai.
 * **Q:** How do you scale specific browsers using Docker Compose?
 * **A:** Hum terminal command `--scale` ka use karte hain. Example: `docker-compose up --scale chrome-node=5 -d` se Hub ke sath 5 chrome containers attach ho jayenge, jisse parallel execution queue rapidly process hogi.
-* **Q:** What is the role of `depends_on` in the YAML file?
-* **A:** `depends_on` execution order define karta hai. Nodes tab tak theek se register nahi ho sakte jab tak Hub fully up aur running na ho. Isliye hum nodes ke configuration mein `depends_on: selenium-hub` likhte hain taaki Docker pehle hub ko start kare.
-* **Q:** How do containers communicate with each other in Docker Compose?
-* **A:** `docker-compose` automatically ek internal virtual network banata hai. Is network ke andar, containers ek dusre ke naam (jaise `selenium-hub`) se directly connect kar sakte hain. Humein internal IPs yaad rakhne ki zaroorat nahi padti.
+* **[[HL::Q:** What is the role of `depends_on` in the YAML file?::HL]]
+* [[HL::**A:** `depends_on` execution order define karta hai. Nodes tab tak theek se register nahi ho sakte jab tak Hub fully up aur running na ho. Isliye hum nodes ke configuration mein `depends_on: selenium-hub` likhte hain taaki Docker pehle hub ko start kare.::HL]]
+* [[HL::**Q:** How do containers communicate with each other in Docker Compose?::HL]]
+* [[HL::**A:** `docker-compose` automatically ek internal virtual network banata hai. Is network ke andar, containers ek dusre ke naam (jaise `selenium-hub`) se directly connect kar sakte hain. Humein internal IPs yaad rakhne ki zaroorat nahi padti::HL]].
 * **Q:** What happens when you run `docker-compose down`?
 * **A:** Yeh command saare active containers ko gracefully stop karti hai, unhe remove karti hai, aur jo default network docker-compose ne banaya tha use bhi delete kar deti hai, system ko ek clean state mein wapas laati hai.
 
@@ -8547,8 +8547,8 @@ Docker Compose ek "Building Manager" ki tarah hai. Woh ek building (single serve
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Docker Compose sirf ek single computer par limit hota hai (RAM/CPU bottleneck). Agar tumhe 1000 nodes parallel testing (1000 browsers ek sath) chalane hain, toh ek computer ki RAM fat jayegi.
-* **Solution:** Kubernetes test load ko detect karke automatically naye computers (servers) add karta hai aur tests distribute kar deta hai. ⭐ "Enterprise level par Docker Compose kaam nahi aata, wahan Kubernetes hi Raja hai."
+* **[[HL::Problem:** Docker Compose sirf ek single computer par limit hota hai (RAM/CPU bottleneck). Agar tumhe 1000 nodes parallel testing (1000 browsers ek sath) chalane hain, toh ek computer ki RAM fat jayegi.::HL]]
+* [[HL::**Solution:** Kubernetes test load ko detect karke automatically naye computers (servers) add karta hai aur tests distribute kar deta hai. ⭐ "Enterprise level par Docker Compose kaam nahi aata, wahan Kubernetes hi Raja hai::HL]]."
 * **What breaks if we don't use it?** Badi companies mein release days par test queues block ho jayengi aur deployment rukh jayegi.
 * **✅ Kab use karo:** Enterprise scale par, jab test cases hazaron mein hon, aur CI/CD pipeline Cloud-Native (cloud environment ke liye naturally designed) architecture par bani ho (AWS EKS, GCP GKE).
 * **❌ Kab mat karo / Alternative prefer karo:** Chhote startups ya 5-50 tests wale projects mein. Kubernetes bohot complex hai aur iska overhead choti testing ke liye overkill hai. Wahan Docker Compose ya Cloud Grid prefer karo.
@@ -8623,10 +8623,10 @@ Yeh ultimate scalability solution hai. Badi companies apne K8s cluster Cloud pro
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Pod aur Container mein kya fark hai?"**
-* **Galat soch:** K8s mein Pod hi Docker Container hota hai.
-* **Actually:** Container actual engine (jaise Chrome) hai. Pod K8s ka ek 'lifafa' (wrapper) hai jiske andar ek (ya ek se zyada) containers band hote hain. K8s directly containers se baat nahi karta, Pods se karta hai.
-* **Prove karo:** `kubectl get pods` run karo, dikhega `READY 1/1` — iska matlab ek pod ke andar 1 container chal raha hai.
+* **[[HL::Confusion 1 — "Pod aur Container mein kya fark hai?"**::HL]]
+* [[HL::**Galat soch:** K8s mein Pod hi Docker Container hota hai.::HL]]
+* [[HL::**Actually:** Container actual engine (jaise Chrome) hai. Pod K8s ka ek 'lifafa' (wrapper) hai jiske andar ek (ya ek se zyada) containers band hote hain. K8s directly containers se baat nahi karta, Pods se karta hai.::HL]]
+* [[HL::**Prove karo:** `kubectl get pods` run karo, dikhega `READY 1/1` — iska matlab ek pod ke andar 1 container::HL]] chal raha hai.
 
 
 * **Confusion 2 — "Helm kya hai aur kyun chahiye?"**
@@ -8685,14 +8685,14 @@ Uber aur Zomato jaisi enterprise companies CI/CD pipelines (GitLab/Jenkins) se a
 
 #### ❓ 17. Interview Q&A
 
-* **Q:** Explain why an enterprise would choose Kubernetes over Docker Compose for Selenium Grid?
-* **A:** Docker Compose single machine architecture hai jo fault-tolerant nahi hai aur resource-constrained hota hai. Kubernetes (K8s) multiple physical servers ko mila kar cluster banata hai. Yeh fault-tolerance deta hai (ek pod mara toh dusra zinda karega) aur KEDA ki madad se massive load (1000s of browsers) ko seamlessly auto-scale kar sakta hai.
-* **Q:** What is Helm and how does it help in Selenium Grid setup?
-* **A:** Helm Kubernetes ka package manager hai. Selenium Grid K8s pe manually lagana bohot complex YAML manifests require karta hai. Helm pre-packaged "Charts" provide karta hai, jisse sirf `helm install` command use karke pura Hub, Nodes, aur Services ka infrastructure minutes mein setup ho jata hai.
+* **[[HL::Q:** Explain why an enterprise would choose Kubernetes over Docker Compose for Selenium Grid?::HL]]
+* [[HL::**A:** Docker Compose single machine architecture hai jo fault-tolerant nahi hai aur resource-constrained hota hai. Kubernetes (K8s) multiple physical servers ko mila kar cluster banata hai. Yeh fault-tolerance deta hai (ek pod mara toh dusra zinda karega) aur KEDA ki madad se massive load (1000s of browsers) ko seamlessly auto-scale kar sakta hai.::HL]]
+* [[HL::**Q:** What is Helm and how does it help in Selenium Grid setup?::HL]]
+* [[HL::**A:** Helm Kubernetes ka package manager hai. Selenium Grid K8s pe manually lagana bohot complex YAML manifests require karta hai. Helm pre-packaged "Charts" provide karta hai, jisse sirf `helm install` command use karke pura Hub, Nodes, aur Services ka infrastructure minutes mein setup ho jata hai::HL]].
 * **Q:** QA roles ke hisaab se K8s aana zaroori kyun hota ja raha hai?
 * **A:** Aaj kal test infrastructure Cloud-Native ho gaya hai. Test fails hone par QA Engineer ko Devops par depend rehne ke bajaye khud `kubectl logs` ya `kubectl get pods` run karke root cause find karna aana chahiye, especially jab test infrastructure timeout ya network failures face kar raha ho.
-* **Q:** What are Pods and Services in K8s?
-* **A:** Pod K8s mein sabse choti execution unit hai jo containers ko encapsulate karta hai. Service ek network abstraction hai jo in dynamically changing Pods ko ek stable IP/URL deta hai taaki humari Selenium script Hub (Service) se consistently connect kar sake.
+* **[[HL::Q:** What are Pods and Services in K8s?::HL]]
+* [[HL::**A:** Pod K8s mein sabse choti execution unit hai jo containers ko encapsulate karta hai. Service ek network abstraction hai jo in dynamically changing Pods ko ek stable IP/URL deta hai taaki humari Selenium script Hub (Service) se consistently connect kar sake::HL]].
 * **Q:** Auto-scaling kaise achieve hoti hai?
 * **A:** KEDA (Kubernetes Event-driven Autoscaling) jaisa tool Hub ki task queue ko continuously monitor karta hai. Jab queue length ek threshold cross karti hai, KEDA naye Node pods scale-up kar deta hai. Jab tests khatam ho jate hain, toh resources aur paisa bachane ke liye pods ko scale-down (zero tak) kar deta hai.
 
@@ -8846,12 +8846,12 @@ BrowserStack aur LambdaTest infinite concurrency offer karte hain, matlab tum pa
 
 #### 🛠️ 12. Troubleshooting Flowchart
 
-* **`urllib.error.HTTPError: HTTP Error 401: Unauthorized`**
+* ** `urllib.error.HTTPError: HTTP Error 401: Unauthorized`**
 * **Root Cause:** Tumhara username ya access key galat hai, ya env vars load nahi hue (authentication failed).
 * **Fix:** Terminal mein `echo $BSTACK_KEY` (Mac/Linux) ya `echo %BSTACK_KEY%` (Windows) chala kar check karo ki key exist karti hai ya nahi.
 
 
-* **`BrowserStack Dashboard constantly shows 'TIMEOUT'`**
+* ** `BrowserStack Dashboard constantly shows 'TIMEOUT'`**
 * **Root Cause:** Test ke beech mein local script crash/interrupt ho gayi (jaise tumne `Ctrl+C` daba diya), aur `driver.quit()` call nahi hua. Cloud server session hold karke betha raha infinity tak.
 * **Fix:** Hamesha `try...finally` block mein `driver.quit()` rakho taaki exception aane par bhi session cleanly close ho.
 
@@ -8961,14 +8961,14 @@ Socho tum ek restaurant mein ho. Tum (Client/Coder) ek Universal Waiter (Appium 
 #### 📖 3. Technical Definition
 
 * **Precise English:** Appium uses a client-server architecture where the client sends automation commands via the W3C WebDriver protocol to a Node.js-based Appium server. The server then delegates these commands to platform-specific native drivers (like UIAutomator2 or XCUITest) to execute actions on the mobile device.
-* **Hinglish Simplification:** Appium ek middleman (server) hai jo tumhare code (client) se commands leta hai, aur unhe Android ya iOS ki native bhasha mein translate karke device par run karta hai.
+* **[[HL::Hinglish Simplification:** Appium ek middleman (server) hai jo tumhare code (client) se commands leta hai, aur unhe Android ya iOS ki native bhasha mein translate karke device par run karta hai::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Android aur iOS ke apne alag automation tools hain (Android ke liye UIAutomator2, iOS ke liye XCUITest). Ek tester ko dono languages aur tools alag-alag seekhne padte the.
-* **Solution:** Appium Architecture ek common layer deta hai. Tum ek hi Python script likhte ho, aur Appium usko dono platforms ke liye translate kar deta hai.
+* **[[HL::Problem:** Android aur iOS ke apne alag automation tools hain (Android ke liye UIAutomator2, iOS ke liye XCUITest). Ek tester ko dono languages aur tools alag-alag seekhne padte the.::HL]]
+* [[HL::**Solution:** Appium Architecture ek common layer deta hai. Tum ek hi Python script likhte ho, aur Appium usko dono platforms ke liye translate kar deta hai::HL]].
 * **What breaks if we don't use it?** Cross-platform automation impossible ho jayega — tumhe Android aur iOS ke liye double mehnat aur alag-alag codebases maintain karne padenge.
-* **✅ Kab use karo:** Jab tumhe ek hi automation team se Android aur iOS dono apps test karwani ho, aur tum chahte ho ki web (Selenium) aur mobile (Appium) ka syntax same rahe.
+* **✅ [[HL::Kab use karo:** Jab tumhe ek hi automation team se Android aur iOS dono apps test karwani ho, aur tum chahte ho ki web (Selenium) aur mobile (Appium) ka syntax same rahe::HL]].
 * **❌ Kab mat karo / Alternative prefer karo:** Agar tumhari app sirf Android ke liye hai aur iOS pe kabhi nahi jayegi — toh sidha Espresso (Android ka native fast testing framework) prefer karo, Appium overkill ho sakta hai.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -8977,7 +8977,7 @@ Socho tum ek restaurant mein ho. Tum (Client/Coder) ek Universal Waiter (Appium 
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. **Client (Python Script):** Tumhara code `appium-python-client` (Python library — jo Appium commands ko API calls mein convert karti hai) use karke commands likhta hai jaise `driver.find_element()`, `click`, ya `send_keys`.
+1. [[HL::**Client (Python Script):** Tumhara code `appium-python-client` (Python library — jo Appium commands ko API calls mein convert karti hai) use karke commands likhta hai jaise `driver.find_element()`, `click`, ya `send_keys::HL]]`.
 2. **JSON Wire Protocol / W3C Protocol:** Yeh commands **HTTP POST** requests ban kar JSON format mein Appium Server ko bheje jaate hain. (Note: Naya Appium sirf **WebDriver (W3C) protocol** (standard web automation protocol) use karta hai).
 3. **Appium Server:** Ek **Node.js** (JavaScript runtime — jo server chalane ke liye zaroori hai) server jo default port `localhost:4723` (tumhara local network port kahan server listen kar raha hai) par run hota hai. Yeh **Hub** (central router) ka kaam karta hai.
 4. **Desired Capabilities:** Server ko request ke saath ek JSON object milta hai jise Desired Capabilities kehte hain. Yeh batata hai ki kaunsa OS, konsi device, aur konsi app test karni hai.
@@ -9134,7 +9134,7 @@ Puraana Appium ek judi hui "Car" ki tarah aata tha — jisme engine, pahiye, sea
 #### 📖 3. Technical Definition
 
 * **Precise English:** Appium 2.x introduces a decoupled architecture where the core server is separated from the drivers and plugins. It relies on the Node.js package manager (npm) for CLI installation, while UI inspection is handled by a standalone application called Appium Inspector.
-* **Hinglish Simplification:** Appium 2.x mein server aur drivers alag-alag aate hain. Tum server terminal (CLI) se chalate ho, aur app ke buttons dhundhne ke liye ek alag software (Appium Inspector) download karke use karte ho.
+* **[[HL::Hinglish Simplification:** Appium 2.x mein server aur drivers alag-alag aate hain. Tum server terminal (CLI) se chalate ho, aur app ke buttons dhundhne ke liye ek alag software (Appium Inspector) download karke use karte ho::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
@@ -9159,8 +9159,8 @@ Appium logo ke saath ek desktop app jahan Capabilities enter karke "Start Sessio
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. **Node.js & npm:** Appium actually ek Node.js application hai. Tumhare system par `npm` (Node Package Manager — jo JavaScript libraries install karta hai) hona mandatory hai.
-2. **Core Server Install:** `npm install -g appium` command sirf Appium ka core engine (server) global level par install karta hai.
+1. [[HL::**Node.js & npm:** Appium actually ek Node.js application hai. Tumhare system par `npm` (Node Package Manager — jo JavaScript libraries install karta hai) hona mandatory hai.::HL]]
+2. [[HL::**Core Server Install:** `npm install -g appium` command sirf Appium ka core engine (server) global level par install karta hai::HL]].
 3. **Decoupled Drivers:** Server install hone ke baad, woh bilkul khali (empty) hota hai. Usme by default koi mobile support nahi hota.
 4. **Driver Installation:** Tum explicitly `appium driver install uiautomator2` command run karte ho, tab jake server ke andar Android OS ko control karne ki taqat aati hai.
 
@@ -9169,10 +9169,10 @@ Appium logo ke saath ek desktop app jahan Capabilities enter karke "Start Sessio
 *Note: Yeh Python code nahi hai, balki terminal commands hain Appium server aur uske components setup karne ke liye.*
 
 ```bash
-# Terminal (Windows/Mac) — Node.js install hone ke baad
-1  npm install -g appium                         # Appium 2.x core server global (-g) install karo
-2  appium driver list                            # Check karo ki server ke paas kaunse drivers hain (shuru mein empty hoga)
-3  appium driver install uiautomator2            # Android automation ke liye uiautomator2 driver connect karo
+# [[HL::Terminal (Windows/Mac) — Node.js install hone ke baad::HL]]
+[[HL::1  npm install -g appium                         # Appium 2.x core server global (-g) install karo::HL]]
+[[HL::2  appium driver list                            # Check karo ki server ke paas kaunse drivers hain (shuru mein empty hoga)::HL]]
+[[HL::3  appium driver install uiautomator2            # Android automation ke liye uiautomator2 driver connect karo::HL]]
 4  appium driver install xcuitest                # iOS automation ke liye xcuitest driver connect karo (Mac only)
 5  npm install -g appium-doctor                  # Appium Doctor tool install karo jo environment check karega
 6  appium-doctor --android                       # Android environment variables check karo (Red flags matlab error)
@@ -9210,9 +9210,9 @@ Industry CI/CD pipelines (jaise Jenkins ya GitHub Actions) mein Appium Inspector
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Appium Server aur Appium Inspector mein kya farq hai?"**
-* **Galat soch:** Dono ek hi software ke do naam hain.
-* **Actually:** Appium Server ek invisible engine (terminal process) hai jo code se baat karta hai. Appium Inspector ek alag visual (standalone app / Web Inspector) hai jisme tum app ki screen dekh kar buttons (elements) ka ID aur XPath dhundhte ho test likhne ke liye.
+* **[[HL::Confusion 1 — "Appium Server aur Appium Inspector mein kya farq hai?"**::HL]]
+* [[HL::**Galat soch:** Dono ek hi software ke do naam hain.::HL]]
+* [[HL::**Actually:** Appium Server ek invisible engine (terminal process) hai jo code se baat karta hai. Appium Inspector ek alag visual (standalone app / Web Inspector) hai jisme tum app ki screen dekh kar buttons (elements) ka ID aur XPath dhundhte ho test likhne ke liye::HL]].
 * **Prove karo:** Inspector ko open karke server URL (localhost:4723) dena padta hai. Agar server background mein nahi chal raha, toh Inspector connect nahi ho payega (ConnectionRefusedError).
 
 
@@ -9225,7 +9225,7 @@ Industry CI/CD pipelines (jaise Jenkins ya GitHub Actions) mein Appium Inspector
 
 #### 🛠️ 12. Troubleshooting Flowchart
 
-* **`appium: command not found` (Mac/Linux) ya `appium is not recognized` (Windows)**
+* ** `appium: command not found` (Mac/Linux) ya `appium is not recognized` (Windows)**
 * **Root Cause:** Node.js install nahi hai, ya fir npm global package path environment variables mein add nahi hai.
 * **Fix:** Node.js reinstall karo aur installer mein "Add to PATH" checkbox tick karo. Phir terminal restart karke `npm install -g appium` dubara run karo.
 
@@ -9453,7 +9453,7 @@ Capabilities mein kabhi bhi production username/passwords ya cloud (e.g., Browse
 * **Fix:** System environment variables mein `ANDROID_HOME` ka path set karo aur terminal restart karo.
 
 
-* **`Session starts but App doesn't open`**
+* ** `Session starts but App doesn't open`**
 * **Root Cause:** `appPackage` aur `appActivity` galat type kiya hai.
 * **Fix:** APK Info app se exact case-sensitive package/activity name check karo (e.g., `MainActivity` instead of `mainactivity`).
 
@@ -9654,7 +9654,7 @@ Large scale projects (CI/CD) mein companies apne physical phones desk par nahi r
 * **Fix:** Phone ke Developer Options mein jao -> USB Debugging ON karo. Phone screen unlock rakho aur "Allow USB debugging?" popup par "Always allow" tick karke OK press karo. Check with a data-sync USB cable.
 
 
-* **`SessionNotCreatedException: Could not find any free port to connect`**
+* ** `SessionNotCreatedException: Could not find any free port to connect`**
 * **Root Cause:** Ek se zyada emulators/devices connected hain aur tumne capabilities mein specific `device_name` nahi diya, toh Appium confuse ho gaya.
 * **Fix:** Capabilities mein explicit `device_name = "device_id"` pass karo taaki Appium correct target choose kare.
 
@@ -9752,15 +9752,15 @@ Socho tum ek factory mein ho aur tumhe ek specific parcel dhundhna hai. **Appium
 #### 📖 3. Technical Definition
 
 * **Precise English:** Locators are strategies used to identify GUI elements within the application's XML tree structure. Appium Inspector is the tool used to inspect this XML source. The `AppiumBy` class provides mobile-specific locator strategies like Accessibility ID, ID, XPath, and Class Name.
-* **Hinglish Simplification:** Locators woh pate (addresses) hain jinke through humari script elements (buttons, inputs) ko dhundhti hai. Hum Appium Inspector tool ka use karke in elements ka unique naam (ID ya XPath) pata karte hain aur phir `AppiumBy` class ke zariye script mein use karte hain.
+* **[[HL::Hinglish Simplification:** Locators woh pate (addresses) hain jinke through humari script elements (buttons, inputs) ko dhundhti hai. Hum Appium Inspector tool ka use karke in elements ka unique naam (ID ya XPath) pata karte hain aur phir `AppiumBy` class ke zariye script mein use karte hain::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Appium andha (blind) hota hai. Use nahi pata ki "Login" button kahan hai. Agar tum directly `click()` bologi bina button bataye, toh script fail ho jayegi.
-* **Solution:** Hum Inspector ka use karke XML (Extensible Markup Language — data store karne ka tree-like structure jisme app ke UI elements code ke roop mein likhe hote hain) se locators nikalte hain.
-* **What breaks if we don't use it?** Script kabhi kisi element se interact hi nahi kar payegi.
-* **✅ Kab use karo (Accessibility ID):** Hamesha! Yeh sabse priority wala locator hai. Agar developer ne diya hai, toh aankh band karke use karo.
-* **❌ Kab mat karo / Alternative prefer karo (XPath):** XPath ko tab tak avoid karo jab tak aur koi rasta na bache. XPath slow hota hai aur app ke chote se UI change hone par toot (break) jata hai.
+* **[[HL::Problem:** Appium andha (blind) hota hai. Use nahi pata ki "Login" button kahan hai. Agar tum directly `click()` bologi bina button bataye, toh script fail ho jayegi.::HL]]
+* [[HL::**Solution:** Hum Inspector ka use karke XML (Extensible Markup Language — data store karne ka tree-like structure jisme app ke UI elements code ke roop mein likhe hote hain) se locators nikalte hain.::HL]]
+* [[HL::**What breaks if we don't use it?** Script kabhi kisi element se interact hi nahi kar payegi.::HL]]
+* [[HL::**✅ Kab use karo (Accessibility ID):** Hamesha! Yeh sabse priority wala locator hai. Agar developer ne diya hai, toh aankh band karke use karo.::HL]]
+* [[HL::**❌ Kab mat karo / Alternative prefer karo (XPath):** XPath ko tab tak avoid karo jab tak aur koi rasta na bache. XPath slow hota hai aur app ke chote se UI change hone par toot (break) jata hai::HL]].
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
@@ -9776,11 +9776,11 @@ Right Side: XML Tree Source jisme tags hain:
 
 1. Device par actual app render hoti hai, jiske background mein ek XML page structure hota hai.
 2. Jab hum Appium Inspector chalate hain, woh device se is XML ka snapshot (screenshot + code) download karke hume dikhata hai.
-3. Mobile elements ko dhundhne ke liye locator priority list (hierarchy) hoti hai:
-* **Priority 1: Accessibility ID** (Android mein `content-desc`, iOS mein `accessibility-label`). ⭐ **"Sabse best, sabse fast!"**
-* **Priority 2: ID (Resource ID)** (Android mein `resource-id`).
-* **Priority 3: Class Name** (Android mein `android.widget.Button`, iOS mein `XCUIElementTypeButton`).
-* **Priority 4: XPath** (Last resort, jab element ka koi naam na ho).
+3. [[HL::Mobile elements ko dhundhne ke liye locator priority list (hierarchy) hoti hai:::HL]]
+* [[HL::**Priority 1: Accessibility ID** (Android mein `content-desc`, iOS mein `accessibility-label`). ⭐ **"Sabse best, sabse fast!"**::HL]]
+* [[HL::**Priority 2: ID (Resource ID)** (Android mein `resource-id`).::HL]]
+* [[HL::**Priority 3: Class Name** (Android mein `android.widget.Button`, iOS mein `XCUIElementTypeButton`).::HL]]
+* [[HL::**Priority 4: XPath** (Last resort, jab element ka koi naam na ho::HL]]).
 
 
 
@@ -9791,17 +9791,17 @@ Right Side: XML Tree Source jisme tags hain:
 1  # ⭐ "Sabse Zaroori Import": AppiumBy class — jo mobile specific locators (jaise ACCESSIBILITY_ID) provide karti hai
 2  from appium.webdriver.common.appiumby import AppiumBy   
 3 
-4  # 1. Accessibility ID (Sabse Fast & Best) - 'content-desc' attribute ko target karta hai
-5  btn_1 = driver.find_element(AppiumBy.ACCESSIBILITY_ID, "login-button-desc") # find_element() = screen par single element dhundhne ka factory method
-6 
-7  # 2. Resource ID - XML mein 'resource-id' attribute ko target karta hai
-8  btn_2 = driver.find_element(AppiumBy.ID, "com.app:id/login_btn")            # AppiumBy.ID = standard id locator
-9 
-10 # 3. XPath - Jab koi ID na ho, tab hum XML path language (tree traverse karne ka tarika) use karte hain
-11 btn_3 = driver.find_element(AppiumBy.XPATH, "//android.widget.Button[@text='Login']") # [@text='Login'] = jis button ka text 'Login' hai
-12 
-13 # 4. Class Name - Jab hume ek jaise bohot saare elements chahiye
-14 buttons = driver.find_elements(AppiumBy.CLASS_NAME, "android.widget.Button") # find_elements() (plural) = list of elements return karta hai, yahan class target ki hai
+4  # 1. [[HL::Accessibility ID (Sabse Fast & Best) - 'content-desc' attribute ko target karta hai::HL]]
+[[HL::5  btn_1 = driver.find_element(AppiumBy.ACCESSIBILITY_ID, "login-button-desc") # find_element() = screen par single element dhundhne ka factory method::HL]]
+[[HL::6 ::HL]]
+[[HL::7  # 2. Resource ID - XML mein 'resource-id' attribute ko target karta hai::HL]]
+[[HL::8  btn_2 = driver.find_element(AppiumBy.ID, "com.app:id/login_btn")            # AppiumBy.ID = standard id locator::HL]]
+[[HL::9 ::HL]]
+[[HL::10 # 3. XPath - Jab koi ID na ho, tab hum XML path language (tree traverse karne ka tarika) use karte hain::HL]]
+[[HL::11 btn_3 = driver.find_element(AppiumBy.XPATH, "//android.widget.Button[@text='Login']") # [@text='Login'] = jis button ka text 'Login' hai::HL]]
+[[HL::12 ::HL]]
+[[HL::13 # 4. Class Name - Jab hume ek jaise bohot saare elements chahiye::HL]]
+[[HL::14 buttons = driver.find_elements(AppiumBy.CLASS_NAME, "android.widget.Button") # find_elements() (plural) = list of elements return karta hai, yahan class target ki hai::HL]]
 
 ```
 
@@ -9814,7 +9814,7 @@ Right Side: XML Tree Source jisme tags hain:
 ##### 🔬 Code Explanation Rule (LINE-BY-LINE)
 
 * **Line 2 — `AppiumBy`:** Pehle hum Selenium ka `By` class use karte the, lekin modern Appium scripts mein `AppiumBy` import karna mandatory hai kyunki isme `ACCESSIBILITY_ID` jaisi mobile-specific cheezein hain jo Selenium mein nahi hoti.
-* **Line 11 — `AppiumBy.XPATH`:** Yeh XML tree mein search karta hai. `//` matlab kahin se bhi start karo, `android.widget.Button` (Android ka native class name hai, jaise iOS mein `XCUIElementTypeButton` hota hai) matlab button ko dhundho, aur `[@text='Login']` ek filter hai (attribute condition) jo wahi button layega jiska text 'Login' ho.
+* **[[HL::Line 11 — `AppiumBy.XPATH`:** Yeh XML tree mein search karta hai. `//` matlab kahin se bhi start karo, `android.widget.Button` (Android ka native class name hai, jaise iOS mein `XCUIElementTypeButton` hota hai) matlab button ko dhundho, aur `[@text='Login']` ek filter hai (attribute condition) jo wahi button layega jiska text 'Login' ho::HL]].
 
 #### 🔒 8. Security-First Check
 
@@ -9826,17 +9826,17 @@ Industry mein test scripts fail hone ka sabse bada reason "flaky XPath" (aise lo
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes
 
-* **❌ Mistake:** Absolute XPath use karna jaise `/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/...`
-* **🤦 Why:** Beginners Appium Inspector se direct "Copy XPath" karke lambi string chipka dete hain.
-* **✅ The 'Pro' Way:** Ya toh Accessibility ID use karo, ya relative XPath `//android.widget.Button[@text='Login']` banao.
-* **⚡ Consequences:** Agar app UI mein ek naya layout/frame add hua (jaise nayi promo banner), toh tumhara poora absolute XPath toot jayega aur script fail ho jayegi.
+* **❌ [[HL::Mistake:** Absolute XPath use karna jaise `/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout::HL]]/...`
+* **🤦 [[HL::Why:** Beginners Appium Inspector se direct "Copy XPath" karke lambi string chipka dete hain.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Ya toh Accessibility ID use karo, ya relative XPath `//android.widget.Button[@text='Login']` banao.::HL]]
+* [[HL::**⚡ Consequences:** Agar app UI mein ek naya layout/frame add hua (jaise nayi promo banner), toh tumhara poora absolute XPath toot jayega aur script fail ho jayegi::HL]].
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "content-desc aur Accessibility ID alag hain kya?"**
-* **Galat soch:** Beginners ko lagta hai yeh dono alag locator hain.
-* **Actually:** Dono exactly same cheez hain. Android XML mein property ka naam `content-desc` (yaani content description — jo visually impaired logon ke screen readers ke liye hoti hai) hota hai. Aur Appium mein hum us property ko dhundhne ke liye `AppiumBy.ACCESSIBILITY_ID` method use karte hain.
-* **Prove karo:** Inspector mein dekho, jahan `content-desc` ki value "Submit" hai, tum code mein `AppiumBy.ACCESSIBILITY_ID, "Submit"` likhoge toh wahi element select hoga.
+* **[[HL::Confusion 1 — "content-desc aur Accessibility ID alag hain kya?"**::HL]]
+* [[HL::**Galat soch:** Beginners ko lagta hai yeh dono alag locator hain.::HL]]
+* [[HL::**Actually:** Dono exactly same cheez hain. Android XML mein property ka naam `content-desc` (yaani content description — jo visually impaired logon ke screen readers ke liye hoti hai) hota hai. Aur Appium mein hum us property ko dhundhne ke liye `AppiumBy.ACCESSIBILITY_ID` method use karte hain.::HL]]
+* [[HL::**Prove karo:** Inspector mein dekho, jahan `content-desc` ki value "Submit" hai, tum code mein `AppiumBy.ACCESSIBILITY_ID, "Submit"` likhoge toh wahi element select hoga::HL]].
 
 
 * **Confusion 2 — "Selenium ka 'By.ID' use kar sakta hoon?"**
@@ -9892,12 +9892,12 @@ Appium Inspector (Live Screen View)
 
 #### ❓ 17. Interview Q&A
 
-* **Q:** Appium mein sabse fast locator strategy kaunsi hai aur kyun?
-* **A:** ⭐ Accessibility ID sabse fast aur best strategy hai. Kyunki UIAutomator2 (Android) aur XCUITest (iOS) directly accessibility layer ke objects ko memory mein turant map kar lete hain, jabki XPath ke case mein unhe poore XML tree (XML nodes) ko line-by-line traverse (scan) karna padta hai jisme milliseconds zyada lagte hain.
-* **Q:** Android ke `content-desc` aur iOS ke `accessibility-label` ko Appium script mein ek saath kaise handle karte hain?
-* **A:** Hum dono OS ke liye `AppiumBy.ACCESSIBILITY_ID` method hi call karte hain! Appium engine itna smart hai ki Android hone par background mein `content-desc` dhundhta hai, aur iOS hone par background mein `accessibility-label` target karta hai.
-* **Q:** XPath kab use karna chahiye?
-* **A:** XPath sirf tab use karna chahiye jab element par koi Accessibility ID, Resource ID ya unique class name maujood na ho (jaise text ke basis par button dhundhna). Hamesha relative XPath (`//...`) use karein, absolute XPath (`/hierarchy/...`) kabhi nahi kyunki UI thoda bhi change hone par woh toot jate hain.
+* **[[HL::Q:** Appium mein sabse fast locator strategy kaunsi hai aur kyun?::HL]]
+* [[HL::**A:** ⭐ Accessibility ID sabse fast aur best strategy hai. Kyunki UIAutomator2 (Android) aur XCUITest (iOS) directly accessibility layer ke objects ko memory mein turant map kar lete hain, jabki XPath ke case mein unhe poore XML tree (XML nodes) ko line-by-line traverse (scan) karna padta hai jisme milliseconds zyada lagte hain.::HL]]
+* [[HL::**Q:** Android ke `content-desc` aur iOS ke `accessibility-label` ko Appium script mein ek saath kaise handle karte hain?::HL]]
+* [[HL::**A:** Hum dono OS ke liye `AppiumBy.ACCESSIBILITY_ID` method hi call karte hain! Appium engine itna smart hai ki Android hone par background mein `content-desc` dhundhta hai, aur iOS hone par background mein `accessibility-label` target karta hai.::HL]]
+* [[HL::**Q:** XPath kab use karna chahiye?::HL]]
+* [[HL::**A:** XPath sirf tab use karna chahiye jab element par koi Accessibility ID, Resource ID ya unique class name maujood na ho (jaise text ke basis par button dhundhna). Hamesha relative XPath::HL]] (`//...`) [[HL::use karein, absolute XPath (`/hierarchy/...`) kabhi nahi kyunki UI thoda bhi change hone par woh toot jate hain::HL]].
 * **Q:** `find_element` aur `find_elements` mein kya difference hai?
 * **A:** `find_element` (singular) pehla matching element dhoondh kar uska WebObject return karta hai (agar nahi mila toh error aayega). `find_elements` (plural) saare matching elements ki ek Python List return karta hai (agar koi element nahi mila toh khali list `[]` return hoti hai, error nahi aata).
 * **Q:** Appium Inspector kya hai?
@@ -9934,7 +9934,7 @@ Pichle topic mein humne address (Locator) dhundhna seekha. Ab wahan ja kar karna
 #### 📖 3. Technical Definition
 
 * **Precise English:** Basic mobile actions involve interacting with located UI elements via methods like `click()`, `send_keys()`, and `clear()`. For complex gestures like swiping, Appium previously used `TouchAction`, but now strictly uses W3C Standard `ActionChains` or native specific commands like Android's `UiScrollable` to interact with out-of-view components.
-* **Hinglish Simplification:** Mobile actions woh commands hain jo actual phone par kaam karti hain. `click()` dabaane ke liye, `send_keys()` type karne ke liye, aur `UiScrollable` (Android ka native feature) chuphe hue elements tak automatic scroll karke pohanchne ke liye.
+* **[[HL::Hinglish Simplification:** Mobile actions woh commands hain jo actual phone par kaam karti hain. `click()` dabaane ke liye, `send_keys()` type karne ke liye, aur `UiScrollable` (Android ka native feature) chuphe hue elements tak automatic scroll karke pohanchne ke liye::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
@@ -9966,20 +9966,20 @@ Pichle topic mein humne address (Locator) dhundhna seekha. Ab wahan ja kar karna
 # Python 3.10+ | Appium-Python-Client 3.x+
 1  from appium.webdriver.common.appiumby import AppiumBy
 2  
-3  # --- 1. BASIC ACTIONS (Click, Send Keys, Clear) ---
-4  email_input = driver.find_element(AppiumBy.ACCESSIBILITY_ID, "email-field")
-5  email_input.clear()                           # clear() = Pehle se likha text delete karta hai (e.g., default placeholder hatai)
-6  email_input.send_keys("test@example.com")     # send_keys() = Keyboard keystrokes simulate karke text type karta hai
-7  
-8  login_btn = driver.find_element(AppiumBy.ID, "com.app:id/login_btn")
-9  login_btn.click()                             # click() = Element ke center par ek baar native tap perform karta hai (tap() ka modern replacement)
+3  # --- 1. [[HL::BASIC ACTIONS (Click, Send Keys, Clear) ---::HL]]
+[[HL::4  email_input = driver.find_element(AppiumBy.ACCESSIBILITY_ID, "email-field")::HL]]
+[[HL::5  email_input.clear()                           # clear() = Pehle se likha text delete karta hai (e.g., default placeholder hatai)::HL]]
+[[HL::6  email_input.send_keys("test@example.com")     # send_keys() = Keyboard keystrokes simulate karke text type karta hai::HL]]
+[[HL::7  ::HL]]
+[[HL::8  login_btn = driver.find_element(AppiumBy.ID, "com.app:id/login_btn")::HL]]
+[[HL::9  login_btn.click()                             # click() = Element ke center par ek baar native tap perform karta hai (tap() ka modern replacement::HL]])
 10 
-11 # --- 2. SWIPE COORDINATES (Manual Swiping based on screen size) ---
-12 size = driver.get_window_size()               # get_window_size() = Device ki screen dimensions (width aur height) ka dictionary return karta hai
-13 start_x = size['width'] / 2                   # Screen ka center (X-axis)
-14 start_y = size['height'] * 0.8                # Bottom of screen (80% from top)
-15 end_x = size['width'] / 2                     # Center par hi rakhna hai
-16 end_y = size['height'] * 0.2                  # Top of screen (20% from top) - Neeche se upar (scroll down)
+11 # --- 2. [[HL::SWIPE COORDINATES (Manual Swiping based on screen size) ---::HL]]
+[[HL::12 size = driver.get_window_size()               # get_window_size() = Device ki screen dimensions (width aur height) ka dictionary return karta hai::HL]]
+[[HL::13 start_x = size['width'] / 2                   # Screen ka center (X-axis)::HL]]
+[[HL::14 start_y = size['height'] * 0.8                # Bottom of screen (80% from top)::HL]]
+[[HL::15 end_x = size['width'] / 2                     # Center par hi rakhna hai::HL]]
+[[HL::16 end_y = size['height'] * 0.2                  # Top of screen (20% from top::HL]]) - Neeche se upar (scroll down)
 17 
 18 # driver.swipe() = Start (x,y) se lekar End (x,y) tak screen drag karta hai 'duration' (milliseconds) mein
 19 driver.swipe(start_x, start_y, end_x, end_y, duration=500) 
@@ -9987,11 +9987,11 @@ Pichle topic mein humne address (Locator) dhundhna seekha. Ab wahan ja kar karna
 21 # --- 3. ⭐ THE MAGIC LOCATOR (Smart Native Scroll - ANDROID ONLY) ---
 22 # AppiumBy.ANDROID_UIAUTOMATOR = Android OS ka native code inject karne ki facility
 23 # scrollIntoView() = Yeh screen ko tab tak scroll karega jab tak "Submit" text wala element screen par na aa jaye
-24 submit_btn = driver.find_element(
-25     AppiumBy.ANDROID_UIAUTOMATOR, 
-26     'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text("Submit").instance(0));'
-27 )
-28 submit_btn.click()                            # Scroll hone ke baad uspe action
+24 [[HL::submit_btn = driver.find_element(::HL]]
+[[HL::25     AppiumBy.ANDROID_UIAUTOMATOR, ::HL]]
+[[HL::26     'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text("Submit").instance(0));'::HL]]
+[[HL::27 )::HL]]
+[[HL::28 submit_btn.click::HL]]()                            # Scroll hone ke baad uspe action
 
 ```
 
@@ -10017,9 +10017,9 @@ Industry experts `driver.swipe()` (Coordinate swipe) ko kaafi dislike karte hain
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes
 
-* **❌ Mistake:** Out-of-view element par bina scroll kiye seedha `.click()` marna.
-* **🤦 Why:** Beginners ko lagta hai ki jaise Web/Selenium mein kabhi-kabhi hidden elements click ho jate hain, mobile mein bhi ho jayega.
-* **✅ The 'Pro' Way:** Pehle ⭐ **"Jaadui Locator"** (`scrollIntoView`) se element ko Viewport (jo screen dikh rahi hai) ke andar le kar aao, tab us par interact karo.
+* **❌ [[HL::Mistake:** Out-of-view element par bina scroll kiye seedha `.click()` marna.::HL]]
+* [[HL::**🤦 Why:** Beginners ko lagta hai ki jaise Web/Selenium mein kabhi-kabhi hidden elements click ho jate hain, mobile mein bhi ho jayega.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Pehle ⭐ **"Jaadui Locator"** (`scrollIntoView`) se element ko Viewport (jo screen dikh rahi hai) ke andar le kar aao, tab us par interact karo::HL]].
 * **⚡ Consequences:** Appium clearly `NoSuchElementException` throw karega, kyunki mobile memory sirf unhi elements ko render karti hai jo user ki aankhon ke samne hote hain (ise lazy loading kehte hain).
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
@@ -10038,7 +10038,7 @@ Industry experts `driver.swipe()` (Coordinate swipe) ko kaafi dislike karte hain
 
 #### 🛠️ 12. Troubleshooting Flowchart
 
-* **`InvalidElementStateException: Cannot set the element to 'text'`**
+* ** `InvalidElementStateException: Cannot set the element to 'text'`**
 * **Root Cause:** Tum ek aisi field par `send_keys()` chala rahe ho jisme pehle se kuch text hai aur app usse directly overwrite nahi karne de raha.
 * **Fix:** Hamesha text type karne se pehle element ko khali karo: pehle `element.clear()` call karo, phir uske baad `element.send_keys(...)` call karo.
 
@@ -10174,7 +10174,7 @@ Socho tum ek **Ghar** (Software) banwa rahe ho. Agar Customer (jo paisa de raha 
 BDD process ek strict 4-step flow follow karta hai:
 
 1. **(1) Discover:** Team (BA, Dev, Tester) milkar feature discuss karti hai.
-2. **(2) Define:** Us discussion se nikle examples ko **Gherkin** (BDD ki bhasha) mein **`.feature` file** (text file jisme test cases hote hain) mein likhte hain.
+2. **(2) Define:** Us discussion se nikle examples ko **Gherkin** (BDD ki bhasha) mein ** `.feature` file** (text file jisme test cases hote hain) mein likhte hain.
 3. **(3) Develop:** Developer actual software code likhta hai aur Tester **automation tests** (scripts jo automatically code check karti hain) banata hai.
 4. **(4) Test:** Tests run hote hain. Code aur English match hote hain tabhi pass hote hain.
 
@@ -10383,7 +10383,7 @@ Industry mein bade scenarios ko "Scenario Outline" use karke scale kiya jaata ha
 
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
 
-* **`Gherkin Parser Error: unexpected token`**
+* ** `Gherkin Parser Error: unexpected token`**
 * **Root Cause:** Feature file mein Gherkin keyword (Given/When/Then) miss ho gaya ya spelling galat hai.
 * **Fix:** Apne steps check karo ki har nayi line inhi standard keywords se shuru ho rahi hai ya nahi.
 
@@ -11030,10 +11030,10 @@ Applitools ya Percy (SaaS — cloud based applications visual testing ke liye) k
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. **Run 1 (Baseline Capture):** Pehli baar test chalne par tool (jaise Percy) page ka screenshot (HTML/CSS state) leta hai aur use cloud par **Baseline** maan kar save karta hai.
-2. **Run 2 (Actual Capture):** Code change ke baad jab test dobara chalta hai, toh naya screenshot **Actual** ke roop mein capture hota hai.
-3. **Comparison Engine:** OpenCV (Computer vision library — images compare karne ke liye) ya AI algorithms dono images ko pixel-by-pixel match karte hain.
-4. **Result:** Agar 1 pixel bhi alag hota hai (dumb comparison) ya AI ko logical difference milta hai (Smart AI-powered), toh test fail mark karke dashboard par bhej diya jaata hai.
+1. **[[HL::Run 1 (Baseline Capture):** Pehli baar test chalne par tool (jaise Percy) page ka screenshot (HTML/CSS state) leta hai aur use cloud par **Baseline** maan kar save karta hai.::HL]]
+2. [[HL::**Run 2 (Actual Capture):** Code change ke baad jab test dobara chalta hai, toh naya screenshot **Actual** ke roop mein capture hota hai.::HL]]
+3. [[HL::**Comparison Engine:** OpenCV (Computer vision library — images compare karne ke liye) ya AI algorithms dono images ko pixel-by-pixel match karte hain.::HL]]
+4. [[HL::**Result:** Agar 1 pixel bhi alag hota hai (dumb comparison) ya AI ko logical difference milta hai (Smart AI-powered), toh test fail mark karke dashboard par bhej diya jaata hai::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
 
@@ -11041,19 +11041,19 @@ Applitools ya Percy (SaaS — cloud based applications visual testing ke liye) k
 # Python 3.10+ | Selenium 4.x | Percy 1.0+
 1  import os                                # os module — environment variables read/write karne ke liye
 2  from selenium import webdriver           # webdriver — browser control karne ke liye
-3  from percy import percy_snapshot         # percy_snapshot — Percy cloud pe screenshot bhejne wala function
-4  
-5  # Setup Percy Driver (normal driver ko Percy wrap karta hai)
-6  driver = webdriver.Chrome()              # Chrome browser launch karo
-7  
-8  # Step 1: Website open karo
-9  driver.get("https://example.com")        # get() = URL open karta hai
-10 
-11 # Step 2: Visual Snapshot lo
-12 # percy_snapshot() = DOM, HTML, aur CSS state capture karke Percy dashboard pe bhejta hai
-13 percy_snapshot(driver, "Homepage_Baseline") 
-14 
-15 driver.quit()                            # quit() = browser band karo
+3  [[HL::from percy import percy_snapshot         # percy_snapshot — Percy cloud pe screenshot bhejne wala function::HL]]
+[[HL::4  ::HL]]
+[[HL::5  # Setup Percy Driver (normal driver ko Percy wrap karta hai)::HL]]
+[[HL::6  driver = webdriver.Chrome()              # Chrome browser launch karo::HL]]
+[[HL::7  ::HL]]
+[[HL::8  # Step 1: Website open karo::HL]]
+[[HL::9  driver.get("https://example.com")        # get() = URL open karta hai::HL]]
+[[HL::10 ::HL]]
+[[HL::11 # Step 2: Visual Snapshot lo::HL]]
+[[HL::12 # percy_snapshot() = DOM, HTML, aur CSS state capture karke Percy dashboard pe bhejta hai::HL]]
+[[HL::13 percy_snapshot(driver, "Homepage_Baseline") ::HL]]
+[[HL::14 ::HL]]
+[[HL::15 driver.quit::HL]]()                            # quit() = browser band karo
 
 ```
 
@@ -11120,7 +11120,7 @@ Industry mein "Dumb comparison" (Pillow ya basic libraries se) fail ho jata hai 
 
 #### 🛠️ 12. Troubleshooting Flowchart
 
-* **`[percy] Error: missing Percy token`**
+* ** `[percy] Error: missing Percy token`**
 * **Root Cause:** Script ko Percy cloud ka access nahi mil raha kyunki ⭐PERCY_TOKEN environment variable set nahi hai.
 * **Fix:** Terminal mein run karne se pehle `export PERCY_TOKEN=your_token_here` (Mac/Linux) ya `set PERCY_TOKEN=your_token_here` (Windows) set karo.
 
@@ -11203,7 +11203,7 @@ E-commerce sites jaise Amazon par, agar kisi developer ne galti se CSS file mein
 
 ### 🎯 Topic: 2. Detecting Broken Images & Links
 
-*(Is topic mein hum seekhenge ki kaise web page par tooti hui images aur dead links ko systematically API aur JS ka use karke dhoondha jata hai.)*
+*([[HL::Is topic mein hum seekhenge ki kaise web page par tooti hui images aur dead links ko systematically API aur JS ka use karke dhoondha jata hai::HL]].)*
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
@@ -11212,7 +11212,7 @@ Socho tum ek **City Tour** par nikle ho. Agar koi link kaam nahi karta (Broken L
 #### 📖 3. Technical Definition
 
 * **Precise English:** Detecting broken resources involves parsing the HTML DOM for hyperlink and image tags, and programmatically verifying that their source URLs return valid HTTP status codes (2xx) and not errors like 404 Not Found.
-* **Hinglish Simplification:** Ek script likhna jo website ke saare links aur images nikal kar, backend se verify kare ki unme se koi "404 Page Not Found" ya "Image missing" error toh nahi de raha.
+* **[[HL::Hinglish Simplification:** Ek script likhna jo website ke saare links aur images nikal kar, backend se verify kare ki unme se koi "404 Page Not Found" ya "Image missing" error toh nahi de raha::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
@@ -11230,11 +11230,11 @@ Terminal mein aapko URL list print hoti dikhegi jinke aage unka status code hoga
 
 **Hybrid Approach Flow:**
 
-1. Selenium webdriver page par load hota hai aur JavaScript (DOM) execute karke saare elements (`By.TAG_NAME`, 'a' ya 'img') dhundhta hai.
-2. Har tag ka URL (`href` ya `src` attribute) extract kiya jata hai.
-3. Bajaay Selenium se click karne ke (jo slow hai), script Python ka `requests` API module use karti hai.
-4. `requests.head(url)` us URL par ek lightweight server ping (HTTP GET/HEAD) bhejti hai.
-5. Agar `response.status_code` 400 ya 500 (jaise 404 Not Found) aata hai, toh test fail ho jata hai. Images ke liye JS injection (`naturalWidth`) verify karta hai ki browser ne picture actual mein paint ki hai ya nahi.
+1. [[HL::Selenium webdriver page par load hota hai aur JavaScript (DOM) execute karke saare elements (`By.TAG_NAME`, 'a' ya 'img') dhundhta hai.::HL]]
+2. [[HL::Har tag ka URL (`href` ya `src` attribute) extract kiya jata hai.::HL]]
+3. [[HL::Bajaay Selenium se click karne ke (jo slow hai), script Python ka `requests` API module use karti hai.::HL]]
+4. [[HL::`requests.head(url)` us URL par ek lightweight server ping (HTTP GET/HEAD) bhejti hai.::HL]]
+5. [[HL::Agar `response.status_code` 400 ya 500 (jaise 404 Not Found) aata hai, toh test fail ho jata hai. Images ke liye JS injection (`naturalWidth`) verify karta hai ki browser ne picture actual mein paint ki hai ya nahi::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
 
@@ -11311,7 +11311,7 @@ Loop ke andar ek-ek karke 1000 links check karna (synchronous) bohot time lega. 
 
 #### 🛠️ 12. Troubleshooting Flowchart
 
-* **`requests.exceptions.ConnectionError: Max retries exceeded`**
+* ** `requests.exceptions.ConnectionError: Max retries exceeded`**
 * **Root Cause:** Jis URL ko test kar rahe ho, woh exist hi nahi karta (Domain invalid) ya aapka internet disconnect ho gaya hai.
 * **Fix:** Code mein `try...except` block add karo taaki agar DNS error aaye toh script crash hone ki bajaye us URL ko fail list mein log karke aage badh jaye.
 
@@ -11360,9 +11360,9 @@ Media websites (jaise News portals) par daily hazaron images aur articles publis
 
 #### ❓ 17. Interview Q&A
 
-* **Q:** Selenium mein broken links test karne ka sabse efficient tarika kya hai?
-* **A:** Sabse efficient "Hybrid Approach" hai. Selenium ka use karke DOM se saare `<a>` tags aur unke `href` attribute values nikalein, aur fir Python ke `requests.head()` method se HTTP status code check karein (200 OK hai ya 404 Not Found). Click navigation ka use na karein kyunki woh slow hai.
-* **Q:** `requests.get()` aur `requests.head()` mein broken links ke context mein kya fark hai?
+* **[[HL::Q:** Selenium mein broken links test karne ka sabse efficient tarika kya hai?::HL]]
+* [[HL::**A:** Sabse efficient "Hybrid Approach" hai. Selenium ka use karke DOM se saare `<a>` tags aur unke `href` attribute values nikalein, aur fir Python ke `requests.head()` method se HTTP status code check karein (200 OK hai ya 404 Not Found). Click navigation ka use na karein kyunki woh slow hai.::HL]]
+* [[HL::**Q:** `requests.get()` aur::HL]] `requests.head()` mein broken links ke context mein kya fark hai?
 * **A:** `GET` request bhejti hai toh server pura HTML page/content return karta hai, jisme memory aur bandwidth waste hoti hai. `HEAD` request bhi wahi route follow karti hai, but server reply mein body data nahi bhejta, sirf metadata aur Status Code bhejta hai. Broken links ke liye humein sirf status code chahiye, isliye `HEAD` fast aur best practice hai.
 * **Q:** Ek image ka HTTP status code 200 OK hai, par fir bhi browser mein broken kyu dikh sakti hai? Isko automation mein kaise pakdenge?
 * **A:** Aisa tab hota hai jab file size 0 bytes ho ya file corrupt ho. Status code 200 hoga par photo render nahi hogi. Isko pakadne ke liye JS ki property `naturalWidth` use karte hain. Selenium via `execute_script` check karta hai ki `image.naturalWidth > 0` hai ya nahi.
@@ -11832,8 +11832,8 @@ Maan lo tumhara **Ghar ka Address** tumhara source code hai — jo public hai au
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Beginners aksar `password = "admin123"` seedha `.py` file mein likh dete hain (Hard-coding). Jab yeh code GitHub par jata hai, toh saari duniya ko password dikh jata hai.
-* **Solution:** Hum **.env** file banate hain aur code mein variables ko bahar se read karte hain (`os.environ.get` se).
+* **[[HL::Problem:** Beginners aksar `password = "admin123"` seedha `.py` file mein likh dete hain (Hard-coding). Jab yeh code GitHub par jata hai, toh saari duniya ko password dikh jata hai.::HL]]
+* [[HL::**Solution:** Hum **.env** file banate hain aur code mein variables ko bahar se read karte hain (`os.environ.get` se::HL]]).
 * **What breaks if we don't use it?** Hackers bots lagake rakhte hain jo GitHub par API keys scan karte hain. Agar tumhara **BSTACK_KEY** (BrowserStack ka paid API key) leak ho gaya, toh hacker tumhare account se hazaron dollars ka bill bana dega. Ise bachana **⭐"anivarya"** (mandatory) hai.
 * **✅ Kab use karo:** Jab bhi tumhare code mein koi **secrets, Passwords, API Keys, Tokens, DB_USER, ya DB_PASSWORD** use ho. Inhe **⭐"kabhi bhi"** code mein hardcode mat karo.
 * **❌ Kab mat karo / Alternative prefer karo:** Public data (jaise base URL `https://example.com`) ko `.env` mein rakhne ki zaroorat nahi hai, usko seedha constants file mein rakh sakte ho.
@@ -11944,7 +11944,7 @@ Industry mein companies har environment ke liye alag credentials rakhti hain (e.
 
 #### 🛠️ 12. Troubleshooting Flowchart
 
-* **`os.environ.get` return kar raha hai `None**`
+* ** `os.environ.get` return kar raha hai `None**`
 * **Root Cause:** Ya toh `.env` file ka naam galat hai (jaise `env.txt`), ya tumne `load_dotenv()` call nahi kiya, ya key ki spelling galat hai.
 * **Fix:** File ka naam exactly `.env` (without any name before the dot) rakho aur check karo ki script mein `load_dotenv()` top par call hua ho.
 
@@ -12340,9 +12340,9 @@ Industry mein "headless mode" (browser ka UI na kholna, background mein test cha
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "CMD aur ENTRYPOINT mein kya difference hai?"**
-* **Galat soch:** Dono ka kaam same hai, bas naam alag hain.
-* **Actually:** `ENTRYPOINT` (woh main executable command hai jise aasaani se override nahi kiya ja sakta). `CMD` (woh default arguments hote hain). Agar tumne `ENTRYPOINT ["pytest"]` likha hai, toh command line par uske aage arguments de sakte ho: `docker run my-tests -v` (yahan `-v` automatically `pytest -v` ban jayega).
+* **[[HL::Confusion 1 — "CMD aur ENTRYPOINT mein kya difference hai?"**::HL]]
+* [[HL::**Galat soch:** Dono ka kaam same hai, bas naam alag hain.::HL]]
+* [[HL::**Actually:** `ENTRYPOINT` (woh main executable command hai jise aasaani se override nahi kiya ja sakta). `CMD` (woh default arguments hote hain). Agar tumne `ENTRYPOINT ["pytest"]` likha hai, toh command line par uske aage arguments de sakte ho: `docker run my-tests -v` (yahan `-v` automatically `pytest -v` ban jayega::HL]]).
 * **Prove karo:** Try running `docker run my-tests --help`. Agar CMD use kiya hota toh yeh `--help` error deta, par ENTRYPOINT isko append kar dega.
 
 
@@ -12952,10 +12952,10 @@ Slack ki jagah agar company Email use karti hai, toh Jenkins mein **Email Extens
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Webhook aur API mein kya farq hai?"**
-* **Galat soch:** Slack webhook matlab Slack ki API hai jahan se main data pull karta hoon.
-* **Actually:** API usually 'Pull' karti hai (tum request bhejte ho data laane ke liye). Webhook 'Push' karta hai. Tum Slack ko command (post) bhejte ho ki "Yeh message abhi publish kar do".
-* **Prove karo:** Webhook URL browser mein open karoge toh "Invalid GET payload" aayega, kyunki webhook browser request (GET) pe nahi, code dwara bheje gaye data (POST) pe kaam karta hai.
+* **[[HL::Confusion 1 — "Webhook aur API mein kya farq hai?"**::HL]]
+* [[HL::**Galat soch:** Slack webhook matlab Slack ki API hai jahan se main data pull karta hoon.::HL]]
+* [[HL::**Actually:** API usually 'Pull' karti hai (tum request bhejte ho data laane ke liye). Webhook 'Push' karta hai. Tum Slack ko command (post) bhejte ho ki "Yeh message abhi publish kar do".::HL]]
+* [[HL::**Prove karo:** Webhook URL browser mein open karoge toh "Invalid GET payload" aayega, kyunki webhook browser request (GET) pe nahi, code dwara bheje gaye data (POST) pe kaam karta hai::HL]].
 
 
 * **Confusion 2 — "Kya Slack account hack ho jayega agar GitHub actions use kiya toh?"**
@@ -13870,8 +13870,8 @@ Maan lo tum ek bank mein ho. Front desk clerk tumhe raseed (receipt) deta hai ki
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Kai baar API cache (temporary memory) se purana data dikha deti hai, ya UI par fake success message aa jata hai, lekin actual hard drive par data insert nahi hua hota.
-* **Solution:** Direct RDBMS (Relational DB jaise MySQL/PostgreSQL) mein connect karke SQL query maaro aur pure validation paao.
+* **[[HL::Problem:** Kai baar API cache (temporary memory) se purana data dikha deti hai, ya UI par fake success message aa jata hai, lekin actual hard drive par data insert nahi hua hota.::HL]]
+* [[HL::**Solution:** Direct RDBMS (Relational DB jaise MySQL/PostgreSQL) mein connect karke SQL query maaro aur pure validation paao::HL]].
 * **What breaks if we don't use it?** "Data Loss" bugs silently production mein chale jayenge — user sign-up karke success dekhega but login nahi kar payega kyunki DB mein data gaya hi nahi.
 * **✅ Kab use karo:** Jab test financial data, user profiles, ya critical transactions verify kar raha ho. (⭐ **UI par jo dikh raha hai, wo DB mein bhi hona chahiye!**)
 * **❌ Kab mat karo / Alternative prefer karo:** Jab simple UI styling/CSS tests ho rahe ho. Usme DB hit karna test execution time waste karega.
@@ -15282,13 +15282,13 @@ Socho tum ek factory mein ho jahan "Quality Check Machine" lagi hai. Bina JIRA i
 #### 📖 3. Technical Definition
 
 * **Precise English:** JIRA integration involves using the JIRA REST API within the test execution hooks to automatically log a bug ticket containing the stack trace whenever an automated test fails, ensuring complete traceability.
-* **Hinglish Simplification:** Apne PyTest framework ko JIRA se jodna taaki jab bhi koi test fail ho, script khud-ba-khud JIRA pe ek bug ticket bana de jisme error ka detail ho.
+* **[[HL::Hinglish Simplification:** Apne PyTest framework ko JIRA se jodna taaki jab bhi koi test fail ho, script khud-ba-khud JIRA pe ek bug ticket bana de jisme error ka detail ho::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Hazaron tests raat ko CI/CD pipeline (Continuous Integration/Continuous Deployment — code ko automatically test aur deploy karne ka system) mein chalte hain. Subah aakar manually check karna aur fail hue tests ka ticket banana bohot time-consuming hai.
-* **Solution:** **Automatic Bug Reporting** se jaise hi test fail hoga, JIRA ticket ban jayega jisse **Traceability** (kis test ke fail hone se kaunsa bug aaya, usko track karna) maintain rehti hai.
-* **What breaks if we don't use it?** Bugs easily miss ho jayenge, developers ko issue track karne mein mushkil hogi, aur testing cycle slow ho jayega.
+* **[[HL::Problem:** Hazaron tests raat ko CI/CD pipeline (Continuous Integration/Continuous Deployment — code ko automatically test aur deploy karne ka system) mein chalte hain. Subah aakar manually check karna aur fail hue tests ka ticket banana bohot time-consuming hai.::HL]]
+* [[HL::**Solution:** **Automatic Bug Reporting** se jaise hi test fail hoga, JIRA ticket ban jayega jisse **Traceability** (kis test ke fail hone se kaunsa bug aaya, usko track karna) maintain rehti hai.::HL]]
+* [[HL::**What breaks if we don't use it?** Bugs easily miss ho jayenge, developers ko issue track karne mein mushkil hogi, aur testing cycle slow ho jayega::HL]].
 * **✅ Kab use karo:** Jab aap CI/CD pipeline setup kar rahe ho aur **"Sabse Zaroori"** requirement yeh ho ki failures ka record automatic track ho team dashboard par.
 * **❌ Kab mat karo / Alternative prefer karo:** Jab tumhara framework local level par bas debug ho raha ho. Aise mein TestRail (test management tool jisme testrail-api use hoti hai) ya simply HTML reports zyada suit karte hain jab tak script stable na ho jaye.
 
@@ -15304,15 +15304,15 @@ Description: Error log with traceback...
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. PyTest script chalti hai.
-2. Agar test fail hota hai, toh PyTest ka ek special internal function (`pytest_runtest_makereport` hook) trigger hota hai.
-3. Yeh hook error message (traceback) ko pakadta hai.
-4. Phir hamara custom `create_jira_bug()` function JIRA server ko API call karta hai with credentials.
-5. JIRA server authenticate karta hai aur **Bug ticket** create kar deta hai.
+1. [[HL::PyTest script chalti hai.::HL]]
+2. [[HL::Agar test fail hota hai, toh PyTest ka ek special internal function (`pytest_runtest_makereport` hook) trigger hota hai.::HL]]
+3. [[HL::Yeh hook error message (traceback) ko pakadta hai.::HL]]
+4. [[HL::Phir hamara custom `create_jira_bug()` function JIRA server ko API call karta hai with credentials.::HL]]
+5. [[HL::JIRA server authenticate karta hai aur **Bug ticket** create kar deta hai.::HL]]
 
-#### 💻 7. Hands-On — Runnable Example
+#### [[HL::💻 7. Hands-On — Runnable Example::HL]]
 
-Pehle terminal mein library install karo:
+[[HL::Pehle terminal mein library install karo::HL]]:
 
 ```bash
 # 📤 Expected Output:
@@ -15370,7 +15370,7 @@ Pehle terminal mein library install karo:
 1  import pytest                                # pytest import karo
 2  from jira_helper import create_jira_bug      # custom helper function import karo
 3
-4  @pytest.hookimpl(tryfirst=True, hookwrapper=True) # pytest hook — test run hone ke baad execute hoga
+4  @[[HL::pytest.hookimpl(tryfirst=True, hookwrapper=True) # pytest hook — test run hone ke baad execute hoga::HL]]
 5  def pytest_runtest_makereport(item, call):   # pytest_runtest_makereport = har test ka result (pass/fail) generate karne wala function
 6      outcome = yield                          # test ka result yahan catch karo
 7      report = outcome.get_result()            # actual report object nikalo
@@ -15505,13 +15505,13 @@ Ek nayi "Bridge" (Pul) bani hai.
 
 #### 📖 3. Technical Definition
 
-* **Precise English:** Performance Testing (or Load Testing) is a type of Non-Functional Testing used to determine how a system performs in terms of responsiveness and stability under a particular simulated workload.
-* **Hinglish Simplification:** Ek aisi testing jahan hum software par farzi (fake) users ka bhari load daalte hain, taaki pata chale ki traffic badhne par website crash toh nahi hogi.
+* **[[HL::Precise English:** Performance Testing (or Load Testing) is a type of Non-Functional Testing used to determine how a system performs in terms of responsiveness and stability under a particular simulated workload.::HL]]
+* [[HL::**Hinglish Simplification:** Ek aisi testing jahan hum software par farzi (fake) users ka bhari load daalte hain, taaki pata chale ki traffic badhne par website crash toh nahi hogi::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Functional test pass ho jata hai (e.g., login successfully), par jab Flipkart ki Big Billion Day Sale aati hai toh hazaron users ek saath login karte hain aur website mein "traffic jam" lagta hai aur screen par **503 Service Unavailable** error aata hai (crash ho jata hai).
-* **Solution:** **Locust** jaisa framework use karke hum pehle se hi load (bheed) dalkar bottlenecks find kar lete hain.
+* **[[HL::Problem:** Functional test pass ho jata hai (e.g., login successfully), par jab Flipkart ki Big Billion Day Sale aati hai toh hazaron users ek saath login karte hain aur website mein "traffic jam" lagta hai aur screen par **503 Service Unavailable** error aata hai (crash ho jata hai).::HL]]
+* [[HL::**Solution:** **Locust** jaisa framework use karke hum pehle se hi load (bheed) dalkar bottlenecks find kar lete hain::HL]].
 * **What breaks if we don't use it?** Production mein real customers jab aayenge toh server down ho jayega, brand value down hogi aur financial loss hoga.
 * **✅ Kab use karo:** Jab app public-facing ho aur expected user traffic kaafi zyada ho (e.g., Ticket booking app, E-commerce sale).
 * **❌ Kab mat karo / Alternative prefer karo:** Functional defects dhoondhne ke liye (uske liye PyTest/Selenium hai). Aur yaad rakho, UI level par (Selenium se) load testing **⭐kabhi nahi karna** — yeh hamesha API level par hoti hai!
@@ -15519,20 +15519,20 @@ Ek nayi "Bridge" (Pul) bani hai.
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
 ```text
-# Terminal run karne ke baad, browser mein http://localhost:8089 kholne par:
-Locust Dashboard dikhega!
-- Number of users (e.g., 100) enter karne ka form hoga.
-- "Start Swarm" naam ka button hoga.
-- Live Real-time graphs dikhenge (RPS - Requests Per Second).
+# [[HL::Terminal run karne ke baad, browser mein http://localhost:8089 kholne par:::HL]]
+[[HL::Locust Dashboard dikhega!::HL]]
+- [[HL::Number of users (e.g., 100) enter karne ka form hoga.::HL]]
+- [[HL::"Start Swarm" naam ka button hoga.::HL]]
+- [[HL::Live Real-time graphs dikhenge (RPS - Requests Per Second::HL]]).
 
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. Hum Python script mein `locustfile.py` banate hain jo describe karta hai ki ek "user" kya karega (e.g., Homepage kholna).
-2. Locust engine ek dashboard start karta hai local port `8089` par.
-3. Jab tum UI se "Start Swarm" (nakli bheed bhejna) button dabate ho, toh Locust hazaron virtual users banata hai.
-4. Har virtual user API endpoints par HTTP requests spam karta hai server response time check karne ke liye.
+1. [[HL::Hum Python script mein `locustfile.py` banate hain jo describe karta hai ki ek "user" kya karega (e.g., Homepage kholna).::HL]]
+2. [[HL::Locust engine ek dashboard start karta hai local port `8089` par.::HL]]
+3. [[HL::Jab tum UI se "Start Swarm" (nakli bheed bhejna) button dabate ho, toh Locust hazaron virtual users banata hai.::HL]]
+4. [[HL::Har virtual user API endpoints par HTTP requests spam karta hai server response time check karne ke liye::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
 
@@ -15540,12 +15540,12 @@ Pehle install karo:
 
 ```bash
 # 📤 Expected Output:
-# pip install locust
+# [[HL::pip install locust::HL]]
 # Successfully installed locust-x.x.x
 
 ```
 
-**File: `locustfile.py` (Script Setup)**
+**[[HL::File: `locustfile.py` (Script Setup::HL]])**
 
 ```python
 # Python 3.10+ | locust
@@ -15557,11 +15557,11 @@ Pehle install karo:
 6      def on_start(self):                      # on_start = jaise hi user (swarm) start hoga, yeh sabse pehle chalega (e.g., login karne ke liye)
 7          print("User joined the swarm!")
 8          
-9      @task(2)                                 # @task() decorator — Locust ko batata hai ki yeh function run karna hai. (2) = iska weightage double hai
-10     def load_homepage(self):
-11         self.client.get("/")                 # self.client.get() = website ke root URL "/" par HTTP GET request bhejo (API level)
+9      @[[HL::task(2)                                 # @task() decorator — Locust ko batata hai ki yeh function run karna hai. (2) = iska weightage double hai::HL]]
+[[HL::10     def load_homepage(self):::HL]]
+[[HL::11         self.client.get::HL]]("/")                 # self.client.get() = website ke root URL "/" par HTTP GET request bhejo (API level)
 12         
-13     @task(1)                                 # (1) = iska weightage half hai, matlab homepage 2 baar khulega toh about-us 1 baar khulega
+13     @[[HL::task(1)                                 # (1) = iska weightage half hai, matlab homepage 2 baar khulega toh about-us 1 baar khulega::HL]]
 14     def load_about_us(self):
 15         self.client.get("/about-us")
 
@@ -15570,8 +15570,8 @@ Pehle install karo:
 Terminal mein test start karo:
 
 ```bash
-# Command to run locust script:
-locust -f locustfile.py --host=http://yourwebsite.com
+# [[HL::Command to run locust script:::HL]]
+[[HL::locust -f locustfile.py --host=http://yourwebsite.com::HL]]
 
 ```
 
@@ -15585,8 +15585,8 @@ locust -f locustfile.py --host=http://yourwebsite.com
 
 #### 🔬 Code Explanation Rule (LINE-BY-LINE)
 
-* **Line 1 (`task`):** `@task` decorator yeh bataata hai ki user in actions ko repeatedly karega loop mein. Weightage e.g., `@task(2)` ka matlab yeh action zyada frequently execute hoga compared to `@task(1)`.
-* **Line 3 (`HttpUser`):** Yeh class tumhari script ko power deti hai HTTP request bhejne ke liye. Iske andar `self.client` ek requests-module jaisa object hai.
+* **[[HL::Line 1 (`task`):** `@task` decorator yeh bataata hai ki user in actions ko repeatedly karega loop mein. Weightage e.g., `@task(2)` ka matlab yeh action zyada frequently execute hoga compared to `@task(1)`.::HL]]
+* [[HL::**Line 3::HL]] (`HttpUser`):** Yeh class tumhari script ko power deti hai HTTP request bhejne ke liye. Iske andar `self.client` ek requests-module jaisa object hai.
 * **Line 11 (`self.client.get`):** Dhyan do, hum Selenium ki tarah browser open nahi kar rahe, seedha backend API endpoint (`/`) ko request bhej rahe hain.
 
 #### 🔒 8. Security-First Check

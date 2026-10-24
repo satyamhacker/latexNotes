@@ -138,10 +138,9 @@ pre.mac-window {
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     margin: 2rem 0;
     
-    /* STRICT WRAPPING FOR PDF */
-    white-space: pre-wrap !important;
-    word-break: break-word !important; 
-    overflow-x: hidden !important;
+    overflow-x: auto !important;
+    white-space: pre !important; 
+    word-break: normal !important;
 }
 
 .code-header {
@@ -158,8 +157,8 @@ pre.mac-window {
 
 code {
     font-family: 'Fira Code', monospace;
-    white-space: pre-wrap !important; 
-    word-wrap: break-word !important;
+    white-space: inherit !important; 
+    word-wrap: normal !important;
 }
 
 /* Inline Code Styling */
@@ -238,15 +237,52 @@ tr:hover {
 .layout {
     display: flex;
     min-height: 100vh;
+    background: #090a0c; /* Darker backdrop for pages */
 }
 
 .main-content {
     flex: 1;
-    padding: 3rem 4rem;
-    max-width: 900px;
-    margin: 0 auto;
+    padding: 2rem 0;
+    margin: 0;
     line-height: 1.7;
     font-size: 1.05rem;
+}
+
+/* UI Page Simulation */
+.a4-page {
+    width: 210mm;
+    height: 297mm;
+    background: var(--bg-primary);
+    margin: 0 auto 2rem auto;
+    padding: 20mm;
+    box-sizing: border-box;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.page-content {
+    flex: 1;
+    overflow-y: auto; /* Handle oversized elements like massive code blocks */
+    padding-right: 5px;
+}
+
+/* Custom scrollbar for page-content */
+.page-content::-webkit-scrollbar { width: 6px; }
+.page-content::-webkit-scrollbar-thumb { background: #30363d; border-radius: 4px; }
+
+.page-footer {
+    height: 10mm;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+    border-top: 1px solid var(--border-color);
+    padding-top: 5mm;
+    margin-top: 5mm;
 }
 
 /* Content Links */
@@ -295,6 +331,12 @@ blockquote {
 
 /* CRITICAL PRINT STYLES - DO NOT MODIFY */
 @media print {
+    /* Set page margins so browser can inject page numbers (Headers & Footers) */
+    @page {
+        margin-top: 10mm;
+        margin-bottom: 15mm;
+    }
+
     * {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
@@ -329,11 +371,32 @@ blockquote {
 
     .layout {
         display: block;
+        background: none;
     }
     
-    .main-content { padding: 2rem !important; margin: 0 auto; max-width: 100%; }
+    .a4-page {
+        margin: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        width: 100% !important;
+        height: auto !important;
+        page-break-after: auto !important;
+        padding: 0 !important;
+        display: block !important;
+    }
     
-    a { text-decoration: none !important; border-bottom: none !important; }
+    .page-content {
+        display: block !important;
+        overflow: visible !important;
+    }
+    
+    .page-footer {
+        display: none !important; /* Let the browser print its own page numbers, or hide this if it conflicts */
+    }
+    
+    .main-content { padding: 0 !important; margin: 0 auto; max-width: 100%; }
+    
+    a { text-decoration: none !important; border-bottom: none !important; color: #79c0ff !important; }
 
     /* PDF Page Breaking Rules */
     .module-section {
@@ -345,8 +408,27 @@ blockquote {
         page-break-after: avoid; /* Prevent header at the bottom of a page */
     }
     
-    pre, blockquote, table, img {
-        page-break-inside: avoid; /* Prevent code blocks and tables from splitting across pages */
+    pre.mac-window, pre.mac-window code {
+        white-space: pre-wrap !important;
+        word-break: break-all !important; 
+        overflow-x: hidden !important;
+        font-size: 11px !important; /* Shrink to fit ~120 chars per line so ASCII art doesn't wrap */
+        line-height: 1.4 !important;
+    }
+    
+    pre, blockquote, img {
+        page-break-inside: avoid; /* Prevent code blocks from splitting across pages */
+    }
+    
+    table {
+        page-break-inside: avoid;
+        table-layout: fixed !important; /* Force table to respect 100% width and not bleed off page */
+        width: 100% !important;
+    }
+    
+    td, th {
+        word-wrap: break-word !important; /* Break long strings inside table cells */
+        overflow-wrap: break-word !important;
     }
 }
 
@@ -358,6 +440,11 @@ mark.yellow-highlight {
     border-radius: 4px;
     font-weight: 600;
     box-shadow: 0 0 8px rgba(253, 224, 71, 0.1);
+}
+
+/* Fix ASCII alignment by removing horizontal padding in code blocks */
+pre mark.yellow-highlight {
+    padding: 0.15em 0 !important;
 }
 
 @media print {
@@ -426,9 +513,15 @@ document.addEventListener("DOMContentLoaded", () => {
         // 🟡 1. Extract highlights BEFORE hljs runs to protect them
         let hlCount = 0;
         let hlMap = {};
-        let rawCode = safeCode.replace(/\[\[HL::(.*?)::HL\]\]/g, function(match, p1) {
+        let rawCode = safeCode.replace(/\[\[HL::([\s\S]*?)::HL\]\]/g, function(match, p1) {
             let key = `HLTOKEN${hlCount}ENDHL`;
-            hlMap[key] = p1;
+            // Escape HTML entities to prevent DOM breakout inside <pre>
+            let escaped = p1.replace(/&/g, "&amp;")
+                            .replace(/</g, "&lt;")
+                            .replace(/>/g, "&gt;")
+                            .replace(/"/g, "&quot;")
+                            .replace(/'/g, "&#039;");
+            hlMap[key] = escaped;
             hlCount++;
             return key;
         });
@@ -522,9 +615,61 @@ document.addEventListener("DOMContentLoaded", () => {
     let finalHtml = marked.parse(processed, { renderer: renderer });
     
     // Replace remaining [[HL::text::HL]] outside of code blocks
-    finalHtml = finalHtml.replace(/\[\[HL::(.*?)::HL\]\]/gs, '<mark class="yellow-highlight">$1</mark>');
+    // Fix hanging newline tags that break HTML blocks
+    finalHtml = finalHtml.replace(/\n::HL\]\]/g, '::HL]]\n');
     
-    contentArea.innerHTML = finalHtml;
+    // Replace remaining [[HL::text::HL]] outside of code blocks
+    finalHtml = finalHtml.replace(/\[\[HL::([\s\S]*?)::HL\]\]/g, '<mark class="yellow-highlight">$1</mark>');
+    
+    // HEALING OVERLAPPING HTML DOM TAGS
+    // Fix cases where <mark> starts inside a <strong> tag but ends outside it
+    // Ex: <strong><mark>Text:</strong> More Text</mark> -> <mark><strong>Text:</strong> More Text</mark>
+    // Since browser DOM fixes overlap destructively, we fix it in the raw HTML string first
+    finalHtml = finalHtml.replace(/<strong>([^<]*?)<mark class="yellow-highlight">/g, '<mark class="yellow-highlight"><strong>$1');
+    finalHtml = finalHtml.replace(/<em>([^<]*?)<mark class="yellow-highlight">/g, '<mark class="yellow-highlight"><em>$1');
+    finalHtml = finalHtml.replace(/<\/mark>([^<]*?)<\/strong>/g, '$1</strong></mark>');
+    finalHtml = finalHtml.replace(/<\/mark>([^<]*?)<\/em>/g, '$1</em></mark>');
+    
+    // UI Pagination Logic
+    contentArea.innerHTML = '';
+    
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = finalHtml;
+    
+    let pageNumber = 1;
+    let currentPage, currentContent;
+    
+    function createNewPage(num) {
+        const page = document.createElement('div');
+        page.className = 'a4-page';
+        page.innerHTML = `
+            <div class="page-content"></div>
+            <div class="page-footer">Page ${num}</div>
+        `;
+        contentArea.appendChild(page);
+        return page;
+    }
+    
+    currentPage = createNewPage(pageNumber);
+    currentContent = currentPage.querySelector('.page-content');
+    
+    const children = Array.from(tempDiv.children);
+    for (let i = 0; i < children.length; i++) {
+        const el = children[i];
+        currentContent.appendChild(el);
+        
+        // Force synchronous layout calculation
+        if (currentContent.scrollHeight > currentContent.clientHeight) {
+            // If the page was not empty before adding this element, move it to a new page
+            if (currentContent.children.length > 1) {
+                currentContent.removeChild(el);
+                pageNumber++;
+                currentPage = createNewPage(pageNumber);
+                currentContent = currentPage.querySelector('.page-content');
+                currentContent.appendChild(el);
+            }
+        }
+    }
 
     // Generate TOC
     const headings = contentArea.querySelectorAll('h1, h2.module-section, h3.topic-section');

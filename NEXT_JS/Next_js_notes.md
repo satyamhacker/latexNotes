@@ -1,9 +1,9 @@
-=====Next.js 15/16 TOPICS...
+=====[[HL::Ne::HL]]xt.js 15/16 TOPICS...
 
 ## Phase 1: Foundations & Architecture (Neev)  
 Start strong with the right mental model.  
 Topic 1: Modern Web Architecture  
-- React vs Next.js: Why use a Framework? (The "Meta-Framework" concept).  
+- React vs Next.js: Why [[HL::use::HL]] a Framework? (The "Meta-Framework" concept).  
 - Rendering Evolution: CSR vs SSR vs SSG vs ISR.  
 - RSC (React Server Components): The conceptual shift (Server-first default).  
 - Next.js 15 Specifics: React 19 Compiler, TurboPack, Hydration errors fix.  
@@ -103,7 +103,7 @@ Topic 18: Optimistic UI & Global State
 The engine behind the store.  
 Topic 19: Database Layer  
 - PostgreSQL: Setup (Neon/Supabase).  
-- ORM: Prisma or Drizzle (Schema: User, Product, Order).  
+- ORM: [[HL::Prisma or Drizzle (Schema::HL]]: User, Product, Order).  
 - Seeding: Scripts to populate dummy data.  
 Topic 20: Database Performance  
 - Indexing: Adding indexes for fast search/filtering.  
@@ -171,17 +171,17 @@ Socho tumhe ek ghar banana hai.
 * **Hinglish Simplification:** React sirf screen par buttons aur text dikhane ka kaam karta hai (UI Library). Next.js ek poora package (Meta-Framework) hai jo React ko use karke ek poori fast aur secure website banata hai.
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Pure React mein agar ek page se doosre page pe jana ho (Routing), toh ek alag tool (`react-router-dom`) install karna padta hai. Google ko tumhari website samajhne mein dikkat hoti hai (Poor SEO - Search Engine Optimization).
-* **Solution:** Next.js aate hi bolta hai, "Bhai tu tension mat le!" Ye pages banane ka tarika, fast loading, aur Google pe rank karne ka system (SEO) apne andar inbuilt deta hai. 
+* [[HL::**Problem:** Pure React mein agar ek page se doosre page pe jana ho (Routing), toh ek alag tool (`react-router-dom`) install karna padta hai. Google ko tumhari website samajhne mein dikkat hoti hai (Poor SEO - Search Engine Optimization).::HL]]
+* [[HL::**Solution:** Next.js aate hi bolta hai, "Bhai tu tension mat le!" Ye pages banane ka tarika, fast loading, aur Google pe rank karne ka system (SEO) apne andar inbuilt deta hai::HL]]. 
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
-Agar tum pure React aur Next.js ka folder structure dekho, toh difference saaf dikhega:
-* **React mein:** Tumhe khud ek `routes.js` file banani padti hai.
-* **Next.js mein:** Ek `app/` folder hota hai. Usme `about/page.tsx` banao, aur website par `/about` URL apne aap chalne lagta hai!
+[[HL::Agar tum pure React aur Next.js ka folder structure dekho, toh difference saaf dikhega:::HL]]
+* [[HL::**React mein:** Tumhe khud ek `routes.js` file banani padti hai.::HL]]
+* [[HL::**Next.js mein:** Ek `app/` folder hota hai. Usme `about/page.tsx` banao, aur website par `/about` URL apne aap chalne lagta hai::HL]]!
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1. Jab tum React use karte ho, toh browser (jaise Chrome) poora heavy JavaScript code download karta hai, fir usko aapke phone/laptop par process karke website dikhata hai. (Isme time lagta hai).
-2. Next.js ek **Node.js Server** *(ek powerful computer jo humesha on rehta hai)* ka use karta hai. Ye server pehle hi website ka HTML bana kar aapke browser ko bhej deta hai.
+1. [[HL::Jab tum React use karte ho, toh browser (jaise Chrome) poora heavy JavaScript code download karta hai, fir usko aapke phone/laptop par process karke website dikhata hai. (Isme time lagta hai).::HL]]
+2. [[HL::Next.js ek **Node.js Server** *(ek powerful computer jo humesha on rehta hai)* ka use karta hai. Ye server pehle hi website ka HTML bana kar aapke browser ko bhej deta hai::HL]].
 3. Isse website turant (instantly) khul jati hai!
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
@@ -250,7 +250,7 @@ Welcome to Next.js!
 | **SEO (Google Ranking)**| Bahut bekar (Kyunki sab JS mein chhupa hota hai) | Excellent (HTML pehle se ban ke aata hai) |
 | **Starting Command** | `npm create vite@latest` | `npx create-next-app@latest` |
 
-## 🚫 9. Common Mistakes (Beginner Traps):
+## 🚫 9. Common [[HL::Mistak::HL]]es (Beginner Traps):
 1. **Mistake:** Next.js project mein `react-router-dom` install karne ki koshish karna. 
    **Fix:** Next.js ka apna "App Router" hai. Bahar ke router ki zaroorat nahi hai.
 2. **Mistake:** Sochna ki Next.js seekhne ke liye React bhoolna padega.
@@ -258,8 +258,8 @@ Welcome to Next.js!
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
 1. **"Meta-Framework ka matlab kya hai?"** Meta ka matlab hota hai 'Beyond' (uske aage). React ek framework/library hai, aur Next.js us React ke upar ek aur framework hai jo uski saari kamiyo ko poora karta hai. 
-2. **"Agar Next.js itna achha hai toh log React kyun use karte the?"**
-   Pehle log pure React use karte the, par jab unhe badi websites (jaise E-commerce) banani hoti thi toh unhe SEO aur speed ki dikkat aayi. Tab Vercel (Next.js banane wali company) ne ye solution nikala. Aajkal default standard Next.js hi hai!
+2. **"[[HL::Agar Next.js itna achha hai toh log React kyun use karte the?"**::HL]]
+   [[HL::Pehle log pure React use karte the, par jab unhe badi websites (jaise E-commerce) banani hoti thi toh unhe SEO aur speed ki dikkat aayi. Tab Vercel (Next.js banane wali company) ne ye solution nikala. Aajkal default standard Next.js hi hai::HL]]!
 
 ## 🌍 11. Real-World Use Case (Production Application):
 **Netflix** ya **Amazon**. Amazon ko chahiye ki jab koi Google par "Buy iPhone 15" search kare, toh Amazon ka page sabse upar aaye. Agar Amazon sirf React use karta, toh Google ka bot unka content padh hi nahi pata. Next.js unhe fast loading + perfect Google search ranking deta hai.
@@ -283,7 +283,7 @@ Senior engineers humesha naye projects Next.js (App Router) mein hi shuru karte 
 Agar tum ek client ke liye online shopping site pure React mein bana doge, toh uski site Google par kabhi search result mein aayegi hi nahi. Usko sales mein nuksan hoga.
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **Q:** Is Next.js a frontend or backend framework? **Ans:** It's a "Full-stack" framework. You can write both UI (frontend) and APIs (backend) in it.
+1. [[HL::**Q:** Is Next.js a frontend or backend framework? **Ans:** It's a "Full-stack" framework. You can write both UI (frontend) and APIs (backend) in it::HL]].
 2. **Q:** Do I need to learn Node.js to use Next.js? **Ans:** No, but a basic understanding of how servers work helps.
 3. **Q:** What is Vercel? **Ans:** The company that created and maintains Next.js.
 4. **Q:** Can I use Tailwind with Next.js? **Ans:** Yes, it comes pre-configured if you choose it during setup!
@@ -299,18 +299,18 @@ Agar tum ek client ke liye online shopping site pure React mein bana doge, toh u
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
 Maan lo tum ek Restaurant (Browser) gaye ho aur tumhe Pizza (Webpage) khana hai:
-* **CSR (Client-Side Rendering):** Waiter tumhe kachha aata, cheese aur sabziyan de deta hai aur bolta hai "Sir, gas wahan hai, khud paka lo." (Browser ko khud saari mehnat karni padti hai).
-* **SSR (Server-Side Rendering):** Tum order karte ho, Chef (Server) kitchen mein fresh Pizza banata hai, aur lakar deta hai. (Har order pe thoda wait karna padta hai, par fresh milta hai).
-* **SSG (Static Site Generation):** Tumhe pata hai ki yahan sirf ek hi type ka Pizza milta hai. Chef ne subah hi 100 Pizza bana ke rakh diye hain. Tumne order kiya, turant mil gaya! (Super fast, no wait time).
-* **ISR (Incremental Static Regeneration):** Chef ne subah Pizza banaye (SSG), par usne rule rakha hai ki "Har 10 minute mein purane Pizza hata kar ek naya fresh lot banaunga." (Fast bhi, aur relatively fresh bhi!).
+* [[HL::**CSR (Client-Side Rendering):** Waiter tumhe kachha aata, cheese aur sabziyan de deta hai aur bolta hai "Sir, gas wahan hai, khud paka lo." (Browser ko khud saari mehnat karni padti hai).::HL]]
+* [[HL::**SSR (Server-Side Rendering):** Tum order karte ho, Chef (Server) kitchen mein fresh Pizza banata hai, aur lakar deta hai. (Har order pe thoda wait karna padta hai, par fresh milta hai).::HL]]
+* [[HL::**SSG (Static Site Generation):** Tumhe pata hai ki yahan sirf ek hi type ka Pizza milta hai. Chef ne subah hi 100 Pizza bana ke rakh diye hain. Tumne order kiya, turant mil gaya! (Super fast, no wait time::HL]]).
+* [[HL::**ISR (Incremental Static Regeneration):** Chef ne subah Pizza banaye (SSG), par usne rule rakha hai ki "Har 10 minute mein purane Pizza hata kar ek naya fresh lot banaunga." (Fast bhi, aur relatively fresh bhi::HL]]!).
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** "Rendering" is the process of generating HTML from React components. CSR happens in the user's browser. SSR generates HTML on the server per request. SSG generates HTML once at build time. ISR updates static pages in the background without rebuilding the whole site.
-* **Hinglish Simplification:** Webpage ka code HTML mein kaise badlega (browser mein ya server par), aur kab badlega (turant ya pehle se), isko rendering kehte hain.
+* [[HL::**Precise English:** "Rendering" is the process of generating HTML from React components. CSR happens in the user's browser. SSR generates HTML on the server per request. SSG generates HTML once at build time. ISR updates static pages in the background without rebuilding the whole site.::HL]]
+* [[HL::**Hinglish Simplification:** Webpage ka code HTML mein kaise badlega (browser mein ya server par), aur kab badlega (turant ya pehle se), isko rendering kehte hain::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Agar hum har cheez browser pe chhod de (CSR), toh purane mobile phones wale users ke liye website bahut slow khulegi (Kyunki unka mobile itna heavy JS run nahi kar pata).
-* **Solution:** Next.js hume alag-alag pages ke liye alag strategy chunte ki azaadi deta hai. Blog ke liye SSG use karo (fast), Cart page ke liye SSR use karo (humesha updated)!
+* [[HL::**Problem:** Agar hum har cheez browser pe chhod de (CSR), toh purane mobile phones wale users ke liye website bahut slow khulegi (Kyunki unka mobile itna heavy JS run nahi kar pata).::HL]]
+* [[HL::**Solution:** Next.js hume alag-alag pages ke liye alag strategy chunte ki azaadi deta hai. Blog ke liye SSG use karo (fast), Cart page ke liye SSR use karo (humesha updated::HL]])!
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 Jab tum browser ka "Network Tab" kholte ho:
@@ -318,9 +318,9 @@ Jab tum browser ka "Network Tab" kholte ho:
 * **SSR/SSG mein:** Pehla HTML poora bhara hua aayega `<h1>Welcome to My Shop</h1><p>Items...</p>`.
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1. **SSG (Default in Next.js):** Jab tum code ko production ke liye deploy karte ho (`npm run build`), server saare pages ka HTML bana kar hard-disk pe save kar leta hai. User ke aate hi directly file serve hoti hai.
-2. **SSR:** User jab link pe click karta hai, request Server pe jati hai. Server API call karta hai, data lata hai, HTML banata hai aur bhejta hai.
-3. **Hydration (Crucial Word):** Jab Server se HTML aata hai, toh usme buttons click nahi hote (wo bas sookha HTML hai). Fir browser aaram se background mein JS code load karke us HTML mein "Jaan dalta hai" (click events attach karta hai). Is process ko **Hydration** kehte hain. (Jaise sookhi hui sponge mein pani dalna).
+1. [[HL::**SSG (Default in Next.js):** Jab tum code ko production ke liye deploy karte ho (`npm run build`), server saare pages ka HTML bana kar hard-disk pe save kar leta hai. User ke aate hi directly file serve hoti hai.::HL]]
+2. [[HL::**SSR:** User jab link pe click karta hai, request Server pe jati hai. Server API call karta hai, data lata hai, HTML banata hai aur bhejta hai.::HL]]
+3. [[HL::**Hydration (Crucial Word):** Jab Server se HTML aata hai, toh usme buttons click nahi hote (wo bas sookha HTML hai). Fir browser aaram se background mein JS code load karke us HTML mein "Jaan dalta hai" (click events attach karta hai). Is process ko **Hydration** kehte hain. (Jaise sookhi hui sponge mein pani dalna::HL]]).
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
@@ -329,11 +329,11 @@ Next.js 15/16 (App Router) mein fetching ke tarike badal gaye hain. Ab `fetch` A
 **Example 1: SSR (Server-Side Rendering) - Humesha fresh data**
 Agar page pe data har second change ho raha hai (like Stock Market):
 ```typescript
-// app/stock/page.tsx
-export default async function StockPage() {
-  // 'no-store' ka matlab hai: Cache mat karo! Har baar naya laao (SSR)
-  const response = await fetch('https://api.example.com/stock-price', {
-    cache: 'no-store' 
+// [[HL::app/stock/page.tsx::HL]]
+[[HL::export default async function StockPage() {::HL]]
+  [[HL::// 'no-store' ka matlab hai: Cache mat karo! Har baar naya laao (SSR)::HL]]
+  [[HL::const response = await fetch('https://api.example.com/stock-price', {::HL]]
+    [[HL::cache: 'no-store::HL]]' 
   });
   
   const data = await response.json();
@@ -346,68 +346,68 @@ export default async function StockPage() {
 }
 ```
 ```text
-# 📤 Expected Output: (On Browser)
-Current Reliance Stock Price: $2450.50
-(Agar refresh karoge, toh server wapas api hit karega, thoda time lega, aur naya price dikhayega)
+# 📤 [[HL::Expected Output: (On Browser)::HL]]
+[[HL::Current Reliance Stock Price: $2450.50::HL]]
+[[HL::(Agar refresh karoge, toh server wapas api hit karega, thoda time lega, aur naya price dikhayega::HL]])
 ```
 
-**Example 2: SSG (Static Site Generation) - Ek baar banaya, life jhingalala**
-Agar page ka data saalo tak change nahi hoga (like Privacy Policy):
+[[HL::**Example 2: SSG (Static Site Generation) - Ek baar banaya, life jhingalala**::HL]]
+[[HL::Agar page ka data saalo tak change nahi hoga (like Privacy Policy::HL]]):
 ```typescript
-// app/privacy/page.tsx
-export default async function PrivacyPage() {
-  // 'force-cache' default hota hai Next.js mein. Ye build time pe fetch karke save kar lega (SSG)
-  const response = await fetch('https://api.example.com/privacy-text', {
-    cache: 'force-cache'
-  });
+// [[HL::app/privacy/page.tsx::HL]]
+[[HL::export default async function PrivacyPage() {::HL]]
+  [[HL::// 'force-cache' default hota hai Next.js mein. Ye build time pe fetch karke save kar lega (SSG)::HL]]
+  [[HL::const response = await fetch('https://api.example.com/privacy-text', {::HL]]
+    [[HL::cache: 'force-cache'::HL]]
+  [[HL::});::HL]]
   
-  const data = await response.json();
+  [[HL::const data = await response.json();::HL]]
   
-  return (
-    <div>
-      <h1>Privacy Policy</h1>
-      <p>{data.text}</p>
-    </div>
-  );
+  [[HL::return (::HL]]
+    [[HL::<div>::HL]]
+      [[HL::<h1>Privacy Policy</h1>::HL]]
+      [[HL::<p>{data.text}</p>::HL]]
+    [[HL::</div>::HL]]
+  [[HL::);::HL]]
+[[HL::}::HL]]
+```
+```text
+[[HL::# 📤 Expected Output: (On Browser)::HL]]
+[[HL::Privacy Policy::HL]]
+[[HL::We respect your privacy...::HL]]
+[[HL::(Refresh karne par milliseconds mein load hoga kyunki HTML pehle se saved hai::HL]])
+```
+
+[[HL::**Example 3: ISR (Incremental Static Regeneration) - Best of both worlds**::HL]]
+[[HL::Blog post jo din mein 1 baar change hota hai.::HL]]
+```typescript
+[[HL::// app/blog/page.tsx::HL]]
+[[HL::export default async function BlogPage() {::HL]]
+  [[HL::// 'next: { revalidate: 3600 }' matlab: 1 ghante (3600 sec) tak purana (SSG) dikhao.::HL]] 
+  [[HL::// 1 ghante baad agar koi aayega, toh background mein naya fetch karke HTML update kar do.::HL]]
+  [[HL::const response = await fetch('https://api.example.com/daily-news', {::HL]]
+    [[HL::next: { revalidate: 3600 }::HL]] 
+  [[HL::});::HL]]
+  
+  [[HL::const data = await response.json();::HL]]
+  
+  [[HL::return <h1>{data.headline}</h1::HL]]>;
 }
 ```
 ```text
-# 📤 Expected Output: (On Browser)
-Privacy Policy
-We respect your privacy...
-(Refresh karne par milliseconds mein load hoga kyunki HTML pehle se saved hai)
-```
-
-**Example 3: ISR (Incremental Static Regeneration) - Best of both worlds**
-Blog post jo din mein 1 baar change hota hai.
-```typescript
-// app/blog/page.tsx
-export default async function BlogPage() {
-  // 'next: { revalidate: 3600 }' matlab: 1 ghante (3600 sec) tak purana (SSG) dikhao. 
-  // 1 ghante baad agar koi aayega, toh background mein naya fetch karke HTML update kar do.
-  const response = await fetch('https://api.example.com/daily-news', {
-    next: { revalidate: 3600 } 
-  });
-  
-  const data = await response.json();
-  
-  return <h1>{data.headline}</h1>;
-}
-```
-```text
-# 📤 Expected Output: (On Browser)
-Breaking News: AI takes over!
-(Agle 1 ghante tak yahi dikhega, chahe API mein naya data aa gaya ho. 1 ghante baad update hoga)
+# 📤 [[HL::Expected Output: (On Browser)::HL]]
+[[HL::Breaking News: AI takes over!::HL]]
+[[HL::(Agle 1 ghante tak yahi dikhega, chahe API mein naya data aa gaya ho. 1 ghante baad update hoga::HL]])
 ```
 
 ## ⚖️ 8. Comparison (Ye vs Woh):
 
-| Type | Full Form | Speed | Freshness | Kahan Use Karein? |
+| [[HL::Type::HL]] | [[HL::Full Form::HL]] | [[HL::Speed::HL]] | [[HL::Freshness::HL]] | [[HL::Kahan Use Karein?::HL]] |
 | :--- | :--- | :--- | :--- | :--- |
-| **CSR** | Client-Side Render | Slow initial | Always Fresh | Private Dashboards (Gmail) |
-| **SSR** | Server-Side Render | Medium | Always Fresh | User Cart, Stock Prices |
-| **SSG** | Static Site Gen. | **Super Fast** | Stale (Purana) | Blogs, About Us, Docs |
-| **ISR** | Incremental Static | **Super Fast** | Timed Updates | News Sites, E-commerce Catalog |
+| [[HL::**CSR**::HL]] | [[HL::Client-Side Render::HL]] | [[HL::Slow initial::HL]] | [[HL::Always Fresh::HL]] | [[HL::Private Dashboards (Gmail)::HL]] |
+| [[HL::**SSR**::HL]] | [[HL::Server-Side Render::HL]] | [[HL::Medium::HL]] | [[HL::Always Fresh::HL]] | [[HL::User Cart, Stock Prices::HL]] |
+| [[HL::**SSG**::HL]] | [[HL::Static Site Gen.::HL]] | [[HL::**Super Fast**::HL]] | [[HL::Stale (Purana)::HL]] | [[HL::Blogs, About Us, Docs::HL]] |
+| [[HL::**ISR**::HL]] | [[HL::Incremental Static::HL]] | [[HL::**Super Fast**::HL]] | [[HL::Timed Updates::HL]] | [[HL::News Sites, E-commerce Catalog::HL]] |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
 1. **Mistake:** Har page ko SSR bana dena `cache: 'no-store'` likh kar. 
@@ -416,7 +416,7 @@ Breaking News: AI takes over!
    **Fix:** Next.js 15+ mein Hydration errors ko kaafi improve kiya gaya hai, UI mein exact bata deta hai ki kahan mismatch hai!
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-1. **"Toh main kab kya use karun?"** Aankh band karke **SSG/ISR** use karo. Agar tumhara data aisi cheez hai jo har second badalti hai ya user-specific hai (jaise user profile), tabhi **SSR** ki taraf jao.
+1. [[HL::**"Toh main kab kya use karun?"** Aankh band karke **SSG/ISR** use karo. Agar tumhara data aisi cheez hai jo har second badalti hai ya user-specific hai (jaise user profile), tabhi **SSR** ki taraf jao::HL]].
 2. **"Hydration word se darr lag raha hai!"**
    Simple hai: HTML aana = skeleton aana. Hydration = Skeleton mein muscles aur life daalna taaki user click kar sake.
 
@@ -446,8 +446,8 @@ Agar tumne ek heavily visited public page (jaise e-commerce product page) ko SSR
 1. **Q:** What is Hydration? **Ans:** The process where React attaches event listeners to the pre-rendered static HTML sent by the server.
 2. **Q:** Can I mix CSR and SSR in Next.js? **Ans:** Yes! In Next.js App Router, you can have a Server Component (SSR/SSG) that imports a Client Component (CSR).
 3. **Q:** What is the default rendering in Next.js App directory? **Ans:** React Server Components (which behave like SSR/SSG).
-4. **Q:** Why not use ISR for everything? **Ans:** For highly sensitive real-time data (like bank balance), ISR might show a 5-minute old balance, which is disastrous.
-5. **Q:** How do I trigger CSR in Next.js 15? **Ans:** Add `"use client"` at the very top of your file.
+4. [[HL::**Q:** Why not use ISR for everything? **Ans:** For highly sensitive real-time data (like bank balance), ISR might show a 5-minute old balance, which is disastrous::HL]].
+5. [[HL::**Q:** How::HL]] [[HL::do I trigger CSR in Next.js 15? **Ans:** Add `"use client"` at the very top of your::HL]] file.
 
 ## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
 **"Rendering ye decide karti hai ki khana (HTML) customer ki table par banega (CSR), kitchen mein order ke baad banega (SSR), ya subah se ban kar ready rakha hai (SSG/ISR)."**
@@ -481,105 +481,105 @@ Socho tum ek bade 5-Star Hotel ke Restaurant mein gaye ho.
 Next.js (App Router) mein by default har component **Chef (RSC)** hota hai. Jab tak tum explicitly usko "Waiter" na banao!
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** React Server Components (RSC) is a new architecture where components execute exclusively on the server. They never ship their JavaScript to the client, resulting in zero-bundle-size components and allowing direct access to server-side resources like databases.
-* **Hinglish Simplification:** Aise React components jinka code (JS) user ke browser mein kabhi download nahi hota. Ye sirf Server pe chalte hain, apna kaam karte hain, aur output (HTML) browser ko de dete hain. Isse website super fast ho jati hai.
+* [[HL::**Precise English:** React Server Components (RSC) is a new architecture where components execute exclusively on the server. They never ship their JavaScript to the client, resulting in zero-bundle-size components and allowing direct access to server-side resources like databases.::HL]]
+* [[HL::**Hinglish Simplification:** Aise React components jinka code (JS) user ke browser mein kabhi download nahi hota. Ye sirf Server pe chalte hain, apna kaam karte hain, aur output (HTML) browser ko de dete hain. Isse website super fast ho jati hai::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Pehle React mein, tumhari website ka **saara** code (chahe wo sirf text dikhane ka ho ya button click karne ka) user ke mobile/laptop par download hota tha. Jisko hum "JavaScript Bundle" bolte hain. Isse website heavy aur slow ho jati thi.
-* **Solution:** RSC ne bola, "Bhai, jo component sirf Text ya Image dikha raha hai aur jisme koi `onClick` ya `useState` nahi hai, uska code hum user ko bhejenge hi nahi!" Wo code sirf server pe chalega. Bundle size ekdum zero!
+* [[HL::**Problem:** Pehle React mein, tumhari website ka **saara** code (chahe wo sirf text dikhane ka ho ya button click karne ka) user ke mobile/laptop par download hota tha. Jisko hum "JavaScript Bundle" bolte hain. Isse website heavy aur slow ho jati thi.::HL]]
+* [[HL::**Solution:** RSC ne bola, "Bhai, jo component sirf Text ya Image dikha raha hai aur jisme koi `onClick` ya `useState` nahi hai, uska code hum user ko bhejenge hi nahi!" Wo code sirf server pe chalega. Bundle size ekdum zero!::HL]]
 
-## 🔍 5. Visual / Editor Mein Kya Dikhega:
-Jab tum VS Code mein file banaoge, toh wo normal React component jaisi hi dikhegi. Par agar tumhe Waiter (Client Component) banana hai, toh file ke sabse top par ` "use client"; ` likhna padega. Agar kuch nahi likha, toh wo automatically Chef (RSC) hai!
+[[HL::## 🔍 5. Visual / Editor Mein Kya Dikhega:::HL]]
+[[HL::Jab tum VS Code mein file banaoge, toh wo normal React component jaisi hi dikhegi. Par agar tumhe Waiter (Client Component) banana hai, toh file ke sabse top par ` "use client"; ` likhna padega. Agar kuch nahi likha, toh wo automatically Chef (RSC) hai!::HL]]
 
-## ⚙️ 6. Under the Hood (Technical Working):
-1. User website kholta hai.
-2. Next.js ka Server tumhare **Server Components** ko run karta hai. 
-3. Agar wo Database se data maang rahe hain, toh server turant data le aata hai (kyunki database aur server aas-paas hote hain).
-4. Server un components ko HTML aur ek special data format (RSC Payload) mein convert karta hai.
-5. Ye halka sa data Browser ko milta hai. Browser directly usko screen par chhaap deta hai (paint kar deta hai). Koi extra JS download nahi hoti!
+[[HL::## ⚙️ 6. Under the Hood (Technical Working):::HL]]
+1. [[HL::User website kholta hai.::HL]]
+2. [[HL::Next.js ka Server tumhare **Server Components** ko run karta hai.::HL]] 
+3. [[HL::Agar wo Database se data maang rahe hain, toh server turant data le aata hai (kyunki database aur server aas-paas hote hain).::HL]]
+4. [[HL::Server un components ko HTML aur ek special data format (RSC Payload) mein convert karta hai.::HL]]
+5. [[HL::Ye halka sa data Browser ko milta hai. Browser directly usko screen par chhaap deta hai (paint kar deta hai). Koi extra JS download nahi hoti::HL]]!
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
 
 
-**A. The Chef (Server Component - Default)**
-Dhyan se dekho, yahan hum directly Database ya API call kar rahe hain bina kisi `useEffect` ke! Ye pure React mein impossible tha.
+[[HL::**A. The Chef (Server Component - Default)**::HL]]
+[[HL::Dhyan se dekho, yahan hum directly Database ya API call kar rahe hain bina kisi `useEffect` ke! Ye pure React mein impossible tha::HL]].
 
 ```tsx
-// app/products/page.tsx
-// (Yahan koi "use client" nahi likha hai, toh ye Server Component hai)
+// [[HL::app/products/page.tsx::HL]]
+[[HL::// (Yahan koi "use client" nahi likha hai, toh ye Server Component hai)::HL]]
 
-export default async function ProductList() {
-  // Direct server par API call (No useEffect required!)
-  const res = await fetch('https://api.example.com/products');
-  const products = await res.json();
+[[HL::export default async function ProductList() {::HL]]
+  [[HL::// Direct server par API call (No useEffect required!)::HL]]
+  [[HL::const res = await fetch('https://api.example.com/products');::HL]]
+  [[HL::const products = await res.json();::HL]]
 
-  return (
-    <ul>
-      {/* Ye loop server pe hi chal jayega */}
-      {products.map((item) => (
-        <li key={item.id}>{item.name} - ${item.price}</li>
-      ))}
-    </ul>
-  );
-}
+  [[HL::return (::HL]]
+    [[HL::<ul>::HL]]
+      [[HL::{/* Ye loop server pe hi chal jayega */}::HL]]
+      [[HL::{products.map((item) => (::HL]]
+        [[HL::<li key={item.id}>{item.name} - ${item.price}</li>::HL]]
+      [[HL::))}::HL]]
+    [[HL::</ul>::HL]]
+  [[HL::);::HL]]
+[[HL::}::HL]]
 ```
 ```text
-# 📤 Expected Output: (On Browser)
-- iPhone 15 - $999
-- Samsung S24 - $899
-(Agar browser ka Network tab dekhoge, toh is component ki ek bhi JS line download nahi hui hogi! Sirf HTML aaya hai.)
+[[HL::# 📤 Expected Output: (On Browser)::HL]]
+- [[HL::iPhone 15 - $999::HL]]
+- [[HL::Samsung S24 - $899::HL]]
+[[HL::(Agar browser ka Network tab dekhoge, toh is component ki ek bhi JS line download nahi hui hogi! Sirf HTML aaya hai.)::HL]]
 ```
 
-**B. The Waiter (Client Component)**
-Agar tumhe button click karwana hai, toh usko alag file mein banao.
+[[HL::**B. The Waiter (Client Component)**::HL]]
+[[HL::Agar tumhe button click karwana hai, toh usko alag file mein banao::HL]].
 
 ```tsx
 // components/BuyButton.tsx
-// Sabse upar ye likhna ZAROORI hai, warna error aayega!
-"use client"; 
+// [[HL::Sabse upar ye likhna ZAROORI hai, warna error aayega!::HL]]
+[[HL::"use client";::HL]] 
 
-import { useState } from 'react';
+[[HL::import { useState } from 'react';::HL]]
 
-export default function BuyButton() {
-  const [loading, setLoading] = useState(false); // useState Client pe hi chalta hai
+[[HL::export default function BuyButton() {::HL]]
+  [[HL::const [loading, setLoading] = useState(false); // useState Client pe hi chalta hai::HL]]
 
-  return (
-    <button onClick={() => {
-        setLoading(true);
-        console.log("Button clicked!");
-    }}>
-      {loading ? "Buying..." : "Buy Now"}
-    </button>
-  );
-}
+  [[HL::return (::HL]]
+    [[HL::<button onClick={() => {::HL]]
+        [[HL::setLoading(true);::HL]]
+        [[HL::console.log("Button clicked!");::HL]]
+    [[HL::}}>::HL]]
+      [[HL::{loading ? "Buying..." : "Buy Now"}::HL]]
+    [[HL::</button>::HL]]
+  [[HL::);::HL]]
+[[HL::}::HL]]
 ```
 ```text
-# 📤 Expected Output: (On Browser after clicking)
-Browser Console mein print hoga: "Button clicked!" 
-Aur button ka text "Buying..." ho jayega.
-(Is file ka JS code user ke browser mein download hoga)
+[[HL::# 📤 Expected Output: (On Browser after clicking)::HL]]
+[[HL::Browser Console mein print hoga: "Button clicked!"::HL]] 
+[[HL::Aur button ka text "Buying..." ho jayega.::HL]]
+[[HL::(Is file ka JS code user ke browser mein download hoga::HL]])
 ```
 
 ## ⚖️ 8. Comparison (Ye vs Woh):
 
-| Feature | Server Component (RSC) | Client Component ("use client") |
+| [[HL::Feature::HL]] | [[HL::Server Component (RSC)::HL]] | [[HL::Client Component ("use client")::HL]] |
 | :--- | :--- | :--- |
-| **Kahan chalte hain?** | Sirf Server par | Server (SSR ke time) + Browser dono pe |
-| **Kya use kar sakte hain?** | Direct Database, Node.js features | `useState`, `useEffect`, `onClick` |
+| [[HL::**Kahan chalte hain?**::HL]] | [[HL::Sirf Server par::HL]] | [[HL::Server (SSR ke time) + Browser dono pe::HL]] |
+| [[HL::**Kya use kar sakte hain?**::HL]] | [[HL::Direct Database, Node.js features::HL]] | [[HL::`useState`, `useEffect`, `onClick`::HL]] |
 | **JS downloaded to Browser?**| **ZERO Bytes** | Yes (JS code is sent to browser) |
 | **Default in Next.js?** | YES ✅ | NO ❌ (Must write `"use client"`) |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-1. **Mistake:** Server Component mein `onClick` ya `useState` lagane ki koshish karna. 
-   **Fix:** Next.js turant error fekega *"Event handlers cannot be passed to Client Component props... "*. Aise components ko `"use client"` mark karo.
-2. **Mistake:** Har single file ke upar `"use client"` likh dena aadat se majboor hokar.
-   **Fix:** Aisa karoge toh tum Next.js ki aadhi power maar doge. Default hamesha Server Component rakho. Jab jarurat pade (clicks, animations), sirf us chhote hisse ko Client Component banao.
+1. [[HL::**Mistake:** Server Component mein `onClick` ya `useState` lagane ki koshish karna.::HL]] 
+   [[HL::**Fix:** Next.js turant error fekega *"Event handlers cannot be passed to Client Component props... "*. Aise components ko `"use client"` mark karo::HL]].
+2. [[HL::**Mistake:** Har single file ke upar `"use client"` likh dena aadat se majboor hokar.::HL]]
+   [[HL::**Fix:** Aisa karoge toh tum Next.js ki aadhi power maar doge. Default hamesha Server Component rakho. Jab jarurat pade (clicks, animations), sirf us chhote hisse ko Client Component banao::HL]].
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-1. **"Kya mujhe ab alag se backend (Node/Express) nahi banana padega?"** Zyadatar cases mein, HAAN! Tum Next.js ke Server Components mein seedha `sql` queries ya Prisma database calls likh sakte ho. Tumhara frontend aur backend ek hi jagah aa gaya hai!
-2. **"Toh kya main Client components use karna chhod doon?"**
-   Nahi! Website mein interactivty (clicks, sliders, dark mode toggles) ke liye Client components chahiye hi. Formula simple hai: Data lana hai toh Server, User se interaction karna hai toh Client.
+1. **"[[HL::Kya mujhe ab alag se backend (Node/Express) nahi banana padega?"** Zyadatar cases mein, HAAN! Tum Next.js ke Server Components mein seedha `sql` queries ya Prisma database calls likh sakte ho. Tumhara frontend aur backend ek hi jagah aa gaya hai::HL]]!
+2. **"[[HL::Toh kya main Client components use karna chhod doon?"**::HL]]
+   [[HL::Nahi! Website mein interactivty (clicks, sliders, dark mode toggles) ke liye Client components chahiye hi. Formula simple hai: Data lana hai toh Server, User se interaction karna hai toh Client::HL]].
 
 ## 🌍 11. Real-World Use Case (Production Application):
 **Twitter (X) Profile Page:**
@@ -606,8 +606,8 @@ Aur button ka text "Buying..." ho jayega.
 Agar tumne galti se apni `layout.tsx` (sabse main file) ko `"use client"` bana diya, toh tumhari saari website hi purane React ki tarah behave karne lagegi aur saara JS code user ko chala jayega. Website slow ho jayegi.
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **Q:** How do you pass data from a Server Component to a Client Component? **Ans:** By passing them as `props`. But remember, you can only pass plain data (like strings, numbers, JSON), not functions!
-2. **Q:** Can a Client Component import a Server Component? **Ans:** No! But a Server Component can pass another Server Component as a `children` prop to a Client Component.
+1. [[HL::**Q:** How do you pass data from a Server Component to a Client Component? **Ans:** By passing them as `props`. But remember, you can only pass plain data (like strings, numbers, JSON), not functions::HL]]!
+2. [[HL::**Q:** Can a Client Component import a Server Component? **Ans:** No! But a Server Component can pass another Server Component as a `children` prop to a Client Component::HL]].
 3. **Q:** Are Server Components the same as SSR? **Ans:** No. SSR generates HTML on the server. RSCs go a step further and *never* send their JS to the client at all.
 
 ## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
@@ -625,11 +625,11 @@ Sath mein, tumhare paas ek **Smart Assistant (React 19 Compiler)** baitha diya g
 
 ## 📖 3. Technical Definition (Interview Answer):
 * **Precise English:** Next.js 15 and 16 stabilize major performance tools: **Turbopack** (a Rust-based bundler that replaces Webpack, offering 10x faster local dev updates), **React 19 Compiler** (which automatically memoizes values and UI, eliminating the need for `useMemo`), and **File System Caching** (which stores build artifacts to make dev server restarts incredibly fast).
-* **Hinglish Simplification:** Next.js 15/16 ne Developer ki zindagi aasaan kar di hai. Code save karte hi browser turant update hoga (Turbopack ki wajah se), aur code ko fast banane ke liye manual matha-pacchi nahi karni padegi (Compiler apne aap handle karega).
+* [[HL::**Hinglish Simplification:** Next.js 15/16 ne Developer ki zindagi aasaan kar di hai. Code save karte hi browser turant update hoga (Turbopack ki wajah se), aur code ko fast banane ke liye manual matha-pacchi nahi karni padegi (Compiler apne aap handle karega::HL]]).
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Badi companies mein jab developers apna Next.js server start karte the (`npm run dev`), toh Webpack ko project build karne mein 2-3 minute lag jate the. Aur file save karne par browser refresh hone mein 5 second lagte the. Time waste! Plus, React mein fast apps banane ke liye devs ko jagah-jagah `useMemo` aur `useCallback` likhna padta tha jo code ko ugly banata tha.
-* **Solution:** Turbopack (Rust language mein bana hai jo super fast hai) ne Webpack ko replace kar diya. Aur React 19 Compiler ne un saare manual `useMemo` hooks ko kachre ke dabbe mein daal diya.
+* [[HL::**Problem:** Badi companies mein jab developers apna Next.js server start karte the (`npm run dev`), toh Webpack ko project build karne mein 2-3 minute lag jate the. Aur file save karne par browser refresh hone mein 5 second lagte the. Time waste! Plus, React mein fast apps banane ke liye devs ko jagah-jagah `useMemo` aur `useCallback` likhna padta tha jo code ko ugly banata tha.::HL]]
+* [[HL::**Solution:** Turbopack (Rust language mein bana hai jo super fast hai) ne Webpack ko replace kar diya. Aur React 19 Compiler ne un saare manual `useMemo` hooks ko kachre ke dabbe mein daal diya::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 Jab tum server chalaoge, toh pehle terminal mein dikhta tha:
@@ -787,8 +787,8 @@ Maan lo tumhe ek naya ghar banana hai. Ek tarika hai ki tum khud ja kar eent, ce
 * **Hinglish Simplification:** Ek aisi terminal command jo tumhare liye Next.js ka saara setup, configuration aur zaroori files automatically bana deti hai.
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** React, TypeScript, Tailwind CSS, aur ESLint ko ek sath manually configure karne mein ghanton lag jate hain. Version mismatches aate hain aur dimaag kharab hota hai.
-* **Solution:** Vercel ne ye tool banaya hai taaki ye saare tools ek doosre ke sath perfect harmony mein chalein bina kisi error ke, wo bhi sirf 1 minute mein.
+* [[HL::**Problem:** React, TypeScript, Tailwind CSS, aur ESLint ko ek sath manually configure karne mein ghanton lag jate hain. Version mismatches aate hain aur dimaag kharab hota hai.::HL]]
+* [[HL::**Solution:** Vercel ne ye tool banaya hai taaki ye saare tools ek doosre ke sath perfect harmony mein chalein bina kisi error ke, wo bhi sirf 1 minute mein::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 Terminal mein tumse ek-ek karke Yes/No questions pooche jayenge (jaise ek form bhar rahe ho). Uske baad ek naya folder ban jayega jisme saari files hongi.
@@ -801,39 +801,39 @@ Terminal mein tumse ek-ek karke Yes/No questions pooche jayenge (jaise ek form b
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
 Apna terminal (ya VS Code ka terminal) kholo aur ye command run karo:
-*(Note: `npx` ka matlab hai "Node Package Execute". Ye bina permanently install kiye package ko run kar deta hai)*
+*(Note: [[HL::`npx` ka matlab hai "Node Package Execute". Ye bina permanently install kiye package ko run kar deta hai)*::HL]]
 
 ```bash
-npx create-next-app@latest my-awesome-app
+[[HL::npx create-next-app@latest my-awesome-app::HL]]
 ```
 ```text
-# 📤 Expected Output: (Terminal aapse kuch sawaal poochega. Arrow keys aur Enter se choose karo)
+[[HL::# 📤 Expected Output: (Terminal aapse kuch sawaal poochega. Arrow keys aur Enter se choose karo)::HL]]
 
-Need to install the following packages:
-create-next-app@15.x.x
-Ok to proceed? (y) y
+[[HL::Need to install the following packages:::HL]]
+[[HL::create-next-app@15.x.x::HL]]
+[[HL::Ok to proceed? (y) y::HL]]
 
-✔ Would you like to use TypeScript? … No / Yes  (✅ Choose YES - Type safety ke liye)
-✔ Would you like to use ESLint? … No / Yes      (✅ Choose YES - Code ki galtiyan pakadne ke liye)
-✔ Would you like to use Tailwind CSS? … No / Yes (✅ Choose YES - Styling ke liye)
-✔ Would you like your code inside a `src/` directory? … No / Yes (✅ Choose YES - Clean root folder ke liye)
-✔ Would you like to use App Router? (recommended) … No / Yes (✅ Choose YES - Naya fast routing system)
-✔ Would you like to customize the default import alias (@/*)? … No / Yes (❌ Choose NO - Default sahi hai)
+[[HL::✔ Would you like to use TypeScript? … No / Yes  (✅ Choose YES - Type safety ke liye)::HL]]
+[[HL::✔ Would you like to use ESLint? … No / Yes      (✅ Choose YES - Code ki galtiyan pakadne ke liye)::HL]]
+[[HL::✔ Would you like to use Tailwind CSS? … No / Yes (✅ Choose YES - Styling ke liye)::HL]]
+[[HL::✔ Would you like your code inside a `src/` directory? … No / Yes (✅ Choose YES - Clean root folder ke liye)::HL]]
+[[HL::✔ Would you like to use App Router? (recommended) … No / Yes (✅ Choose YES - Naya fast routing system)::HL]]
+[[HL::✔ Would you like to customize the default import alias (@/*)? … No / Yes (❌ Choose NO - Default sahi hai)::HL]]
 
-Creating a new Next.js app in /path/to/my-awesome-app.
-Installing dependencies:
-- react
-- react-dom
-- next
-- tailwindcss
-...
-Success! Created my-awesome-app at /path/to/my-awesome-app
+[[HL::Creating a new Next.js app in /path/to/my-awesome-app.::HL]]
+[[HL::Installing dependencies:::HL]]
+- [[HL::react::HL]]
+- [[HL::react-dom::HL]]
+- [[HL::next::HL]]
+- [[HL::tailwindcss::HL]]
+[[HL::...::HL]]
+[[HL::Success! Created my-awesome-app at /path/to/my-awesome-app::HL]]
 ```
 
 Ab server start karo:
 ```bash
-cd my-awesome-app
-npm run dev
+cd [[HL::my-awesome-app::HL]]
+[[HL::npm run dev::HL]]
 ```
 ```text
 # 📤 Expected Output:
@@ -886,16 +886,16 @@ Senior devs humesha ek extra flag use karte hain agar unko bar-bar yes/no nahi k
 `npx create-next-app@latest my-app --ts --tailwind --eslint --app --src-dir --import-alias "@/*"`
 
 ## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
-Agar tumne setup ke time Tailwind ya TS ko "No" kar diya, aur baad mein unko manually add karne ki koshish ki, toh configuration files (jaise `tsconfig.json` ya `tailwind.config.ts`) mein bahut errors aayenge aur tumhara poora din fix karne mein nikal jayega.
+[[HL::Agar tumne setup ke time Tailwind ya TS ko "No" kar diya, aur baad mein unko manually add karne ki koshish ki, toh configuration files (jaise `tsconfig.json` ya `tailwind.config.ts`) mein bahut errors aayenge aur tumhara poora din fix karne mein nikal jayega::HL]].
 
 ## ❓ 15. FAQ (Interview Questions):
 1. **Q:** What is the command to create a Next.js app? **Ans:** `npx create-next-app@latest`
-2. **Q:** What is the difference between `npm` and `npx`? **Ans:** `npm` installs packages. `npx` executes packages directly from the registry without a global installation.
-3. **Q:** Why do we prefer the `src` directory? **Ans:** To separate application source code from configuration files at the root level.
+2. [[HL::**Q:** What is the difference between `npm` and `npx`? **Ans:** `npm` installs packages. `npx` executes packages directly from the registry without a global installation::HL]].
+3. [[HL::**Q:** Why do we prefer the `src` directory? **Ans:** To separate application source code from configuration files at the root level::HL]].
 4. **Q:** Does create-next-app use Webpack or Turbopack? **Ans:** In Next 15/16, you can opt into Turbopack by running `npm run dev --turbo`.
 
 ## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
-**"`create-next-app` ek aisi jadooi chhadi hai jo 1 minute mein tumhare project ka saara foundation khada kar deti hai."**
+**"`create-next-app` ek aisi jadooi chhadi hai jo 1 minute mein [[HL::tumhare project::HL]] ka saara foundation khada kar deti hai."**
 
 ---
 ---
@@ -911,14 +911,14 @@ Ek *Production Grade* structure aisi almari hai jisme Shirts ka section alag (`c
 * **Hinglish Simplification:** Apne files ko sahi folders mein baantna taaki jab project bada ho jaye (100+ files), toh kisi particular code ko dhoondhne mein aasani ho. 
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Beginners saara code `app/page.tsx` ke andar likh dete hain. Kuch dino baad wo file 1000 lines ki ho jati hai. Padhna aur samajhna impossible ho jata hai.
-* **Solution:** Chote-chote tukde (Components) banao aur unhe sahi folders mein rakho.
+* [[HL::**Problem:** Beginners saara code `app/page.tsx` ke andar likh dete hain. Kuch dino baad wo file 1000 lines ki ho jati hai. Padhna aur samajhna impossible ho jata hai.::HL]]
+* [[HL::**Solution:** Chote-chote tukde (Components) banao aur unhe sahi folders mein rakho::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 Aapke VS Code ke left sidebar mein ek dam clean aur organized tree dikhega jahan har folder ka purpose clear hoga.
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-Next.js ka `app/` folder sirf aur sirf **Routing** (URL paths) ke liye use hota hai. Baaki ka saara logical kaam aur UI design `app/` ke bahar `components/` ya `lib/` mein rehta hai taaki Next.js ka server faltu files ko route banane ki koshish na kare.
+[[HL::Next.js ka `app/` folder sirf aur sirf **Routing** (URL paths) ke liye use hota hai. Baaki ka saara logical kaam aur UI design `app/` ke bahar `components/` ya `lib/` mein rehta hai taaki Next.js ka server faltu files ko route banane ki koshish na kare::HL]].
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
@@ -926,13 +926,13 @@ Tumhara default project ban chuka hai. Ab hum usme industry-standard folders ban
 
 Terminal mein ye commands run karo:
 ```bash
-# src folder ke andar zaroori folders banate hain
-cd src
-mkdir components lib types utils hooks
+# [[HL::src folder ke andar zaroori folders banate hain::HL]]
+[[HL::cd src::HL]]
+[[HL::mkdir components lib types utils hooks::HL]]
 
-# components ke andar bhi do hisse karenge
-cd components
-mkdir ui features
+[[HL::# components ke andar bhi do hisse karenge::HL]]
+[[HL::cd components::HL]]
+[[HL::mkdir ui features::HL]]
 ```
 ```text
 # 📤 Expected Output:
@@ -943,54 +943,54 @@ mkdir ui features
 
 **The Ultimate Folder Tree:**
 ```text
-my-awesome-app/
-├── src/
-│   ├── app/                 👉 (Sirf Routes - jaise /about, /dashboard)
-│   │   ├── layout.tsx
-│   │   └── page.tsx
-│   ├── components/          👉 (React Components)
-│   │   ├── ui/              👉 (Dumb UI parts - Button, Input, Modal - Shadcn ui yahan aata hai)
-│   │   └── features/        👉 (Smart UI blocks - ChatBox, ProductList)
-│   ├── lib/                 👉 (Helper code - database connect, LLM api calls)
-│   ├── types/               👉 (TypeScript ke definitions - interfaces)
-│   └── utils/               👉 (Chhoti math/formatting functions - formatDate, cn)
-├── public/                  👉 (Images, fonts, icons)
-├── next.config.ts
-└── package.json
+[[HL::my-awesome-app/::HL]]
+[[HL::├── src/::HL]]
+[[HL::│   ├── app/                 👉 (Sirf Routes - jaise /about, /dashboard)::HL]]
+[[HL::│   │   ├── layout.tsx::HL]]
+[[HL::│   │   └── page.tsx::HL]]
+[[HL::│   ├── components/          👉 (React Components)::HL]]
+[[HL::│   │   ├── ui/              👉 (Dumb UI parts - Button, Input, Modal - Shadcn ui yahan aata hai)::HL]]
+[[HL::│   │   └── features/        👉 (Smart UI blocks - ChatBox, ProductList)::HL]]
+[[HL::│   ├── lib/                 👉 (Helper code - database connect, LLM api calls)::HL]]
+[[HL::│   ├── types/               👉 (TypeScript ke definitions - interfaces)::HL]]
+[[HL::│   └── utils/               👉 (Chhoti math/formatting functions - formatDate, cn)::HL]]
+[[HL::├── public/                  👉 (Images, fonts, icons)::HL]]
+[[HL::├── next.config.ts::HL]]
+[[HL::└── package.json::HL]]
 ```
 
-**Example - Component Integration:**
-Maan lo tum ek *local LLM model* ke liye chat interface bana rahe ho. 
-Tumhara chota UI button yahan aayega:
-`src/components/ui/SendButton.tsx`
+[[HL::**Example - Component Integration:**::HL]]
+[[HL::Maan lo tum ek *local LLM model* ke liye chat interface bana rahe ho.::HL]] 
+[[HL::Tumhara chota UI button yahan aayega:::HL]]
+[[HL::`src/components/ui/SendButton.tsx`::HL]]
 
-Aur tumhara poora chat interface jisme logic hai, wo yahan aayega:
-`src/components/features/ChatBox.tsx`
+[[HL::Aur tumhara poora chat interface jisme logic hai, wo yahan aayega:::HL]]
+[[HL::`src/components/features/ChatBox.tsx`::HL]]
 
-Aur LLM model ko call karne ka function yahan aayega:
-`src/lib/llm-api.ts`
+[[HL::Aur LLM model ko call karne ka function yahan aayega:::HL]]
+[[HL::`src/lib/llm-api.ts`::HL]]
 
 ## ⚖️ 8. Comparison (Ye vs Woh):
 
-| Folder | Kya Rakhein? (Do's) | Kya NAHI Rakhein? (Don'ts) |
+| [[HL::Folder::HL]] | [[HL::Kya Rakhein? (Do's)::HL]] | [[HL::Kya NAHI Rakhein? (Don'ts)::HL]] |
 | :--- | :--- | :--- |
-| `app/` | Sirf `page.tsx`, `layout.tsx`, `route.ts` | Bade React components mat rakho |
-| `components/ui/` | Chote reusable buttons, inputs | Data fetching logic (API calls) mat rakho |
-| `components/features/`| Bade sections (e.g., `NavBar`, `Sidebar`) | URL routing logic mat rakho |
-| `lib/` | Database setup, API configs, LLM connections | React Components (JSX) mat rakho |
+| [[HL::`app/`::HL]] | [[HL::Sirf `page.tsx`, `layout.tsx`, `route.ts`::HL]] | [[HL::Bade React components mat rakho::HL]] |
+| [[HL::`components/ui/`::HL]] | [[HL::Chote reusable buttons, inputs::HL]] | [[HL::Data fetching logic (API calls) mat rakho::HL]] |
+| [[HL::`components/features/`::HL]]| [[HL::Bade sections (e.g., `NavBar`, `Sidebar`)::HL]] | [[HL::URL routing logic mat rakho::HL]] |
+| [[HL::`lib/`::HL]] | [[HL::Database setup, API configs, LLM connections::HL]] | [[HL::React Components (JSX) mat rakho::HL]] |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-1. **Mistake:** Saare components ek hi `components/` folder mein dump kar dena.
-   **Fix:** `ui/` (chote parts) aur `features/` (bade parts) mein divide karo.
-2. **Mistake:** Data fetching logic (fetch API) ko UI components ke andar hi likh dena.
-   **Fix:** Fetching logic ya utilities ko `lib/` ya `utils/` mein rakho aur component mein import karo.
+1. [[HL::**Mistake:** Saare components ek hi `components/` folder mein dump kar dena.::HL]]
+   [[HL::**Fix:** `ui/` (chote parts) aur `features/` (bade parts) mein divide karo::HL]].
+2. [[HL::**Mistake:** Data fetching logic (fetch API) ko UI components ke andar hi likh dena.::HL]]
+   [[HL::**Fix:** Fetching logic ya utilities ko `lib/` ya `utils/` mein rakho aur component mein import karo::HL]].
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-1. **"`ui` aur `features` mein exactly kya difference hai?"**
-   `ui/Button` ek blank button hai. Usko nahi pata ki wo kya save kar raha hai. 
-   `features/SubmitOrderButton` ek smart button hai jisme click hone par order save hone ka logic likha hai.
-2. **"Shadcn kya hai jo upar skeleton mein likha tha?"**
-   Shadcn ek aisi library hai jisse tum pre-styled components (jaise sundar Buttons, Cards) copy-paste karke apne `components/ui/` folder mein daal sakte ho. Ye tumhe zero se CSS likhne se bachata hai.
+1. [[HL::**"`ui` aur `features` mein exactly kya difference hai?"**::HL]]
+   [[HL::`ui/Button` ek blank button hai. Usko nahi pata ki wo kya save kar raha hai.::HL]] 
+   [[HL::`features/SubmitOrderButton` ek smart button hai jisme click hone par order save hone ka logic likha hai::HL]].
+2. **"[[HL::Shadcn kya hai jo upar skeleton mein likha tha?"**::HL]]
+   [[HL::Shadcn ek aisi library hai jisse tum pre-styled components (jaise sundar Buttons, Cards) copy-paste karke apne `components/ui/` folder mein daal sakte ho. Ye tumhe zero se CSS likhne se bachata hai::HL]].
 
 ## 🌍 11. Real-World Use Case (Production Application):
 Jab tum kisi local AI ya LLM project ka interface banate ho, toh tumhara architecture clean hona bahut zaroori hai. `lib/llm.ts` mein tum apna local port (eg. `localhost:11434`) configure karoge, aur `features/ChatWindow.tsx` usko use karke response UI pe dikhayega. Agar kal ko tum API change karte ho, toh sirf `lib/` ki ek file modify karni padegi, saare UI files safe rahenge!
@@ -1011,15 +1011,15 @@ Jab tum kisi local AI ya LLM project ka interface banate ho, toh tumhara archite
 ```
 
 ## 🛠️ 13. Best Practices (Pro Tips):
-Apne components ka naam hamesha **PascalCase** mein rakho (e.g., `ChatBox.tsx`, `UserProfile.tsx`). Aur regular utility files ka naam **camelCase** mein rakho (e.g., `formatDate.ts`, `apiClient.ts`).
+[[HL::Apne components ka naam hamesha **PascalCase** mein rakho (e.g., `ChatBox.tsx`, `UserProfile.tsx`). Aur regular utility files ka naam **camelCase** mein rakho (e.g., `formatDate.ts`, `apiClient.ts`::HL]]).
 
 ## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
 Agar structure nahi banaya, toh 2 mahine baad tumhe khud yaad nahi rahega ki kaunsa function kahan likha tha. "Code to chal raha hai, par agar ek change kiya toh puri site break ho jati hai" - aisi situation aa jayegi!
 
 ## ❓ 15. FAQ (Interview Questions):
 1. **Q:** Can we put React components inside the `app` directory? **Ans:** Yes, but it's a bad practice. `app` should strictly be for routing. Components should be outside in a `components` folder.
-2. **Q:** What goes inside the `types` folder? **Ans:** TypeScript interface and type declaration files (`.d.ts` or `.ts`) that are shared across the application.
-3. **Q:** Difference between `lib` and `utils`? **Ans:** `lib` is usually for third-party configurations or major setups (DB, APIs). `utils` is for pure mathematical or string manipulation functions.
+2. [[HL::**Q:** What goes inside the `types` folder? **Ans:** TypeScript interface and type declaration files (`.d.ts` or `.ts`) that are shared across the application::HL]].
+3. [[HL::**Q:** Difference between `lib` and `utils`? **Ans:** `lib` is usually for third-party configurations or major setups (DB, APIs). `utils` is for pure mathematical or string manipulation functions::HL]].
 
 ## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
 **"Sahi folder structure ek successful project ki aatma (soul) hai; har file ka apna ek specific ghar hona chahiye."**
@@ -1047,52 +1047,52 @@ Tumhara naya smartphone socho. Jab tum usko pehli baar on karte ho, toh sabse pe
 `next.config.ts` aur `tsconfig.json` tumhare Next.js project ki wahi **'Settings App'** hain. Yahan tum project ko batate ho ki "Bahar ki konsi images allow karni hain" aur "Files ko dhoondhne ka shortcut kya hoga".
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** `next.config.ts` is the central configuration file used to customize the behavior of the Next.js server, build phases, routing, and external integrations. `tsconfig.json` configures the TypeScript compiler, specifically defining path aliases (like `@/*`) to simplify module resolutions.
-* **Hinglish Simplification:** Ye wo files hain jahan hum Next.js aur TypeScript engine ko rules batate hain. Taaki humara code safely aur smartly run ho sake.
+* [[HL::**Precise English:** `next.config.ts` is the central configuration file used to customize the behavior of the Next.js server, build phases, routing, and external integrations. `tsconfig.json` configures the TypeScript compiler, specifically defining path aliases (like `@/*`) to simplify module resolutions.::HL]]
+* [[HL::**Hinglish Simplification:** Ye wo files hain jahan hum Next.js aur TypeScript engine ko rules batate hain. Taaki humara code safely aur smartly run ho sake::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem 1 (Path Hell):** Agar tum apne UI button ko kisi deep folder mein import karna chaho, toh code kuch aisa dikhta hai: `import Button from '../../../../../components/ui/Button'`. Ye padhne mein bahut ganda lagta hai aur error ke chances badhate hain.
-* **Problem 2 (Security/CORS):** Next.js by default kisi bhi bahar ki website (jaise Google Images) ya local ports (jaise tumhara koi local python server) ko direct access nahi karne deta security ke kaaran. 
-* **Solution:** `tsconfig.json` mein hum "Path Aliases" (`@/`) banate hain jisse path clean ho jata hai. Aur `next.config.ts` mein hum external domains aur API rewrites ko allow karte hain.
+* [[HL::**Problem 1 (Path Hell):** Agar tum apne UI button ko kisi deep folder mein import karna chaho, toh code kuch aisa dikhta hai: `import Button from '../../../../../components/ui/Button'`. Ye padhne mein bahut ganda lagta hai aur error ke chances badhate hain.::HL]]
+* [[HL::**Problem 2 (Security/CORS):** Next.js by default kisi bhi bahar ki website (jaise Google Images) ya local ports (jaise tumhara koi local python server) ko direct access nahi karne deta security ke kaaran.::HL]] 
+* [[HL::**Solution:** `tsconfig.json` mein hum "Path Aliases" (`@/`) banate hain jisse path clean ho jata hai. Aur `next.config.ts` mein hum external domains aur API rewrites ko allow karte hain::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
-Tumhare VS Code mein ekdum root level (sabse bahar) par tumhe do files dikhengi:
-1. `tsconfig.json` (TypeScript ki settings)
-2. `next.config.ts` (Next.js server ki settings)
+[[HL::Tumhare VS Code mein ekdum root level (sabse bahar) par tumhe do files dikhengi:::HL]]
+1. [[HL::`tsconfig.json` (TypeScript ki settings)::HL]]
+2. [[HL::`next.config.ts` (Next.js server ki settings::HL]])
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1. Jab tum code type karte ho, VS Code background mein `tsconfig.json` ko padhta hai. Agar tumne likha `@/components`, toh TypeScript samajh jata hai ki "Accha, `@` ka matlab `src/` folder hai." Aur wo error nahi deta.
-2. Jab tum terminal mein `npm run dev` chalate ho, toh Next.js ka server start hone se pehle `next.config.ts` ko load karta hai, uske saare rules yaad karta hai, aur phir server start karta hai.
+1. [[HL::Jab tum code type karte ho, VS Code background mein `tsconfig.json` ko padhta hai. Agar tumne likha `@/components`, toh TypeScript samajh jata hai ki "Accha, `@` ka matlab `src/` folder hai." Aur wo error nahi deta.::HL]]
+2. [[HL::Jab tum terminal mein `npm run dev` chalate ho, toh Next.js ka server start hone se pehle `next.config.ts` ko load karta hai, uske saare rules yaad karta hai, aur phir server start karta hai::HL]].
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
-**A. Setting up Clean Paths (Path Aliases) in `tsconfig.json`**
-Is file ko open karo aur `compilerOptions` ke andar `paths` check karo. `create-next-app` isko by default set kar deta hai, par tumhe pata hona chahiye ye kaise kaam karta hai.
+**A. [[HL::Setting up Clean Paths (Path Aliases) in `tsconfig.json`**::HL]]
+[[HL::Is file ko open karo aur `compilerOptions` ke andar `paths` check karo. `create-next-app` isko by default set kar deta hai, par tumhe pata hona chahiye ye kaise kaam karta hai::HL]].
 
 ```json
-// tsconfig.json
-{
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      // Is line ka matlab hai: "@/" likhne ka matlab "src/" folder mein jao
-      "@/*": ["src/*"]
+// [[HL::tsconfig.json::HL]]
+[[HL::{::HL]]
+  [[HL::"compilerOptions": {::HL]]
+    [[HL::"baseUrl": ".",::HL]]
+    [[HL::"paths": {::HL]]
+      [[HL::// Is line ka matlab hai: "@/" likhne ka matlab "src/" folder mein jao::HL]]
+      [[HL::"@/*": ["src::HL]]/*"]
     }
   }
 }
 ```
-Ab iska jaadu dekho apni component file mein:
+[[HL::Ab iska jaadu dekho apni component file mein:::HL]]
 ```tsx
-// src/app/page.tsx
+[[HL::// src/app/page.tsx::HL]]
 
-// ❌ Ganda tarika (Relative Path - Aise MAT karna)
-// import Button from '../../components/ui/Button';
+[[HL::// ❌ Ganda tarika (Relative Path - Aise MAT karna)::HL]]
+[[HL::// import Button from '../../components/ui/Button';::HL]]
 
-// ✅ Pro/Clean tarika (Absolute Path using Alias)
-import Button from '@/components/ui/Button';
+[[HL::// ✅ Pro/Clean tarika (Absolute Path using Alias)::HL]]
+[[HL::import Button from '@/components/ui/Button';::HL]]
 
-export default function Home() {
-  return <Button>Click Me</Button>;
+[[HL::export default function Home() {::HL]]
+  [[HL::return <Button>Click Me</Button::HL]]>;
 }
 ```
 ```text
@@ -1100,71 +1100,71 @@ export default function Home() {
 A perfectly rendered button. No "Module not found" errors in terminal.
 ```
 
-**B. Configuring `next.config.ts` for External APIs and Images**
-Maan lo tum apne Next.js frontend ko kisi aur jagah chal rahe server se connect kar rahe ho (jaise port 11434 pe chalne wala tumhara apna local LLM model). Agar tum direct API call karoge toh Browser CORS (Cross-Origin Resource Sharing) error de dega. Hum isko configuration se solve karte hain:
+**B. [[HL::Configuring `next.config.ts` for External APIs and Images**::HL]]
+[[HL::Maan lo tum apne Next.js frontend ko kisi aur jagah chal rahe server se connect kar rahe ho (jaise port 11434 pe chalne wala tumhara apna local LLM model). Agar tum direct API call karoge toh Browser CORS (Cross-Origin Resource Sharing) error de dega. Hum isko configuration se solve karte ha::HL]]in:
 
 ```typescript
-// next.config.ts
-import type { NextConfig } from "next";
+// [[HL::next.config.ts::HL]]
+[[HL::import type { NextConfig } from "next";::HL]]
 
-const nextConfig: NextConfig = {
-  // 1. Agar internet se images load karni hain, toh domain yahan batao
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'avatars.githubusercontent.com', // Github profile pics allow ki
-      },
-    ],
-  },
+[[HL::const nextConfig: NextConfig = {::HL]]
+  [[HL::// 1. Agar internet se images load karni hain, toh domain yahan batao::HL]]
+  [[HL::images: {::HL]]
+    [[HL::remotePatterns: [::HL]]
+      [[HL::{::HL]]
+        [[HL::protocol: 'https',::HL]]
+        [[HL::hostname: 'avatars.githubusercontent.com', // Github profile pics allow ki::HL]]
+      [[HL::},::HL]]
+    [[HL::],::HL]]
+  [[HL::},::HL]]
 
-  // 2. API Rewrites (Jaadu!)
-  // Ye browser ko bewakoof banata hai ki API call Next.js pe hi ho rahi hai, 
-  // par background mein Next.js usko tumhare local model pe bhej deta hai.
-  async rewrites() {
-    return [
-      {
-        source: '/api/local-model/:path*', // Jab Next.js pe ye call aaye
-        destination: 'http://localhost:11434/api/:path*', // Toh usey chupke se yahan bhej do
-      },
-    ]
-  },
-};
+  [[HL::// 2. API Rewrites (Jaadu!)::HL]]
+  [[HL::// Ye browser ko bewakoof banata hai ki API call Next.js pe hi ho rahi hai,::HL]] 
+  [[HL::// par background mein Next.js usko tumhare local model pe bhej deta hai.::HL]]
+  [[HL::async rewrites() {::HL]]
+    [[HL::return [::HL]]
+      [[HL::{::HL]]
+        [[HL::source: '/api/local-model/:path*', // Jab Next.js pe ye call aaye::HL]]
+        [[HL::destination: 'http://localhost:11434/api/:path*', // Toh usey chupke se yahan bhej do::HL]]
+      [[HL::},::HL]]
+    [[HL::]::HL]]
+  [[HL::},::HL]]
+[[HL::};::HL]]
 
-export default nextConfig;
+[[HL::export default nextConfig;::HL]]
 ```
 ```text
-# 📤 Expected Output: 
-(Terminal mein kuch print nahi hoga, but you MUST restart the server)
-Press CTRL+C in terminal to stop server.
-Run: npm run dev
-Output:
- ✓ Ready in 120ms
+[[HL::# 📤 Expected Output:::HL]] 
+[[HL::(Terminal mein kuch print nahi hoga, but you MUST restart the server)::HL]]
+[[HL::Press CTRL+C in terminal to stop server.::HL]]
+[[HL::Run: npm run dev::HL]]
+[[HL::Output:::HL]]
+ [[HL::✓ Ready in 120ms::HL]]
 ```
 
-## ⚖️ 8. Comparison (Ye vs Woh):
+[[HL::## ⚖️ 8. Comparison (Ye vs Woh):::HL]]
 
-| Feature | Relative Imports (`../../`) | Path Aliases (`@/`) |
+| [[HL::Feature::HL]] | [[HL::Relative Imports (`../../`)::HL]] | [[HL::Path Aliases (`@/`)::HL]] |
 | :--- | :--- | :--- |
-| **Dikhne mein** | Ugly and confusing | Clean and professional |
-| **Refactoring** | File move karne par toot jate hain | Hamesha sahi kaam karte hain |
-| **Setup** | Pehle se hota hai | `tsconfig.json` mein `paths` set karna padta hai |
+| [[HL::**Dikhne mein**::HL]] | [[HL::Ugly and confusing::HL]] | [[HL::Clean and professional::HL]] |
+| **Refacto[[HL::ring**::HL]] | [[HL::File move karne par toot jate hain::HL]] | [[HL::Hamesha sahi kaam karte hain::HL]] |
+| [[HL::**Setup**::HL]] | [[HL::Pehle se hota hai::HL]] | [[HL::`tsconfig.json` mein `paths` set karna padta hai::HL]] |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-1. **Mistake:** `next.config.ts` mein change karne ke baad browser mein baar-baar refresh karke dekhna ki change kyu nahi aaya.
-   **Fix:** **CRITICAL RULE:** Jab bhi `next.config.ts` ya `tsconfig.json` ko modify karo, tumhe apna dev server (`npm run dev`) terminal mein stop karke wapas start karna hi padega! Ye hot-reload nahi hote.
-2. **Mistake:** External image ka `src` tag me direct link dalna aur error aana.
-   **Fix:** Next.js ka `<Image>` component bina `next.config.ts` mein domain allow kiye bahar ki images load nahi karta. Remote patterns specify karna zaroori hai.
+1. [[HL::**Mistake:** `next.config.ts` mein change karne ke baad browser mein baar-baar refresh karke dekhna ki change kyu nahi aaya.::HL]]
+   [[HL::**Fix:** **CRITICAL RULE:** Jab bhi `next.config.ts` ya `tsconfig.json` ko modify karo, tumhe apna dev server (`npm run dev`) terminal mein stop karke wapas start karna hi padega! Ye hot-reload nahi hote.::HL]]
+2. [[HL::**Mistake:** External image ka `src` tag me direct link dalna aur error aana.::HL]]
+   [[HL::**Fix:** Next.js ka `<Image>` component bina `next.config.ts` mein domain allow kiye bahar ki images load nahi karta. Remote patterns specify karna zaroori hai.::HL]]
 
-## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-1. **"Ye `@` symbol hi kyun use karte hain?"**
-   Ye ek industry standard ban gaya hai. Tum chaho toh `tsconfig.json` mein `@` ki jagah `~` (tilde) ya `#` bhi likh sakte ho, par `@` dekh kar sab samajh jate hain ki ye root alias hai.
-2. **"Rewrites aur Redirects mein kya farq hai?"**
-   Redirects mein URL badal jata hai aur user ko dikhta hai (jaise `/old-page` se `/new-page`). Rewrites parde ke peeche kaam karte hain (URL wahi rehta hai, par data kahin aur se aata hai). Ye API calls ke liye best hai.
+[[HL::## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):::HL]]
+1. [[HL::**"Ye `@` symbol hi kyun use karte hain?"**::HL]]
+   [[HL::Ye ek industry standard ban gaya hai. Tum chaho toh `tsconfig.json` mein `@` ki jagah `~` (tilde) ya `#` bhi likh sakte ho, par `@` dekh kar sab samajh jate hain ki ye root alias hai.::HL]]
+2. [[HL::**"Rewrites aur Redirects mein kya farq hai?"**::HL]]
+   [[HL::Redirects mein URL badal jata hai aur user ko dikhta hai (jaise `/old-page` se `/new-page`). Rewrites parde ke peeche kaam karte hain (URL wahi rehta hai, par data kahin aur se aata hai). Ye API calls ke liye best hai.::HL]]
 
-## 🌍 11. Real-World Use Case (Production Application):
-Socho tum ek AI Chatbot bana rahe ho jahan frontend Next.js mein hai aur backend tumhara ek local LLM model hai jo alag port pe chal raha hai. Tum directly `fetch('http://localhost:11434/generate')` karoge toh CORS error aayega. 
-Lekin `next.config.ts` mein rewrite rule likhne ke baad, tumhara frontend command bhejega `fetch('/api/local-model/generate')`. Next.js us command ko aage LLM tak pahunchayega aur answer la kar dega, safely bina kisi error ke!
+[[HL::## 🌍 11. Real-World Use Case (Production Application):::HL]]
+[[HL::Socho tum ek AI Chatbot bana rahe ho jahan frontend Next.js mein hai aur backend tumhara ek local LLM model hai jo alag port pe chal raha hai. Tum directly `fetch('http://localhost:11434/generate')` karoge toh CORS error aayega.::HL]] 
+[[HL::Lekin `next.config.ts` mein rewrite rule likhne ke baad, tumhara frontend command bhejega `fetch('/api/local-model/generate')`. Next.js us command ko aage LLM tak pahunchayega aur answer la kar dega, safely bina kisi error ke::HL]]!
 
 ## 🎨 12. Visual Diagram (ASCII Art):
 ```text
@@ -1189,17 +1189,17 @@ Looking for Button...
 ```
 
 ## 🛠️ 13. Best Practices (Pro Tips):
-Hamesha apne Next.js project mein strict Type-checking on rakho. `tsconfig.json` mein `"strict": true` hona chahiye. Isse shuru mein thodi mehnat lagti hai, par production mein code kabhi crash nahi hota.
+[[HL::Hamesha apne Next.js project mein strict Type-checking on rakho. `tsconfig.json` mein `"strict": true` hona chahiye. Isse shuru mein thodi mehnat lagti hai, par production mein code kabhi crash nahi hota::HL]].
 
 ## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
-Agar config files mein ek comma `,` ya bracket `}` ki galti ho gayi, toh Next.js ka server start hi nahi hoga aur lamba chauda Red error fekega "Failed to parse config". Isliye JSON/TS syntax ka dhyan rakhna padta hai.
+[[HL::Agar config files mein ek comma `,` ya bracket `}` ki galti ho gayi, toh Next.js ka server start hi nahi hoga aur lamba chauda Red error fekega "Failed to parse config". Isliye JSON/TS syntax ka dhyan rakhna padta hai::HL]].
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **Q:** How do you resolve CORS issues in a Next.js frontend talking to an external API? **Ans:** By setting up `rewrites` in `next.config.ts` to proxy the request.
-2. **Q:** Why is my Next.js `<Image>` component giving an "Invalid src prop" error? **Ans:** Because the external domain of the image is not added to the `remotePatterns` in `next.config.ts`.
-3. **Q:** Do I need to restart the server if I change a React component? **Ans:** No, Fast Refresh handles it.
-4. **Q:** Do I need to restart the server if I change `next.config.ts`? **Ans:** Yes, absolutely.
-5. **Q:** What is the purpose of `@/*` in tsconfig? **Ans:** It's a path alias that maps to the `src` directory, preventing long relative import chains.
+1. [[HL::**Q:** How do you resolve CORS issues in a Next.js frontend talking to an external API? **Ans:** By setting up `rewrites` in `next.config.ts` to proxy the request::HL]].
+2. [[HL::**Q:** Why is my Next.js `<Image>` component giving an "Invalid src prop" error? **Ans:** Because the external domain of the image is not added to the `remotePatterns` in `next.config.ts`::HL]].
+3. [[HL::**Q:** Do I need to restart the server if I change a React component? **Ans:** No, Fast Refresh handles it.::HL]]
+4. [[HL::**Q:** Do I need to restart the server if I change `next.config.ts`? **Ans:** Yes, absolutely::HL]].
+5. [[HL::**Q:** What is the purpose of `@/*` in tsconfig? **Ans:** It's a path alias that maps to the `src` directory, preventing long relative import chains::HL]].
 
 ## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
 **"Project ki settings (config files) tumhari gadi ka steering wheel aur security system hain; inko sahi set kiya toh safar aasan ho jata hai."**
@@ -1220,85 +1220,85 @@ Agar config files mein ek comma `,` ya bracket `}` ki galti ho gayi, toh Next.js
 ## 🎯 1. Title / Topic: Phase 2: Routing & Navigation System - The App Router (Basic Routes: page.tsx, layout.tsx, template.tsx)
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
-Imagine karo ek bohot bada **Shopping Mall**. 
-- Us mall ke andar alag-alag **floors aur dukanein (shops)** hain. Next.js mein, ye dukanein tumhare **Folders** hain (jaise `clothing/`, `electronics/`).
-- Har dukaan ke andar ek **Main Display Window** hoti hai jo customer dekhta hai. Ye tumhari **`page.tsx`** file hai.
-- Pura mall aur har dukaan ka ek **fixed structure** hota hai (chat, pillars, entry gate) jo kabhi nahi badalta chahe tum kisi bhi dukaan mein jao. Ye tumhara **`layout.tsx`** hai.
-- Agar kisi dukaan mein koi **seasonal decoration** hai (jaise Diwali lights) jo har baar naye custom entry par wapas on hoti hai, toh wo **`template.tsx`** hai.
+[[HL::Imagine karo ek bohot bada **Shopping Mall**.::HL]] 
+- [[HL::Us mall ke andar alag-alag **floors aur dukanein (shops)** hain. Next.js mein, ye dukanein tumhare **Folders** hain (jaise `clothing/`, `electronics/`).::HL]]
+- [[HL::Har dukaan ke andar ek **Main Display Window** hoti hai jo customer dekhta hai. Ye tumhari **`page.tsx`** file hai.::HL]]
+- [[HL::Pura mall aur har dukaan ka ek **fixed structure** hota hai (chat, pillars, entry gate) jo kabhi nahi badalta chahe tum kisi bhi dukaan mein jao. Ye tumhara **`layout.tsx`** hai.::HL]]
+- [[HL::Agar kisi dukaan mein koi **seaso::HL]]n[[HL::al decoration** hai (jaise Diwali lights) jo har baar naye custom entry par wapas on hoti hai, toh wo **`template.tsx`** hai::HL]].
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** Next.js uses a file-system based router built on React Server Components, where folders define the routes (URL paths) and special files like `page.tsx` define the UI for those routes.
-* **Hinglish Simplification:** Jo folder ka naam hoga, wahi website ka link (URL) banega, aur us folder ke andar rakhi hui `page.tsx` file browser par page banke dikhegi.
+* [[HL::**Precise English:** Next.js uses a file-system based router built on React Server Components, where folders define the routes (URL paths) and special files like `page.tsx` define the UI for those routes.::HL]]
+* [[HL::**Hinglish Simplification:** Jo folder ka naam hoga, wahi website ka link (URL) banega, aur us folder ke andar rakhi hui `page.tsx` file browser par page banke dikhegi::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-- **Problem:** Purane React (CRA) mein ek page se doosre page par jane ke liye hume `react-router-dom` naam ki ek alag library download karni padti thi. Usme manually likhna padta tha: *"Agar URL '/about' hai toh About component dikhao"*. Ye bohot confusing aur lamba process tha.
-- **Solution:** Next.js ne bola, "Bhai, tension mat le. Tu bas folder bana aur usme file rakh. Main khud samajh jaunga ki user ko kya dikhana hai." Isse code clean rehta hai aur errors kam aate hain.
+- [[HL::**Problem:** Purane React (CRA) mein ek page se doosre page par jane ke liye hume `react-router-dom` naam ki ek alag library download karni padti thi. Usme manually likhna padta tha: *"Agar URL '/about' hai toh About component dikhao"*. Ye bohot confusing aur lamba process tha.::HL]]
+- [[HL::**Solution:** Next.js ne bola, "Bhai, tension mat le. Tu bas folder bana aur usme file rakh. Main khud samajh jaunga ki user ko kya dikhana hai." Isse code clean rehta hai aur errors kam aate hain::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 Jab tum VS Code open karoge, toh tumhara folder structure kuch aisa dikhega:
 ```text
-app/
- ├── layout.tsx     (Pure website ka common design, e.g., Navbar)
- ├── page.tsx       (Ye tumhara Home page hai - www.website.com)
- └── about/         (Ye ek naya folder/route ban gaya)
-      └── page.tsx  (Ye About page ki UI hai - www.website.com/about)
+[[HL::app/::HL]]
+ [[HL::├── layout.tsx     (Pure website ka common design, e.g., Navbar)::HL]]
+ [[HL::├── page.tsx       (Ye tumhara Home page hai - www.website.com)::HL]]
+ [[HL::└── about/         (Ye ek naya folder/route ban gaya)::HL]]
+      [[HL::└── page.tsx  (Ye About page ki UI hai - www.website.com/about::HL]])
 ```
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1. User ne browser mein type kiya `www.tumharishop.com/about`.
-2. Next.js ka internal server check karega: "Kya mere `app/` folder ke andar `about` naam ka koi folder hai?"
-3. Haan, usko folder mil jata hai.
-4. Phir wo us folder ke andar `page.tsx` ko dhoondhta hai.
-5. Fir Next.js sabse pehle root `layout.tsx` (Navbar/Footer) ko load karta hai, aur uske theek beech mein `about/page.tsx` ka code fit (inject) kar deta hai.
-6. Browser ko puri bani-banai HTML file bhej di jati hai.
+1. [[HL::User ne browser mein type kiya `www.tumharishop.com/about`.::HL]]
+2. [[HL::Next.js ka internal server check karega: "Kya mere `app/` folder ke andar `about` naam ka koi folder hai?"::HL]]
+3. [[HL::Haan, usko folder mil jata hai.::HL]]
+4. [[HL::Phir wo us folder ke andar `page.tsx` ko dhoondhta hai.::HL]]
+5. [[HL::Fir Next.js sabse pehle root `layout.tsx` (Navbar/Footer) ko load karta hai, aur uske theek beech mein `about/page.tsx` ka code fit (inject) kar deta hai.::HL]]
+6. [[HL::Browser ko puri bani-banai HTML file bhej di jati hai.::HL]]
 
-## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
+[[HL::## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):::HL]]
 
-Chalo isko code karte hain! 
+[[HL::Chalo isko code karte hain!::HL]] 
 
-**Step 1: Root Layout Setup (`app/layout.tsx`)**
-Ye file pure app ko wrap karti hai. (Next.js automatically bana deta hai ise mostly).
+[[HL::**Step 1: Root Layout Setup (`app/layout.tsx`)**::HL]]
+[[HL::Ye file pure app ko wrap karti hai. (Next.js automatically bana deta hai ise mostly::HL]]).
 
 ```tsx
-// File: app/layout.tsx
+// [[HL::File: app/layout.tsx::HL]]
 
-// React function jo pure app ka layout define karta hai
-// 'children' ka matlab hai ki jo bhi current page (page.tsx) hai, wo yahan aayega
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <body>
-        <nav>🛒 My E-commerce Navbar</nav>  {/* Ye har page pe dikhega */}
+[[HL::// React function jo pure app ka layout define karta hai::HL]]
+[[HL::// 'children' ka matlab hai ki jo bhi current page (page.tsx) hai, wo yahan aayega::HL]]
+[[HL::export default function RootLayout({ children }: { children: React.ReactNode }) {::HL]]
+  [[HL::return (::HL]]
+    [[HL::<html lang="en">::HL]]
+      [[HL::<body>::HL]]
+        [[HL::<nav>🛒 My E-commerce Navbar</nav>  {/* Ye har page pe dikhega */}::HL]]
         
-        {/* Yahan par actual page content aayega (Home, About, etc.) */}
-        <main>{children}</main> 
+        [[HL::{/* Yahan par actual page content aayega (Home, About, etc.) */}::HL]]
+        [[HL::<main>{children}</main>::HL]] 
         
-        <footer>📞 Contact Us: 1800-SHOP</footer> {/* Ye bhi har page pe dikhega */}
-      </body>
-    </html>
-  );
-}
+        [[HL::<footer>📞 Contact Us: 1800-SHOP</footer> {/* Ye bhi har page pe dikhega */}::HL]]
+      [[HL::</body>::HL]]
+    [[HL::</html>::HL]]
+  [[HL::);::HL]]
+[[HL::}::HL]]
 ```
 ```text
-# 📤 Expected Output: 
-(Koi direct output nahi, lekin ab tumhare app ka har page is Navbar aur Footer ke beech mein aayega)
+[[HL::# 📤 Expected Output:::HL]] 
+[[HL::(Koi direct output nahi, lekin ab tumhare app ka har page is Navbar aur Footer ke beech mein aayega)::HL]]
 ```
 
-**Step 2: Home Page Setup (`app/page.tsx`)**
-Ye file website ka main/home page banegi (`/`).
+[[HL::**Step 2: Home Page Setup (`app/page.tsx`)**::HL]]
+[[HL::Ye file website ka main/home page banegi (`/`).::HL]]
 
 ```tsx
-// File: app/page.tsx
+[[HL::// File: app/page.tsx::HL]]
 
-// Export default karna zaroori hai, tabhi Next.js isko page manega
-export default function HomePage() {
-  console.log("Home page rendered!"); // Ye server terminal pe print hoga
+[[HL::// Export default karna zaroori hai, tabhi Next.js isko page manega::HL]]
+[[HL::export default function HomePage() {::HL]]
+  [[HL::console.log("Home page rendered!"); // Ye server terminal pe print hoga::HL]]
   
-  return (
-    <div>
-      <h1>Welcome to Our Shop! 🛍️</h1>
-      <p>Best products at best prices.</p>
-    </div>
+  [[HL::return (::HL]]
+    [[HL::<div>::HL]]
+      [[HL::<h1>Welcome to Our Shop! 🛍️</h1>::HL]]
+      [[HL::<p>Best products at best prices.</p>::HL]]
+    [[HL::</div::HL]]>
   );
 }
 ```
@@ -1313,8 +1313,8 @@ Best products at best prices.
 📞 Contact Us: 1800-SHOP
 ```
 
-**Step 3: About Page Setup (`app/about/page.tsx`)**
-Agar user ko `/about` pe bhejna hai, toh ek `about` folder banao, aur usme ek nayi `page.tsx` daalo.
+[[HL::**Step 3: About Page Setup (`app/about/page.tsx`)**::HL]]
+[[HL::Agar user ko `/about` pe bhejna hai, toh ek `about` folder banao, aur usme ek nayi `page.tsx` daalo::HL]].
 
 ```tsx
 // File: app/about/page.tsx
@@ -1339,32 +1339,32 @@ Hum 1990 se samaan bech rahe hain.
 
 ## ⚖️ 8. Comparison (Ye vs Woh):
 
-Beginners hamesha `layout.tsx` aur `template.tsx` mein confuse hote hain.
+[[HL::Beginners hamesha `layout.tsx` aur `template.tsx` mein confuse hote hain::HL]].
 
-| Feature | `layout.tsx` (Makaan ki deewar) | `template.tsx` (Diwali ki ladi/lights) |
+| [[HL::Feature::HL]] | [[HL::`layout.tsx` (Makaan ki deewar)::HL]] | [[HL::`template.tsx` (Diwali ki ladi/lights)::HL]] |
 | :--- | :--- | :--- |
-| **State (Data)** | Maintain karta hai (jaise user ne kahaan scroll kiya tha, wo yaad rakhta hai). | Destroy aur Recreate karta hai (har baar naya banta hai). |
-| **Re-render** | Page badalne par dobaara render **NAHI** hota. | Har baar jab page change hota hai, ye **DOBAARA** render hota hai. |
-| **Kab Use Karein?** | Navbar, Sidebar, Footer banane ke liye. | Page enter/exit animations, ya page ke hisaab se Analytics track karne ke liye. |
+| [[HL::**State (Data)**::HL]] | [[HL::Maintain karta hai (jaise user ne kahaan scroll kiya tha, wo yaad rakhta hai).::HL]] | [[HL::Destroy aur Recreate karta hai (har baar naya banta hai).::HL]] |
+| [[HL::**Re-render**::HL]] | [[HL::Page badalne par dobaara render **NAHI** hota.::HL]] | [[HL::Har baar jab page change hota hai, ye **DOBAARA** render hota hai.::HL]] |
+| [[HL::**Kab Use Karein?**::HL]] | [[HL::Navbar, Sidebar, Footer banane ke liye.::HL]] | [[HL::Page enter/exit animations, ya page ke hisaab se Analytics track karne ke liye::HL]]. |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-1. **Wrong File Name:** File ka naam `Page.tsx` (Capital P) ya `Home.tsx` rakh dena. 
-   - *Fix:* Next.js itna strict hai ki file ka exact naam small letters mein `page.tsx` hi hona chahiye, warna wo usko web page nahi maanega.
-2. **Missing `default export`:** Component ko export karna bhool jana.
-   - *Fix:* Hamesha function ke aage `export default` lagao.
-3. **Putting normal components in app folder:** Buttons, forms, wagarah ki files directly `app/` folder mein faila dena.
-   - *Fix:* Components ke liye alag se ek `components/` folder banao bahar.
+1. [[HL::**Wrong File Name:** File ka naam `Page.tsx` (Capital P) ya `Home.tsx` rakh dena.::HL]] 
+   - [[HL::*Fix:* Next.js itna strict hai ki file ka exact naam small letters mein `page.tsx` hi hona chahiye, warna wo usko web page nahi maanega.::HL]]
+2. [[HL::**Missing `default export`:** Component ko export karna bhool jana.::HL]]
+   - [[HL::*Fix:* Hamesha function ke aage `export default` lagao.::HL]]
+3. [[HL::**Putting normal components in app folder:** Buttons, forms, wagarah ki files directly `app/` folder mein faila dena.::HL]]
+   - [[HL::*Fix:* Components ke liye alag se ek `components/` folder banao bahar.::HL]]
 
-## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-1. **"Kya mere `app/` folder ke andar ki har ek file URL (link) ban jayegi?"**
-   - **Nahi!** Sirf aur sirf wahi file link banegi jiska naam exactly `page.tsx` hai. Agar tumne `app/about/button.tsx` banayi hai, toh `www.website.com/about/button` kuch nahi dikhayega (404 Error aayega).
-2. **"To main apne chote-chote React components kahaan rakhun?"**
-   - `app/` folder ke andar bhi rakh sakte ho, Next.js unko ignore kar dega (kuki unka naam `page.tsx` nahi hai), par best practice hai ki ek alag `components` folder banao source ke andar.
+[[HL::## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):::HL]]
+1. [[HL::**"Kya mere `app/` folder ke andar ki har ek file URL (link) ban jayegi?"**::HL]]
+   - [[HL::**Nahi!** Sirf aur sirf wahi file link banegi jiska naam exactly `page.tsx` hai. Agar tumne `app/about/button.tsx` banayi hai, toh `www.website.com/about/button` kuch nahi dikhayega (404 Error aayega).::HL]]
+2. [[HL::**"To main apne chote-chote React components kahaan rakhun?"**::HL]]
+   - [[HL::`app/` folder ke andar bhi rakh sakte ho, Next.js unko ignore kar dega (kuki unka naam `page.tsx` nahi hai), par best practice hai ki ek alag `components` folder banao source ke andar.::HL]]
 
-## 🌍 11. Real-World Use Case (Production Application):
-Socho tum **Amazon** ka clone bana rahe ho. 
-Tumhe ek top search bar chahiye jo har page par dikhe. Tum us search bar ko `app/layout.tsx` mein likhoge. 
-Tumhe `Electronics`, `Fashion`, aur `Groceries` ke alag sections chahiye. Tum `app/electronics/page.tsx`, `app/fashion/page.tsx` alag alag folders bana kar setup karoge. Ekdum clean aur scalable!
+[[HL::## 🌍 11. Real-World Use Case (Production Application):::HL]]
+[[HL::Socho tum **Amazon** ka clone bana rahe ho.::HL]] 
+[[HL::Tumhe ek top search bar chahiye jo har page par dikhe. Tum us search bar ko `app/layout.tsx` mein likhoge.::HL]] 
+[[HL::Tumhe `Electronics`, `Fashion`, aur `Groceries` ke alag sections chahiye. Tum `app/electronics/page.tsx`, `app/fashion/page.tsx` alag alag folders bana kar setup karoge. Ekdum clean aur scalable::HL]]!
 
 ## 🎨 12. Visual Diagram (ASCII Art):
 
@@ -1389,21 +1389,21 @@ Tumhe `Electronics`, `Fashion`, aur `Groceries` ke alag sections chahiye. Tum `a
 ```
 
 ## 🛠️ 13. Best Practices (Pro Tips):
-- **Senior Engineers rule:** `page.tsx` ko hamesha chota (lean) rakho. Usk andar hazaro line ka code mat likho. Actual UI logic ko `components` folder se import karo aur yahan bas render karo.
-- **Root Layout is King:** `app/layout.tsx` hona lazmi (mandatory) hai. Usme `<html>` aur `<body>` tags hone hi chahiye.
+- [[HL::**Senior Engineers rule:** `page.tsx` ko hamesha chota (lean) rakho. Usk andar hazaro line ka code mat likho. Actual UI logic ko `components` folder se import karo aur yahan bas render karo.::HL]]
+- [[HL::**Root Layout is King:** `app/layout.tsx` hona lazmi (mandatory) hai. Usme `<html>` aur `<body>` tags hone hi chahiye::HL]].
 
 ## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
 - Agar tumne ek folder banaya (e.g., `/contact`) par uske andar `page.tsx` daalna bhool gaye, toh browser tumhe ek bhayanak **404 Page Not Found** error fek ke marega. Kyunki rasta toh hai, par dukaan nahi!
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **Q:** Next.js mein routing kaise kaam karti hai? 
-   **Ans:** "File-system based" hoti hai. Folders URL routes banate hain, aur `page.tsx` us URL ka UI hota hai.
-2. **Q:** App Router mein root `layout.tsx` kyu zaroori hai?
-   **Ans:** Kyunki wahi se poore HTML document ka structure (html, body tags) banta hai jo Next.js ko browser mein render karne ke liye chahiye hota hai.
+1. [[HL::**Q:** Next.js mein routing kaise kaam karti hai?::HL]] 
+   [[HL::**Ans:** "File-system based" hoti hai. Folders URL routes banate hain, aur `page.tsx` us URL ka UI hota hai::HL]].
+2. **Q:** [[HL::App Router mein root `layout.tsx` kyu zaroori hai?::HL]]
+   [[HL::**Ans:** Kyunki wahi se poore HTML document ka structure (html, body tags) banta hai jo Next.js ko browser mein render karne ke liye chahiye hota hai::HL]].
 3. **Q:** `layout.tsx` aur `template.tsx` mein main difference kya hai?
    **Ans:** Layout state ko preserve rakhta hai on navigation, jabki Template har navigation par re-mount/re-render hota hai.
-4. **Q:** Kya main `app/` folder mein custom components (jaise Button.tsx) rakh sakta hoon?
-   **Ans:** Haan, safely rakh sakte ho. Next.js unhe routes nahi manega jab tak file ka naam `page.tsx` na ho. Isko "Safe Colocation" kehte hain.
+4. **Q:** [[HL::Kya main `app/` folder mein custom components (jaise Button.tsx) rakh sakta hoon?::HL]]
+   [[HL::**Ans:** Haan, safely rakh sakte ho. Next.js unhe routes nahi manega jab tak file ka naam `page.tsx` na ho. Isko "Safe Colocation" kehte hain::HL]].
 5. **Q:** Agar mujhe kisi page ke liye alag layout chahiye toh?
    **Ans:** Jis folder ka page hai, usme ek naya `layout.tsx` bana do (Nested Layouts). Wo us specific folder aur uske bacchon (sub-folders) pe apply ho jayega.
 
@@ -1436,19 +1436,19 @@ Socho tum mall mein ho. Agar tum normal chal ke doosri dukaan mein jaate ho, toh
 Lekin, mall mein ek **Magic Teleportation Signboard** laga hai. Jaise hi tum usko dekhte ho, wo aage ki dukaan ka saara samaan background mein ready kar leta hai. Aur click karte hi, *BAM!* Tum turant wahan pahunch gaye bina kisi loading ke! (Ye Next.js ka `<Link>` component hai).
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** The `<Link>` component is a React component that extends the standard HTML `<a>` element to provide prefetching and client-side navigation between routes in Next.js.
-* **Hinglish Simplification:** Ye Next.js ka apna special link tag hai jo website ko bina refresh (reload) kiye ek page se doosre page par le jata hai.
+* [[HL::**Precise English:** The `<Link>` component is a React component that extends the standard HTML `<a>` element to provide prefetching and client-side navigation between routes in Next.js.::HL]]
+* [[HL::**Hinglish Simplification:** Ye Next.js ka apna special link tag hai jo website ko bina refresh (reload) kiye ek page se doosre page par le jata hai::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-- **Problem:** Normal website mein jab tum kisi link par click karte ho, toh browser poori screen ko white karke server se fresh page mangata hai. Ye slow lagta hai aur user ka "App" wala feel khatam kar deta hai.
-- **Solution:** `<Link>` component sirf naye page ka data aur UI laata hai aur smoothly dikha deta hai. Poora browser reload nahi hota!
+- [[HL::**Problem:** Normal website mein jab tum kisi link par click karte ho, toh browser poori screen ko white karke server se fresh page mangata hai. Ye slow lagta hai aur user ka "App" wala feel khatam kar deta hai.::HL]]
+- [[HL::**Solution:** `<Link>` component sirf naye page ka data aur UI laata hai aur smoothly dikha deta hai. Poora browser reload nahi hota::HL]]!
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 Browser mein ye ek normal clickable blue text ya button jaisa hi dikhega. Code mein, hume isko Next.js se `import` karna padta hai.
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1. **Prefetching:** Jab website load hoti hai, aur `<Link>` component user ki screen (viewport) par dikhta hai, Next.js chupchaap (background mein) us aage wale page ka thoda sa data pehle hi download kar leta hai.
-2. **Client-side Navigation:** Jab user sach mein click karta hai, toh browser refresh nahi hota. Next.js sirf pehle se download kiya hua data use karke UI ko turant badal deta hai.
+1. [[HL::**Prefetching:** Jab website load hoti hai, aur `<Link>` component user ki screen (viewport) par dikhta hai, Next.js chupchaap (background mein) us aage wale page ka thoda sa data pehle hi download kar leta hai.::HL]]
+2. [[HL::**Client-side Navigation:** Jab user sach mein click karta hai, toh browser refresh nahi hota. Next.js sirf pehle se download kiya hua data use karke UI ko turant badal deta hai::HL]].
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
@@ -1458,7 +1458,7 @@ Ek `app/page.tsx` banate hain jahan hum About page ka link denge.
 // File: app/page.tsx
 
 // 1. Sabse pehle Link component ko Next.js se import karna zaroori hai
-import Link from 'next/link';
+[[HL::import Link from 'next/link::HL]]';
 
 export default function HomePage() {
   return (
@@ -1469,12 +1469,12 @@ export default function HomePage() {
       <a href="/about">Go to About (Slow)</a>
       <br />
 
-      {/* 3. Next.js ka <Link> tag (SAHI TARIQA - Fast, no reload) */}
-      {/* href="/about" matlab click karne pe /about route pe le jao */}
-      <Link href="/about">
-        Go to About Us (Super Fast! ⚡)
-      </Link>
-    </div>
+      {/* 3. [[HL::Next.js ka <Link> tag (SAHI TARIQA - Fast, no reload) */}::HL]]
+      [[HL::{/* href="/about" matlab click karne pe /about route pe le jao */}::HL]]
+      [[HL::<Link href="/about">::HL]]
+        [[HL::Go to About Us (Super Fast! ⚡)::HL]]
+      [[HL::</Link>::HL]]
+    [[HL::</div::HL]]>
   );
 }
 ```
@@ -1499,12 +1499,12 @@ About Us page content will appear instantly.
 | **Prefetching** | Kuch pehle se load nahi karta. | Background mein aage ka page pehle hi load kar leta hai. |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-1. **Import karna bhool jana:** `<Link>` likh diya par upar `import Link from 'next/link'` nahi likha. (React error de dega).
-2. **External links ke liye `<Link>` use karna:** Agar tumhe Google (`https://google.com`) par bhejna hai, toh normal `<a>` tag use karo. `<Link>` sirf tumhari apni website ke andar ghumne ke liye hai.
+1. [[HL::**Import karna bhool jana:** `<Link>` likh diya par upar `import Link from 'next/link'` nahi likha. (React error de dega).::HL]]
+2. [[HL::**External links ke liye `<Link>` use karna:** Agar tumhe Google (`https://google.com`) par bhejna hai, toh normal `<a>` tag use karo. `<Link>` sirf tumhari apni website ke andar ghumne ke liye hai::HL]].
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-1. **"Kya main Link tag ke andar button daal sakta hu?"**
-   - Haan! Tum `<Link href="/cart"><button>View Cart</button></Link>` likh sakte ho.
+1. **"[[HL::Kya main Link tag ke andar button daal sakta hu?"**::HL]]
+   - [[HL::Haan! Tum `<Link href="/cart"><button>View Cart</button></Link>` likh sakte ho::HL]].
 2. **"Prefetching mera data (internet) toh waste nahi karegi?"**
    - Agar tumhara page bohot heavy hai, toh tum us link mein `prefetch={false}` add kar sakte ho: `<Link href="/heavy-page" prefetch={false}>`. Isse wo advance mein data download nahi karega.
 
@@ -1556,124 +1556,124 @@ Tum ek E-commerce website par shopping kar rahe ho.
 - **Programmatic Navigation:** Ye ek **Bouncer ya Escalator** hai. Tumne form bhara (payment ki), aur system ne *apne aap* tumhe Success Page par dhakka maar diya (bhej diya). Tumne explicitly kisi link par click nahi kiya. Ye code (program) decide karta hai ki kab rasta badalna hai!
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** Programmatic navigation refers to changing routes via code (like inside an event handler or server function) rather than requiring a user to click a static link element.
-* **Hinglish Simplification:** Jab website automatically tumhara page badal de kisi logic ya calculation ke baad (jaise login success hone pe dashboard dikhana), usko programmatic navigation kehte hain.
+* **Preci[[HL::se English:** Programmatic navigation refers to changing routes via code (like inside an event handler or server function) rather than requiring a user to click a static link element.::HL]]
+* [[HL::**Hinglish Simplification:** Jab website automatically tumhara page badal de kisi logic ya calculation ke baad (jaise login success hone pe dashboard dikhana), usko programmatic navigation kehte hain::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-- **Problem:** User ne "Login" form submit kiya. Ab tum use ussi page par toh nahi rakh sakte na? Tumhe use Home page par bhejna hai. `<Link>` kaam nahi aayega kyunki form submit click par rasta decide nahi hota, API ke response (success/fail) par decide hota hai.
-- **Solution:** Hum React Hooks (`useRouter`) ya Server functions (`redirect`) ka use karte hain code ke zariye user ko doosre page par dhakelne ke liye.
+- [[HL::**Problem:** User ne "Login" form submit kiya. Ab tum use ussi page par toh nahi rakh sakte na? Tumhe use Home page par bhejna hai. `<Link>` kaam nahi aayega kyunki form submit click par rasta decide nahi hota, API ke response (success/fail) par decide hota hai.::HL]]
+- [[HL::**Solution:** Hum React Hooks (`useRouter`) ya Server functions (`redirect`) ka use karte hain code ke zariye user ko doosre page par dhakelne ke liye::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 Isko trigger karne ke liye hume mostly ek Button `onClick` ya form `onSubmit` chahiye hota hai.
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-Iske do alag alag raste hain (Client side aur Server side):
-1. **Client-Side (`useRouter`):** Ye browser ki History API ko use karta hai. Tum code likhte ho `router.push('/dashboard')`, aur browser URL badal kar naya page dikha deta hai.
-2. **Server-Side (`redirect`):** Server pe Next.js ek special error throw karta hai (HTTP 307/308). Browser us error ko pakadta hai aur samajh jata hai ki "Accha, mujhe us doosre URL par jana hai."
+[[HL::Iske do alag alag raste hain (Client side aur Server side):::HL]]
+1. [[HL::**Client-Side (`useRouter`):** Ye browser ki History API ko use karta hai. Tum code likhte ho `router.push('/dashboard')`, aur browser URL badal kar naya page dikha deta hai.::HL]]
+2. [[HL::**Server-Side (`redirect`):** Server pe Next.js ek special error throw karta hai (HTTP 307/308). Browser us error ko pakadta hai aur samajh jata hai ki "Accha, mujhe us doosre URL par jana hai::HL]]."
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
-**Tarika 1: `useRouter` (Client Components mein use hota hai)**
-Agar user kisi button pe click karke koi kaam karta hai, aur uske baad bhejna ho.
+[[HL::**Tarika 1: `useRouter` (Client Components mein use hota hai)**::HL]]
+[[HL::Agar user kisi button pe click karke koi kaam karta hai, aur uske baad bhejna ho.::HL]]
 
 ```tsx
-// File: app/login/page.tsx
-'use client'; // useRouter use karne ke liye 'use client' likhna zaroori hai
+[[HL::// File: app/login/page.tsx::HL]]
+[[HL::'use client'; // useRouter use karne ke liye 'use client' likhna zaroori hai::HL]]
 
-import { useRouter } from 'next/navigation'; // import sahi jagah se hona chahiye
+[[HL::import { useRouter } from 'next/navigation'; // import sahi jagah se hona chahiye::HL]]
 
-export default function LoginPage() {
-  const router = useRouter(); // Router ka object banaya
+[[HL::export default function LoginPage() {::HL]]
+  [[HL::const router = useRouter(); // Router ka object banaya::HL]]
 
-  const handleLogin = () => {
-    // 1. Man lo yahan humne API call ki login check karne ke liye...
-    console.log("Checking credentials...");
+  [[HL::const handleLogin = () => {::HL]]
+    [[HL::// 1. Man lo yahan humne API call ki login check karne ke liye...::HL]]
+    [[HL::console.log("Checking credentials...");::HL]]
     
-    // 2. Login hit ho gaya! Ab automatically Dashboard pe bhej do
-    router.push('/dashboard'); 
-  };
+    [[HL::// 2. Login hit ho gaya! Ab automatically Dashboard pe bhej do::HL]]
+    [[HL::router.push('/dashboard');::HL]] 
+  [[HL::};::HL]]
 
-  return (
-    <div>
-      <h2>Login Page 🔐</h2>
-      {/* Jab user is button ko dabayega, handleLogin function chalega */}
-      <button onClick={handleLogin}>Login Now</button>
-    </div>
+  [[HL::return (::HL]]
+    [[HL::<div>::HL]]
+      [[HL::<h2>Login Page 🔐</h2>::HL]]
+      [[HL::{/* Jab user is button ko dabayega, handleLogin function chalega */}::HL]]
+      [[HL::<button onClick={handleLogin}>Login Now</button>::HL]]
+    [[HL::</div::HL]]>
   );
 }
 ```
 ```text
-# 📤 Expected Output (Terminal/Console after clicking button):
-Checking credentials...
+# 📤 [[HL::Expected Output (Terminal/Console after clicking button):::HL]]
+[[HL::Checking credentials...::HL]]
 
-# 📤 Expected Output (Browser shifts instantly):
-URL changes from localhost:3000/login -> localhost:3000/dashboard
-Dashboard page loads!
+[[HL::# 📤 Expected Output (Browser shifts instantly):::HL]]
+[[HL::URL changes from localhost:3000/login -> localhost:3000/dashboard::HL]]
+[[HL::Dashboard page loads::HL]]!
 ```
 
-**Tarika 2: `redirect` (Server Components mein use hota hai)**
-Jab server pe checking karni ho, jaise ki kya user logged in hai? Agar nahi, toh bouncer usko bhej dega wapas.
+[[HL::**Tarika 2: `redirect` (Server Components mein use hota hai)**::HL]]
+[[HL::Jab server pe checking karni ho, jaise ki kya user logged in hai? Agar nahi, toh bouncer usko bhej dega wapas::HL]].
 
 ```tsx
-// File: app/dashboard/page.tsx
-// Yahan 'use client' NAHI hai, yani ye Server Component hai
+// [[HL::File: app/dashboard/page.tsx::HL]]
+[[HL::// Yahan 'use client' NAHI hai, yani ye Server Component hai::HL]]
 
-import { redirect } from 'next/navigation';
+[[HL::import { redirect } from 'next/navigation';::HL]]
 
-export default function DashboardPage() {
-  const isLoggedIn = false; // Maan lo database check kiya aur user login nahi hai
+[[HL::export default function DashboardPage() {::HL]]
+  [[HL::const isLoggedIn = false; // Maan lo database check kiya aur user login nahi hai::HL]]
 
-  if (!isLoggedIn) {
-    // Ye line chalti hi, Next.js forcefully user ko '/login' pe bhej dega
-    // Niche ka koi bhi code run nahi hoga
-    redirect('/login'); 
-  }
+  [[HL::if (!isLoggedIn) {::HL]]
+    [[HL::// Ye line chalti hi, Next.js forcefully user ko '/login' pe bhej dega::HL]]
+    [[HL::// Niche ka koi bhi code run nahi hoga::HL]]
+    [[HL::redirect('/login');::HL]] 
+  [[HL::}::HL]]
 
-  return (
-    <div>
-      <h1>Secret Dashboard 🕵️‍♂️</h1>
-      <p>Only logged in users can see this!</p>
-    </div>
+  [[HL::return (::HL]]
+    [[HL::<div>::HL]]
+      [[HL::<h1>Secret Dashboard 🕵️‍♂️</h1>::HL]]
+      [[HL::<p>Only logged in users can see this!</p>::HL]]
+    [[HL::</div::HL]]>
   );
 }
 ```
 ```text
-# 📤 Expected Output (Browser behavior):
-If user types localhost:3000/dashboard in URL:
-Server checks isLoggedIn (false).
-Server triggers redirect.
-Browser instantly changes URL to localhost:3000/login and shows Login Page.
-(Secret dashboard UI is NEVER sent to browser)
+# 📤 [[HL::Expected Output (Browser behavior):::HL]]
+[[HL::If user types localhost:3000/dashboard in URL:::HL]]
+[[HL::Server checks isLoggedIn (false).::HL]]
+[[HL::Server triggers redirect.::HL]]
+[[HL::Browser instantly changes URL to localhost:3000/login and shows Login Page.::HL]]
+[[HL::(Secret dashboard UI is NEVER sent to browser::HL]])
 ```
 
 ## ⚖️ 8. Comparison (Ye vs Woh):
 
-| Feature | `useRouter` | `redirect` | `permanentRedirect` |
+| [[HL::Feature::HL]] | [[HL::`useRouter`::HL]] | [[HL::`redirect`::HL]] | [[HL::`permanentRedirect`::HL]] |
 | :--- | :--- | :--- | :--- |
-| **Kaha Use Karein?** | Client Components (`'use client'`) | Server Components (Ya Server Actions) | Server Components |
-| **Kaise Kaam Karta Hai?** | Browser ko naya URL push karta hai. | Server ko bolta hai user ko doosre page par fek do. | Browser ko bolta hai "Ye purana URL hamesha ke liye badal gaya hai, search engines (SEO) update kar lo" (HTTP 308). |
-| **Example Use Case**| Button click karke agle page pe jana. | Login na hone par dashboard se nikalna. | Purani website `/shop` se nayi `/store` pe permanent bhej dena. |
+| [[HL::**Kaha Use Karein?**::HL]] | [[HL::Client Components (`'use client'`)::HL]] | [[HL::Server Components (Ya Server Actions)::HL]] | [[HL::Server Components::HL]] |
+| [[HL::**Kaise Kaam Karta Hai?**::HL]] | [[HL::Browser ko naya URL push karta hai.::HL]] | [[HL::Server ko bolta hai user ko doosre page par fek do.::HL]] | [[HL::Browser ko bolta hai "Ye purana URL hamesha ke liye badal gaya hai, search engines (SEO) update kar lo" (HTTP 308::HL]]). |
+| [[HL::**Example Use Case**::HL]]| [[HL::Button click karke agle page pe jana.::HL]] | [[HL::Login na hone par dashboard se nikalna.::HL]] | [[HL::Purani website `/shop` se nayi `/store` pe permanent bhej dena::HL]]. |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
 1. **Wrong Import:** `useRouter` ko `next/router` (purana Next.js) se import kar lena. 
    - *Fix:* App Router mein hamesha `next/navigation` se import karo.
-2. **Forgetting `'use client'`:** Server component (default) mein `useRouter` use karne ki koshish karna. Ye error dega!
+2. **Forgetting `'use client'`:** Server component (default) mein [[HL::`useRouter` use karne ki koshish karna. Ye error de::HL]]ga!
 3. **Putting code after `redirect()`:**
    ```tsx
-   redirect('/login');
-   console.log("Ye print hoga?"); // NAHI! redirect error throw karta hai, execution wahi ruk jati hai.
+   [[HL::redirect('/login');::HL]]
+   [[HL::console.log("Ye print hoga?"); // NAHI! redirect error throw karta hai, execution wahi ruk jati hai.::HL]]
    ```
 
-## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-1. **"Client Component kya bala hai?"**
-   - Jiske aage `'use client'` likha ho. Ye browser mein chalte hain (isliye button clicks, animations yahan possible hain). Default pages Server components hote hain jo direct server (computer) pe HTML banate hain.
-2. **"Toh kab `<Link>` use karu aur kab `useRouter`?"**
-   - Rule of thumb: Agar user ko explicitly kisi text/image pe **click** karna hai agle page pe jane ke liye, toh `<Link>` use karo (SEO ke liye better hai). Agar **form submit** ya timer ke baad automatically bhej dena hai, toh `useRouter` use karo!
+[[HL::## 🤔 10. Agar::HL]] [[HL::Dimag Ghoom Rahan Hai? (Confusion Clarifier):::HL]]
+1. [[HL::**"Client Component kya bala hai?"**::HL]]
+   - [[HL::Jiske aage `'use client::HL]]'` [[HL::likha ho. Ye browser mein chalte hain (isliye button clicks, animations yahan possible hain). Default pages Server components hote hain jo direct server (computer) pe HTML banate hain.::HL]]
+2. [[HL::**"Toh kab `<Link>` use karu aur kab `useRouter`?"**::HL]]
+   - [[HL::Rule of thumb: Agar user ko explicitly kisi text/image pe **click** karna hai agle page pe jane ke liye, toh `<Link>` use karo (SEO ke liye better hai). Agar **form submit** ya timer ke baad automatically bhej dena hai, toh `useRouter` use karo!::HL]]
 
-## 🌍 11. Real-World Use Case (Production Application):
-**Swiggy/Zomato:** Tumne cart mein khana dala aur "Pay Now" pe click kiya. Razorpay gateway khula, payment successful hui. Wahan koi link nahi hota ki "Click here to go to order success". Code automatically tumhe `router.push('/order-status')` par bhej deta hai!
+[[HL::## 🌍 11. Real-World Use Case (Production Application):::HL]]
+[[HL::**Swiggy/Zomato:** Tumne cart mein khana dala aur "Pay Now" pe click kiya. Razorpay gateway khula, payment successful hui. Wahan koi link nahi hota ki "Click here to go to order success". Code automatically tumhe `router.push('/order-status')` par bhej deta hai!::HL]]
 
-## 🎨 12. Visual Diagram (ASCII Art):
+[[HL::## 🎨 12. Visual Diagram (ASCII Art::HL]]):
 ```text
 [ Is User Logged In? ]
        /      \
@@ -1694,8 +1694,8 @@ Agar tumne galat jagah `useRouter` laga diya without `'use client'`, toh app cra
 ## ❓ 15. FAQ (Interview Questions):
 1. **Q:** Difference between `useRouter` in App Router vs Pages Router?
    **Ans:** App Router uses `next/navigation`, Pages Router uses `next/router`.
-2. **Q:** Can `redirect()` be used in a Client Component?
-   **Ans:** No, `redirect` is specifically designed for Server Components and Server Actions.
+2. [[HL::**Q:** Can `redirect()` be used in a Client Component?::HL]]
+   [[HL::**Ans:** No, `redirect` is specifically designed for Server Components and Server Actions::HL]].
 3. **Q:** What HTTP status code does `redirect` and `permanentRedirect` use?
    **Ans:** `redirect` uses 307 (Temporary), `permanentRedirect` uses 308 (Permanent).
 
@@ -1729,12 +1729,12 @@ Tum wahan koi bhi t-shirt lekar jao (jaise Spider-Man wali ya Batman wali), wo t
 Tumhe har ek t-shirt ke liye alag-alag 1000 trial rooms banane ki zaroorat nahi padi! Bas ek trial room banaya, aur jo item tum laaye, usne wahi dikha diya. 
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** Dynamic routing allows you to create pages from dynamic data by using square brackets `[]` around a folder name, mapping URL segments to variables. In Next.js 15, these URL parameters are treated as asynchronous Promises.
-* **Hinglish Simplification:** Folder ke naam mein square brackets `[]` lagane se wo fixed nahi rehta, balki ek variable ban jata hai. Jo bhi tum URL mein type karoge, wo data ban kar code mein aa jayega.
+* [[HL::**Precise English:** Dynamic routing allows you to create pages from dynamic data by using square brackets `[]` around a folder name, mapping URL segments to variables. In Next.js 15, these URL parameters are treated as asynchronous Promises.::HL]]
+* [[HL::**Hinglish Simplification:** Folder ke naam mein square brackets `[]` lagane se wo fixed nahi rehta, balki ek variable ban jata hai. Jo bhi tum URL mein type karoge, wo data ban kar code mein aa jayega::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-- **Problem:** E-commerce site par thousands of products hote hain (`/product/iphone-15`, `/product/samsung-s24`). Hum har phone ke liye naya folder aur `page.tsx` manually copy-paste nahi kar sakte.
-- **Solution:** Hum bas ek folder banate hain jiska naam hota hai `[productId]`. Ab URL mein `/product/` ke aage kuch bhi likho, Next.js usko pakad kar is ek page ko de dega.
+- [[HL::**Problem:** E-commerce site par thousands of products hote hain (`/product/iphone-15`, `/product/samsung-s24`). Hum har phone ke liye naya folder aur `page.tsx` manually copy-paste nahi kar sakte.::HL]]
+- [[HL::**Solution:** Hum bas ek folder banate hain jiska naam hota hai `[productId]`. Ab URL mein `/product/` ke aage kuch bhi likho, Next.js usko pakad kar is ek page ko de dega::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 Tumhare VS Code mein folder ke aage aur peeche exactly brackets lagane honge:
@@ -1748,37 +1748,37 @@ app/
 ```
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1. User ne browser mein type kiya `www.shop.com/product/iphone-15`.
-2. Next.js router check karta hai: "Kya mere paas exactly `iphone-15` naam ka folder hai?" -> Jawab: Nahi.
-3. Phir wo dekhta hai: "Kya mere paas koi bracket wala `[productId]` folder hai?" -> Jawab: Haan!
-4. Next.js us `iphone-15` text ko uthata hai aur ek variable `productId` mein daal deta hai.
-5. Fir Next.js ye variable `page.tsx` ko bhej deta hai taaki page us variable (iphone-15) ka data database se laa sake.
+1. [[HL::User ne browser mein type kiya `www.shop.com/product/iphone-15`.::HL]]
+2. [[HL::Next.js router check karta hai: "Kya mere paas exactly `iphone-15` naam ka folder hai?" -> Jawab: Nahi.::HL]]
+3. [[HL::Phir wo dekhta hai: "Kya mere paas koi bracket wala `[productId]` folder hai?" -> Jawab: Haan!::HL]]
+4. [[HL::Next.js us `iphone-15` text ko uthata hai aur ek variable `productId` mein daal deta hai.::HL]]
+5. [[HL::Fir Next.js ye variable `page.tsx` ko bhej deta hai taaki page us variable (iphone-15) ka data database se laa sake::HL]].
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
-🚨 **Pro Tip for Next.js 15:** Next.js 15 mein ek major change aaya hai. Jo parameters (data) URL se aate hain, wo ab **Promise** hote hain. Matlab unhe nikalne ke liye `await` use karna padta hai.
+🚨 [[HL::**Pro Tip for Next.js 15:** Next.js 15 mein ek major change aaya hai. Jo parameters (data) URL se aate hain, wo ab **Promise** hote hain. Matlab unhe nikalne ke liye `await` use karna padta hai::HL]].
 
 ```tsx
-// File: app/product/[productId]/page.tsx
+// [[HL::File: app/product/[productId]/page.tsx::HL]]
 
-// 1. Kyunki Next.js 15 mein params Promise hote hain, page component async hona chahiye
-export default async function ProductPage({ 
-  params 
-}: { 
-  params: Promise<{ productId: string }> // TypeScript ko bataya ki kya aane wala hai
-}) {
+[[HL::// 1. Kyunki Next.js 15 mein params Promise hote hain, page component async hona chahiye::HL]]
+[[HL::export default async function ProductPage({::HL]] 
+  [[HL::params::HL]] 
+[[HL::}: {::HL]] 
+  [[HL::params: Promise<{ productId: string }> // TypeScript ko bataya ki kya aane wala hai::HL]]
+[[HL::}) {::HL]]
   
-  // 2. await laga kar hum URL se wo word nikalenge
-  const resolvedParams = await params;
-  const currentProduct = resolvedParams.productId; // Agar URL /product/iphone-15 hai, toh isme 'iphone-15' aayega
+  [[HL::// 2. await laga kar hum URL se wo word nikalenge::HL]]
+  [[HL::const resolvedParams = await params;::HL]]
+  [[HL::const currentProduct = resolvedParams.productId; // Agar URL /product/iphone-15 hai, toh isme 'iphone-15' aayega::HL]]
 
-  console.log("Fetching data for:", currentProduct);
+  [[HL::console.log("Fetching data for:", currentProduct);::HL]]
 
-  // 3. Page pe display karenge
-  return (
-    <div>
-      <h1>Product Detail Page 📦</h1>
-      {/* Hum wahi naam dikha rahe hain jo URL mein pass hua tha */}
+  [[HL::// 3. Page pe display karenge::HL]]
+  [[HL::return (::HL]]
+    [[HL::<div>::HL]]
+      [[HL::<h1>Product Detail Page 📦</h1>::HL]]
+      [[HL::{/* Hum wahi naam dikha rahe hain jo URL mei::HL]]n pass hua tha */}
       <p>Aap dekh rahe hain: <b>{currentProduct}</b></p>
     </div>
   );
@@ -1786,73 +1786,73 @@ export default async function ProductPage({
 ```
 
 ```text
-# 📤 Expected Output (Terminal/Console - if URL is localhost:3000/product/iphone-15):
-Fetching data for: iphone-15
+# 📤 [[HL::Expected Output (Terminal/Console - if URL is localhost:3000/product/iphone-15):::HL]]
+[[HL::Fetching data for: iphone-15::HL]]
 
-# 📤 Expected Output (Browser at localhost:3000/product/iphone-15):
-Product Detail Page 📦
-Aap dekh rahe hain: iphone-15
+[[HL::# 📤 Expected Output (Browser at localhost:3000/product/iphone-15):::HL]]
+[[HL::Product Detail Page 📦::HL]]
+[[HL::Aap dekh rahe hain: iphone-15::HL]]
 
-# 📤 Expected Output (Browser at localhost:3000/product/samsung-s24):
-Product Detail Page 📦
-Aap dekh rahe hain: samsung-s24
+[[HL::# 📤 Expected Output (Browser at localhost:3000/product/samsung-s24):::HL]]
+[[HL::Product Detail Page 📦::HL]]
+[[HL::Aap dekh rahe hain: samsung-s24::HL]]
 ```
 *(Dekha? Page ek hi hai, par URL ke hisaab se content badal gaya!)*
 
 ## ⚖️ 8. Comparison (Ye vs Woh):
 
-| Feature | Static Route (`app/about`) | Dynamic Route (`app/[id]`) |
+| [[HL::Feature::HL]] | [[HL::Static Route (`app/about`)::HL]] | [[HL::Dynamic Route (`app/[id]`)::HL]] |
 | :--- | :--- | :--- |
-| **URL Match** | Sirf `/about` pe hi chalega. | `/123`, `/abc`, `/iphone` sab pe chalega. |
-| **Data (Params)** | Koi external data pass nahi hota. | URL ka hissa variable banke component mein aata hai. |
-| **Use Case** | Contact Us, Privacy Policy, Home. | Product details, User Profiles (`/user/rahul`). |
+| [[HL::**URL Match**::HL]] | [[HL::Sirf `/about` pe hi chalega.::HL]] | [[HL::`/123`, `/abc`, `/iphone` sab pe chalega.::HL]] |
+| [[HL::**Data (Params)**::HL]] | [[HL::Koi external data pass nahi hota.::HL]] | [[HL::URL ka hissa variable banke component mein aata hai.::HL]] |
+| [[HL::**Use Case**::HL]] | [[HL::Contact Us, Privacy Policy, Home.::HL]] | [[HL::Product details, User Profiles (`/user/rahul`::HL]]). |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-1. **Brackets bhool jana:** Folder ka naam `productId` rakh dena instead of `[productId]`. Isse Next.js sochega ki URL exact `/product/productId` hona chahiye.
-2. **Next.js 15 mein `await` na lagana:** Purane Next.js (13/14) mein `params.productId` direct use hota tha. Version 15 mein agar `await params` nahi kiya, toh error aayega!
+1. [[HL::**Brackets bhool jana:** Folder ka naam `productId` rakh dena instead of `[productId]`. Isse Next.js sochega ki URL exact `/product/productId` hona chahiye::HL]].
+2. [[HL::**Next.js 15 mein `await` na lagana:** Purane Next.js (13/14) mein `params.productId` direct use hota tha. Version 15 mein agar `await params` nahi kiya, toh error aayega::HL]]!
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-1. **"Kya main bracket mein koi bhi naam rakh sakta hoon?"**
-   - Haan! `[id]`, `[slug]`, `[productName]` kuch bhi. Jo naam tum folder ko doge, wahi naam se variable code mein milega.
-2. **"Agar mere paas `/product/shoes` naam ka fixed folder bhi hai, aur `[productId]` bhi, toh Next.js kahan jayega?"**
-   - Next.js hamesha **Exact Match** ko pehle chunta hai. Toh wo pehle `/product/shoes` wale folder mein jayega. Agar wo nahi mila, tabhi `[productId]` mein jayega.
+1. [[HL::**"Kya main bracket mein koi bhi naam rakh sakta hoon?"**::HL]]
+   - [[HL::Haan! `[id]`, `[slug]`, `[productName]` kuch bhi. Jo naam tum folder ko doge, wahi naam se variable code mein milega::HL]].
+2. [[HL::**"Agar mere paas `/product/shoes` naam ka fixed folder bhi hai, aur `[productId]` bhi, toh Next.js kahan jayega?"**::HL]]
+   - [[HL::Next.js hamesha **Exact Match** ko pehle chunta hai. Toh wo pehle `/product/shoes` wale folder mein jayega. Agar wo nahi mila, tabhi `[productId]` mein jayega.::HL]]
 
-## 🌍 11. Real-World Use Case (Production Application):
-**Instagram Profiles:** Jab tum URL bar mein `instagram.com/virat.kohli` likhte ho, toh Instagram ke paas Virat ke liye alag web page nahi hai. Unhone ek hi folder banaya hai `[username]`. Wo `virat.kohli` ko pakadte hain, database se uski photo late hain, aur screen par chipka dete hain.
+[[HL::## 🌍 11. Real-World Use Case (Production Applicatio::HL]]n):
+[[HL::**Instagram Profiles:** Jab tum URL bar mein `instagram.com/virat.kohli` likhte ho, toh Instagram ke paas Virat ke liye alag web page nahi hai. Unhone ek hi folder banaya hai `[username]`. Wo `virat.kohli` ko pakadte hain, database se uski photo late hain, aur screen par chipka dete hain.::HL]]
 
-## 🎨 12. Visual Diagram (ASCII Art):
+[[HL::## 🎨 12. Visual Diagram (ASCII Art::HL]]):
 ```text
-🌐 Request: GET /product/macbook-pro
+🌐 [[HL::Request: GET /product/macbook-pro::HL]]
         |
-        V
-[ Next.js Router ] ---> Is there a exact folder 'macbook-pro'? (No)
+        [[HL::V::HL]]
+[[HL::[ Next.js Router ] ---> Is there a exact folder 'macbook-pro'? (No)::HL]]
         |
-        V
-[ Next.js Router ] ---> Is there a dynamic folder '[productId]'? (Yes!)
+        [[HL::V::HL]]
+[[HL::[ Next.js Router ] ---> Is there a dynamic folder '[productId]'? (Yes!)::HL]]
         |
-        V
-Extracts "macbook-pro" ---> Sets params = { productId: "macbook-pro" }
+        [[HL::V::HL]]
+[[HL::Extracts "macbook-pro" ---> Sets params = { productId: "macbook-pro" }::HL]]
         |
-        V
-Renders app/product/[productId]/page.tsx
+        [[HL::V::HL]]
+[[HL::Renders app/product/[productId]/page.tsx::HL]]
 ```
 
 ## 🛠️ 13. Best Practices (Pro Tips):
-- Hamesha descriptive naam rakho. `[id]` likhne se behtar `[productId]` ya `[userId]` likho taaki code padhte waqt samajh aaye ki kya aane wala hai.
+- [[HL::Hamesha descriptive naam rakho. `[id]` likhne se behtar `[productId]` ya `[userId]` likho taaki code padhte waqt samajh aaye ki kya aane wala hai::HL]].
 
 ## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
-Agar tum dynamic routes use nahi karoge, toh e-commerce website banana practically impossible ho jayega. Tumhe har naye product launch hone par code mein naya folder manually add karke website dobaara deploy karni padegi!
+Agar [[HL::tum dynamic routes use nahi karoge, toh e-commerce website banana practically impossible ho jayega. Tumhe har naye product launch hone par code mein naya folder manually add karke website dobaara deploy karni padegi::HL]]!
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **Q:** What is a Dynamic Route in Next.js?
-   **Ans:** A route that can match any path segment dynamically, created by wrapping a folder name in square brackets `[]`.
-2. **Q:** How do you access the dynamic URL segment in Next.js 15?
-   **Ans:** By awaiting the `params` Promise passed to the page component (e.g., `const { id } = await params;`).
-3. **Q:** Can we have multiple dynamic segments?
-   **Ans:** Yes, like `/category/[catId]/product/[prodId]`. You will get both in the params object.
+1. [[HL::**Q:** What is a Dynamic Route in Next.js?::HL]]
+   [[HL::**Ans:** A route that can match any path segment dynamically, created by wrapping a folder name in square brackets::HL]] `[]`.
+2. [[HL::**Q:** How do you access the dynamic URL segment in Next.js 15?::HL]]
+   [[HL::**Ans:** By awaiting the `params` Promise passed to the page component (e.g., `const { id } = await params::HL]];`).
+3. [[HL::**Q:** Can we have multiple dynamic segments?::HL]]
+   [[HL::**Ans:** Yes, like `/category/[catId]/product/[prodId]`. You will get both in the params object::HL]].
 
 ## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
-**Brackets `[]` laga do, toh raste ka naam fixed se variable ban jata hai!**
+[[HL::**Brackets `[]` laga do, toh raste ka naam fixed se variable ban jata hai::HL]]!**
 
 ---
 *(Ek lambi saans lo! Ab aage badhte hain ek step aur advanced topic par!)*
@@ -1861,107 +1861,107 @@ Agar tum dynamic routes use nahi karoge, toh e-commerce website banana practical
 ## 🎯 1. Title / Topic: Advanced E-commerce Routing - Catch-all Segments (`[...slug]`)
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
-Socho ek Delivery Boy hai (Dynamic Route `[id]`), jo ek baar mein sirf 1 hi gaon ka raasta pooch sakta hai. Agar usko lambe address pe jana ho toh wo confuse ho jayega.
-Par ek **Super Postman** hai (Catch-all Route `[...slug]`). Tum usko kitna bhi lamba address de do, chahe "India -> Delhi -> CP -> Shop No. 5", wo saare raston ko ek single list (Array) mein apne thela (bag) mein daal lega aur sahi jagah pahunch jayega. Uske aage chahe jitne marzi `/` lagao, wo sab pakad lega!
+[[HL::Socho ek Delivery Boy hai (Dynamic Route `[id]`), jo ek baar mein sirf 1 hi gaon ka raasta pooch sakta hai. Agar usko lambe address pe jana ho toh wo confuse ho jayega.::HL]]
+[[HL::Par ek **Super Postman** hai (Catch-all Route `[...slug]`). Tum usko kitna bhi lamba address de do, chahe "India -> Delhi -> CP -> Shop No. 5", wo saare raston ko ek single list (Array) mein apne thela (bag) mein daal lega aur sahi jagah pahunch jayega. Uske aage chahe jitne marzi `/` lagao, wo sab pakad lega!::HL]]
 
-## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** A catch-all segment is created by adding an ellipsis (`...`) inside the brackets `[...folderName]`. It matches not just one segment, but all subsequent segments of the URL path, grouping them into an array of strings.
-* **Hinglish Simplification:** Folder ke naam mein 3 dots `...` lagane se wo URL ke aage aane wale har ek `/` word ko pakad kar ek Array bana deta hai.
+[[HL::## 📖 3. Technical Definition (Interview Answer):::HL]]
+* [[HL::**Precise English:** A catch-all segment is created by adding an ellipsis (`...`) inside the brackets `[...folderName]`. It matches not just one segment, but all subsequent segments of the URL path, grouping them into an array of strings.::HL]]
+* [[HL::**Hinglish Simplification:** Folder ke naam mein 3 dots `...` lagane se wo URL ke aage aane wale har ek `/` word ko pakad kar ek Array bana deta hai.::HL]]
 
-## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-- **Problem:** E-commerce mein Filters hote hain. Jaise: `www.shop.com/clothes`, ya `www.shop.com/clothes/men`, ya `www.shop.com/clothes/men/summer/nike`. Ab yahan segments fix nahi hain, kabhi 1 hai, kabhi 4. Tum kitne nested dynamic folders (`[a]/[b]/[c]`) banaoge?
-- **Solution:** Ek hi folder banao `[...slug]`. Ab URL ke aage chahe 1 path aaye ya 10, ye akele sabko catch kar lega.
+[[HL::## 🧠 4. Zaroorat Kyun Hai? (Why use it?):::HL]]
+- [[HL::**Problem:** E-commerce mein Filters hote hain. Jaise: `www.shop.com/clothes`, ya `www.shop.com/clothes/men`, ya `www.shop.com/clothes/men/summer/nike`. Ab yahan segments fix nahi hain, kabhi 1 hai, kabhi 4. Tum kitne nested dynamic folders (`[a]/[b]/[c]`) banaoge?::HL]]
+- [[HL::**Solution:** Ek hi folder banao `[...slug]`. Ab URL ke aage chahe 1 path aaye ya 10, ye akele sabko catch kar lega::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 ```text
-app/
- └── shop/
-      └── [...slug]/        <-- (3 dots dekho! Ye Catch-all hai)
-           └── page.tsx
+[[HL::app/::HL]]
+ [[HL::└── shop/::HL]]
+      [[HL::└── [...slug]/        <-- (3 dots dekho! Ye Catch-all hai)::HL]]
+           [[HL::└── page.tsx::HL]]
 ```
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-Agar URL hai `/shop/clothes/men/summer`:
-1. Next.js dekhega ki `shop/` ke baad kya hai.
-2. Usko milega `clothes`, `men`, aur `summer`.
-3. Wo dekhega ki folder hai `[...slug]`.
-4. Wo in teeno words ko lega aur ek Array bana dega: `['clothes', 'men', 'summer']`.
-5. Ye array tumhare page component ko de dega.
+[[HL::Agar URL hai `/shop/clothes/men/summer`:::HL]]
+1. [[HL::Next.js dekhega ki `shop/` ke baad kya hai.::HL]]
+2. [[HL::Usko milega `clothes`, `men`, aur `summer`.::HL]]
+3. [[HL::Wo dekhega ki folder hai `[...slug]`.::HL]]
+4. [[HL::Wo in teeno words ko lega aur ek Array bana dega: `['clothes', 'men', 'summer']`.::HL]]
+5. [[HL::Ye array tumhare page component ko de dega::HL]].
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
 ```tsx
-// File: app/shop/[...slug]/page.tsx
+// [[HL::File: app/shop/[...slug]/page.tsx::HL]]
 
-// Next 15 rule: params hamesha Promise hote hain
-export default async function ShopCategoryPage({
-  params
-}: {
-  params: Promise<{ slug: string[] }> // Notice: Ye string[] (Array) hai, simple string nahi!
-}) {
+[[HL::// Next 15 rule: params hamesha Promise hote hain::HL]]
+[[HL::export default async function ShopCategoryPage({::HL]]
+  [[HL::params::HL]]
+[[HL::}: {::HL]]
+  [[HL::params: Promise<{ slug: string[] }> // Notice: Ye string[] (Array) hai, simple string nahi!::HL]]
+[[HL::}) {::HL]]
   
-  // 1. Promise ko resolve karo
-  const resolvedParams = await params;
+  [[HL::// 1. Promise ko resolve karo::HL]]
+  [[HL::const resolvedParams = await params;::HL]]
   
-  // 2. Array ko nikal lo
-  const slugArray = resolvedParams.slug; 
+  [[HL::// 2. Array ko nikal lo::HL]]
+  [[HL::const slugArray = resolvedParams.slug;::HL]] 
 
-  console.log("Caught these paths:", slugArray);
+  [[HL::console.log("Caught these paths:", slugArray);::HL]]
 
-  return (
-    <div>
-      <h1>Deep Category Filters 🏷️</h1>
+  [[HL::return (::HL]]
+    [[HL::<div>::HL]]
+      [[HL::<h1>Deep Category Filters 🏷️</h1>::HL]]
       
-      {/* Hum array ko string mein convert karke dikha rahe hain */}
-      <p>Aapne ye categories select ki hain:</p>
-      <ul>
-        {/* Array ke har element (word) ke liye ek list item bana rahe hain */}
-        {slugArray.map((item, index) => (
-          <li key={index}>Level {index + 1}: {item}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+      [[HL::{/* Hum array ko string mein convert karke dikha rahe hain */}::HL]]
+      [[HL::<p>Aapne ye categories select ki hain:</p>::HL]]
+      [[HL::<ul>::HL]]
+        [[HL::{/* Array ke har element (word) ke liye ek list item bana rahe hain */}::HL]]
+        [[HL::{slugArray.map((item, index) => (::HL]]
+          [[HL::<li key={index}>Level {index + 1}: {item}</li>::HL]]
+        [[HL::))}::HL]]
+      [[HL::</ul>::HL]]
+    [[HL::</div>::HL]]
+  [[HL::);::HL]]
+[[HL::}::HL]]
 ```
 
 ```text
-# 📤 Expected Output (Terminal/Console - if URL is localhost:3000/shop/clothes/men/nike):
-Caught these paths: [ 'clothes', 'men', 'nike' ]
+[[HL::# 📤 Expected Output (Terminal/Console - if URL is localhost:3000/shop/clothes/men/nike):::HL]]
+[[HL::Caught these paths: [ 'clothes', 'men', 'nike' ]::HL]]
 
-# 📤 Expected Output (Browser at localhost:3000/shop/clothes/men/nike):
-Deep Category Filters 🏷️
-Aapne ye categories select ki hain:
-- Level 1: clothes
-- Level 2: men
-- Level 3: nike
+[[HL::# 📤 Expected Output (Browser at localhost:3000/shop/clothes/men/nike):::HL]]
+[[HL::Deep Category Filters 🏷️::HL]]
+[[HL::Aapne ye categories select ki hain:::HL]]
+- [[HL::Level 1: clothes::HL]]
+- [[HL::Level 2: men::HL]]
+- [[HL::Level 3: nike::HL]]
 ```
 
 ## ⚖️ 8. Comparison (Ye vs Woh):
 
-Beginners hamesha isme phaste hain! Table dhyaan se dekho:
+[[HL::Beginners hamesha isme phaste hain! Table dhyaan se dekho:::HL]]
 
-| URL Path | `app/shop/[slug]` (Dynamic) | `app/shop/[...slug]` (Catch-all) |
+| [[HL::URL Path::HL]] | [[HL::`app/shop/[slug]` (Dynamic)::HL]] | [[HL::`app/shop/[...slug]` (Catch-all)::HL]] |
 | :--- | :--- | :--- |
-| `/shop/a` | Match ✅ (`slug` = 'a') | Match ✅ (`slug` = ['a']) |
-| `/shop/a/b` | **Error (404 Not Found) ❌** | Match ✅ (`slug` = ['a', 'b']) |
-| `/shop/a/b/c` | **Error (404 Not Found) ❌** | Match ✅ (`slug` = ['a', 'b', 'c']) |
-| `/shop` | Error (404 Not Found) ❌ | Error (404 Not Found) ❌ |
+| [[HL::`/shop/a`::HL]] | [[HL::Match ✅ (`slug` = 'a')::HL]] | [[HL::Match ✅ (`slug` = ['a'])::HL]] |
+| [[HL::`/shop/a/b`::HL]] | [[HL::**Error (404 Not Found) ❌**::HL]] | [[HL::Match ✅ (`slug` = ['a', 'b'])::HL]] |
+| [[HL::`/shop/a/b/c`::HL]] | [[HL::**Error (404 Not Found) ❌**::HL]] | [[HL::Match ✅ (`slug` = ['a', 'b', 'c'])::HL]] |
+| [[HL::`/shop`::HL]] | [[HL::Error (404 Not Found) ❌::HL]] | [[HL::Error (404 Not Found) ❌::HL]] |
 
-*(Pro-tip: Agar `/shop` ko bhi bina error chalana hai, toh Optional Catch-all `[[...slug]]` double brackets use karte hain!)*
+[[HL::*(Pro-tip: Agar::HL]] `/shop` ko bhi bina error chalana hai, toh Optional Catch-all `[[...[[HL::slug]]` double brackets use karte hain!)*::HL]]
 
-## 🚫 9. Common Mistakes (Beginner Traps):
-1. **Array samajhna bhool jana:** Beginners sochte hain ki `params.slug` ek string dega. Wo array par seedha `.toUpperCase()` lagane lagte hain aur code fat jata hai (crash ho jata hai) kuki `.toUpperCase()` array pe nahi chalta.
-2. **Missing default page:** `/shop` visit karne pe catch-all page nahi chalta. Agar usko bhi cover karna hai toh us folder mein ek alag `page.tsx` banani padegi, ya phir double brackets `[[...slug]]` use karne honge.
+[[HL::## 🚫 9. Common Mistakes (Beginner Traps):::HL]]
+1. [[HL::**Array samajhna bhool jana:** Beginners sochte hain ki `params.slug` ek string dega. Wo array par seedha `.toUpperCase()` lagane lagte hain aur code fat jata hai (crash ho jata hai) kuki `.toUpperCase()` array pe nahi chalta.::HL]]
+2. [[HL::**Missing default page:** `/shop` visit karne pe catch-all page nahi chalta. Agar usko bhi cover karna hai toh us folder mein ek alag `page.tsx` banani padegi, ya phir double brackets `[[...slug]]` use karne honge.::HL]]
 
-## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-1. **"Ye 3 dots (`...`) kya hain?"**
-   - Ye JavaScript ka "Spread Operator" ya "Rest Parameter" syntax hai. Jiska basically matlab hota hai "baaki bacha hua saara samaan idhar ikattha kar lo". Next.js ne same concept URL ke liye copy kiya hai.
-2. **"To main [id] kab use karu aur [...slug] kab?"**
-   - Agar pata hai ki sirf ek hi level deep jana hai (jaise sirf Product ID), toh single `[id]` use karo. Agar filters hain jo kitne bhi andar ja sakte hain, tabhi `[...slug]` lagao.
+[[HL::## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):::HL]]
+1. [[HL::**"Ye 3 dots (`...`) kya hain?"**::HL]]
+   - [[HL::Ye JavaScript ka "Spread Operator" ya "Rest Parameter" syntax hai. Jiska basically matlab hota hai "baaki bacha hua saara samaan idhar ikattha kar lo". Next.js ne same concept URL ke liye copy kiya hai::HL]].
+2. [[HL::**"To main [id] kab use karu aur [...slug] kab?"**::HL]]
+   - [[HL::Agar pata hai ki sirf ek hi level deep jana hai (jaise sirf Product ID), toh single `[id]` use karo. Agar filters hain jo kitne bhi andar ja sakte hain, tabhi `[...slug]` lagao::HL]].
 
 ## 🌍 11. Real-World Use Case (Production Application):
-**Myntra / Amazon search filters:** Jab tum left sidebar mein filters lagate ho: "Men" -> "Footwear" -> "Sports" -> "Nike". URL continuously lamba hota jata hai (`/men/footwear/sports/nike`). Is pure system ko sambhalne ke liye backend mein sirf ek file hoti hai: `[...filters]/page.tsx`. Ye un saare words ki array banakar database se exact wahi joote dhund kar le aati hai!
+[[HL::**Myntra / Amazon search filters:** Jab tum left sidebar mein filters lagate ho: "Men" -> "Footwear" -> "Sports" -> "Nike". URL continuously lamba hota jata hai (`/men/footwear/sports/nike`). Is pure system ko sambhalne ke liye backend mein sirf ek file hoti hai: `[...filters]/page.tsx`. Ye un saare words ki array banakar database se exact wahi joote dhund kar le aati hai::HL]]!
 
 ## 🎨 12. Visual Diagram (ASCII Art):
 ```text
@@ -1981,8 +1981,8 @@ Array created: ["clothes", "winter", "jackets"]
 Agar catch-all nahi hoga, toh tumhe har combination ke liye code likhna padega: `app/shop/[cat1]/page.tsx`, `app/shop/[cat1]/[cat2]/page.tsx`, `app/shop/[cat1]/[cat2]/[cat3]/page.tsx`. Tumhara folder structure raite ki tarah phail jayega!
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **Q:** Difference between `[slug]` and `[...slug]`?
-   **Ans:** `[slug]` matches only ONE path segment and returns a string. `[...slug]` catches ALL subsequent segments and returns an Array of strings.
+1. [[HL::**Q:** Difference between `[slug]` and `[...slug]`?::HL]]
+   [[HL::**Ans:** `[slug]` matches only ONE path segment and returns a string. `[...slug]` catches ALL subsequent segments and returns an Array of strings::HL]].
 2. **Q:** What is Optional Catch-all?
    **Ans:** Wrapping the folder in double brackets `[[...slug]]`. It works like catch-all, but it will ALSO match the root route without any segments (e.g., just `/shop`).
 3. **Q:** Are params in Next 15 Catch-all routes also Promises?
@@ -2019,34 +2019,34 @@ Tumne apne documents ko achhe se rakhne ke liye andar 3 boxes banaye: "Marketing
 **Route Groups** wahi boxes hain. Ye sirf **tumhare (developer ke)** code ko organize karne ke liye hain. Bahar user ko (URL mein) inka naam kabhi nahi dikhta.
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** Route Groups allow you to logically organize your Next.js application's folder structure without affecting the URL path. You create them by wrapping a folder name in parentheses, like `(folderName)`.
-* **Hinglish Simplification:** Agar tum kisi folder ke naam ke aaspas gol brackets `()` laga do, toh Next.js us folder ko URL banate waqt "ignore" kar deta hai (gayab kar deta hai), par uske andar ki files normally kaam karti hain.
+* [[HL::**Precise English:** Route Groups allow you to logically organize your Next.js application's folder structure without affecting the URL path. You create them by wrapping a folder name in parentheses, like `(folderName)`.::HL]]
+* [[HL::**Hinglish Simplification:** Agar tum kisi folder ke naam ke aaspas gol brackets `()` laga do, toh Next.js us folder ko URL banate waqt "ignore" kar deta hai (gayab kar deta hai), par uske andar ki files normally kaam karti hain::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-- **Problem:** E-commerce website par `Login` aur `Register` pages hote hain. Hum chahte hain inka URL `/login` aur `/register` ho. Par hume in dono ko code mein ek sath ek hi folder mein rakhna hai, aur inka ek alag design (Layout) banana hai jisme Navbar aur Footer na ho (sirf ek simple card ho).
-- **Solution:** Hum ek `(auth)` naam ka folder banayenge. Uske andar `login` aur `register` daal denge. Ab URL toh clean rahega (`/login`), par humara code mast organize ho jayega aur hum `(auth)` ke andar ek naya `layout.tsx` bana payenge jo sirf login/register pe apply hoga!
+- [[HL::**Problem:** E-commerce website par `Login` aur `Register` pages hote hain. Hum chahte hain inka URL `/login` aur `/register` ho. Par hume in dono ko code mein ek sath ek hi folder mein rakhna hai, aur inka ek alag design (Layout) banana hai jisme Navbar aur Footer na ho (sirf ek simple card ho).::HL]]
+- [[HL::**Solution:** Hum ek `(auth)` naam ka folder banayenge. Uske andar `login` aur `register` daal denge. Ab URL toh clean rahega (`/login`), par humara code mast organize ho jayega aur hum `(auth)` ke andar ek naya `layout.tsx` bana payenge jo sirf login/register pe apply hoga::HL]]!
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 
 ```text
-app/
- ├── layout.tsx         (Main layout - Navbar/Footer ke sath)
- ├── (marketing)/
- │    └── about/
- │         └── page.tsx (URL banega: /about)
- └── (auth)/
-      ├── layout.tsx    (Auth layout - bina Navbar ke)
-      ├── login/
-      │    └── page.tsx (URL banega: /login)
-      └── register/
-           └── page.tsx (URL banega: /register)
+[[HL::app/::HL]]
+ [[HL::├── layout.tsx         (Main layout - Navbar/Footer ke sath)::HL]]
+ [[HL::├── (marketing)/::HL]]
+ [[HL::│    └── about/::HL]]
+ [[HL::│         └── page.tsx (URL banega: /about)::HL]]
+ [[HL::└── (auth)/::HL]]
+      [[HL::├── layout.tsx    (Auth layout - bina Navbar ke)::HL]]
+      [[HL::├── login/::HL]]
+      [[HL::│    └── page.tsx (URL banega: /login)::HL]]
+      [[HL::└── register/::HL]]
+           [[HL::└── page.tsx (URL banega: /register::HL]])
 ```
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1. User ne browser mein type kiya `www.shop.com/login`.
-2. Next.js check karta hai: "Kya mere root `app/` mein `login` folder hai?" Nahi.
-3. Fir wo bracket `()` wale folders ke andar jhaankta hai: "Kya `(auth)` ya kisi aur group ke andar `login` hai?" Haan!
-4. Next.js bracket wale naam ko URL se delete (omit) kar deta hai aur user ko seedha `login/page.tsx` dikha deta hai.
+1. [[HL::User ne browser mein type kiya `www.shop.com/login`.::HL]]
+2. [[HL::Next.js check karta hai: "Kya mere root `app/` mein `login` folder hai?" Nahi.::HL]]
+3. [[HL::Fir wo bracket `()` wale folders ke andar jhaankta hai: "Kya `(auth)` ya kisi aur group ke andar `login` hai?" Haan!::HL]]
+4. [[HL::Next.js bracket wale naam ko URL se delete (omit) kar deta hai aur user ko seedha `login/page.tsx` dikha deta hai::HL]].
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
@@ -2102,25 +2102,25 @@ Login page loaded without '(auth)' in URL!
 ```
 *(Magic dekha? Folder ka naam `(auth)` tha, par URL sirf `/login` raha!)*
 
-## ⚖️ 8. Comparison (Ye vs Woh):
+## ⚖️ 8. [[HL::Comparison (Ye vs Woh):::HL]]
 
-| Feature | Regular Folder (`app/auth/`) | Route Group (`app/(auth)/`) |
+| [[HL::Feature::HL]] | [[HL::Regular Folder (`app/auth/`)::HL]] | [[HL::Route Group (`app/(auth)/`)::HL]] |
 | :--- | :--- | :--- |
-| **URL Path** | `/auth/login` | `/login` |
-| **Purpose** | URL ko structure dena. | Developer ke code ko organize karna aur Layouts ko separate karna. |
-| **Visibility** | User ko URL bar mein dikhta hai. | Completely invisible to the user. |
+| [[HL::**URL Path**::HL]] | [[HL::`/auth/login`::HL]] | [[HL::`/login`::HL]] |
+| [[HL::**Purpose**::HL]] | [[HL::URL ko structure dena.::HL]] | [[HL::Developer ke code ko organize karna aur Layouts ko separate karna.::HL]] |
+| [[HL::**Visibility**::HL]] | [[HL::User ko URL bar mein dikhta hai.::HL]] | [[HL::Completely invisible to the user::HL]]. |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-1. **Wrong bracket:** Curly braces `{auth}` ya square brackets `[auth]` laga dena. 
-   - *Fix:* Hamesha Parentheses (gol brackets) `(auth)` use karo. Square brackets Dynamic Routes ke liye hote hain!
-2. **Conflicting Routes:** Ek page `app/(marketing)/about/page.tsx` banana aur doosra `app/(company)/about/page.tsx` banana. 
-   - *Fix:* Next.js error dega kyunki dono URL end mein `/about` hi banenge aur wo confuse ho jayega ki kaunsa dikhau.
+1. [[HL::**Wrong bracket:** Curly braces `{auth}` ya square brackets `[auth]` laga dena.::HL]] 
+   - [[HL::*Fix:* Hamesha Parentheses (gol brackets) `(auth)` use karo. Square brackets Dynamic Routes ke liye hote hain!::HL]]
+2. [[HL::**Conflicting Routes:** Ek page `app/(marketing)/about/page.tsx` banana aur doosra `app/(company)/about/page.tsx` banana.::HL]] 
+   - [[HL::*Fix:* Next.js error dega kyunki dono URL end mein `/about` hi banenge aur wo confuse ho jayega ki kaunsa dikhau::HL]].
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
 1. **"Kya main `(auth)` aur `(marketing)` dono ka alag `layout.tsx` bana sakta hu, aur main root `app/layout.tsx` ko delete kar du?"**
    - Haan, isko **Multiple Root Layouts** bolte hain. Par fir dono ke layout mein `<html>` aur `<body>` tags hone chahiye.
-2. **"To main kab Route Group banau?"**
-   - Jab tumhare app mein bohot saare folders ho jayein aur tum chahte ho "Ye 5 pages Admin ke hain, ye 5 User ke hain", par tum URL lamba nahi karna chahte.
+2. [[HL::**"To main kab Route Group banau?"**::HL]]
+   - [[HL::Jab tumhare app mein bohot saare folders ho jayein aur tum chahte ho "Ye 5 pages Admin ke hain, ye 5 User ke hain", par tum URL lamba nahi karna chahte::HL]].
 
 ## 🌍 11. Real-World Use Case (Production Application):
 **Netflix:** Jab tum Netflix dekhte ho, Homepage (`/`) aur Movie Player (`/watch`) ka design bilkul alag hai. Homepage pe navbar hai, rows hain. Player page pe sirf full-screen video hai. Wo code ko `(browse)` aur `(playback)` jaise route groups mein rakhte hain taaki unke layouts bilkul alag ho sake bina URL change kiye.
@@ -2143,7 +2143,7 @@ app/
 - Apne Next.js project ka structure hamesha Route Groups se start karo (e.g., `(admin)`, `(public)`, `(customer)`). Baad mein scale karna bohot aasaan hota hai.
 
 ## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
-Agar tum Route Groups use nahi karoge, toh tumhe apne main `layout.tsx` mein complex `if/else` logic likhna padega: `if (pathname === '/login') { hide Navbar }`. Ye code ko bohot ganda aur slow bana dega.
+[[HL::Agar tum Route Groups use nahi karoge, toh tumhe apne main `layout.tsx` mein complex `if/else` logic likhna padega: `if (pathname === '/login') { hide Navbar }`. Ye code ko bohot ganda aur slow bana dega::HL]].
 
 ## ❓ 15. FAQ (Interview Questions):
 1. **Q:** What is a Route Group in Next.js?
@@ -2168,128 +2168,128 @@ Wahan car dekhte dekhte tumne ek chota sa "Loan Calculator" ka TV screen dekha j
 **Parallel Routes** bilkul yahi karte hain: Ek hi screen par 2 ya usse zyada alag-alag pages ko ek sath (parallelly) load karke dikhate hain.
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** Parallel Routes allow you to simultaneously or conditionally render one or more pages within the same layout. They are created using named "slots" with the `@folder` convention and are passed as props to the parent layout.
-* **Hinglish Simplification:** Ek `@` wala folder banakar hum ek "slot" banate hain. Usko hum apne `layout.tsx` mein normal page (`children`) ke theek bagal mein (side-by-side) display kar sakte hain.
+* [[HL::**Precise English:** Parallel Routes allow you to simultaneously or conditionally render one or more pages within the same layout. They are created using named "slots" with the `@folder` convention and are passed as props to the parent layout.::HL]]
+* [[HL::**Hinglish Simplification:** Ek `@` wala folder banakar hum ek "slot" banate hain. Usko hum apne `layout.tsx` mein normal page (`children`) ke theek bagal mein (side-by-side) display kar sakte hain::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-- **Problem:** E-commerce Dashboard mein Admin ko ek side "Total Sales" ka graph dekhna hai, aur doosri side "New Users" ki list. Agar "New Users" wali API slow hai, toh poora dashboard load hone mein late ho jayega!
-- **Solution:** Parallel Routes use karo (`@sales` aur `@users`). Dono independently load honge. Agar users mein error aayi, toh sirf wahi hissa crash hoga, sales ka graph chalta rahega! Isko independent error/loading states kehte hain.
+- [[HL::**Problem:** E-commerce Dashboard mein Admin ko ek side "Total Sales" ka graph dekhna hai, aur doosri side "New Users" ki list. Agar "New Users" wali API slow hai, toh poora dashboard load hone mein late ho jayega::HL]]!
+- [[HL::**Solution:** Parallel Routes use karo (`@sales` aur `@users`). Dono independently load honge. Agar users mein error aayi, toh sirf wahi hissa crash hoga, sales ka graph chalta rahega! Isko independent error/loading states kehte hai::HL]]n.
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 
-Dhyaan se dekho, folder ke naam se pehle `@` (At the rate) laga hai:
+[[HL::Dhyaan se dekho, folder ke naam se pehle `@` (At the rate) laga hai:::HL]]
 ```text
-app/
- ├── layout.tsx         (Main layout jo sabko dikhayega)
- ├── page.tsx           (Ye main children prop hai)
- ├── @analytics/        <-- (Ye pehla parallel route / slot hai)
- │    └── page.tsx
- └── @team/             <-- (Ye doosra parallel route / slot hai)
-      └── page.tsx
+[[HL::app/::HL]]
+ [[HL::├── layout.tsx         (Main layout jo sabko dikhayega)::HL]]
+ [[HL::├── page.tsx           (Ye main children prop hai)::HL]]
+ [[HL::├── @analytics/        <-- (Ye pehla parallel route / slot hai)::HL]]
+ [[HL::│    └── page.tsx::HL]]
+ [[HL::└── @team/             <-- (Ye doosra parallel route / slot hai)::HL]]
+      [[HL::└── page.tsx::HL]]
 ```
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-*(Concept ko dhyaan se samajhna, yahan 'Props' ka khel hai)*
-1. Next.js dekhta hai ki `app/` mein `@analytics` aur `@team` slots hain.
-2. Wo in slots ke andar ki `page.tsx` ka UI banata hai.
-3. Fir wo root `layout.tsx` ke function mein inko as a **Property (Prop)** pass kar deta hai.
-4. Layout mein normally sirf `{ children }` aata tha, ab `{ children, analytics, team }` aayega. Aur tum unhe screen par kahin bhi rakh sakte ho!
+*([[HL::Concept ko dhyaan se samajhna, yahan 'Props' ka khel hai)*::HL]]
+1. [[HL::Next.js dekhta hai ki `app/` mein `@analytics` aur `@team` slots hain.::HL]]
+2. [[HL::Wo in slots ke andar ki `page.tsx` ka UI banata hai.::HL]]
+3. [[HL::Fir wo root `layout.tsx` ke function mein inko as a **Property (Prop)** pass kar deta hai.::HL]]
+4. [[HL::Layout mein normally sirf `{ children }` aata tha, ab `{ children, analytics, team }` aayega. Aur tum unhe screen par kahin bhi rakh sakte ho!::HL]]
 
-## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
+[[HL::## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):::HL]]
 
-**Step 1: Slots Setup**
-Pehle apne `@analytics` aur `@team` ke pages banate hain.
+[[HL::**Step 1: Slots Setup**::HL]]
+[[HL::Pehle apne `@analytics` aur `@team` ke pages banate hain::HL]].
 
 ```tsx
-// File: app/@analytics/page.tsx
-export default function AnalyticsSlot() {
-  console.log("Analytics slot rendering...");
-  return <div style={{ border: '2px solid blue', padding: '10px' }}>📈 Sales: $5000</div>;
-}
+// [[HL::File: app/@analytics/page.tsx::HL]]
+[[HL::export default function AnalyticsSlot() {::HL]]
+  [[HL::console.log("Analytics slot rendering...");::HL]]
+  [[HL::return <div style={{ border: '2px solid blue', padding: '10px' }}>📈 Sales: $5000</div>;::HL]]
+[[HL::}::HL]]
 
-// File: app/@team/page.tsx
-export default function TeamSlot() {
-  console.log("Team slot rendering...");
-  return <div style={{ border: '2px solid green', padding: '10px' }}>👥 Active Users: 120</div>;
-}
+[[HL::// File: app/@team/page.tsx::HL]]
+[[HL::export default function TeamSlot() {::HL]]
+  [[HL::console.log("Team slot rendering...");::HL]]
+  [[HL::return <div style={{ border: '2px solid green', padding: '10px' }}>👥 Active Users: 120</div>;::HL]]
+[[HL::}::HL]]
 
-// File: app/page.tsx (Main Page)
-export default function HomePage() {
-  console.log("Main Home page rendering...");
-  return <div>🏠 Welcome to Admin Dashboard!</div>;
+[[HL::// File: app/page.tsx (Main Page)::HL]]
+[[HL::export default function HomePage() {::HL]]
+  [[HL::console.log("Main Home page rendering...");::HL]]
+  [[HL::return <div>🏠 Welcome to Admin Dashboard!</div::HL]]>;
 }
 ```
 ```text
-# 📤 Expected Output: (Abhi tak koi UI nahi aayega jab tak Layout mein inko bulayenge nahi)
+# 📤 [[HL::Expected Output: (Abhi tak koi UI nahi aayega jab tak Layout mein inko bulayenge nahi::HL]])
 ```
 
-**Step 2: Combine them in Layout (The Magic Trick)**
+**Step 2: [[HL::Combine them in Layout (The Magic Trick::HL]])**
 ```tsx
-// File: app/layout.tsx
+// [[HL::File: app/layout.tsx::HL]]
 
-// Notice: 'children' ke sath 'analytics' aur 'team' exactly wahi naam hain jo '@' ke baad the
-export default function RootLayout({
-  children,
-  analytics, 
-  team
-}: {
-  children: React.ReactNode;
-  analytics: React.ReactNode;
-  team: React.ReactNode;
-}) {
-  return (
-    <html lang="en">
-      <body>
-        <h1>My Dashboard 🚀</h1>
+[[HL::// Notice: 'children' ke sath 'analytics' aur 'team' exactly wahi naam hain jo '@' ke baad the::HL]]
+[[HL::export default function RootLayout({::HL]]
+  [[HL::children,::HL]]
+  [[HL::analytics,::HL]] 
+  [[HL::team::HL]]
+[[HL::}: {::HL]]
+  [[HL::children: React.ReactNode;::HL]]
+  [[HL::analytics: React.ReactNode;::HL]]
+  [[HL::team: React.ReactNode;::HL]]
+[[HL::}) {::HL]]
+  [[HL::return (::HL]]
+    [[HL::<html lang="en">::HL]]
+      [[HL::<body>::HL]]
+        [[HL::<h1>My Dashboard 🚀</h1>::HL]]
         
-        {/* Main page (app/page.tsx) yahan aayega */}
-        <div>{children}</div> 
+        [[HL::{/* Main page (app/page.tsx) yahan aayega */}::HL]]
+        [[HL::<div>{children}</div>::HL]] 
 
-        <hr />
+        [[HL::<hr />::HL]]
         
-        {/* Parallel slots ko grid mein side-by-side dikha rahe hain */}
-        <div style={{ display: 'flex', gap: '20px', marginTop: '20px' }}>
-          <div>{analytics}</div> {/* @analytics/page.tsx */}
-          <div>{team}</div>      {/* @team/page.tsx */}
-        </div>
+        [[HL::{/* Parallel slots ko grid mein side-by-side dikha rahe hain */}::HL]]
+        [[HL::<div style={{ display: 'flex', gap: '20px', marginTop: '20px' }}>::HL]]
+          [[HL::<div>{analytics}</div> {/* @analytics/page.tsx */}::HL]]
+          [[HL::<div>{team}</div>      {/* @team/page.tsx */}::HL]]
+        [[HL::</div>::HL]]
 
-      </body>
-    </html>
+      [[HL::</body>::HL]]
+    [[HL::</html::HL]]>
   );
 }
 ```
 
 ```text
-# 📤 Expected Output (Terminal/Console):
-Analytics slot rendering...
-Team slot rendering...
-Main Home page rendering...
+# 📤 [[HL::Expected Output (Terminal/Console):::HL]]
+[[HL::Analytics slot rendering...::HL]]
+[[HL::Team slot rendering...::HL]]
+[[HL::Main Home page rendering...::HL]]
 
-# 📤 Expected Output (Browser at localhost:3000/):
-My Dashboard 🚀
-🏠 Welcome to Admin Dashboard!
+[[HL::# 📤 Expected Output (Browser at localhost:3000/):::HL]]
+[[HL::My Dashboard 🚀::HL]]
+[[HL::🏠 Welcome to Admin Dashboard!::HL]]
 -----------------------------------
-[ 📈 Sales: $5000 ]    [ 👥 Active Users: 120 ] 
-  (Blue border)          (Green border)
+[[HL::[ 📈 Sales: $5000 ]    [ 👥 Active Users: 120 ]::HL]] 
+  [[HL::(Blue border)          (Green border::HL]])
 ```
 *(BAM! Teen alag-alag pages ek hi screen par merge ho gaye!)*
 
 ## ⚖️ 8. Comparison (Ye vs Woh):
 
-| Feature | Standard React Components (`<Analytics />`) | Parallel Routes (`@analytics`) |
+| Featur[[HL::e::HL]] | [[HL::Standard React Components (`<Analytics />`)::HL]] | [[HL::Parallel Routes (`@analytics`)::HL]] |
 | :--- | :--- | :--- |
-| **Routing / URL** | URL pe depend nahi karta. | **URL pe depend kar sakta hai**, inka apna alag error/loading page (`loading.tsx`) ban sakta hai. |
-| **Loading state** | Jab tak poora parent page load na ho, sab atka rehta hai. | Analytics ka hissa alag se load hoga, Team ka alag se. Page fast lagta hai. |
-| **Use Case** | Chote UI elements (Buttons, Cards). | Complex Dashboards ya Shareable Modals. |
+| [[HL::**Routing / URL**::HL]] | [[HL::URL pe depend nahi karta.::HL]] | [[HL::**URL pe depend kar sakta hai**, inka apna alag error/loading page (`loading.tsx`) ban sakta hai.::HL]] |
+| [[HL::**Loading state**::HL]] | [[HL::Jab tak poora parent page load na ho, sab atka rehta hai.::HL]] | [[HL::Analytics ka hissa alag se load hoga, Team ka alag se. Page fast lagta hai.::HL]] |
+| [[HL::**Use Case**::HL]] | [[HL::Chote UI elements (Buttons, Cards).::HL]] | [[HL::Complex Dashboards ya Shareable Modals::HL]]. |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-1. **Missing `default.tsx` file (Sabse bada trap!):** Agar user kisi aur page pe navigate kare aur page refresh (F5) maar de, aur kisi `@slot` ka UI Next.js ko na mile, toh poora app crash hoke **404 Not Found** dega.
-   - *Fix:* Hamesha `@folder` ke andar ek `default.tsx` file banao jo bataye ki jab koi content na ho toh kya dikhana hai (e.g., `return null;`).
-2. **Prop ka naam galat likhna:** Folder ka naam `@teamAnalytics` aur layout mein prop `team` mangna. Naam exact match hona chahiye (bina `@` ke).
+1. [[HL::**Missing `default.tsx` file (Sabse bada trap!):** Agar user kisi aur page pe navigate kare aur page refresh (F5) maar de, aur kisi `@slot` ka UI Next.js ko na mile, toh poora app crash hoke **404 Not Found** dega.::HL]]
+   - [[HL::*Fix:* Hamesha `@folder` ke andar ek `default.tsx` file banao jo bataye ki jab koi content na ho toh kya dikhana hai (e.g., `return null;`).::HL]]
+2. [[HL::**Prop ka naam galat likhna:** Folder ka naam `@teamAnalytics` aur layout mein prop `team` mangna. Naam exact match hona chahiye (bina `@` ke).::HL]]
 
-## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-1. **"Ye `@` folder kya URL mein dikhega?"**
-   - Bilkul Nahi! Ye Route Groups `()` ki tarah URL se invisible hote hain.
+[[HL::## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):::HL]]
+1. [[HL::**"Ye `@` folder kya URL mein dikhega?"**::HL]]
+   - [[HL::Bilkul Nahi! Ye Route Groups `()` ki tarah URL se invisible hote hain::HL]].
 2. **"Agar ye normal components jaise hi kaam karte hain, toh itna complex banaya kyu?"**
    - Normal components ka khud ka `loading.tsx` aur `error.tsx` nahi ban sakta jo file-system based ho. Plus, jab agla topic "Intercepting Routes" padhoge (Instagram Modal), tab samjhoge ki inki asli taaqat kya hai!
 
@@ -2314,11 +2314,11 @@ My Dashboard 🚀
 - Hard-refresh crashes se bachne ke liye **hamesha** `default.tsx` include karo.
 
 ## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
-Agar tum complex dashboard without Parallel routes banaoge, aur tumhari ek API slow ho gayi (maan lo user list lane mein 5 seconds lage), toh tumhara poora ka poora dashboard 5 seconds tak blank/loading rahega. Parallel routes isse bachate hain!
+[[HL::Agar tum complex dashboard without Parallel routes banaoge, aur tumhari ek API slow ho gayi (maan lo user list lane mein 5 seconds lage), toh tumhara poora ka poora dashboard 5 seconds tak blank/loading rahega. Parallel routes isse bachate hain::HL]]!
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **Q:** What is the naming convention for Parallel Routes?
-   **Ans:** They are defined using the `@` symbol before the folder name (e.g., `@dashboard`).
+1. [[HL::**Q:** What is the naming convention for Parallel Routes?::HL]]
+   [[HL::**Ans:** They are defined using the `@` symbol before the folder name (e.g., `@dashboard`::HL]]).
 2. **Q:** How do Parallel Routes receive their content in the layout?
    **Ans:** They are passed as props to the same-level `layout.tsx` component alongside the `children` prop.
 3. **Q:** What is the purpose of `default.tsx` in a Parallel Route?
@@ -2350,148 +2350,148 @@ Chalo, aakhri baar apne 16-point structure mein deep-dive karte hain!
 ## 🎯 1. Title / Topic: Advanced E-commerce Routing - Intercepting Routes `(.)product`
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
-Tum **Instagram** chala rahe ho. Tum feed scroll kar rahe ho, achanak ek photo pasand aayi. Tumne uspar click kiya, toh wo photo ek popup (Modal) mein khul gayi. Us photo ke peeche tumhari feed abhi bhi wahi ruki hui hai. Tumne popup close kiya, aur wahi se scroll karna start kar diya. *(Ye internal click tha)*.
-Lekin! Agar tum us photo ka link copy karke apne dost ko WhatsApp pe bhejte ho, aur dost us link pe click karta hai, toh usko popup nahi dikhta. Usko ekdum bada sa "Full Page" dikhta hai sirf us photo ka, peeche koi feed nahi hoti. *(Ye external direct link tha)*.
-**Intercepting Routes** yahi exact jaadu karte hain!
+[[HL::Tum **Instagram** chala rahe ho. Tum feed scroll kar rahe ho, achanak ek photo pasand aayi. Tumne uspar click kiya, toh wo photo ek popup (Modal) mein khul gayi. Us photo ke peeche tumhari feed abhi bhi wahi ruki hui hai. Tumne popup close kiya, aur wahi se scroll karna start kar diya. *(Ye internal click tha)*.::HL]]
+[[HL::Lekin! Agar tum us photo ka link copy karke apne dost ko WhatsApp pe bhejte ho, aur dost us link pe click karta hai, toh usko popup nahi dikhta. Usko ekdum bada sa "Full Page" dikhta hai sirf us photo ka, peeche koi feed nahi hoti. *(Ye external direct link tha)*.::HL]]
+[[HL::**Intercepting Routes** yahi exact jaadu karte hain::HL]]!
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** Intercepting routes allow you to load a route from another part of your application within the current layout (usually as a modal). If the route is accessed directly via a hard navigation or shared URL, the full page is rendered instead.
-* **Hinglish Simplification:** Jab tum website ke andar se kisi link par click karte ho, toh Next.js us raste (route) ko beech mein hi "Intercept" (rok/pakad) leta hai aur usko ek chote popup mein dikha deta hai. Par agar URL directly browser mein paste karo, toh pura naya bada page khulta hai.
+* [[HL::**Precise English:** Intercepting routes allow you to load a route from another part of your application within the current layout (usually as a modal). If the route is accessed directly via a hard navigation or shared URL, the full page is rendered instead.::HL]]
+* [[HL::**Hinglish Simplification:** Jab tum website ke andar se kisi link par click karte ho, toh Next.js us raste (route) ko beech mein hi "Intercept" (rok/pakad) leta hai aur usko ek chote popup mein dikha deta hai. Par agar URL directly browser mein paste karo, toh pura naya bada page khulta hai::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-- **Problem:** E-commerce feed mein hundreds of products hote hain. Agar user ne 50 products scroll kar liye, aur ek T-shirt pe click kiya, toh wo naye T-shirt page pe chala jayega. Wapas (Back) aane par uski feed shuru (top) se start ho sakti hai, jisse user irritate ho jayega.
-- **Solution:** Hum T-shirt ke details ko ek Modal (Popup) mein dikhayenge taaki feed apni jagah fix rahe. Par sath hi URL `/product/tshirt` update hoga taaki user us link ko doston ke sath share bhi kar sake!
+- [[HL::**Problem:** E-commerce feed mein hundreds of products hote hain. Agar user ne 50 products scroll kar liye, aur ek T-shirt pe click kiya, toh wo naye T-shirt page pe chala jayega. Wapas (Back) aane par uski feed shuru (top) se start ho sakti hai, jisse user irritate ho jayega::HL]].
+- [[HL::**Solution:** Hum T-shirt ke details ko ek Modal (Popup) mein dikhayenge taaki feed apni jagah fix rahe. Par sath hi URL `/product/tshirt` update hoga taaki user us link ko doston ke sath share bhi kar sake::HL]]!
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
-Isme hum apne purane dost **Parallel Routes (`@modal`)** ki madad lete hain. 
-Folder ke naam ke aage `(.)` lagane se Next.js samajh jata hai ki ye ek interceptor hai.
+[[HL::Isme hum apne purane dost **Parallel Routes (`@modal`)** ki madad lete hain.::HL]] 
+[[HL::Folder ke naam ke aage `(.)` lagane se Next.js samajh jata hai ki ye ek interceptor hai.::HL]]
 
 
 ```text
-app/
- ├── feed/
- │    ├── layout.tsx         (Feed layout with @modal slot)
- │    ├── page.tsx           (Jahan saare products ki list hogi)
- │    └── @modal/            (Hamara parallel route)
- │         └── (.)product/   <-- YE HAI INTERCEPTOR! (Popup wala UI)
- │              └── [id]/
- │                   └── page.tsx
- │
- └── product/
-      └── [id]/
-           └── page.tsx      (Ye asli BADA page hai - direct link ke liye)
+[[HL::app/::HL]]
+ [[HL::├── feed/::HL]]
+ [[HL::│    ├── layout.tsx         (Feed layout with @modal slot)::HL]]
+ [[HL::│    ├── page.tsx           (Jahan saare products ki list hogi)::HL]]
+ [[HL::│    └── @modal/            (Hamara parallel route)::HL]]
+ [[HL::│         └── (.)product/   <-- YE HAI INTERCEPTOR! (Popup wala UI)::HL]]
+ [[HL::│              └── [id]/::HL]]
+ [[HL::│                   └── page.tsx::HL]]
+ [[HL::│::HL]]
+ [[HL::└── product/::HL]]
+      [[HL::└── [id]/::HL]]
+           [[HL::└── page.tsx      (Ye asli BADA page hai - direct link ke liye)::HL]]
 ```
 
-## ⚙️ 6. Under the Hood (Technical Working):
-1. **User is on `/feed`:** Wo ek link `<Link href="/product/123">` par click karta hai.
-2. **The Interception:** Next.js dekhta hai ki URL badal kar `/product/123` karna hai. Par wo check karta hai: "Kya mere paas same level par `(.)product` naam ka koi nakli (intercepting) rasta hai?" 
-3. Haan hai! Toh wo asli `product/[id]` wale page par jane ke bajaye, user ko `@modal/(.)product/[id]/page.tsx` dikha deta hai popup mein. URL badal jata hai, par page reload nahi hota.
-4. **Direct Link:** Ab user ne wo link copy kiya aur naye tab mein paste karke Enter mara. Is baar Next.js intercept nahi karega. Wo seedha root wale `app/product/[id]/page.tsx` (Bade page) ko load kar dega.
+[[HL::## ⚙️ 6. Under the Hood (Technical Working):::HL]]
+1. [[HL::**User is on `/feed`:** Wo ek link `<Link href="/product/123">` par click karta hai.::HL]]
+2. [[HL::**The Interception:** Next.js dekhta hai ki URL badal kar `/product/123` karna hai. Par wo check karta hai: "Kya mere paas same level par `(.)product` naam ka koi nakli (intercepting) rasta hai?"::HL]] 
+3. [[HL::Haan hai! Toh wo asli `product/[id]` wale page par jane ke bajaye, user ko `@modal/(.)product/[id]/page.tsx` dikha deta hai popup mein. URL badal jata hai, par page reload nahi hota.::HL]]
+4. [[HL::**Direct Link:** Ab user ne wo link copy kiya aur naye tab mein paste karke Enter mara. Is baar Next.js intercept nahi karega. Wo seedha root wale `app/product/[id]/page.tsx` (Bade page) ko load kar dega::HL]].
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
-Humein 3 files banani padengi is jaadu ko dekhne ke liye.
+Humein 3 [[HL::files banani padengi is jaadu ko dekhne ke liye.::HL]]
 
-**File 1: Asli Bada Page (Jo share karne pe khulega)**
+[[HL::**File 1: Asli Bada Page (Jo share karne pe khulega::HL]])**
 ```tsx
 // File: app/product/[id]/page.tsx
 
-export default async function FullProductPage({ params }: { params: Promise<{ id: string }> }) {
-  const resolvedParams = await params;
+expor[[HL::t default async function FullProductPage({ params }: { params: Promise<{ id: string }> }) {::HL]]
+  [[HL::const resolvedParams = await params;::HL]]
   
-  return (
-    <div style={{ padding: '50px', background: '#ffebee' }}>
-      <h1>BADA PAGE: Product {resolvedParams.id} 📦</h1>
-      <p>Ye tab dikhega jab tum URL direct enter karoge ya page refresh karoge.</p>
-    </div>
+  [[HL::return (::HL]]
+    [[HL::<div style={{ padding: '50px', background: '#ffebee' }}>::HL]]
+      [[HL::<h1>BADA PAGE: Product {resolvedParams.id} 📦</h1>::HL]]
+      [[HL::<p>Ye tab dikhega jab tum URL direct enter karoge ya page refresh karoge.</p>::HL]]
+    [[HL::</div::HL]]>
   );
 }
 ```
 
-**File 2: Nakli Intercepted Page (Jo popup banke aayega)**
+[[HL::**File 2: Nakli Intercepted Page (Jo popup banke aayega)**::HL]]
 ```tsx
-// File: app/feed/@modal/(.)product/[id]/page.tsx
+[[HL::// File: app/feed/@modal/(.)product/[id]/page.tsx::HL]]
 
-export default async function ModalProductPage({ params }: { params: Promise<{ id: string }> }) {
-  const resolvedParams = await params;
+[[HL::export default async function ModalProductPage({ params }: { params: Promise<{ id: string }> }) {::HL]]
+  [[HL::const resolvedParams = await params;::HL]]
   
-  return (
-    // Ye style isko ek popup (modal) ki tarah dikhayega
-    <div style={{
-      position: 'absolute', top: '20%', left: '30%', 
-      background: 'white', border: '2px solid black', padding: '20px',
-      boxShadow: '0 0 100px rgba(0,0,0,0.5)'
-    }}>
-      <h2>POPUP MODAL: Product {resolvedParams.id} ✨</h2>
-      <p>Feed ke upar khula hai! Peeche dekho feed wahi hai.</p>
-    </div>
+  [[HL::return (::HL]]
+    [[HL::// Ye style isko ek popup (modal) ki tarah dikhayega::HL]]
+    [[HL::<div style={{::HL]]
+      [[HL::position: 'absolute', top: '20%', left: '30%',::HL]] 
+      [[HL::background: 'white', border: '2px solid black', padding: '20px',::HL]]
+      [[HL::boxShadow: '0 0 100px rgba(0,0,0,0.5)'::HL]]
+    [[HL::}}>::HL]]
+      [[HL::<h2>POPUP MODAL: Product {resolvedParams.id} ✨</h2>::HL]]
+      [[HL::<p>Feed ke upar khula hai! Peeche dekho feed wahi hai.</p>::HL]]
+    [[HL::</div::HL]]>
   );
 }
 ```
 
-**File 3: Feed Page & Layout (Jahan se click hoga)**
+[[HL::**File 3: Feed Page & Layout (Jahan se click hoga::HL]])**
 ```tsx
-// File: app/feed/layout.tsx
-export default function FeedLayout({ children, modal }: { children: React.ReactNode, modal: React.ReactNode }) {
-  return (
-    <div>
-      {children} {/* Asli feed */}
-      {modal}    {/* Modal slot */}
-    </div>
-  );
-}
+// [[HL::File: app/feed/layout.tsx::HL]]
+[[HL::export default function FeedLayout({ children, modal }: { children: React.ReactNode, modal: React.ReactNode }) {::HL]]
+  [[HL::return (::HL]]
+    [[HL::<div>::HL]]
+      [[HL::{children} {/* Asli feed */}::HL]]
+      [[HL::{modal}    {/* Modal slot */}::HL]]
+    [[HL::</div>::HL]]
+  [[HL::);::HL]]
+[[HL::}::HL]]
 
-// File: app/feed/page.tsx
-import Link from 'next/link';
+[[HL::// File: app/feed/page.tsx::HL]]
+[[HL::import Link from 'next/link';::HL]]
 
-export default function FeedPage() {
-  return (
-    <div>
-      <h1>My Shopping Feed 🛍️</h1>
-      <div style={{ display: 'flex', gap: '10px' }}>
-        {/* Ye Link user ko /product/123 par bhejega */}
-        <Link href="/product/123" style={{ border: '1px solid gray', padding: '10px' }}>
-          👕 Buy T-Shirt (ID: 123)
-        </Link>
-      </div>
-      <p>Yahan par 100 aur products hain. Scroll down...</p>
-    </div>
+[[HL::export default function FeedPage() {::HL]]
+  [[HL::return (::HL]]
+    [[HL::<div>::HL]]
+      [[HL::<h1>My Shopping Feed 🛍️</h1>::HL]]
+      [[HL::<div style={{ display: 'flex', gap: '10px' }}>::HL]]
+        [[HL::{/* Ye Link user ko /product/123 par bhejega */}::HL]]
+        [[HL::<Link href="/product/123" style={{ border: '1px solid gray', padding: '10px' }}>::HL]]
+          [[HL::👕 Buy T-Shirt (ID: 123)::HL]]
+        [[HL::</Link>::HL]]
+      [[HL::</div>::HL]]
+      [[HL::<p>Yahan par 100 aur products hain. Scroll down...</p>::HL]]
+    [[HL::</div::HL]]>
   );
 }
 ```
 
 ```text
-# 📤 Expected Output (Scenario 1 - User opens localhost:3000/feed and CLICKS the link):
-My Shopping Feed 🛍️
-[ 👕 Buy T-Shirt (ID: 123) ]
-Yahan par 100 aur products hain. Scroll down...
+# 📤 [[HL::Expected Output (Scenario 1 - User opens localhost:3000/feed and CLICKS the link):::HL]]
+[[HL::My Shopping Feed 🛍️::HL]]
+[[HL::[ 👕 Buy T-Shirt (ID: 123) ]::HL]]
+[[HL::Yahan par 100 aur products hain. Scroll down...::HL]]
 
-(URL instantly changes to localhost:3000/product/123)
-(A white popup appears IN FRONT OF the feed)
+[[HL::(URL instantly changes to localhost:3000/product/123)::HL]]
+[[HL::(A white popup appears IN FRONT OF the feed)::HL]]
 -----------------------------------------
-| POPUP MODAL: Product 123 ✨           |
-| Feed ke upar khula hai! Peeche dekho  |
+| [[HL::POPUP MODAL: Product 123 ✨::HL]]           |
+| [[HL::Feed ke upar khula hai! Peeche dekho::HL]]  |
 -----------------------------------------
 
 
-# 📤 Expected Output (Scenario 2 - User directly types localhost:3000/product/123 and presses ENTER):
-BADA PAGE: Product 123 📦
-Ye tab dikhega jab tum URL direct enter karoge ya page refresh karoge.
-(Feed is completely gone, only this full page is shown)
+[[HL::# 📤 Expected Output (Scenario 2 - User directly types localhost:3000/product/123 and presses ENTER):::HL]]
+[[HL::BADA PAGE: Product 123 📦::HL]]
+[[HL::Ye tab dikhega jab tum URL direct enter karoge ya page refresh karoge.::HL]]
+[[HL::(Feed is completely gone, only this full page is shown::HL]])
 ```
 
-## ⚖️ 8. Comparison (Ye vs Woh):
+## ⚖️ 8. [[HL::Comparison (Ye vs Woh):::HL]]
 
-| Feature | Normal React Modal `<Modal>` | Next.js Intercepting Route `(.)folder` |
+| [[HL::Feature::HL]] | [[HL::Normal React Modal `<Modal>`::HL]] | [[HL::Next.js Intercepting Route `(.)folder`::HL]] |
 | :--- | :--- | :--- |
-| **URL Change** | URL nahi badalta. | **URL update hota hai!** (e.g., `/product/123`). |
-| **Shareable?** | Nahi. Link share karne pe modal nahi khulega. | **Haan!** Link share karoge toh proper product page khulega. |
-| **Refresh Page**| F5 marne pe modal gayab ho jata hai. | F5 marne pe full-screen product page load ho jata hai. |
+| [[HL::**URL Change**::HL]] | [[HL::URL nahi badalta.::HL]] | [[HL::**URL update hota hai!** (e.g., `/product/123`).::HL]] |
+| [[HL::**Shareable?**::HL]] | [[HL::Nahi. Link share karne pe modal nahi khulega.::HL]] | [[HL::**Haan!** Link share karoge toh proper product page khulega.::HL]] |
+| [[HL::**Refresh Page**::HL]]| [[HL::F5 marne pe modal gayab ho jata hai.::HL]] | [[HL::F5 marne pe full-screen product page load ho jata hai::HL]]. |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-1. **Wrong Level Marker:** Next.js mein folder levels hote hain:
-   - `(.)` ka matlab: Same level par intercept karo.
-   - `(..)` ka matlab: Ek level upar (parent folder) jaakar intercept karo. (Sabse zyada yahi use hota hai real projects mein).
+1. [[HL::**Wrong Level Marker:** Next.js mein folder levels hote hain:::HL]]
+   - [[HL::`(.)` ka matlab: Same level par intercept karo.::HL]]
+   - [[HL::`(..)` ka matlab: Ek level upar (parent folder) jaakar intercept karo. (Sabse zyada yahi use hota hai real projects mein::HL]]).
    - Beginners isme bohot confuse hote hain ki kaunsa dot lagana hai.
 2. **Missing `default.tsx`:** Modal band karne ke liye state clear karni padti hai, warna wo screen pe atka rehta hai. Iske liye `@modal` mein `default.tsx` (jo `return null` kare) hona lazmi hai.
 
@@ -2579,20 +2579,20 @@ Socho aap ek bahut fancy **Restaurant** mein ho.
 Next.js mein, by default sab kuch **Kitchen (Server)** mein banta hai. Par jab humein table par namak daalna ho (jaise user ko button click karne dena ho), tab hum **"use client"** ka tag lagate hain, jiska matlab hai: *"Bhaiya, ye specific cheez customer ki table (Browser) par bhej do."*
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** The `"use client"` directive is a convention in Next.js (React Server Components) that declares a boundary between a Server Component module graph and a Client Component module graph, allowing the component to use client-side features like state, effects, and event listeners.
-* **Hinglish Simplification:** `"use client"` ek simple label hai jo hum file ke top par likhte hain, jisse Next.js ko pata chal jata hai ki is component mein user interact karega (clicks, typing) aur ise Browser (Client) par chalana zaroori hai.
+* [[HL::**Precise English:** The `"use client"` directive is a convention in Next.js (React Server Components) that declares a boundary between a Server Component module graph and a Client Component module graph, allowing the component to use client-side features like state, effects, and event listeners.::HL]]
+* [[HL::**Hinglish Simplification:** `"use client"` ek simple label hai jo hum file ke top par likhte hain, jisse Next.js ko pata chal jata hai ki is component mein user interact karega (clicks, typing) aur ise Browser (Client) par chalana zaroori hai::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Server par code bahut fast chalta hai aur direct database se baat kar sakta hai. Par Server kisi mouse click ya keyboard typing ko sun nahi sakta. Agar aapne bina `"use client"` ke ek Button banaya jispe `onClick` likha hai, toh error aayega kyunki Server ko nahi pata 'click' kya hota hai.
-* **Solution:** Jis hisse mein humein user se baatcheet karni hai (interactivity chahiye), wahan hum `"use client"` likh dete hain. Baki puri website fast Server par hi rehti hai.
+* [[HL::**Problem:** Server par code bahut fast chalta hai aur direct database se baat kar sakta hai. Par Server kisi mouse click ya keyboard typing ko sun nahi sakta. Agar aapne bina `"use client"` ke ek Button banaya jispe `onClick` likha hai, toh error aayega kyunki Server ko nahi pata 'click' kya hota hai.::HL]]
+* [[HL::**Solution:** Jis hisse mein humein user se baatcheet karni hai (interactivity chahiye), wahan hum `"use client"` likh dete hain. Baki puri website fast Server par hi rehti hai.::HL]]
 
-## 🔍 5. Visual / Editor Mein Kya Dikhega:
-Aapke VS Code (code editor) mein folder structure kuch aisa dikhega:
+[[HL::## 🔍 5. Visual / Editor Mein Kya Dikhega:::HL]]
+[[HL::Aapke VS Code (code editor) mein folder structure kuch aisa dikhega:::HL]]
 ```text
-📂 my-app
- ┣ 📂 app
- ┃ ┣ 📄 page.tsx         (Kitchen - Server Component, default hai)
- ┃ ┗ 📄 LikeButton.tsx   (Table - Isme top par 'use client' likha hoga)
+[[HL::📂 my-app::HL]]
+ [[HL::┣ 📂 app::HL]]
+ [[HL::┃ ┣ 📄 page.tsx         (Kitchen - Server Component, default hai)::HL]]
+ [[HL::┃ ┗ 📄 LikeButton.tsx   (Table - Isme top par 'use client' likha hoga::HL]])
 ```
 
 ## ⚙️ 6. Under the Hood (Technical Working):
@@ -2605,107 +2605,107 @@ Aapke VS Code (code editor) mein folder structure kuch aisa dikhega:
 
 Chalo ek Like Button banate hain.
 
-**File 1: `app/LikeButton.tsx`**
+[[HL::**File 1: `app/LikeButton.tsx`**::HL]]
 ```tsx
-// Ye line sabse upar honi chahiye. Iska matlab hai ye code Browser me chalega.
-'use client'; 
+// [[HL::Ye line sabse upar honi chahiye. Iska matlab hai ye code Browser me chalega.::HL]]
+[[HL::'use client';::HL]] 
 
-// useState ek React ka tool hai jo data yaad rakhta hai (jaise kitne likes hue)
-import { useState } from 'react'; 
+[[HL::// useState ek React ka tool hai jo data yaad rakhta hai (jaise kitne likes hue)::HL]]
+[[HL::import { useState } from 'react';::HL]] 
 
-export default function LikeButton() {
-  // likes = variable jisme value hai (start with 0)
-  // setLikes = ek function jo likes ko change karega
-  const [likes, setLikes] = useState(0); 
+[[HL::export default function LikeButton() {::HL]]
+  [[HL::// likes = variable jisme value hai (start with 0)::HL]]
+  [[HL::// setLikes = ek function jo likes ko change karega::HL]]
+  [[HL::const [likes, setLikes] = useState(0);::HL]] 
 
-  return (
-    // Jab button pe click hoga, likes ki value + 1 ho jayegi
-    <button onClick={() => setLikes(likes + 1)}>
-      👍 Likes: {likes}
-    </button>
-  );
-}
+  [[HL::return (::HL]]
+    [[HL::// Jab button pe click hoga, likes ki value + 1 ho jayegi::HL]]
+    [[HL::<button onClick={() => setLikes(likes + 1)}>::HL]]
+      [[HL::👍 Likes: {likes}::HL]]
+    [[HL::</button>::HL]]
+  [[HL::);::HL]]
+[[HL::}::HL]]
 ```
 
 ```text
-# 📤 Expected Output (Browser Screen - Initial Load):
-[ 👍 Likes: 0 ]
+[[HL::# 📤 Expected Output (Browser Screen - Initial Load):::HL]]
+[[HL::[ 👍 Likes: 0 ]::HL]]
 
-# 📤 Expected Output (Browser Screen - After 1 Click):
-[ 👍 Likes: 1 ]
+[[HL::# 📤 Expected Output (Browser Screen - After 1 Click):::HL]]
+[[HL::[ 👍 Likes: 1::HL]] ]
 ```
 
-**File 2: `app/page.tsx` (Main Page)**
+[[HL::**File 2: `app/page.tsx` (Main Page::HL]])**
 ```tsx
-// Yahan humne 'use client' nahi likha. Ye by default Server Component hai.
-import LikeButton from './LikeButton';
+// [[HL::Yahan humne 'use client' nahi likha. Ye by default Server Component hai.::HL]]
+[[HL::import LikeButton from './LikeButton';::HL]]
 
-export default function HomePage() {
-  console.log("Ye message sirf Server (Terminal) mein dikhega!"); 
+[[HL::export default function HomePage() {::HL]]
+  [[HL::console.log("Ye message sirf Server (Terminal) mein dikhega!");::HL]] 
   
-  return (
-    <div>
-      <h1>Welcome to my Blog</h1>
-      <p>Ye text server se bankar aaya hai, bahut fast hai.</p>
-      {/* Hum apne client component ko yahan use kar rahe hain */}
-      <LikeButton /> 
-    </div>
-  );
-}
+  [[HL::return (::HL]]
+    [[HL::<div>::HL]]
+      [[HL::<h1>Welcome to my Blog</h1>::HL]]
+      [[HL::<p>Ye text server se bankar aaya hai, bahut fast hai.</p>::HL]]
+      [[HL::{/* Hum apne client component ko yahan use kar rahe hain */}::HL]]
+      [[HL::<LikeButton />::HL]] 
+    [[HL::</div>::HL]]
+  [[HL::);::HL]]
+[[HL::}::HL]]
 ```
 
 ```text
-# 📤 Expected Output (VS Code Terminal / Console):
-Ye message sirf Server (Terminal) mein dikhega!
+[[HL::# 📤 Expected Output (VS Code Terminal / Console):::HL]]
+[[HL::Ye message sirf Server (Terminal) mein dikhega!::HL]]
 
-# 📤 Expected Output (Browser Console - F12 dabane par):
-(Koi output nahi aayega kyunki upar wala console.log server par chala tha)
+[[HL::# 📤 Expected Output (Browser Console - F12 dabane par):::HL]]
+[[HL::(Koi output nahi aayega kyunki upar wala console.log server par chala tha)::HL]]
 
-# 📤 Expected Output (Browser Screen):
-Welcome to my Blog
-Ye text server se bankar aaya hai, bahut fast hai.
-[ 👍 Likes: 0 ]
+[[HL::# 📤 Expected Output (Browser Screen):::HL]]
+[[HL::Welcome to my Blog::HL]]
+[[HL::Ye text server se bankar aaya hai, bahut fast hai.::HL]]
+[[HL::[ 👍 Likes: 0::HL]] ]
 ```
 
 ## ⚖️ 8. Comparison (Ye vs Woh):
 
-| Feature | 🖥️ Server Components (Default) | 💻 Client Components (`"use client"`) |
+| [[HL::Feature::HL]] | [[HL::🖥️ Server Components (Default)::HL]] | [[HL::💻 Client Components (`"use client"`)::HL]] |
 | :--- | :--- | :--- |
-| **Kahan chalte hain?** | Server par (Company ke computer par) | Client par (User ke mobile/laptop par) |
-| **Kya kar sakte hain?** | Database se direct data lana, fast loading. | `onClick`, `onChange`, `useState` (Interactivity) |
-| **Browser ko kya bhejte hain?**| Sirf HTML (Code ka size chhota rehta hai) | HTML + JavaScript (Thoda heavy ho sakta hai) |
+| [[HL::**Kahan chalte hain?**::HL]] | [[HL::Server par (Company ke computer par)::HL]] | [[HL::Client par (User ke mobile/laptop par)::HL]] |
+| [[HL::**Kya kar sakte hain?**::HL]] | [[HL::Database se direct data lana, fast loading.::HL]] | [[HL::`onClick`, `onChange`, `useState` (Interactivity)::HL]] |
+| [[HL::**Browser ko kya bhejte hain?**::HL]]| [[HL::Sirf HTML (Code ka size chhota rehta hai)::HL]] | [[HL::HTML + JavaScript (Thoda heavy ho sakta hai::HL]]) |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-* **Mistake:** `useState` ya `onClick` use karna bina file ke top par `'use client'` likhe.
-* **Fix:** Hamesha line 1 par `'use client';` likho agar interactivity chahiye. Quotes lagana mat bhoolna!
+* **Mistak[[HL::e:** `useState` ya `onClick` use karna bina file ke top par `'use client'` likhe.::HL]]
+* [[HL::**Fix:** Hamesha line 1 par `'use client';` likho agar interactivity chahiye. Quotes lagana mat bhoolna::HL]]!
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-* **Confusion 1:** *"Kya Client Component sirf browser mein chalte hain aur server par nahi?"* * **Answer:** Nahi! Ye bahut bada misconception hai. Client component bhi pehle server par HTML banate hain (taaki screen jaldi dikhe), uske baad browser unme "jaan" (JavaScript) dalta hai.
-* **Confusion 2:** *"Toh kya main har file mein 'use client' likh doon?"*
-  * **Answer:** Bilkul nahi! Agar sab jagah likh doge toh website slow ho jayegi kyunki bahut saara JavaScript user ke phone par download hoga. Sirf wahan likho jahan button clicks ya animations hain.
+* [[HL::**Confusion 1:** *"Kya Client Component sirf browser mein chalte hain aur server par nahi?"* * **Answer:** Nahi! Ye bahut bada misconception hai. Client component bhi pehle server par HTML banate hain (taaki screen jaldi dikhe), uske baad browser unme "jaan" (JavaScript) dalta hai.::HL]]
+* [[HL::**Confusion 2:** *"Toh kya main har file mein 'use client' likh doon?"*::HL]]
+  * [[HL::**Answer:** Bilkul nahi! Agar sab jagah likh doge toh website slow ho jayegi kyunki bahut saara JavaScript user ke phone par download hoga. Sirf wahan likho jahan button clicks ya animations hain::HL]].
 
 ## 🌍 11. Real-World Use Case (Production Application):
-Imagine karo **Amazon** ka product page.
-* Product ki photo, naam, aur description **Server Component** se aate hain (kyunki ye SEO ke liye Google ko dikhne chahiye aur fast hone chahiye).
-* Jo "Add to Cart" button hai aur "Image Zoom" karne wala feature hai, sirf wahan `"use client"` laga kar **Client Component** banaya jata hai.
+[[HL::Imagine karo **Amazon** ka product page.::HL]]
+* [[HL::Product ki photo, naam, aur description **Server Component** se aate hain (kyunki ye SEO ke liye Google ko dikhne chahiye aur fast hone chahiye).::HL]]
+* [[HL::Jo "Add to Cart" button hai aur "Image Zoom" karne wala feature hai, sirf wahan `"use client"` laga kar **Client Component** banaya jata hai::HL]].
 
 ## 🎨 12. Visual Diagram (ASCII Art):
 ```text
-[ SERVER ] (Fast, Secure, No User Clicks)
-   │
-   ├─> 📄 layout.tsx (Server)
-   ├─> 📄 page.tsx (Server)
-   │      │
-   │      └─> Bhejta hai "HTML" Browser ko
-   │
-[ CLIENT BROWSER ] (User's Laptop/Phone)
-   │
-   └─> 🖱️ 📄 LikeButton.tsx ('use client')
-          (Yahan JavaScript aati hai aur Button zinda hota hai)
+[ [[HL::SERVER ] (Fast, Secure, No User Clicks)::HL]]
+   [[HL::│::HL]]
+   [[HL::├─> 📄 layout.tsx (Server)::HL]]
+   [[HL::├─> 📄 page.tsx (Server)::HL]]
+   [[HL::│      │::HL]]
+   [[HL::│      └─> Bhejta hai "HTML" Browser ko::HL]]
+   [[HL::│::HL]]
+[[HL::[ CLIENT BROWSER ] (User's Laptop/Phone)::HL]]
+   [[HL::│::HL]]
+   [[HL::└─> 🖱️ 📄 LikeButton.tsx ('use client')::HL]]
+          [[HL::(Yahan JavaScript aati hai aur Button zinda hota hai::HL]])
 ```
 
 ## 🛠️ 13. Best Practices (Pro Tips):
-* **Push it to the leaves:** `"use client"` ko page ke sabse aakhri chhor (leaves) par rakho. Pura page client mat banao, sirf chote buttons ya search bars ko client banao.
+* [[HL::**Push it to the leaves:** `"use client"` ko page ke sabse aakhri chhor (leaves) par rakho. Pura page client mat banao, sirf chote buttons ya search bars ko client banao::HL]].
 
 ## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
 Agar aap Server Component mein `onClick` lagaoge, toh aapki puri app crash ho jayegi aur bada sa laal error aayega: `Error: Event handlers cannot be passed to Client Component props...`.
@@ -2713,14 +2713,14 @@ Agar aap Server Component mein `onClick` lagaoge, toh aapki puri app crash ho ja
 ## ❓ 15. FAQ (Interview Questions):
 1. **Q:** Next.js mein default component kaunsa hota hai?
    **A:** Server Component.
-2. **Q:** `'use client'` kahan likhna chahiye?
-   **A:** File ke ekdum top par, saare imports se bhi pehle.
+2. [[HL::**Q:** `'use client'` kahan likhna chahiye?::HL]]
+   [[HL::**A:** File ke ekdum top par, saare imports se bhi pehle::HL]].
 3. **Q:** Kya hum Server Component mein Database query likh sakte hain?
    **A:** Haan, bilkul! Ye safe hai kyunki code user ko nahi dikhta.
 4. **Q:** Kya hum Client Component mein Database query likh sakte hain?
    **A:** Nahi! User aapka database password dekh lega. Ye strictly forbidden hai.
-5. **Q:** Hydration kya hota hai?
-   **A:** Server se aaye hue static HTML page mein JavaScript daalkar usko interactive banane ke process ko Hydration kehte hain.
+5. [[HL::**Q:** Hydration kya hota hai?::HL]]
+   [[HL::**A:** Server se aaye hue static HTML page mein JavaScript daalkar usko interactive banane ke process ko Hydration kehte hain::HL]].
 
 ## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
 > *"Agar component ko chhoone (click/type) par kuch hona hai, toh usko `'use client'` ki ticket de do!"*
@@ -2739,8 +2739,8 @@ Aapki **Mummy (Server Component)** khana banati hain (Database se data lana) aur
 Aap (Dabba) sirf bahar ka cover ho. Aapke andar ka khana abhi bhi Mummy (Server) ne banaya hai. Ise hi **Composition Pattern** kehte hain!
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** The Composition Pattern in Next.js involves passing Server Components as `children` props to Client Components. This prevents the Server Components from being implicitly converted into Client Components, avoiding unnecessary JavaScript bundle bloat and preventing "Prop Drilling".
-* **Hinglish Simplification:** Ek Client Component ke andar direct Server component ko `import` karne ke bajaye, hum Server component ko `children` (prop) ki tarah pass karte hain. Isse Client component ke andar bhi Server component server par hi render hota rehta hai.
+* [[HL::**Precise English:** The Composition Pattern in Next.js involves passing Server Components as `children` props to Client Components. This prevents the Server Components from being implicitly converted into Client Components, avoiding unnecessary JavaScript bundle bloat and preventing "Prop Drilling".::HL]]
+* [[HL::**Hinglish Simplification:** Ek Client Component ke andar direct Server component ko `import` karne ke bajaye, hum Server component ko `children` (prop) ki tarah pass karte hain. Isse Client component ke andar bhi Server component server par hi render hota rehta hai::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
 * **Problem:** Ek rule hai -> *Agar aap kisi Server Component ko kisi Client Component ke andar import karte ho, toh woh Server Component bhi zabardasti Client Component ban jata hai.* Isse aapka JavaScript ka size badh jata hai aur website slow ho jati hai.
@@ -2762,75 +2762,75 @@ Aap (Dabba) sirf bahar ka cover ho. Aapke andar ka khana abhi bhi Mummy (Server)
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
-**File 1: `app/Sidebar.tsx` (Ye Client Component / Dabba hai)**
+[[HL::**File 1: `app/Sidebar.tsx` (Ye Client Component / Dabba hai)**::HL]]
 ```tsx
-'use client'; // Ye client hai kyunki isme open/close state hai
+[[HL::'use client'; // Ye client hai kyunki isme open/close state hai::HL]]
 
-import { useState } from 'react';
+[[HL::import { useState } from 'react';::HL]]
 
-// Props mein hum bata rahe hain ki koi 'children' aayega iske andar
-export default function Sidebar({ children }: { children: React.ReactNode }) {
-  const [isOpen, setIsOpen] = useState(true);
+[[HL::// Props mein hum bata rahe hain ki koi 'children' aayega iske andar::HL]]
+[[HL::export default function Sidebar({ children }: { children: React.ReactNode }) {::HL]]
+  [[HL::const [isOpen, setIsOpen] = useState(true);::HL]]
 
-  return (
-    <div style={{ border: '2px solid red', padding: '10px' }}>
-      <button onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? 'Close Sidebar' : 'Open Sidebar'}
-      </button>
+  [[HL::return (::HL]]
+    [[HL::<div style={{ border: '2px solid red', padding: '10px' }}>::HL]]
+      [[HL::<button onClick={() => setIsOpen(!isOpen)}>::HL]]
+        [[HL::{isOpen ? 'Close Sidebar' : 'Open Sidebar'}::HL]]
+      [[HL::</button>::HL]]
       
-      {/* Agar open hai, toh 'children' dikhao. Ye children actual mein Server se aayega! */}
-      {isOpen && <div>{children}</div>}
-    </div>
+      [[HL::{/* Agar open hai, toh 'children' dikhao. Ye children actual mein Server se aayega! */}::HL]]
+      [[HL::{isOpen && <div>{children}</div>}::HL]]
+    [[HL::</div::HL]]>
   );
 }
 ```
 ```text
-# 📤 Expected Output (Browser Console - Hydration successful):
-(Koi error nahi aayega, Sidebar interactive ho jayega)
+# 📤 [[HL::Expected Output (Browser Console - Hydration successful):::HL]]
+[[HL::(Koi error nahi aayega, Sidebar interactive ho jayega)::HL]]
 ```
 
-**File 2: `app/UserList.tsx` (Ye Server Component / Khana hai)**
+[[HL::**File 2: `app/UserList.tsx` (Ye Server Component / Khana hai::HL]])**
 ```tsx
-// Yahan 'use client' nahi hai. Ye database se direct connect ho sakta hai.
-export default function UserList() {
-  console.log("Fetching users from Database..."); // Ye terminal me dikhega
+// [[HL::Yahan 'use client' nahi hai. Ye database se direct connect ho sakta hai.::HL]]
+[[HL::export default function UserList() {::HL]]
+  [[HL::console.log("Fetching users from Database..."); // Ye terminal me dikhega::HL]]
   
-  return (
-    <ul>
-      <li>Rahul</li>
-      <li>Priya</li>
-    </ul>
-  );
-}
+  [[HL::return (::HL]]
+    [[HL::<ul>::HL]]
+      [[HL::<li>Rahul</li>::HL]]
+      [[HL::<li>Priya</li>::HL]]
+    [[HL::</ul>::HL]]
+  [[HL::);::HL]]
+[[HL::}::HL]]
 ```
 ```text
-# 📤 Expected Output (VS Code Terminal):
-Fetching users from Database...
+[[HL::# 📤 Expected Output (VS Code Terminal):::HL]]
+[[HL::Fetching users from Database::HL]]...
 ```
 
-**File 3: `app/page.tsx` (Server - Yahan Dabba pack ho raha hai)**
+[[HL::**File 3: `app/page.tsx` (Server - Yahan Dabba pack ho raha hai)**::HL]]
 ```tsx
-import Sidebar from './Sidebar';
-import UserList from './UserList';
+[[HL::import Sidebar from './Sidebar';::HL]]
+[[HL::import UserList from './UserList';::HL]]
 
-export default function HomePage() {
-  return (
-    <main>
-      <h1>My Dashboard</h1>
-      {/* Hum Sidebar (Client) ke andar UserList (Server) ko daal rahe hain! */}
-      <Sidebar>
-        <UserList /> 
-      </Sidebar>
-    </main>
+[[HL::export default function HomePage() {::HL]]
+  [[HL::return (::HL]]
+    [[HL::<main>::HL]]
+      [[HL::<h1>My Dashboard</h1>::HL]]
+      [[HL::{/* Hum Sidebar (Client) ke andar UserList (Server) ko daal rahe hain! */}::HL]]
+      [[HL::<Sidebar>::HL]]
+        [[HL::<UserList />::HL]] 
+      [[HL::</Sidebar>::HL]]
+    [[HL::</main::HL]]>
   );
 }
 ```
 ```text
-# 📤 Expected Output (Browser Screen - Initial Load):
-My Dashboard
-[ Open Sidebar ] (Button is in Sidebar component)
-* Rahul          (List is from UserList component)
-* Priya
+# 📤 [[HL::Expected Output (Browser Screen - Initial Load):::HL]]
+[[HL::My Dashboard::HL]]
+[[HL::[ Open Sidebar ] (Button is in Sidebar component)::HL]]
+* [[HL::Rahul          (List is from UserList component)::HL]]
+* [[HL::Priya::HL]]
 ```
 
 ## ⚖️ 8. Comparison (Ye vs Woh):
@@ -2866,7 +2866,7 @@ My Dashboard
 * Hamesha apne complex layouts ko design karte waqt socho: "Kya main is Client Component ke andar ki static cheezon ko `children` bana kar bahar nikal sakta hoon?" Ye senior engineers ki nishani hai.
 
 ## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
-Agar aapne galti se Server Component ko Client mein import kar liya, aur us Server component mein Database ka password (Environment variable) likha tha, toh dhyan rahe: Ab wo Client component ban chuka hai, aur hacker browser dev tools mein aapka password dekh sakta hai! (Ye bahut bada security risk hai).
+[[HL::Agar aapne galti se Server Component ko Client mein import kar liya, aur us Server component mein Database ka password (Environment variable) likha tha, toh dhyan rahe: Ab wo Client component ban chuka hai, aur hacker browser dev tools mein aapka password dekh sakta hai! (Ye bahut bada security risk hai::HL]]).
 
 ## ❓ 15. FAQ (Interview Questions):
 1. **Q:** Kya main Client Component ke andar Server Component import kar sakta hoon?
@@ -2875,8 +2875,8 @@ Agar aapne galti se Server Component ko Client mein import kar liya, aur us Serv
    **A:** Ek data ko parent se child, child se grandchild tak pass karne ko prop drilling kehte hain.
 3. **Q:** Composition pattern ka sabse bada fayda kya hai?
    **A:** JavaScript bundle size chota rakhna aur Client/Server boundaries ko clean rakhna.
-4. **Q:** `children` ka data type TypeScript mein kya hota hai?
-   **A:** `React.ReactNode`.
+4. [[HL::**Q:** `children` ka data type TypeScript mein kya hota hai?::HL]]
+   [[HL::**A:** `React.ReactNode`::HL]].
 5. **Q:** Agar Parent Client Component hai aur Child bhi Client Component hai, toh kya Composition use karna zaruri hai?
    **A:** Nahi, fir aap direct import kar sakte ho, kyunki dono hi client par hain.
 
@@ -2908,12 +2908,12 @@ Maan lo aap ek **Bank ATM** design kar rahe ho.
 Aap kabhi nahi chahoge ki locker room (Server) ka naksha ya master password galti se keypad (Client) ki screen par print ho jaye, right? Isko rokne ke liye hum master password wali file par ek bada sa **"DO NOT BRING OUTSIDE"** (server-only) ka thappa laga dete hain. Agar koi galti se isko bahar (Client) lata hai, toh alarm baj jayega!
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** The `server-only` package is a build-time utility that intentionally throws an error if a developer accidentally imports a server-side module (like database configs or API keys) into a Client Component, preventing security breaches and bundle size bloat.
-* **Hinglish Simplification:** `server-only` ek simple package hai jo ensure karta hai ki aapka sensitive code (jaise password ya database connection) galti se bhi browser (Client) par leak na ho. Agar aap galti karoge, toh app crash ho jayegi aur hack hone se bach jayegi.
+* [[HL::**Precise English:** The `server-only` package is a build-time utility that intentionally throws an error if a developer accidentally imports a server-side module (like database configs or API keys) into a Client Component, preventing security breaches and bundle size bloat.::HL]]
+* [[HL::**Hinglish Simplification:** `server-only` ek simple package hai jo ensure karta hai ki aapka sensitive code (jaise password ya database connection) galti se bhi browser (Client) par leak na ho. Agar aap galti karoge, toh app crash ho jayegi aur hack hone se bach jayegi::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** JavaScript mein hum files ko ek dusre mein import karte rehte hain. Kabhi kabhi galti se ek developer ne Client Component (`"use client"`) ke andar wo file import kar li jisme Database ka password tha. Ab wo password user ke browser mein chala jayega. Ise "Environment Poisoning" kehte hain.
-* **Solution:** `server-only` package lagane se, jaise hi Next.js dekhega ki ye file Client mein import ho rahi hai, woh code ko build hi nahi hone dega aur wahi error phek dega.
+* [[HL::**Problem:** JavaScript mein hum files ko ek dusre mein import karte rehte hain. Kabhi kabhi galti se ek developer ne Client Component (`"use client"`) ke andar wo file import kar li jisme Database ka password tha. Ab wo password user ke browser mein chala jayega. Ise "Environment Poisoning" kehte hain::HL]].
+* [[HL::**Solution:** `server-only` package lagane se, jaise hi Next.js dekhega ki ye file Client mein import ho rahi hai, woh code ko build hi nahi hone dega aur wahi error phek dega::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 ```text
@@ -2925,74 +2925,74 @@ Aap kabhi nahi chahoge ki locker room (Server) ka naksha ya master password galt
 ```
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1. Aap `npm install server-only` karte ho.
-2. Aap sensitive file mein sabse upar `import 'server-only'` likh dete ho.
-3. Next.js ka bundler (Turbopack) jab files ko jodta hai, toh wo ek tree banata hai.
-4. Agar bundler ko dikha ki ek `"use client"` wali file ki branch is `server-only` wali file se jud rahi hai, toh wo build process ko turant rok deta hai (Strict Build Error).
+1. [[HL::Aap `npm install server-only` karte ho.::HL]]
+2. [[HL::Aap sensitive file mein sabse upar `import 'server-only'` likh dete ho.::HL]]
+3. [[HL::Next.js ka bundler (Turbopack) jab files ko jodta hai, toh wo ek tree banata hai.::HL]]
+4. [[HL::Agar bundler ko dikha ki ek `"use client"` wali file ki branch is `server-only` wali file se jud rahi hai, toh wo build process ko turant rok deta hai (Strict Build Error::HL]]).
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
-**Step 1: Install the package**
-Terminal mein ye command run karein:
+[[HL::**Step 1: Install the package**::HL]]
+[[HL::Terminal mein ye command run karein:::HL]]
 ```bash
-npm install server-only
+[[HL::npm install server-only::HL]]
 ```
 ```text
-# 📤 Expected Output (Terminal):
-added 1 package, and audited 365 packages in 2s
-found 0 vulnerabilities
-(Package successfully install ho gaya)
+# 📤 [[HL::Expected Output (Terminal):::HL]]
+[[HL::added 1 package, and audited 365 packages in 2s::HL]]
+[[HL::found 0 vulnerabilities::HL]]
+[[HL::(Package successfully install ho gaya)::HL]]
 ```
 
-**Step 2: File 1: `lib/db.ts` (Safe Server File)**
+[[HL::**Step 2: File 1: `lib/db.ts` (Safe Server File)**::HL]]
 ```typescript
-// Ye line lagana zaroori hai protection ke liye!
-import 'server-only'; 
+[[HL::// Ye line lagana zaroori hai protection ke liye!::HL]]
+[[HL::import 'server-only';::HL]] 
 
-export async function getDatabaseData() {
-  const secretPassword = "SuperSecretDBPassword123";
-  // DB connection logic yahan aayega
-  return { status: "Connected", data: "Secret User Data" };
+[[HL::export async function getDatabaseData() {::HL]]
+  [[HL::const secretPassword = "SuperSecretDBPassword123";::HL]]
+  [[HL::// DB connection logic yahan aayega::HL]]
+  [[HL::return { status: "Connected", data: "Secret User Data::HL]]" };
 }
 ```
 
-**Step 3: File 2: `app/ProfileButton.tsx` (Client Component - Galti se yahan import kar liya)**
+[[HL::**Step 3: File 2: `app/ProfileButton.tsx` (Client Component - Galti se yahan import kar liya)**::HL]]
 ```tsx
-'use client';
+[[HL::'use client';::HL]]
 
-// ❌ DANGER: Humne ek server-only file ko client mein import kar liya!
-import { getDatabaseData } from '../lib/db'; 
+[[HL::// ❌ DANGER: Humne ek server-only file ko client mein import kar liya!::HL]]
+[[HL::import { getDatabaseData } from '../lib/db';::HL]] 
 
-export default function ProfileButton() {
-  return (
-    <button onClick={() => console.log(getDatabaseData())}>
-      Get Data
-    </button>
+[[HL::export default function ProfileButton() {::HL]]
+  [[HL::return (::HL]]
+    [[HL::<button onClick={() => console.log(getDatabaseData())}>::HL]]
+      [[HL::Get Data::HL]]
+    [[HL::</button::HL]]>
   );
 }
 ```
 
 ```text
-# 📤 Expected Output (Terminal/Browser - CRASH!):
-Error: This module cannot be imported from a Client Component module. 
-It should only be used from a Server Component.
-(Next.js ne aapko hack hone se bacha liya!)
+# 📤 Expe[[HL::cted Output (Terminal/Browser - CRASH!):::HL]]
+[[HL::Error: This module cannot be imported from a Client Component module.::HL]] 
+[[HL::It should only be used from a Server Component.::HL]]
+[[HL::(Next.js ne aapko hack hone se bacha liya::HL]]!)
 ```
 
 ## ⚖️ 8. Comparison (Ye vs Woh):
 
-| Package | Kahan use hota hai? | Kaam kya hai? |
+| [[HL::Package::HL]] | [[HL::Kahan use hota hai?::HL]] | [[HL::Kaam kya hai?::HL]] |
 | :--- | :--- | :--- |
-| `server-only` | DB connection files, API keys wale functions mein. | In files ko Client browser par jaane se rokta hai (Security). |
-| `client-only` | Aise functions jo sirf browser pe chalte hain (jaise `window.localStorage`). | Inko Server par chalne se rokta hai (Prevent hydration errors). |
+| [[HL::`server-only`::HL]] | [[HL::DB connection files, API keys wale functions mein.::HL]] | [[HL::In files ko Client browser par jaane se rokta hai (Security).::HL]] |
+| [[HL::`client-only`::HL]] | [[HL::Aise functions jo sirf browser pe chalte hain (jaise `window.localStorage`).::HL]] | [[HL::Inko Server par chalne se rokta hai (Prevent hydration errors::HL]]). |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-* **Mistake:** Utilities file (`utils.ts`) mein `server-only` laga dena jisme date formatting wale functions hain. Phir wo client component mein date format karne ke kaam nahi aa paate.
-* **Fix:** Sirf wahi files mein `server-only` lagao jahan actually mein secret keys ya server-side logic (Node.js APIs like `fs`) use ho raha ho.
+* [[HL::**Mistake:** Utilities file (`utils.ts`) mein `server-only` laga dena jisme date formatting wale functions hain. Phir wo client component mein date format karne ke kaam nahi aa paate.::HL]]
+* [[HL::**Fix:** Sirf wahi files mein `server-only` lagao jahan actually mein secret keys ya server-side logic (Node.js APIs like `fs`) use ho raha ho::HL]].
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-* **Confusion 1:** *"Next.js toh waise bhi safe hai na, Server component ka code browser mein nahi jata, toh iski kya zarurat?"*
-  * **Answer:** Haan safe hai, par *insaan galti karte hain*. Agar kisi junior developer ne galti se Client component mein file import kar li, toh Next.js usko chup-chap bundle karke bhej dega (kyunki usey lagega aapko chahiye). `server-only` ek safety lock hai.
+* [[HL::**Confusion 1:** *"Next.js toh waise bhi safe hai na, Server component ka code browser mein nahi jata, toh iski kya zarurat?"*::HL]]
+  * [[HL::**Answer:** Haan safe hai, par *insaan galti karte hain*. Agar kisi junior developer ne galti se Client component mein file import kar li, toh Next.js usko chup-chap bundle karke bhej dega (kyunki usey lagega aapko chahiye). `server-only` ek safety lock ha::HL]]i.
 
 ## 🌍 11. Real-World Use Case (Production Application):
 Maan lo aap apna khud ka ek local LLM model use kar rahe ho ek backend server par, aur us model ko connect karne ke liye ek internal IP aur secret port number chahiye. Aap us connection logic ko `lib/llm-connect.ts` mein likhoge aur uspe `server-only` laga doge, taaki koi frontend user DevTools khol kar aapke local LLM ka IP address na nikal le!
@@ -3015,8 +3015,8 @@ Maan lo aap apna khud ka ek local LLM model use kar rahe ho ek backend server pa
 Agar API keys (jaise Stripe payment ya OpenAI ki key) browser mein chali gayi, toh hackers aapki key copy karke apne project mein use karenge, aur bill aapke credit card par aayega!
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **Q:** `server-only` kya ek Next.js feature hai ya external package?
-   **A:** Ye ek officially recommended NPM package hai jo React aur Next.js ke ecosystem ka hissa hai.
+1. **Q:** [[HL::`server-only` kya ek Next.js feature hai ya external package?::HL]]
+   [[HL::**A:** Ye ek officially recommended NPM package hai jo React aur Next.js ke ecosystem ka hissa hai::HL]].
 2. **Q:** Agar main bhool jaaun install karna toh kya code chalega?
    **A:** Haan chalega, par aap environment poisoning ke risk par rahoge.
 3. **Q:** Kya main isko Server Component ke andar import kar sakta hu?
@@ -3044,62 +3044,62 @@ Aap ek library se book lene gaye ho. Book laane ko hum **Fetch** kehte hain. Ab 
 3. **next: { revalidate: 3600 }:** Aapne book ghar pe rakhi hai, par har 3600 second (1 ghante) baad ek baar library ja kar check karoge ki koi naya edition aaya hai kya. (ISR - Incremental Static Regeneration).
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** In Next.js, the native Web `fetch` API is extended to allow developers to configure granular caching and revalidation strategies per request. *Crucially, starting in Next.js 15, the default caching behavior for fetch requests has changed from `force-cache` to `no-store`.*
-* **Hinglish Simplification:** Next.js ne normal JavaScript `fetch` ko super-powers de di hain jisse hum decide kar sakte hain ki humein data save karke rakhna hai (fast speed ke liye) ya har baar naya lana hai (fresh data ke liye).
+* [[HL::**Precise English:** In Next.js, the native Web `fetch` API is extended to allow developers to configure granular caching and revalidation strategies per request. *Crucially, starting in Next.js 15, the default caching behavior for fetch requests has changed from `force-cache` to `no-store`.*::HL]]
+* [[HL::**Hinglish Simplification:** Next.js ne normal JavaScript `fetch` ko super-powers de di hain jisse hum decide kar sakte hain ki humein data save karke rakhna hai (fast speed ke liye) ya har baar naya lana hai (fresh data ke liye).::HL]]
 
-## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Agar hum har user ke liye bar-bar database se data layenge, toh server overload ho jayega aur website slow khulegi. Par agar sab kuch cache (save) kar liya, toh stock market ke price jaisa data update hi nahi hoga.
-* **Solution:** Next.js ka extended `fetch` humein control deta hai ki kaunsa data cache karna hai (jaise About Us page) aur kaunsa data live lana hai (jaise user ka balance).
+[[HL::## 🧠 4. Zaroorat Kyun Hai? (Why use it?):::HL]]
+* [[HL::**Problem:** Agar hum har user ke liye bar-bar database se data layenge, toh server overload ho jayega aur website slow khulegi. Par agar sab kuch cache (save) kar liya, toh stock market ke price jaisa data update hi nahi hoga.::HL]]
+* [[HL::**Solution:** Next.js ka extended `fetch` humein control deta hai ki kaunsa data cache karna hai (jaise About Us page) aur kaunsa data live lana hai (jaise user ka balance).::HL]]
 
-## 🔍 5. Visual / Editor Mein Kya Dikhega:
-Hum apne `page.tsx` (Server Component) ke andar direct API calls likhenge, bina kisi `useEffect` ke.
+[[HL::## 🔍 5. Visual / Editor Mein Kya Dikhega:::HL]]
+[[HL::Hum apne::HL]] `page.tsx` (Server Component) ke andar direct API calls likhenge, bina kisi `useEffect` ke.
 ```text
 📂 app
  ┗ 📄 page.tsx    (Yahan hum seedha await fetch() likhenge component function ke andar)
 ```
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1. Component `fetch` request karta hai.
-2. Next.js beech mein khada hota hai aur check karta hai: *"Bhai cache mein kuch hai kya?"*
-3. Agar `force-cache` hai aur data pada hai, toh woh API tak jata hi nahi, direct save kiya hua data bhej deta hai (Instant fast).
-4. Agar `no-store` hai, toh Next.js seedha origin API pe jata hai, fresh data lata hai aur cache mein save nahi karta.
+1. [[HL::Component `fetch` request karta hai.::HL]]
+2. [[HL::Next.js beech mein khada hota hai aur check karta hai: *"Bhai cache mein kuch hai kya?"*::HL]]
+3. [[HL::Agar `force-cache` hai aur data pada hai, toh woh API tak jata hi nahi, direct save kiya hua data bhej deta hai (Instant fast).::HL]]
+4. [[HL::Agar `no-store` hai, toh Next.js seedha origin API pe jata hai, fresh data lata hai aur cache mein save nahi karta::HL]].
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
-🚨 **Note:** Hum isko Server Component (`page.tsx`) mein likh rahe hain. Server component `async` hote hain.
+🚨 [[HL::**Note:** Hum isko Server Component (`page.tsx`) mein likh rahe hain. Server component `async` hote hain::HL]].
 
 ```tsx
-// app/page.tsx
-export default async function DataPage() {
+// [[HL::app/page.tsx::HL]]
+[[HL::export default async function DataPage() {::HL]]
   
-  // 1. no-store (DYNAMIC - Always fresh, default in Next 15)
-  // Ye har baar naya timestamp layega.
-  const resDynamic = await fetch('https://worldtimeapi.org/api/timezone/Asia/Kolkata', { 
-    cache: 'no-store' 
-  });
-  const dynamicData = await resDynamic.json();
+  [[HL::// 1. no-store (DYNAMIC - Always fresh, default in Next 15)::HL]]
+  [[HL::// Ye har baar naya timestamp layega.::HL]]
+  [[HL::const resDynamic = await fetch('https://worldtimeapi.org/api/timezone/Asia/Kolkata', {::HL]] 
+    [[HL::cache: 'no-store'::HL]] 
+  [[HL::});::HL]]
+  [[HL::const dynamicData = await resDynamic.json();::HL]]
 
-  // 2. force-cache (STATIC - Cached forever)
-  // Ye ek baar timestamp layega aur wahi chipka rahega.
-  const resStatic = await fetch('https://worldtimeapi.org/api/timezone/Asia/Kolkata', { 
-    cache: 'force-cache' 
-  });
-  const staticData = await resStatic.json();
+  [[HL::// 2. force-cache (STATIC - Cached forever)::HL]]
+  [[HL::// Ye ek baar timestamp layega aur wahi chipka rahega.::HL]]
+  [[HL::const resStatic = await fetch('https://worldtimeapi.org/api/timezone/Asia/Kolkata', {::HL]] 
+    [[HL::cache: 'force-cache'::HL]] 
+  [[HL::});::HL]]
+  [[HL::const staticData = await resStatic.json();::HL]]
 
-  // 3. revalidate (ISR - Time based fresh data)
-  // Ye data 10 second tak cache mein rahega. 10 second baad first request pe refresh hoga.
-  const resRevalidate = await fetch('https://worldtimeapi.org/api/timezone/Asia/Kolkata', { 
-    next: { revalidate: 10 } 
-  });
-  const revalidateData = await resRevalidate.json();
+  [[HL::// 3. revalidate (ISR - Time based fresh data)::HL]]
+  [[HL::// Ye data 10 second tak cache mein rahega. 10 second baad first request pe refresh hoga.::HL]]
+  [[HL::const resRevalidate = await fetch('https://worldtimeapi.org/api/timezone/Asia/Kolkata', {::HL]] 
+    [[HL::next: { revalidate: 10 }::HL]] 
+  [[HL::});::HL]]
+  [[HL::const revalidateData = await resRevalidate.json();::HL]]
 
-  return (
-    <div>
-      <h1>Next.js Caching Demo</h1>
-      <p>🔴 Dynamic Time (no-store): {dynamicData.datetime}</p>
-      <p>🔵 Static Time (force-cache): {staticData.datetime}</p>
-      <p>🟢 Revalidating Time (10s): {revalidateData.datetime}</p>
-    </div>
+  [[HL::return (::HL]]
+    [[HL::<div>::HL]]
+      [[HL::<h1>Next.js Caching Demo</h1>::HL]]
+      [[HL::<p>🔴 Dynamic Time (no-store): {dynamicData.datetime}</p>::HL]]
+      [[HL::<p>🔵 Static Time (force-cache): {staticData.datetime}</p>::HL]]
+      [[HL::<p>🟢 Revalidating Time (10s): {revalidateData.datetime}</p>::HL]]
+    [[HL::</div::HL]]>
   );
 }
 ```
@@ -3123,28 +3123,28 @@ export default async function DataPage() {
 
 ## ⚖️ 8. Comparison (Ye vs Woh):
 
-| Strategy | `cache: 'force-cache'` | `cache: 'no-store'` | `next: { revalidate: X }` |
+| [[HL::Strategy::HL]] | [[HL::`cache: 'force-cache'`::HL]] | [[HL::`cache: 'no-store'`::HL]] | [[HL::`next: { revalidate: X }`::HL]] |
 | :--- | :--- | :--- | :--- |
-| **Matlab** | Cache forever | Never cache | Cache for X seconds |
-| **Speed** | 🚀 Blazing Fast (Instant) | 🐢 Slower (Depends on API) | 🚀 Fast (Refreshes in background) |
-| **Next 14 Default**| ✅ Default tha | ❌ | ❌ |
-| **Next 15 Default**| ❌ | ✅ **Default hai ab** | ❌ |
+| [[HL::**Matlab**::HL]] | [[HL::Cache forever::HL]] | [[HL::Never cache::HL]] | [[HL::Cache for X seconds::HL]] |
+| [[HL::**Speed**::HL]] | [[HL::🚀 Blazing Fast (Instant)::HL]] | [[HL::🐢 Slower (Depends on API)::HL]] | [[HL::🚀 Fast (Refreshes in background)::HL]] |
+| [[HL::**Next 14 Default**::HL]]| [[HL::✅ Default tha::HL]] | [[HL::❌::HL]] | [[HL::❌::HL]] |
+| [[HL::**Next 15 Default**::HL]]| [[HL::❌::HL]] | [[HL::✅ **Default hai ab**::HL]] | ❌ |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-* **Mistake:** Next.js 14 ke tutorial dekh kar sochna ki API call default cache ho jayegi. Next.js 15 mein default behaviour badal kar `no-store` kar diya gaya hai!
-* **Fix:** Agar aapko cache chahiye Next 15 mein, toh explicit taur par `cache: 'force-cache'` likhna hoga.
+* [[HL::**Mistake:** Next.js 14 ke tutorial dekh kar sochna ki API call default cache ho jayegi. Next.js 15 mein default behaviour badal kar `no-store` kar diya gaya hai::HL]]!
+* [[HL::**Fix:** Agar aapko cache chahiye Next 15 mein, toh explicit taur par `cache: 'force-cache'` likhna hoga::HL]].
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-* **Confusion 1:** *"Main React mein toh useEffect ke andar axios use karta tha. Ye async/await seedha component mein kaise?"*
-  * **Answer:** Welcome to Server Components! Server par chalne wale components async ho sakte hain. Isiliye hum seedha DB ya API hit kar sakte hain bina kisi React Hook (`useEffect`, `useState`) ke. Ye bahut fast aur SEO friendly hai.
-* **Confusion 2:** *"Agar maine revalidate 10s lagaya, toh theek 10s baad API call jayegi kya?"*
-  * **Answer:** Nahi! Next.js timer laga kar nahi baithta. Agar 10 second guzar gaye hain, aur *kisi user ne page refresh kiya*, toh purana data dikhakar Next.js piche (background) naya data layega (ISR).
+* [[HL::**Confusion 1:** *"Main React mein toh useEffect ke andar axios use karta tha. Ye async/await seedha component mein kaise?"*::HL]]
+  * [[HL::**Answer:** Welcome to Server Components! Server par chalne wale components async ho sakte hain. Isiliye hum seedha DB ya API hit kar sakte hain bina kisi React Hook (`useEffect`, `useState`) ke. Ye bahut fast aur SEO friendly hai::HL]].
+* [[HL::**Confusion 2:** *"Agar maine revalidate 10s lagaya, toh theek 10s baad API call jayegi kya?"*::HL]]
+  * [[HL::**Answer:** Nahi! Next.js timer laga kar nahi baithta. Agar 10 second guzar gaye hain, aur *kisi user ne page refresh kiya*, toh purana data dikhakar Next.js piche (background) naya data layega (ISR::HL]]).
 
 ## 🌍 11. Real-World Use Case (Production Application):
 **Swiggy / Zomato App:**
-* **Restaurant Name & Address:** Ise `force-cache` karte hain kyunki ye roz change nahi hote.
-* **Live Order Tracking:** Ise `no-store` karte hain kyunki driver ki location har second update hoti hai.
-* **Menu Prices:** Ise `next: { revalidate: 3600 }` (1 ghanta) karte hain kyunki din mein shayad ek do baar price change ho sakta hai.
+* [[HL::**Restaurant Name & Address:** Ise `force-cache` karte hain kyunki ye roz change nahi hote::HL]].
+* [[HL::**Live Order Tracking:** Ise `no-store` karte hain kyunki driver ki location har second update hoti hai.::HL]]
+* [[HL::**Menu Prices:** Ise `next: { revalidate: 3600 }` (1 ghanta) karte hain kyunki din mein shayad ek do baar price change ho sakta hai::HL]].
 
 ## 🎨 12. Visual Diagram (ASCII Art):
 ```text
@@ -3162,18 +3162,18 @@ export default async function DataPage() {
 ```
 
 ## 🛠️ 13. Best Practices (Pro Tips):
-* Hamesha default (`no-store` in Next 15) ke sath jao shuruwaat mein. Jab aapko lage ki page load slow ho raha hai aur data zyaada change nahi hota, tabhi `force-cache` lagao. Premature caching bugs ka sabse bada kaaran hai.
+* [[HL::Hamesha default (`no-store` in Next 15) ke sath jao shuruwaat mein. Jab aapko lage ki page load slow ho raha hai aur data zyaada change nahi hota, tabhi `force-cache` lagao. Premature caching bugs ka sabse bada kaaran hai::HL]].
 
 ## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
 Agar aapne e-commerce site par user ke 'Shopping Cart' API mein galti se `force-cache` laga diya, toh ek user ko dusre user ke cart ka saaman dikhne lagega! Ye ek bohot badi privacy disaster ban jayegi.
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **Q:** Next.js 14 aur 15 mein fetch caching ka kya bada difference hai?
-   **A:** Next 14 mein fetch by default `force-cache` tha. Next 15 mein ab fetch by default `no-store` ho gaya hai.
-2. **Q:** Kya main `axios` use kar sakta hu ye caching use karne ke liye?
-   **A:** Native fetch API Next.js dwara monkey-patched (extended) hai. Agar axios use karna hai, toh aapko `unstable_cache` function use karna padega. Fetch use karna best hai.
-3. **Q:** ISR ka full form kya hai?
-   **A:** Incremental Static Regeneration (Yehi `revalidate` wala feature hai).
+1. **Q:** [[HL::Next.js 14 aur 15 mein fetch caching ka kya bada difference hai?::HL]]
+   [[HL::**A:** Next 14 mein fetch by default `force-cache` tha. Next 15 mein ab fetch by default `no-store` ho gaya hai::HL]].
+2. [[HL::**Q:** Kya main `axios` use kar sakta hu ye caching use karne ke liye?::HL]]
+   [[HL::**A:** Native fetch API Next.js dwara monkey-patched (extended) hai. Agar axios use karna hai, toh aapko `unstable_cache` function use karna padega. Fetch use karna best hai::HL]].
+3. **Q:** [[HL::ISR ka full form kya hai?::HL]]
+   [[HL::**A:** Incremental Static Regeneration (Yehi `revalidate` wala feature hai::HL]]).
 4. **Q:** Agar mujhe poore route (page) ko cache/no-store karna ho toh kya karu?
    **A:** Aap page.tsx ke top par `export const dynamic = 'force-dynamic';` likh sakte ho.
 5. **Q:** Server Component ke andar `useEffect` use kar ke fetch karu toh?
@@ -3210,12 +3210,12 @@ Kya Mummy 4 baar chalkar router ke paas jayengi password dekhne? Nahi! Wo ek baa
 Next.js mein bhi yahi hota hai. Agar aapke page mein 4 alag-alag components ek hi API ko same time par call karte hain (jaise `fetch('/api/user')`), toh Next.js API par sirf **ek (1)** call bhejta hai aur baaki 3 ko wahi answer chipka deta hai. Ise **De-duping** (duplicate hatana) ya **Memoization** kehte hain.
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** Request Memoization is a React feature where `fetch` requests with the exact same URL and options are automatically deduplicated during a single server render pass. This allows developers to fetch data directly in the components that need it without worrying about redundant network calls.
-* **Hinglish Simplification:** Ek page ke load hone par, agar same API ko 10 baar bhi `fetch` kiya jaye, toh actual network call sirf 1 baar jayegi. Baki 9 baar React apni memory (cache) se answer de dega.
+* **Preci[[HL::se English:** Request Memoization is a React feature where `fetch` requests with the exact same URL and options are::HL]] [[HL::automatically deduplicated during a single server render pass. This allows developers to fetch data directly in the components that need it without worrying about redundant network calls.::HL]]
+* [[HL::**Hinglish Simplification:** Ek page ke load hone par, agar same API ko 10 baar bhi `fetch` kiya jaye, toh actual network call sirf 1 baar jayegi. Baki 9 baar React apni memory (cache) se answer de dega::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Pehle humein ek bada API call sabse upar (jaise `page.tsx` mein) karna padta tha, aur fir data ko props ke through neeche wale components (`Navbar`, `Sidebar`, `Profile`) ko bhejna padta tha. Ise **Prop Drilling** kehte hain, jo code ko bahut complex aur ganda bana deta hai.
-* **Solution:** Request Memoization ke aane ke baad, hum Prop Drilling band kar sakte hain. Jis component ko jo data chahiye, wo wahi seedha `fetch` likh de. Network over-fetch nahi hoga kyunki Next.js smartly unhe combine kar dega.
+* [[HL::**Problem:** Pehle humein ek bada API call sabse upar (jaise `page.tsx` mein) karna padta tha, aur fir data ko props ke through neeche wale components (`Navbar`, `Sidebar`, `Profile`) ko bhejna padta tha. Ise **Prop Drilling** kehte hain, jo code ko bahut complex aur ganda bana deta hai.::HL]]
+* [[HL::**Solution:** Request Memoization ke aane ke baad, hum Prop Drilling band kar sakte hain. Jis component ko jo data chahiye, wo wahi seedha `fetch` likh de. Network over-fetch nahi hoga kyunki Next.js smartly unhe combine kar dega::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 ```text
@@ -3225,26 +3225,26 @@ Next.js mein bhi yahi hota hai. Agar aapke page mein 4 alag-alag components ek h
 ```
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1. User website kholta hai, Server render start hota hai.
-2. `Navbar` render hota hai aur `fetch('/api/user')` call karta hai.
-3. React check karta hai: *"Kya is render mein maine ye API pehle call ki hai?"* Answer: No. Toh wo actual internet par request bhejta hai.
-4. Data aane par React usey ek temporary memory ("Render Cache") mein save kar leta hai.
-5. Thodi der baad `Profile` component render hota hai aur wo bhi `fetch('/api/user')` call karta hai.
-6. React fir check karta hai. Is baar answer milta hai: *"Haan, ye toh mere paas memory mein pada hai!"* Toh bina internet use kiye, data turant mil jata hai.
-7. Jaise hi page user ko dikh jata hai, ye temporary memory (Render Cache) automatically delete ho jati hai.
+1. [[HL::User website kholta hai, Server render start hota hai.::HL]]
+2. [[HL::`Navbar` render hota hai aur `fetch('/api/user')` call karta hai::HL]].
+3. [[HL::React check karta hai: *"Kya is render mein maine ye API pehle call ki hai?"* Answer: No. Toh wo actual internet par request bhejta hai.::HL]]
+4. [[HL::Data aane par React usey ek temporary memory ("Render Cache") mein save kar leta hai.::HL]]
+5. [[HL::Thodi der baad `Profile` component render hota hai aur wo bhi `fetch('/api/user')` call karta hai.::HL]]
+6. [[HL::React fir check karta hai. Is baar answer milta hai: *"Haan, ye toh mere paas memory mein pada hai!"* Toh bina internet use kiye, data turant mil jata hai.::HL]]
+7. [[HL::Jaise hi page user ko dikh jata hai, ye temporary memory (Render Cache) automatically delete ho jati hai::HL]].
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
-**File 1: `app/Navbar.tsx` (Client ya Server, kisi mein bhi chalega, par hum Server lenge)**
+[[HL::**File 1: `app/Navbar.tsx` (Client ya Server, kisi mein bhi chalega, par hum Server lenge)**::HL]]
 ```tsx
-export default async function Navbar() {
-  // Pehli baar fetch call ho raha hai
-  const res = await fetch('https://jsonplaceholder.typicode.com/users/1');
-  const user = await res.json();
+[[HL::export default async function Navbar() {::HL]]
+  [[HL::// Pehli baar fetch call ho raha hai::HL]]
+  [[HL::const res = await fetch('https://jsonplaceholder.typicode.com/users/1');::HL]]
+  [[HL::const user = await res.json();::HL]]
   
-  console.log("Navbar ne fetch kiya!"); 
+  [[HL::console.log("Navbar ne fetch kiya!");::HL]] 
 
-  return <nav>Welcome, {user.name} 👋</nav>;
+  [[HL::return <nav>Welcome, {user.name} 👋</nav::HL]]>;
 }
 ```
 
@@ -3252,53 +3252,53 @@ export default async function Navbar() {
 ```tsx
 import Navbar from './Navbar';
 
-export default async function HomePage() {
-  // SAME EXACT FETCH CALL! 
-  // Dusri baar likha hai, par network pe 1 hi baar jayega.
-  const res = await fetch('https://jsonplaceholder.typicode.com/users/1');
-  const user = await res.json();
+expo[[HL::rt default async function HomePage() {::HL]]
+  [[HL::// SAME EXACT FETCH CALL!::HL]] 
+  [[HL::// Dusri baar likha hai, par network pe 1 hi baar jayega.::HL]]
+  [[HL::const res = await fetch('https://jsonplaceholder.typicode.com/users/1');::HL]]
+  [[HL::const user = await res.json();::HL]]
 
-  console.log("HomePage ne fetch kiya!");
+  [[HL::console.log("HomePage ne fetch kiya!");::HL]]
 
-  return (
-    <div>
-      <Navbar />
-      <h1>User Profile</h1>
-      <p>Email: {user.email}</p>
-    </div>
-  );
-}
+  [[HL::return (::HL]]
+    [[HL::<div>::HL]]
+      [[HL::<Navbar />::HL]]
+      [[HL::<h1>User Profile</h1>::HL]]
+      [[HL::<p>Email: {user.email}</p>::HL]]
+    [[HL::</div>::HL]]
+  [[HL::);::HL]]
+[[HL::}::HL]]
 ```
 
 ```text
-# 📤 Expected Output (VS Code Terminal):
-Navbar ne fetch kiya!
-HomePage ne fetch kiya!
-(Note: Terminal mein dono console dikhenge, par Next.js ke network tab mein sirf 1 HTTP request jayegi external API tak!)
+[[HL::# 📤 Expected Output (VS Code Terminal):::HL]]
+[[HL::Navbar ne fetch kiya!::HL]]
+[[HL::HomePage ne fetch kiya!::HL]]
+[[HL::(Note: Terminal mein dono console dikhenge, par Next.js ke network tab mein sirf 1 HTTP request jayegi external API tak!)::HL]]
 
-# 📤 Expected Output (Browser Screen):
-Welcome, Leanne Graham 👋
-User Profile
-Email: Sincere@april.biz
+[[HL::# 📤 Expected Output (Browser Screen):::HL]]
+[[HL::Welcome, Leanne Graham 👋::HL]]
+[[HL::User Profile::HL]]
+[[HL::Email: Sincere@april.biz::HL]]
 ```
 
-## ⚖️ 8. Comparison (Ye vs Woh):
+## ⚖️ 8. [[HL::Comparison (Ye vs Woh):::HL]]
 
-| Feature | 🧠 Request Memoization | 💽 Data Cache (`force-cache`) |
+| [[HL::Feature::HL]] | [[HL::🧠 Request Memoization::HL]] | [[HL::💽 Data Cache (`force-cache`)::HL]] |
 | :--- | :--- | :--- |
-| **Kab tak memory mein rehta hai?** | Sirf ek page load hone tak (Single Render). | Hamesha ke liye (jab tak manually delete na karo). |
-| **Kiske liye hai?** | Ek hi user ke ek hi page load ko fast karne ke liye. | Sabhi users ke liye API calls bachane ke liye. |
-| **Agar main page refresh karu toh?** | Nayi API call jayegi (memory clear ho chuki hoti hai). | Nayi API call **NAHI** jayegi (data disk se aayega). |
+| [[HL::**Kab tak memory mein rehta hai?**::HL]] | [[HL::Sirf ek page load hone tak (Single Render).::HL]] | [[HL::Hamesha ke liye (jab tak manually delete na karo).::HL]] |
+| [[HL::**Kiske liye hai?**::HL]] | [[HL::Ek hi user ke ek hi page load ko fast karne ke liye.::HL]] | [[HL::Sabhi users ke liye API calls bachane ke liye::HL]]. |
+| [[HL::**Agar main page refresh karu toh?**::HL]] | [[HL::Nayi API call jayegi (memory clear ho chuki hoti hai).::HL]] | [[HL::Nayi API call **NAHI** jayegi (data disk se aayega::HL]]). |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-* **Mistake:** `axios` package use karna data fetch ke liye. `axios` by default memoize nahi hota, toh usme 4 baar duplicate API call chali jayegi.
-* **Fix:** Server Components mein hamesha native `fetch` use karo kyunki Next.js ne usme ye super-power add ki hai. Agar custom DB (jaise Prisma) use kar rahe ho, toh React ke `cache` function ka use karna padta hai.
+* [[HL::**Mistake:** `axios` package use karna data fetch ke liye. `axios` by default memoize nahi hota, toh usme 4 baar duplicate API call chali jayegi.::HL]]
+* [[HL::**Fix:** Server Components mein hamesha native `fetch` use karo kyunki Next.js ne usme ye super-power add ki hai. Agar custom DB (jaise Prisma) use kar rahe ho, toh React ke `cache` function ka use karna padta hai::HL]].
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-* **Confusion 1:** *"Agar User 1 ne website kholi, aur fir 5 minute baad User 2 ne kholi, toh kya User 2 ko memoized data milega?"*
-  * **Answer:** NAHI! Request memoization sirf *ek user ke ek baar page kholne* tak hi zinda rehti hai. Iska kaam API ko cache karna nahi, iska kaam sirf *duplicate calls ko rokna* hai ek page load par.
-* **Confusion 2:** *"Agar fetch ka URL same hai par options alag hain (jaise ek mein POST aur ek mein GET), toh kya wo memoize hoga?"*
-  * **Answer:** Nahi. URL aur Options dono EXACTLY same hone chahiye memoization ke liye.
+* [[HL::**Confusion 1:** *"Agar User 1 ne website kholi, aur fir 5 minute baad User 2 ne kholi, toh kya User 2 ko memoized data milega?"*::HL]]
+  * [[HL::**Answer:** NAHI! Request memoization sirf *ek user ke ek baar page kholne* tak hi zinda rehti hai. Iska kaam API ko cache karna nahi, iska kaam sirf *duplicate calls ko rokna* hai ek page load par::HL]].
+* [[HL::**Confusion 2:** *"Agar fetch ka URL same hai par options alag hain (jaise ek mein POST aur ek mein GET), toh kya wo memoize hoga?"*::HL]]
+  * [[HL::**Answer:** Nahi. URL aur Options dono EXACTLY same hone chahiye memoization ke liye::HL]].
 
 ## 🌍 11. Real-World Use Case (Production Application):
 **E-commerce (Jaise Flipkart):**
@@ -3327,7 +3327,7 @@ fetch('/user')              fetch('/user')
 * **Fetch where you consume:** Data ko exactly wahi fetch karo jahan uski zaroorat hai. Top-level components ko faltu data se overload mat karo.
 
 ## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
-Agar aapne `fetch` ki jagah koi aur tool use kiya aur data ko bina soche har component mein call kiya, toh ek simple page load par 50 database queries fire ho sakti hain, jisse aapka backend server crash ho jayega (N+1 query problem).
+[[HL::Agar aapne `fetch` ki jagah koi aur tool use kiya aur data ko bina soche har component mein call kiya, toh ek simple page load par 50 database queries fire ho sakti hain, jisse aapka backend server crash ho jayega (N+1 query problem::HL]]).
 
 ## ❓ 15. FAQ (Interview Questions):
 1. **Q:** Kya main POST requests ko memoize kar sakta hu?
@@ -3336,8 +3336,8 @@ Agar aapne `fetch` ki jagah koi aur tool use kiya aur data ko bina soche har com
    **A:** Aap React ke import kiye gaye `cache` function se apne axios call ko wrap kar sakte ho: `const getUser = cache(async () => axios.get(...))`.
 3. **Q:** Kya ye client component (`"use client"`) mein kaam karta hai?
    **A:** Nahi, Request Memoization primarily Server Components aur server environment ke liye hai.
-4. **Q:** Prop drilling ka ultimate solution Next.js mein kya hai?
-   **A:** Request Memoization! Alag-alag jagah same fetch likho bina tension ke.
+4. [[HL::**Q:** Prop drilling ka ultimate solution Next.js mein kya hai?::HL]]
+   [[HL::**A:** Request Memoization! Alag-alag jagah same fetch likho bina tension ke::HL]].
 5. **Q:** Data Cache aur Memoization mein kya bada farak hai?
    **A:** Memoization sirf ek render pass (milliseconds) ke liye zinda rehti hai, jabki Data Cache persistent hota hai (hours/days).
 
@@ -3362,65 +3362,65 @@ PPR yahi karta hai: Website ka jo hissa static (fix) hai (Navbar, Footer, Layout
 * **Hinglish Simplification:** Ek hi page par fast static HTML (jaise SSG) aur fresh dynamic data (jaise SSR) ka mix. "Sookha dhancha" turant aata hai, aur "garam data" pipe ke through stream hota rehta hai.
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Pehle humein chunna padta tha ki page ko Static banaye (SEO aur speed ke liye badhiya, par data purana ho jayega) ya Dynamic banaye (Data hamesha fresh, par loading slow hogi).
-* **Solution:** PPR humein dono ki taqat deta hai. Humara SEO aur First Paint super fast hota hai (Static ki wajah se), aur data hamesha naya hota hai (Dynamic Streaming ki wajah se).
+* [[HL::**Problem:** Pehle humein chunna padta tha ki page ko Static banaye (SEO aur speed ke liye badhiya, par data purana::HL]] [[HL::ho jayega) ya Dynamic banaye (Data hamesha fresh, par loading slow hogi).::HL]]
+* [[HL::**Solution:** PPR humein dono ki taqat deta hai. Humara SEO aur First Paint super fast hota hai (Static ki wajah se), aur data hamesha naya hota hai (Dynamic Streaming ki wajah se::HL]]).
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
-Aap isko Next.js config mein on karte ho aur apne component mein React `<Suspense>` ka use karte ho.
+[[HL::Aap isko Next.js config mein on karte ho aur apne component mein React `<Suspense>` ka use karte ho.::HL]]
 ```text
-📂 app
- ┣ 📄 next.config.ts    (Yahan PPR ko enable karenge)
- ┗ 📄 page.tsx          (Yahan Suspense boundary lagayenge)
+[[HL::📂 app::HL]]
+ [[HL::┣ 📄 next.config.ts    (Yahan PPR ko enable karenge)::HL]]
+ [[HL::┗ 📄 page.tsx          (Yahan Suspense boundary lagayenge::HL]])
 ```
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1. **Build Time (Jab app deploy hoti hai):** Next.js aapka code padhta hai. Jahan usko `<Suspense>` dikhta hai, wo samajh jata hai "Ye hole (gaddha) hai". Baki saare page ka HTML banakar CDN (edge) par save kar deta hai (Static Shell).
-2. **User Request Time:** User jab link kholta hai, toh CDN se wo "Static Shell" (bina data ke, sirf layout aur loading states) user ko millisecond mein mil jata hai.
-3. Usi same connection mein, Server background mein us "Hole" ka data (garam dal) calculate karta hai aur usko bache hue HTML ke roop mein bhej kar browser mein fit kar deta hai (Streaming).
+1. [[HL::**Build Time (Jab app deploy hoti hai):** Next.js aapka code padhta hai. Jahan usko `<Suspense>` dikhta hai, wo samajh jata hai "Ye hole (gaddha) hai". Baki saare page ka HTML banakar CDN (edge) par save kar deta hai (Static Shell).::HL]]
+2. [[HL::**User Request Time:** User jab link kholta hai, toh CDN se wo "Static Shell" (bina data ke, sirf layout aur loading states) user ko millisecond mein mil jata hai.::HL]]
+3. [[HL::Usi same connection mein, Server background mein us "Hole" ka data (garam dal) calculate karta hai aur usko bache hue HTML ke roop mein bhej kar browser mein fit kar deta hai (Streaming).::HL]]
 
-## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
+[[HL::## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):::HL]]
 
-🚨 **Note:** Next.js 15 mein PPR abhi bhi ek option hai jisko enable karna padta hai.
+[[HL::🚨 **Note:** Next.js 15 mein PPR abhi bhi ek option hai jisko enable karna padta hai.::HL]]
 
-**Step 1: Enable PPR in `next.config.ts`**
+[[HL::**Step 1: Enable PPR in `next.config.ts`**::HL]]
 ```typescript
-import type { NextConfig } from 'next';
+[[HL::import type { NextConfig } from 'next';::HL]]
 
-const nextConfig: NextConfig = {
-  experimental: {
-    // Isko 'incremental' karne se PPR chalu ho jayega un pages pe jahan Suspense hai
-    ppr: 'incremental', 
-  },
-};
+[[HL::const nextConfig: NextConfig = {::HL]]
+  [[HL::experimental: {::HL]]
+    [[HL::// Isko 'incremental' karne se PPR chalu ho jayega un pages pe jahan Suspense hai::HL]]
+    [[HL::ppr: 'incremental',::HL]] 
+  [[HL::},::HL]]
+[[HL::};::HL]]
 
-export default nextConfig;
+[[HL::export default nextConfig::HL]];
 ```
 ```text
-# 📤 Expected Output (Terminal on Next Dev start):
-warn  - Using experimental feature "ppr".
-ready - started server on 0.0.0.0:3000
+# 📤 [[HL::Expected Output (Terminal on Next Dev start):::HL]]
+[[HL::warn  - Using experimental feature "ppr".::HL]]
+[[HL::ready - started server on 0.0.0.0:3000::HL]]
 ```
 
-**Step 2: File: `app/page.tsx`**
+[[HL::**Step 2: File: `app/page.tsx`**::HL]]
 ```tsx
-// React se Suspense import karna zaroori hai PPR ke liye
-import { Suspense } from 'react';
-// cookies() ek dynamic function hai. Ise use karte hi component dynamic ban jata hai.
-import { cookies } from 'next/headers'; 
+// [[HL::React se Suspense import karna zaroori hai PPR ke liye::HL]]
+[[HL::import { Suspense } from 'react';::HL]]
+[[HL::// cookies() ek dynamic function hai. Ise use karte hi component dynamic ban jata hai.::HL]]
+[[HL::import { cookies } from 'next/headers';::HL]] 
 
-// Ye humara Dynamic Component hai (Garam Dal)
-async function DynamicCart() {
-  const cookieStore = await cookies();
-  const cartId = cookieStore.get('cartId');
+[[HL::// Ye humara Dynamic Component hai (Garam Dal)::HL]]
+[[HL::async function DynamicCart() {::HL]]
+  [[HL::const cookieStore = await cookies();::HL]]
+  [[HL::const cartId = cookieStore.get('cartId::HL]]');
   
-  // Fake delay of 3 seconds to show streaming
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  // [[HL::Fake delay of 3 seconds to show streaming::HL]]
+  [[HL::await new Promise((resolve) => setTimeout(resolve, 3000));::HL]]
   
-  return <div style={{ background: 'lightpink', padding: '10px' }}>Cart Items: 5 (ID: {cartId?.value})</div>;
+  [[HL::return <div style={{ background: 'lightpink', padding: '10px' }}>Cart Items: 5 (ID: {cartId?.value})</div::HL]]>;
 }
 
-// Ye humara Main Page hai
-// Isme 'experimental_ppr' set karne se is route par PPR on ho jayega
+// [[HL::Ye humara Main Page hai::HL]]
+[[HL::// Isme 'experimental_ppr' set karne se is route par PPR on ho jayega::HL]]
 export const experimental_ppr = true;
 
 export default function StorePage() {
@@ -3450,42 +3450,42 @@ export default function StorePage() {
 ```
 
 ```text
-# 📤 Expected Output (Browser Screen - AT 0 SECONDS - INSTANT LOAD):
-[ Lightblue Navbar: SuperFast eCommerce ]
-Welcome to the Store
-This text is static and loads instantly!
-⏳ Loading Cart details (Please wait 3s)...
-© 2026 Store
+# 📤 [[HL::Expected Output (Browser Screen - AT 0 SECONDS - INSTANT LOAD):::HL]]
+[[HL::[ Lightblue Navbar: SuperFast eCommerce ]::HL]]
+[[HL::Welcome to the Store::HL]]
+[[HL::This text is static and loads instantly!::HL]]
+[[HL::⏳ Loading Cart details (Please wait 3s)...::HL]]
+[[HL::© 2026 Store::HL]]
 
-# 📤 Expected Output (Browser Screen - AT 3 SECONDS - STREAMED IN):
-[ Lightblue Navbar: SuperFast eCommerce ]
-Welcome to the Store
-This text is static and loads instantly!
-[ Lightpink box: Cart Items: 5 (ID: 1234) ]  <-- Fallback text replace ho gaya!
-© 2026 Store
+[[HL::# 📤 Expected Output (Browser Screen - AT 3 SECONDS - STREAMED IN):::HL]]
+[[HL::[ Lightblue Navbar: SuperFast eCommerce ]::HL]]
+[[HL::Welcome to the Store::HL]]
+[[HL::This text is static and loads instantly!::HL]]
+[[HL::[ Lightpink box: Cart Items: 5 (ID: 1234) ]  <-- Fallback text replace ho gaya!::HL]]
+[[HL::© 2026 Store::HL]]
 ```
 
 ## ⚖️ 8. Comparison (Ye vs Woh):
 
-| Rendering Type | Hota kya hai? | Speed vs Freshness |
+| [[HL::Rendering Type::HL]] | [[HL::Hota kya hai?::HL]] | [[HL::Speed vs Freshness::HL]] |
 | :--- | :--- | :--- |
-| **SSG (Static)** | Pura page build time pe banta hai. | 🚀 Speed Max, par data purana. |
-| **SSR (Dynamic)**| User ke click karne par server pura page banata hai. | 🐢 Speed Slow, par data 100% fresh. |
-| **PPR (Next 15)**| Static hissa turant aata hai, baki streaming se judta hai. | 🚀 Speed Max + Fresh Data! (Best of both worlds) |
+| [[HL::**SSG (Static)**::HL]] | [[HL::Pura page build time pe banta hai.::HL]] | [[HL::🚀 Speed Max, par data purana.::HL]] |
+| [[HL::**SSR (Dynamic)**::HL]]| [[HL::User ke click karne par server pura page banata hai.::HL]] | [[HL::🐢 Speed Slow, par data 100% fresh.::HL]] |
+| [[HL::**PPR (Next 15)**::HL]]| [[HL::Static hissa turant aata hai, baki streaming se judta hai.::HL]] | [[HL::🚀 Speed Max + Fresh Data! (Best of both worlds::HL]]) |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-* **Mistake:** Dynamic functions (jaise `cookies()`, `headers()`, ya `no-store` API calls) ko bina `<Suspense>` ke use kar lena.
-* **Fix:** Agar aapne `cookies()` ko directly `StorePage` (parent) mein likh diya bina Suspense ke, toh Next.js poore ke poore page ko Slow SSR (Dynamic) bana dega. PPR tabhi kaam karta hai jab dynamic chizein Suspense ki katori ke andar band hon!
+* [[HL::**Mistake:** Dynamic functions (jaise `cookies()`, `headers()`, ya `no-store` API calls) ko bina `<Suspense>` ke use kar lena.::HL]]
+* [[HL::**Fix:** Agar aapne `cookies()` ko directly `StorePage` (parent) mein likh diya bina Suspense ke, toh Next.js poore ke poore page ko Slow SSR (Dynamic) bana dega. PPR tabhi kaam karta hai jab dynamic chizein Suspense ki katori ke andar band hon::HL]]!
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-* **Confusion 1:** *"Toh kya PPR aur Client-Side Rendering (jaise React me useEffect se data lana) same hai?"*
-  * **Answer:** BADA DIFFERENCE HAI! Client side rendering mein browser pehle khali page laata hai, *fir browser ek naya internet API call marta hai*. PPR mein koi dusri API call nahi hoti. Server pehla HTML bhejta hai, aur **usi same internet connection ke pipe** se bacha hua HTML (data) piche se bhejta rehta hai. Ye bahut fast aur secure hai.
-* **Confusion 2:** *"Kya PPR use karne ke liye mujhe naye functions seekhne padenge?"*
-  * **Answer:** Nahi. Aapko sirf React ka normal `<Suspense>` use karna aana chahiye. Baki sab Next.js khud under-the-hood manage karta hai.
+* [[HL::**Confusion 1:** *"Toh kya PPR aur Client-Side Rendering (jaise React me useEffect se data lana) same hai::HL]]?"*
+  * [[HL::**Answer:** BADA DIFFERENCE HAI! Client side rendering mein browser pehle khali page laata hai, *fir browser ek naya internet API call marta hai*. PPR mein koi dusri API call nahi hoti. Server pehla HTML bhejta hai, aur **usi same internet connection ke pipe** se bacha hua HTML (data) piche se bhejta rehta hai. Ye bahut fast aur secure hai::HL]].
+* [[HL::**Confusion 2:** *"Kya PPR use karne ke liye mujhe naye functions seekhne padenge?"*::HL]]
+  * [[HL::**Answer:** Nahi. Aapko sirf React ka normal `<Suspense>` use karna aana chahiye. Baki sab Next.js khud under-the-hood manage karta hai::HL]].
 
 ## 🌍 11. Real-World Use Case (Production Application):
-**YouTube Web:**
-Jab aap koi video kholte ho, toh Navbar, Side Menu, aur Video Player ka layout (Static Shell) millisecond mein aa jata hai taaki aapko lage "video khul raha hai". Uske 1-2 second baad neeche ke Comments aur "Up Next" recommendations (Dynamic Holes) load hote hain. Yahi exact pattern PPR native tarike se Next.js mein karta hai.
+[[HL::**YouTube Web:**::HL]]
+[[HL::Jab aap koi video kholte ho, toh Navbar, Side Menu, aur Video Player ka layout (Static Shell) millisecond mein aa jata hai taaki aapko lage "video khul raha hai". Uske 1-2 second baad neeche ke Comments aur "Up Next" recommendations (Dynamic Holes) load hote hain. Yahi exact pattern PPR native tarike se Next.js mein karta hai::HL]].
 
 ## 🎨 12. Visual Diagram (ASCII Art):
 ```text
@@ -3502,10 +3502,10 @@ Jab aap koi video kholte ho, toh Navbar, Side Menu, aur Video Player ka layout (
 ```
 
 ## 🛠️ 13. Best Practices (Pro Tips):
-* Apne `<Suspense>` boundaries ko bahut chhota (granular) rakho. Poore `<main>` content ko ek suspense mein daalne ki jagah, sirf `<Cart>` aur `<Reviews>` ko alag-alag Suspense mein daalo, taaki jo pehle load ho jaye wo user ko dikhne lage.
+* [[HL::Apne `<Suspense>` boundaries ko bahut chhota (granular) rakho. Poore `<main>` content ko ek suspense mein daalne ki jagah, sirf `<Cart>` aur `<Reviews>` ko alag-alag Suspense mein daalo, taaki jo pehle load ho jaye wo user ko dikhne lage::HL]].
 
 ## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
-Agar aap `<Suspense>` ka `fallback` prop dena bhool gaye (`<Suspense fallback={<p>Loading</p>}>`), toh React ko pata hi nahi chalega ki loading ke time kya dikhana hai, aur PPR theek se kaam nahi karega ya ajeeb UI glitches aayenge.
+[[HL::Agar aap `<Suspense>` ka `fallback` prop dena bhool gaye (`<Suspense fallback={<p>Loading</p>}>`), toh React ko pata hi nahi chalega ki loading ke time kya dikhana hai, aur PPR theek se kaam nahi karega ya ajeeb UI glitches aayenge::HL]].
 
 ## ❓ 15. FAQ (Interview Questions):
 1. **Q:** PPR Next.js mein kaunse version mein introduce hua?
@@ -3514,8 +3514,8 @@ Agar aap `<Suspense>` ka `fallback` prop dena bhool gaye (`<Suspense fallback={<
    **A:** Normal static pages ki tarah ye CDN (Edge network) par global level par host hota hai, isiliye itna fast hai.
 3. **Q:** PPR aur traditional Suspense streaming mein kya farak hai?
    **A:** Traditional streaming Server se shuru hoti hai. PPR ka pehla chunk (shell) Edge/CDN se aata hai, jo ki origin server se bhi zyada fast hai.
-4. **Q:** Kya main PPR ko poore app ke liye ek sath on kar sakta hu?
-   **A:** Haan, `next.config.ts` mein, par safety ke liye `ppr: 'incremental'` recommend kiya jata hai taaki aap file-by-file opt-in kar sako.
+4. **Q:** [[HL::Kya main PPR ko poore app ke liye ek sath on kar sakta hu?::HL]]
+   [[HL::**A:** Haan, `next.config.ts` mein, par safety ke liye `ppr: 'incremental'` recommend kiya jata hai taaki aap file-by-file opt-in kar sako::HL]].
 5. **Q:** Agar user ka internet aadhe mein toot jaye toh?
    **A:** Unhe Static shell dikh jayega, par loading state kabhi complete nahi hogi.
 
@@ -3547,106 +3547,106 @@ Chaliye apne 16-point structure ke saath isko todte hain! 💻
 Maan lo aapko har roz ghar mein sabke liye **Gajar ka Halwa (Heavy Calculation / DB Query)** banana padta hai. Isme 2 ghante lagte hain. 
 Aapne socha, "Roz itna time kyun barbad karu?" Toh aapne ek din 5 kilo halwa banaya aur usko **Deep Freezer (Cache)** mein rakh diya. Ab jab bhi koi halwa mangta hai, aap seedha freezer se nikal kar 2 second mein de dete ho.
 
-Next.js 15 mein **`use cache`** wahi "Deep Freezer" hai. Ye kisi bhi function (jaise database se data nikalne wala function) ke upar likh do, toh Next.js us function ka answer save kar lega aur agli baar bina function run kiye purana answer turant de dega.
+[[HL::Next.js 15 mein **`use cache`** wahi "Deep Freezer" hai. Ye kisi bhi function (jaise database se data nikalne wala function) ke upar likh do, toh Next.js us function ka answer save kar lega aur agli baar bina function run kiye purana answer turant de dega::HL]].
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** The `'use cache'` directive is a new React/Next.js feature (introduced in Next 15) that allows developers to cache the return value of any asynchronous function, component, or file. It replaces the older, more complex `unstable_cache` API, making it trivial to cache direct database queries or heavy computations.
-* **Hinglish Simplification:** `'use cache'` ek simple tag hai jisko kisi bhi function ya file ke top par likhne se, us function ka output server ki memory (cache) mein lambe samay ke liye save ho jata hai.
+* [[HL::**Precise English:** The `'use cache'` directive is a new React/Next.js feature (introduced in Next 15) that allows developers to cache the return value of any asynchronous function, component, or file. It replaces the older, more complex `unstable_cache` API, making it trivial to cache direct database queries or heavy computations.::HL]]
+* [[HL::**Hinglish Simplification:** `'use cache'` ek simple tag hai jisko kisi bhi function ya file ke top par likhne se, us function ka output server ki memory (cache) mein lambe samay ke liye save ho jata hai::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Agar hum `fetch` ka use karte hain, toh Next.js usey easily cache kar leta hai (humne picchle topic mein dekha). Par aajkal hum ORMs (jaise Prisma ya Drizzle) ka use karke *direct database* se baat karte hain bina kisi `fetch` ke. Database call ko cache karna pehle bahut mushkil aur ajeeb tha.
-* **Solution:** Ab bas apne database function ke andar sabse upar `'use cache';` likh do. Next.js khud us function ka output disk par save kar lega. Super easy!
+* [[HL::**Problem:** Agar hum `fetch` ka use karte hain, toh Next.js usey easily cache kar leta hai (humne picchle topic mein dekha). Par aajkal hum ORMs (jaise Prisma ya Drizzle) ka use karke *direct database* se baat karte hain bina kisi `fetch` ke. Database call ko cache karna pehle bahut mushkil aur ajeeb tha.::HL]]
+* [[HL::**Solution:** Ab bas apne database function ke andar sabse upar `'use cache';` likh do. Next.js khud us function ka output disk par save kar lega. Super easy::HL]]!
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 ```text
-📂 app
- ┣ 📂 lib
- ┃ ┗ 📄 db-queries.ts   (Yahan hum apne DB functions likhenge aur 'use cache' lagayenge)
- ┗ 📄 page.tsx          (Yahan hum us function ko bulayenge)
+📂 [[HL::app::HL]]
+ [[HL::┣ 📂 lib::HL]]
+ [[HL::┃ ┗ 📄 db-queries.ts   (Yahan hum apne DB functions likhenge aur 'use cache' lagayenge)::HL]]
+ [[HL::┗ 📄 page.tsx          (Yahan hum us function ko bulayenge::HL]])
 ```
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1. User website load karta hai.
-2. Component ek function ko bulata hai: `getProducts()`.
-3. Next.js dekhta hai is function mein `'use cache'` laga hai. Wo apne "Data Cache" (Freezer) mein check karta hai.
-4. **Pehli Baar (Cache Miss):** Data nahi milta. Function actual mein run hota hai, Database se data nikalta hai. Next.js us data ko Cache mein save karta hai aur user ko dikhata hai.
-5. **Dusri Baar (Cache Hit):** Dusra user aata hai. Next.js Database ke paas nahi jata. Wo direct Cache (Freezer) se data uthakar millisecond mein bhej deta hai.
+1. [[HL::User website load karta hai.::HL]]
+2. [[HL::Component ek function ko bulata hai: `getProducts()`.::HL]]
+3. [[HL::Next.js dekhta hai is function mein `'use cache'` laga hai. Wo apne "Data Cache" (Freezer) mein check karta hai.::HL]]
+4. [[HL::**Pehli Baar (Cache Miss):** Data nahi milta. Function actual mein run hota hai, Database se data nikalta hai. Next.js us data ko Cache mein save karta hai aur user ko dikhata hai::HL]].
+5. [[HL::**Dusri Baar (Cache Hit):** Dusra user aata hai. Next.js Database ke paas nahi jata. Wo direct Cache (Freezer) se data uthakar millisecond mein bhej deta hai::HL]].
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
-**File 1: `app/lib/db-queries.ts` (Database Query File)**
+[[HL::**File 1: `app/lib/db-queries.ts` (Database Query File)**::HL]]
 ```typescript
-// Ek fake database function
-export async function getTotalSales() {
-  // Ye line function ko cache karne ka jaadu hai!
-  'use cache'; 
+[[HL::// Ek fake database function::HL]]
+[[HL::export async function getTotalSales() {::HL]]
+  [[HL::// Ye line function ko cache karne ka jaadu hai!::HL]]
+  [[HL::'use cache';::HL]] 
   
-  console.log("⏳ Database Query chal rahi hai... (Ye sirf pehli baar dikhega!)");
+  [[HL::console.log("⏳ Database Query chal rahi hai... (Ye sirf pehli baar dikhega!)");::HL]]
   
-  // Fake delay of 2 seconds to simulate heavy database calculation
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+  [[HL::// Fake delay of 2 seconds to simulate heavy database calculation::HL]]
+  [[HL::await new Promise((resolve) => setTimeout(resolve, 2000));::HL]]
   
-  // Return some heavy aggregated data
-  return { total: 500000, currency: "INR", date: new Date().toISOString() };
+  [[HL::// Return some heavy aggregated data::HL]]
+  [[HL::return { total: 500000, currency: "INR", date: new Date().toISOString::HL]]() };
 }
 ```
 
-**File 2: `app/page.tsx` (Main Page)**
+[[HL::**File 2: `app/page.tsx` (Main Page)**::HL]]
 ```tsx
-import { getTotalSales } from './lib/db-queries';
+[[HL::import { getTotalSales } from './lib/db-queries';::HL]]
 
-export default async function Dashboard() {
-  // Hum cached function ko call kar रहे hain
-  const salesData = await getTotalSales();
+[[HL::export default async function Dashboard() {::HL]]
+  [[HL::// Hum cached function ko call kar रहे hain::HL]]
+  [[HL::const salesData = await getTotalSales();::HL]]
 
-  return (
-    <div>
-      <h1>Admin Dashboard</h1>
-      <p>Total Sales: {salesData.currency} {salesData.total}</p>
-      <p>Data Timestamp: {salesData.date}</p>
-    </div>
+  [[HL::return (::HL]]
+    [[HL::<div>::HL]]
+      [[HL::<h1>Admin Dashboard</h1>::HL]]
+      [[HL::<p>Total Sales: {salesData.currency} {salesData.total}</p>::HL]]
+      [[HL::<p>Data Timestamp: {salesData.date}</p>::HL]]
+    [[HL::</div::HL]]>
   );
 }
 ```
 
 ```text
-# 📤 Expected Output (VS Code Terminal - FIRST LOAD):
-⏳ Database Query chal rahi hai... (Ye sirf pehli baar dikhega!)
+# 📤 [[HL::Expected Output (VS Code Terminal - FIRST LOAD):::HL]]
+[[HL::⏳ Database Query chal rahi hai... (Ye sirf pehli baar dikhega!)::HL]]
 
-# 📤 Expected Output (Browser Screen - FIRST LOAD - Takes 2 seconds):
-Admin Dashboard
-Total Sales: INR 500000
-Data Timestamp: 2026-03-23T15:00:00.000Z
+[[HL::# 📤 Expected Output (Browser Screen - FIRST LOAD - Takes 2 seconds):::HL]]
+[[HL::Admin Dashboard::HL]]
+[[HL::Total Sales: INR 500000::HL]]
+[[HL::Data Timestamp: 2026-03-23T15:00:00.000Z::HL]]
 
-# 📤 Expected Output (VS Code Terminal - SECOND LOAD / REFRESH):
-(Koi output nahi aayega! Kyunki function skip ho gaya aur data cache se aaya)
+[[HL::# 📤 Expected Output (VS Code Terminal - SECOND LOAD / REFRESH):::HL]]
+[[HL::(Koi output nahi aayega! Kyunki function skip ho gaya aur data cache se aaya)::HL]]
 
-# 📤 Expected Output (Browser Screen - SECOND LOAD - Instant 0 seconds):
-Admin Dashboard
-Total Sales: INR 500000
-Data Timestamp: 2026-03-23T15:00:00.000Z <-- (Dekho time wahi purana hai, matlab cache use hua!)
+[[HL::# 📤 Expected Output (Browser Screen - SECOND LOAD - Instant 0 seconds):::HL]]
+[[HL::Admin Dashboard::HL]]
+[[HL::Total Sales: INR 500000::HL]]
+[[HL::Data Timestamp: 2026-03-23T15:00:00.000Z <-- (Dekho time wahi purana hai, matlab cache use hua::HL]]!)
 ```
 
-## ⚖️ 8. Comparison (Ye vs Woh):
+## ⚖️ 8. [[HL::Comparison (Ye vs Woh):::HL]]
 
-| Feature | `fetch('/api', { cache: 'force-cache' })` | `'use cache'` Directive |
+| [[HL::Feature::HL]] | [[HL::`fetch('/api', { cache: 'force-cache' })`::HL]] | [[HL::`'use cache'` Directive::HL]] |
 | :--- | :--- | :--- |
-| **Kahan use hota hai?** | Sirf HTTP (Internet/Network) calls ke liye. | Kisi bhi asynchronous code (DB, Math, File read) ke liye. |
-| **Kaise lagate hain?** | Options object ke andar. | Function/File ki pehli line mein (string literal). |
-| **Kya cache karta hai?** | JSON response. | Function ka return value. |
+| [[HL::**Kahan use hota hai?**::HL]] | [[HL::Sirf HTTP (Internet/Network) calls ke liye.::HL]] | [[HL::Kisi bhi asynchronous code (DB, Math, File read) ke liye.::HL]] |
+| [[HL::**Kaise lagate hain?**::HL]] | [[HL::Options object ke andar.::HL]] | [[HL::Function/File ki pehli line mein (string literal).::HL]] |
+| [[HL::**Kya cache karta hai?**::HL]] | [[HL::JSON response.::HL]] | [[HL::Function ka return value::HL]]. |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-* **Mistake:** `'use cache'` ko Client Component (`"use client"`) mein use karne ki koshish karna.
-* **Fix:** Ye ek Server feature hai. Ise sirf Server Components ya Server Actions/Functions mein use karein.
+* [[HL::**Mistake:** `'use cache'` ko Client Component (`"use client"`) mein use karne ki koshish karna.::HL]]
+* [[HL::**Fix:** Ye ek Server feature hai. Ise sirf Server Components ya Server Actions/Functions mein use karein::HL]].
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-* **Confusion 1:** *"Kya main ise React ke `useMemo` ki tarah use karu?"*
-  * **Answer:** Nahi! `useMemo` browser (client) ki memory mein data save karta hai (jaise tab band kiya, data gayab). `'use cache'` server ke hard disk par data save karta hai, jo har user ke liye same rehta hai aur dino/mahino tak zinda reh sakta hai.
-* **Confusion 2:** *"Agar maine 'use cache' lagaya, toh data naya kaise hoga?"*
-  * **Answer:** Bahut accha sawaal! By default ye hamesha cached rahega. Naya data laane ke liye humein isko "Tag" dena padta hai aur us tag ko expire karna padta hai (Jo humara agla subtopic hai!).
+* [[HL::**Confusion 1:** *"Kya main ise React ke `useMemo` ki tarah use karu::HL]]?"*
+  * [[HL::**Answer:** Nahi! `useMemo` browser (client) ki memory mein data save karta hai (jaise tab band kiya, data gayab). `'use cache'` server ke hard disk par data save karta hai, jo har user ke liye same rehta hai aur dino/mahino tak zinda reh sakta hai::HL]].
+* [[HL::**Confusion 2:** *"Agar maine 'use cache' lagaya, toh data naya kaise hoga?"*::HL]]
+  * [[HL::**Answer:** Bahut accha sawaal! By default ye hamesha cached rahega. Naya data laane ke liye humein isko "Tag" dena padta hai aur us tag ko expire karna padta hai (Jo humara agla subtopic hai::HL]]!).
 
 ## 🌍 11. Real-World Use Case (Production Application):
-**Analytics Dashboard (e.g., Google Analytics):** Agar 10,000 users ek sath apka dashboard kholenge, aur dashboard direct database se "Last 30 days total clicks" calculate karega, toh server crash ho jayega. Hum calculation function mein `'use cache'` laga dete hain. Ab bhale hi 1 lakh log page kholen, database query sirf 1 baar hogi aur baaki sabko "Freezer" se answer mil jayega.
+[[HL::**Analytics Dashboard (e.g., Google Analytics):** Agar 10,000 users ek sath apka dashboard kholenge, aur dashboard direct database se "Last 30 days total clicks" calculate karega, toh server crash ho jayega. Hum calculation function mein `'use cache'` laga dete hain. Ab bhale hi 1 lakh log page kholen, database query sirf 1 baar hogi aur baaki sabko "Freezer" se answer mil jayega::HL]].
 
 ## 🎨 12. Visual Diagram (ASCII Art):
 ```text
@@ -3663,20 +3663,20 @@ Data Timestamp: 2026-03-23T15:00:00.000Z <-- (Dekho time wahi purana hai, matlab
 ```
 
 ## 🛠️ 13. Best Practices (Pro Tips):
-* Sirf slow ya expensive queries ko cache karo. Agar koi query millisecond mein waise hi chal jati hai, toh usko cache karne mein cache system khud zyaada time le lega.
+* [[HL::Sirf slow ya expensive queries ko cache karo. Agar koi query millisecond mein waise hi chal jati hai, toh usko cache karne mein cache system khud zyaada time le lega::HL]].
 
 ## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
-Agar aapne kisi aisi function mein `'use cache'` laga diya jo har user ke liye alag honi chahiye (jaise `getUserBankAccountDetails()`), toh Ram ka bank balance Shyam ko dikhne lagega kyunki data server level par cache ho gaya hai! Isliye user-specific data par kabhi global cache mat lagao.
+[[HL::Agar aapne kisi aisi function mein `'use cache'` laga diya jo har user ke liye alag honi chahiye (jaise `getUserBankAccountDetails()`), toh Ram ka bank balance Shyam ko dikhne lagega kyunki data server level par cache ho gaya hai! Isliye user-specific data par kabhi global cache mat lagao::HL]].
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **Q:** Next 15 mein database query cache karne ka sabse naya tarika kya hai?
-   **A:** `'use cache'` directive ka use karna.
-2. **Q:** Kya `'use cache'` stable hai ya experimental?
-   **A:** Next 15.0 mein ye experimental `dynamicIO` flag ke sath introduce kiya gaya hai.
-3. **Q:** Kya main isey component file ke top pe likh sakta hu?
-   **A:** Haan, agar aap ek poore Server Component file ke top par `'use cache'` likhoge, toh pura ka pura component layout cache ho jayega.
-4. **Q:** Kya ye memory (RAM) use karta hai ya Disk?
-   **A:** Ye Next.js ke Data Cache system ka use karta hai, jo file system (Disk) par store hota hai aur deployments ke beech bhi tik sakta hai.
+1. [[HL::**Q:** Next 15 mein database query cache karne ka sabse naya tarika kya hai?::HL]]
+   [[HL::**A:** `'use cache'` directive ka use karna.::HL]]
+2. [[HL::**Q:** Kya `'use cache'` stable hai ya experimental?::HL]]
+   [[HL::**A:** Next 15.0 mein ye experimental `dynamicIO` flag ke sath introduce kiya gaya hai::HL]].
+3. [[HL::**Q:** Kya main isey component file ke top pe likh sakta hu?::HL]]
+   [[HL::**A:** Haan, agar aap ek poore Server Component file ke top par `'use cache'` likhoge, toh pura ka pura component layout cache ho jayega::HL]].
+4. [[HL::**Q:** Kya ye memory (RAM) use karta hai ya Disk?::HL]]
+   [[HL::**A:** Ye Next.js ke Data Cache system ka use karta hai, jo file system (Disk) par store hota hai aur deployments ke beech bhi tik sakta hai::HL]].
 5. **Q:** Isme aur `unstable_cache` mein kya farak hai?
    **A:** Ye naya aur padhne mein asaan hai. Pehle function ko ek wrapper mein daalna padta tha, ab bas top par ek string likhni padti hai.
 
@@ -3699,134 +3699,134 @@ Agar dukan mein nayi T-Shirts aati hain, toh kya aap dukan ki saari cheezein nik
 Next.js mein **`revalidateTag()`** yahi karta hai. Hum apne cached data ko Tags (jaise `'products'`, `'cart'`) dete hain. Phir jab humein lagta hai data purana ho gaya, hum us specific Tag ko aawaz lagate hain aur Next.js sirf us hisse ka cache delete karta hai, puri website ka nahi.
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** `revalidateTag` is a Next.js API that allows you to purge cached data on-demand for specific cache tags. In Next 15, caching profiles via `cacheLife` (like 'short', 'long', 'days') are introduced to easily configure expiration times (TTL) and stale-while-revalidate (SWR) behaviors alongside these tags.
-* **Hinglish Simplification:** Apne saved data ko ek naam (Tag) de do. Jab database mein naya data aayega, toh code mein `revalidateTag('woh-naam')` likh do. Next.js purana data delete kar dega aur agli baar nayi API call karega.
+* [[HL::**Precise English:** `revalidateTag` is a Next.js API that allows you to purge cached data on-demand for specific cache tags. In Next 15, caching profiles via `cacheLife` (like 'short', 'long', 'days') are introduced to easily configure expiration times (TTL) and stale-while-revalidate (SWR) behaviors alongside these tags.::HL]]
+* [[HL::**Hinglish Simplification:** Apne saved data ko ek naam (Tag) de do. Jab database mein naya data aayega, toh code mein `revalidateTag('woh-naam')` likh do. Next.js purana data delete kar dega aur agli baar nayi API call karega::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Agar humne E-commerce site par products ko cache kar liya (`force-cache`), toh wo bohot fast load honge. Par jab admin naya product add karega, toh website par purana hi cache dikhta rahega. Agar hum time-based (`revalidate: 3600`) lagate hain, toh admin ko website par change dekhne ke liye 1 ghanta wait karna padega.
-* **Solution:** On-demand (Zaroorat padne par) invalidation. Jab bhi naya product add ho (jaise kisi Server Action mein), wahi par `revalidateTag('products')` call kar do. Cache turant refresh!
+* [[HL::**Problem:** Agar humne E-commerce site par products ko cache kar liya (`force-cache`), toh wo bohot fast load honge. Par jab admin naya product add karega, toh website par purana hi cache dikhta rahega. Agar hum time-based (`revalidate: 3600`) lagate hain, toh admin ko website par change dekhne ke liye 1 ghanta wait karna padega.::HL]]
+* [[HL::**Solution:** On-demand (Zaroorat padne par) invalidation. Jab bhi naya product add ho (jaise kisi Server Action mein), wahi par `revalidateTag('products')` call kar do. Cache turant refresh::HL]]!
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 ```text
-📂 app
- ┣ 📄 page.tsx          (Yahan hum fetch karenge aur Tag lagayenge)
- ┗ 📄 actions.ts        (Yahan naya data add karke revalidateTag karenge)
+📂 [[HL::app::HL]]
+ [[HL::┣ 📄 page.tsx          (Yahan hum fetch karenge aur Tag lagayenge)::HL]]
+ [[HL::┗ 📄 actions.ts        (Yahan naya data add karke revalidateTag karenge)::HL]]
 ```
 
-## ⚙️ 6. Under the Hood (Technical Working):
-1. **Fetch & Tag:** Component data fetch karta hai aur us cache ko ek tag (`tags: ['blog-posts']`) deta hai. Next.js ise hard-disk mein save kar leta hai with the tag.
-2. **User Action:** User "Add New Post" form submit karta hai (Server Action).
-3. **Database Update:** Naya post database mein save ho jata hai.
-4. **Purge Cache:** Action ke andar `revalidateTag('blog-posts')` call hota hai. Next.js hard-disk mein us tag wale saare cache ko dhoondhta hai aur delete (purge) kar deta hai.
-5. **Next Request:** Jab user page refresh karta hai, cache khali milta hai, isliye Next.js nayi API call karta hai aur naya post dikh jata hai.
+[[HL::## ⚙️ 6. Under the Hood (Technical Working):::HL]]
+1. [[HL::**Fetch & Tag:** Component data fetch karta hai aur us cache ko ek tag (`tags: ['blog-posts']`) deta hai. Next.js ise hard-disk mein save kar leta hai with the tag.::HL]]
+2. [[HL::**User Action:** User "Add New Post" form submit karta hai (Server Action).::HL]]
+3. [[HL::**Database Update:** Naya post database mein save ho jata hai.::HL]]
+4. [[HL::**Purge Cache:** Action ke andar `revalidateTag('blog-posts')` call hota hai. Next.js hard-disk mein us tag wale saare cache ko dhoondhta hai aur delete (purge) kar deta hai.::HL]]
+5. [[HL::**Next Request:** Jab user page refresh karta hai, cache khali milta hai, isliye Next.js nayi API call karta hai aur naya post dikh jata hai::HL]].
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
-**File 1: `app/page.tsx` (Displaying Data with a Tag)**
+[[HL::**File 1: `app/page.tsx` (Displaying Data with a Tag::HL]])**
 ```tsx
-import { addProduct } from './actions';
+[[HL::import { addProduct } from './actions';::HL]]
 
-export default async function Store() {
-  // Hum fetch kar rahe hain aur isko 'products' naam ka TAG de rahe hain
-  const res = await fetch('https://api.example.com/products', {
-    next: { tags: ['products'] } 
-  });
-  const products = await res.json();
+[[HL::export default async function Store() {::HL]]
+  [[HL::// Hum fetch kar rahe hain aur isko 'products' naam ka TAG de rahe hain::HL]]
+  [[HL::const res = await fetch('https://api.example.com/products', {::HL]]
+    [[HL::next: { tags: ['products'] }::HL]] 
+  [[HL::});::HL]]
+  [[HL::const products = await res.json();::HL]]
 
-  return (
-    <div>
-      <h1>My Store</h1>
-      <ul>
-        {products.map((p: any) => <li key={p.id}>{p.name}</li>)}
-      </ul>
+  [[HL::return (::HL]]
+    [[HL::<div>::HL]]
+      [[HL::<h1>My Store</h1>::HL]]
+      [[HL::<ul>::HL]]
+        [[HL::{products.map((p: any) => <li key={p.id}>{p.name}</li>)}::HL]]
+      [[HL::</ul>::HL]]
       
-      {/* Ek form jo Action call karega */}
-      <form action={addProduct}>
-        <button type="submit">Add New Product</button>
-      </form>
-    </div>
-  );
-}
+      [[HL::{/* Ek form jo Action call karega */}::HL]]
+      [[HL::<form action={addProduct}>::HL]]
+        [[HL::<button type="submit">Add New Product</button>::HL]]
+      [[HL::</form>::HL]]
+    [[HL::</div>::HL]]
+  [[HL::);::HL]]
+[[HL::}::HL]]
 ```
 
-**File 2: `app/actions.ts` (Server Action to Update DB and Clear Cache)**
+[[HL::**File 2: `app/actions.ts` (Server Action to Update DB and Clear Cache)**::HL]]
 ```typescript
-'use server';
+[[HL::'use server';::HL]]
 
-// Ye function cache delete karne ke kaam aata hai
-import { revalidateTag } from 'next/cache';
+[[HL::// Ye function cache delete karne ke kaam aata hai::HL]]
+[[HL::import { revalidateTag } from 'next/cache';::HL]]
 
-export async function addProduct() {
-  // 1. Naya product Database (API) mein save karo
-  await fetch('https://api.example.com/products', { method: 'POST' });
+[[HL::export async function addProduct() {::HL]]
+  [[HL::// 1. Naya product Database (API) mein save karo::HL]]
+  [[HL::await fetch('https://api.example.com/products', { method: 'POST' });::HL]]
   
-  console.log("Database mein naya product chala gaya!");
+  [[HL::console.log("Database mein naya product chala gaya!");::HL]]
 
-  // 2. MAGICAL STEP: 'products' tag wale saare cache ko delete kar do!
-  revalidateTag('products');
+  [[HL::// 2. MAGICAL STEP: 'products' tag wale saare cache ko delete kar do!::HL]]
+  [[HL::revalidateTag('products');::HL]]
   
-  console.log("Cache clear ho gaya!");
+  [[HL::console.log("Cache clear ho gaya::HL]]!");
 }
 ```
 
 ```text
-# 📤 Expected Output (Terminal - When User clicks "Add New Product"):
-Database mein naya product chala gaya!
-Cache clear ho gaya!
+# 📤 [[HL::Expected Output (Terminal - When User clicks "Add New Product"):::HL]]
+[[HL::Database mein naya product chala gaya!::HL]]
+[[HL::Cache clear ho gaya!::HL]]
 
-# 📤 Expected Output (Browser Screen):
-(Page automatically refresh hoga aur naya product list mein turant dikhne lagega bina 1 ghanta wait kiye)
+[[HL::# 📤 Expected Output (Browser Screen):::HL]]
+[[HL::(Page automatically refresh hoga aur naya product list mein turant dikhne lagega bina 1 ghanta wait kiye::HL]])
 ```
 
-**💡 Bonus: Next 15 `cacheLife` (Experimental):**
-Next 15 mein hum `'use cache'` ke sath profiles de sakte hain:
+**💡 [[HL::Bonus: Next 15 `cacheLife` (Experimental):**::HL]]
+[[HL::Next 15 mein hum `'use cache'` ke sath profiles de sakte hain:::HL]]
 ```typescript
-import { unstable_cacheLife as cacheLife } from 'next/cache';
+[[HL::import { unstable_cacheLife as cacheLife } from 'next/cache';::HL]]
 
-export async function getPrices() {
-  'use cache';
-  // Ye batata hai ki price dynamic hai, jaldi purana (stale) hota hai
-  cacheLife('short'); 
-  return db.getLivePrices();
+[[HL::export async function getPrices() {::HL]]
+  [[HL::'use cache';::HL]]
+  [[HL::// Ye batata hai ki price dynamic hai, jaldi purana (stale) hota hai::HL]]
+  [[HL::cacheLife('short');::HL]] 
+  [[HL::return db.getLivePrices::HL]]();
 }
 ```
 
 ## ⚖️ 8. Comparison (Ye vs Woh):
 
-| Feature | `revalidatePath('/store')` | `revalidateTag('products')` |
+| [[HL::Feature::HL]] | [[HL::`revalidatePath('/store')`::HL]] | [[HL::`revalidateTag('products')`::HL]] |
 | :--- | :--- | :--- |
-| **Kya delete karta hai?** | Ek specific URL (page) ka pura cache. | Us tag se jude saare fetch calls ka cache, chahe wo kisi bhi page par ho. |
-| **Precision** | Bada (Poora page refresh hota hai). | Ekdum Sharp (Sirf wahi API call refresh hoti hai). |
-| **Kab use karein?** | Jab poora page naya chahiye ho. | Jab Navbar, Sidebar aur Page sab mein API call ho aur sabko ek sath refresh karna ho. |
+| [[HL::**Kya delete karta hai?**::HL]] | [[HL::Ek specific URL (page) ka pura cache.::HL]] | [[HL::Us tag se jude saare fetch calls ka cache, chahe wo kisi bhi page par ho.::HL]] |
+| [[HL::**Precision**::HL]] | [[HL::Bada (Poora page refresh hota hai).::HL]] | [[HL::Ekdum Sharp (Sirf wahi API call refresh hoti hai).::HL]] |
+| [[HL::**Kab use karein?**::HL]] | [[HL::Jab poora page naya chahiye ho.::HL]] | [[HL::Jab Navbar, Sidebar aur Page sab mein API call ho aur sabko ek sath refresh karna ho::HL]]. |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-* **Mistake:** Tag ka naam string banana bhool jana, ya spelling mistake karna (e.g., fetch mein `['product']` aur revalidate mein `'products'`).
+* [[HL::**Mistake:** Tag ka naam string banana bhool jana, ya spelling mistake karna (e.g., fetch mein `['product']` aur revalidate mein `'products::HL]]'`).
 * **Fix:** Ek file banao `tags.ts` aur wahan variables bana kar rakh lo (`export const PRODUCT_TAG = 'products'`), taaki typo (spelling mistake) ka bug na aaye.
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-* **Confusion 1:** *"Maine revalidateTag call kiya par website update nahi hui!"*
-  * **Answer:** Yaad rakho, `revalidateTag` sirf *cache ko delete* karta hai. Wo user ki current screen ko refresh nahi karta. Agar form server action se juda hai, toh Next.js aapse aap page refresh kar dega. Agar client (`onClick`) se kar rahe ho, toh naya data dekhne ke liye URL change ya router.refresh() karna padega.
-* **Confusion 2:** *"updateTag() kya hai?"*
-  * **Answer:** Next 15 ecosystem (aur React 19) mein Optimistic UI ke liye hum data ko pehle hi client par update dikha dete hain (jaise like button click karte hi red ho jana), aur background mein `revalidateTag` call hota hai ("read-your-writes" concept).
+* [[HL::**Confusion 1:** *"Maine revalidateTag call kiya par website update nahi hui!"*::HL]]
+  * [[HL::**Answer:** Yaad rakho, `revalidateTag` sirf *cache ko delete* karta hai. Wo user ki current screen ko refresh nahi karta. Agar form server action se juda hai, toh Next.js aapse aap page refresh kar dega. Agar client (`onClick`) se kar rahe ho, toh naya data dekhne ke liye URL change ya router.refresh() karna padega.::HL]]
+* [[HL::**Confusion 2:** *"updateTag() kya hai?"*::HL]]
+  * [[HL::**Answer:** Next 15 ecosystem (aur React 19) mein Optimistic UI ke liye hum data ko pehle hi client par update dikha dete hain (jaise like button click karte hi red ho jana), aur background mein `revalidateTag` call hota hai ("read-your-writes" concept).::HL]]
 
-## 🌍 11. Real-World Use Case (Production Application):
-**Notion / Google Docs:**
-Jab aap document ka naam badalte ho, toh backend mein naam change ho jata hai. Par website ke Sidebar mein (jahan saare docs ki list hai) wahi naam cache rehta hai. Backend update hone ke baad `revalidateTag('doc-list')` call kiya jata hai, taaki Sidebar ka cache refresh ho jaye aur naya naam dikhe.
+[[HL::## 🌍 11. Real-World Use Case (Production Application):::HL]]
+[[HL::**Notion / Google Docs:**::HL]]
+[[HL::Jab aap document ka naam badalte ho, toh backend mein naam change ho jata hai. Par website ke Sidebar mein (jahan saare docs ki list hai) wahi naam cache rehta hai. Backend update hone ke baad `revalidateTag('doc-list')` call kiya jata hai, taaki Sidebar ka cache refresh ho jaye aur naya naam dikhe.::HL]]
 
-## 🎨 12. Visual Diagram (ASCII Art):
+[[HL::## 🎨 12. Visual Diagram (ASCII Art):::HL]]
 ```text
-[ Data Fetched ] ──(Tagged as 'products')──> [ 💽 Data Cache ]
-                                                  │
-                                                  │
-[ User clicks "Buy" ] ──(DB Updates)──> [ revalidateTag('products') ]
-                                                  │
-                                          (Cache goes BOOM 💥)
-                                                  │
-[ Next user loads page ] ──(Cache Empty)──> [ 🌐 Fresh API Call ]
+[[HL::[ Data Fetched ] ──(Tagged as 'products')──> [ 💽 Data Cache ]::HL]]
+                                                  [[HL::│::HL]]
+                                                  [[HL::│::HL]]
+[[HL::[ User clicks "Buy" ] ──(DB Updates)──> [ revalidateTag('products') ]::HL]]
+                                                  [[HL::│::HL]]
+                                          [[HL::(Cache goes BOOM 💥)::HL]]
+                                                  [[HL::│::HL]]
+[[HL::[ Next user loads page ] ──(Cache Empty)──> [ 🌐 Fresh API Call::HL]] ]
 ```
 
 ## 🛠️ 13. Best Practices (Pro Tips):
-* **Dynamic Tags:** Hamesha generic tags mat do. Agar ek product ka page hai, toh tag do `['product', 'product-123']`. Taaki jab product 123 update ho, toh `revalidateTag('product-123')` call karke sirf usi product ka cache udao, sabka nahi!
+* [[HL::**Dynamic Tags:** Hamesha generic tags mat do. Agar ek product ka page hai, toh tag do `['product', 'product-123']`. Taaki jab product 123 update ho, toh `revalidateTag('product-123')` call karke sirf usi product ka cache udao, sabka nahi::HL]]!
 
 ## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
 Agar aapne tag lagaya par action mein `revalidateTag` call karna bhool gaye, toh admin changes karta rahega par frontend par users ko hamesha purana data dikhega. Customers complain karenge ki unhone cart mein item daala par wo gayab ho gaya!
@@ -3834,8 +3834,8 @@ Agar aapne tag lagaya par action mein `revalidateTag` call karna bhool gaye, toh
 ## ❓ 15. FAQ (Interview Questions):
 1. **Q:** Kya main ek fetch request ko multiple tags de sakta hu?
    **A:** Haan! `{ next: { tags: ['user', 'admin', 'profile'] } }`. Kisi ek tag ko bhi revalidate kiya toh ye fetch ud jayega.
-2. **Q:** `cacheLife` kya hai Next 15 mein?
-   **A:** Ye semantic profiles hain (jaise 'seconds', 'minutes', 'days') jo standardize karte hain ki cache kitni der tak fresh rahega.
+2. [[HL::**Q:** `cacheLife` kya hai Next 15 mein?::HL]]
+   [[HL::**A:** Ye semantic profiles hain (jaise 'seconds', 'minutes', 'days') jo standardize karte hain ki cache kitni der tak fresh rahega::HL]].
 3. **Q:** `revalidateTag` ko kahan se call kar sakte hain?
    **A:** Route Handlers (`app/api/...`), Server Actions, ya Next.js middleware se. Ise Server Components ke direct render mein call nahi kar sakte.
 4. **Q:** Agar main aisi tag ko revalidate karu jo exist nahi karti toh kya error aayega?
@@ -3875,10 +3875,10 @@ Maan lo aapko raat ko 12 baje bhookh lagi aur ek packet Maggi chahiye.
 Next.js mein, aapka code kahan chalega, ye aap choose kar sakte ho. **Node** bada aur door ka server hai, jabki **Edge** user ke shehar ke paas wala chota aur fast server hai.
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** The Node runtime is a full Node.js environment with access to all native APIs (like `fs`, `crypto`). The Edge runtime is a stripped-down, lightweight V8 engine environment designed to run globally on CDNs (Content Delivery Networks) close to the user, providing near-zero cold starts and ultra-low latency, but with limited API access.
-* **Hinglish Simplification:** Node runtime ek pura power-packed computer hai jisme sab kuch chalta hai. Edge runtime usi computer ka ek bohot chota hissa hai jo duniya bhar mein bikhra hua hai taaki user ko data turant (fast) mil sake, par isme purane Node.js ke bhari features kaam nahi karte.
+* [[HL::**Precise English:** The Node runtime is a full Node.js environment with access to all native APIs (like `fs`, `crypto`). The Edge runtime is a stripped-down, lightweight V8 engine environment designed to run globally on CDNs (Content Delivery Networks) close to the user, providing near-zero cold starts and ultra-low latency, but with limited API access.::HL]]
+* [[HL::**Hinglish Simplification:** Node runtime ek pura power-packed computer hai jisme sab kuch chalta hai. Edge runtime usi computer ka ek bohot chota hissa hai jo duniya bhar mein bikhra hua hai taaki user ko data turant (fast) mil sake, par isme purane Node.js ke bhari features kaam nahi karte.::HL]]
 
-## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+[[HL::## 🧠 4. Zaroorat Kyun Hai? (Why use it::HL]]?):
 * **Problem:** Agar aapka main server America (US) mein hai, aur user India se website kholta hai, toh request ko US jaane aur wapas aane mein 300-500 milliseconds (aadha second) lag jata hai. Ise **Latency** kehte hain. Agar user ko sirf login check karna hai, toh itni door request bhejna bevkufi hai.
 * **Solution:** Vercel (Next.js banane wali company) ne duniya bhar mein chote-chote "Edge Servers" laga diye hain (jaise Mumbai, Delhi mein). Jab Indian user website kholta hai, toh Mumbai wala Edge server turant usko reply de deta hai bina US gaye. Ye blazingly fast hota hai!
 
@@ -4020,8 +4020,8 @@ Aap Next.js mein **Middleware (Edge)** use karenge user ki API Key ko validate k
 Agar aapne Node.js wale code (`node-fetch` ya `child_process`) ko Middleware mein import kar liya, toh build fail ho jayegi. Deployment ruk jayegi aur error aayega: `Dynamic Code Evaluation is not allowed in Edge Runtime`.
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **Q:** Next.js mein API routes ka default runtime kya hota hai?
-   **A:** Default runtime hamesha `nodejs` hota hai. Ise specifically `edge` karna padta hai.
+1. **Q:** [[HL::Next.js mein API routes ka default runtime kya hota hai?::HL]]
+   [[HL::**A:** Default runtime hamesha `nodejs` hota hai. Ise specifically `edge` karna padta hai::HL]].
 2. **Q:** `req.geo` kya hai aur kaha chalta hai?
    **A:** Ye Next.js Middleware (Edge) ka ek feature hai jo request ka IP address padh kar automatically country aur city ki details de deta hai.
 3. **Q:** V8 Isolate kya hota hai?
@@ -4065,12 +4065,12 @@ Neeche 'YouTube Recommendations' aane mein 2 second lagte hain, toh wahan ek gol
 Bajaye iske ki TV 5 second tak poora black screen dikhaye, wo **jo hissa ready hai wo dikha deta hai**, aur baaki hisson par "dhakkan" (Suspense) laga deta hai. Ise hi **Streaming aur Suspense** kehte hain.
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** React Suspense is a concurrent rendering feature that lets you specify a fallback UI (like a skeleton or spinner) for a component tree that is not yet ready to render (usually waiting for async data). In Next.js, this is paired with Server Streaming to send the HTML of the fallback instantly, and then "stream" the actual data chunk over the same HTTP connection once resolved.
-* **Hinglish Simplification:** `<Suspense>` ek React component hai jo aapke slow components ko lapet leta hai. Jab tak andar ka data nahi aata, ye user ko ek "Loading..." message dikhata hai, aur data aate hi usko actual component se replace kar deta hai.
+* [[HL::**Precise English:** React Suspense is a concurrent rendering feature that lets you specify a fallback UI (like a skeleton or spinner) for a component tree that is not yet ready to render (usually waiting for async data). In Next.js, this is paired with Server Streaming to send the HTML of the fallback instantly, and then "stream" the actual data chunk over the same HTTP connection once resolved.::HL]]
+* [[HL::**Hinglish Simplification:** `<Suspense>` ek React component hai jo aapke slow components ko lapet leta hai. Jab tak andar ka data nahi aata, ye user ko ek "Loading..." message dikhata hai, aur data aate hi usko actual component se replace kar deta hai::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Agar aapke ek hi page par 3 APIs call ho rahi hain. Ek 1 second leti hai, dusri 2 second, aur teesri 5 second. Purane Server Side Rendering (SSR) mein, server 5 second tak wait karega aur user ko kuch nahi dikhega (White screen of death). User sochega website hang ho gayi.
-* **Solution:** Suspense ki madad se, server pehle second mein hi page bhej dega. Jo API slow hai, unki jagah loading spinner bhej dega. Data aane par spinner gayab, aur data haazir!
+* [[HL::**Problem:** Agar aapke ek hi page par 3 APIs call ho rahi hain. Ek 1 second leti hai, dusri 2 second, aur teesri 5 second. Purane Server Side Rendering (SSR) mein, server 5 second tak wait karega aur user ko kuch nahi dikhega (White screen of death). User sochega website hang ho gayi.::HL]]
+* [[HL::**Solution:** Suspense ki madad se, server pehle second mein hi page bhej dega. Jo API slow hai, unki jagah loading spinner bhej dega. Data aane par spinner gayab, aur data haazir::HL]]!
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 ```text
@@ -4100,45 +4100,45 @@ export default async function Reviews() {
 }
 ```
 
-**File 2: `app/ProductList.tsx` (Thoda slow component, iske andar bhi Suspense hai - NESTED SUSPENSE)**
+[[HL::**File 2: `app/ProductList.tsx` (Thoda slow component, iske andar bhi Suspense hai - NESTED SUSPENSE)**::HL]]
 ```tsx
-import { Suspense } from 'react';
-import Reviews from './Reviews';
+[[HL::import { Suspense } from 'react';::HL]]
+[[HL::import Reviews from './Reviews';::HL]]
 
-export default async function ProductList() {
-  // Fake 2 second delay
-  await new Promise(res => setTimeout(res, 2000));
+[[HL::export default async function ProductList() {::HL]]
+  [[HL::// Fake 2 second delay::HL]]
+  [[HL::await new Promise(res => setTimeout(res, 2000));::HL]]
   
-  return (
-    <div style={{ border: '2px solid blue', padding: '10px' }}>
-      <h2>📱 iPhone 16 Pro</h2>
-      <p>Price: ₹1,20,000</p>
+  [[HL::return (::HL]]
+    [[HL::<div style={{ border: '2px solid blue', padding: '10px' }}>::HL]]
+      [[HL::<h2>📱 iPhone 16 Pro</h2>::HL]]
+      [[HL::<p>Price: ₹1,20,000</p>::HL]]
       
-      {/* ⚠️ NESTED SUSPENSE: Product jaldi aayega, par Reviews aur time lenge */}
-      <Suspense fallback={<p style={{ color: 'gray' }}>⏳ Loading reviews...</p>}>
-        <Reviews />
-      </Suspense>
-    </div>
+      [[HL::{/* ⚠️ NESTED SUSPENSE: Product jaldi aayega, par Reviews aur time lenge */}::HL]]
+      [[HL::<Suspense fallback={<p style={{ color: 'gray' }}>⏳ Loading reviews...</p>}>::HL]]
+        [[HL::<Reviews />::HL]]
+      [[HL::</Suspense>::HL]]
+    [[HL::</div::HL]]>
   );
 }
 ```
 
-**File 3: `app/page.tsx` (Main Page - Fast)**
+[[HL::**File 3: `app/page.tsx` (Main Page - Fast)**::HL]]
 ```tsx
-import { Suspense } from 'react';
-import ProductList from './ProductList';
+[[HL::import { Suspense } from 'react';::HL]]
+[[HL::import ProductList from './ProductList';::HL]]
 
-export default function StorePage() {
-  return (
-    <main style={{ padding: '20px' }}>
-      <h1>Welcome to the Tech Store!</h1>
-      <p>Ye text instantly load hoga bina ruke.</p>
+[[HL::export default function StorePage() {::HL]]
+  [[HL::return (::HL]]
+    [[HL::<main style={{ padding: '20px' }}>::HL]]
+      [[HL::<h1>Welcome to the Tech Store!</h1>::HL]]
+      [[HL::<p>Ye text instantly load hoga bina ruke.</p>::HL]]
       
-      {/* Ye bahar wala Suspense hai */}
-      <Suspense fallback={<div style={{ height: '200px', background: '#ddd' }}>⏳ Loading Products...</div>}>
-        <ProductList />
-      </Suspense>
-    </main>
+      [[HL::{/* Ye bahar wala Suspense hai */}::HL]]
+      [[HL::<Suspense fallback={<div style={{ height: '200px', background: '#ddd' }}>⏳ Loading Products...</div>}>::HL]]
+        [[HL::<ProductList />::HL]]
+      [[HL::</Suspense>::HL]]
+    [[HL::</main::HL]]>
   );
 }
 ```
@@ -4166,27 +4166,27 @@ Ye text instantly load hoga bina ruke.
 
 ## ⚖️ 8. Comparison (Ye vs Woh):
 
-| Feature | `loading.tsx` file | `<Suspense>` boundary |
+| [[HL::Feature::HL]] | [[HL::`loading.tsx` file::HL]] | [[HL::`<Suspense>` boundary::HL]] |
 | :--- | :--- | :--- |
-| **Kya karta hai?** | Poore Route (Page) ke liye loading UI set karta hai. | Specific component ke liye granular loading set karta hai. |
-| **Control** | Bada (Bahar ka dabba). | Chota aur sharp (Andar ki katoriyan). |
-| **Nested loading?** | Nahi, ek page ka ek hi `loading.tsx` hota hai. | Haan, ek page mein 10 alag-alag Suspense ho sakte hain. |
+| [[HL::**Kya karta hai?**::HL]] | [[HL::Poore Route (Page) ke liye loading UI set karta hai.::HL]] | [[HL::Specific component ke liye granular loading set karta hai.::HL]] |
+| [[HL::**Control**::HL]] | [[HL::Bada (Bahar ka dabba).::HL]] | [[HL::Chota aur sharp (Andar ki katoriyan).::HL]] |
+| [[HL::**Nested loading?**::HL]] | [[HL::Nahi, ek page ka ek hi `loading.tsx` hota hai.::HL]] | [[HL::Haan, ek page mein 10 alag-alag Suspense ho sakte hain::HL]]. |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-* **Mistake:** `<Suspense>` ko us component ke *andar* likhna jisme API call ho rahi hai.
-  *(e.g., `ProductList` ke return ke andar hi usko wrap kar dena).*
-* **Fix:** Suspense hamesha parent mein lagta hai! Slow component ko bahar se wrap kiya jata hai. Agar aapne andar lagaya, toh component pehle wait karega, fir render hoga, toh Suspense ka koi fayda hi nahi hua!
+* [[HL::**Mistake:** `<Suspense>` ko us component ke *andar* likhna jisme API call ho rahi hai.::HL]]
+  [[HL::*(e.g., `ProductList` ke return ke andar hi usko wrap kar dena).*::HL]]
+* [[HL::**Fix:** Suspense hamesha parent mein lagta hai! Slow component ko bahar se wrap kiya jata hai. Agar aapne andar lagaya, toh component pehle wait karega, fir render hoga, toh Suspense ka koi fayda hi nahi hua!::HL]]
 
-## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-* **Confusion 1:** *"Toh PPR (Partial Pre-Rendering) aur isme kya farak tha?"*
-  * **Answer:** PPR isi Streaming ka advanced (Next 15) version hai. Normal streaming mein fast HTML (Welcome text) origin server (Node.js) se ban kar aata hai jisme thoda time (100ms) lagta hai. PPR mein wo fast HTML pehle se CDN (Edge) par saved (static) hota hai, toh 1ms mein aata hai. Dono ke piche ka React code `<Suspense>` hi hai!
-* **Confusion 2:** *"Agar SEO (Google bot) aayega toh usko kya spinner dikhega?"*
-  * **Answer:** Nahi! Next.js bahut smart hai. Jab bot (crawler) aata hai, toh server streaming disable kar deta hai aur poora page (bina spinner ke) ek sath build karke bhejta hai. SEO bilkul safe hai.
+[[HL::## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):::HL]]
+* [[HL::**Confusion 1:** *"Toh PPR (Partial Pre-Rendering) aur isme kya farak tha?"*::HL]]
+  * [[HL::**Answer:** PPR isi Streaming ka advanced (Next 15) version hai. Normal streaming mein fast HTML (Welcome text) origin server (Node.js) se ban kar aata hai jisme thoda time (100ms) lagta hai. PPR mein wo fast HTML pehle se CDN (Edge) par saved (static) hota hai, toh 1ms mein aata hai. Dono ke piche ka React code `<Suspense>` hi hai!::HL]]
+* [[HL::**Confusion 2:** *"Agar SEO (Google bot) aayega toh usko kya spinner dikhega?"*::HL]]
+  * [[HL::**Answer:** Nahi! Next.js bahut smart hai. Jab bot (crawler) aata hai, toh server streaming disable kar deta hai aur poora page (bina spinner ke) ek sath build karke bhejta hai. SEO bilkul safe hai.::HL]]
 
-## 🌍 11. Real-World Use Case (Production Application):
-**Amazon Product Page:**
-* Product ka naam aur Photo -> Instant Load (No Suspense).
-* "Frequently Bought Together" -> `<Suspense fallback={<Skeleton />}>` (Takes 2 secs).
+[[HL::## 🌍 11. Real-World Use Case (Production Application):::HL]]
+[[HL::**Amazon Product Page::HL]]:**
+* [[HL::Product ka naam aur Photo -> Instant Load (No Suspense).::HL]]
+* [[HL::"Frequently Bought Together" -> `<Suspense fallback={<Skeleton />}>` (Takes 2 secs::HL]]).
 * "Customer Reviews & Q&A" -> `<Suspense fallback={<Spinner />}>` (Takes 4 secs).
 Isse user instantly photo dekh kar padhna shuru kar deta hai, aur background mein page load hota rehta hai.
 
@@ -4207,13 +4207,13 @@ Isse user instantly photo dekh kar padhna shuru kar deta hai, aur background mei
 * **Skeleton UI:** `fallback={<p>Loading</p>}` ki jagah hamesha actual component jaisa dikhne wala ek grey skeleton banao. Isse "Layout Shift" (page ka achanak se hilna) nahi hota aur user experience premium lagta hai.
 
 ## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
-Agar aapne poore app ko ek hi bade `<Suspense>` mein lapet diya `layout.tsx` mein, toh ek single choti si slow API ki wajah se user ko poore 5 second tak kuch nahi dikhega sivaye ek bade spinner ke. Granularity (chhote hisse) is the key!
+[[HL::Agar aapne poore app ko ek hi bade `<Suspense>` mein lapet diya `layout.tsx` mein, toh ek single choti si slow API ki wajah se user ko poore 5 second tak kuch nahi dikhega sivaye ek bade spinner ke. Granularity (chhote hisse) is the key::HL]]!
 
 ## ❓ 15. FAQ (Interview Questions):
 1. **Q:** Kya Suspense Client Components mein kaam karta hai?
    **A:** Haan, agar Client component mein `use()` hook se promise resolve ho raha ho, ya `React.lazy()` use ho raha ho, tab bhi Suspense kaam karta hai.
-2. **Q:** Nested Suspense ka kya fayda hai?
-   **A:** Ye independent loading states banata hai. Agar parent jaldi load ho gaya par child late hai, toh parent dikh jayega aur child loading state mein rahega.
+2. [[HL::**Q:** Nested Suspense ka kya fayda hai?::HL]]
+   [[HL::**A:** Ye independent loading states banata hai. Agar parent jaldi load ho gaya par child late hai, toh parent dikh jayega aur child loading state mein rahega::HL]].
 3. **Q:** Kya hoga agar Suspense fallback miss kar dein?
    **A:** React error phenk dega: `Suspense needs a fallback`.
 4. **Q:** `loading.tsx` Next.js mein under-the-hood kaise kaam karta hai?
@@ -4238,12 +4238,12 @@ Aapko bazaar se 3 cheezein lani hain: Sabzi, Doodh, aur Dawai.
 Programming mein, jab requests ek ke baad ek wait karti hain bina wajah, usko **Network Waterfall** kehte hain. Isko theek karne ke liye hum Javascript ka super-weapon `Promise.all` use karte hain.
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** A network waterfall occurs in async/await logic when asynchronous operations are executed sequentially, causing unnecessary delays. If the requests do not depend on each other's responses, they should be executed concurrently using `Promise.all()` to minimize the total resolve time to the longest individual request.
-* **Hinglish Simplification:** Agar ek API doosri API par depend nahi karti, toh unko line (queue) mein mat lagao. Unko `Promise.all` mein dalo taaki wo sab ek saath (parallel) chal sakein aur page jaldi load ho.
+* [[HL::**Precise English:** A network waterfall occurs in async/await logic when asynchronous operations are executed sequentially, causing unnecessary delays. If the requests do not depend on each other's responses, they should be executed concurrently using `Promise.all()` to minimize the total resolve time to the longest individual request.::HL]]
+* [[HL::**Hinglish Simplification:** Agar ek API doosri API par depend nahi karti, toh unko line (queue) mein mat lagao. Unko `Promise.all` mein dalo taaki wo sab ek saath (parallel) chal sakein aur page jaldi load ho::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Hum Server Components mein easily `await fetch()` likh lete hain. Par agar humne 3 line mein 3 `await` likh diye, toh Javascript pehli line khatam hone ka wait karega, tab jaakar dusri start karega. Agar har API 2 second leti hai, toh total 6 second barbad honge.
-* **Solution:** Data jaldi lane ke liye humein un teeno fetch calls ko ek hi waqt par "fire" karna hoga.
+* [[HL::**Problem:** Hum Server Components mein easily `await fetch()` likh lete hain. Par agar humne 3 line mein 3 `await` likh diye, toh Javascript pehli line khatam hone ka wait karega, tab jaakar dusri start karega. Agar har API 2 second leti hai, toh total 6 second barbad honge.::HL]]
+* [[HL::**Solution:** Data jaldi lane ke liye humein un teeno fetch calls ko ek hi waqt par "fire" karna hoga::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 Hum ek hi Server Component ke andar dono approaches dekhenge.
@@ -4253,7 +4253,7 @@ Hum ek hi Server Component ke andar dono approaches dekhenge.
 ```
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1. **Sequential (`await A`, then `await B`):** Event loop pehle Promise A ko start karta hai aur so jata hai. A pura hota hai, tab B start hota hai. (Waterfall).
+1. [[HL::**Sequential (`await A`, then `await B`):** Event loop pehle Promise A ko start karta hai aur so jata hai. A pura hota hai, tab B start hota hai. (Waterfall::HL]]).
 2. **Concurrent (`Promise.all([A, B])`):** Event loop dono Promise A aur B ko ek millisecond ke andar start kar deta hai. Dono network par ek sath travel karte hain. Jab dono wapas aa jate hain, tabhi code aage badhta hai.
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
@@ -4261,44 +4261,44 @@ Hum ek hi Server Component ke andar dono approaches dekhenge.
 **File: `app/Dashboard.tsx`**
 
 ```tsx
-// ❌ THE BAD WAY (Waterfall)
-async function BadDashboard() {
-  const start = Date.now();
+// ❌ [[HL::THE BAD WAY (Waterfall)::HL]]
+[[HL::async function BadDashboard() {::HL]]
+  [[HL::const start = Date.now();::HL]]
   
-  // Ye 2 second lega
-  const userReq = await fetch('https://jsonplaceholder.typicode.com/users/1'); 
-  const user = await userReq.json();
+  [[HL::// Ye 2 second lega::HL]]
+  [[HL::const userReq = await fetch('https://jsonplaceholder.typicode.com/users/1');::HL]] 
+  [[HL::const user = await userReq.json();::HL]]
   
-  // Ye agle 2 second lega (total 4s ho gaye)
-  const postsReq = await fetch('https://jsonplaceholder.typicode.com/posts?userId=1'); 
-  const posts = await postsReq.json();
+  [[HL::// Ye agle 2 second lega (total 4s ho gaye)::HL]]
+  [[HL::const postsReq = await fetch('https://jsonplaceholder.typicode.com/posts?userId=1');::HL]] 
+  [[HL::const posts = await postsReq.json();::HL]]
 
-  console.log(`❌ Bad approach took: ${Date.now() - start}ms`);
-  return <div>{user.name} has {posts.length} posts.</div>;
-}
+  [[HL::console.log(`❌ Bad approach took: ${Date.now() - start}ms`);::HL]]
+  [[HL::return <div>{user.name} has {posts.length} posts.</div>;::HL]]
+[[HL::}::HL]]
 
-// ✅ THE GOOD WAY (Concurrent with Promise.all)
-export default async function GoodDashboard() {
-  const start = Date.now();
+[[HL::// ✅ THE GOOD WAY (Concurrent with Promise.all)::HL]]
+[[HL::export default async function GoodDashboard() {::HL]]
+  [[HL::const start = Date.now();::HL]]
 
-  // 1. Fetch requests ko INITIATE karo (par 'await' mat lagao yahan)
-  const userPromise = fetch('https://jsonplaceholder.typicode.com/users/1');
-  const postsPromise = fetch('https://jsonplaceholder.typicode.com/posts?userId=1');
+  [[HL::// 1. Fetch requests ko INITIATE karo (par 'await' mat lagao yahan)::HL]]
+  [[HL::const userPromise = fetch('https://jsonplaceholder.typicode.com/users/1');::HL]]
+  [[HL::const postsPromise = fetch('https://jsonplaceholder.typicode.com/posts?userId=1');::HL]]
 
-  // 2. Promise.all mein dono ko EK SATH daalo aur await karo
-  const [userReq, postsReq] = await Promise.all([userPromise, postsPromise]);
+  [[HL::// 2. Promise.all mein dono ko EK SATH daalo aur await karo::HL]]
+  [[HL::const [userReq, postsReq] = await Promise.all([userPromise, postsPromise]);::HL]]
 
-  // 3. JSON parse karne ko bhi parallel kar sakte ho
-  const [user, posts] = await Promise.all([userReq.json(), postsReq.json()]);
+  [[HL::// 3. JSON parse karne ko bhi parallel kar sakte ho::HL]]
+  [[HL::const [user, posts] = await Promise.all([userReq.json(), postsReq.json()]);::HL]]
 
-  console.log(`✅ Good approach took: ${Date.now() - start}ms`);
+  [[HL::console.log(`✅ Good approach took: ${Date.now() - start}ms`);::HL]]
 
-  return (
-    <div style={{ padding: '20px', border: '2px solid green' }}>
-      <h1>Dashboard</h1>
-      <p>Name: {user.name}</p>
-      <p>Total Posts: {posts.length}</p>
-    </div>
+  [[HL::return (::HL]]
+    [[HL::<div style={{ padding: '20px', border: '2px solid green' }}>::HL]]
+      [[HL::<h1>Dashboard</h1>::HL]]
+      [[HL::<p>Name: {user.name}</p>::HL]]
+      [[HL::<p>Total Posts: {posts.length}</p>::HL]]
+    [[HL::</div::HL]]>
   );
 }
 ```
@@ -4314,20 +4314,20 @@ export default async function GoodDashboard() {
 [ Total Posts: 10 ]
 ```
 
-## ⚖️ 8. Comparison (Ye vs Woh):
+## ⚖️ 8. [[HL::Comparison (Ye vs Woh):::HL]]
 
-| Execution Style | Syntax | Performance | Kab use karein? |
+| [[HL::Execution Style::HL]] | [[HL::Syntax::HL]] | [[HL::Performance::HL]] | [[HL::Kab use karein?::HL]] |
 | :--- | :--- | :--- | :--- |
-| **Sequential (Waterfall)** | `await A; await B;` | 🐢 Slow (Sum of all times). | Jab API 'B' ko API 'A' ke ID/Data ki zarurat ho. |
-| **Concurrent (Parallel)** | `await Promise.all([A,B])` | 🚀 Fast (Time of the slowest API). | Jab dono API independent ho (jaise Profile aur Weather). |
+| [[HL::**Sequential (Waterfall)**::HL]] | [[HL::`await A; await B;`::HL]] | [[HL::🐢 Slow (Sum of all times).::HL]] | [[HL::Jab API 'B' ko API 'A' ke ID/Data ki zarurat ho.::HL]] |
+| [[HL::**Concurrent (Parallel)**::HL]] | [[HL::`await Promise.all([A,B])`::HL]] | [[HL::🚀 Fast (Time of the slowest API).::HL]] | [[HL::Jab dono API independent ho (jaise Profile aur Weather::HL]]). |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
 * **Mistake:** `Promise.all` wahan laga dena jahan requests dependent hain.
 * **Fix:** Agar aapko User ka ID milega tabhi aap uske Orders fetch kar sakte ho, toh wahan Waterfall banana *majboori* hai. Wahan `Promise.all` fail ho jayega kyunki dusre fetch ko ID pehle se chahiye. Aise cases mein pehle User fetch karo, fir Orders fetch karo.
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-* **Confusion 1:** *"Agar Promise.all mein 3 API hain, aur 1 fail ho gayi (error aa gaya), toh kya baki 2 ka data milega?"*
-  * **Answer:** NAHI! `Promise.all` ka rule hai "Sab ya koi nahi" (All or Nothing). Agar 1 fail hui toh poora code crash hoga. Agar aap chahte ho ki jo pass hue hain unka data mil jaye, toh ES2020 ka naya feature **`Promise.allSettled()`** use karo.
+* [[HL::**Confusion 1:** *"Agar Promise.all mein 3 API hain, aur 1 fail ho gayi (error aa gaya), toh kya baki 2 ka data milega?"*::HL]]
+  * [[HL::**Answer:** NAHI! `Promise.all` ka rule hai "Sab ya koi nahi" (All or Nothing). Agar 1 fail hui toh poora code crash hoga. Agar aap chahte ho ki jo pass hue hain unka data mil jaye, toh ES2020 ka naya feature **`Promise.allSettled()`** use karo::HL]].
 * **Confusion 2:** *"Kya mujhe Next.js mein hamesha Promise.all lagana chahiye?"*
   * **Answer:** Jaha APIs ek dusre se link nahi hain (Independent queries), waha absolutely lagana chahiye. Ye performance optimize karne ka sabse asaan tarika hai.
 
@@ -4400,30 +4400,30 @@ Maan lo aap ek **Gadi (Car)** chala rahe ho.
 * **`not-found.tsx` (Wrong Address Board):** Agar aap galti se kisi aisi sadak par chale gaye jo hai hi nahi, toh wahan ek board laga hota hai: "Bhaiya, ye rasta aage band hai (404 Error)".
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** Next.js uses file-system based routing to implement React Error Boundaries. `error.tsx` catches runtime errors in nested segments, `global-error.tsx` catches errors in the root layout, and `not-found.tsx` renders a UI when a route doesn't exist or `notFound()` is explicitly invoked. The `reset()` function allows recovering from the error without a full page reload.
-* **Hinglish Simplification:** Ye Next.js ki special files hain jo crash hone par automatically chal jati hain. Inka kaam hai user ko gandi si laal error screen ("White Screen of Death") dikhane ki jagah ek sundar sa UI dikhana aur usko page refresh karne (recover) ka option dena.
+* [[HL::**Precise English:** Next.js uses file-system based routing to implement React Error Boundaries. `error.tsx` catches runtime errors in nested segments, `global-error.tsx` catches errors in the root layout, and `not-found.tsx` renders a UI when a route doesn't exist or `notFound()` is explicitly invoked. The `reset()` function allows recovering from the error without a full page reload.::HL]]
+* [[HL::**Hinglish Simplification:** Ye Next.js ki special files hain jo crash hone par automatically chal jati hain. Inka kaam hai user ko gandi si laal error screen ("White Screen of Death") dikhane ki jagah ek sundar sa UI dikhana aur usko page refresh karne (recover) ka option dena::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Agar ek e-commerce site par 'Reviews' section ka database slow hai aur fail ho jata hai, toh us ek choti si galti ki wajah se poora product page blank ho jayega. User product khareed hi nahi payega.
-* **Solution:** Agar hum 'Reviews' ke folder mein ek `error.tsx` bana dein, toh sirf Reviews wala dabba crash hoga. Wahan likha aayega "Reviews load nahi hue", par baaki ka poora page (Product Photo, Buy Button) perfectly chalta rahega!
+* [[HL::**Problem:** Agar ek e-commerce site par 'Reviews' section ka database slow hai aur fail ho jata hai, toh us ek choti si galti ki wajah se poora product page blank ho jayega. User product khareed hi nahi payega.::HL]]
+* [[HL::**Solution:** Agar hum 'Reviews' ke folder mein ek `error.tsx` bana dein, toh sirf Reviews wala dabba crash hoga. Wahan likha aayega "Reviews load nahi hue", par baaki ka poora page (Product Photo, Buy Button) perfectly chalta rahega::HL]]!
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 ```text
-📂 app
- ┣ 📄 global-error.tsx  (Root level pe hota hai, extreme crashes ke liye)
- ┣ 📄 not-found.tsx     (Jab URL match na ho)
- ┣ 📄 page.tsx          (Main page)
- ┗ 📂 dashboard
-    ┣ 📄 page.tsx       (Dashboard ka page, agar ye crash hua toh...)
-    ┗ 📄 error.tsx      (...toh ye file chalegi aur user ko bacha legi!)
+📂 [[HL::app::HL]]
+ [[HL::┣ 📄 global-error.tsx  (Root level pe hota hai, extreme crashes ke liye)::HL]]
+ [[HL::┣ 📄 not-found.tsx     (Jab URL match na ho)::HL]]
+ [[HL::┣ 📄 page.tsx          (Main page)::HL]]
+ [[HL::┗ 📂 dashboard::HL]]
+    [[HL::┣ 📄 page.tsx       (Dashboard ka page, agar ye crash hua toh...)::HL]]
+    [[HL::┗ 📄 error.tsx      (...toh ye file chalegi aur user ko bacha legi::HL]]!)
 ```
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1. Next.js aapke code ko ek invisible React `<ErrorBoundary>` mein wrap kar deta hai.
-2. Jab kisi Component mein error aata hai (jaise Database connection fail), toh wo error aage badhta hai.
-3. Agar usko apne folder mein `error.tsx` milta hai, toh wo wahin ruk jata hai aur us `error.tsx` ka UI dikha deta hai.
-4. Uss `error.tsx` ko Next.js 2 cheezein (props) pass karta hai: `error` (kya galti hui) aur `reset` (ek function jo page ko dobara try karne ko bolta hai).
-5. **CRITICAL:** `error.tsx` ka hamesha ek Client Component (`'use client'`) hona zaroori hai, kyunki errors user ke browser par kisi click se bhi aa sakte hain.
+1. [[HL::Next.js aapke code ko ek invisible React `<ErrorBoundary>` mein wrap kar deta hai.::HL]]
+2. [[HL::Jab kisi Component mein error aata hai (jaise Database connection fail), toh wo error aage badhta hai.::HL]]
+3. [[HL::Agar usko apne folder mein `error.tsx` milta hai, toh wo wahin ruk jata hai aur us `error.tsx` ka UI dikha deta hai.::HL]]
+4. [[HL::Uss `error.tsx` ko Next.js 2 cheezein (props) pass karta hai: `error` (kya galti hui) aur `reset` (ek function jo page ko dobara try karne ko bolta hai::HL]]).
+5. [[HL::**CRITICAL:** `error.tsx` ka hamesha ek Client Component (`'use client'`) hona zaroori hai, kyunki errors user ke browser par kisi click se bhi aa sakte hain::HL]].
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
@@ -4441,25 +4441,25 @@ export default async function DashboardPage() {
 }
 ```
 
-**File 2: `app/dashboard/error.tsx` (Ye page us crash ko pakdega)**
+[[HL::**File 2: `app/dashboard/error.tsx` (Ye page us crash ko pakdega::HL]])**
 ```tsx
-'use client'; // Ye likhna 100% zaroori hai error files ke liye!
+'use [[HL::client'; // Ye likhna 100% zaroori hai error files ke liye!::HL]]
 
-import { useEffect } from 'react';
+[[HL::import { useEffect } from 'react';::HL]]
 
-// Next.js in do (2) cheezon ko khud bhejta hai
-export default function ErrorBoundary({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
+[[HL::// Next.js in do (2) cheezon ko khud bhejta hai::HL]]
+[[HL::export default function ErrorBoundary({::HL]]
+  [[HL::error,::HL]]
+  [[HL::reset,::HL]]
+[[HL::}: {::HL]]
+  [[HL::error: Error & { digest?: string };::HL]]
+  [[HL::reset: () => void;::HL]]
+[[HL::}) {::HL]]
   
-  useEffect(() => {
-    // Developers ke liye console mein error print karna
-    console.error("Crash pakda gaya:", error);
-  }, [error]);
+  [[HL::useEffect(() => {::HL]]
+    [[HL::// Developers ke liye console mein error print karna::HL]]
+    [[HL::console.error("Crash pakda gaya:", error);::HL]]
+  [[HL::}, [error::HL]]]);
 
   return (
     <div style={{ padding: '20px', background: 'lightcoral' }}>
@@ -4492,27 +4492,27 @@ Welcome to Dashboard! (Code perfectly chal gaya)
 
 ## ⚖️ 8. Comparison (Ye vs Woh):
 
-| File | Kahan kaam aati hai? | Kab chalti hai? |
+| [[HL::File::HL]] | [[HL::Kahan kaam aati hai?::HL]] | [[HL::Kab chalti hai?::HL]] |
 | :--- | :--- | :--- |
-| **`error.tsx`** | Specific folder/route mein. | Jab koi code throw `Error` karta hai. |
-| **`not-found.tsx`**| Har jagah. | Jab user galat URL type kare, ya API se data na mile. |
-| **`global-error.tsx`**| Sirf root `app/` folder mein. | Jab aapki main `layout.tsx` (jaise Navbar ya Body tag) hi crash ho jaye. Ye pura HTML/Body khud render karti hai. |
+| [[HL::**`error.tsx`**::HL]] | [[HL::Specific folder/route mein.::HL]] | [[HL::Jab koi code throw `Error` karta hai.::HL]] |
+| [[HL::**`not-found.tsx`**::HL]]| [[HL::Har jagah.::HL]] | [[HL::Jab user galat URL type kare, ya API se data na mile.::HL]] |
+| [[HL::**`global-error.tsx`**::HL]]| [[HL::Sirf root `app/` folder mein.::HL]] | [[HL::Jab aapki main `layout.tsx` (jaise Navbar ya Body tag) hi crash ho jaye. Ye pura HTML/Body khud render karti hai::HL]]. |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-* **Mistake:** `error.tsx` file ke top par `'use client'` likhna bhool jana. 
-* **Fix:** Build error aayega! Error boundaries ko browser mein React ke error pakadne hote hain, isliye wo strict client components hote hain.
+* [[HL::**Mistake:** `error.tsx` file ke top par `'use client'` likhna bhool jana.::HL]] 
+* [[HL::**Fix:** Build error aayega! Error boundaries ko browser mein React ke error pakadne hote hain, isliye wo strict client components hote hain::HL]].
 * **Mistake:** `error.tsx` usi folder ki `layout.tsx` ke errors ko pakadne ki koshish karta hai.
 * **Fix:** `error.tsx` sirf apne **children** (jaise `page.tsx`) ke errors pakadta hai, apne sath wale `layout.tsx` ke nahi. Layout ke errors pakadne ke liye ek level upar wale folder mein `error.tsx` banana padta hai.
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-* **Confusion 1:** *"Toh kya main har ek folder mein error.tsx banau?"*
-  * **Answer:** Nahi. Zyadatar ek ya do badi jagah (jaise Dashboard root ya e-commerce Store root) mein ek error file banana kafi hota hai. Next.js error ko tab tak upar bhejta rehta hai jab tak usko koi `error.tsx` nahi mil jata.
+* [[HL::**Confusion 1:** *"Toh kya main har ek folder mein error.tsx banau?"*::HL]]
+  * [[HL::**Answer:** Nahi. Zyadatar ek ya do badi jagah (jaise Dashboard root ya e-commerce Store root) mein ek error file banana kafi hota hai. Next.js error ko tab tak upar bhejta rehta hai jab tak usko koi `error.tsx` nahi mil jata::HL]].
 * **Confusion 2:** *"Reset button click karne se kya poora page reload hota hai?"*
   * **Answer:** Nahi! Ye iski sabse badi power hai. Ye sirf usi chote se component ko dobara render karke check karta hai. Aapka bacha hua page waise hi rehta hai (koi flicker nahi hota).
 
 ## 🌍 11. Real-World Use Case (Production Application):
-**Netflix Web App:**
-Maan lijiye Netflix par aap koi movie dekh rahe ho (Video Player chal raha hai). Niche "Recommended Movies" wala section fetch hone mein error aa gaya. Agar Netflix ne `error.tsx` use nahi kiya, toh aapka video chalna band ho jayega. Par `error.tsx` hone se, video smoothly chalta rehta hai, aur niche ek chota sa button aa jata hai: "We couldn't load recommendations. [Retry]".
+[[HL::**Netflix Web App:**::HL]]
+[[HL::Maan lijiye Netflix par aap koi movie dekh rahe ho (Video Player chal raha hai). Niche "Recommended Movies" wala section fetch hone mein error aa gaya. Agar Netflix ne `error.tsx` use nahi kiya, toh aapka video chalna band ho jayega. Par `error.tsx` hone se, video smoothly chalta rehta hai, aur niche ek chota sa button aa jata hai: "We couldn't load recommendations. [Retry::HL]]]".
 
 ## 🎨 12. Visual Diagram (ASCII Art):
 ```text
@@ -4533,10 +4533,10 @@ Natija (Result): Navbar dikhta rahega, sirf page.tsx ki jagah error.tsx ka UI aa
 Agar aapne poori app mein ek bhi `error.tsx` nahi banaya, aur database 1 second ke liye bhi fail hua, toh user ke browser par production mein ek bhayanak error page aayega "Application Error", aur user ghabra kar app band kar dega.
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **Q:** Kya `error.tsx` server errors pakadta hai ya client errors?
-   **A:** Dono! Next.js server par aane wale errors ko serialize karke client wale `error.tsx` ko de deta hai.
-2. **Q:** `global-error.tsx` banana kyun zaruri hai?
-   **A:** Kyunki root `layout.tsx` ka error root `error.tsx` nahi pakad sakta. `global-error.tsx` html aur body tags ke upar control rakhta hai aakhri bachaav ke liye.
+1. [[HL::**Q:** Kya `error.tsx` server errors pakadta hai ya client errors?::HL]]
+   [[HL::**A:** Dono! Next.js server par aane wale errors ko serialize karke client wale `error.tsx` ko de deta hai::HL]].
+2. [[HL::**Q:** `global-error.tsx` banana kyun zaruri hai?::HL]]
+   [[HL::**A:** Kyunki root `layout.tsx` ka error root `error.tsx` nahi pakad sakta. `global-error.tsx` html aur body tags ke upar control rakhta hai aakhri bachaav ke liye::HL]].
 3. **Q:** `not-found.tsx` kab trigger hota hai?
    **A:** Do case mein: 1) Jab URL router mein na ho. 2) Jab aap code mein explicitly `notFound()` function call karte ho.
 4. **Q:** `reset()` function Server component mein retry kaise karta hai?
@@ -4557,17 +4557,17 @@ Agar aapne poori app mein ek bhi `error.tsx` nahi banaya, aur database 1 second 
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
 Maan lo aap ek **Traffic Police Officer** ho:
-* **`redirect()` (Detour / Temporary Diversion):** "Bhaiya, aage VVIP movement hai (Not Logged In), isliye aaj aap dusre raste se (Login page) chale jao." Ye temporary hai (HTTP 307).
-* **`permanentRedirect()` (Road Closed Forever):** "Bhaiya, ye purana Highway ab hamesha ke liye band ho gaya hai. Ab aap naye Highway se jao." (HTTP 308). Browser ye yaad rakh lega aur agli baar seedha naye raste jayega.
-* **`notFound()` (Wrong Address):** "Bhaiya, aisi toh koi building is shehar mein nahi hai. Aap 404 (Not Found) wale board ke paas chale jao."
+* [[HL::**`redirect()` (Detour / Temporary Diversion):** "Bhaiya, aage VVIP movement hai (Not Logged In), isliye aaj aap dusre raste se (Login page) chale jao." Ye temporary hai (HTTP 307).::HL]]
+* [[HL::**`permanentRedirect()` (Road Closed Forever):** "Bhaiya, ye purana Highway ab hamesha ke liye band ho gaya hai. Ab aap naye Highway se jao." (HTTP 308). Browser ye yaad rakh lega aur agli baar seedha naye raste jayega.::HL]]
+* [[HL::**`notFound()` (Wrong Address):** "Bhaiya, aisi toh koi building is shehar mein nahi hai. Aap 404 (Not Found) wale board ke paas chale jao::HL]]."
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** Next.js provides server-side routing utilities. `redirect()` throws a specialized error that interrupts the rendering process and sends a 307 Temporary Redirect HTTP response. `permanentRedirect()` sends a 308 Permanent Redirect (good for SEO). `notFound()` throws an error that renders the closest `not-found.tsx` boundary and returns a 404 HTTP status.
-* **Hinglish Simplification:** Ye teeno functions server par chalte hain. Inko use karke hum user ko kisi dusre page par dhakel sakte hain (redirect) ya usko bata sakte hain ki data nahi mila (404), bina kisi lamba chauda code likhe.
+* [[HL::**Precise English:** Next.js provides server-side routing utilities. `redirect()` throws a specialized error that interrupts the rendering process and sends a 307 Temporary Redirect HTTP response. `permanentRedirect()` sends a 308 Permanent Redirect (good for SEO). `notFound()` throws an error that renders the closest `not-found.tsx` boundary and returns a 404 HTTP status.::HL]]
+* [[HL::**Hinglish Simplification:** Ye teeno functions server par chalte hain. Inko use karke hum user ko kisi dusre page par dhakel sakte hain (redirect) ya usko bata sakte hain ki data nahi mila (404), bina kisi lamba chauda code likhe.::HL]]
 
-## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Agar koi user `/dashboard` URL open karta hai, par usne login nahi kiya hai, toh hum usko dashboard ka data nahi dikha sakte. Use rokna padega.
-* **Solution:** Dashboard ke sabse upar hum check karenge: `if (!loggedIn) redirect('/login')`. Code wahi ruk jayega aur user turant login page par pahuch jayega.
+[[HL::## 🧠 4. Zaroorat Kyun Hai? (Why use it?):::HL]]
+* [[HL::**Problem:** Agar koi user `/dashboard` URL open karta hai, par usne login nahi kiya hai, toh hum usko dashboard ka data nahi dikha sakte. Use rokna padega.::HL]]
+* [[HL::**Solution:** Dashboard ke sabse upar hum check karenge: `if (!loggedIn) redirect('/login')`. Code wahi ruk jayega aur user turant login page par pahuch jayega::HL]]
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 Inko hum kisi bhi Server Component, Server Action, ya Route Handler (`route.ts`) ke andar seedha call karte hain.
@@ -4585,31 +4585,31 @@ Jaise hi aap `redirect()` likhte ho, under the hood Next.js ek special error phe
 **File: `app/user/[id]/page.tsx`**
 
 ```tsx
-// in functions ko Next.js ki navigation library se nikalna padta hai
-import { redirect, notFound, permanentRedirect } from 'next/navigation';
+// [[HL::in functions ko Next.js ki navigation library se nikalna padta hai::HL]]
+[[HL::import { redirect, notFound, permanentRedirect } from 'next/navigation';::HL]]
 
-export default async function UserProfile({ params }: { params: { id: string } }) {
-  // Fake User Check
-  const userId = params.id;
+[[HL::export default async function UserProfile({ params }: { params: { id: string } }) {::HL]]
+  [[HL::// Fake User Check::HL]]
+  [[HL::const userId = params.id;::HL]]
 
-  // Case 1: Agar ID 'admin' hai, par banda login nahi hai (Temporary redirect)
-  if (userId === 'admin') {
-    console.log("Admin nahi hai, bhagao isko!");
-    redirect('/login'); 
-    // Iske niche ka code nahi chalega, ye yahi se mud jayega.
+  [[HL::// Case 1: Agar ID 'admin' hai, par banda login nahi hai (Temporary redirect)::HL]]
+  [[HL::if (userId === 'admin') {::HL]]
+    [[HL::console.log("Admin nahi hai, bhagao isko!");::HL]]
+    [[HL::redirect('/login');::HL]] 
+    [[HL::// Iske niche ka code nahi chalega, ye yahi se mud jayega::HL]].
   }
 
-  // Case 2: Agar URL purana hai (jaise pehle ID '001' tha, ab 'newUser' ho gaya)
-  if (userId === '001') {
-    console.log("Purana ID use kar raha hai, naye pe bhejo hamesha ke liye.");
-    permanentRedirect('/user/newUser');
+  // [[HL::Case 2: Agar URL purana hai (jaise pehle ID '001' tha, ab 'newUser' ho gaya)::HL]]
+  [[HL::if (userId === '001') {::HL]]
+    [[HL::console.log("Purana ID use kar raha hai, naye pe bhejo hamesha ke liye.");::HL]]
+    [[HL::permanentRedirect('/user/newUser::HL]]');
   }
 
-  // Case 3: ID '999' jaisa koi user database mein hai hi nahi
-  if (userId === '999') {
-    console.log("Aisa koi user nahi hai.");
-    notFound(); 
-    // Ye direct aapki 'not-found.tsx' file ko call kar dega.
+  // [[HL::Case 3: ID '999' jaisa koi user database mein hai hi nahi::HL]]
+  [[HL::if (userId === '999') {::HL]]
+    [[HL::console.log("Aisa koi user nahi hai.");::HL]]
+    [[HL::notFound();::HL]] 
+    [[HL::// Ye direct aapki 'not-found.tsx' file ko call kar dega::HL]].
   }
 
   // Case 4: Sab theek hai
@@ -4624,25 +4624,25 @@ export default async function UserProfile({ params }: { params: { id: string } }
 ```
 
 ```text
-# 📤 Expected Output (Terminal / Browser Network Tab):
+# 📤 [[HL::Expected Output (Terminal / Browser Network Tab):::HL]]
 
-* Hitting `/user/admin`:
-Terminal: Admin nahi hai, bhagao isko!
-Browser: (Redirects instantly to `/login`, HTTP Status 307)
+* [[HL::Hitting `/user/admin`:::HL]]
+[[HL::Terminal: Admin nahi hai, bhagao isko!::HL]]
+[[HL::Browser: (Redirects instantly to `/login`, HTTP Status 307)::HL]]
 
-* Hitting `/user/001`:
-Terminal: Purana ID use kar raha hai, naye pe bhejo hamesha ke liye.
-Browser: (Redirects instantly to `/user/newUser`, HTTP Status 308)
+* [[HL::Hitting `/user/001`:::HL]]
+[[HL::Terminal: Purana ID use kar raha hai, naye pe bhejo hamesha ke liye.::HL]]
+[[HL::Browser: (Redirects instantly to `/user/newUser`, HTTP Status 308)::HL]]
 
-* Hitting `/user/999`:
-Terminal: Aisa koi user nahi hai.
-Browser: (Shows the default 404 UI from `not-found.tsx`, HTTP Status 404)
+* [[HL::Hitting `/user/999`:::HL]]
+[[HL::Terminal: Aisa koi user nahi hai.::HL]]
+[[HL::Browser: (Shows the default 404 UI from `not-found.tsx`, HTTP Status 404)::HL]]
 
-* Hitting `/user/123`:
-Browser: 
-[ User Profile ]
-[ ID: 123 ]
-[ Ye page successfully load ho gaya. ]
+* [[HL::Hitting `/user/123`:::HL]]
+[[HL::Browser:::HL]] 
+[[HL::[ User Profile ]::HL]]
+[[HL::[ ID: 123 ]::HL]]
+[[HL::[ Ye page successfully load ho gaya::HL]]. ]
 ```
 
 ## ⚖️ 8. Comparison (Ye vs Woh):
@@ -4654,14 +4654,14 @@ Browser:
 | **`notFound()`** | 404 (Not Found) | N/A | Jab DB se data null aaye, ya invalid ID ho. |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-* **THE BIGGEST MISTAKE:** `redirect()` ko `try...catch` block ke andar daal dena.
-* **Fix:** Kyunki `redirect()` under the hood ek *error throw* karta hai, agar aapne isko `try...catch` mein rakha, toh aapka `catch` block us error ko daba dega (swallow kar lega) aur redirect chalega hi nahi!
-  * **Galat (❌):** `try { redirect('/login') } catch (e) { console.log(e) }`
-  * **Sahi (✅):** `redirect` ko hamesha try-catch ke *bahar* ya *baad* mein call karein.
+* [[HL::**THE BIGGEST MISTAKE:** `redirect()` ko `try...catch` block ke andar daal dena.::HL]]
+* [[HL::**Fix:** Kyunki `redirect()` under the hood ek *error throw* karta hai, agar aapne isko `try...catch` mein rakha, toh aapka `catch` block us error ko daba dega (swallow kar lega) aur redirect chalega hi nahi!::HL]]
+  * [[HL::**Galat (❌):** `try { redirect('/login') } catch (e) { console.log(e) }`::HL]]
+  * [[HL::**Sahi (✅):** `redirect` ko hamesha try-catch ke *bahar* ya *baad* mein call karein::HL]].
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-* **Confusion 1:** *"Agar mujhe client side (jaise ek button click par) redirect karna ho toh?"*
-  * **Answer:** Ye teeno functions zyada tar **Server** ke liye hain. Client side par kisi button ke `onClick` par redirect karne ke liye aapko `useRouter()` hook nikalna padega: `const router = useRouter(); router.push('/login');`
+* [[HL::**Confusion 1:** *"Agar mujhe client side (jaise ek button click par) redirect karna ho toh?"*::HL]]
+  * [[HL::**Answer:** Ye teeno functions zyada tar **Server** ke liye hain. Client side par kisi button ke `onClick` par redirect karne ke liye aapko `useRouter()` hook nikalna padega: `const router = useRouter(); router.push('/login::HL]]');`
 * **Confusion 2:** *"redirect() ke baad `return null` likhna zaruri hai?"*
   * **Answer:** Nahi! `redirect()` TypeScript ka `never` type return karta hai. Matlab wahan se code aage jayega hi nahi, wahi execution rukk jayega.
 
@@ -4693,8 +4693,8 @@ Agar aapne Database se data laya aur wo `null` aaya, aur aapne `notFound()` call
    **A:** Ye execution ko rokne ke liye ek `NEXT_REDIRECT` error throw karta hai, jise Next.js internally catch karke HTTP 307 response bhejta hai.
 2. **Q:** Kya main Server Action ke aakhri step mein redirect use kar sakta hu?
    **A:** Haan! Form submit hone ke baad `redirect('/success')` call karna ek standard pattern hai Next.js mein.
-3. **Q:** 307 aur 308 mein kya difference hai?
-   **A:** 307 Temporary hai, 308 Permanent hai (SEO bots isko note kar lete hain aur apna index update kar lete hain).
+3. [[HL::**Q:** 307 aur 308 mein kya difference hai?::HL]]
+   [[HL::**A:** 307 Temporary hai, 308 Permanent hai (SEO bots isko note kar lete::HL]] [[HL::hain aur apna index update kar lete hain::HL]]).
 4. **Q:** `try-catch` wale issue ka Next.js ne koi hal nikala hai?
    **A:** Agar aapko majboori mein catch block mein redirect pakadna pade, toh aap `isRedirectError(error)` function (from `next/navigation`) ka use karke check kar sakte ho aur use dobara throw kar sakte ho.
 5. **Q:** `notFound()` call karne par kon si file chalegi?
@@ -4723,33 +4723,33 @@ Mera internal check complete ho gaya hai. Chaliye is grand finale ko shuru karte
 ## 🎯 1. Title / Topic: Metadata API, Sitemaps & Robots (`robots.txt`, `sitemap.xml`)
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
-Maan lo aapne ek nayi **Dukan (Shop)** kholi hai.
-* **Metadata:** Ye aapki dukan ka bahar laga bada sa **Signboard** hai. Ispe dukan ka naam aur kya milta hai (Description) likha hota hai. Jab log WhatsApp par link share karte hain, toh jo photo aur text dikhta hai, wo Metadata hota hai.
-* **Sitemap (`sitemap.xml`):** Ye dukan ka **Naksha (Map)** hai. Ye Google ke postman (Bot) ko batata hai ki aapki dukan mein kitne kamre (pages) hain aur kahan-kahan jana hai.
-* **Robots (`robots.txt`):** Ye dukan ka **Security Guard** hai. Ye Google ko batata hai: *"Bhaiya, Showroom (Homepage) mein jao, par Godown (Admin panel) mein mat jana."*
+[[HL::Maan lo aapne ek nayi **Dukan (Shop)** kholi hai.::HL]]
+* [[HL::**Metadata:** Ye aapki dukan ka bahar laga bada sa **Signboard** hai. Ispe dukan ka naam aur kya milta hai (Description) likha hota hai. Jab log WhatsApp par link share karte hain, toh jo photo aur text dikhta hai, wo Metadata hota hai.::HL]]
+* [[HL::**Sitemap (`sitemap.xml`):** Ye dukan ka **Naksha (Map)** hai. Ye Google ke postman (Bot) ko batata hai ki aapki dukan mein kitne kamre (pages) hain aur kahan-kahan jana hai.::HL]]
+* [[HL::**Robots (`robots.txt`):** Ye dukan ka **Security Guard** hai. Ye Google ko batata hai: *"Bhaiya, Showroom (Homepage) mein jao, par Godown (Admin panel) mein mat jana::HL]]."*
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** The Next.js Metadata API allows you to define `<head>` elements (like title, meta tags, and Open Graph images) either statically via exported objects or dynamically via the `generateMetadata` function. Additionally, Next.js provides special file conventions (`sitemap.ts` and `robots.ts`) to programmatically generate XML and TXT files for search engine crawlers.
-* **Hinglish Simplification:** Next.js mein bina alag se koi package dale, hum pages ke top par kuch special functions likhte hain jo automatically HTML ke `<head>` tag ko bhar dete hain. Aur `sitemap.ts` banakar hum Google ko apni website ke saare links ek jagah de dete hain.
+* [[HL::**Precise English:** The Next.js Metadata API allows you to define `<head>` elements (like title, meta tags, and Open Graph images) either statically via exported objects or dynamically via the `generateMetadata` function. Additionally, Next.js provides special file conventions (`sitemap.ts` and `robots.ts`) to programmatically generate XML and TXT files for search engine crawlers.::HL]]
+* [[HL::**Hinglish Simplification:** Next.js mein bina alag se koi package dale, hum pages ke top par kuch special functions likhte hain jo automatically HTML ke `<head>` tag ko bhar dete hain. Aur `sitemap.ts` banakar hum Google ko apni website ke saare links ek jagah de dete hain::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Normal React websites ("Single Page Applications") mein `<head>` tag khali hota hai. Google ka bot jab aakar dekhta hai toh usko kuch samajh nahi aata, aur website search results mein aati hi nahi.
-* **Solution:** Next.js server par pehle hi Metadata aur Sitemaps generate kar deta hai, taaki Google ko instantly pata chal jaye ki ye page kis baare mein hai (SEO - Search Engine Optimization).
+* [[HL::**Problem:** Normal React websites ("Single Page Applications") mein `<head>` tag khali hota hai. Google ka bot jab aakar dekhta hai toh usko kuch samajh nahi aata, aur website search results mein aati hi nahi.::HL]]
+* [[HL::**Solution:** Next.js server par pehle hi Metadata aur Sitemaps generate kar deta hai, taaki Google ko instantly pata chal jaye ki ye page kis baare mein hai (SEO - Search Engine Optimization::HL]]).
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 ```text
 📂 app
- ┣ 📄 layout.tsx        (Yahan pure website ka common Metadata hoga)
- ┣ 📄 robots.ts         (Ye Security guard banega)
- ┣ 📄 sitemap.ts        (Ye Naksha banega)
- ┗ 📂 products
-    ┗ 📂 [id]
-       ┗ 📄 page.tsx    (Yahan har product ka apna alag (dynamic) Metadata hoga)
+ ┣ 📄 [[HL::layout.tsx        (Yahan pure website ka common Metadata hoga)::HL]]
+ [[HL::┣ 📄 robots.ts         (Ye Security guard banega)::HL]]
+ [[HL::┣ 📄 sitemap.ts        (Ye Naksha banega)::HL]]
+ [[HL::┗ 📂 products::HL]]
+    [[HL::┗ 📂 [id]::HL]]
+       [[HL::┗ 📄 page.tsx    (Yahan har product ka apna alag (dynamic) Metadata hoga::HL]])
 ```
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1. **Metadata:** Jab bhi koi page load hota hai, Next.js sabse pehle `generateMetadata()` function ko chalata hai. Uska answer laakar wo HTML ke `<head>` mein `<title>` aur `<meta>` tags chipkata hai, aur fir actual component render karta hai.
-2. **Sitemap/Robots:** Ye actual mein API routes ki tarah kaam karte hain. Jab Google `yoursite.com/sitemap.xml` mangta hai, toh `sitemap.ts` database se saare products nikalta hai, XML format banata hai aur bhej deta hai.
+1. [[HL::**Metadata:** Jab bhi koi page load hota hai, Next.js sabse pehle `generateMetadata()` function ko chalata hai. Uska answer laakar wo HTML ke `<head>` mein `<title>` aur `<meta>` tags chipkata hai, aur fir actual component render karta hai::HL]].
+2. [[HL::**Sitemap/Robots:** Ye actual mein API routes ki tarah kaam karte hain. Jab Google `yoursite.com/sitemap.xml` mangta hai, toh `sitemap.ts` database se saare products nikalta hai, XML format banata hai aur bhej deta hai::HL]].
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
@@ -4858,30 +4858,30 @@ Har news article ka ek unique URL hota hai. Jab editor naya article publish kart
 
 ## 🎨 12. Visual Diagram (ASCII Art):
 ```text
-[ Google Crawler Bot ] 🤖
-        │
-        ├─> Checks `robots.txt` (Kya main yahan ghoom sakta hu?)
-        │
-        ├─> Checks `sitemap.xml` (Achha, yahan 500 product pages hain)
-        │
-        └─> Visits `/product/1` ──> Reads `<head>` Metadata (Title, Image)
-                                       │
-                                    [ Ranks on Google Page 1 🏆 ]
+[ [[HL::Google Crawler Bot ] 🤖::HL]]
+        [[HL::│::HL]]
+        [[HL::├─> Checks `robots.txt` (Kya main yahan ghoom sakta hu?)::HL]]
+        [[HL::│::HL]]
+        [[HL::├─> Checks `sitemap.xml` (Achha, yahan 500 product pages hain)::HL]]
+        [[HL::│::HL]]
+        [[HL::└─> Visits `/product/1` ──> Reads `<head>` Metadata (Title, Image)::HL]]
+                                       [[HL::│::HL]]
+                                    [[HL::[ Ranks on Google Page 1::HL]] 🏆 ]
 ```
 
 ## 🛠️ 13. Best Practices (Pro Tips):
 * Hamesha ek Fallback (default) Metadata zaroor rakhein apne root `layout.tsx` mein. Taaki agar kisi page par Metadata likhna bhool gaye, toh kam se kam website ka main logo aur naam toh dikhe!
 
 ## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
-Agar aapne `robots.ts` mein galti se `Disallow: /` likh diya, toh aapne basically security guard ko bol diya "Kisi ko andar mat aane do". Google aapki website ko apne search se hamesha ke liye Delete kar dega! (Isliye ise dhyan se use karein).
+[[HL::Agar aapne `robots.ts` mein galti se `Disallow: /` likh diya, toh aapne basically security guard ko bol diya "Kisi ko andar mat aane do". Google aapki website ko apne search se hamesha ke liye Delete kar dega! (Isliye ise dhyan se use karein::HL]]).
 
 ## ❓ 15. FAQ (Interview Questions):
 1. **Q:** Kya main Next.js 15 mein `next/head` use kar sakta hu?
    **A:** App Router mein `next/head` deprecate (band) ho chuka hai. Ab sirf Metadata API use hoti hai.
 2. **Q:** Dynamic SEO tag banane ke liye kya command/function hai?
    **A:** `generateMetadata({ params })`.
-3. **Q:** Sitemap XML format mein hi kyun hota hai?
-   **A:** Kyunki saare search engines (Google, Bing, Yahoo) XML format ko hi official map mante hain standard protocols ke hisaab se.
+3. [[HL::**Q:** Sitemap XML format mein hi kyun hota hai?::HL]]
+   [[HL::**A:** Kyunki saare search engines (Google, Bing, Yahoo) XML format ko hi official map mante hain standard protocols ke hisaab se::HL]].
 4. **Q:** Title tag ki ideal length kya hoti hai SEO ke liye?
    **A:** Around 50-60 characters, taaki mobile aur desktop par kate nahi (Next.js ise truncate nahi karta, aapko khud dhyan rakhna padta hai).
 5. **Q:** `absolute` title kya karta hai Next.js mein?
@@ -5070,28 +5070,28 @@ Socho tum ek naya ghar bana rahe ho.
 **Tailwind CSS:** Ye ekdum "Readymade Stickers aur Paint-Brush" jaisa hai. Tumhe bas bolna hai "Mujhe laal rang chahiye" (`text-red-500`) aur "Mujhe box ko center mein rakhna hai" (`flex justify-center`). Tumhara kaam minto mein ho jata hai bina alag se paint ka dabba (CSS file) khole!
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** Tailwind CSS is a utility-first CSS framework that provides low-level utility classes to build custom designs directly in your HTML/JSX markup without writing custom CSS files.
-* **Hinglish Simplification:** Ek aisi library jo tumhe chhote-chhote aasaan naam (classes) deti hai, jinko direct HTML/React code mein likhne se styling ho jati hai. Tumhe alag se `style.css` file banakar lamba code nahi likhna padta.
+* [[HL::**Precise English:** Tailwind CSS is a utility-first CSS framework that provides low-level utility classes to build custom designs directly in your HTML/JSX markup without writing custom CSS files.::HL]]
+* [[HL::**Hinglish Simplification:** Ek aisi library jo tumhe chhote-chhote aasaan naam (classes) deti hai, jinko direct HTML/React code mein likhne se styling ho jati hai. Tumhe alag se `style.css` file banakar lamba code nahi likhna padta::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Pehle hum HTML likhte the, fir ek alag `style.css` file banate the. Fir class name sochna padta tha (jaise `.my-beautiful-red-button`). Code bahut bada aur messy ho jata tha. Aur sabse badi problem: **Responsive Design** (Phone, tablet, laptop pe alag-alag design dikhana) set karna bahut mushkil tha.
-* **Solution:** Tailwind ne sab solve kar diya! Alag se file mat banao. Button ban banana hai? HTML mein hi likh do: `<button className="bg-red-500 rounded p-2">`. Aur mobile ke liye alag dikhana hai? Bas `md:` (medium screen) ya `sm:` (small screen) laga do!
+* [[HL::**Problem:** Pehle hum HTML likhte the, fir ek alag `style.css` file banate the. Fir class name sochna padta tha (jaise `.my-beautiful-red-button`). Code bahut bada aur messy ho jata tha. Aur sabse badi problem: **Responsive Design** (Phone, tablet, laptop pe alag-alag design dikhana) set karna bahut mushkil tha.::HL]]
+* [[HL::**Solution:** Tailwind ne sab solve kar diya! Alag se file mat banao. Button ban banana hai? HTML mein hi likh do: `<button className="bg-red-500 rounded p-2">`. Aur mobile ke liye alag dikhana hai? Bas `md:` (medium screen) ya `sm:` (small screen) laga do::HL]]!
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
-Tumhare VS Code mein koi badi `style.css` file nahi dikhegi jisme hazaaron lines ka code ho. Tumhare React components (`.tsx` files) ke andar hi HTML tags mein chote-chote class names dikhenge.
-**Structure:**
+[[HL::Tumhare VS Code mein koi badi `style.css` file nahi dikhegi jisme hazaaron lines ka code ho. Tumhare React components (`.tsx` files) ke andar hi HTML tags mein chote-chote class names dikhenge.::HL]]
+[[HL::**Structure:**::HL]]
 ```text
-📁 app/
- 📄 page.tsx       <-- Saari styling isi ke andar HTML ke sath hogi
-📄 tailwind.config.ts <-- Tailwind ka brain (settings file)
-📄 globals.css     <-- Bas 3 line ka setup code hoga yahan
+[[HL::📁 app/::HL]]
+ [[HL::📄 page.tsx       <-- Saari styling isi ke andar HTML ke sath hogi::HL]]
+[[HL::📄 tailwind.config.ts <-- Tailwind ka brain (settings file)::HL]]
+[[HL::📄 globals.css     <-- Bas 3 line ka setup code hoga yahan::HL]]
 ```
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-* **JIT (Just-In-Time) Compiler:** Tailwind ke paas ek "JIT Compiler" (ek smart program) hota hai.
-* Jab tum code likhte ho, ye compiler tumhari saari files ko scan karta hai.
-* Ye dekhta hai, "Achha, isne `text-red-500` use kiya hai."
-* Sirf usi exact class ka CSS code ye background mein generate karke browser ko deta hai. Isse tumhari website **bahut fast** load hoti hai kyunki extra kachra (unused CSS) nahi hota.
+* [[HL::**JIT (Just-In-Time) Compiler:** Tailwind ke paas ek "JIT Compiler" (ek smart program) hota hai.::HL]]
+* [[HL::Jab tum code likhte ho, ye compiler tumhari saari files ko scan karta hai.::HL]]
+* [[HL::Ye dekhta hai, "Achha, isne `text-red-500` use kiya hai::HL]]."
+* [[HL::Sirf usi exact class ka CSS code ye background mein generate karke browser ko deta hai. Isse tumhari website **bahut fast** load hoti hai kyunki extra kachra (unused CSS) nahi hota::HL]].
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
@@ -5108,20 +5108,20 @@ Welcome to my shop
 (Black color, standard boring font, left aligned)
 ```
 
-**Step 2: Adding Tailwind & Making it Responsive**
-*(Responsive matlab: Phone pe alag dikhe, Laptop pe alag dikhe)*
+[[HL::**Step 2: Adding Tailwind & Making it Responsive**::HL]]
+[[HL::*(Responsive matlab: Phone pe alag dikhe, Laptop pe alag dikhe)*::HL]]
 
 ```tsx
-export default function Home() {
-  return (
-    // text-center: Text ko center mein laao
-    // text-xl: Phone ke liye font size Xtra Large kardo
-    // text-red-500: Phone ke liye Red color kardo
-    // md:text-3xl: Agar screen Medium (md - Tablet/Laptop) ho, toh font size 3X Large kardo
-    // md:text-blue-500: Agar screen Medium ho, toh color Blue kardo!
-    <h1 className="text-center text-xl text-red-500 md:text-3xl md:text-blue-500">
-      Welcome to my shop
-    </h1>
+[[HL::export default function Home() {::HL]]
+  [[HL::return (::HL]]
+    [[HL::// text-center: Text ko center mein laao::HL]]
+    [[HL::// text-xl: Phone ke liye font size Xtra Large kardo::HL]]
+    [[HL::// text-red-500: Phone ke liye Red color kardo::HL]]
+    [[HL::// md:text-3xl: Agar screen Medium (md - Tablet/Laptop) ho, toh font size 3X Large kardo::HL]]
+    [[HL::// md:text-blue-500: Agar screen Medium ho, toh color Blue kardo!::HL]]
+    [[HL::<h1 className="text-center text-xl text-red-500 md:text-3xl md:text-blue-500">::HL]]
+      [[HL::Welcome to my shop::HL]]
+    [[HL::</h1::HL]]>
   );
 }
 ```
@@ -5136,11 +5136,11 @@ Welcome to my shop
 ```
 
 ## ⚖️ 8. Comparison (Ye vs Woh):
-| Feature | Vanilla CSS (Purana Tarika) | Tailwind CSS (Naya Tarika) |
+| [[HL::Feature::HL]] | [[HL::Vanilla CSS (Purana Tarika)::HL]] | [[HL::Tailwind CSS (Naya Tarika)::HL]] |
 | :--- | :--- | :--- |
-| **Kaam Kahan Hota hai?** | Alag `style.css` file banani padti hai. | Direct HTML/JSX line ke andar. |
-| **Class Names** | Khud sochna padta hai (e.g., `.btn-primary-red`). | Pre-defined hote hain (e.g., `bg-red-500`). |
-| **File Size** | Bahut badi ho jati hai time ke sath. | Ekdum tiny (sirf used classes hi compile hoti hain). |
+| [[HL::**Kaam Kahan Hota hai?**::HL]] | [[HL::Alag `style.css` file banani padti hai.::HL]] | [[HL::Direct HTML/JSX line ke andar.::HL]] |
+| [[HL::**Class Names**::HL]] | [[HL::Khud sochna padta hai (e.g., `.btn-primary-red`).::HL]] | [[HL::Pre-defined hote hain (e.g., `bg-red-500`).::HL]] |
+| [[HL::**File Size**::HL]] | [[HL::Bahut badi ho jati hai time ke sath.::HL]] | [[HL::Ekdum tiny (sirf used classes hi compile hoti hain::HL]]). |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
 1. **Dynamic class concatenation (Sabse badi galti!):** Beginners likhte hain `className={"text-" + myColor + "-500"}`. Tailwind ka scanner isko padh nahi pata aur styling fail ho jati hai.
@@ -5148,10 +5148,10 @@ Welcome to my shop
 2. **Forgetting to start the build process:** Tailwind run nahi hota agar Next.js ka server (`npm run dev`) chalu na ho.
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-* **"Bhai, itni saari classes kaise yaad rakhunga? `bg-red-500`, `flex`, `mt-4`..."**
-  * **Tension mat lo!** Tumhe VS Code mein ek extension install karna hai: **Tailwind CSS IntelliSense**. Tum jaise hi `bg-` type karoge, ye khud tumhe saare colors aur options suggest kar dega!
-* **"Code bahut lamba aur ugly nahi ho jayega?"**
-  * Shuru mein lagta hai, par jab tum components bana loge (jaise ek Button component), toh tumhe class bar-bar nahi likhni padegi.
+* **"[[HL::Bhai, itni saari classes kaise yaad rakhunga? `bg-red-500`, `flex`, `mt-4`..."**::HL]]
+  * [[HL::**Tension mat lo!** Tumhe VS Code mein ek extension install karna hai: **Tailwind CSS IntelliSense**. Tum jaise hi `bg-` type karoge, ye khud tumhe saare colors aur options suggest kar dega::HL]]!
+* **"[[HL::Code bahut lamba aur ugly nahi ho jayega?"**::HL]]
+  * [[HL::Shuru mein lagta hai, par jab tum components bana loge (jaise ek Button component), toh tumhe class bar-bar nahi likhni padegi::HL]].
 
 ## 🌍 11. Real-World Use Case (Production Application):
 **Netflix / OpenAI / ChatGPT** ki websites Tailwind use karti hain. Kyun? Taaki jab koi user phone pe ChatGPT khole toh website turant sikud kar phone ke size ki ho jaye (Responsive), aur laptop pe khole toh chaudi ho jaye, bina extra files download kiye.
@@ -5177,11 +5177,11 @@ Welcome to my shop
 Agar tumne responsive prefixes (`sm:`, `md:`) use nahi kiye, toh tumhari website laptop pe toh mast dikhegi, par kisi ne phone pe kholi toh text aur buttons screen se bahar nikal jayenge aur customer gussa hokar website band kar dega.
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **Q: What is a Utility-First framework?**
-   *A: It means providing single-purpose CSS classes (like `flex` or `p-4`) that do exactly one thing, instead of complex classes.*
+1. [[HL::**Q: What is a Utility-First framework?**::HL]]
+   [[HL::*A: It means providing single-purpose CSS classes (like `flex` or `p-4`) that do exactly one thing, instead of complex classes::HL]].*
 2. **Q: Does Tailwind make HTML messy?**
    *A: Visually yes, but logically it makes it highly maintainable because styling is directly coupled with the element.*
-3. **Q: How does Tailwind keep file size small?**
+3. **Q: [[HL::How doe::HL]]s Tailwind keep file size small?**
    *A: Using the JIT (Just In Time) compiler which purges (deletes) all unused CSS classes in production.*
 4. **Q: What is `md:` in Tailwind?**
    *A: It's a media query prefix for Medium screens (usually tablets and small laptops).*
@@ -5201,21 +5201,21 @@ Tailwind CSS ek readymade paint-box hai jahan tum seedha HTML mein likhte ho ki 
 **Shadcn UI:** Ye IKEA ka "DIY (Do It Yourself) Furniture kit" lene jaisa hai. Ye tumhe kursi banane ki lakdi, keel, aur design de deta hai. Kursi taiyar hai, par kyunki saaman tumhare haath mein hai, tum usko kaat kar, paint karke, jaisa marzi customize kar sakte ho!
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** Shadcn UI is not a component library you install via npm; it's a collection of reusable, beautifully designed components built on top of Radix UI and Tailwind CSS, where you copy and paste the source code directly into your project.
-* **Hinglish Simplification:** Ye koi standard library (package) nahi hai jise install karke bhool jao. Ye tumhe direct code de deta hai tumhare project mein, taaki tum har component (jaise Button, Card, Modal) ko exact apne design ke hisaab se badal sako.
+* [[HL::**Precise English:** Shadcn UI is not a component library you install via npm; it's a collection of reusable, beautifully designed components built on top of Radix UI and Tailwind CSS, where you copy and paste the source code directly into your project.::HL]]
+* [[HL::**Hinglish Simplification:** Ye koi standard library (package) nahi hai jise install karke bhool jao. Ye tumhe direct code de deta hai tumhare project mein, taaki tum har component (jaise Button, Card, Modal) ko exact apne design ke hisaab se badal sako::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Jab hum Material UI ya Bootstrap use karte the, toh ek simple Button ka rang ya size badalne ke liye bahut gande "hacks" lagane padte the (jaise `!important` likhna). Code rigid (sakht) hota tha.
-* **Solution:** Shadcn UI tumhe Button ka *poora React code* de deta hai. Agar button mein kuch naya chahiye? Direct code kholo aur type kar do. It gives you **100% control** aur ye Tailwind use karta hai toh styling ekdum aasaan ho jati hai!
+* [[HL::**Problem:** Jab hum Material UI ya Bootstrap use karte the, toh ek simple Button ka rang ya size badalne ke liye bahut gande "hacks" lagane padte the (jaise `!important` likhna). Code rigid (sakht) hota tha.::HL]]
+* [[HL::**Solution:** Shadcn UI tumhe Button ka *poora React code* de deta hai. Agar button mein kuch naya chahiye? Direct code kholo aur type kar do. It gives you **100% control** aur ye Tailwind use karta hai toh styling ekdum aasaan ho jati ha::HL]]i!
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
-Jab tum Shadcn UI se koi component laate ho, toh wo tumhari `node_modules` (dark box) mein nahi chhupata. Wo tumhare samne ek folder mein aayega!
-**Structure:**
+[[HL::Jab tum Shadcn UI se koi component laate ho, toh wo tumhari `node_modules` (dark box) mein nahi chhupata. Wo tumhare samne ek folder mein aayega!::HL]]
+[[HL::**Structure:**::HL]]
 ```text
-📁 components/
-   📁 ui/
-      📄 button.tsx  <-- Shadcn ne ye file tumhare liye banayi hai! Tum isko edit kar sakte ho.
-      📄 card.tsx
+[[HL::📁 components/::HL]]
+   [[HL::📁 ui/::HL]]
+      [[HL::📄 button.tsx  <-- Shadcn ne ye file tumhare liye banayi hai! Tum isko edit kar sakte ho.::HL]]
+      [[HL::📄 card.ts::HL]]x
 ```
 
 ## ⚙️ 6. Under the Hood (Technical Working):
@@ -5223,67 +5223,67 @@ Jab tum Shadcn UI se koi component laate ho, toh wo tumhari `node_modules` (dark
 * **Layer 2 (Tailwind CSS):** Ye us Radix UI ke oopar Tailwind ki classes laga kar usko khoobsurat bana deta hai.
 * **Layer 3 (Your Code):** CLI (Command Line Interface) tool use karke ye code seedha tumhare folder mein copy-paste ho jata hai.
 
-## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
+## 💻 7. [[HL::Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):::HL]]
 
-**Step 1: Initializing Shadcn in Next.js**
-Terminal mein ye command run karo:
+[[HL::**Step 1: Initializing Shadcn in Next.js**::HL]]
+[[HL::Terminal mein ye command run karo:::HL]]
 ```bash
-npx shadcn-ui@latest init
+[[HL::npx shadcn-ui@latest init::HL]]
 ```
-*(CLI tumse puchega konsa color theme chahiye, default choose kar lo)*
+[[HL::*(CLI tumse puchega konsa color theme chahiye, default choose kar lo::HL]])*
 ```text
-# 📤 Expected Output:
-✔ Preflight checks.
-✔ Verifying framework. Found Next.js.
-✔ Writing components.json.
-✔ Initializing project...
-Success! Project initialization completed.
+# 📤 [[HL::Expected Output:::HL]]
+[[HL::✔ Preflight checks.::HL]]
+[[HL::✔ Verifying framework. Found Next.js.::HL]]
+[[HL::✔ Writing components.json.::HL]]
+[[HL::✔ Initializing project...::HL]]
+[[HL::Success! Project initialization completed.::HL]]
 ```
 
-**Step 2: Adding a Button Component**
-Tumhe poora Shadcn ek sath download nahi karna hai! Jo chahiye, bas wahi maango. Mujhe ek button chahiye:
+[[HL::**Step 2: Adding a Button Component**::HL]]
+[[HL::Tumhe poora Shadcn ek sath download nahi karna hai! Jo chahiye, bas wahi maango. Mujhe ek button chahiye:::HL]]
 ```bash
-npx shadcn-ui@latest add button
+[[HL::npx shadcn-ui@latest add button::HL]]
 ```
 ```text
-# 📤 Expected Output:
-✔ Installing dependencies.
-✔ Done.
-(A new file `components/ui/button.tsx` is created in your project!)
+[[HL::# 📤 Expected Output:::HL]]
+[[HL::✔ Installing dependencies.::HL]]
+[[HL::✔ Done.::HL]]
+[[HL::(A new file `components/ui/button.tsx` is created in your project!)::HL]]
 ```
 
-**Step 3: Using the Button in our page**
+[[HL::**Step 3: Using the Button in our page**::HL]]
 ```tsx
-import { Button } from "@/components/ui/button"; // Apne hi folder se import kar rahe hain!
+[[HL::import { Button } from "@/components/ui/button"; // Apne hi folder se import kar rahe hain!::HL]]
 
-export default function Home() {
-  return (
-    <div className="p-4">
-      {/* Default button */}
-      <Button>Click Me</Button> 
+[[HL::export default function Home() {::HL]]
+  [[HL::return (::HL]]
+    [[HL::<div className="p-4">::HL]]
+      [[HL::{/* Default button */}::HL]]
+      [[HL::<Button>Click Me</Button>::HL]] 
 
-      {/* Variant change karke 'destructive' (Red) button banaya */}
-      <Button variant="destructive" className="ml-4">Delete Account</Button>
-    </div>
-  );
-}
+      [[HL::{/* Variant change karke 'destructive' (Red) button banaya */}::HL]]
+      [[HL::<Button variant="destructive" className="ml-4">Delete Account</Button>::HL]]
+    [[HL::</div>::HL]]
+  [[HL::);::HL]]
+[[HL::}::HL]]
 ```
 ```text
-# 📤 Expected Output (On Browser):
-[Click Me] (A beautiful standard black/blue button depending on theme)
-[Delete Account] (A red warning button, spaced to the right)
+[[HL::# 📤 Expected Output (On Browser):::HL]]
+[[HL::[Click Me] (A beautiful standard black/blue button depending on theme)::HL]]
+[[HL::[Delete Account] (A red warning button, spaced to the right::HL]])
 ```
 
-## ⚖️ 8. Comparison (Ye vs Woh):
-| Feature | Traditional Libraries (MUI/Ant Design) | Shadcn UI |
+## ⚖️ 8. [[HL::Comparison (Ye vs Woh):::HL]]
+| [[HL::Feature::HL]] | [[HL::Traditional Libraries (MUI/Ant Design)::HL]] | [[HL::Shadcn UI::HL]] |
 | :--- | :--- | :--- |
-| **Installation** | `npm install @mui/material` | `npx shadcn-ui add <component-name>` |
-| **Code Access** | Hidden in `node_modules`. | Right inside your `components/ui/` folder! |
-| **Customization** | Very hard, requires overriding themes. | Very easy, just edit the standard React/Tailwind code. |
+| [[HL::**Installation**::HL]] | [[HL::`npm install @mui/material`::HL]] | [[HL::`npx shadcn-ui add <component-name>`::HL]] |
+| [[HL::**Code Access**::HL]] | [[HL::Hidden in `node_modules`.::HL]] | [[HL::Right inside your `components/ui/` folder!::HL]] |
+| [[HL::**Customization**::HL]] | [[HL::Very hard, requires overriding themes.::HL]] | [[HL::Very easy, just edit the standard React/Tailwind code::HL]]. |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
 1. **Trying to `npm install shadcn-ui`:** Beginners package manager mein isko khojte hain. Ye library nahi hai! Hamesha `npx shadcn-ui add` command use karni hoti hai.
-2. **Afraid to edit the component file:** Beginners sochte hain `button.tsx` file ko chhuunga toh kharab ho jayega. **Nahi!** Wo file tumhare liye hi bani hai, usko edit karna completely safe aur expected hai.
+2. [[HL::**Afraid to edit the component file:** Beginners sochte hain `button.tsx` file ko chhuunga toh kharab ho jayega. **Nahi!** Wo file tumhare liye hi bani hai, usko edit karna completely safe aur expected hai::HL]].
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
 * **"Agar update aaya toh main Shadcn UI ko update kaise karunga?"**
@@ -5309,20 +5309,20 @@ Aaj kal **Vercel** (jo Next.js banati hai) aur hazaron modern SaaS startups Shad
 ```
 
 ## 🛠️ 13. Best Practices (Pro Tips):
-* Sirf wahi components `add` karo jo tumhe sach mein chahiye. Agar tumne `calendar` ya `slider` abhi tak use nahi kiya hai, toh usko project mein daal kar kachra mat badhao. Keep your project lightweight!
+* [[HL::Sirf wahi components `add` karo jo tumhe sach mein chahiye. Agar tumne `calendar` ya `slider` abhi tak use nahi kiya hai, toh usko project mein daal kar kachra mat badhao. Keep your project lightweight::HL]]!
 
 ## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
 Agar tum basic HTML buttons use karte rahoge bina Shadcn ke, toh tumhara E-commerce store ek 1990 ke school project jaisa dikhega. Shadcn tumhe instant "Professional Silicon Valley" look deta hai.
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **Q: Is Shadcn a component library?**
-   *A: No, it’s a collection of reusable components that you copy and paste into your apps.*
-2. **Q: Why not just use Material UI?**
-   *A: Material UI is heavy and hard to customize. Shadcn gives full ownership of the component code and is natively built with Tailwind CSS.*
+1. [[HL::**Q: Is Shadcn a component library?**
+   *A: No, it’s a collection of reusable components that you copy and paste into your apps.*::HL]]
+2. [[HL::**Q: Why not just use Material UI?**::HL]]
+   [[HL::*A: Material UI is heavy and hard to customize. Shadcn gives full ownership of the component code and is natively built with Tailwind CSS::HL]].*
 3. **Q: What is Radix UI's role in Shadcn?**
    *A: Radix UI handles all the complex logic (like opening/closing, focus management, accessibility) while Shadcn handles the visual styling via Tailwind.*
-4. **Q: Can I use Shadcn without Tailwind?**
-   *A: No, Shadcn relies completely on Tailwind CSS for styling.*
+4. **Q: [[HL::Can I use Shadcn without Tailwind?**::HL]]
+   [[HL::*A: No, Shadcn relies completely on Tailwind CSS for styling::HL]].*
 5. **Q: Are Shadcn components accessible?**
    *A: Yes, fully. They follow WAI-ARIA standards out of the box because of Radix UI.*
 
@@ -5356,8 +5356,8 @@ Website pe bhi aisa hi hota hai. Tum kisi 'Buy Now' button pe click karne jate h
 * **Hinglish Simplification:** Ek aisi bimari jisme website ka design tab hilta hai jab koi heavy image ya font load ho raha hota hai. Next.js ke `Image` aur `Font` components is bimari ka perfect ilaaj hain, ye pehle se jagah (space) reserve kar lete hain.
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Normal `<img>` tag ya Google Fonts use karne se page dheere load hota hai. Jab tak image aati nahi, uski jagah khali hoti hai (0 pixels height). Jaise hi image aati hai, wo baki content ko dhakka maar kar niche kar deti hai. Google aisi hilne wali websites ko pasand nahi karta aur SEO ranking gira deta hai.
-* **Solution:** `next/image` aur `next/font` automatically us image/font ka exact size pehle se calculate karke browser ko bata dete hain ki "Bhai, itni jagah khaali chhod dena". Result? Page ekdum solid (rock-steady) load hota hai.
+* [[HL::**Problem:** Normal `<img>` tag ya Google Fonts use karne se page dheere load hota hai. Jab tak image aati nahi, uski jagah khali hoti hai (0 pixels height). Jaise hi image aati hai, wo baki content ko dhakka maar kar niche kar deti hai. Google aisi hilne wali websites ko pasand nahi karta aur SEO ranking gira deta hai.::HL]]
+* [[HL::**Solution:** `next/image` aur `next/font` automatically us image/font ka exact size pehle se calculate karke browser::HL]] [[HL::ko bata dete hain ki "Bhai, itni jagah khaali chhod dena". Result? Page ekdum solid (rock-steady) load hota hai::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 Tum `<img>` ki jagah `<Image>` use karोगे, aur Google fonts ka link HTML mein daalne ki bajaye, direct Next.js config mein font import karoge.
@@ -5369,7 +5369,7 @@ Tum `<img>` ki jagah `<Image>` use karोगे, aur Google fonts ka link HTML m
 ```
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-* **`next/font`:** Jab tum `npm run build` karte ho, Next.js Google ke server se font file download karke tumhare project ke andar save kar leta hai. Browser ko font ke liye extra internet call nahi karni padti.
+* [[HL::**`next/font`:** Jab tum `npm run build` karte ho, Next.js Google ke server se font file download karke tumhare project ke andar save kar leta hai. Browser ko font ke liye extra internet call nahi karni padti::HL]].
 * **`next/image`:** Ye automatically image ko **WebP/AVIF** (modern chhote formats) mein convert karta hai, uska size chota karta hai (agar phone se dekh rahe ho toh choti image dega), aur ek sundar sa blur (dhundhla) placeholder dikhata hai jab tak real image download na ho jaye.
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
@@ -5437,7 +5437,7 @@ export default function ProductPage() {
 | **Lazy Loading** | Khud code likhna padta hai | Default enabled hai (Niche scroll karोगे tabhi load hogi) |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-1. **Not defining Width and Height:** Agar tum external link (like `src="https://amazon.com/pic.jpg"`) use karte ho, toh Next.js ko uska size nahi pata hota. Tumhe manually `width={500} height={300}` dena padega, warna error aayega.
+1. [[HL::**Not defining Width and Height:** Agar tum external link (like `src="https://amazon.com/pic.jpg"`) use karte ho, toh Next.js ko uska size nahi pata hota. Tumhe manually `width={500} height={300}` dena padega, warna error aayega::HL]].
 2. **Importing huge remote images without `next.config.js`:** External images ko security ke liye allow karna padta hai config file mein, warna Next.js load hi nahi hone dega.
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
@@ -5479,10 +5479,10 @@ Agar images optimize nahi ki, toh website slow load hogi. Google tumhari SEO ran
    *A: It requires width and height to be set (or reads it from local imports) to reserve the exact layout space before the image downloads.*
 3. **Q: Does `next/font` require an active internet connection for the user to see the font?**
    *A: No, it downloads fonts at build time and serves them locally.*
-4. **Q: What is `lazy` loading?**
-   *A: It means images are only loaded by the browser when the user scrolls near them, saving bandwidth.*
-5. **Q: Why do I get an error when using an external image URL in `<Image>`?**
-   *A: You must add the remote hostname to the `images.remotePatterns` array in your `next.config.js` for security.*
+4. [[HL::**Q: What is `lazy` loading?**::HL]]
+   [[HL::*A: It means images are only loaded by the browser when the user scrolls near them, saving bandwidth::HL]].*
+5. [[HL::**Q: Why do I get an error when using an external image URL in `<Image>`?**::HL]]
+   [[HL::*A: You must add the remote hostname to the `images.remotePatterns` array in your `next.config.js` for security::HL]].*
 
 ## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
 `next/image` aur `next/font` tumhari website ke "Traffic Police" hain, jo images aur fonts ko line mein lagate hain taaki page ka design kabhi na hile aur website makhan ki tarah fast chale.
@@ -5497,12 +5497,12 @@ Tumhare kamre mein ek light ka switch hai. Din mein tum light band rakhte ho (Li
 Par socho agar tumne raat ko Dark Mode set kiya, aur agle din page refresh kiya toh wo firse ankho mein chubhnewala White ho gaya! Ye kitna annoying hai na? **Theme System** wahi chhota sa dimag hai jo yaad rakhta hai ki tumhara pasandida mode konsa hai, aur usko "flicker" (bijli chamakne) ke bina apply karta hai.
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** Implementing a robust theme system involves using `next-themes` to manage a `class` (dark/light) on the root `<html>` element. It synchronizes with `localStorage` to persist user preference and prevents hydration mismatch (the "flicker") on initial load.
-* **Hinglish Simplification:** Ek setup jisse website Dark aur Light mode switch kar sakti hai, user ki pasand ko browser mein save (persist) karti hai, aur page load hote hi bina jhatke (flicker) ke sahi theme dikhati hai.
+* [[HL::**Precise English:** Implementing a robust theme system involves using `next-themes` to manage a `class` (dark/light) on the root `<html>` element. It synchronizes with `localStorage` to persist user preference and prevents hydration mismatch (the "flicker") on initial load.::HL]]
+* [[HL::**Hinglish Simplification:** Ek setup jisse website Dark aur Light mode switch kar sakti hai, user ki pasand ko browser mein save (persist) karti hai, aur page load hote hi bina jhatke (flicker) ke sahi theme dikhati hai::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Normal React mein agar tum Dark mode banate ho (ek React State banakar), toh jab website pehli baar load hoti hai, wo fraction of a second ke liye White dikhti hai (kyunki default state white hoti hai), fir achanak Black ho jati hai. Is ankh fodne wale jhatke ko **Flicker** bolte hain.
-* **Solution:** `next-themes` library is "Flicker" ko rok deti hai. Ye page ko paint hone se *pehle* hi HTML tag pe `class="dark"` chipka deti hai, taaki sidha dark mode hi khule.
+* [[HL::**Problem:** Normal React mein agar tum Dark mode banate ho (ek React State banakar), toh jab website pehli baar load hoti hai, wo fraction of a second ke liye White dikhti hai (kyunki default state white hoti hai), fir achanak Black ho jati hai. Is ankh fodne wale jhatke ko **Flicker** bolte hain.::HL]]
+* [[HL::**Solution:** `next-themes` library is "Flicker" ko rok deti hai. Ye page ko paint hone se *pehle* hi HTML tag pe `class="dark"` chipka deti hai, taaki sidha dark mode hi khule::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 Tumhe ek `ThemeProvider` banana hoga jo poori website ko wrap karega.
@@ -5521,13 +5521,13 @@ Tumhe ek `ThemeProvider` banana hoga jo poori website ko wrap karega.
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
-**Step 1: Install `next-themes`**
+[[HL::**Step 1: Install `next-themes`**::HL]]
 ```bash
-npm install next-themes
+[[HL::npm install next-themes::HL]]
 ```
 ```text
-# 📤 Expected Output:
-added 1 package, and audited 345 packages in 2s
+# 📤 [[HL::Expected Output:::HL]]
+[[HL::added 1 package, and audited 345 packages in 2s::HL]]
 ```
 
 **Step 2: Tell Tailwind to use Class-based dark mode (`tailwind.config.ts`)**
@@ -5641,8 +5641,8 @@ Tailwind reads class="dark"
 Agar tumne "Flicker" ko theek nahi kiya, toh raat ko 2 baje tumhara customer andhere kamre mein site kholig aur ek bright white flash aayega screen pe. Uski aanke chaundhiye jayengi aur wo gusse mein site tab band kar dega!
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **Q: Why does Dark Mode sometimes cause a "Flash of Unstyled Content" (FOUC)?**
-   *A: Because the React Javascript hasn't loaded yet to read the localStorage preference, so it defaults to light mode for a split second.*
+1. [[HL::**Q: Why does Dark Mode sometimes cause a "Flash of Unstyled Content" (FOUC)?**::HL]]
+   [[HL::*A: Because the React Javascript hasn't loaded yet to read the localStorage preference, so it defaults to light mode for a split second::HL]].*
 2. **Q: How does `next-themes` solve this flash?**
    *A: By injecting a tiny blocking JS script in the `<head>` that runs before the page renders, instantly adding the correct class to the `<html>` tag.*
 3. **Q: What is `suppressHydrationWarning`?**
@@ -5855,12 +5855,12 @@ Socho tumne ek dukan kholi Delhi mein. Sab sahi chal raha hai. Phir tumne socha 
 **i18n** wahi system hai jo tumhari website ko batata hai: "Bhai, agar user France se hai, toh use French dikhao aur Euro mein price batao!"
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** Internationalization (i18n) is the process of designing a software application so that it can be adapted to various languages and regions without engineering changes. In Next.js, this involves localized routing, middleware for locale detection, and using libraries like `next-intl` to manage translation dictionaries.
-* **Hinglish Simplification:** Website ko aise setup karna ki wo automatically user ki language (Hindi, English, Arabic) pehchan le aur poora content, date, aur paise (currency) uske hisab se badal de.
+* [[HL::**Precise English:** Internationalization (i18n) is the process of designing a software application so that it can be adapted to various languages and regions without engineering changes. In Next.js, this involves localized routing, middleware for locale detection, and using libraries like `next-intl` to manage translation dictionaries.::HL]]
+* [[HL::**Hinglish Simplification:** Website ko aise setup karna ki wo automatically user ki language (Hindi, English, Arabic) pehchan le aur poora content, date, aur paise (currency) uske hisab se badal de::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Agar tumne text ko "Hardcode" kar diya (jaise `<h1>Welcome</h1>`), toh wo hamesha English hi rahega. Duniya ki sirf 25% janta English samajhti hai. Baaki 75% customer tum kho doge!
-* **Solution:** Hum text ko variables mein rakhte hain (jaise `t('welcome')`). Next.js check karta hai ki user `/en` page pe hai ya `/hi` page pe, aur uske hisab se sahi file se translation utha leta hai.
+* [[HL::**Problem:** Agar tumne text ko "Hardcode" kar diya (jaise `<h1>Welcome</h1>`), toh wo hamesha English hi rahega. Duniya ki sirf 25% janta English samajhti hai. Baaki 75% customer tum kho doge!::HL]]
+* [[HL::**Solution:** Hum text ko variables mein rakhte hain (jaise `t('welcome')`). Next.js check karta hai ki user `/en` page pe hai ya `/hi` page pe, aur uske hisab se sahi file se translation utha leta hai::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 Tumhare project mein translation ki JSON files hongi aur URL badal jayega.
@@ -5876,9 +5876,9 @@ Tumhare project mein translation ki JSON files hongi aur URL badal jayega.
 ```
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1. **Detection:** Jab user `mysite.com` kholta hai, **Middleware** uske browser ki settings check karta hai.
-2. **Routing:** Agar user ki language Hindi hai, toh middleware use `mysite.com/hi` par bhej deta hai.
-3. **Context:** `next-intl` library sahi JSON file (hi.json) load karti hai.
+1. [[HL::**Detection:** Jab user `mysite.com` kholta hai, **Middleware** uske browser ki settings check karta hai.::HL]]
+2. [[HL::**Routing:** Agar user ki language Hindi hai, toh middleware use `mysite.com/hi` par bhej deta hai.::HL]]
+3. [[HL::**Context:** `next-intl` library sahi JSON file (hi.json) load karti hai::HL]].
 4. **Rendering:** React component mein `t('welcome')` ki jagah "Swagat hai" print ho jata hai.
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
@@ -5957,7 +5957,7 @@ export function PriceDisplay({ amount }: { amount: number }) {
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
 1. **Forgeting RTL (Right-to-Left):** Arabic ya Hebrew mein sirf text nahi badalta, poori website ka layout mirror ho jata hai (Sidebar left se right chala jata hai). Hamesha `dir={locale === 'ar' ? 'rtl' : 'ltr'}` use karo.
-2. **Hardcoding Date Formats:** Kabhi `DD/MM/YYYY` mat likho. US mein `MM/DD/YYYY` chalta hai. Hamesha `format.dateTime()` use karo.
+2. [[HL::**Hardcoding Date Formats:** Kabhi `DD/MM/YYYY` mat likho. US mein `MM/DD/YYYY` chalta hai. Hamesha `format.dateTime()` use karo::HL]].
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
 * **"Bhai ye `[locale]` folder kyun banaya?"**
@@ -6030,12 +6030,12 @@ Socho tum ek bade Restaurant mein ho. Tum (Client/Browser) table par baithe ho. 
 **Server Actions** ka matlab hai: Tumhare table par ek jaadui pipe lag gaya hai jo seedha Kitchen ke Chef tak jata hai. Tum seedha order pipe mein daalo, aur Chef kaam shuru kar dega. Waiter (API) ki ab koi zaroorat nahi! Aur **Zod Validation** wo chaukidar hai jo pipe ke end par khada hai, yeh check karne ke liye ki tumne sach mein khana order kiya hai, ya mazak mein patthar daal diye hain.
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** Server Actions are asynchronous functions that are executed on the server but can be directly called from Client Components or Server Components in Next.js, eliminating the need to manually write API endpoints. Zod is a TypeScript-first schema declaration and validation library used to securely validate the incoming data on the server.
-* **Hinglish Simplification:** Ek aisa function jo likha toh frontend ke code ke aas-paas jata hai, par chalta hamesha secure server par hai, bina kisi extra API route banaye. Zod us function ke data ko check (validate) karne ka tool hai.
+* [[HL::**Precise English:** Server Actions are asynchronous functions that are executed on the server but can be directly called from Client Components or Server Components in Next.js, eliminating the need to manually write API endpoints. Zod is a TypeScript-first schema declaration and validation library used to securely validate the incoming data on the server.::HL]]
+* [[HL::**Hinglish Simplification:** Ek aisa function jo likha toh frontend ke code ke aas-paas jata hai, par chalta hamesha secure server par hai, bina kisi extra API route banaye. Zod us function ke data ko check (validate) karne ka tool hai::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Pehle agar tumhe ek chota sa form submit karna hota tha (jaise Contact Us), toh tumhe 1. Ek alag API route file banani padti thi. 2. Frontend mein `fetch()` likhna padta tha. 3. Headers aur JSON stringify karna padta tha. Bahut zyada faltu code (boilerplate) likhna padta tha.
-* **Solution:** Server Actions se tum bas ek function banate ho jiske upar `"use server"` likhte ho, aur usko seedha form ke `action` attribute mein pass kar dete ho. Next.js baaki saara network ka kaam khud sambhal leta hai. Time aur code dono bachta hai!
+* [[HL::**Problem:** Pehle agar tumhe ek chota sa form submit karna hota tha (jaise Contact Us), toh tumhe 1. Ek alag API route file banani padti thi. 2. Frontend mein `fetch()` likhna padta tha. 3. Headers aur JSON stringify karna padta tha. Bahut zyada faltu code (boilerplate) likhna padta tha.::HL]]
+* [[HL::**Solution:** Server Actions se tum bas ek function banate ho jiske upar `"use server"` likhte ho, aur usko seedha form ke `action` attribute mein pass kar dete ho. Next.js baaki saara network ka kaam khud sambhal leta hai. Time aur code dono bachta hai::HL]]!
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 Tumhare VS Code ke andar `app` folder mein tumhe yeh structure dikhega:
@@ -6059,8 +6059,8 @@ Tumhare VS Code ke andar `app` folder mein tumhe yeh structure dikhega:
 Sabse pehle, humein validation ke liye **Zod** install karna padega. Terminal mein yeh likho:
 
 ```bash
-# Terminal Command: Zod install karne ke liye
-npm install zod
+# [[HL::Terminal Command: Zod install karne ke liye::HL]]
+[[HL::npm install zod::HL]]
 ```
 ```text
 # 📤 Expected Output:
@@ -6073,53 +6073,53 @@ Ab hum 2 files banayenge. Ek Backend ke liye (`actions.ts`), aur ek Frontend ke 
 
 **File 1: `app/actions.ts` (Tumhara Server Function)**
 ```typescript
-// app/actions.ts
-"use server" // Yeh likhna bohot zaroori hai! Ye batata hai ki ye code sirf server par chalega.
+// [[HL::app/actions.ts::HL]]
+[[HL::"use server" // Yeh likhna bohot zaroori hai! Ye batata hai ki ye code sirf server par chalega.::HL]]
 
-import { z } from "zod"; // Zod library ko import kar rahe hain validation ke liye
+[[HL::import { z } from "zod"; // Zod library ko import kar rahe hain validation ke liye::HL]]
 
-// Zod ka ek Schema (Rulebook) bana rahe hain
-const formSchema = z.object({
-  username: z.string().min(3, "Naam kam se kam 3 letters ka hona chahiye"), // Name string ho aur min 3 chars
-  email: z.string().email("Sahi email id daalo bhai!"), // Email proper format mein hona chahiye
-});
+[[HL::// Zod ka ek Schema (Rulebook) bana rahe hain::HL]]
+[[HL::const formSchema = z.object({::HL]]
+  [[HL::username: z.string().min(3, "Naam kam se kam 3 letters ka hona chahiye"), // Name string ho aur min 3 chars::HL]]
+  [[HL::email: z.string().email("Sahi email id daalo bhai!"), // Email proper format mein hona chahiye::HL]]
+[[HL::});::HL]]
 
-// Yeh hamara main Server Action function hai. 
-// prevState (purana state) aur formData (jo user ne form me bhara) isko milta hai.
-export async function registerUser(prevState: any, formData: FormData) {
+[[HL::// Yeh hamara main Server Action function hai.::HL]] 
+[[HL::// prevState (purana state) aur formData (jo user ne form me bhara) isko milta hai.::HL]]
+[[HL::export async function registerUser(prevState: any, formData: FormData) {::HL]]
   
-  // 1. Form se data nikalna
-  const rawData = {
-    username: formData.get("username"), // form ke input(name="username") ki value
-    email: formData.get("email"),       // form ke input(name="email") ki value
-  };
+  [[HL::// 1. Form se data nikalna::HL]]
+  [[HL::const rawData = {::HL]]
+    [[HL::username: formData.get("username"), // form ke input(name="username") ki value::HL]]
+    [[HL::email: formData.get("email"),       // form ke input(name="email") ki value::HL]]
+  [[HL::};::HL]]
 
-  // 2. Zod se Check (Validate) karna ki data rules follow kar raha hai ya nahi
-  const validatedData = formSchema.safeParse(rawData);
+  [[HL::// 2. Zod se Check (Validate) karna ki data rules follow kar raha hai ya nahi::HL]]
+  [[HL::const validatedData = formSchema.safeParse(rawData);::HL]]
 
-  // 3. Agar user ne galat data daala hai (jaise galat email)
-  if (!validatedData.success) {
-    // Console pe print karo server side pe
-    console.log("Validation Failed:", validatedData.error.flatten().fieldErrors);
+  [[HL::// 3. Agar user ne galat data daala hai (jaise galat email)::HL]]
+  [[HL::if (!validatedData.success) {::HL]]
+    [[HL::// Console pe print karo server side pe::HL]]
+    [[HL::console.log("Validation Failed:", validatedData.error.flatten().fieldErrors);::HL]]
     
-    // UI ko error message wapas bhejo
-    return { 
-      error: "Galat data daala hai. Kripya form check karein.",
-      success: false 
-    };
-  }
+    [[HL::// UI ko error message wapas bhejo::HL]]
+    [[HL::return {::HL]] 
+      [[HL::error: "Galat data daala hai. Kripya form check karein.",::HL]]
+      [[HL::success: false::HL]] 
+    [[HL::};::HL]]
+  [[HL::}::HL]]
 
-  // 4. Agar sab sahi hai (Yahan tum data ko Database mein save karoge)
-  console.log("Database me save ho raha hai:", validatedData.data);
+  [[HL::// 4. Agar sab sahi hai (Yahan tum data ko Database mein save karoge)::HL]]
+  [[HL::console.log("Database me save ho raha hai:", validatedData.data);::HL]]
   
-  // Fake delay taaki hum loading state dekh sakein (2 seconds)
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+  [[HL::// Fake delay taaki hum loading state dekh sakein (2 seconds)::HL]]
+  [[HL::await new Promise((resolve) => setTimeout(resolve, 2000));::HL]]
 
-  // 5. Success message wapas bhejo UI ko
-  return { 
-    error: null, 
-    success: true, 
-    message: `Badhai ho ${validatedData.data.username}, account ban gaya!` 
+  [[HL::// 5. Success message wapas bhejo UI ko::HL]]
+  [[HL::return {::HL]] 
+    [[HL::error: null,::HL]] 
+    [[HL::success: true,::HL]] 
+    [[HL::message: `Badhai ho ${validatedData.data.username}, account ban gaya::HL]]!` 
   };
 }
 ```
@@ -6268,8 +6268,8 @@ Agar tumne `"use server"` function galti se ek normal client file mein bina decl
 ## ❓ 15. FAQ (Interview Questions):
 1. **Q: What is a Server Action in Next.js?**
    **A:** It's an asynchronous function executed on the server, callable directly from a client or server component without manually creating API endpoints.
-2. **Q: Why do we use Zod?**
-   **A:** For schema validation on the server to ensure incoming data (like form submissions) matches expected types and formats securely.
+2. [[HL::**Q: Why do we use Zod?**::HL]]
+   [[HL::**A:** For schema validation on the server to ensure incoming data (like form submissions) matches expected types and formats securely::HL]].
 3. **Q: What happens if JavaScript is disabled in the browser? Do Server Actions work?**
    **A:** Yes! Forms with server actions will fall back to standard HTML form submissions, making them highly reliable.
 4. **Q: What is `useFormStatus` used for?**
@@ -6302,12 +6302,12 @@ Agar tum aam React (`useState`) use karte ho, toh iska matlab hai: Tum form ka e
 **React Hook Form (RHF)** ek Smart Assistant ki tarah hai. Tum aaram se poora form bharte raho, assistant chupchap dekhta rahega bina tumhe disturb kiye. Jab tum form poora kar loge, ya jab tum kisi fix rule (Zod) ko todoge (jaise phone number mein ABC likh diya), sirf tabhi assistant tumhe tokega. Isse form bohot fast aur smooth chalta hai!
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** React Hook Form is a lightweight library for managing form state in React using uncontrolled components, which minimizes re-renders and boosts performance. We use `@hookform/resolvers` to connect it seamlessly with Zod for robust client-side validation.
-* **Hinglish Simplification:** Ye ek tool hai jo bade forms ko bina website ko slow kiye handle karta hai. Ye Zod ke sath milkar form submit hone se *pehle* hi browser mein check kar leta hai ki data sahi hai ya nahi.
+* [[HL::**Precise English:** React Hook Form is a lightweight library for managing form state in React using uncontrolled components, which minimizes re-renders and boosts performance. We use `@hookform/resolvers` to connect it seamlessly with Zod for robust client-side validation.::HL]]
+* [[HL::**Hinglish Simplification:** Ye ek tool hai jo bade forms ko bina website ko slow kiye handle karta hai. Ye Zod ke sath milkar form submit hone se *pehle* hi browser mein check kar leta hai ki data sahi hai ya nahi::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Agar checkout form mein 15 input fields hain, aur tum `useState` use kar rahe ho, toh user jab bhi ek key dabayega (jaise 'A'), poora form page wapas se refresh/re-draw (re-render) hoga. Mobile devices par ye bohot laggy (atakk atakk ke) chalta hai. Upar se server se aane wale errors ko wapas form me theek jagah dikhana bada dardnaak kaam hai.
-* **Solution:** React Hook Form React ke background mechanism (Refs) ka use karta hai. Tum type karte raho, page re-render nahi hoga. Aur Zod ke rules form mein direct jud jaate hain. Plus, agar Server Action bole ki "Bhai, ye Email toh pehle se registered hai", toh hum wo error aaram se form mein sync kar sakte hain.
+* [[HL::**Problem:** Agar checkout form mein 15 input fields hain, aur tum `useState` use kar rahe ho, toh user jab bhi ek key dabayega (jaise 'A'), poora form page wapas se refresh/re-draw (re-render) hoga. Mobile devices par ye bohot laggy (atakk atakk ke) chalta hai. Upar se server se aane wale errors ko wapas form me theek jagah dikhana bada dardnaak kaam hai.::HL]]
+* [[HL::**Solution:** React Hook Form React ke background mechanism (Refs) ka use karta hai. Tum type karte raho, page re-render nahi hoga. Aur Zod ke rules form mein direct jud jaate hain. Plus, agar Server Action bole ki "Bhai, ye Email toh pehle se registered hai", toh hum wo error aaram se form mein sync kar sakte hain::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 Tumhare VS Code mein kuch naye packages install honge aur ek form component banega:
@@ -6346,57 +6346,57 @@ Ab hum ek Checkout Form banayenge jo Server ke sath baat karega.
 
 **File: `app/checkout/page.tsx`**
 ```tsx
-"use client"; // Kyunki ye UI form hai
+"[[HL::use client"; // Kyunki ye UI form hai::HL]]
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod"; // Ye RHF aur Zod ko jodata hai
-import { z } from "zod";
-import { registerUser } from "../actions"; // Pichle topic ka server action import kiya
+[[HL::import { useForm } from "react-hook-form";::HL]]
+[[HL::import { zodResolver } from "@hookform/resolvers/zod"; // Ye RHF aur Zod ko jodata hai::HL]]
+[[HL::import { z } from "zod";::HL]]
+[[HL::import { registerUser } from "../actions"; // Pichle topic ka server action import kiya::HL]]
 
-// 1. Zod Schema (Rulebook) - Ye rules pehle browser me check honge
-const checkoutSchema = z.object({
-  fullName: z.string().min(3, "Naam mein kam se kam 3 letter hone chahiye"),
-  email: z.string().email("Sahi email id daaliye"),
-  pincode: z.string().length(6, "Pincode exactly 6 digit ka hona chahiye"),
-});
+[[HL::// 1. Zod Schema (Rulebook) - Ye rules pehle browser me check honge::HL]]
+[[HL::const checkoutSchema = z.object({::HL]]
+  [[HL::fullName: z.string().min(3, "Naam mein kam se kam 3 letter hone chahiye"),::HL]]
+  [[HL::email: z.string().email("Sahi email id daaliye"),::HL]]
+  [[HL::pincode: z.string().length(6, "Pincode exactly 6 digit ka hona chahiye"),::HL]]
+[[HL::});::HL]]
 
-// TypeScript walon ke liye: Zod schema se Type nikalna (taaki auto-complete mile)
-type CheckoutFormValues = z.infer<typeof checkoutSchema>;
+[[HL::// TypeScript walon ke liye: Zod schema se Type nikalna (taaki auto-complete mile)::HL]]
+[[HL::type CheckoutFormValues = z.infer<typeof checkoutSchema>;::HL]]
 
-export default function CheckoutPage() {
+[[HL::export default function CheckoutPage() {::HL]]
   
-  // 2. React Hook Form ko setup karna
-  const {
-    register,       // Inputs ko form se jodne ke liye
-    handleSubmit,   // Form submit handle karne ke liye
-    setError,       // Server se error aaye toh set karne ke liye
-    formState: { errors, isSubmitting }, // Errors aur loading state nikalne ke liye
-  } = useForm<CheckoutFormValues>({
-    resolver: zodResolver(checkoutSchema), // RHF ko bata diya ki Zod ke rules maanne hain
-  });
+  [[HL::// 2. React Hook Form ko setup karna::HL]]
+  [[HL::const {::HL]]
+    [[HL::register,       // Inputs ko form se jodne ke liye::HL]]
+    [[HL::handleSubmit,   // Form submit handle karne ke liye::HL]]
+    [[HL::setError,       // Server se error aaye toh set karne ke liye::HL]]
+    [[HL::formState: { errors, isSubmitting }, // Errors aur loading state nikalne ke liye::HL]]
+  [[HL::} = useForm<CheckoutFormValues>({::HL]]
+    [[HL::resolver: zodResolver(checkoutSchema), // RHF ko bata diya ki Zod ke rules maanne hain::HL]]
+  [[HL::});::HL]]
 
-  // 3. Hamara apna Submit function
-  // Ye tabhi chalega jab Zod browser me sab pass kar dega
-  const onSubmitForm = async (data: CheckoutFormValues) => {
+  [[HL::// 3. Hamara apna Submit function::HL]]
+  [[HL::// Ye tabhi chalega jab Zod browser me sab pass kar dega::HL]]
+  [[HL::const onSubmitForm = async (data: CheckoutFormValues) => {::HL]]
     
-    // Server action ko call kar rahe hain (Topic 15 yaad hai?)
-    // Yahan hum FormData ki jagah direct Javascript Object bhej sakte hain backend ko!
-    const formData = new FormData();
-    formData.append("username", data.fullName);
-    formData.append("email", data.email);
+    [[HL::// Server action ko call kar rahe hain (Topic 15 yaad hai?)::HL]]
+    [[HL::// Yahan hum FormData ki jagah direct Javascript Object bhej sakte hain backend ko!::HL]]
+    [[HL::const formData = new FormData();::HL]]
+    [[HL::formData.append("username", data.fullName);::HL]]
+    [[HL::formData.append("email", data.email);::HL]]
     
-    // Dummy state aur form data pass kar rahe hain server action ko
-    const response = await registerUser({}, formData); 
+    [[HL::// Dummy state aur form data pass kar rahe hain server action ko::HL]]
+    [[HL::const response = await registerUser({}, formData);::HL]] 
     
-    // SYNCING: Agar server se error aayi (jaise: Email pehle se hai)
-    if (response.success === false) {
-      // setError hume form ke kisi specific input par error dikhane deta hai
-      setError("email", { 
-        type: "server", 
-        message: response.error || "Server pe kuch gadbad hai" 
-      });
-    } else {
-      alert("Checkout Success! " + response.message);
+    [[HL::// SYNCING: Agar server se error aayi (jaise: Email pehle se hai)::HL]]
+    [[HL::if (response.success === false) {::HL]]
+      [[HL::// setError hume form ke kisi specific input par error dikhane deta hai::HL]]
+      [[HL::setError("email", {::HL]] 
+        [[HL::type: "server",::HL]] 
+        [[HL::message: response.error::HL]] || [[HL::"Server pe kuch gadbad hai"::HL]] 
+      [[HL::});::HL]]
+    [[HL::} else {::HL]]
+      [[HL::alert("Checkout Success! " + response.message::HL]]);
     }
   };
 
@@ -6472,11 +6472,11 @@ Agar server pass kare toh:
 
 ## ⚖️ 8. Comparison (Ye vs Woh):
 
-| Feature | Standard React Form (`useState`) | React Hook Form (RHF) |
+| [[HL::Feature::HL]] | [[HL::Standard React Form (`useState`)::HL]] | [[HL::React Hook Form (RHF)::HL]] |
 | :--- | :--- | :--- |
-| **Typing Speed** | Har letter type karne par lag hota hai (bade form me). | Super fast, koi unnecessary re-renders nahi. |
-| **Validation Code** | Tumhe khud saare `if-else` likhne padte hain. | Seedha Zod schema pass karo, automatic ho jata hai. |
-| **Code Length** | Bohot lamba (Har input ke liye alag state aur onChange). | Bohot chota (Sirf `...register("name")` likhna hai). |
+| [[HL::**Typing Speed**::HL]] | [[HL::Har letter type karne par lag hota hai (bade form me).::HL]] | [[HL::Super fast, koi unnecessary re-renders nahi.::HL]] |
+| [[HL::**Validation Code**::HL]] | [[HL::Tumhe khud saare `if-else` likhne padte hain.::HL]] | [[HL::Seedha Zod schema pass karo, automatic ho jata hai.::HL]] |
+| [[HL::**Code Length**::HL]] | [[HL::Bohot lamba (Har input ke liye alag state aur onChange).::HL]] | [[HL::Bohot chota (Sirf `...register("name")` likhna hai::HL]]). |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
 1. **`name` attribute bhool jana:** RHF mein `<input name="email">` likhne ki jagah hum `{...register("email")}` likhte hain. Ye khud hi name aur onChange dono laga deta hai. Beginners isko bhool jate hain aur sochte hain data kyu nahi aa raha.
@@ -6484,7 +6484,7 @@ Agar server pass kare toh:
 3. **Zod aur RHF ka mismatch:** Jo naam Zod schema mein hai (jaise `fullName`), exactly wahi naam `register("fullName")` mein hona chahiye. Spelling mistake hui toh form toot jayega.
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-* **Confusion 1: "Zod toh Topic 15 mein server par tha, abhi client par kyun laga diya?"** Great question! Tumhe dono jagah Zod chahiye. Client par (Browser me) Zod isliye chahiye taaki user ko "Instant" feedback mile bina server ko hit kiye (isse user experience achha hota hai aur server ka load bachta hai). Server par Zod isliye chahiye taaki koi Hacker Postman se direct ganda data server ko na bhej de. (Isko **Double Validation** kehte hain aur ye Industry Standard hai).
+* [[HL::**Confusion 1: "Zod toh Topic 15 mein server par tha, abhi client par kyun laga diya?"** Great question! Tumhe dono jagah Zod chahiye. Client par (Browser me) Zod isliye chahiye taaki user ko "Instant" feedback mile bina server ko hit kiye (isse user experience achha hota hai aur server ka load bachta hai). Server par Zod isliye chahiye taaki koi Hacker Postman se direct ganda data server ko na bhej de. (Isko **Double Validation** kehte hain aur ye Industry Standard hai::HL]]).
 * **Confusion 2: `isSubmitting` kahan se aaya?**
   Ye RHF ka in-built feature hai. Jab tumhara `onSubmitForm` wala function (jo `async` hai) chalta hai, toh RHF khud samajh jata hai ki abhi await chal raha hai, aur wo `isSubmitting` ko `true` kar deta hai. Tumhe alag se `const [loading, setLoading]` banane ki zaroorat nahi!
 
@@ -6520,8 +6520,8 @@ Agar server pass kare toh:
 Agar tumne e-commerce site par `useState` lagakar 20 field ka bada form bana diya, toh purane budget smartphones par form hang ho jayega. User irritate hokar app band kar dega aur tumhari sale loss ho jayegi. Performance matters!
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **Q: Why use React Hook Form over controlled components (useState)?**
-   **A:** Because it uses uncontrolled inputs to avoid re-rendering the entire component on every keystroke, resulting in much better performance for large forms.
+1. **Q: [[HL::Why use React Hook Form over controlled components (useState)?**::HL]]
+   [[HL::**A:** Because it uses uncontrolled inputs to avoid re-rendering the entire component on every keystroke, resulting in much better performance for large forms::HL]].
 2. **Q: What is the role of a "resolver" in RHF?**
    **A:** A resolver acts as a bridge between React Hook Form and external validation libraries like Zod or Yup, translating their validation results into RHF's error format.
 3. **Q: Can React Hook Form handle Server Action errors?**
@@ -7233,7 +7233,7 @@ Agar tumne connection string mein ek letter bhi galat type kiya, toh terminal me
 ---
 ---
 
-## 🎯 1. Title / Topic: ORM - Prisma or Drizzle (Schema: User, Product, Order)
+## 🎯 1. Title / Topic: ORM - [[HL::Prisma or Drizzle (Schema::HL]]: User, Product, Order)
 *(Topic 19: Database Layer - Subtopic 2)*
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
@@ -7242,79 +7242,79 @@ Socho tum (JavaScript/Code) ek aisi country mein gaye ho jahan sab sirf Russian 
 
 ## 📖 3. Technical Definition (Interview Answer):
 * **Precise English:** An ORM (Object-Relational Mapping) is a technique/tool that lets you query and manipulate data from a database using an object-oriented paradigm. Prisma and Drizzle are modern TypeScript ORMs that provide type-safe database access.
-* **Hinglish Simplification:** Bina complex SQL queries yaad kiye, simple JavaScript/TypeScript code likh kar database se data nikalne aur save karne ke tool ko ORM kehte hain.
+* [[HL::**Hinglish Simplification:** Bina complex SQL queries yaad kiye, simple JavaScript/TypeScript code likh kar database se data nikalne aur save karne ke tool ko ORM kehte hain::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Database se baat karne ke liye SQL likhni padti hai jaise `SELECT * FROM users WHERE age > 18;`. Yeh likhne mein mistakes bahut hoti hain, autocompletion nahi milta, aur bugs aate hain.
-* **Solution:** ORM allow karta hai ki hum SQL ki jagah JS/TS use karein: `prisma.user.findMany()`. Isse humein code editor mein autocompletion milta hai, errors pehle hi dikh jaate hain, aur code clean rehta hai.
+* [[HL::**Problem:** Database se baat karne ke liye SQL likhni padti hai jaise `SELECT * FROM users WHERE age > 18;`. Yeh likhne mein mistakes bahut hoti hain, autocompletion nahi milta, aur bugs aate hain.::HL]]
+* [[HL::**Solution:** ORM allow karta hai ki hum SQL ki jagah JS/TS use karein: `prisma.user.findMany()`. Isse humein code editor mein autocompletion milta hai, errors pehle hi dikh jaate hain, aur code clean rehta hai::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
-Tumhare project folder ke andar ek naya folder banega `prisma/`, aur uske andar ek file hogi `schema.prisma`. Is file mein tum apna "Naksha" (Blueprint) define karoge ki tumhara database kaisa dikhega.
+Tumhare project [[HL::folder ke andar ek naya folder banega `prisma/`, aur uske andar ek file hogi `schema.prisma`. Is file mein tum apna "Naksha" (Blueprint) define karoge ki tumhara database kaisa dikhega::HL]].
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1. Tum apne code mein likhte ho: `prisma.user.create({ data: { name: "Rahul" } })`
-2. Prisma Client (background mein) is JavaScript object ko read karta hai.
-3. Prisma Engine isko SQL query mein convert karta hai: `INSERT INTO User (name) VALUES ('Rahul');`
-4. Yeh query database ko bheji jaati hai aur data save ho jata hai.
+1. [[HL::Tum apne code mein likhte ho: `prisma.user.create({ data: { name: "Rahul" } })`::HL]]
+2. [[HL::Prisma Client (background mein) is JavaScript object ko read karta hai::HL]].
+3. [[HL::Prisma Engine isko SQL query mein convert karta hai: `INSERT INTO User (name) VALUES ('Rahul');`::HL]]
+4. [[HL::Yeh query database ko bheji jaati hai aur data save ho jata hai.::HL]]
 
-## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
+[[HL::## 💻 7. Hands-On: Code / Step-b::HL]]y-Step Practical (CRITICAL SECTION):
 
 Pehle hum Prisma ko apne project mein install karenge. Terminal (command line) open karo aur likho:
 
 ```bash
-# Prisma ke tools ko as a developer dependency (sirf development ke liye) install kar rahe hain
-npm install prisma --save-dev
+# [[HL::Prisma ke tools ko as a developer dependency (sirf development ke liye) install kar rahe hain::HL]]
+[[HL::npm install prisma --save-dev::HL]]
 
-# 📤 Expected Output:
-# added 1 package, and audited 342 packages in 3s
-# found 0 vulnerabilities
+[[HL::# 📤 Expected Output:::HL]]
+[[HL::# added 1 package, and audited 342 packages in 3s::HL]]
+[[HL::# found 0 vulnerabilities::HL]]
 
-# Ab Prisma ko initialize (start) karenge
-npx prisma init
+[[HL::# Ab Prisma ko initialize (start) karenge::HL]]
+[[HL::npx prisma init::HL]]
 
-# 📤 Expected Output:
-# ✔ Your Prisma schema was created at prisma/schema.prisma
-#   You can now open it in your text editor.
+[[HL::# 📤 Expected Output:::HL]]
+[[HL::# ✔ Your Prisma schema was created at prisma/schema.prisma::HL]]
+[[HL::#   You can now open it in your text editor::HL]].
 ```
 
 Ab hum `prisma/schema.prisma` file kholenge aur apne Tables ka naksha banayenge.
 
-**File:** `prisma/schema.prisma`
+[[HL::**File:** `prisma/schema.prisma`::HL]]
 ```prisma
-// 1. Kis tarah ka database use kar rahe hain? PostgreSQL.
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL") // Jo humne pichle step mein .env mein rakha tha
-}
+// 1. [[HL::Kis tarah ka database use kar rahe hain? PostgreSQL.::HL]]
+[[HL::datasource db {::HL]]
+  [[HL::provider = "postgresql"::HL]]
+  [[HL::url      = env("DATABASE_URL") // Jo humne pichle step mein .env mein rakha tha::HL]]
+[[HL::}::HL]]
 
-// 2. ORM ka client kaunsi language mein code generate karega? (JavaScript/TypeScript)
-generator client {
-  provider = "prisma-client-js"
-}
+[[HL::// 2. ORM ka client kaunsi language mein code generate karega? (JavaScript/TypeScript)::HL]]
+[[HL::generator client {::HL]]
+  [[HL::provider = "prisma-client-js"::HL]]
+[[HL::}::HL]]
 
-// 3. User Table (Naksha)
-model User {
-  id        Int      @id @default(autoincrement()) // Har user ka unique ID hoga (1, 2, 3...)
-  email     String   @unique                       // Email same nahi ho sakti 2 logon ki
-  name      String?                                // ? ka matlab hai naam optional hai (khali chhod sakte hain)
-  orders    Order[]                                // Ek user ke paas bahut saare Orders ho sakte hain (Relation)
-}
+[[HL::// 3. User Table (Naksha)::HL]]
+[[HL::model User {::HL]]
+  [[HL::id        Int      @id @default(autoincrement()) // Har user ka unique ID hoga (1, 2, 3...)::HL]]
+  [[HL::email     String   @unique                       // Email same nahi ho sakti 2 logon ki::HL]]
+  [[HL::name      String?                                // ? ka matlab hai naam optional hai (khali chhod sakte hain)::HL]]
+  [[HL::orders    Order[]                                // Ek user ke paas bahut saare Orders ho sakte hain (Relation)::HL]]
+[[HL::}::HL]]
 
-// 4. Product Table (Naksha)
-model Product {
-  id          Int      @id @default(autoincrement())
-  title       String   // Product ka naam
-  price       Float    // Price decimals mein ho sakti hai (jaise 99.99)
-  orderItems  Order[]  // Yeh product kis kis order mein hai
-}
+[[HL::// 4. Product Table (Naksha)::HL]]
+[[HL::model Product {::HL]]
+  [[HL::id          Int      @id @default(autoincrement())::HL]]
+  [[HL::title       String   // Product ka naam::HL]]
+  [[HL::price       Float    // Price decimals mein ho sakti hai (jaise 99.99)::HL]]
+  [[HL::orderItems  Order[]  // Yeh product kis kis order mein hai::HL]]
+[[HL::}::HL]]
 
-// 5. Order Table (Naksha)
-model Order {
-  id          Int      @id @default(autoincrement())
-  userId      Int      // Kis user ne order kiya
-  user        User     @relation(fields: [userId], references: [id]) // User aur Order ko jod (link) rahe hain
-  productId   Int      // Kya product order hua
-  product     Product  @relation(fields: [productId], references: [id])
+[[HL::// 5. Order Table (Naksha)::HL]]
+[[HL::model Order {::HL]]
+  [[HL::id          Int      @id @default(autoincrement())::HL]]
+  [[HL::userId      Int      // Kis user ne order kiya::HL]]
+  [[HL::user        User     @relation(fields: [userId], references: [id]) // User aur Order ko jod (link) rahe hain::HL]]
+  [[HL::productId   Int      // Kya product order hua::HL]]
+  [[HL::product     Product  @relation(fields: [productId], references: [id::HL]]])
 }
 ```
 *(Jab yeh file save karoge toh koi output terminal par nahi aayega. Yeh bas rules define kar raha hai)*
@@ -7327,17 +7327,17 @@ model Order {
 | **Speed/Performance** | Thoda heavy hai (background engine run hota hai). | Ekdum fast aur light (Edge functions pe perfect chalta hai). |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-* **Mistake:** `schema.prisma` file mein changes karne ke baad database ko update karna bhool jana.
-* **Fix:** Hamesha schema change karne ke baad terminal mein `npx prisma db push` (development mein) ya `npx prisma migrate dev` chalana hota hai taaki asli database mein bhi woh tables ban jayein.
+* [[HL::**Mistake:** `schema.prisma` file mein changes karne ke baad database ko update karna bhool jana.::HL]]
+* [[HL::**Fix:** Hamesha schema change karne ke baad terminal mein `npx prisma db push` (development mein) ya `npx prisma migrate dev` chalana hota hai taaki asli database mein bhi woh tables ban jayein.::HL]]
 
-## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-* **Confusion 1: "Schema kya bala hai?"**
-  Schema bas ek blueprint (architect ka naksha) hai. Yeh database ko batata hai ki User table mein 'email' hamesha text hoga, aur 'age' hamesha number.
-* **Confusion 2: "Model User mein `@id @default(autoincrement())` kya hai?"**
-  Iska matlab hai ki humein khud se har user ko ID number dene ki zaroorat nahi hai. Database khud automatically pehle user ko ID 1 dega, dusre ko 2, teesre ko 3.
+[[HL::## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):::HL]]
+* [[HL::**Confusion 1: "Schema kya bala hai?"**::HL]]
+  [[HL::Schema bas ek blueprint (architect ka naksha) hai. Yeh database ko batata hai ki User table mein 'email' hamesha text hoga, aur 'age' hamesha number.::HL]]
+* [[HL::**Confusion 2: "Model User mein `@id @default(autoincrement())` kya hai?"**::HL]]
+  [[HL::Iska matlab hai ki humein khud se har user ko ID number dene ki zaroorat nahi hai. Database khud automatically pehle user ko ID 1 dega, dusre ko 2, teesre ko 3.::HL]]
 
-## 🌍 11. Real-World Use Case (Production Application):
-Ek e-commerce website par jab tum "My Orders" par click karte ho, toh backend Prisma ka use karke ek line ka code chalata hai: `prisma.user.findUnique({ where: { id: myId }, include: { orders: true } })`. Yeh automatically user aur uske saare orders database se nikal kar laa deta hai.
+[[HL::## 🌍 11. Real-World Use Case (Production Application):::HL]]
+[[HL::Ek e-commerce website par jab tum "My Orders" par click karte ho, toh backend Prisma ka use karke ek line ka code chalata hai: `prisma.user.findUnique({ where: { id: myId }, include: { orders: true } })`. Yeh automatically user aur uske saare orders database se nikal kar laa deta hai::HL]].
 
 ## 🎨 12. Visual Diagram (ASCII Art):
 ```text
@@ -7397,21 +7397,21 @@ Socho tumne ek nayi kapdon ki dukan (clothes shop) kholi hai. Opening ke din aga
 Tech mein, jab hum naya database banate hain toh woh bilkul khali hota hai. Khali website par hum design ya features test nahi kar sakte. Toh hum ek chhota sa program (script) likhte hain jo ek second mein **100 nakli (dummy) products aur users** database mein daal deta hai. Isko **Seeding** (beej bona) kehte hain.
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** Database seeding is the automated process of populating a database with an initial set of data. This is typically used to load dummy data for development/testing or essential configuration data for production.
-* **Hinglish Simplification:** Ek script run karke apne khali database mein ek hi baar mein testing ke liye bahut saara fake data dalne ko Seeding kehte hain.
+* [[HL::**Precise English:** Database seeding is the automated process of populating a database with an initial set of data. This is typically used to load dummy data for development/testing or essential configuration data for production.::HL]]
+* [[HL::**Hinglish Simplification:** Ek script run karke apne khali database mein ek hi baar mein testing ke liye bahut saara fake data dalne ko Seeding kehte hain::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Frontend developer ko website ka "Product Grid" design karna hai, par database mein 0 products hain. Kya woh har baar website pe jaa kar ek-ek karke 50 product manually add karega testing ke liye? Yeh toh bahut boring aur time-consuming hai!
-* **Solution:** Hum ek `seed.js` ya `seed.ts` file likh dete hain. Jaise hi koi naya developer team join karta hai, woh bas ek command chalata hai aur uske local laptop wale database mein turant 50 products aur 10 users aa jate hain testing ke liye.
+* [[HL::**Problem:** Frontend developer ko website ka "Product Grid" design karna hai, par database mein 0 products hain. Kya woh::HL]] [[HL::har baar website pe jaa kar ek-ek karke 50 product manually add karega testing ke liye? Yeh toh bahut boring aur time-consuming hai!::HL]]
+* [[HL::**Solution:** Hum ek `seed.js` ya `seed.ts` file likh dete hain. Jaise hi koi naya developer team join karta hai, woh bas ek command chalata hai aur uske local laptop wale database mein turant 50 products aur 10 users aa jate hain testing ke liye::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
-Tumhare `prisma/` folder ke andar ek nayi file banegi `seed.ts`. Aur tumhari main `package.json` file mein ek chhoti si setting add karni padegi taaki Prisma ko pata chale ki seed file kahan rakhi hai.
+[[HL::Tumhare `prisma/` folder ke andar ek nayi file banegi `seed.ts`. Aur tumhari main `package.json` file mein ek chhoti si setting add karni padegi taaki Prisma ko pata chale ki seed file kahan rakhi hai::HL]].
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1. Tum terminal mein `npm run seed` command type karte ho.
-2. Prisma tumhari `seed.ts` file ko run karta hai.
-3. Us file mein likha code (JS/TS) Prisma ORM ko bolta hai: "Bhai, ye lo 5 products ki list, inko save kardo".
-4. Prisma automatically `INSERT INTO...` wali SQL query generate karta hai aur PostgreSQL mein data save kar deta hai.
+1. [[HL::Tum terminal mein `npm run seed` command type karte ho.::HL]]
+2. [[HL::Prisma tumhari `seed.ts` file ko run karta hai.::HL]]
+3. [[HL::Us file mein likha code (JS/TS) Prisma ORM ko bolta hai: "Bhai, ye lo 5 products ki list, inko save kardo".::HL]]
+4. [[HL::Prisma automatically `INSERT INTO...` wali SQL query generate karta hai aur PostgreSQL mein data save kar deta hai::HL]].
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
@@ -7419,88 +7419,88 @@ Pehle hum apne `prisma` folder mein ek `seed.ts` file banayenge. Is file mein hu
 
 **File:** `prisma/seed.ts`
 ```typescript
-// PrismaClient ko import kar rahe hain database se baat karne ke liye
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
+// [[HL::PrismaClient ko import kar rahe hain database se baat karne ke liye::HL]]
+[[HL::import { PrismaClient } from '@prisma/client'::HL]]
+[[HL::const prisma = new PrismaClient()::HL]]
 
-async function main() {
-  console.log('🌱 Seeding start ho rahi hai...')
+[[HL::async function main() {::HL]]
+  [[HL::console.log('🌱 Seeding start ho rahi hai...')::HL]]
 
-  // Ek dummy user bana rahe hain
-  const user1 = await prisma.user.create({
-    data: {
-      email: 'testuser@example.com',
-      name: 'Ramesh Tester',
-    },
-  })
-  console.log(`User ban gaya: ${user1.name}`)
+  [[HL::// Ek dummy user bana rahe hain::HL]]
+  [[HL::const user1 = await prisma.user.create({::HL]]
+    [[HL::data: {::HL]]
+      [[HL::email: 'testuser@example.com',::HL]]
+      [[HL::name: 'Ramesh Tester',::HL]]
+    [[HL::},::HL]]
+  [[HL::})::HL]]
+  [[HL::console.log(`User ban gaya: ${user1.name}`)::HL]]
 
-  // Do dummy products bana rahe hain
-  const product1 = await prisma.product.create({
-    data: {
-      title: 'Gaming Laptop',
-      price: 999.99,
-    },
-  })
+  [[HL::// Do dummy products bana rahe hain::HL]]
+  [[HL::const product1 = await prisma.product.create({::HL]]
+    [[HL::data: {::HL]]
+      [[HL::title: 'Gaming Laptop',::HL]]
+      [[HL::price: 999.99,::HL]]
+    [[HL::},::HL]]
+  [[HL::})::HL]]
   
-  const product2 = await prisma.product.create({
-    data: {
-      title: 'Wireless Mouse',
-      price: 49.50,
-    },
-  })
-  console.log(`Products ban gaye: ${product1.title}, ${product2.title}`)
+  [[HL::const product2 = await prisma.product.create({::HL]]
+    [[HL::data: {::HL]]
+      [[HL::title: 'Wireless Mouse',::HL]]
+      [[HL::price: 49.50,::HL]]
+    [[HL::},::HL]]
+  [[HL::})::HL]]
+  [[HL::console.log(`Products ban gaye: ${product1.title}, ${product2.title}`)::HL]]
 
-  console.log('✅ Seeding complete ho gayi!')
-}
+  [[HL::console.log('✅ Seeding complete ho gayi!')::HL]]
+[[HL::}::HL]]
 
-// Ye function ko call karta hai, aur error aane pe log karta hai
-main()
-  .catch((e) => {
-    console.error(e)
-    process.exit(1)
-  })
-  .finally(async () => {
-    await prisma.$disconnect() // Kaam hone ke baad connection close
-  })
+[[HL::// Ye function ko call karta hai, aur error aane pe log karta hai::HL]]
+[[HL::main()::HL]]
+  [[HL::.catch((e) => {::HL]]
+    [[HL::console.error(e)::HL]]
+    [[HL::process.exit(1)::HL]]
+  [[HL::})::HL]]
+  [[HL::.finally(async () => {::HL]]
+    [[HL::await prisma.$disconnect() // Kaam hone ke baad connection close::HL]]
+  [[HL::})::HL]]
 ```
 
-Ab Prisma ko batana padega ki is file ko run kaise karna hai. Hum `package.json` mein yeh add karenge (file ke end mein):
+[[HL::Ab Prisma ko batana padega ki is file ko run kaise karna hai. Hum `package.json` mein yeh add karenge (file ke end mein):::HL]]
 
-**File:** `package.json`
+[[HL::**File:** `package.json`::HL]]
 ```json
 {
-  "name": "my-ecommerce",
-  "version": "1.0.0",
-  "scripts": {
-    "dev": "next dev"
-  },
-  "prisma": {
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
-  }
-}
+  "[[HL::name": "my-ecommerce",::HL]]
+  [[HL::"version": "1.0.0",::HL]]
+  [[HL::"scripts": {::HL]]
+    [[HL::"dev": "next dev"::HL]]
+  [[HL::},::HL]]
+  [[HL::"prisma": {::HL]]
+    [[HL::"seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"::HL]]
+  [[HL::}::HL]]
+[[HL::}::HL]]
 ```
 
-Ab hum terminal mein jake apni command run karenge:
+[[HL::Ab hum terminal mein jake apni command run karenge:::HL]]
 ```bash
-npx prisma db seed
+[[HL::npx prisma db seed::HL]]
 ```
 ```text
-# 📤 Expected Output:
-Running seed command `ts-node --compiler-options {"module":"CommonJS"} prisma/seed.ts` ...
-🌱 Seeding start ho rahi hai...
-User ban gaya: Ramesh Tester
-Products ban gaye: Gaming Laptop, Wireless Mouse
-✅ Seeding complete ho gayi!
+[[HL::# 📤 Expected Output:::HL]]
+[[HL::Running seed command `ts-node --compiler-options {"module":"CommonJS"} prisma/seed.ts` ...::HL]]
+[[HL::🌱 Seeding start ho rahi hai...::HL]]
+[[HL::User ban gaya: Ramesh Tester::HL]]
+[[HL::Products ban gaye: Gaming Laptop, Wireless Mouse::HL]]
+[[HL::✅ Seeding complete ho gayi!::HL]]
 
-🌱  The seed command has been executed.
+[[HL::🌱  The seed command has been executed.::HL]]
 ```
 
-## ⚖️ 8. Comparison (Ye vs Woh):
-| Feature | Automated Seeding (`seed.ts`) | Manual Data Entry (Admin Panel se) |
+[[HL::## ⚖️ 8. Comparison (Ye vs Woh):::HL]]
+| [[HL::Feature::HL]] | [[HL::Automated Seeding (`seed.ts`)::HL]] | [[HL::Manual Data Entry (Admin Panel se)::HL]] |
 | :--- | :--- | :--- |
-| **Speed** | 1000 records 2 second mein | 1000 records dalne mein 5 din |
-| **Reproducibility** | DB delete hua toh 1 click mein wapas aa jayega | DB delete hua toh rona aa jayega (phir se mehnat) |
+| [[HL::**Speed**::HL]] | [[HL::1000 records 2 second mein::HL]] | [[HL::1000 records dalne mein 5 din::HL]] |
+| [[HL::**Reproducibility**::HL]] | [[HL::DB delete hua toh 1 click mein wapas aa jayega::HL]] | [[HL::DB delete hua toh rona aa jayega (phir se mehnat::HL]]) |
 | **Best for** | Developers, QA Testing | Real Customers, Non-tech Admin staff |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
@@ -7508,8 +7508,8 @@ Products ban gaye: Gaming Laptop, Wireless Mouse
 * **Fix:** Hamesha seed file mein check lagao ki kahin data pehle se toh nahi hai. (Isko "Idempotent" bolte hain - matlab kitni baar bhi run karo, errors na aayein aur duplicate duplicate data na bane).
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-* **Confusion 1: "Kya seeding sirf fake data ke liye hoti hai?"**
-  Nahi! Jab website pehli baar live hoti hai, toh asli "Admin Categories" (jaise Men, Women, Electronics) aur "Admin Accounts" daalne ke liye bhi hum seed script ka use karte hain taaki production par manual type na karna pade.
+* [[HL::**Confusion 1: "Kya seeding sirf fake data ke liye hoti hai?"**::HL]]
+  [[HL::Nahi! Jab website pehli baar live hoti hai, toh asli "Admin Categories" (jaise Men, Women, Electronics) aur "Admin Accounts" daalne ke liye bhi hum seed script ka use karte hain taaki production par manual type na karna pade::HL]].
 * **Confusion 2: "Agar main 2 baar command chala du toh?"**
   Agar tumhare schema mein email `@unique` hai, toh dusri baar command chalane pe error aa jayega (Email already exists). Isliye better hai `create` ki jagah `upsert` (update ya insert) method use karna seed scripts mein.
 
@@ -7534,7 +7534,7 @@ Senior engineers dummy data generate karne ke liye ek library use karte hain jis
 Agar tumne test data generate karne ke scripts nahi banaye, toh tumhari team ka har naya developer apna pehla din sirf form bhar-bhar ke fake data daalne mein waste kar dega, aur testing theek se nahi hogi.
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **Q: Database seeding kya hai?** A: Database ko initial dummy ya default data se bharne ka process.
+1. **Q: [[HL::Database seeding kya hai?** A: Database ko initial dummy ya default data se bharne ka process::HL]].
 2. **Q: Faker.js kya kaam aata hai seeding mein?** A: Yeh real-sounding fake data (names, emails, prices) automatically generate karta hai.
 3. **Q: Idempotent seed script kya hoti hai?** A: Aisi script jisko 10 baar bhi run karo, toh data corrupt ya duplicate nahi hota.
 4. **Q: `package.json` mein `prisma.seed` kyun add karte hain?** A: Taaki Prisma ki CLI (Command Line Interface) ko pata chal sake ki kaunsi file ko run karna hai.
@@ -7550,26 +7550,26 @@ Agar tumne test data generate karne ke scripts nahi banaye, toh tumhari team ka 
 *(Topic 20: Database Performance - Subtopic 1)*
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
-Socho tumhare paas 2000 pages ki ek History ki book hai, par usme aage koi **Vishay Soochi (Index / Table of Contents)** nahi hai. Agar main tumhe bolu "Bhai, 'Mahatma Gandhi' kis page pe likha hai batao?" Toh tum kya karoge? Tum page 1 se lekar page 2000 tak ek-ek panna palat kar padhoge. Isme ghanto lag jayenge!
-Par agar book ke peeche ek Index hota (M -> Mahatma Gandhi -> Page 450), toh tum 2 second mein us page pe pahunch jaate. 
-Database mein bhi same yahi problem hoti hai. Jab 10 Lakh (1 million) users hon, aur koi login karne aaye, toh DB ek-ek row check karta hai (bahut slow). Isse bachne ke liye hum Database ko bolte hain, "Is column ka ek Index (vishay soochi) bana lo!"
+Socho [[HL::tumhare paas 2000 pages ki ek History ki book hai, par usme aage koi **Vishay Soochi (Index / Table of Contents)** nahi hai. Agar main tumhe bolu "Bhai, 'Mahatma Gandhi' kis page pe likha hai batao?" Toh tum kya karoge::HL]]? [[HL::Tum page 1 se lekar page 2000 tak ek-ek panna palat kar padhoge. Isme ghanto lag jayenge!::HL]]
+[[HL::Par agar book ke peeche ek Index hota (M -> Mahatma Gandhi -> Page 450), toh tum 2 second mein us page pe pahunch jaate.::HL]] 
+[[HL::Database mein bhi same yahi problem hoti hai. Jab 10 Lakh (1 million) users hon, aur koi login karne aaye, toh DB ek-ek row check karta hai (bahut slow). Isse bachne ke liye hum Database ko bolte hain, "Is column ka ek Index (vishay soochi) bana lo::HL]]!"
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** A database index is a specialized data structure (often a B-Tree) created on a specific column or set of columns in a table. It optimizes data retrieval speeds (SELECT queries) by allowing the database engine to locate the desired row without performing a full table scan.
-* **Hinglish Simplification:** Indexing database ka ek fast shortcut map hai. Yeh banani padti hai taaki database ko hazaron rows mein se ek specific data dhundhne ke liye poori table line-by-line check na karni pade.
+* [[HL::**Precise English:** A database index is a specialized data structure (often a B-Tree) created on a specific column or set of columns in a table. It optimizes data retrieval speeds (SELECT queries) by allowing the database engine to locate the desired row without performing a full table scan::HL]].
+* [[HL::**Hinglish Simplification:** Indexing database ka ek fast shortcut map hai. Yeh banani padti hai taaki database ko hazaron rows mein se ek specific data dhundhne ke liye poori table line-by-line check na karni pade::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Tumhari E-commerce site pe 50,000 products hain. User ne search bar mein "Nike Shoes" likha. Bina index ke, database har ek 50,000 product ka naam check karega ki kisne "Nike" likha hai. Isse website bahut slow (lag) ho jayegi aur server thak jayega.
-* **Solution:** Agar hum `title` (product ka naam) column par ek **Index** laga dein, toh database usko alphabet ke hisaab se (A to Z) ek alag memory mein store kar lega. Ab jaise hi "Nike" search hoga, woh direct 'N' wale block mein jayega aur milliseconds mein result de dega.
+* [[HL::**Problem:** Tumhari E-commerce site pe 50,000 products hain. User ne search bar mein "Nike Shoes" likha. Bina index ke, database har ek 50,000 product ka naam check karega ki kisne "Nike" likha hai. Isse website bahut slow (lag) ho jayegi aur server thak jayega::HL]].
+* [[HL::**Solution:** Agar hum `title` (product ka naam) column par ek **Index** laga dein, toh database usko alphabet ke hisaab se (A to Z) ek alag memory mein store kar lega. Ab jaise hi "Nike" search hoga, woh direct 'N' wale block mein jayega aur milliseconds mein result de dega::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 Tumhe apne code mein alag se kuch JS/TS nahi likhna hai. Tumhe bas wapas apni `prisma/schema.prisma` file kholni hai aur jis chiz pe fast search chahiye, uske aage ek special tag `@@index` ya `@unique` lagana hai.
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1. Jab tum kisi column (e.g., email) pe index lagate ho, toh PostgreSQL (database) ek alag chhota sa hidden table banata hai (jisko B-Tree Data Structure kehte hain).
-2. Is Tree mein saari emails alphabetically sorted (A-Z) hoti hain, aur unke aage unki asali row ka number (ID) likha hota hai.
-3. Jab tum query chalate ho: `SELECT * FROM User WHERE email = 'zain@test.com'`, toh DB asali badi table ko chhoota tak nahi hai.
-4. Woh seedha is sorted B-Tree Index mein "Binary Search" lagata hai, milliseconds mein pata lagata hai ki "zain" ID 50 par hai, aur direct ID 50 ka data le aata hai.
+1. [[HL::Jab tum kisi column (e.g., email) pe index lagate ho, toh PostgreSQL (database) ek alag chhota sa hidden table banata hai (jisko B-Tree Data Structure kehte hain).::HL]]
+2. [[HL::Is Tree mein saari emails alphabetically sorted (A-Z) hoti hain, aur unke aage unki asali row ka number (ID) likha hota hai.::HL]]
+3. [[HL::Jab tum query chalate ho: `SELECT * FROM User WHERE email = 'zain@test.com'`, toh DB asali badi table ko chhoota tak nahi hai.::HL]]
+4. [[HL::Woh seedha is sorted B-Tree Index mein "Binary Search" lagata hai, milliseconds mein pata lagata hai ki "zain" ID 50 par hai, aur direct ID 50 ka data le aata hai::HL]].
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
@@ -7592,8 +7592,8 @@ model Product {
   price       Float
   orderItems  Order[]
 
-  // Naya addition: Humne Prisma ko bola ki bhai 'title' column par ek Index (vishay soochi) bana do
-  @@index([title]) 
+  // [[HL::Naya addition: Humne Prisma ko bola ki bhai 'title' column par ek Index (vishay soochi) bana do::HL]]
+  [[HL::@@index([title::HL]]]) 
 }
 
 model Order {
@@ -7609,7 +7609,7 @@ model Order {
 }
 ```
 
-Ab hum is change ko database mein push karenge taaki PostgreSQL asali mein inka Index (B-Tree) create kare.
+Ab [[HL::hum is change ko database mein push karenge taaki PostgreSQL asali mein inka Index (B-Tree) create kare::HL]].
 
 ```bash
 npx prisma db push
@@ -7624,22 +7624,22 @@ Datasource "db": PostgreSQL database "ecommerce_db" at "ep-cool-butterfly-123456
 ✔ Generated Prisma Client (v5.0.0) to ./node_modules/@prisma/client in 45ms
 ```
 
-## ⚖️ 8. Comparison (Ye vs Woh):
-| Feature | Full Table Scan (Bina Index) | Index Scan (Index ke sath) |
+## ⚖️ 8. [[HL::Comparison (Ye vs Woh):::HL]]
+| [[HL::Feature::HL]] | [[HL::Full Table Scan (Bina Index)::HL]] | [[HL::Index Scan (Index ke sath)::HL]] |
 | :--- | :--- | :--- |
-| **Kaise dhoondhta hai?** | Page 1 se end tak sab check karega. | Direct us specific page/data par jump karega. |
-| **Speed (Jab data bahut zyada ho)** | Bahut slow (Seconds/Minutes lag sakte hain). | Ekdum Fast (Milliseconds). |
-| **Space/Memory** | Extra memory nahi leta. | Index save karne ke liye thodi hard disk space extra lagti hai. |
+| [[HL::**Kaise dhoondhta hai?**::HL]] | [[HL::Page 1 se end tak sab check karega.::HL]] | [[HL::Direct us specific page/data par jump karega.::HL]] |
+| [[HL::**Speed (Jab data bahut zyada ho)**::HL]] | [[HL::Bahut slow (Seconds/Minutes lag sakte hain).::HL]] | [[HL::Ekdum Fast (Milliseconds).::HL]] |
+| [[HL::**Space/Memory**::HL]] | [[HL::Extra memory nahi leta.::HL]] | [[HL::Index save karne ke liye thodi hard disk space extra lagti hai::HL]]. |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-* **Mistake:** Beginners sochte hain "Agar Index se sab fast ho jata hai, toh main har ek column (age, color, gender) par Index laga dunga!" 
-* **Fix:** Ise "Over-indexing" kehte hain. Agar tum har chiz ka index banaoge, toh jab bhi tum database mein naya product *add* karoge, database ko saare index (vishay soochi) bhi update karne padenge. Isse data "Save" (Write) hone ki speed bahut slow ho jayegi. Sirf wahi Index lagao jispe log actually "Search/Filter" karte hain.
+* [[HL::**Mistake:** Beginners sochte hain "Agar Index se sab fast ho jata hai, toh main har ek column (age, color, gender) par Index laga dunga!"::HL]] 
+* [[HL::**Fix:** Ise "Over-indexing" kehte hain. Agar tum har chiz ka index banaoge, toh jab bhi tum database mein naya product *add* karoge, database ko saare index (vishay soochi) bhi update karne padenge. Isse data "Save" (Write) hone ki speed bahut slow ho jayegi. Sirf wahi Index lagao jispe log actually "Search/Filter" karte hain::HL]].
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-* **Confusion 1: "Kya `@unique` aur `@@index` dono index banate hain?"**
-  Haan! Jab tum kisi chiz ko `@unique` banate ho (jaise email), toh database under-the-hood uska index automatic bana leta hai taaki woh quickly check kar sake ki yeh email pehle se exist karti hai ya nahi.
-* **Confusion 2: "Agar product ke paas index nahi hai, toh kya search fail ho jayega?"**
-  Fail nahi hoga, chalega bilkul theek. Bas speed dhimi hogi kyunki usko Full Table Scan karna padega. 
+* [[HL::**Confusion 1: "Kya `@unique` aur `@@index` dono index banate hain?"**::HL]]
+  [[HL::Haan! Jab tum kisi chiz ko `@unique` banate ho (jaise email), toh database under-the-hood uska index automatic bana leta hai taaki woh quickly check kar sake ki yeh email pehle se exist karti hai ya nahi::HL]].
+* [[HL::**Confusion 2: "Agar product ke paas index nahi hai, toh kya search fail ho jayega?"**::HL]]
+  [[HL::Fail nahi hoga, chalega bilkul theek. Bas speed dhimi hogi kyunki usko Full Table Scan karna padega::HL]]. 
 
 ## 🌍 11. Real-World Use Case (Production Application):
 Twitter (X) par jab tum kisi ka handle `@elonmusk` search karte ho, toh piche database mein `username` column par ek tagda index laga hota hai. Agar index na ho, toh Twitter ke 50 Crore accounts mein se 'elonmusk' dhundhne mein tumhari screen 10 minute tak ghoomti rahegi!
@@ -7664,11 +7664,11 @@ Senior backend engineers ka ek thumb rule hota hai: Index sirf un columns par la
 Agar tumne e-commerce site banayi aur Order table ke `userId` par index nahi lagaya, toh jab website popular hogi, log "My Orders" pe click karenge toh unka page 10-15 second tak load hi hota rahega (spinning wheel), aur server par load aane se site crash ho sakti hai.
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **Q: Indexing kya hoti hai?** A: Database ki search speed badhane ka ek tarika, jaise book mein table of contents (index) hota hai.
+1. [[HL::**Q: Indexing kya hoti hai?** A: Database ki search speed badhane ka ek tarika, jaise book mein table of contents (index) hota hai::HL]].
 2. **Q: Indexing kaise kaam karti hai?** A: Yeh specific data ko (mostly B-Tree format mein) sort karke rakhti hai taaki direct search ho sake.
-3. **Q: Over-indexing ke kya nuksaan hain?** A: Data read/search toh fast ho jata hai, par data insert/update karna (write speed) bahut slow ho jata hai kyunki index ko bhi baar-baar update hona padta hai.
-4. **Q: Full Table Scan kya hota hai?** A: Jab DB ke paas index nahi hota, toh woh 1st row se leke aakhiri row tak ek-ek karke data check karta hai.
-5. **Q: Prisma mein index kaise lagate hain?** A: Model ke andar `@@index([columnName])` likh kar.
+3. **Q: [[HL::Over-indexing ke kya nuksaan hain?** A: Data read/search toh fast ho jata hai, par data insert/update karna::HL]] ([[HL::write speed) bahut slow ho jata hai kyunki index ko bhi baar-baar update hona padta hai::HL]].
+4. [[HL::**Q: Full Table Scan kya hota hai?** A: Jab DB ke paas index nahi hota, toh woh 1st row se leke aakhiri row tak ek-ek karke data check karta hai.::HL]]
+5. [[HL::**Q: Prisma mein index kaise lagate hain?** A: Model ke andar `@@index([columnName])` likh kar::HL]].
 
 ## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
 **Indexing tumhare database ki 'Vishay Soochi' (Dictionary) hai, jo lakhon records mein se tumhara data second ke fraction mein dhundh laati hai.**
@@ -7704,12 +7704,12 @@ Socho tum ek library mein ho aur ek bahut moti kitab padh rahe ho.
 **Cursor Pagination:** Tum us kitab mein ek **Bookmark** laga dete ho. Agli baar tum aate ho aur bolte ho, "Jahan mera bookmark hai, bas uske aage ke 10 pages de do." Library wala bina kuch gine sidha bookmark kholega. (Ekdum instant!)
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** Pagination is the process of dividing a large dataset into smaller, manageable chunks. Offset pagination uses `LIMIT` and `OFFSET` SQL clauses to skip rows, while Cursor pagination uses a unique identifier (cursor) from the last fetched record to fetch the next sequential batch efficiently.
-* **Hinglish Simplification:** Data ko chhote-chhote hisson (pages) mein tod kar user ko dikhane ko pagination kehte hain. Offset page number use karta hai, aur Cursor ek reference/bookmark use karta hai.
+* [[HL::**Precise English:** Pagination is the process of dividing a large dataset into smaller, manageable chunks. Offset pagination uses `LIMIT` and `OFFSET` SQL clauses to skip rows, while Cursor pagination uses a unique identifier (cursor) from the last fetched record to fetch the next sequential batch efficiently.::HL]]
+* [[HL::**Hinglish Simplification:** Data ko chhote-chhote hisson (pages) mein tod kar user ko dikhane ko pagination kehte hain. Offset page number use karta hai, aur Cursor ek reference/bookmark use karta hai::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Tumhari Amazon jaisi site par 1 Lakh (100,000) T-shirts hain. Agar user ne 'T-shirt' search kiya aur tumne database se 1 Lakh T-shirts ek saath frontend par bhej di, toh user ka browser aur mobile hang ho jayega, aur internet data exhaust ho jayega.
-* **Solution:** Hum DB ko bolte hain ki "Bhai ek baar mein sirf 20 T-shirts laa." Jab user scroll karega ya 'Next Page' dabayega, tab agle 20 lana. Ise Pagination kehte hain.
+* [[HL::**Problem:** Tumhari Amazon jaisi site par 1 Lakh (100,000) T-shirts hain. Agar user ne 'T-shirt' search kiya aur tumne database se 1 Lakh T-shirts ek saath frontend par bhej di, toh user ka browser aur mobile hang ho jayega, aur internet data exhaust ho jayega.::HL]]
+* [[HL::**Solution:** Hum DB ko bolte hain ki "Bhai ek baar mein sirf 20 T-shirts laa." Jab user scroll karega ya 'Next Page' dabayega, tab agle 20 lana. Ise Pagination kehte hain::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 Frontend UI pe tumhe ya toh neeche numbers dikhenge: `[1] [2] [3] ... [Next]` (Yeh Offset ka nishaan hai). 
@@ -7717,13 +7717,13 @@ Ya phir Instagram ki tarah scroll karte jaoge aur naya data aata jayega, aka Inf
 Code mein tum ek API route banaoge jo query parameters (`?page=2` ya `?cursor=xyz`) accept karega.
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-**Offset kaise kaam karta hai:**
-1. SQL Query: `SELECT * FROM Products LIMIT 10 OFFSET 50000;`
-2. Database pehle 1 se lekar 50,000 rows tak jayega (scan karega), unhe memory mein load karega, fir unko phek (discard) dega, aur uske baad aane wali 10 rows dega. (Deeper pages pe yeh bahut slow ho jata hai).
+[[HL::**Offset kaise kaam karta hai:**::HL]]
+1. [[HL::SQL Query: `SELECT * FROM Products LIMIT 10 OFFSET 50000;`::HL]]
+2. [[HL::Database pehle 1 se lekar 50,000 rows tak jayega (scan karega), unhe memory mein load karega, fir unko phek (discard) dega, aur uske baad aane wali 10 rows dega. (Deeper pages pe yeh bahut slow ho jata hai::HL]]).
 
-**Cursor kaise kaam karta hai:**
-1. SQL Query: `SELECT * FROM Products WHERE id > 50000 LIMIT 10;`
-2. Database index (jo humne pehle seekha tha) ka use karta hai. Woh directly ID 50000 pe jump karta hai (0 scanning), aur agli 10 rows nikal leta hai. (Hamesha fast rehta hai).
+[[HL::**Cursor kaise kaam karta hai:**::HL]]
+1. [[HL::SQL Query: `SELECT * FROM Products WHERE id > 50000 LIMIT 10;`::HL]]
+2. [[HL::Database index (jo humne pehle seekha tha) ka use karta hai. Woh directly ID 50000 pe jump karta hai (0 scanning), aur agli 10 rows nikal leta hai. (Hamesha fast rehta hai::HL]]).
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
@@ -7731,70 +7731,70 @@ Code mein tum ek API route banaoge jo query parameters (`?page=2` ya `?cursor=xy
 
 Dekho hum Prisma (ORM) mein dono ko kaise likhte hain.
 
-**Example 1: Offset Pagination (Traditional Page Numbers)**
+[[HL::**Example 1: Offset Pagination (Traditional Page Numbers)**::HL]]
 ```typescript
-// Hum user ko page 3 dikha rahe hain, har page pe 10 items hain.
-const page = 3;
-const limit = 10;
-const skipCount = (page - 1) * limit; // (3-1)*10 = 20 items skip karne hain
+[[HL::// Hum user ko page 3 dikha rahe hain, har page pe 10 items hain.::HL]]
+[[HL::const page = 3;::HL]]
+[[HL::const limit = 10;::HL]]
+[[HL::const skipCount = (page - 1) * limit; // (3-1)*10 = 20 items skip karne hain::HL]]
 
-const products = await prisma.product.findMany({
-  skip: skipCount, // Shuru ke 20 chhod do
-  take: limit,     // Agle 10 utha lo
-  orderBy: { id: 'asc' } // Line se lagao
-});
+[[HL::const products = await prisma.product.findMany({::HL]]
+  [[HL::skip: skipCount, // Shuru ke 20 chhod do::HL]]
+  [[HL::take: limit,     // Agle 10 utha lo::HL]]
+  [[HL::orderBy: { id: 'asc' } // Line se lagao::HL]]
+[[HL::});::HL]]
 
-console.log(products);
+[[HL::console.log(products);::HL]]
 
-# 📤 Expected Output:
-# [
-#   { id: 21, title: 'Product 21', price: 100 },
-#   { id: 22, title: 'Product 22', price: 150 },
-#   ... (8 aur products up to id 30)
+[[HL::# 📤 Expected Output:::HL]]
+[[HL::# [::HL]]
+[[HL::#   { id: 21, title: 'Product 21', price: 100 },::HL]]
+[[HL::#   { id: 22, title: 'Product 22', price: 150 },::HL]]
+[[HL::#   ... (8 aur products up to id 30::HL]])
 # ]
 ```
 
-**Example 2: Cursor Pagination (Infinite Scroll)**
+[[HL::**Example 2: Cursor Pagination (Infinite Scroll)**::HL]]
 ```typescript
-// Frontend ne humein pichle batch ka aakhiri ID (bookmark) bheja hai
-const lastProductId = 30; // Yeh humara Cursor hai
+[[HL::// Frontend ne humein pichle batch ka aakhiri ID (bookmark) bheja hai::HL]]
+[[HL::const lastProductId = 30; // Yeh humara Cursor hai::HL]]
 
-const products = await prisma.product.findMany({
-  take: 10,       // 10 items lene hain
-  skip: 1,        // Cursor wale item ko dobara nahi lena, isliye 1 skip karte hain
-  cursor: {
-    id: lastProductId // Humara bookmark!
-  },
-  orderBy: { id: 'asc' }
-});
+[[HL::const products = await prisma.product.findMany({::HL]]
+  [[HL::take: 10,       // 10 items lene hain::HL]]
+  [[HL::skip: 1,        // Cursor wale item ko dobara nahi lena, isliye 1 skip karte hain::HL]]
+  [[HL::cursor: {::HL]]
+    [[HL::id: lastProductId // Humara bookmark!::HL]]
+  [[HL::},::HL]]
+  [[HL::orderBy: { id: 'asc' }::HL]]
+[[HL::});::HL]]
 
-console.log(products);
+[[HL::console.log(products);::HL]]
 
-# 📤 Expected Output:
-# [
-#   { id: 31, title: 'Product 31', price: 200 },
+[[HL::# 📤 Expected Output:::HL]]
+[[HL::# [::HL]]
+[[HL::#   { id: 31, title: 'Product 31', price: 200::HL]] },
 #   { id: 32, title: 'Product 32', price: 250 },
 #   ... (8 aur products up to id 40)
 # ]
 ```
 
 ## ⚖️ 8. Comparison (Ye vs Woh):
-| Feature | Offset Pagination (`skip` / `take`) | Cursor Pagination (`cursor`) |
+| Feature | Offset Pagination (`skip` / `take`) | [[HL::Cursor Pagination (`cursor`)::HL]] |
 | :--- | :--- | :--- |
-| **Speed (Deep Pages)** | Slow (Database ko shuru se ginti karni padti hai). | Extremely Fast (Seedha bookmark se start hota hai). |
-| **Data Consistency** | Kharab. (Agar naya item add hua toh rows aage khisak jayengi aur duplicate items dikhenge). | Best. (Item ID fixed hoti hai, toh duplicate nahi hote). |
-| **Jump to Specific Page** | Aasaan hai (Direct Page 50 par jaa sakte ho). | Impossible (Page 50 pe jane ke liye page 49 ka cursor/bookmark chahiye hoga). |
-| **Best For** | Admin Panels, Tables (Jahan Page 1, 2, 3 zaroori ho). | Infinite Scroll (Social media feeds, Mobile Apps). |
+| [[HL::**Speed (Deep Pages)**::HL]] | [[HL::Slow (Database ko shuru se ginti karni padti hai).::HL]] | [[HL::Extremely Fast (Seedha bookmark se start hota hai).::HL]] |
+| [[HL::**Data Consistency**::HL]] | [[HL::Kharab. (Agar naya item add hua toh rows aage khisak jayengi aur duplicate items dikhenge).::HL]] | [[HL::Best. (Item ID fixed hoti hai, toh duplicate nahi hote).::HL]] |
+| [[HL::**Jump to Specific Page**::HL]] | [[HL::Aasaan hai (Direct Page 50 par jaa sakte ho).::HL]] | [[HL::Impossible (Page 50 pe jane ke liye page 49 ka cursor/bookmark chahiye hoga).::HL]] |
+| [[HL::**Best For**::HL]] | [[HL::Admin Panels, Tables (Jahan Page 1, 2, 3 zaroori ho).::HL]] | [[HL::Infinite Scroll (Social media feeds, Mobile Apps::HL]]). |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
 * **Mistake:** Social media app (jaise Instagram clone) banate waqt Offset pagination use karna. Jab user scroll kar raha hoga aur naye posts aayenge, toh Offset bigad jayega aur user ko same post 2 baar dikhne lagegi.
 * **Fix:** Infinite scroll ke liye humesha Cursor pagination use karo.
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-* **Confusion 1: "Cursor hota kya hai asaliyat mein?"**
-  Cursor koi jaadu nahi hai. Yeh bas ek unique value hoti hai (usually tumhare database row ki `id` ya `createdAt` timestamp) jo frontend backend ko bhejta hai yeh batane ke liye ki "Maine yahan tak dekh liya hai, iske aage ka do".
-* **Confusion 2: "Cursor mein `skip: 1` kyun likhte hain?"**
-  Kyunki tum bol rahe ho "ID 30 se aage dhoondo". Agar `skip: 1` nahi likhoge, toh database ID 30 ko bhi de dega, aur tumhare frontend pe ID 30 do baar dikh jayega.
+* [[HL::**Confusion 1: "Cursor hota kya hai asaliyat mein?"**::HL]]
+  [[HL::Cursor koi jaadu nahi hai. Yeh bas ek unique value hoti hai (usually tumhare database row ki `id` ya `createdAt` timestamp) jo frontend backend ko bhejta hai yeh batane ke liye ki "Maine yahan tak dekh liya hai, iske aage ka do".::HL]]
+* [[HL::**Confusion 2: "Cursor mein `skip: 1` kyun likhte hain?"**::HL]]
+  [[HL::Kyunki tum bol rahe ho "ID 30 se aage dhoondo". Agar `skip: 1` nahi likhoge, toh database ID 30 ko bhi de dega, aur tumhare frontend pe ID 30 do baar dikh jayega::HL]].
 
 ## 🌍 11. Real-World Use Case (Production Application):
 Jab tum YouTube Shorts scroll karte ho, toh YouTube backend Cursor pagination ka use karta hai. Har video ke baad agle video ki request mein pichle video ki ek unique ID (Cursor) bheji jaati hai, taaki milliseconds mein naya video fetch ho sake bina database ko load diye.
@@ -7817,9 +7817,9 @@ Senior engineers hamesha Cursor pagination ko us column ke saath lagate hain jis
 Agar tumne badi e-commerce app mein Offset pagination use kar liya aur ek user ne galti se Page 10,000 khol liya, toh database 100,000 rows ginne baith jayega aur baaki saare users ke liye website slow ho jayegi. Isko "Deep Pagination Attack" bolte hain hackers.
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **Q: Pagination kya hoti hai?** A: Ek bade dataset ko chhote chunks (pages) mein todna.
+1. **Q: [[HL::Pagination kya hoti hai?** A: Ek bade dataset ko chhote chunks (pages) mein todna::HL]].
 2. **Q: Offset pagination kab fail hoti hai?** A: Jab database mein lakho rows hon aur user deep page (like page 500) request kare.
-3. **Q: Cursor pagination fast kyun hoti hai?** A: Kyunki woh `WHERE` clause aur Index ka use karti hai seedha us record pe jump karne ke liye.
+3. [[HL::**Q: Cursor pagination fast kyun hoti hai?** A: Kyunki woh `WHERE` clause aur Index ka use karti hai seedha us record pe jump karne ke liye::HL]].
 4. **Q: E-commerce ke "Next Page" ke liye kya use karun?** A: Agar total pages dikhane hain (1, 2, 3...) toh Offset. Agar "Load More" button hai toh Cursor.
 5. **Q: Kya Cursor pagination mein direct 100th page pe ja sakte hain?** A: Nahi, isme sequentially (ek ke baad ek) aage badhna padta hai kyunki humein agle page ka cursor nahi pata hota.
 
@@ -7839,12 +7839,12 @@ Socho tum apne ghar pe ho aur mummy ne tumhe market se 10 sabziyan laane ko bola
 Tech ki duniya mein, tumhara code tum (client) ho, aur Database market hai. Agar code ek hi data lane ke liye baar-baar DB ke chakkar lagaye, toh usko **N+1 Query Problem** bolte hain.
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** The N+1 query problem is a performance anti-pattern where an application executes one database query to fetch a list of 'N' records, and then executes 'N' additional queries inside a loop to fetch related data for each record.
-* **Hinglish Simplification:** Pehle ek main list lane ke liye 1 query chalana, aur fir us list ke har ek item ki detail lane ke liye loop ke andar alag se query chalana. Isse database pe load badhta hai.
+* [[HL::**Precise English:** The N+1 query problem is a performance anti-pattern where an application executes one database query to fetch a list of 'N' records, and then executes 'N' additional queries inside a loop to fetch related data for each record.::HL]]
+* [[HL::**Hinglish Simplification:** Pehle ek main list lane ke liye 1 query chalana, aur fir us list ke har ek item ki detail lane ke liye loop ke andar alag se query chalana. Isse database pe load badhta hai::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Tumhe apne admin panel mein 50 Users aur unke kiye gaye Orders dikhane hain. Agar tum galti se har user ke liye order fetch karne ka loop chala doge, toh DB par 1 (user list) + 50 (orders per user) = 51 chakkkar lagenge. Site hang ho jayegi.
-* **Solution:** Humein DB (SQL) ke `JOIN` feature (ya Prisma ke `include`) ka use karna chahiye jisse 1 hi query (1 chakkar) mein User aur uske Orders ek sath ek "Thele" mein aa jayein.
+* [[HL::**Problem:** Tumhe apne admin panel mein 50 Users aur unke kiye gaye Orders dikhane hain. Agar tum galti se har user ke liye order fetch karne ka loop chala doge, toh DB par 1 (user list) + 50 (orders per user) = 51 chakkkar lagenge. Site hang ho jayegi.::HL]]
+* [[HL::**Solution:** Humein DB (SQL) ke `JOIN` feature (ya Prisma ke `include`) ka use karna chahiye jisse 1 hi query (1 chakkar) mein User aur uske Orders ek sath ek "Thele" mein aa jayein::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 Agar tum apna terminal/console dekhoge jahan server run ho raha hai, toh galti (N+1) hone par tumhe terminal mein `SELECT * FROM Order WHERE userId = ...` ki aisi baarish (flooding) dikhegi jo rukne ka naam nahi legi. 
@@ -7921,10 +7921,10 @@ console.log(usersWithOrders[0]); // Pura data ek baar mein aa gaya
 * **Fix:** Database ko query humesha loop ke **BAHAR** karni chahiye aur ek baar mein poora jhund (batch) fetch karna chahiye.
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-* **Confusion 1: "N ka matlab kya hai?"**
-  N ek variable (number) hai. Agar 100 users hain, toh N = 100. N+1 matlab (100+1) = 101 database queries lagengi.
-* **Confusion 2: "Agar include use kiya aur data bahut bada ho gaya toh?"**
-  Badiya sawaal! Agar ek user ke 1000 orders hain aur tumne `include: { orders: true }` kiya, toh RAM full ho sakti hai. Isliye include ke andar bhi limits lagti hain: `include: { orders: { take: 5 } }` (ki user ke sath sirf uske latest 5 order hi lana).
+* [[HL::**Confusion 1: "N ka matlab kya hai?"**::HL]]
+  [[HL::N ek variable (number) hai. Agar 100 users hain, toh N = 100. N+1 matlab (100+1) = 101 database queries lagengi::HL]].
+* [[HL::**Confusion 2: "Agar include use kiya aur data bahut bada ho gaya toh?"**::HL]]
+  [[HL::Badiya sawaal! Agar ek user ke 1000 orders hain aur tumne `include: { orders: true }` kiya, toh RAM full ho sakti hai. Isliye include ke andar bhi limits lagti hain: `include: { orders: { take: 5 } }` (ki user ke sath sirf uske latest 5 order hi lana::HL]]).
 
 ## 🌍 11. Real-World Use Case (Production Application):
 Shopify jaisi e-commerce backend APIs kabhi bhi N+1 query alow nahi karti. Jab tum Shopify dashboard mein apne 'Customers' list dekhte ho, toh backend ek optimized JOIN query chalata hai taaki unka LTV (Life Time Value) aur total orders ek hi shot mein database se aa jayein.
@@ -7951,10 +7951,10 @@ Tumhari app local (laptop) pe bahut tez chalegi kyunki tumhara DB aur code ek hi
 
 ## ❓ 15. FAQ (Interview Questions):
 1. **Q: N+1 query problem kya hai?** A: Jab hum relation wale data ko lane ke liye DB ke loop lagate hain (ek main query, N sab-queries).
-2. **Q: Is problem ka sabse aasaan solution kya hai?** A: SQL mein JOINs use karna, ya ORM mein Eager Loading (`include`) use karna.
-3. **Q: Eager Loading kya hoti hai?** A: Main data ke saath related data ko shuru mein hi (ek query mein) saath laana.
-4. **Q: Lazy Loading kya hoti hai?** A: Jab related data ki zaroorat ho, bas tabhi uske liye extra query karna (Isko dhyan se use na karein toh N+1 ban jata hai).
-5. **Q: Kaise pata lagau mere code mein N+1 bug hai?** A: Apne database queries ko terminal mein log/print karke dekho. Agar ek page refresh pe 20 query log ho rahi hain, toh gadbad hai!
+2. [[HL::**Q: Is problem ka sabse aasaan solution kya hai?** A: SQL mein JOINs use karna, ya ORM mein Eager Loading (`include`) use karna::HL]].
+3. [[HL::**Q: Eager Loading kya hoti hai?** A: Main data ke saath related data ko shuru mein hi (ek query mein) saath laana.::HL]]
+4. [[HL::**Q: Lazy Loading kya hoti hai?** A: Jab related data ki zaroorat ho, bas tabhi uske liye extra query karna (Isko dhyan se use na karein toh N+1 ban jata hai::HL]]).
+5. **Q: [[HL::Kaise pata lagau mere code mein N+1 bug hai?** A: Apne database queries ko terminal mein log/print karke dekho. Agar ek page refresh pe 20 query log ho rahi hain, toh gadbad hai::HL]]!
 
 ## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
 **Database ko market ki tarah treat karo; baar-baar chakkar mat lagao, 'JOIN/Include' ka thela le jao aur ek baar mein sab le aao.**
@@ -8136,8 +8136,8 @@ Socho tum Club ke andar aa gaye ho (Login ho gaya). Par club ke andar ek **VIP L
 * **Hinglish Simplification:** Middleware ek check-post hai jo har naye page ke load hone se pehle check karta hai ki user ke paas valid Session (login cookie/VIP band) hai ya nahi. Agar nahi, toh usko login page pe phenk deta hai.
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Tumne login page bana liya. Par agar main directly browser mein URL likhu `www.tumharisite.com/admin/dashboard`, toh main bina login kiye seedha dashboard mein ghus jaunga!
-* **Solution:** Humein ek Middleware chahiye jo har request ke beech mein khada ho jaye aur bole: "Ruko! Pehle apna Session (Cookie) dikhao, tabhi `/admin` page dekhne dunga." Isko **Route Protection** kehte hain.
+* [[HL::**Problem:** Tumne login page bana liya. Par agar main directly browser mein URL likhu `www.tumharisite.com/admin/dashboard`, toh main bina login kiye seedha dashboard mein ghus jaunga::HL]]!
+* [[HL::**Solution:** Humein ek Middleware chahiye jo har request ke beech mein khada ho jaye aur bole: "Ruko! Pehle apna Session (Cookie) dikhao, tabhi `/admin` page dekhne dunga." Isko **Route Protection** kehte hain::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 Tumhare project ke root folder (jahan `package.json` hota hai, ya `src/` ke andar) ek file hogi jiska naam hoga `middleware.ts`. Yeh file `app` folder ke *bahar* hoti hai kyunki yeh poore project ka gatekeeper hai.
@@ -8232,10 +8232,10 @@ export default async function Dashboard() {
 * **Fix:** `middleware.ts` humesha root directory mein hona chahiye (same level as `package.json` ya `src/` folder ke andar).
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-* **Confusion 1: "Session aur Cookie mein kya farq hai?"**
-  Cookie browser mein data save karne ka ek chhota sa dabba (box) hai. Us dabbe ke andar jo "VIP Pass" rakha hai, use Session kehte hain. 
-* **Confusion 2: "Middleware har request pe run hota hai, toh kya website slow nahi hogi?"**
-  Next.js Middleware 'Edge Runtime' par chalta hai, jo aam server se 10x zyada fast hota hai (less than 10 milliseconds). Isliye isse website slow nahi hoti.
+* [[HL::**Confusion 1: "Session aur Cookie mein kya farq hai?"**::HL]]
+  [[HL::Cookie browser mein data save karne ka ek chhota sa dabba (box) hai. Us dabbe ke andar jo "VIP Pass" rakha hai, use Session kehte hain::HL]]. 
+* [[HL::**Confusion 2: "Middleware har request pe run hota hai, toh kya website slow nahi hogi?"**::HL]]
+  [[HL::Next.js Middleware 'Edge Runtime' par chalta hai, jo aam server se 10x zyada fast hota hai (less than 10 milliseconds). Isliye isse website slow nahi hoti::HL]].
 
 ## 🌍 11. Real-World Use Case (Production Application):
 Jab tum Netflix bina subscription (login) ke kholne ki koshish karte ho, toh URL badal kar wapas `netflix.com/login` ho jata hai. Yeh Netflix ka Middleware hai jo tumhari request ko intercept karke wapas bhej raha hai kyunki tumhare browser mein active session cookie nahi hai.
@@ -8435,7 +8435,7 @@ Agar tum API route mein sensitive data (jaise user ka password ya credit card) f
 ## ❓ 15. FAQ (Interview Questions):
 1. **Q: Route Handlers Next.js mein kahan banate hain?** A: `app/api/...` folder ke andar `route.ts` file mein.
 2. **Q: GET aur POST method mein kya farq hai?** A: GET data read karne ke liye hota hai, POST data create ya send karne ke liye.
-3. **Q: `NextResponse` kya kaam karta hai?** A: Yeh data aur HTTP status code (200, 400, etc.) ko frontend tak bhejne ka Next.js ka official tarika hai.
+3. **Q: [[HL::`NextResponse` kya kaam karta hai?** A: Yeh data aur HTTP status code (200, 400, etc.) ko frontend tak bhejne ka Next.js ka official tarika hai::HL]].
 4. **Q: API Route banana zaroori hai kya?** A: Agar database access karna hai ya koi secret API key (jaise Stripe key) use karni hai, toh API route (ya server action) zaroori hai security ke liye.
 5. **Q: Status 200 aur 500 ka kya matlab hai?** A: 200 ka matlab "Sab theek hai (Success)". 500 ka matlab "Server mein aag lag gayi (Internal Server Error)".
 
@@ -8455,12 +8455,12 @@ Socho tumne online Pizza order kiya.
 Tech mein, jab hum Stripe (Payment) use karte hain, toh hum baar-baar nahi puchte "Payment hui?". Hum Stripe ko apni website ka ek URL (Webhook) de dete hain. Jab customer payment kar deta hai, toh Stripe humari website ko "Missed Call" (ek POST request) marta hai ki "Bhai, payment success ho gayi, order ship kar do!"
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** A webhook is an HTTP-based callback function that allows lightweight, event-driven communication between two APIs. When a specific event occurs in a 3rd party service (like a successful charge in Stripe), it automatically sends an HTTP POST request with payload data to your specified webhook URL.
-* **Hinglish Simplification:** Webhook dusri company (jaise Stripe) dwara humari website par bheja gaya ek automated message hai, jo tab aata hai jab unke paas koi event (jaise payment success) hota hai.
+* [[HL::**Precise English:** A webhook is an HTTP-based callback function that allows lightweight, event-driven communication between two APIs. When a specific event occurs in a 3rd party service (like a successful charge in Stripe), it automatically sends an HTTP POST request with payload data to your specified webhook URL.::HL]]
+* [[HL::**Hinglish Simplification:** Webhook dusri company (jaise Stripe) dwara humari website par bheja gaya ek automated message hai, jo tab aata hai jab unke paas koi event (jaise payment success) hota hai::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Jab user Pay karta hai, toh Bank aur OTP process hone mein time lagta hai. Agar user ne payment successful hone se pehle hi tab band kar diya, toh humare frontend ko kabhi pata hi nahi chalega ki payment hui ya nahi, aur user ko order nahi milega (User gussa!).
-* **Solution:** Webhook directly server-to-server baat karta hai. Bhale hi user laptop band karke so jaye, Stripe ka server automatically humare server (Webhook) ko message bhej dega ki payment aa gayi hai, database update kar lo.
+* [[HL::**Problem:** Jab user Pay karta hai, toh Bank aur OTP process hone mein time lagta hai. Agar user ne payment successful hone se pehle hi tab band kar diya, toh humare frontend ko kabhi pata hi nahi chalega ki payment hui ya nahi, aur user ko order nahi milega (User gussa!).::HL]]
+* [[HL::**Solution:** Webhook directly server-to-server baat karta hai. Bhale hi user laptop band karke so jaye, Stripe ka server automatically humare server (Webhook) ko message bhej dega ki payment aa gayi hai, database update kar lo::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 Yeh bhi exactly API Route jaisa hi dikhega. Tum ek file banaoge `app/api/webhooks/stripe/route.ts`. Aur Stripe ke dashboard mein jaa kar is URL (`https://tumharisite.com/api/webhooks/stripe`) ko save karoge.
@@ -8575,9 +8575,9 @@ Jab tum GitHub par apna code `git push` karte ho, toh Vercel automatically tumha
 Agar tumhari webhook route break ho gayi aur usne `200 OK` return nahi kiya, toh Stripe ko lagega payment ka data tumhe mila hi nahi. User ke bank se paise cut jayenge, par tumhari website pe hamesha "Payment Pending" dikhega. Support tickets ki baarish ho jayegi!
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **Q: Webhook kya hota hai?** A: Ek server se dusre server par automatically bheja gaya POST request jab koi specific event hota hai.
-2. **Q: Webhooks aur regular APIs mein kya farq hai?** A: API mein tum request karte ho, Webhook mein 3rd party service tumhe apne aap request karti hai.
-3. **Q: Webhook signature kyun verify karte hain?** A: Taaki hackers fake payment success messages bhej kar system ko bevkuf na bana sakein.
+1. [[HL::**Q: Webhook kya hota hai?** A: Ek server se dusre server par automatically bheja gaya POST request jab koi specific event hota hai::HL]].
+2. [[HL::**Q: Webhooks aur regular APIs mein kya farq hai?** A: API mein tum request karte ho, Webhook mein 3rd party service tumhe apne aap request karti hai::HL]].
+3. [[HL::**Q: Webhook signature kyun verify karte hain?** A: Taaki hackers fake payment success messages bhej kar system ko bevkuf na bana sakein::HL]].
 4. **Q: Agar Webhook fail ho jaye toh kya hoga?** A: Good services (like Stripe) usko retry karte hain agle kuch ghanto/dino tak (Exponential Backoff).
 5. **Q: Webhook URL kaisa hona chahiye?** A: Publicly accessible internet par hona chahiye (Localhost pe direct nahi chalega bina forwarding tool ke).
 
@@ -8615,11 +8615,11 @@ Iske bajaye, tum order likhte ho, ek **Token (Receipt)** customer ko dete ho ("S
 
 ## 📖 3. Technical Definition (Interview Answer):
 * **Precise English:** Background jobs (or asynchronous task processing) allow you to offload heavy, time-consuming operations to a separate worker process outside the main HTTP request-response cycle. Message queues manage these tasks, ensuring they are executed reliably with built-in retries. Tools like Inngest or Trigger.dev provide serverless infrastructure for this.
-* **Hinglish Simplification:** Jo code run hone mein bahut time leta hai (jaise 1000 emails bhejna ya PDF banana), usko main website se hata kar piche (background) mein chup-chap chalane ke system ko Background Jobs kehte hain.
+* [[HL::**Hinglish Simplification:** Jo code run hone mein bahut time leta hai (jaise 1000 emails bhejna ya PDF banana), usko main website se hata kar piche (background) mein chup-chap chalane ke system ko Background Jobs kehte::HL]] hain.
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Vercel (jahan hum Next.js host karte hain) par ek API route ki limit (timeout) **10 se 60 seconds** hoti hai. Agar user ne payment ki, aur tumhara code Invoice PDF generate karke Email bhej raha hai jisme 65 seconds lag gaye, toh Vercel beech mein code kaat dega (504 Gateway Timeout). User ko error dikhega aur email kabhi nahi jayega.
-* **Solution:** Hum Inngest/Trigger.dev use karte hain. API route bas unko ek "Event" (message) bhejta hai aur user ko turant bolta hai "Payment Success!". Inngest piche aaram se 5 minute laga kar PDF banata hai aur email bhejta hai bina kisi timeout ke darr ke.
+* [[HL::**Problem:** Vercel (jahan hum Next.js host karte hain) par ek API route ki limit (timeout) **10 se 60 seconds** hoti hai. Agar user ne payment ki, aur tumhara code Invoice PDF generate karke Email bhej raha hai jisme 65 seconds lag gaye, toh Vercel beech mein code kaat dega (504 Gateway Timeout). User ko error dikhega aur email kabhi nahi jayega.::HL]]
+* [[HL::**Solution:** Hum Inngest/Trigger.dev use karte hain. API route bas unko ek "Event" (message) bhejta hai aur user ko turant bolta hai "Payment Success!". Inngest piche aaram se 5 minute laga kar PDF banata hai aur email bhejta hai bina kisi timeout ke darr ke::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 
@@ -8634,82 +8634,82 @@ Tumhare project mein ek naya folder banega `src/inngest/`. Usme `client.ts` aur 
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
-Pehle hum Inngest install karenge:
+[[HL::Pehle hum Inngest install karenge:::HL]]
 ```bash
-npm install inngest
-# 📤 Expected Output: added 18 packages in 2s
+[[HL::npm install inngest::HL]]
+[[HL::# 📤 Expected Output: added 18 packages in 2s::HL]]
 ```
 
-**Step 1:** Inngest Client setup (Receptionist banana)
-**File:** `src/inngest/client.ts`
+[[HL::**Step 1:** Inngest Client setup (Receptionist banana)::HL]]
+[[HL::**File:** `src/inngest/client.ts`::HL]]
 ```typescript
-import { Inngest } from "inngest";
+import { [[HL::Inngest } from "inngest";::HL]]
 
-// Hum apna Inngest client bana rahe hain jiska naam 'E-commerce App' hai
-export const inngest = new Inngest({ id: "ecommerce-app" });
+[[HL::// Hum apna Inngest client bana rahe hain jiska naam 'E-commerce App' hai::HL]]
+[[HL::export const inngest = new Inngest({ id: "ecommerce-app::HL]]" });
 ```
 *(No terminal output for saving a file)*
 
-**Step 2:** Heavy function likhna (Kitchen/Chef banana)
-**File:** `src/inngest/functions.ts`
+[[HL::**Step 2:** Heavy function likhna (Kitchen/Chef banana)::HL]]
+[[HL::**File:** `src/inngest/functions.ts`::HL]]
 ```typescript
-import { inngest } from "./client";
+[[HL::import { inngest } from "./client";::HL]]
 
-// Yeh function tab chalega jab 'app/order.placed' naam ka message aayega
-export const sendInvoiceEmail = inngest.createFunction(
-  { id: "send-invoice-email" }, // Job ka unique naam
-  { event: "app/order.placed" }, // Kaunse event pe chalna hai
-  async ({ event, step }) => {
-    // step.run() ka matlab hai yeh ek alag isolated step hai. 
-    // Agar ye fail hua toh Inngest sirf isi hisse ko retry karega!
-    await step.run("generate-and-send-pdf", async () => {
-      console.log(`⏳ Background mein email bhejna shuru kar rahe hain: ${event.data.email} ko...`);
+[[HL::// Yeh function tab chalega jab 'app/order.placed' naam ka message aayega::HL]]
+[[HL::export const sendInvoiceEmail = inngest.createFunction(::HL]]
+  [[HL::{ id: "send-invoice-email" }, // Job ka unique naam::HL]]
+  [[HL::{ event: "app/order.placed" }, // Kaunse event pe chalna hai::HL]]
+  [[HL::async ({ event, step }) => {::HL]]
+    [[HL::// step.run() ka matlab hai yeh ek alag isolated step hai.::HL]] 
+    [[HL::// Agar ye fail hua toh Inngest sirf isi hisse ko retry karega!::HL]]
+    [[HL::await step.run("generate-and-send-pdf", async () => {::HL]]
+      [[HL::console.log(`⏳ Background mein email bhejna shuru kar rahe hain: ${event.data.email} ko...`);::HL]]
       
-      // Socho yahan koi heavy kaam ho raha hai jisme 5 second lagte hain (sleep)
-      await new Promise((resolve) => setTimeout(resolve, 5000));
+      [[HL::// Socho yahan koi heavy kaam ho raha hai jisme 5 second lagte hain (sleep)::HL]]
+      [[HL::await new Promise((resolve) => setTimeout(resolve, 5000));::HL]]
       
-      console.log(`✅ Email successfully bhej diya gaya: ${event.data.email} ko!`);
-    });
+      [[HL::console.log(`✅ Email successfully bhej diya gaya: ${event.data.email} ko!`);::HL]]
+    [[HL::});::HL]]
 
-    return { success: true };
+    [[HL::return { success: true::HL]] };
   }
 );
 ```
 *(No terminal output for saving)*
 
-**Step 3:** API se Inngest ko bulana (Order dena)
-**File:** `app/api/checkout/route.ts`
+[[HL::**Step 3:** API se Inngest ko bulana (Order dena)::HL]]
+[[HL::**File:** `app/api/checkout/route.ts`::HL]]
 ```typescript
-import { inngest } from "@/src/inngest/client";
-import { NextResponse } from "next/server";
+[[HL::import { inngest } from "@/src/inngest/client";::HL]]
+[[HL::import { NextResponse } from "next/server";::HL]]
 
-export async function POST(req: Request) {
-  const { userEmail } = await req.json();
+[[HL::export async function POST(req: Request) {::HL]]
+  [[HL::const { userEmail } = await req.json();::HL]]
 
-  // 1. Database mein order save karo (Fast kaam)
-  // await prisma.order.create(...)
+  [[HL::// 1. Database mein order save karo (Fast kaam)::HL]]
+  [[HL::// await prisma.order.create(...)::HL]]
 
-  // 2. Inngest ko event bhej do (Bhari kaam usko de diya)
-  await inngest.send({
-    name: "app/order.placed",
-    data: { email: userEmail },
-  });
+  [[HL::// 2. Inngest ko event bhej do (Bhari kaam usko de diya)::HL]]
+  [[HL::await inngest.send({::HL]]
+    [[HL::name: "app/order.placed",::HL]]
+    [[HL::data: { email: userEmail },::HL]]
+  [[HL::});::HL]]
 
-  // 3. User ko TURANT response de do, email bhejte hue rukna nahi hai!
-  console.log("🚀 API ne turant response de diya!");
-  return NextResponse.json({ message: "Order Success! Invoice email mein aa jayega." });
+  [[HL::// 3. User ko TURANT response de do, email bhejte hue rukna nahi hai!::HL]]
+  [[HL::console.log("🚀 API ne turant response de diya!");::HL]]
+  [[HL::return NextResponse.json({ message: "Order Success! Invoice email mein aa jayega::HL]]." });
 }
 ```
 
 ```text
-# 📤 Expected Output (Jab user API hit karega):
+# 📤 [[HL::Expected Output (Jab user API hit karega):::HL]]
 
-# -- Terminal (Next.js server) mein turant aayega: --
-# 🚀 API ne turant response de diya!
+[[HL::# -- Terminal (Next.js server) mein turant aayega: --::HL]]
+[[HL::# 🚀 API ne turant response de diya!::HL]]
 
-# -- (5 seconds baad, Inngest server terminal mein aayega): --
-# ⏳ Background mein email bhejna shuru kar rahe hain: rahul@test.com ko...
-# ✅ Email successfully bhej diya gaya: rahul@test.com ko!
+[[HL::# -- (5 seconds baad, Inngest server terminal mein aayega): --::HL]]
+[[HL::# ⏳ Background mein email bhejna shuru kar rahe hain: rahul@test.com ko...::HL]]
+[[HL::# ✅ Email successfully bhej diya gaya: rahul@test.com ko::HL]]!
 ```
 
 ## ⚖️ 8. Comparison (Ye vs Woh):
@@ -8724,10 +8724,10 @@ export async function POST(req: Request) {
 * **Fix:** Tumne job dispatch (send) kar di, bas kaam khatam! Uski return value ka wait mat karo, warna background job ka fayda hi kya hua?
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-* **Confusion 1: "Kya main `setTimeout()` use karke background mein kaam nahi kar sakta?"**
-  Nahi! Serverless environments (jaise Vercel) mein, jaise hi tumhara HTTP response return hota hai, Vercel tumhare server CPU ko "Sula" (freeze kar) deta hai. Tumhara `setTimeout` kabhi chalega hi nahi, ya beech mein cut jayega.
-* **Confusion 2: "Inngest aur Trigger.dev mein kya chunein?"**
-  Dono lagbhag same kaam karte hain. Inngest thoda purana aur zyada tested hai, Trigger.dev naya hai aur uski Developer Experience (DX) bahut pyari hai. Beginners ke liye dono excellent hain.
+* [[HL::**Confusion 1: "Kya main `setTimeout()` use karke background mein kaam nahi kar sakta?"**::HL]]
+  [[HL::Nahi! Serverless environments (jaise Vercel) mein, jaise hi tumhara HTTP response return hota hai, Vercel tumhare server CPU ko "Sula" (freeze kar) deta hai. Tumhara `setTimeout` kabhi chalega hi nahi, ya beech mein cut jayega.::HL]]
+* [[HL::**Confusion 2: "Inngest aur Trigger.dev mein kya chunein?"**::HL]]
+  [[HL::Dono lagbhag same kaam karte hain. Inngest thoda purana aur zyada tested hai, Trigger.dev naya hai aur uski Developer Experience (DX) bahut pyari hai. Beginners ke liye dono excellent hain::HL]].
 
 ## 🌍 11. Real-World Use Case (Production Application):
 Jab tum YouTube par 1GB ki video upload karte ho, toh YouTube ki API tumhe turant bolti hai "Upload Complete, Processing in background...". Agar video processing (10 minutes) main API mein hoti, toh tumhara browser 10 minute tak hang rehta! Wahan queues aur background jobs hi kaam aate hain.
@@ -8756,8 +8756,8 @@ Jab tum YouTube par 1GB ki video upload karte ho, toh YouTube ki API tumhe turan
 Agar heavy tasks normal API mein chhod diye, toh "Black Friday Sale" ke waqt jab 100 log ek sath buy karenge, tumhare saare API routes Timeout mar jayenge. Server 500 Errors dega, aur tumhari site poori tarah down ho jayegi.
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **Q: Message Queue kya hota hai?** A: Ek digital line (queue) jahan heavy tasks ko ek-ek karke background mein run hone ke liye store kiya jata hai.
-2. **Q: Vercel mein background jobs zaroori kyun hain?** A: Kyunki Vercel (Serverless functions) maximum 10s se 60s mein timeout ho jate hain.
+1. **Q: [[HL::Message Queue kya hota hai?** A: Ek digital line (queue) jahan heavy tasks ko ek-ek karke background mein run hone ke liye store kiya jata hai::HL]].
+2. [[HL::**Q: Vercel mein background jobs zaroori kyun hain?** A: Kyunki Vercel (Serverless functions) maximum 10s se 60s mein timeout ho jate hain::HL]].
 3. **Q: Idempotent function ka kya matlab hai background jobs mein?** A: Ek aisa function jisko agar Inngest galti se retry bhi kare (2 baar run kare), toh uska result same rahe (e.g. duplicate emails na jayein).
 4. **Q: Cron Job aur Background Job mein kya farq hai?** A: Cron job schedule pe chalti hai (jaise "Har raat 12 baje"). Background job event pe chalti hai (jaise "Jab user button dabaye").
 5. **Q: Kya main frontend se directly Inngest function bula sakta hoon?** A: Nahi, frontend se hamesha API bulani chahiye, aur API securely Inngest event fire karti hai.
@@ -8777,12 +8777,12 @@ Tumne note likhne ke liye Rahul ko phone par hold nahi karwaya!
 Next.js 15 mein **`after()`** yahi kaam karta hai. Yeh bolta hai "Bhai, user ko unka page ya data dikha do (phone kaat do), aur uske *theek baad* server par thoda sa bacha hua kaam (jaise analytics update karna) chupke se kar lo, bina user ko wait karwaye."
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** The `after()` API (introduced in Next.js 15) allows you to schedule a callback function to execute *after* the server has finished streaming the HTTP response to the client. This is ideal for secondary, non-blocking tasks like logging, analytics, or simple cache invalidation without increasing the Time-to-First-Byte (TTFB).
-* **Hinglish Simplification:** `after()` ek function hai jo Next.js ko bolta hai ki "Pehle user ko jaldi se page dikha do, aur uske baad background mein data log karne ya cache update karne ka chhota-mota kaam kar lo."
+* [[HL::**Precise English:** The `after()` API (introduced in Next.js 15) allows you to schedule a callback function to execute *after* the server has finished streaming the HTTP response to the client. This is ideal for secondary, non-blocking tasks like logging, analytics, or simple cache invalidation without increasing the Time-to-First-Byte (TTFB).::HL]]
+* [[HL::**Hinglish Simplification:** `after()` ek function hai jo Next.js ko bolta hai ki "Pehle user ko jaldi se page dikha do, aur uske baad background mein data log karne ya cache update karne ka chhota-mota kaam kar lo::HL]]."
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Har baar jab koi user product page dekhta hai, hum chahte hain database mein "View Count +1" ho jaye (Analytics). Agar hum API mein pehle DB update karenge aur fir page dikhayenge, toh page load hone mein 100-200 milliseconds extra lagenge. User ka experience slow hoga. Inngest setup karna is chhote se kaam ke liye "Makkhi maarne ke liye Top (Cannon)" chalane jaisa hai.
-* **Solution:** Hum `after()` use karte hain. Page turant load hoga (0 ms delay), aur "View Count +1" ka database query `after()` ke andar background mein complete ho jayega.
+* [[HL::**Problem:** Har baar jab koi user product page dekhta hai, hum chahte hain database mein "View Count +1" ho jaye (Analytics). Agar hum API mein pehle DB update karenge aur fir page dikhayenge, toh page load hone mein 100-200 milliseconds extra lagenge. User ka experience slow hoga. Inngest setup karna is chhote se kaam ke liye "Makkhi maarne ke liye Top (Cannon)" chalane jaisa hai.::HL]]
+* [[HL::**Solution:** Hum `after()` use karte hain. Page turant load hoga (0 ms delay), aur "View Count +1" ka database query `after()` ke andar background mein complete ho jayega::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 
@@ -8792,36 +8792,36 @@ Tumhe bas Next.js ki core library se `after` import karna hai: `import { after }
 1. User requests a page (`GET /product/shoes`).
 2. Server immediately returns the HTML/JSON data (HTTP connection close ho jati hai).
 3. Normally, yahan server execution stop kar deta hai. Par agar tumne `after()` lagaya hai, toh Node/Edge runtime execution context ko thodi der aur zinda rakhta hai.
-4. Response bhejne ke baad, Vercel infrastructure `after()` ke andar likha code (e.g., `prisma.analytics.create()`) execute karta hai.
+4. Response bhejne ke baad, Vercel infrastructure `after()` ke andar likha code (e.g., [[HL::`prisma.analytics.create()`) execute karta hai.::HL]]
 
-## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
+[[HL::## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):::HL]]
 
-Dekho yeh Next.js Server Action mein kaise likhte hain.
+[[HL::Dekho yeh Next.js Server Action mein kaise likhte hain.::HL]]
 
-**File:** `app/actions.ts`
+[[HL::**File:** `app/actions.ts`::HL]]
 ```typescript
-"use server" // Yeh Next.js ko batata hai ki yeh backend function hai
+[[HL::"use server" // Yeh Next.js ko batata hai ki yeh backend function hai::HL]]
 
-// Next.js 15+ se 'after' import kar rahe hain
-import { after } from 'next/server';
+[[HL::// Next.js 15+ se 'after' import kar rahe hain::HL]]
+[[HL::import { after } from 'next/server';::HL]]
 
-export async function addProductToCart(productId: string) {
-  // 1. Zaroori kaam: Cart mein product add karna (Iska user wait karega)
-  console.log(`🛒 Product ${productId} cart mein add kiya jaa raha hai...`);
-  // await db.cart.add(productId);
+[[HL::export async function addProductToCart(productId: string) {::HL]]
+  [[HL::// 1. Zaroori kaam: Cart mein product add karna (Iska user wait karega)::HL]]
+  [[HL::console.log(`🛒 Product ${productId} cart mein add kiya jaa raha hai...`);::HL]]
+  [[HL::// await db.cart.add(productId);::HL]]
   
-  // 2. Chhota background kaam: Analytics log karna
-  // Hum 'after' ke andar function paas karte hain. 
-  // Yeh code tab chalega jab return statement ke through user ko response mil chuka hoga!
-  after(async () => {
-    console.log(`📊 [BACKGROUND TASK] Analytics save ho raha hai: User ne ${productId} cart mein dala.`);
-    // await db.analytics.create({ action: 'add_to_cart', productId });
-    console.log(`✅ [BACKGROUND TASK] Analytics save ho gaya!`);
-  });
+  [[HL::// 2. Chhota background kaam: Analytics log karna::HL]]
+  [[HL::// Hum 'after' ke andar function paas karte hain.::HL]] 
+  [[HL::// Yeh code tab chalega jab return statement ke through user ko response mil chuka hoga!::HL]]
+  [[HL::after(async () => {::HL]]
+    [[HL::console.log(`📊 [BACKGROUND TASK] Analytics save ho raha hai: User ne ${productId} cart mein dala.`);::HL]]
+    [[HL::// await db.analytics.create({ action: 'add_to_cart', productId });::HL]]
+    [[HL::console.log(`✅ [BACKGROUND TASK] Analytics save ho gaya!`);::HL]]
+  [[HL::});::HL]]
 
-  // 3. User ko turant response mil gaya!
-  console.log("⚡ Response User ko bhej diya gaya!");
-  return { success: true, message: "Added to cart" };
+  [[HL::// 3. User ko turant response mil gaya!::HL]]
+  [[HL::console.log("⚡ Response User ko bhej diya gaya!");::HL]]
+  [[HL::return { success: true, message: "Added to cart::HL]]" };
 }
 ```
 
@@ -8873,8 +8873,8 @@ Agar tum e-commerce site bana rahe ho aur koi cache invalidate karna hai (jaise 
 Agar tumne apna saara analytics aur logging code normal API execution flow mein rakh diya (bina `after` ke), toh tumhari website ka TTFB (Time to First Byte) badh jayega. Google slow sites ko SEO (Search ranking) mein neeche gira deta hai. Tumhara business loss hoga.
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **Q: Next.js mein `after()` API kya hai?** A: Ek feature jo HTTP response bhejne ke baad background task run karne deta hai.
-2. **Q: Kya main `after()` se emails bhej sakta hoon?** A: Technically haan, par recommended nahi hai kyunki email fail hone par `after()` retry nahi karega. Inngest better hai uske liye.
+1. [[HL::**Q: Next.js mein `after()` API kya hai?** A: Ek feature jo HTTP response bhejne ke baad background task run karne deta hai.::HL]]
+2. [[HL::**Q: Kya main `after()` se emails bhej sakta hoon?** A: Technically haan, par recommended nahi hai kyunki email fail hone par `after()` retry nahi karega. Inngest better hai uske liye::HL]].
 3. **Q: `after()` ka main faida kya hai?** A: Yeh website ki speed (latency) badhaye bina server par secondary tasks complete karne deta hai.
 4. **Q: Server Component mein `after()` kaha use hota hai?** A: Page data load karke render karne ke theek baad (e.g. view count badhane ke liye).
 5. **Q: Kya `after()` mein likha code user ka browser slow karta hai?** A: Bilkul nahi! Yeh purely server par run hota hai, browser ka isse connection cut chuka hota hai.
@@ -8918,12 +8918,12 @@ Socho tum ek famous Hotel ke chef ho. Tumhare paas baar-baar "Dal Makhani" ka or
 Yahan **"Nayi Dal banana" = Database se data lana (slow)**. Aur **"Patila" = Cache (fast)**.
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** `unstable_cache` is a Next.js API that allows developers to cache the results of expensive operations, such as direct database queries or heavy computations, preventing redundant calculations across multiple user requests.
-* **Hinglish Simplification:** Ek aisi trick jisse hum database se aane wale result ko temporary save kar lete hain, taaki baar-baar same sawaal puchhne par server aur database ka time waste na ho.
+* [[HL::**Precise English:** `unstable_cache` is a Next.js API that allows developers to cache the results of expensive operations, such as direct database queries or heavy computations, preventing redundant calculations across multiple user requests.::HL]]
+* [[HL::**Hinglish Simplification:** Ek aisi trick jisse hum database se aane wale result ko temporary save kar lete hain, taaki baar-baar same sawaal puchhne par server aur database ka time waste na ho::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Agar tumhari website par 10,000 log ek saath aa gaye aur sabko Home Page ke "Top 10 Products" dekhne hain, toh tumhara server database se 10,000 baar same sawal puchega. Database overload hokar crash ho jayega (website band pad jayegi).
-* **Solution:** `unstable_cache` use karo. Server 1st user ke liye database se puchega, result ko yaad kar lega (cache), aur baaki 9,999 users ko wahi yaad kiya hua result turant de dega!
+* [[HL::**Problem:** Agar tumhari website par 10,000 log ek saath aa gaye aur sabko Home Page ke "Top 10 Products" dekhne hain, toh tumhara server database se 10,000 baar same sawal puchega. Database overload hokar crash ho jayega (website band pad jayegi).::HL]]
+* [[HL::**Solution:** `unstable_cache` use karo. Server 1st user ke liye database se puchega, result ko yaad kar lega (cache), aur baaki 9,999 users ko wahi yaad kiya hua result turant de dega::HL]]!
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 Tumhare VS Code file explorer mein ek simple file hogi jahan hum database call likhte hain:
@@ -8936,79 +8936,79 @@ Tumhare VS Code file explorer mein ek simple file hogi jahan hum database call l
 ```
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1. **Pehla User Aata Hai:** Next.js dekhta hai, "Kya mere paas data Cache mein hai?" -> Jawab milta hai "Nahi".
-2. **Database Call:** Next.js database se data mangwata hai (takes 2 seconds).
-3. **Save to Cache:** Data ko Next.js apni memory (Cache) mein save kar leta hai. User ko dikha deta hai.
+1. [[HL::**Pehla User Aata Hai:** Next.js dekhta hai, "Kya mere paas data Cache mein hai?" -> Jawab milta hai "Nahi".::HL]]
+2. [[HL::**Database Call:** Next.js database se data mangwata hai (takes 2 seconds).::HL]]
+3. [[HL::**Save to Cache:** Data ko Next.js apni memory (Cache) mein save kar leta hai. User ko dikha deta hai::HL]].
 4. **Doosra User Aata Hai:** Next.js phir check karta hai. Is baar data Cache mein mil jata hai!
 5. **Instant Reply:** Next.js bina database ke paas gaye, direct Cache se data de deta hai (takes 0.001 seconds).
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
-Maan lo hum `app/page.tsx` mein ek database query run kar rahe hain. Niche wala code dhyan se dekho.
+[[HL::Maan lo hum `app/page.tsx` mein ek database query run kar rahe hain. Niche wala code dhyan se dekho.::HL]]
 
-*(Note: `{}` inko curly braces kehte hain, ye function ya object ka block banate hain. `[]` ko square brackets kehte hain, ye list (array) banane ke kaam aate hain. `' '` single quotes mein hum text (string) likhte hain.)*
+[[HL::*(Note: `{}` inko curly braces kehte hain, ye function ya object ka block banate hain. `[]` ko square brackets kehte hain, ye list (array) banane ke kaam aate hain. `' '` single quotes mein hum text (string) likhte hain.)*::HL]]
 
 ```typescript
-// 1. Next.js ke cache module se unstable_cache import kar rahe hain
-import { unstable_cache } from 'next/cache';
+[[HL::// 1. Next.js ke cache module se unstable_cache import kar rahe hain::HL]]
+[[HL::import { unstable_cache } from 'next/cache';::HL]]
 
-// 2. Ek dummy database function maan lete hain (jo time lagata hai)
-async function getProductsFromDB() {
-  console.log("⏳ Database se query ho rahi hai... (Slow!)");
-  // Yahan asli DB query hoti hai, hum bas ek list return kar rahe hain
-  return [{ id: 1, name: "Laptop" }, { id: 2, name: "Phone" }];
-}
+[[HL::// 2. Ek dummy database function maan lete hain (jo time lagata hai)::HL]]
+[[HL::async function getProductsFromDB() {::HL]]
+  [[HL::console.log("⏳ Database se query ho rahi hai... (Slow!)");::HL]]
+  [[HL::// Yahan asli DB query hoti hai, hum bas ek list return kar rahe hain::HL]]
+  [[HL::return [{ id: 1, name: "Laptop" }, { id: 2, name: "Phone" }];::HL]]
+[[HL::}::HL]]
 
-// 3. Yahan hum unstable_cache ka jadoo laga rahe hain
-const getCachedProducts = unstable_cache(
-  // Pehla argument: Wo function jisko cache karna hai
-  async () => await getProductsFromDB(),
+[[HL::// 3. Yahan hum unstable_cache ka jadoo laga rahe hain::HL]]
+[[HL::const getCachedProducts = unstable_cache(::HL]]
+  [[HL::// Pehla argument: Wo function jisko cache karna hai::HL]]
+  [[HL::async () => await getProductsFromDB(),::HL]]
   
-  // Doosra argument: Ek unique key array, taaki Next.js isko pehchan sake
-  ['top-products-key'], // Ye ek unique naam hai hamare cache patile ka
+  [[HL::// Doosra argument: Ek unique key array, taaki Next.js isko pehchan sake::HL]]
+  [[HL::['top-products-key'], // Ye ek unique naam hai hamare cache patile ka::HL]]
   
-  // Teesra argument: Options (kitne der tak cache rakhna hai)
-  { revalidate: 3600 } // 3600 seconds (1 ghanta) tak cache valid rahega
-);
+  [[HL::// Teesra argument: Options (kitne der tak cache rakhna hai)::HL]]
+  [[HL::{ revalidate: 3600 } // 3600 seconds (1 ghanta) tak cache valid rahega::HL]]
+[[HL::);::HL]]
 
-// 4. Hamara main page component
-export default async function HomePage() {
-  // Ab hum direct DB nahi, Cached function call karenge
-  const products = await getCachedProducts();
+[[HL::// 4. Hamara main page component::HL]]
+[[HL::export default async function HomePage() {::HL]]
+  [[HL::// Ab hum direct DB nahi, Cached function call karenge::HL]]
+  [[HL::const products = await getCachedProducts();::HL]]
 
-  console.log("🚀 Data load ho gaya:", products);
+  [[HL::console.log("🚀 Data load ho gaya:", products);::HL]]
 
-  return (
-    <div>
-      <h1>Top Products</h1>
-      {/* List ko screen par dikhane ka code */}
-    </div>
+  [[HL::return (::HL]]
+    [[HL::<div>::HL]]
+      [[HL::<h1>Top Products</h1>::HL]]
+      [[HL::{/* List ko screen par dikhane ka code */}::HL]]
+    [[HL::</div::HL]]>
   );
 }
 ```
 
 ```text
-# 📤 Expected Output in Terminal (Jab Pehla User aayega):
-⏳ Database se query ho rahi hai... (Slow!)
-🚀 Data load ho gaya: [ { id: 1, name: 'Laptop' }, { id: 2, name: 'Phone' } ]
+# 📤 [[HL::Expected Output in Terminal (Jab Pehla User aayega):::HL]]
+[[HL::⏳ Database se query ho rahi hai... (Slow!)::HL]]
+[[HL::🚀 Data load ho gaya: [ { id: 1, name: 'Laptop' }, { id: 2, name: 'Phone' } ]::HL]]
 
-# 📤 Expected Output in Terminal (Jab 2nd, 3rd, 100th User aayega us ghante mein):
-🚀 Data load ho gaya: [ { id: 1, name: 'Laptop' }, { id: 2, name: 'Phone' } ]
-(Dhyan do: "Database se query ho rahi hai..." dobara print nahi hua! Data direct cache se aaya.)
+[[HL::# 📤 Expected Output in Terminal (Jab 2nd, 3rd, 100th User aayega us ghante mein):::HL]]
+[[HL::🚀 Data load ho gaya: [ { id: 1, name: 'Laptop' }, { id: 2, name: 'Phone' } ]::HL]]
+[[HL::(Dhyan do: "Database se query ho rahi hai..." dobara print nahi hua! Data direct cache se aaya::HL]].)
 ```
 
-## ⚖️ 8. Comparison (Ye vs Woh):
-| Feature | `fetch()` Caching | `unstable_cache` |
+## ⚖️ 8. [[HL::Comparison (Ye vs Woh):::HL]]
+| [[HL::Feature::HL]] | [[HL::`fetch()` Caching::HL]] | [[HL::`unstable_cache`::HL]] |
 | :--- | :--- | :--- |
-| **Kahan Use Hota Hai?** | Jab hum kisi 3rd party API (URL) se data late hain. | Jab hum direct apni Database (SQL/MongoDB) query run karte hain. |
-| **Kaise Likhte Hain?** | `fetch('https://api.com', { next: { revalidate: 60 } })` | `unstable_cache(myDbQuery, ['key'])` |
+| [[HL::**Kahan Use Hota Hai?**::HL]] | [[HL::Jab hum kisi 3rd party API (URL) se data late hain.::HL]] | [[HL::Jab hum direct apni Database (SQL/MongoDB) query run karte hain.::HL]] |
+| [[HL::**Kaise Likhte Hain?**::HL]] | [[HL::`fetch('https://api.com', { next: { revalidate: 60 } })`::HL]] | [[HL::`unstable_cache(myDbQuery, ['key::HL]]'])` |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-1. **User-specific data cache karna:** Agar tumne kisi ek user ke "Cart" (shopping bag) ko cache kar diya, toh site pe aane wale har naye user ko pehle wale user ka cart dikhne lagega! Fix: Kabhi bhi personal data global cache mein mat dalo.
-2. **Ajeeb naam dekh kar darna:** Beginners sochte hain `unstable_` ka matlab ye tut jayega (broken hai). Fix: Nahi, Next.js ki bhasha mein `unstable_` ka matlab hai ki bhavishya mein iska naam badal sakta hai, par ye kaam perfect aur safe karta hai.
+1. [[HL::**User-specific data cache karna:** Agar tumne kisi ek user ke "Cart" (shopping bag) ko cache kar diya, toh site pe aane wale har naye user ko pehle wale user ka cart dikhne lagega! Fix: Kabhi bhi personal data global cache mein mat dalo.::HL]]
+2. [[HL::**Ajeeb naam dekh kar darna:** Beginners sochte hain `unstable_` ka matlab ye tut jayega (broken hai). Fix: Nahi, Next.js ki bhasha mein `unstable_` ka matlab hai ki bhavishya mein iska naam badal sakta hai, par ye kaam perfect aur safe karta hai::HL]].
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-* **"Bhaiya, agar API call karna hai toh fetch use karu ya unstable_cache?"** -> Agar URL wala `fetch()` use kar rahe ho, toh usme Next.js ne by-default caching de rakhi hai, wahi use karo. `unstable_cache` SIRF tab use karo jab tum direct Database library (jaise Prisma, Mongoose) use karke data la rahe ho server pe.
+* **"[[HL::Bhaiya, agar API call karna hai toh fetch use karu ya unstable_cache?"** -> Agar URL wala `fetch()` use kar rahe ho, toh usme Next.js ne by-default caching de rakhi hai, wahi use karo. `unstable_cache` SIRF tab use karo jab tum direct Database library (jaise Prisma, Mongoose) use karke data la rahe ho server pe::HL]].
 
 ## 🌍 11. Real-World Use Case (Production Application):
 **Swiggy ya Zomato ka Home Page:** Sheher ke saare restaurants ki list har second change nahi hoti. Wo direct database hit karne ke bajaye list ko `unstable_cache` mein rakhte hain. Isse jab hazaron log bhookhe hokar app kholte hain, toh app crash nahi hoti.
@@ -9033,7 +9033,7 @@ Senior engineers hamesha unique aur clear `keys` dete hain. Jaise `['user-profil
 Agar tumne cache lagana bhool gaye aur website viral ho gayi, toh database server ki CPU 100% hit karegi aur AWS/Vercel (jahan tumhari site host hai) tumhe hazaron dollars ka bill bhej dega kyunki database reads bahut mehnge hote hain!
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **What is `unstable_cache`?** It's a Next.js utility to cache results of async functions, typically direct database queries.
+1. [[HL::**What is `unstable_cache`?** It's a Next.js utility to cache results of async functions, typically direct database queries::HL]].
 2. **Why the prefix `unstable_`?** It indicates the API signature (how we write it) might change in future Next.js updates, though the core feature is stable to use.
 3. **Can I cache user-authenticated data?** You shouldn't cache it globally, otherwise data will leak between users.
 4. **How long does the cache stay?** Until the `revalidate` time you specify runs out.
@@ -9052,51 +9052,51 @@ Socho tum ek Supermarket ke manager ho. Store mein "Dairy" (Doodh, Dahi) ke 50 i
 Yahi hai **Tag-based Revalidation**. Pure cache ko delete karne ke bajaye, sirf ek specific "Tag" wale cache ko update karna.
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** `revalidateTag` is a Next.js server-side function that allows you to purge specific cached data on-demand across your application by referencing a custom string tag associated with that data.
-* **Hinglish Simplification:** Agar humne cache lagaya hai aur beech mein hi data badal gaya, toh pure cache ko torne ke bajaye, ek specific "Naam" (Tag) wale cache ko jabardasti refresh karne ka button hai `revalidateTag`.
+* [[HL::**Precise English:** `revalidateTag` is a Next.js server-side function that allows you to purge specific cached data on-demand across your application by referencing a custom string tag associated with that data.::HL]]
+* [[HL::**Hinglish Simplification:** Agar humne cache lagaya hai aur beech mein hi data badal gaya, toh pure cache ko torne ke bajaye, ek specific "Naam" (Tag) wale cache ko jabardasti refresh karne ka button hai `revalidateTag`.::HL]]
 
-## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Pichle topic mein humne 1 ghante (`3600s`) ka cache lagaya tha. Par maan lo admin ne 5 minute baad hi ek product ka price ₹50,000 se ₹10,000 kar diya! Ab 55 minute tak logo ko purana price (₹50k) hi dikhega.
-* **Solution:** Jaise hi admin price change kare, hum background mein `revalidateTag('products')` call kar denge. Ye turant purane cache ko kachre mein phek dega aur naya data le aayega.
+[[HL::## 🧠 4. Zaroorat Kyun Hai? (Why use it?):::HL]]
+* [[HL::**Problem:** Pichle topic mein humne 1 ghante::HL]] ([[HL::`3600s`) ka cache lagaya tha. Par maan lo admin ne 5 minute baad hi ek product ka price ₹50,000 se ₹10,000 kar diya! Ab 55 minute tak logo ko purana price (₹50k) hi dikhega.::HL]]
+* [[HL::**Solution:** Jaise hi admin price change kare, hum background mein `revalidateTag('products')` call kar denge. Ye turant purane cache ko kachre mein phek dega aur naya data le aayega::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 Usually tumhare paas ek data laane wali jagah hogi aur ek data update karne wali jagah (API route):
 ```text
-📦 my-next-app
- ┣ 📂 app
- ┃ ┣ 📂 products
- ┃ ┃ ┗ 📜 page.tsx        (Yahan tag lagayenge)
- ┃ ┗ 📂 api
- ┃   ┗ 📂 update-price
- ┃     ┗ 📜 route.ts      (Yahan se tag ko revalidate/refresh karenge)
+📦 my-[[HL::next-app::HL]]
+ [[HL::┣ 📂 app::HL]]
+ [[HL::┃ ┣ 📂 products::HL]]
+ [[HL::┃ ┃ ┗ 📜 page.tsx        (Yahan tag lagayenge)::HL]]
+ [[HL::┃ ┗ 📂 api::HL]]
+ [[HL::┃   ┗ 📂 update-price::HL]]
+ [[HL::┃     ┗ 📜 route.ts      (Yahan se tag ko revalidate/refresh karenge)::HL]]
 ```
 
-## ⚙️ 6. Under the Hood (Technical Working):
-1. User Home page dekhta hai. `fetch` pe ek tag laga hai `"product-list"`. Data cache ho jata hai.
-2. Admin backend dashboard mein ja kar iPhone ka price update karke "Save" dabata hai.
-3. Save dabte hi hamara API route trigger hota hai, jisme humne likha hai `revalidateTag('product-list')`.
-4. Next.js turant server pe us specific tag wale cache ko invalid (kharab) ghoshit kar deta hai.
-5. Agla user jab website kholta hai, toh use naya fresh price dikhta hai aur wo naya price wapas cache ho jata hai.
+[[HL::## ⚙️ 6. Under the Hood (Technical Working):::HL]]
+1. [[HL::User Home page dekhta hai. `fetch` pe ek tag laga hai `"product-list"`. Data cache ho jata hai.::HL]]
+2. [[HL::Admin backend dashboard mein ja kar iPhone ka price update karke "Save" dabata hai.::HL]]
+3. [[HL::Save dabte hi hamara API route trigger hota hai, jisme humne likha hai `revalidateTag('product-list')`.::HL]]
+4. [[HL::Next.js turant server pe us specific tag wale cache ko invalid (kharab) ghoshit kar deta hai.::HL]]
+5. [[HL::Agla user jab website kholta hai, toh use naya fresh price dikhta hai aur wo naya price wapas cache ho jata hai.::HL]]
 
-## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
+[[HL::## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):::HL]]
 
-**Step A: Fetch karte time Tag lagana (app/products/page.tsx)**
+[[HL::**Step A: Fetch karte time Tag lagana (app/products/page.tsx)**::HL]]
 
 ```tsx
-// 1. Data laate time fetch function mein hum 'tags' namak array bhejte hain
-async function getProducts() {
-  const res = await fetch('https://api.my-store.com/products', {
-    next: { 
-      // Is cache box par humne ek sticker (tag) laga diya: 'all-products'
-      tags: ['all-products'] 
-    }
-  });
-  return res.json();
-}
+[[HL::// 1. Data laate time fetch function mein hum 'tags' namak array bhejte hain::HL]]
+[[HL::async function getProducts() {::HL]]
+  [[HL::const res = await fetch('https://api.my-store.com/products', {::HL]]
+    [[HL::next: {::HL]] 
+      [[HL::// Is cache box par humne ek sticker (tag) laga diya: 'all-products'::HL]]
+      [[HL::tags: ['all-products']::HL]] 
+    [[HL::}::HL]]
+  [[HL::});::HL]]
+  [[HL::return res.json();::HL]]
+[[HL::}::HL]]
 
-export default async function ProductsPage() {
-  const products = await getProducts();
-  return <div>{products[0].price}</div>;
+[[HL::export default async function ProductsPage() {::HL]]
+  [[HL::const products = await getProducts();::HL]]
+  [[HL::return <div>{products[0].price}</div::HL]]>;
 }
 ```
 
@@ -9178,10 +9178,10 @@ const TAGS = { PRODUCTS: 'all-products' };
 Agar tum e-commerce site chala rahe ho aur admin ne stock "Out of Stock" (0) kar diya DB mein, par tumne `revalidateTag` call nahi kiya, toh purana cache user ko "In Stock" dikhata rahega. User order place kar dega jo tumhare paas hai hi nahi! Business ka reputation kharab!
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **What is the difference between Time-based and Tag-based revalidation?** Time-based updates cache after X seconds automatically. Tag-based updates cache instantly when YOU tell it to.
+1. [[HL::**What is the difference between Time-based and Tag-based revalidation?** Time-based updates cache after X seconds automatically. Tag-based updates cache instantly when YOU tell it to::HL]].
 2. **Can I attach multiple tags to one fetch request?** Yes, you pass an array: `tags: ['clothing', 'mens', 'winter']`.
-3. **If I revalidate 'mens', will it affect 'clothing'?** No, it only purges data that has the exact 'mens' tag.
-4. **Is `revalidateTag` a client or server feature?** Strictly Server-side.
+3. **If [[HL::I revalidate 'mens', will it affect 'clothing'?** No, it only purges data that has the exact 'mens' tag.::HL]]
+4. [[HL::**Is `revalidateTag` a client or server feature?** Strictly Server-side::HL]].
 5. **Does it delete the database data?** No! It only deletes the *temporary copy* inside the Next.js Cache memory.
 
 ## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
@@ -9207,12 +9207,12 @@ Maan lo tum Goa ghoomne ja rahe ho 3 din ke liye. Kya tum apna poora ghar, bed, 
 Yahan **"Ghar ka saaman" = Hamara poora code**, aur **"Goa ka bag" = User ke browser mein bheja gaya code**.
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** Code Splitting is the process of breaking down a large JavaScript bundle into smaller, manageable chunks that are loaded on-demand. Tree Shaking is a dead-code elimination technique that removes unused exports from the final bundle.
-* **Hinglish Simplification:** Poori website ka code ek sath load karne ke bajaye, sirf us page ka code load karna jo user dekh raha hai (Code Splitting). Aur jo code project mein likha toh hai par kahin use nahi ho raha, usko build time par kachre mein daal dena (Tree Shaking).
+* [[HL::**Precise English:** Code Splitting is the process of breaking down a large JavaScript bundle into smaller, manageable chunks that are loaded on-demand. Tree Shaking is a dead-code elimination technique that removes unused exports from the final bundle.::HL]]
+* [[HL::**Hinglish Simplification:** Poori website ka code ek sath load karne ke bajaye, sirf us page ka code load karna jo user dekh raha hai (Code Splitting). Aur jo code project mein likha toh hai par kahin use nahi ho raha, usko build time par kachre mein daal dena (Tree Shaking::HL]]).
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Agar tumhari e-commerce site mein ek bohot heavy "3D Product Viewer" hai jo sirf Product page pe use hota hai, aur tumne Code Splitting nahi ki, toh Home page load karne wale user ko bhi us 3D viewer ka 2MB ka code download karna padega! Website super slow ho jayegi.
-* **Solution:** `next/dynamic` use karke hum Next.js ko bolenge, "Bhai, ye 3D viewer wala code tabhi download karna jab user asliyat mein us component ke paas pahuche."
+* [[HL::**Problem:** Agar tumhari e-commerce site mein ek bohot heavy "3D Product Viewer" hai jo sirf Product page pe use hota hai, aur tumne Code Splitting nahi ki, toh Home page load karne wale user ko bhi us 3D viewer ka 2MB ka code download karna padega! Website super slow ho jayegi::HL]].
+* [[HL::**Solution:** `next/dynamic` use karke hum Next.js ko bolenge, "Bhai, ye 3D viewer wala code tabhi download karna jab user asliyat mein us component ke paas pahuche::HL]]."
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 ```text
@@ -9225,10 +9225,10 @@ Yahan **"Ghar ka saaman" = Hamara poora code**, aur **"Goa ka bag" = User ke bro
 ```
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1. **Normal Import:** Webpack saari files ko mila kar ek bada `main.js` (e.g., 5MB) bana deta hai.
-2. **Dynamic Import:** Webpack dekhta hai `next/dynamic` aur us heavy component ka ek alag file `chunk-123.js` (e.g., 2MB) bana deta hai.
-3. Jab user website kholta hai, sirf `main.js` (3MB) load hota hai. Website turant dikhne lagti hai.
-4. Jab user us section tak scroll karta hai ya button dabata hai, tab background mein `chunk-123.js` download hota hai.
+1. [[HL::**Normal Import:** Webpack saari files ko mila kar ek bada `main.js` (e.g., 5MB) bana deta hai.::HL]]
+2. [[HL::**Dynamic Import:** Webpack dekhta hai `next/dynamic` aur us heavy component ka ek alag file `chunk-123.js` (e.g., 2MB) bana deta hai.::HL]]
+3. [[HL::Jab user website kholta hai, sirf `main.js` (3MB) load hota hai. Website turant dikhne lagti hai.::HL]]
+4. [[HL::Jab user us section tak scroll karta hai ya button dabata hai, tab background mein `chunk-123.js` download hota hai::HL]].
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
@@ -9240,15 +9240,15 @@ import dynamic from 'next/dynamic';
 // 1. Normal import aesa dikhta hai (Hum isko USE NAHI karenge)
 // import HeavyChatBot from '@/components/HeavyChatBot';
 
-// 2. Dynamic import aise karte hain:
-const DynamicChatBot = dynamic(
-  () => import('@/components/HeavyChatBot'), // Wo file jo baad mein laani hai
-  { 
-    // Jab tak background mein download ho raha hai, tab tak kya dikhaye?
-    loading: () => <p>🤖 Loading Chatbot...</p>,
+// 2. [[HL::Dynamic import aise karte hain:::HL]]
+[[HL::const DynamicChatBot = dynamic(::HL]]
+  [[HL::() => import('@/components/HeavyChatBot'), // Wo file jo baad mein laani hai::HL]]
+  [[HL::{::HL]] 
+    [[HL::// Jab tak background mein download ho raha hai, tab tak kya dikhaye?::HL]]
+    [[HL::loading: () => <p>🤖 Loading Chatbot...</p>,::HL]]
     
-    // Agar ye component server par render nahi karna, sirf browser (client) pe karna hai
-    ssr: false 
+    [[HL::// Agar ye component server par render nahi karna, sirf browser (client) pe karna hai::HL]]
+    [[HL::ssr: false::HL]] 
   }
 );
 
@@ -9282,13 +9282,13 @@ Scroll down to talk to our support bot.
 **Tree Shaking ke baare mein (No extra code needed):** Tree shaking automatic hoti hai jab hum `npm run build` chalate hain. Bas ek dhyan rakhna hai, hamesha ES Modules (`import/export`) use karo, `require()` use mat karo.
 
 ## ⚖️ 8. Comparison (Ye vs Woh):
-| Feature | Static Import (`import X from 'y'`) | Dynamic Import (`dynamic(() => ...)`) |
+| [[HL::Feature::HL]] | [[HL::Static Import (`import X from 'y'`)::HL]] | [[HL::Dynamic Import (`dynamic(() => ...)`)::HL]] |
 | :--- | :--- | :--- |
-| **Download Time** | Page ke start hote hi pehle download hota hai. | Zaroorat padne par baad mein download hota hai. |
-| **Best For** | Header, Navbar, Buttons, Text (Jo turant chahiye). | Modals, Heavy Charts, PDF Viewers, Video Players. |
+| [[HL::**Download Time**::HL]] | [[HL::Page ke start hote hi pehle download hota hai.::HL]] | [[HL::Zaroorat padne par baad mein download hota hai.::HL]] |
+| [[HL::**Best For**::HL]] | [[HL::Header, Navbar, Buttons, Text (Jo turant chahiye).::HL]] | [[HL::Modals, Heavy Charts, PDF Viewers, Video Players::HL]]. |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-1. **Har cheez ko dynamic banana:** Beginners sochte hain "Agar ye itna achha hai, toh har component dynamic bana doon!" Fix: Isse ulta network requests badh jayengi aur site slow ho jayegi. Sirf badi size (>50KB) ki files ko dynamic banao.
+1. [[HL::**Har cheez ko dynamic banana:** Beginners sochte hain "Agar ye itna achha hai, toh har component dynamic bana doon!" Fix: Isse ulta network requests badh jayengi aur site slow ho jayegi. Sirf badi size (>50KB) ki files ko dynamic banao::HL]].
 2. **Tree shaking fail hona:** Agar tum `import * as icons from 'lucide-react'` likhoge, toh saare 1000 icons bundle mein aa jayenge. Fix: Hamesha named imports use karo: `import { HomeIcon } from 'lucide-react'`.
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
@@ -9308,10 +9308,10 @@ User Clicks Chat ----(Fetches 4MB)----> Browser (Loads heavy chatbot now)
 ```
 
 ## 🛠️ 13. Best Practices (Pro Tips):
-Senior developers hamesha React ke `Suspense` boundary ke sath dynamic imports use karte hain, taaki loading skeletons dikha sakein. Ek rule yaad rakho: "Below the fold" (jo screen ke niche hai, bina scroll kiye nahi dikhta) components ko dynamically load karo.
+[[HL::Senior developers hamesha React ke `Suspense` boundary ke sath dynamic imports use karte hain, taaki loading skeletons dikha sakein. Ek rule yaad rakho: "Below the fold" (jo screen ke niche hai, bina scroll kiye nahi dikhta) components ko dynamically load karo::HL]].
 
 ## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
-Agar tumne Lottie animations ya heavy PDF generator libraries ko statically import kar liya, toh tumhara "First Load Time" 5-6 seconds se badh jayega. Mobile users gussa hoke website band karke chale jayenge (High Bounce Rate).
+[[HL::Agar tumne Lottie animations ya heavy PDF generator libraries ko statically import kar liya, toh tumhara "First Load Time" 5-6 seconds se badh jayega. Mobile users gussa hoke website band karke chale jayenge (High Bounce Rate::HL]]).
 
 ## ❓ 15. FAQ (Interview Questions):
 1. **What function handles Code Splitting in Next.js?** The `next/dynamic` function.
@@ -9333,22 +9333,22 @@ Tumhara wazan (weight) badh gaya hai, par tumhe nahi pata ki ye pizza se badha h
 Yahan **"Dietitian ka X-Ray" = Bundle Analyzer** hai. Ye tumhe exact batata hai ki tumhari website itni moti (heavy) kis package ki wajah se hui hai.
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** Bundle Analysis is the process of generating a visual treemap of the webpack/turbopack output to identify oversized dependencies and duplicate packages that bloat the application size.
-* **Hinglish Simplification:** Ek aasa tool jo hamari website ke build folders ko scan karke ek colorful map banata hai, jisse aankhon se dikh jata hai ki kaunsa third-party package sabse zyada MBs khaa raha hai.
+* [[HL::**Precise English:** Bundle Analysis is the process of generating a visual treemap of the webpack/turbopack output to identify oversized dependencies and duplicate packages that bloat the application size.::HL]]
+* [[HL::**Hinglish Simplification:** Ek aasa tool jo hamari website ke build folders ko scan karke ek colorful map banata hai, jisse aankhon se dikh jata hai ki kaunsa third-party package sabse zyada MBs khaa raha hai::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Tumne `npm install moment` (ek date formatting library) kiya. Tumhe laga chhoti si library hai, par usne tumhare bundle size mein 300KB add kar diya! Bina tool ke tumhe zindagi mein kabhi pata nahi chalega ki site slow kyun ho gayi.
-* **Solution:** Bundle Analyzer chalao, mota package pakdo, aur usko kisi patle package (jaise `date-fns` jo sirf 2KB leta hai) se replace kar do.
+* [[HL::**Problem:** Tumne `npm install moment` (ek date formatting library) kiya. Tumhe laga chhoti si library hai, par usne tumhare bundle size mein 300KB add kar diya! Bina tool ke tumhe zindagi mein kabhi pata nahi chalega ki site slow kyun ho gayi.::HL]]
+* [[HL::**Solution:** Bundle Analyzer chalao, mota package pakdo, aur usko kisi patle package (jaise `date-fns` jo sirf 2KB leta hai) se replace kar do::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
-Jab command run hogi, tumhare browser mein achanak se ek naya tab khulega jisme bado-bade colorful boxes honge. Bade boxes = Heavy Libraries.
-Aur tumhare project mein:
+[[HL::Jab command run hogi, tumhare browser mein achanak se ek naya tab khulega jisme bado-bade colorful boxes honge. Bade boxes = Heavy Libraries.::HL]]
+[[HL::Aur tumhare project mein:::HL]]
 ```text
-📦 my-next-app
- ┣ 📂 .next
- ┃ ┗ 📂 analyze          (Analyzer yahan HTML files generate karta hai)
- ┣ 📜 next.config.mjs   (Yahan hum analyzer ka setup karenge)
- ┗ 📜 package.json
+[[HL::📦 my-next-app::HL]]
+ [[HL::┣ 📂 .next::HL]]
+ [[HL::┃ ┗ 📂 analyze          (Analyzer yahan HTML files generate karta hai)::HL]]
+ [[HL::┣ 📜 next.config.mjs   (Yahan hum analyzer ka setup karenge)::HL]]
+ [[HL::┗ 📜 package.json::HL]]
 ```
 
 ## ⚙️ 6. Under the Hood (Technical Working):
@@ -9429,10 +9429,10 @@ Agar tum Next.js dev server Turbopack se chala rahe ho (`next dev --turbo`), toh
 2. **Dev size dekh kar darna:** Dev mode (`npm run dev`) mein files purposely badi hoti hain (for debugging). Kabhi bhi Dev mode ko analyze mat karo, hamesha Production build ko karo.
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-* **"Bhaiya, agar ek block (package) bada dikh raha hai toh main kya karu?"** -> 3 raste hain: (a) Kya wo zaroori hai? Agar nahi, toh uninstall kar do. (b) Kya uska chota alternative hai? (Jaise `moment` ki jagah `dayjs`). (c) Kya main Code Splitting (Dynamic Import) laga sakta hu uspe?
+* **"[[HL::Bhaiya, agar ek block (package) bada dikh raha hai toh main kya karu?"** -> 3 raste hain: (a) Kya wo zaroori hai? Agar nahi, toh uninstall kar do. (b) Kya uska chota alternative hai? (Jaise `moment` ki jagah `dayjs`). (c) Kya main::HL]] [[HL::Code Splitting (Dynamic Import) laga sakta hu uspe::HL]]?
 
 ## 🌍 11. Real-World Use Case (Production Application):
-**Shopify ya E-commerce Brands:** Jab ek page load hone mein 1 second extra lagta hai, toh sales (conversion rate) 7% gir jati hai! Senior engineers har 15 din mein Bundle Analyzer chalate hain taaki koi naya developer galti se koi 500KB ki useless animation library push na kar de.
+[[HL::**Shopify ya E-commerce Brands:** Jab ek page load hone mein 1 second extra lagta hai, toh sales (conversion rate) 7% gir jati hai! Senior engineers har 15 din mein Bundle Analyzer chalate hain taaki koi naya developer galti se koi 500KB ki useless animation library push na kar de::HL]].
 
 ## 🎨 12. Visual Diagram (ASCII Art):
 ```text
@@ -9451,15 +9451,15 @@ Agar tum Next.js dev server Turbopack se chala rahe ho (`next dev --turbo`), toh
 ```
 
 ## 🛠️ 13. Best Practices (Pro Tips):
-"Dependency Phobia" rakho! Koi naya `npm install` karne se pehle `bundlephobia.com` pe jao. Us package ka naam dalo, wo bata dega ki install hone ke baad ye tumhara kitna size badhayega.
+"[[HL::Dependency Phobia" rakho! Koi naya `npm install` karne se pehle `bundlephobia.com` pe jao. Us package ka naam dalo, wo bata dega ki install hone ke baad ye tumhara kitna size badhayega::HL]].
 
 ## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
 Agar tum kabhi bundle size check nahi karte, toh tumhari site dheere-dheere 3MB.. 5MB.. 10MB ki ho jayegi. Jinke paas fast 5G wifi hai unhe farq nahi padega, par India ke Gaon mein Tier-3 city ka mobile user tumhari site load hi nahi kar payega.
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **How do you identify which library is slowing down your Next.js app?** I use `@next/bundle-analyzer` to visually inspect the size of generated chunks.
-2. **Why shouldn't you run the analyzer in Development mode?** Because dev mode includes source maps, hot-reloading code, and doesn't minify the JS, giving inaccurate bloated sizes.
-3. **What is a "good" bundle size for a single page?** Ideally, the initial JS payload should be under 150KB-200KB (Gzipped).
+1. [[HL::**How do you identify which library is slowing down your Next.js app?** I use `@next/bundle-analyzer` to visually inspect the size of generated chunks::HL]].
+2. [[HL::**Why shouldn't you run the analyzer in Development mode?** Because dev mode includes source maps, hot-reloading code, and doesn't minify the JS, giving inaccurate bloated sizes::HL]].
+3. [[HL::**What is a "good" bundle size for a single page?** Ideally, the initial JS payload should be under 150KB-200KB (Gzipped::HL]]).
 4. **How do you reduce the size of `lodash`?** Instead of `import { get } from 'lodash'`, I use `import get from 'lodash/get'` or babel plugins to avoid importing the entire library.
 5. **What does the 'client.html' report show?** It shows the JavaScript bundle that will be downloaded and executed in the user's browser.
 
@@ -9506,7 +9506,7 @@ Browser mein DevTools open karne par:
 ```
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1. **LCP (Loading):** Browser HTML padhta hai, images download karta hai. Jis second screen ka sabse bada text block ya image poori tarah render ho jati hai, browser us time ko LCP time note kar leta hai.
+1. [[HL::**LCP (Loading):** Browser HTML padhta hai, images download karta hai. Jis second screen ka sabse bada text block ya image poori tarah render ho jati hai, browser us time ko LCP time note kar leta hai::HL]].
 2. **CLS (Stability):** Browser dekhta hai ki bina user ke scroll kiye, kya koi cheez achanak screen par apni jagah se hili? Har shift ka ek math score calculate hota hai.
 3. **INP (Responsiveness):** User jab click ya tap karta hai, browser timer start karta hai. Jab tak screen par naya frame (visual change) nahi aata, tab tak timer chalta hai. Poore session ka sabse kharab time INP banta hai.
 
@@ -9614,12 +9614,12 @@ Agar CLS 0.1 se zyada hai, toh e-commerce site par user "Add to Cart" dabane jay
 **Image:** Tumhe ek chhote se photo frame (mobile screen) mein photo lagani hai, par tumhare paas ek badi wall-size painting (4K image) hai. Image CDN ek jaadugar hai jo us painting ko turant chhota (resize) aur halka (WebP) karke deta hai taaki wo frame mein fit ho jaye.
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** Next.js provides built-in components like `<Script>` to optimize third-party JavaScript loading strategies (preventing render-blocking) and `<Image>` which automatically uses an Image CDN for resizing, format conversion (like WebP/AVIF), and lazy loading.
-* **Hinglish Simplification:** Next.js ke do jaadui HTML tags. `<Script>` bahar ke code ko sahi time pe load karta hai bina site slow kiye. `<Image>` badi photos ko automatically chhota, compress aur modern format mein convert karke dikhata hai.
+* [[HL::**Precise English:** Next.js provides built-in components like `<Script>` to optimize third-party JavaScript loading strategies (preventing render-blocking) and `<Image>` which automatically uses an Image CDN for resizing, format conversion (like WebP/AVIF), and lazy loading.::HL]]
+* [[HL::**Hinglish Simplification:** Next.js ke do jaadui HTML tags. `<Script>` bahar ke code ko sahi time pe load karta hai bina site slow kiye. `<Image>` badi photos ko automatically chhota, compress aur modern format mein convert karke dikhata hai::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Agar HTML ke `<script>` se Google Analytics lagaya, toh jab tak Analytics load nahi hoga, user ko blank screen dikhegi. Agar direct HTML `<img>` se 5MB ki 4K photo laga di, toh mobile ka data khatam ho jayega aur photo LCP ko slow kar degi.
-* **Solution:** `<Script strategy="lazyOnload">` use karo aur standard `<img>` ki jagah Next.js ka `<Image>` use karo.
+* [[HL::**Problem:** Agar HTML ke `<script>` se Google Analytics lagaya, toh jab tak Analytics load nahi hoga, user ko blank screen dikhegi. Agar direct HTML `<img>` se 5MB ki 4K photo laga di, toh mobile ka data khatam ho jayega aur photo LCP ko slow kar degi.::HL]]
+* [[HL::**Solution:** `<Script strategy="lazyOnload">` use karo aur standard `<img>` ki jagah Next.js ka `<Image>` use karo::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 Tumhe normally HTML tags hata kar Next.js ke components import karne honge:
@@ -9756,8 +9756,8 @@ Senior engineers external images ke liye `fill` prop use karte hain agar width/h
 Agar direct `<img>` use kiya badi files ke sath aur site ko AWS/Vercel pe host kiya, toh bandwidth bill rocket ki tarah upar jayega! Kyunki bina CDN compression ke tumhara server har user ko 5MB ki image serve karta rahega.
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **How does `<Image>` prevent Cumulative Layout Shift (CLS)?** By forcing you to provide `width` and `height` props (or using `fill`), so the browser reserves the exact space before the image even downloads.
-2. **What does the `priority` prop do in `<Image>`?** It preloads the image and disables lazy loading, which is crucial for improving the LCP metric.
+1. **How does `<Image>` [[HL::prevent Cumulative Layout Shift (CLS)?** By forcing you to provide `width` and `height` props (or using `fill`), so the browser reserves the exact space before the image even downloads::HL]].
+2. [[HL::**What does the `priority` prop do in `<Image>`?** It preloads the image and disables lazy loading, which is crucial for improving the LCP metric::HL]].
 3. **What are the different strategies in `<Script>`?** `beforeInteractive`, `afterInteractive` (default), `lazyOnload`, and `worker` (experimental).
 4. **Why do I get an error when using an external image URL in `<Image>`?** Next.js requires you to explicitly configure trusted domains in `next.config.js` (`images.remotePatterns`) to prevent malicious image processing attacks.
 5. **Can I use `<Image>` with local images?** Yes, and if you `import` local images, Next.js automatically calculates their width and height!
@@ -9789,8 +9789,8 @@ Aaj hum cover karenge **Topic 26 ka pehla hissa: Security Headers aur XSS Attack
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
 Assume karo tumhara ek VIP Nightclub (tumhari website) hai. 
-- **CSP (Content Security Policy):** Yeh tumhara strict Bouncer hai jiske paas ek VIP Guest List hai. Agar koi gaana (script) play karna chahta hai jo list mein nahi hai, toh bouncer usko turant bahar nikaal dega.
-- **X-Frame-Options:** Yeh nightclub ki security deewar hai jo dusre (fake) clubs ko tumhari party ka live telecast apne club mein dikhane se rokti hai (taaki log confuse na ho jayein).
+- [[HL::**CSP (Content Security Policy):** Yeh tumhara strict Bouncer hai jiske paas ek VIP Guest List hai. Agar koi gaana (script) play karna chahta hai jo list mein nahi hai, toh bouncer usko turant bahar nikaal dega.::HL]]
+- [[HL::**X-Frame-Options:** Yeh nightclub ki security deewar hai jo dusre (fake) clubs ko tumhari party ka live telecast apne club mein dikhane se rokti hai (taaki log confuse na ho jayein::HL]]).
 
 ## 📖 3. Technical Definition (Interview Answer):
 * **Precise English:** HTTP Security Headers are directives sent by the web server to the client's browser, instructing it on how to behave and handle resources securely, mitigating risks like malicious script execution and framing.
@@ -9801,12 +9801,12 @@ Assume karo tumhara ek VIP Nightclub (tumhari website) hai.
 - **Solution:** Security headers browser ko pehle hi bata dete hain ki "Bhai, sirf mere allowed code ko hi chalana, aur kisi ko meri website apne page par embed (ghusane) mat dena."
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
-Jab tum Chrome mein **Right Click -> Inspect -> Network Tab** khologe aur apni website refresh karoge, toh pehli file (Document) par click karne ke baad tumhe "Headers" section dikhega. Wahan tumhe `Content-Security-Policy` aur `X-Frame-Options` likha hua dikhega.
+Jab [[HL::tum Chrome mein **Right Click -> Inspect -> Network Tab** khologe aur apni website refresh karoge, toh pehli file (Document) par click karne ke baad tumhe "Headers" section dikhega. Wahan tumhe `Content-Security-Policy` aur `X-Frame-Options` likha hua dikhega::HL]].
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1. User ka Browser website maangne ke liye Server ko request bhejta hai.
-2. Server HTML bhejta hai, par uske saath ek invisible "Envelope" (Header) bhi bhejta hai.
-3. Envelope mein likha hota hai: `Content-Security-Policy: default-src 'self'` (Matlab sirf apni website ke scripts chalana).
+1. [[HL::User ka Browser website maangne ke liye Server ko request bhejta hai.::HL]]
+2. [[HL::Server HTML bhejta hai, par uske saath ek invisible "Envelope" (Header) bhi bhejta hai.::HL]]
+3. [[HL::Envelope mein likha hota hai: `Content-Security-Policy: default-src 'self'` (Matlab sirf apni website ke scripts chalana::HL]]).
 4. Browser page load karta hai. Agar koi hacker bahar se script run karne ki koshish karta hai, toh browser us header ka rule padhta hai aur us script ko block kar deta hai.
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
@@ -9814,9 +9814,9 @@ Hum Node.js (ek environment jo server par JavaScript chalata hai) aur Express (s
 
 **Terminal (Command Line) mein type karo:**
 ```bash
-# Naya project banate hain aur Express & Helmet install karte hain
-npm init -y
-npm install express helmet
+# [[HL::Naya project banate hain aur Express & Helmet install karte hain::HL]]
+[[HL::npm init -y::HL]]
+[[HL::npm install express helmet::HL]]
 ```
 ```text
 # 📤 Expected Output:
@@ -9825,28 +9825,28 @@ found 0 vulnerabilities
 (Matlab packages successfully install ho gaye)
 ```
 
-**Ab ek file banao `server.js` aur ye code likho:**
+[[HL::**Ab ek file banao `server.js` aur ye code likho::HL]]:**
 ```javascript
-// Express aur Helmet ko apne code mein laate hain
-const express = require('express');
-const helmet = require('helmet');
+// [[HL::Express aur Helmet ko apne code mein laate hain::HL]]
+[[HL::const express = require('express');::HL]]
+[[HL::const helmet = require('helmet');::HL]]
 
-// Ek naya server application banate hain
-const app = express();
+[[HL::// Ek naya server application banate hain::HL]]
+[[HL::const app = express();::HL]]
 
-// Helmet ko bolte hain ki saare security headers laga do!
-// Yeh automatically CSP aur X-Frame-Options set kar dega.
-app.use(helmet());
+[[HL::// Helmet ko bolte hain ki saare security headers laga do!::HL]]
+[[HL::// Yeh automatically CSP aur X-Frame-Options set kar dega.::HL]]
+[[HL::app.use(helmet());::HL]]
 
-// Jab koi main page ("/") open kare, toh ye message bhejo
-app.get('/', (req, res) => {
-    res.send('<h1>Hello Hacker, meri website safe hai!</h1>');
-});
+[[HL::// Jab koi main page ("/") open kare, toh ye message bhejo::HL]]
+[[HL::app.get('/', (req, res) => {::HL]]
+    [[HL::res.send('<h1>Hello Hacker, meri website safe hai!</h1>');::HL]]
+[[HL::});::HL]]
 
-// Server ko port 3000 par start karte hain
-// Port matlab server ka darwaza number jahan se traffic aayega
-app.listen(3000, () => {
-    console.log('Server chal raha hai port 3000 par! 🚀');
+[[HL::// Server ko port 3000 par start karte hain::HL]]
+[[HL::// Port matlab server ka darwaza number jahan se traffic aayega::HL]]
+[[HL::app.listen(3000, () => {::HL]]
+    [[HL::console.log('Server chal raha hai port 3000 par::HL]]! 🚀');
 });
 ```
 ```text
@@ -9854,33 +9854,33 @@ app.listen(3000, () => {
 Server chal raha hai port 3000 par! 🚀
 ```
 
-**Testing the Headers:**
-Terminal mein ek naya tab kholo aur server ko check karne ke liye `curl` (ek tool jo server se data maangta hai) command chalao:
+[[HL::**Testing the Headers:**::HL]]
+[[HL::Terminal mein ek naya tab kholo aur server ko check karne ke liye `curl` (ek tool jo server se data maangta hai) command chalao:::HL]]
 ```bash
-# Server se sirf headers mangne ke liye -I flag use karte hain
-curl -I http://localhost:3000
+[[HL::# Server se sirf headers mangne ke liye -I flag use karte hain::HL]]
+[[HL::curl -I http://localhost:3000::HL]]
 ```
 ```text
-# 📤 Expected Output:
-HTTP/1.1 200 OK
-X-Powered-By: Express
-Content-Security-Policy: default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests
-X-Frame-Options: SAMEORIGIN
-Content-Type: text/html; charset=utf-8
+# 📤 [[HL::Expected Output:::HL]]
+[[HL::HTTP/1.1 200 OK::HL]]
+[[HL::X-Powered-By: Express::HL]]
+[[HL::Content-Security-Policy: default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests::HL]]
+[[HL::X-Frame-Options: SAMEORIGIN::HL]]
+[[HL::Content-Type: text/html; charset=utf-8::HL]]
 ```
 *(Notice karo `Content-Security-Policy` aur `X-Frame-Options` successfully aa gaye!)*
 
-## ⚖️ 8. Comparison (Ye vs Woh):
-| Feature | CSP (Content Security Policy) | X-Frame-Options |
+## ⚖️ 8. [[HL::Comparison (Ye vs Woh):::HL]]
+| [[HL::Feature::HL]] | [[HL::CSP (Content Security Policy)::HL]] | [[HL::X-Frame-Options::HL]] |
 | :--- | :--- | :--- |
-| **Kya karta hai?** | Batata hai kaunse images/scripts load ho sakte hain. | Batata hai ki tumhari site iframe (doosri site ke andar box) mein load ho sakti hai ya nahi. |
-| **Kisse bachata hai?** | Malicious script injection (XSS). | Fake buttons pe click karwana (Clickjacking). |
+| [[HL::**Kya karta hai?**::HL]] | [[HL::Batata hai kaunse images/scripts load ho sakte hain.::HL]] | [[HL::Batata hai ki tumhari site iframe (doosri site ke andar box) mein load ho sakti hai ya nahi.::HL]] |
+| [[HL::**Kisse bachata hai?**::HL]] | [[HL::Malicious script injection (XSS).::HL]] | [[HL::Fake buttons pe click karwana (Clickjacking::HL]]). |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
 1. **Mistake:** Bahut strict CSP laga dena bina test kiye.
    * **Fix:** Pehle `Content-Security-Policy-Report-Only` use karo. Yeh scripts block nahi karta, sirf tumhe report bhejta hai ki kya block hota agar policy on hoti.
-2. **Mistake:** Sochna ki Helmet laga diya toh 100% secure ho gaye. 
-   * **Fix:** Helmet sirf headers set karta hai, tumhara code (logic) secure hona chahiye.
+2. [[HL::**Mistake:** Sochna ki Helmet laga diya toh 100% secure ho gaye.::HL]] 
+   * [[HL::**Fix:** Helmet sirf headers set karta hai, tumhara code (logic) secure hona chahiye::HL]].
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
 * **"Bhai ye Header hota kahan hai, mujhe kyu nahi dikhta?"** Headers background mein travel karte hain. Tumhe normally UI par nahi dikhte. Yeh Browser aur Server ke beech ki secret chat hai.
@@ -9908,8 +9908,8 @@ Socho ek E-commerce site (jaise Amazon) hai. Agar hacker ne review section mein 
 Agar CSP nahi lagaya, toh hacker tumhari website par fake login form bana kar users ke passwords chura lega. Agar X-Frame-Options nahi lagaya, toh koi tumhari website ka clone bana kar fraud kar lega.
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **What is CSP?** It's a header that acts as a whitelist for resources your site is allowed to load.
-2. **What does `X-Frame-Options: DENY` mean?** It means NO ONE (not even your own other websites) can put this website inside an iframe.
+1. [[HL::**What is CSP?** It's a header that acts as a whitelist for resources your site is allowed to load::HL]].
+2. [[HL::**What does `X-Frame-Options: DENY` mean?** It means NO ONE (not even your own other websites) can put this website inside an iframe::HL]].
 3. **What is 'unsafe-inline' in CSP?** It allows writing JavaScript directly inside HTML tags (like `<button onclick="...">`), which is considered dangerous and should be avoided.
 4. **How do we test CSP without breaking the site?** Use the `Content-Security-Policy-Report-Only` header.
 5. **Does CSP replace input sanitization?** No! CSP is a second layer of defense. You must still clean user inputs.
@@ -9927,7 +9927,7 @@ Socho tum school ke notice board (Website) par ek marker se notice likhte ho. Ek
 
 ## 📖 3. Technical Definition (Interview Answer):
 * **Precise English:** Cross-Site Scripting (XSS) is a vulnerability where an attacker injects malicious executable scripts into the code of a trusted application or webpage, executing in the victim's browser.
-* **Hinglish Simplification:** Jab hacker tumhari website ke input boxes (jaise comment section) mein aam text ki jagah JavaScript code daal deta hai, aur tumhara server us code ko galti se run kar deta hai.
+* [[HL::**Hinglish Simplification:** Jab hacker tumhari website ke input boxes (jaise comment section) mein aam text ki jagah JavaScript code daal deta hai, aur tumhara server us code ko galti se run kar deta hai::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
 - **Problem:** Agar XSS attack successful hua, toh hacker tumhare users ke session cookies (jo login details yaad rakhte hain) chura sakta hai aur unka account takeover kar sakta hai.
@@ -9961,29 +9961,29 @@ document.body.appendChild(div);
 Ek pop-up (alert box) aayega jisme likha hoga "You are Hacked!"
 ```
 
-**✅ SAHI TARIQA (Escaping Input):**
-Hum `textContent` use karenge. Yeh browser ko bolta hai ki "Bhai, isko sirf normal text maanna, code mat maanna."
+**✅ [[HL::SAHI TARIQA (Escaping Input):**::HL]]
+[[HL::Hum `textContent` use karenge. Yeh browser ko bolta hai ki "Bhai, isko sirf normal text maanna, code mat maanna."::HL]]
 ```javascript
-// Hacker ne same dangerous input diya:
-let hackerInput = "<img src='x' onerror='alert(\"You are Hacked!\")'>";
+[[HL::// Hacker ne same dangerous input diya:::HL]]
+[[HL::let hackerInput = "<img src='x' onerror='alert(\"You are Hacked!\")'>";::HL]]
 
-// Sahi approach: textContent ka use karna
-let safeDiv = document.createElement("div");
-safeDiv.textContent = hackerInput; // ✅ SAFE! Ye HTML tags ko normal text treat karega
-document.body.appendChild(safeDiv);
+[[HL::// Sahi approach: textContent ka use karna::HL]]
+[[HL::let safeDiv = document.createElement("div");::HL]]
+[[HL::safeDiv.textContent = hackerInput; // ✅ SAFE! Ye HTML tags ko normal text treat karega::HL]]
+[[HL::document.body.appendChild(safeDiv::HL]]);
 ```
 ```text
-# 📤 Expected Output (Browser par):
-Screen par directly yahi print ho jayega: <img src='x' onerror='alert("You are Hacked!")'>
-(Koi pop-up nahi aayega, malicious code successfully be-asar ho gaya!)
+# 📤 [[HL::Expected Output (Browser par):::HL]]
+[[HL::Screen par directly yahi print ho::HL]] [[HL::jayega: <img src='x' onerror='alert("You are Hacked!")'>::HL]]
+[[HL::(Koi pop-up nahi aayega, malicious code successfully be-asar ho gaya::HL]]!)
 ```
 
 ## ⚖️ 8. Comparison (Ye vs Woh):
-| Attack | XSS (Cross-Site Scripting) | SQL Injection (Aage padhenge) |
+| [[HL::Attack::HL]] | [[HL::XSS (Cross-Site Scripting)::HL]] | [[HL::SQL Injection (Aage padhenge)::HL]] |
 | :--- | :--- | :--- |
-| **Target kaun hai?** | User ka Browser. | Tumhara Database (Server). |
-| **Hacker kya churaata hai?** | User ke cookies / Browser data. | Database ka data (passwords, emails). |
-| **Kaise bachen?** | Escaping & Sanitization (Frontend + Backend) | Parameterized Queries (Backend) |
+| [[HL::**Target kaun hai?**::HL]] | [[HL::User ka Browser.::HL]] | [[HL::Tumhara Database (Server).::HL]] |
+| [[HL::**Hacker kya churaata hai?**::HL]] | [[HL::User ke cookies / Browser data.::HL]] | [[HL::Database ka data (passwords, emails).::HL]] |
+| [[HL::**Kaise bachen?**::HL]] | [[HL::Escaping & Sanitization (Frontend + Backend)::HL]] | [[HL::Parameterized Queries (Backend::HL]]) |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
 1. **ReactJS mein mistake:** React waise toh automatically safe hai (wo `textContent` jaisa kaam karta hai), par agar tum galti se `<div dangerouslySetInnerHTML={{__html: userInput}} />` use karlo bina saaf kiye, toh hack ho jaoge! Naam hi uska "dangerously" hai.
@@ -10047,13 +10047,13 @@ Socho tum apne phone mein Swiggy khol kar baithe ho aur tumhara account logged i
 
 ## 📖 3. Technical Definition (Interview Answer):
 
-  * **Precise English:** Cross-Site Request Forgery (CSRF) is an attack that forces an authenticated user to execute unwanted actions on a web application in which they are currently authenticated, leveraging the browser's automatic inclusion of ambient credentials (like cookies).
-  * **Hinglish Simplification:** Ek aisi trick jahan hacker tumhare pehle se logged-in browser ka use karke kisi doosri site (hacker ki site) se tumhare bank ya social media par request bhej deta hai, aur tumhara browser automatically tumhari identity (cookies) sath bhej deta hai.
+  * [[HL::**Precise English:** Cross-Site Request Forgery (CSRF) is an attack that forces an authenticated user to execute unwanted actions on a web application in which they are currently authenticated, leveraging the browser's automatic inclusion of ambient credentials (like cookies).::HL]]
+  * [[HL::**Hinglish Simplification:** Ek aisi trick jahan hacker tumhare pehle se logged-in browser ka use karke kisi doosri site (hacker ki site) se tumhare bank ya social media par request bhej deta hai, aur tumhara browser automatically tumhari identity (cookies) sath bhej deta hai::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
 
-  - **Problem:** Browser ka ek default nature hota hai ki jab bhi kisi website par request jati hai, browser us website ki saved 'Cookies' (tumhari login ID/password ka proof) sath bhej deta hai, chahe request kisi aur website se kyun na aayi ho.
-  - **Solution:** Isliye humein ek **Anti-CSRF Token** (ek secret one-time password) chahiye jo sirf aur sirf hamari original website ke paas ho.
+  - **Prob[[HL::lem:** Browser ka ek default nature hota hai ki jab bhi kisi website par request jati hai, browser us website ki saved 'Cookies' (tumhari login ID/password ka proof) sath bhej deta hai, chahe request kisi aur website se kyun na aayi ho.::HL]]
+  - [[HL::**Solution:** Isliye humein ek **Anti-CSRF Token** (ek secret one-time password) chahiye jo sirf aur sirf hamari original website ke paas ho::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 
@@ -10064,12 +10064,12 @@ Browser ke **Network Tab** mein tumhe do cheezein dikhengi:
 
 ## ⚙️ 6. Under the Hood (Technical Working):
 
-1.  User Bank.com par login karta hai. Browser cookie save kar leta hai.
-2.  User galti se https://www.google.com/search?q=Hacker.com kholta hai.
-3.  https://www.google.com/search?q=Hacker.com ke andar ek hidden form hota hai jo Bank.com ko "Paisa Transfer karo" ki request bhejta hai.
-4.  Browser dekhta hai request Bank.com ko ja rahi hai, toh wo automatically Bank wali Cookie sath bhej deta hai.
-5.  Bank.com ko lagta hai user ne khud request ki hai, aur paisa transfer ho jata hai.
-    **Defense:** Agar Bank.com ek secret CSRF token maange jo https://www.google.com/search?q=Hacker.com ke paas nahi hai, toh attack fail ho jayega\!
+1.  [[HL::User Bank.com par login karta hai. Browser cookie save kar leta hai.::HL]]
+2.  [[HL::User galti se https://www.google.com/search?q=Hacker.com kholta hai.::HL]]
+3.  [[HL::https://www.google.com/search?q=Hacker.com ke andar ek hidden form hota hai jo Bank.com ko "Paisa Transfer karo" ki request bhejta hai.::HL]]
+4.  [[HL::Browser dekhta hai request Bank.com ko ja rahi hai, toh wo automatically Bank wali Cookie sath bhej deta hai.::HL]]
+5.  [[HL::Bank.com ko lagta hai user ne khud request ki hai, aur paisa transfer ho jata hai.::HL]]
+    [[HL::**Defense:** Agar Bank.com ek secret CSRF token maange jo https://www.google.com/search?q=Hacker.com ke paas nahi hai, toh attack fail ho jayega::HL]]\!
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
@@ -10089,13 +10089,13 @@ app.use(cookieParser());
 app.post('/login', (req, res) => {
     // SameSite='strict' ka matlab hai: Ye cookie SIRF tabhi jayegi jab 
     // user directly hamari website par ho. Kisi doosri site se request aayi toh nahi jayegi!
-    res.cookie('session_id', 'super_secret_user_123', {
-        httpOnly: true, // Javascript se cookie read na ho sake (XSS se bachne ke liye)
-        sameSite: 'strict', // CSRF se bachne ka RAMBAAN ilaaj (Silver Bullet)
-        secure: true // Sirf HTTPS (secure connection) par kaam kare
-    });
+    [[HL::res.cookie('session_id', 'super_secret_user_123', {::HL]]
+        [[HL::httpOnly: true, // Javascript se cookie read na ho sake (XSS se bachne ke liye)::HL]]
+        [[HL::sameSite: 'strict', // CSRF se bachne ka RAMBAAN ilaaj (Silver Bullet)::HL]]
+        [[HL::secure: true // Sirf HTTPS (secure connection) par kaam kare::HL]]
+    [[HL::});::HL]]
     
-    res.send('Login Successful!');
+    [[HL::res.send('Login Successful::HL]]!');
 });
 
 app.listen(3000, () => {
@@ -10127,13 +10127,13 @@ Login Successful!
 
 *(Dekha? Server ne `SameSite=Strict` laga kar bheja. Ab hacker ki site is cookie ko use nahi kar payegi\!)*
 
-## ⚖️ 8. Comparison (Ye vs Woh):
+## ⚖️ 8. [[HL::Comparison (Ye vs Woh):::HL]]
 
-| Feature | XSS (Cross-Site Scripting) | CSRF (Cross-Site Request Forgery) |
+| [[HL::Feature::HL]] | [[HL::XSS (Cross-Site Scripting)::HL]] | [[HL::CSRF (Cross-Site Request Forgery)::HL]] |
 | :--- | :--- | :--- |
-| **Kaise kaam karta hai?** | Hacker tumhari site par apna JS code run karwata hai. | Hacker tumhari logged-in site par jhoothi request bhejta hai. |
-| **Chori kya hota hai?** | Data / Cookies chori hoti hain. | Data chori nahi hota, action (transfer/delete) perform ho jata hai. |
-| **Kaise bachen?** | Input Sanitization, Escaping. | CSRF Tokens, `SameSite` Cookies. |
+| [[HL::**Kaise kaam karta hai?**::HL]] | [[HL::Hacker tumhari site par apna JS code run karwata hai.::HL]] | [[HL::Hacker tumhari logged-in site par jhoothi request bhejta hai.::HL]] |
+| [[HL::**Chori kya hota hai?**::HL]] | [[HL::Data / Cookies chori hoti hain.::HL]] | [[HL::Data chori nahi hota, action (transfer/delete) perform ho jata hai.::HL]] |
+| [[HL::**Kaise bachen?**::HL]] | [[HL::Input Sanitization, Escaping.::HL]] | [[HL::CSRF Tokens, `SameSite` Cookies::HL]]. |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
 
@@ -10194,13 +10194,13 @@ Tum ek IT company (Frontend) mein kaam karte ho aur tumhe sath wali building ki 
 
 ## 📖 3. Technical Definition (Interview Answer):
 
-  * **Precise English:** CORS is an HTTP-header based mechanism that allows a server to indicate any origins (domain, scheme, or port) other than its own from which a browser should permit loading resources.
-  * **Hinglish Simplification:** Ye ek security rule hai jo browser ko batata hai ki kya ek website (jaise `localhost:3000`) kisi dusri website (jaise `api.mybackend.com`) se data maang sakti hai ya nahi.
+  * [[HL::**Precise English:** CORS is an HTTP-header based mechanism that allows a server to indicate any origins (domain, scheme, or port) other than its own from which a browser should permit loading resources.::HL]]
+  * [[HL::**Hinglish Simplification:** Ye ek security rule hai jo browser ko batata hai ki kya ek website (jaise `localhost:3000`) kisi dusri website (jaise `api.mybackend.com`) se data maang sakti hai ya nahi::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
 
-  - **Problem:** Browser ki ek default security policy hoti hai jise "Same-Origin Policy" (SOP) kehte hain. Iska matlab `a.com` sirf `a.com` se hi data maang sakta hai. Par aaj kal Frontend `localhost:3000` pe chalta hai aur Backend `localhost:5000` pe. Dono alag hain (different origins), toh browser block kar deta hai.
-  - **Solution:** CORS server ko power deta hai ki wo browser ko bole, "Koi baat nahi, `localhost:3000` apna hi bhai hai, usko data de do."
+  - **Problem:** [[HL::Browser ki ek default security policy hoti hai jise "Same-Origin Policy" (SOP) kehte hain. Iska matlab `a.com` sirf `a.com` se hi data maang sakta hai. Par aaj kal Frontend `localhost:3000` pe chalta hai aur Backend `localhost:5000` pe. Dono alag hain (different origins), toh browser block kar deta hai::HL]].
+  - [[HL::**Solution:** CORS server ko power deta hai ki wo browser ko bole, "Koi baat nahi, `localhost:3000` apna hi bhai hai, usko data de do::HL]]."
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 
@@ -10209,11 +10209,11 @@ Agar CORS error aayega, toh Frontend UI par data load nahi hoga aur Chrome Inspe
 
 ## ⚙️ 6. Under the Hood (Technical Working):
 
-Jab Frontend kisi dusre Backend par request marta hai (jaise POST request):
+[[HL::Jab Frontend kisi dusre Backend par request marta hai (jaise POST request):::HL]]
 
-1.  Browser pehle ek **"Preflight Request"** (OPTIONS method) bhejta hai yeh check karne ke liye ki kya permission hai?
-2.  Backend reply karta hai headers ke sath: `Access-Control-Allow-Origin: http://localhost:3000`.
-3.  Browser check karta hai. Agar match ho gaya, toh wo asli (main) request bhejta hai. Agar match nahi hua, toh LAL error de deta hai.
+1.  [[HL::Browser pehle ek **"Preflight Request"** (OPTIONS method) bhejta hai yeh check karne ke liye ki kya permission hai?::HL]]
+2.  [[HL::Backend reply karta hai headers ke sath: `Access-Control-Allow-Origin: http://localhost:3000`.::HL]]
+3.  [[HL::Browser check karta hai. Agar match ho gaya, toh wo asli (main) request bhejta hai. Agar match nahi hua, toh LAL error de deta hai::HL]].
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
@@ -10228,47 +10228,47 @@ npm install express cors
 added 2 packages in 1s (Successfully installed)
 ```
 
-**Backend Code (`server.js`):**
+[[HL::**Backend Code (`server.js`::HL]]):**
 
 ```javascript
-const express = require('express');
-// cors package ko import kiya
-const cors = require('cors'); 
-const app = express();
+[[HL::const express = require('express');::HL]]
+[[HL::// cors package ko import kiya::HL]]
+[[HL::const cors = require('cors');::HL]] 
+[[HL::const app = express();::HL]]
 
-// ❌ DANGEROUS WAY (Sabko allow kar diya):
-// app.use(cors()); 
+[[HL::// ❌ DANGEROUS WAY (Sabko allow kar diya):::HL]]
+[[HL::// app.use(cors());::HL]] 
 
-// ✅ PROPER WAY (Sirf apne frontend ko allow kiya):
-const corsOptions = {
-    origin: 'http://localhost:3000', // Sirf ye website hamara data le sakti hai
-    methods: ['GET', 'POST'], // Sirf GET aur POST allowed hain
-    optionsSuccessStatus: 200 // Legacy browsers ke liye
-};
+[[HL::// ✅ PROPER WAY (Sirf apne frontend ko allow kiya):::HL]]
+[[HL::const corsOptions = {::HL]]
+    [[HL::origin: 'http://localhost:3000', // Sirf ye website hamara data le sakti hai::HL]]
+    [[HL::methods: ['GET', 'POST'], // Sirf GET aur POST allowed hain::HL]]
+    [[HL::optionsSuccessStatus: 200 // Legacy browsers ke liye::HL]]
+[[HL::};::HL]]
 
-// CORS middleware lagaya
-app.use(cors(corsOptions));
+[[HL::// CORS middleware lagaya::HL]]
+[[HL::app.use(cors(corsOptions));::HL]]
 
-app.get('/api/data', (req, res) => {
-    res.json({ message: "Hello Frontend, yeh lo tumhara Data! 📦" });
-});
+[[HL::app.get('/api/data', (req, res) => {::HL]]
+    [[HL::res.json({ message: "Hello Frontend, yeh lo tumhara Data! 📦" });::HL]]
+[[HL::});::HL]]
 
-app.listen(5000, () => {
-    console.log('Backend API running on port 5000! 🌍');
-});
+[[HL::app.listen(5000, () => {::HL]]
+    [[HL::console.log('Backend API running on port 5000! 🌍');::HL]]
+[[HL::});::HL]]
 ```
 
 ```text
-# 📤 Expected Output (Terminal):
-Backend API running on port 5000! 🌍
+[[HL::# 📤 Expected Output (Terminal):::HL]]
+[[HL::Backend API running on port 5000! 🌍::HL]]
 ```
 
-**Testing CORS (cURL simulating a different origin):**
-Hum Server ko bolenge ki hum "https://www.google.com/search?q=Hacker.com" se aaye hain.
+[[HL::**Testing CORS (cURL simulating a different origin):**::HL]]
+[[HL::Hum Server ko bolenge ki hum "https://www.google.com/search?q=Hacker.com" se aaye hain.::HL]]
 
 ```bash
-# Origin header bhej kar check karte hain
-curl -H "Origin: http://hacker.com" -I http://localhost:5000/api/data
+[[HL::# Origin header bhej kar check karte hain::HL]]
+[[HL::curl -H "Origin: http://hacker.com" -I http://localhost:5000/api/data::HL]]
 ```
 
 ```text
@@ -10279,25 +10279,25 @@ X-Powered-By: Express
 # iska matlab browser is response ko aage frontend tak nahi jaane dega aur block kar dega!)
 ```
 
-## ⚖️ 8. Comparison (Ye vs Woh):
+## ⚖️ 8. [[HL::Comparison (Ye vs Woh):::HL]]
 
-| Concept | CORS | CSRF |
+| [[HL::Concept::HL]] | [[HL::CORS::HL]] | [[HL::CSRF::HL]] |
 | :--- | :--- | :--- |
-| **Kaun block karta hai?** | User ka apna Browser. | Backend Server (via Tokens/Cookies). |
-| **Kiske liye banaya hai?** | Data read karne se rokne ke liye (Privacy). | Unwanted action perform hone se rokne ke liye (Integrity). |
-| **Kya Postman isko block karega?** | **Nahi\!** Postman browser nahi hai, wo seedha server se baat karta hai. | Haan, agar server ko token nahi mila toh Postman ko bhi block karega. |
+| [[HL::**Kaun block karta hai?**::HL]] | [[HL::User ka apna Browser.::HL]] | [[HL::Backend Server (via Tokens/Cookies).::HL]] |
+| [[HL::**Kiske liye banaya hai?**::HL]] | [[HL::Data read karne se rokne ke liye (Privacy).::HL]] | [[HL::Unwanted action perform hone se rokne ke liye (Integrity).::HL]] |
+| [[HL::**Kya Postman isko block karega?**::HL]] | [[HL::**Nahi\!** Postman browser nahi hai, wo seedha server se baat karta hai.::HL]] | [[HL::Haan, agar server ko token nahi mila toh Postman ko bhi block karega::HL]]. |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
 
-1.  **Mistake:** Jab CORS error aata hai, toh log ghabra kar code mein `app.use(cors({ origin: '*' }))` likh dete hain. Iska matlab duniya ki koi bhi website tumhara backend access kar sakti hai. (Production mein ye paap hai\!)
-2.  **Mistake:** Sochna ki CORS API ko secure karta hai. (CORS sirf browsers par apply hota hai. Hacker script likh kar ya Postman se API chala sakta hai. Asli security Auth Tokens se aati hai).
+1.  [[HL::**Mistake:** Jab CORS error aata hai, toh log ghabra kar code mein `app.use(cors({ origin: '*' }))` likh dete hain. Iska matlab duniya ki koi bhi website tumhara backend access kar sakti hai. (Production mein ye paap hai\!)::HL]]
+2.  [[HL::**Mistake:** Sochna ki CORS API ko secure karta hai. (CORS sirf browsers par apply hota hai. Hacker script likh kar ya Postman se API chala sakta hai. Asli security Auth Tokens se aati hai::HL]]).
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
 
-  * **"Bhai, Postman se request chalti hai, par Browser mein CORS error kyu aata hai?"**
-    Sabse bada confusion\! Postman ek tool hai, wo Browser ke rules (Same-Origin Policy) follow nahi karta. CORS policy SIRF aur SIRF browsers (Chrome, Safari, Firefox) implement karte hain user ko bachane ke liye.
-  * **"Preflight request kya bala hai?"**
-    Browser bina pooche direct heavy request (jaise bada data bhejna) nahi marta. Wo pehle "OPTIONS" request bhej kar guard se poochta hai "Bhaiya andar aane doge?". Isi pooch-taach ko Preflight kehte hain.
+  * **"[[HL::Bhai, Postman se request chalti hai, par Browser mein CORS error kyu aata hai?"**::HL]]
+    [[HL::Sabse bada confusion\! Postman ek tool hai, wo Browser ke rules (Same-Origin Policy) follow nahi karta. CORS policy SIRF aur SIRF browsers (Chrome, Safari, Firefox) implement karte hain user ko bachane ke liye.::HL]]
+  * [[HL::**"Preflight request kya bala hai?"**::HL]]
+    [[HL::Browser bina pooche direct heavy request (jaise bada data bhejna) nahi marta. Wo pehle "OPTIONS" request bhej kar guard se poochta hai "Bhaiya andar aane doge?". Isi pooch-taach ko Preflight kehte hain::HL]].
 
 ## 🌍 11. Real-World Use Case (Production Application):
 
@@ -10319,16 +10319,16 @@ Socho tumhari ek website hai `https://my-store.com` (Frontend on Vercel) aur tum
 
 ## 🛠️ 13. Best Practices (Pro Tips):
 
-  * Environment variables (`.env`) ka use karo origin set karne ke liye. (e.g., `origin: process.env.FRONTEND_URL`). Dev mein wo `localhost` hoga, Prod mein tumhari actual domain.
-  * Hamesha wahi Methods (`GET`, `POST`) allow karo jo sach mein zaroori hain.
+  * Environment variables (`.[[HL::env`) ka use karo origin set karne ke liye. (e.g., `origin: process.env.FRONTEND_URL`). Dev mein wo `localhost` hoga, Prod mein tumhari actual domain.::HL]]
+  * [[HL::Hamesha wahi Methods (`GET`, `POST`) allow karo jo sach mein zaroori hain.::HL]]
 
-## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
+[[HL::## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):::HL]]
 
-Agar tumne `origin: '*'` chhod diya, toh koi hacker apni fake website bana kar background mein tumhari API se sensitive data fetch kar sakta hai aur apne server pe bhej sakta hai jab user uski fake site visit kare.
+[[HL::Agar tumne `origin: '*'` chhod diya, toh koi hacker apni fake website bana kar background mein tumhari API se sensitive data fetch kar sakta hai aur apne server pe bhej sakta hai jab user uski fake site visit kare::HL]].
 
 ## ❓ 15. FAQ (Interview Questions):
 
-1.  **What does CORS stand for?** Cross-Origin Resource Sharing.
+1.  [[HL::**What does CORS stand for?** Cross-Origin Resource Sharing::HL]].
 2.  **Why does CORS exist?** To bypass the strict Same-Origin Policy safely, allowing different origins to communicate.
 3.  **What is a Preflight request?** An HTTP OPTIONS request sent by the browser to check if the server permits the actual request.
 4.  **Is CORS a security feature for the backend?** No, it is a security feature enforced by the *browser* to protect the user.
@@ -10362,29 +10362,29 @@ Socho ek popular Movie Theater (Tumhara Server) ka ticket counter hai. Ek hi aad
 
 ## 📖 3. Technical Definition (Interview Answer):
 * **Precise English:** Rate limiting is a strategy for limiting network traffic. It places a cap on how often someone can repeat an action within a certain timeframe, preventing server overload, brute-force attacks, and scraping.
-* **Hinglish Simplification:** Ek aisi technique jisse hum decide karte hain ki ek user (ya IP address) hamare server ko ek specific time mein kitni baar call (request) kar sakta hai.
+* [[HL::**Hinglish Simplification:** Ek aisi technique jisse hum decide karte hain ki ek user (ya IP address) hamare server ko ek specific time mein kitni baar call (request) kar sakta hai::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-- **Problem:** Hackers "Bots" (automated scripts) banate hain jo 1 second mein tumhari website par 10,000 requests bhej sakte hain. Isse tumhara server crash ho jayega (jise DDoS attack kehte hain) ya hacker saare passwords guess karne ki koshish karega (Brute-force).
-- **Solution:** Rate Limiting laga do. Jaise hi koi limit cross karega, server usko block kar dega aur `429 Too Many Requests` ka error bhej dega.
+- [[HL::**Problem:** Hackers "Bots" (automated scripts) banate hain jo 1 second mein tumhari website par 10,000 requests bhej sakte hain. Isse tumhara server crash ho jayega (jise DDoS attack kehte hain) ya hacker saare passwords guess karne ki koshish karega (Brute-force::HL]]).
+- [[HL::**Solution:** Rate Limiting laga do. Jaise hi koi limit cross karega, server usko block kar dega aur `429 Too Many Requests` ka error bhej dega::HL]].
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
-Agar tum Postman ya Browser mein jaldi-jaldi refresh karoge, toh 5-6 baar page load hoga, uske baad achanak screen par ek text aayega: `Too many requests, please try again later.` aur Network Tab mein Status Code `429` (Lal rang mein) dikhega.
+Agar tum Postman ya Browser mein jaldi-jaldi refresh karoge, toh 5-6 baar page load hoga, uske baad achanak screen par ek text aayega: `Too many requests, please try again later.` aur Network Tab mein Status Code [[HL::`429` (Lal rang mein) dikhega.::HL]]
 
-## ⚙️ 6. Under the Hood (Technical Working):
+[[HL::## ⚙️ 6. Under the Hood (Technical Working):::HL]]
 
-1. User pehli baar request karta hai.
-2. Bouncer (Rate Limiter) user ka IP Address note karta hai aur memory mein likhta hai: `IP 192.168.1.1 = 1 request`.
-3. User wapas request karta hai, counter `2` ho jata hai.
-4. Agar limit `5 requests per minute` hai, aur user 6th request karta hai, toh Bouncer bolta hai: "Limit cross ho gayi, error 429 bhej do".
-*(Production mein ye memory store karne ke liye hum **Redis** ya **Upstash** (jo cloud par Redis hai) use karte hain kyunki ye bahut fast memory hoti hai).*
+1. [[HL::User pehli baar request karta hai.::HL]]
+2. [[HL::Bouncer (Rate Limiter) user ka IP Address note karta hai aur memory mein likhta hai: `IP 192.168.1.1 = 1 request`.::HL]]
+3. [[HL::User wapas request karta hai, counter `2` ho jata hai.::HL]]
+4. [[HL::Agar limit `5 requests per minute` hai, aur user 6th request karta hai, toh Bouncer bolta hai: "Limit cross ho gayi, error 429 bhej do".::HL]]
+[[HL::*(Production mein ye memory store karne ke liye hum **Redis** ya **Upstash** (jo cloud par Redis hai) use karte hain kyunki ye bahut fast memory hoti hai).*::HL]]
 
-## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
-Hum Node.js mein `express-rate-limit` package use karenge. (Beginner level par hum server ki normal RAM use karenge, production mein isko Redis se connect kiya jata hai).
+[[HL::## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):::HL]]
+[[HL::Hum Node.js mein `express-rate-limit` package use karenge. (Beginner level par hum server ki normal RAM use karenge, production mein isko Redis se connect kiya jata hai::HL]]).
 
 **Terminal Setup:**
 ```bash
-npm install express express-rate-limit
+[[HL::npm install express express-rate-limit::HL]]
 ```
 ```text
 # 📤 Expected Output:
@@ -10397,25 +10397,25 @@ const express = require('express');
 // Rate limit package ko import kiya
 const rateLimit = require('express-rate-limit'); 
 
-const app = express();
+const app = [[HL::express();::HL]]
 
-// Rate Limiter ka rule banate hain
-const apiLimiter = rateLimit({
-    windowMs: 1 * 60 * 1000, // 1 minute ka time window
-    max: 3, // 1 minute mein MAX 3 requests allowed hain
-    message: "Bhai thoda saans le lo! 🛑 Too many requests, try after 1 minute."
-});
+[[HL::// Rate Limiter ka rule banate hain::HL]]
+[[HL::const apiLimiter = rateLimit({::HL]]
+    [[HL::windowMs: 1 * 60 * 1000, // 1 minute ka time window::HL]]
+    [[HL::max: 3, // 1 minute mein MAX 3 requests allowed hain::HL]]
+    [[HL::message: "Bhai thoda saans le lo! 🛑 Too many requests, try after 1 minute."::HL]]
+[[HL::});::HL]]
 
-// Ye limiter humne '/api/data' wale route par laga diya
-app.use('/api/data', apiLimiter);
+[[HL::// Ye limiter humne '/api/data' wale route par laga diya::HL]]
+[[HL::app.use('/api/data', apiLimiter);::HL]]
 
-// Normal route
-app.get('/api/data', (req, res) => {
-    res.send("Ye lo tumhara Data! ✅");
-});
+[[HL::// Normal route::HL]]
+[[HL::app.get('/api/data', (req, res) => {::HL]]
+    [[HL::res.send("Ye lo tumhara Data! ✅");::HL]]
+[[HL::});::HL]]
 
-app.listen(4000, () => {
-    console.log("Server chal raha hai port 4000 par! 🚀");
+[[HL::app.listen(4000, () => {::HL]]
+    [[HL::console.log("Server chal raha hai port 4000 par::HL]]! 🚀");
 });
 ```
 ```text
@@ -10454,15 +10454,15 @@ curl -i http://localhost:4000/api/data
 | **Problem solved?** | Passwords guess karne se rokna, API misuse rokna. | Lakhon fake computers se aane wale traffic ko rokna jo server down kar sakte hain. |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-1. **Mistake:** Rate limiter ko Database (MongoDB/MySQL) ke sath banana. Ye bahut slow ho jayega. 
-   * **Fix:** Hamesha in-memory database jaise **Redis** (ya cloud based **Upstash**) use karo kyunki ye micro-seconds mein read/write karte hain.
+1. [[HL::**Mistake:** Rate limiter ko Database (MongoDB/MySQL) ke sath banana. Ye bahut slow ho jayega.::HL]] 
+   * [[HL::**Fix:** Hamesha in-memory database jaise **Redis** (ya cloud based **Upstash**) use karo kyunki ye micro-seconds mein read/write karte hain::HL]].
 2. **Mistake:** Saari API endpoints par ek hi limit lagana. (e.g., Image load hone par bhi limit cross ho jana).
    * **Fix:** Login/Signup routes par strict limit (5 req/min) lagao, par normal data fetch routes par thodi zyada limit (100 req/min) rakho.
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-* **"Ye Redis kya hai aur iski zaroorat kyun hai?"** Agar tumhare 4 alag-alag servers chal rahe hain (load balancing), toh har server ko pata hona chahiye ki user ne kitni request ki hain. Redis ek aisi fast, common memory hai jahan saare servers data share karte hain. Upstash bas Redis ka modern, serverless version hai.
-* **"Agar mera Wi-Fi router IP same deta hai, toh kya mere ghar ke sab log block ho jayenge?"**
-  Haan! Ek public IP par rate limit lagti hai. Isliye companies IP ke sath-sath `User ID` ya `Session Token` par bhi rate limit lagati hain.
+* **"[[HL::Ye Redis kya hai aur iski zaroorat kyun hai?"** Agar tumhare 4 alag-alag servers chal rahe hain (load balancing), toh har server ko pata hona chahiye ki user ne kitni request ki hain. Redis ek aisi fast, common memory hai jahan saare servers data share karte hain. Upstash bas Redis ka modern, serverless version hai::HL]].
+* **"[[HL::Agar mera Wi-Fi router IP same deta hai, toh kya mere ghar ke sab log block ho jayenge?"**::HL]]
+  [[HL::Haan! Ek public IP par rate limit lagti hai. Isliye companies IP ke sath-sath `User ID` ya `Session Token` par bhi rate limit lagati hain::HL]].
 
 ## 🌍 11. Real-World Use Case (Production Application):
 Twitter (X) ka API rate limit. Tumne notice kiya hoga agar tum continuously scroll/refresh karte raho kisi 3rd party app mein, toh likha aata hai "Rate Limit Exceeded". Elon Musk ne recently data scraping (bots data chura na lein) rokne ke liye strict rate limits lagai thi ki ek user din mein sirf 600 posts dekh sakta hai.
@@ -10483,8 +10483,8 @@ Agar API par rate limiting nahi hai, toh koi hacker script chala kar tumhari API
 
 ## ❓ 15. FAQ (Interview Questions):
 1. **What HTTP status code is used for Rate Limiting?** 429 Too Many Requests.
-2. **Why use Redis for Rate Limiting?** Because Redis operates entirely in RAM (memory), making it insanely fast for counting requests compared to traditional databases.
-3. **What is a "Token Bucket" algorithm?** It's a popular rate-limiting math logic. Imagine a bucket with 5 tokens. Every request takes 1 token. Tokens refill every minute. If bucket is empty, request is denied.
+2. [[HL::**Why use Redis for Rate Limiting?** Because Redis operates entirely in RAM (memory), making it insanely fast for counting requests compared to traditional databases.::HL]]
+3. [[HL::**What is a "Token Bucket" algorithm?** It's a popular rate-limiting math logic. Imagine a bucket with 5 tokens. Every request takes 1 token. Tokens refill every minute. If bucket is empty, request is denied::HL]].
 4. **How do we identify users for rate limiting?** Usually by their IP address (`req.ip`), or if logged in, by their User ID.
 5. **What is Upstash?** Upstash is a serverless database platform that provides Redis without the hassle of setting up servers manually.
 
@@ -10628,9 +10628,9 @@ Raaton-raat tumhari company ka pura database delete ho sakta hai, ya hackers saa
 ## ❓ 15. FAQ (Interview Questions):
 1. **What does `' OR '1'='1` do in an SQL query?** It forces the `WHERE` clause to always evaluate to `TRUE`, bypassing authentication or fetching all records.
 2. **What is a Parameterized Query?** A query where the SQL statement is sent to the DB separately from the user data (parameters), preventing the DB from interpreting data as code.
-3. **Are NoSQL databases immune to injection?** No, NoSQL databases like MongoDB can suffer from NoSQL injection if objects/queries are built dynamically with raw user input.
+3. [[HL::**Are NoSQL databases immune to injection?** No, NoSQL databases like MongoDB can suffer from NoSQL injection if objects/queries are built dynamically with raw user input::HL]].
 4. **Is input validation the same as input sanitization?** No. Validation checks if the data is the correct *format* (e.g., is it an email?). Sanitization removes or escapes dangerous characters from the data.
-5. **Why should we use an ORM for security?** ORMs automatically sanitize and parameterize inputs under the hood, heavily reducing the risk of accidental SQL injection.
+5. [[HL::**Why should we use an ORM for security?** ORMs automatically sanitize and parameterize inputs under the hood, heavily reducing the risk of accidental SQL injection::HL]].
 
 ## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
 **User ke input ko kabhi bhi direct apni SQL query string mein math jodo, hamesha parameters ( `?` ) ka use karo.**
@@ -10837,12 +10837,12 @@ Let’s become a Testing Hero! 🚀
 ## 🎯 1. Title / Topic: Unit Testing (Vitest/Jest for Logic - Cart Calculations)
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
-Imagine tum ek cycle (bicycle) bana rahe ho. Cycle puri jodne se pehle, tum sirf uski "ghanti" (bell) bajaa kar check karte ho ki aawaz aa rahi hai ya nahi. Phir tum sirf "break wire" kheench kar dekhte ho ki wo majboot hai ya nahi. 
-**Unit testing yahi hai:** Pure app ko chalane se pehle, uske sabse chhote hisse (ek single function) ko akele check karna.
+[[HL::Imagine tum ek cycle (bicycle) bana rahe ho. Cycle puri jodne se pehle, tum sirf uski "ghanti" (bell) bajaa kar check karte ho ki aawaz aa rahi hai ya nahi. Phir tum sirf "break wire" kheench kar dekhte ho ki wo majboot hai ya nahi.::HL]] 
+[[HL::**Unit testing yahi hai:** Pure app ko chalane se pehle, uske sabse chhote hisse (ek single function) ko akele check karna::HL]].
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** Unit testing is a software testing method where individual units or components of a software are tested in isolation to ensure they function exactly as expected. We use tools like Jest or Vitest for this.
-* **Hinglish Simplification:** App ke chhote-chhote parts (jaise ek calculation ka function) ko baaki app se alag karke test karna taaki pata chale wo akela sahi kaam kar raha hai.
+* [[HL::**Precise English:** Unit testing is a software testing method where individual units or components of a software are tested in isolation to ensure they function exactly as expected. We use tools like Jest or Vitest for this.::HL]]
+* [[HL::**Hinglish Simplification:** App ke chhote-chhote parts (jaise ek calculation ka function) ko baaki app se alag karke test karna taaki pata chale wo akela sahi kaam kar raha hai::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
 * **Problem:** Agar tum seedha pura e-commerce app bana doge aur end mein cart ka total galat aayega, toh tumhe samajh nahi aayega ki galti kahan hai (UI mein? Database mein? Ya calculation wale function mein?).
@@ -11103,7 +11103,7 @@ npm run test
 Agar tum API aur DB ka integration test nahi karte, toh app "User Created!" ka message dikha dega, par sach mein database mein kuch save hi nahi hua hoga. User login karne jayega toh "Account not found" aayega!
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **Q: How does integration testing differ from unit testing?** Ans: Unit tests check single functions offline; integration tests check if multiple modules (like API and DB) communicate properly.
+1. **Q: [[HL::How does integration testing differ from unit testing?** Ans: Unit tests check single functions offline; integration tests check if multiple modules (like API and DB) communicate properly::HL]].
 2. **Q: What happens if a test leaves data in the DB?** Ans: It causes "Test Pollution", where future tests fail because of old leftover data.
 3. **Q: Do we test the UI in integration testing?** Ans: No, usually we just test the Backend API talking to the Database. UI is checked in E2E testing.
 4. **Q: Why do integration tests take longer?** Ans: Because they actually connect to network ports, read/write to disk, and wait for database queries.
@@ -11135,104 +11135,104 @@ Let's dive in! 💻✨
 Tumne ghar banaya. Eent (brick) check ki (Unit test). Paani ki pipe ke saath tap check kiya (Integration test). **E2E Testing yahi hai ki tum khud main door kholte ho, andar aate ho, light on karte ho, sofe par baithte ho aur dekhte ho ki sab kaisa feel ho raha hai.** E2E testing mein ek nakli (robot) user banta hai jo tumhari website open karta hai, buttons click karta hai, aur form bharta hai, bilkul ek asli insaan ki tarah.
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** End-to-End (E2E) testing is a software testing methodology to evaluate the functioning of an application as a whole, from start to finish, simulating real user scenarios in a real browser environment.
-* **Hinglish Simplification:** Ek robot banakar usko bolna ki "Ja, website open kar, T-shirt cart mein daal, aur checkout karke dekh ki success page aata hai ya nahi."
+* **Precis[[HL::e English:** End-to-End (E2E) testing is a software testing methodology to evaluate the functioning of an application as a whole, from start to finish, simulating real user scenarios in a real browser environment.::HL]]
+* [[HL::**Hinglish Simplification:** Ek robot banakar usko bolna ki "Ja, website open kar, T-shirt cart mein daal, aur checkout karke dekh ki success page aata hai ya nahi::HL]]."
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Tumhara Backend API sahi hai, Database bhi sahi hai. Par Frontend mein galti se 'Checkout' button ke upar ek transparent `<div>` aa gaya hai. Asli user click hi nahi kar paa raha! Unit aur Integration tests pass ho jayenge, par app fail hai.
-* **Solution:** E2E testing real browser open karke check karti hai ki kya sach mein button click ho pa raha hai? Kya screen pe text sahi dikh raha hai?
+* [[HL::**Problem:** Tumhara Backend API sahi hai, Database bhi sahi hai. Par Frontend mein galti se 'Checkout' button ke upar ek transparent `<div>` aa gaya hai. Asli user click hi nahi kar paa raha! Unit aur Integration tests pass ho jayenge, par app fail hai.::HL]]
+* [[HL::**Solution:** E2E testing real browser open karke check karti hai ki kya sach mein button click ho pa raha hai? Kya screen pe text sahi dikh raha hai::HL]]?
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
-Jab tum Playwright (E2E testing tool) run karoge, toh tumhari screen par jadoo hoga. Ek asli Google Chrome (ya Chromium) browser apne aap open hoga, usme website khulegi, mouse bina tumhare haath lagaye apne aap click hoga, typing hogi, aur browser band ho jayega. Terminal mein green checks aayenge.
+[[HL::Jab tum Playwright (E2E testing tool) run karoge, toh tumhari screen par jadoo hoga. Ek asli Google Chrome (ya Chromium) browser apne aap open hoga, usme website khulegi, mouse bina tumhare haath lagaye apne aap click hoga, typing hogi, aur browser band ho jayega. Terminal mein green checks aayenge::HL]].
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1. **Playwright** (ek E2E testing framework) ek browser engine ko background mein (ya tumhare saamne) launch karta hai.
-2. Wo tumhari website ke local URL (jaise `localhost:3000`) par jata hai.
-3. Tumhare likhe hue instructions padhta hai (e.g., "Find the button with text 'Add to Cart' and click it").
-4. Playwright DOM (website ki HTML structure) ko scan karta hai, element dhoondhta hai aur ek actual physical click event fire karta hai.
-5. Fir wo URL change hone ka ya success message aane ka wait karta hai.
+1. [[HL::**Playwright** (ek E2E testing framework) ek browser engine ko background mein (ya tumhare saamne) launch karta hai.::HL]]
+2. [[HL::Wo tumhari website ke local URL (jaise `localhost:3000`) par jata hai.::HL]]
+3. [[HL::Tumhare likhe hue instructions padhta hai (e.g., "Find the button with text 'Add to Cart' and click it").::HL]]
+4. [[HL::Playwright DOM (website ki HTML structure) ko scan karta hai, element dhoondhta hai aur ek actual physical click event fire karta hai.::HL]]
+5. [[HL::Fir wo URL change hone ka ya success message aane ka wait karta hai::HL]].
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
 Pehle Playwright install karte hain:
 ```bash
-# Terminal mein run karo
-npm init playwright@latest
+# [[HL::Terminal mein run karo::HL]]
+[[HL::npm init playwright@latest::HL]]
 
-# 📤 Expected Output:
-# Getting started with writing end-to-end tests with Playwright:
-# Initializing project in '.'
-# ✔ Success! Created a Playwright Test project.
+[[HL::# 📤 Expected Output:::HL]]
+[[HL::# Getting started with writing end-to-end tests with Playwright:::HL]]
+[[HL::# Initializing project in '.'::HL]]
+[[HL::# ✔ Success! Created a Playwright Test project::HL]].
 ```
 
-Ab hum ek test likhenge jo Amazon jaisa checkout flow simulate karega.
+[[HL::Ab hum ek test likhenge jo Amazon jaisa checkout flow simulate karega.::HL]]
 
-**File: `tests/checkout.spec.js`**
+[[HL::**File: `tests/checkout.spec.js`**::HL]]
 ```javascript
-// Playwright se 'test' aur 'expect' functions import karo
-const { test, expect } = require('@playwright/test');
+// [[HL::Playwright se 'test' aur 'expect' functions import karo::HL]]
+[[HL::const { test, expect } = require('@playwright/test::HL]]');
 
-// Test ka naam aur async function (kyunki website load hone me time lagta hai)
-test('User should be able to checkout completely', async ({ page }) => {
+// [[HL::Test ka naam::HL]] [[HL::aur async function (kyunki website load hone me time lagta hai)::HL]]
+[[HL::test('User should be able to checkout completely', async ({ page }) => {::HL]]
     
-    // 1. URL par jao (page.goto website open karta hai)
-    await page.goto('http://localhost:3000/products');
+    [[HL::// 1. URL par jao (page.goto website open karta hai)::HL]]
+    [[HL::await page.goto('http://localhost:3000/products');::HL]]
 
-    // 2. Product par click karo. 
-    // getByText() screen par wo word dhoondhta hai, aur .click() us par click karta hai
-    await page.getByText('Red Nike T-Shirt').click();
+    [[HL::// 2. Product par click karo.::HL]] 
+    [[HL::// getByText() screen par wo word dhoondhta hai, aur .click() us par click karta hai::HL]]
+    [[HL::await page.getByText('Red Nike T-Shirt').click();::HL]]
 
-    // 3. 'Add to Cart' button dhoondho aur click karo
-    await page.getByRole('button', { name: 'Add to Cart' }).click();
+    [[HL::// 3. 'Add to Cart' button dhoondho aur click karo::HL]]
+    [[HL::await page.getByRole('button', { name: 'Add to Cart' }).click();::HL]]
 
-    // 4. Checkout page par jao
-    await page.goto('http://localhost:3000/checkout');
+    [[HL::// 4. Checkout page par jao::HL]]
+    [[HL::await page.goto('http://localhost:3000/checkout');::HL]]
 
-    // 5. Form fill karo (jaise asli user type karta hai)
-    await page.getByLabel('Name').fill('Tech Guru');
-    await page.getByLabel('Address').fill('123 Code Street');
+    [[HL::// 5. Form fill karo (jaise asli user type karta hai)::HL]]
+    [[HL::await page.getByLabel('Name').fill('Tech Guru');::HL]]
+    [[HL::await page.getByLabel('Address').fill('123 Code Street');::HL]]
 
-    // 6. Pay button click karo
-    await page.getByRole('button', { name: 'Pay Now' }).click();
+    [[HL::// 6. Pay button click karo::HL]]
+    [[HL::await page.getByRole('button', { name: 'Pay Now' }).click();::HL]]
 
-    // 7. ASSERT: Check karo ki URL change ho kar success page aaya ya nahi
-    // toHaveURL check karta hai ki kya naya link sahi hai
-    await expect(page).toHaveURL('http://localhost:3000/success');
+    [[HL::// 7. ASSERT: Check karo ki URL change ho kar success page aaya ya nahi::HL]]
+    [[HL::// toHaveURL check karta hai ki kya naya link sahi hai::HL]]
+    [[HL::await expect(page).toHaveURL('http://localhost:3000/success');::HL]]
 
-    // 8. ASSERT: Check karo ki success message screen par dikh raha hai
-    await expect(page.getByText('Order Placed Successfully!')).toBeVisible();
+    [[HL::// 8. ASSERT: Check karo ki success message screen par dikh raha hai::HL]]
+    [[HL::await expect(page.getByText('Order Placed Successfully!')).toBeVisible::HL]]();
 });
 ```
 
-Ab test run karte hain terminal mein:
-*(Note: `--headed` flag ka matlab hai ki browser screen par dikhega, warna wo chupke se background mein run ho jata hai jisko "headless" bolte hain).*
+[[HL::Ab test run karte hain terminal mein:::HL]]
+[[HL::*(Note: `--headed` flag ka matlab hai ki browser screen par dikhega, warna wo chupke se background mein run ho jata hai jisko "headless" bolte hain).*::HL]]
 ```bash
-npx playwright test --headed
+[[HL::npx playwright test --headed::HL]]
 
-# 📤 Expected Output:
-# Running 1 test using 1 worker
-# [Chromium] › tests/checkout.spec.js:3:1 › User should be able to checkout completely
-# 
-#   ✓  1 passed (3.2s)
+[[HL::# 📤 Expected Output:::HL]]
+[[HL::# Running 1 test using 1 worker::HL]]
+[[HL::# [Chromium] › tests/checkout.spec.js:3:1 › User should be able to checkout completely::HL]]
+[[HL::#::HL]] 
+[[HL::#   ✓  1 passed (3.2s::HL]])
 ```
 *(Yahan screen par ek browser khulega, fat-a-fat clicks honge aur band ho jayega!)*
 
-## ⚖️ 8. Comparison (Ye vs Woh):
-| Feature | Integration Testing | E2E Testing (Playwright) |
+## ⚖️ 8. [[HL::Comparison (Ye vs Woh):::HL]]
+| [[HL::Feature::HL]] | [[HL::Integration Testing::HL]] | [[HL::E2E Testing (Playwright)::HL]] |
 | :--- | :--- | :--- |
-| **Kya check karta hai?** | API <-> Database dosti | Pura App (UI + API + DB) a-to-z |
-| **Browser Khulta hai?** | Nahi (Sirf code chalta hai) | Haan (Real Chrome/Safari khulta hai) |
-| **Time taken** | Fast (~Seconds) | Very Slow (~Minutes for full app) |
+| [[HL::**Kya check karta hai?**::HL]] | [[HL::API <-> Database dosti::HL]] | [[HL::Pura App (UI + API + DB) a-to-z::HL]] |
+| [[HL::**Browser Khulta hai?**::HL]] | [[HL::Nahi (Sirf code chalta hai)::HL]] | [[HL::Haan (Real Chrome/Safari khulta hai)::HL]] |
+| [[HL::**Time taken**::HL]] | [[HL::Fast (~Seconds)::HL]] | [[HL::Very Slow (~Minutes for full app::HL]]) |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-1. **Testing EVERYTHING in E2E:** Beginners har choti cheez (jaise 2+2=4) E2E mein test karte hain. *Fix:* E2E test slow hote hain. Isme sirf main flows (Login, Signup, Checkout) test karo. Baaki Unit tests pe chhodo.
-2. **Waiting for `setTimeout`:** Beginners network slow hone par `setTimeout(5000)` laga dete hain (5 second wait). *Fix:* Aisa mat karo. Playwright ka apna smart `await expect(locator).toBeVisible()` use karo jo tab tak wait karega jab tak element aa nahi jata.
+1. [[HL::**Testing EVERYTHING in E2E:** Beginners har choti cheez (jaise 2+2=4) E2E mein test karte hain. *Fix:* E2E test slow hote hain. Isme sirf main flows (Login, Signup, Checkout) test karo. Baaki Unit tests pe chhodo.::HL]]
+2. [[HL::**Waiting for `setTimeout`:** Beginners network slow hone par `setTimeout(5000)` laga dete hain (5 second wait). *Fix:* Aisa mat karo. Playwright ka apna smart `await expect(locator).toBeVisible()` use karo jo tab tak wait karega jab tak element aa nahi jata::HL]].
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
 * **"Bhaiya, agar Playwright test kar raha hai, toh server (website) ko chalu (start) rakhna padega kya?"** Haan! E2E test asli website ko test karta hai, toh tumhara `npm run dev` ya server pehle se chalu hona chahiye terminal ke ek dusre tab mein.
 
 ## 🌍 11. Real-World Use Case (Production Application):
-**Flipkart Big Billion Days:** Sale live hone se ek raat pehle, Flipkart ke servers par Playwright ki thousands scripts chalti hain jo automatically T-shirts, phones, aur laptops cart mein daal kar check karti hain ki checkout button kaam kar raha hai ya nahi. Agar ek bhi fail hua, toh release rok di jati hai.
+[[HL::**Flipkart Big Billion Days:** Sale live hone se ek raat pehle, Flipkart ke servers par Playwright ki thousands scripts chalti hain jo automatically T-shirts, phones, aur laptops cart mein daal kar check karti hain ki checkout button kaam kar raha hai ya nahi. Agar ek bhi fail hua, toh release rok di jati hai::HL]].
 
 ## 🎨 12. Visual Diagram (ASCII Art):
 ```text
@@ -11258,9 +11258,9 @@ Agar Checkout flow break ho gaya aur E2E test nahi the, toh website live hone ke
 
 ## ❓ 15. FAQ (Interview Questions):
 1. **Q: What is the Testing Pyramid?** Ans: It says we should have MOST Unit tests (base), SOME Integration tests (middle), and FEW E2E tests (top) because E2E tests are slow and expensive to maintain.
-2. **Q: What is a headless browser?** Ans: A web browser without a graphical user interface (GUI). It runs in the background, making tests run much faster.
-3. **Q: Playwright vs Cypress/Selenium?** Ans: Playwright is newer, created by Microsoft, runs much faster, and easily supports multiple browser tabs and frames compared to Cypress.
-4. **Q: Can E2E test check mobile views?** Ans: Yes, Playwright can simulate mobile viewports (like iPhone 14 screen size) to test responsive UI.
+2. **Q: [[HL::What is a headless browser?** Ans: A web browser without a graphical user interface (GUI). It runs in the background, making tests run much faster::HL]].
+3. [[HL::**Q: Playwright vs Cypress/Selenium?** Ans: Playwright is newer, created by Microsoft, runs much faster, and easily supports multiple browser tabs and frames compared to Cypress::HL]].
+4. **Q: [[HL::Can E2E test check mobile views?** Ans: Yes, Playwright can simulate mobile viewports (like iPhone 14 screen size) to test responsive UI::HL]].
 5. **Q: How to handle captchas in E2E?** Ans: You CANNOT test real captchas. You have to disable captchas in your testing environment.
 
 ## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
@@ -11276,84 +11276,84 @@ Tum ek action movie shoot kar rahe ho jisme hero ko goli lagti hai. Kya tum asli
 **Mocking yahi hai:** Jab hum test run karte hain, toh hum asli Stripe (Payment gateway) ya asli Google Login ko hit nahi karte. Hum unka ek nakli (mock) version bana dete hain jo turant "Success" bol deta hai, taaki hamara test poora ho sake bina paise kate.
 
 ## 📖 3. Technical Definition (Interview Answer):
-* **Precise English:** Mocking is a technique used in testing to replace real objects or external systems with simulated ("mock") objects. This ensures tests are isolated, fast, and don't trigger real-world side effects like charging credit cards.
-* **Hinglish Simplification:** External APIs (jaise payment ya email) ke real functions ko ek fake function se replace kar dena jo waisa hi result deta hai, taaki asli api ko pareshan na karna pade.
+* [[HL::**Precise English:** Mocking is a technique used in testing to replace real objects or external systems with simulated::HL]] ("[[HL::mock") objects. This ensures tests are isolated, fast, and don't trigger real-world side effects like charging credit cards.::HL]]
+* [[HL::**Hinglish Simplification:** External APIs (jaise payment ya email) ke real functions ko ek fake function se replace kar dena jo waisa hi result deta hai, taaki asli api ko pareshan na karna pade::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem 1 (Paisa):** Agar tumhara app checkout test har baar code push karne pe (din me 50 baar) chalta hai, toh kya tum 50 baar asli credit card se paise katwaoge?
-* **Problem 2 (Rate Limits/Internet):** Agar Stripe ka server down hai, ya tumhara internet band hai, toh tumhara test fail ho jayega jabki tumhare code mein koi galti nahi hai!
-* **Solution:** Mocking! Hum code ko bolte hain "Jab bhi stripe.charge() call ho, internet pe mat jao, bas assume kar lo ki payment success ho gayi aur aage badho."
+* [[HL::**Problem 1 (Paisa):** Agar tumhara app checkout test har baar code push karne pe (din me 50 baar) chalta hai, toh kya tum 50 baar asli credit card se paise katwaoge?::HL]]
+* [[HL::**Problem 2 (Rate Limits/Internet):** Agar Stripe ka server down hai, ya tumhara internet band hai, toh tumhara test fail ho jayega jabki tumhare code mein koi galti nahi hai!::HL]]
+* [[HL::**Solution:** Mocking! Hum code ko bolte hain "Jab bhi stripe.charge() call ho, internet pe mat jao, bas assume kar lo ki payment success ho gayi aur aage badho::HL]]."
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
-Code mein tumhe `jest.mock()` jaisi lines dikhengi file ke ekdum top par. Iska matlab hai ki test runner code run karne se pehle, us specific file/tool ko "Nakli" waale version se replace kar dega. Output hamesha pass hoga aur bohot tezi se aayega.
+[[HL::Code mein tumhe `jest.mock()` jaisi lines dikhengi file ke ekdum top par. Iska matlab hai ki test runner code run karne se pehle, us specific file/tool ko "Nakli" waale version se replace kar dega. Output hamesha pass hoga aur bohot tezi se aayega::HL]].
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1. Tum test file run karte ho.
-2. Test runner (Jest/Vitest) dekhta hai ki tumne `stripe` module ko "mock" kiya hai.
-3. Wo internal memory mein asli Stripe code ko hata kar ek khali function (dummy function) rakh deta hai.
-4. Jab tumhara actual app code Stripe ko call karta hai, wo internet pe jane ki bajaye is fake function ko call karta hai.
-5. Fake function turant ek pre-decided response (e.g., `{ status: 200, transaction_id: 'fake_123' }`) wapas de deta hai.
+1. [[HL::Tum test file run karte ho.::HL]]
+2. [[HL::Test runner (Jest/Vitest) dekhta hai ki tumne `stripe` module ko "mock" kiya hai.::HL]]
+3. [[HL::Wo internal memory mein asli Stripe code ko hata kar ek khali function (dummy function) rakh deta hai.::HL]]
+4. [[HL::Jab tumhara actual app code Stripe ko call karta hai, wo internet pe jane ki bajaye is fake function ko call karta hai.::HL]]
+5. [[HL::Fake function turant ek pre-decided response (e.g., `{ status: 200, transaction_id: 'fake_123' }`) wapas de deta hai::HL]].
 
 ## 💻 7. Hands-On: Code / Step-by-Step Practical (CRITICAL SECTION):
 
-Maan lo hamare paas ek real file hai jo payment karti hai.
+[[HL::Maan lo hamare paas ek real file hai jo payment karti hai.::HL]]
 
-**File: `services/payment.js` (Real logic)**
+[[HL::**File: `services/payment.js` (Real logic)**::HL]]
 ```javascript
-// Ye ek external library hai (e.g. Stripe) jo internet se connect hoti hai
-const stripe = require('stripe')('real_secret_key');
+[[HL::// Ye ek external library hai (e.g. Stripe) jo internet se connect hoti hai::HL]]
+[[HL::const stripe = require('stripe')('real_secret_key');::HL]]
 
-async function processPayment(amount) {
-    // Ye line originally internet par jayegi aur asli bank account hit karegi
-    const charge = await stripe.charges.create({
-        amount: amount,
-        currency: 'usd'
-    });
-    return charge;
-}
+[[HL::async function processPayment(amount) {::HL]]
+    [[HL::// Ye line originally internet par jayegi aur asli bank account hit karegi::HL]]
+    [[HL::const charge = await stripe.charges.create({::HL]]
+        [[HL::amount: amount,::HL]]
+        [[HL::currency: 'usd'::HL]]
+    [[HL::});::HL]]
+    [[HL::return charge;::HL]]
+[[HL::}::HL]]
 
-module.exports = { processPayment };
+[[HL::module.exports = { processPayment };::HL]]
 ```
 
-Ab hum iska Unit Test likhenge Jisme hum Stripe ko **Mock** karenge.
+[[HL::Ab hum iska Unit Test likhenge Jisme hum Stripe ko **Mock** karenge.::HL]]
 
-**File: `__tests__/payment.test.js`**
+[[HL::**File: `__tests__/payment.test.js`**::HL]]
 ```javascript
-const { processPayment } = require('../services/payment');
+[[HL::const { processPayment } = require('../services/payment');::HL]]
 
-// 1. MOCKING SETUP: Jest ko bolo ki "stripe" library ko nakli bana do!
-jest.mock('stripe', () => {
-    // Ye hamara nakli Stripe return kar raha hai
-    return jest.fn(() => ({
-        charges: {
-            // create function ab internet pe nahi jayega, bas ye nakli data dega
-            create: jest.fn().mockResolvedValue({ 
-                status: 'succeeded', 
-                id: 'mock_txn_999' 
-            })
-        }
-    }));
-});
+[[HL::// 1. MOCKING SETUP: Jest ko bolo ki "stripe" library ko nakli bana do!::HL]]
+[[HL::jest.mock('stripe', () => {::HL]]
+    [[HL::// Ye hamara nakli Stripe return kar raha hai::HL]]
+    [[HL::return jest.fn(() => ({::HL]]
+        [[HL::charges: {::HL]]
+            [[HL::// create function ab internet pe nahi jayega, bas ye nakli data dega::HL]]
+            [[HL::create: jest.fn().mockResolvedValue({::HL]] 
+                [[HL::status: 'succeeded',::HL]] 
+                [[HL::id: 'mock_txn_999'::HL]] 
+            [[HL::})::HL]]
+        [[HL::}::HL]]
+    [[HL::}));::HL]]
+[[HL::});::HL]]
 
-test('should process payment successfully without hitting real API', async () => {
+[[HL::test('should process payment successfully without hitting real API', async () => {::HL]]
     
-    // ACT: Hum apna function call karte hain
-    // Andar jaakar ye hamare nakli Stripe ko hit karega
-    const result = await processPayment(500);
+    [[HL::// ACT: Hum apna function call karte hain::HL]]
+    [[HL::// Andar jaakar ye hamare nakli Stripe ko hit karega::HL]]
+    [[HL::const result = await processPayment(500);::HL]]
 
-    // ASSERT: Hum check karte hain ki kya hume apna nakli data wapas mila?
-    expect(result.status).toBe('succeeded');
-    expect(result.id).toBe('mock_txn_999');
+    [[HL::// ASSERT: Hum check karte hain ki kya hume apna nakli data wapas mila?::HL]]
+    [[HL::expect(result.status).toBe('succeeded');::HL]]
+    [[HL::expect(result.id).toBe('mock_txn_999::HL]]');
 });
 ```
 
-Terminal mein test run karne par:
+[[HL::Terminal mein test run karne par:::HL]]
 ```bash
-npm test
+[[HL::npm test::HL]]
 
-# 📤 Expected Output:
-# PASS  __tests__/payment.test.js
-#  ✓ should process payment successfully without hitting real API (2 ms)
+[[HL::# 📤 Expected Output:::HL]]
+[[HL::# PASS  __tests__/payment.test.js::HL]]
+[[HL::#  ✓ should process payment successfully without hitting real API (2 ms::HL]])
 ```
 *(Notice the time: 2ms! Agar asli Stripe API call hoti toh internet round-trip mein kam se kam 500ms lagte).*
 
@@ -11365,11 +11365,11 @@ npm test
 | **Kab use karein?** | E2E Tests mein (kabhi-kabhi) | Unit aur Integration Tests mein (hamesha) |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-1. **Mocking internal logic:** Agar tum calculateTotal() ko test kar rahe ho aur calculateTotal() ko hi mock kar doge, toh tum test kya kar rahe ho? *Fix:* Sirf External cheezein (Stripe, Email, DB) mock karo, apna khud ka likha hua business logic kabhi mock mat karo.
+1. [[HL::**Mocking internal logic:** Agar tum calculateTotal() ko test kar rahe ho aur calculateTotal() ko hi mock kar doge, toh tum test kya kar rahe ho? *Fix:* Sirf External cheezein (Stripe, Email, DB) mock karo, apna khud ka likha hua business logic kabhi mock mat karo::HL]].
 2. **Forgetting to clear mocks:** Agar ek test fail hua (mocking error de raha hai) aur dusra test success (mocking success de raha hai), aur tum test ke baad `.clearAllMocks()` nahi chalate, toh tests aapas mein takra jayenge aur ajeeb errors aayenge.
 
 ## 🤔 10. Agar Dimag Ghoom Rahan Hai? (Confusion Clarifier):
-* **"Bhaiya, agar hum payment test mein fail pass hi mock kar denge, toh pata kaise chalega ki app me asli payment code theek likha hai?"** Good question! Mocking hume ye nahi batati ki Stripe API sahi chal rahi hai (wo Stripe ki tension hai, hamari nahi). Mocking hume ye batati hai ki: "Agar stripe ne SUCCESS bheja, toh kya hamara app User ko 'Thank You' page dikhata hai?" aur "Agar stripe ne FAIL bheja, toh kya hamara app 'Retry' button dikhata hai?". Hum apna app test kar rahe hain, Stripe ko nahi!
+* **"[[HL::Bhaiya, agar hum payment test mein fail pass hi mock kar denge, toh pata kaise chalega ki app me asli payment code theek likha hai?"** Good question! Mocking hume ye nahi batati ki Stripe API sahi chal rahi hai (wo Stripe ki tension hai, hamari nahi). Mocking hume ye batati hai ki: "Agar stripe ne SUCCESS bheja, toh kya hamara app User ko 'Thank You' page dikhata hai?" aur "Agar stripe ne FAIL bheja, toh kya hamara app 'Retry' button dikhata hai?". Hum apna app test kar rahe hain, Stripe ko nahi::HL]]!
 
 ## 🌍 11. Real-World Use Case (Production Application):
 **Netflix Login Auth:** Netflix developer jab apni login screen test karte hain, toh wo baar-baar asli Google ya Apple login servers ko hit nahi karte. Wo `next-auth` ya Google provider ko mock kar dete hain, jisse test run karte hi unko fake `user: { name: "Test User" }` mil jata hai aur test speed me aage badh jata hai.
@@ -11395,7 +11395,7 @@ Agar tum external API ko mock karna bhool gaye, aur tumhari pipeline din mein 10
 
 ## ❓ 15. FAQ (Interview Questions):
 1. **Q: What is a mock vs a stub?** Ans: A Stub simply returns fake data. A Mock is smarter; it returns fake data AND remembers how many times it was called and with what arguments.
-2. **Q: Why do we mock the database in unit tests?** Ans: To keep the test blazing fast and entirely isolated from network latency or DB state issues.
+2. [[HL::**Q: Why do we mock the database in unit tests?** Ans: To keep the test blazing fast and entirely isolated from network latency or DB state issues::HL]].
 3. **Q: How do you mock an API error?** Ans: By using methods like `jest.fn().mockRejectedValue(new Error('Network Error'))`.
 4. **Q: What is `jest.spyOn()`?** Ans: It's a way to watch a real function to see if it gets called, optionally replacing it with a mock temporarily.
 5. **Q: Should I mock `fetch` or `axios`?** Ans: Yes, usually developers mock `axios.get` to return static JSON data instead of actually fetching from a URL.
@@ -11428,11 +11428,11 @@ Maan lo tumhari cycle kharab ho gayi hai. Tum phone par ek mechanic ko batate ho
 
 ## 📖 3. Technical Definition (Interview Answer):
 * **Precise English:** The Model Context Protocol (MCP) is an open standard that enables AI assistants to securely connect to local data sources, tools, and development environments (like Next.js Devtools) to read real-time application context and assist in highly accurate debugging.
-* **Hinglish Simplification:** MCP ek communication bridge (pul) hai jisse tumhara AI tool (jaise Cursor ya Claude) tumhare chalte hue Next.js app ke andar jhaank kar dekh sakta hai aur errors ko real-time mein samajh kar fix kar sakta hai.
+* [[HL::**Hinglish Simplification:** MCP ek communication bridge (pul) hai jisse tumhara AI tool (jaise Cursor ya Claude) tumhare chalte hue Next.js app ke andar jhaank kar dekh sakta hai aur errors ko real-time mein samajh kar fix kar sakta hai::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-* **Problem:** Next.js mein ek error aati hai jisko bolte hain **"Hydration Mismatch"** *(iska matlab: Server ne jo page bheja, aur Browser ne jo page banaya, dono thode alag the. Jaise server ne time bheja 12:00, browser pe load hote hote 12:01 ho gaya, toh app crash ho jata hai)*. Isko dhoondhna insaano ke liye bohot mushkil hota hai. Aur normal AI ko context nahi pata hota.
-* **Solution:** MCP AI ko allow karta hai ki wo tumhara terminal, React tree, aur network tab khud padh le. AI turant pakad lega ki "Oh, tumne `Date.now()` server par run kiya tha isliye Hydration error aayi!"
+* [[HL::**Problem:** Next.js mein ek error aati hai jisko bolte hain **"Hydration Mismatch"** *(iska matlab: Server ne jo page bheja, aur Browser ne jo page banaya, dono thode alag the. Jaise server ne time bheja 12:00, browser pe load hote hote 12:01 ho gaya, toh app crash ho jata hai)*. Isko dhoondhna insaano ke liye bohot mushkil hota hai. Aur normal AI ko context nahi pata hota::HL]].
+* [[HL::**Solution:** MCP AI ko allow karta hai ki wo tumhara terminal, React tree, aur network tab khud padh le. AI turant pakad lega ki "Oh, tumne `Date.now()` server par run kiya tha isliye Hydration error aayi::HL]]!"
 
 ## 🔍 5. Visual / Editor Mein Kya Dikhega:
 Tumhare code editor (e.g., Cursor IDE) ke chat box mein ek chhota sa "plug" 🔌 ya "Tools" ka icon dikhega. Jab error aayegi, AI chat mein likha aayega: `Calling Next.js MCP Tool...` aur phir AI bina tumhare kuch samjhaye, automatically problem fix karne ka code de dega.
@@ -11543,9 +11543,9 @@ export default function ProductPage() {
 Agar tum modern tooling (MCP) use nahi karte aur Next.js 15+ mein complex Server Component bugs me phas jate ho, toh tumhara din console.log likhne aur hatane mein hi nikal jayega, jabki tumhara competitor MCP use karke wo bug 2 minute mein fix kar chuka hoga.
 
 ## ❓ 15. FAQ (Interview Questions):
-1. **Q: What does MCP stand for?** Ans: Model Context Protocol. It connects AI models to local data sources.
+1. [[HL::**Q: What does MCP stand for?** Ans: Model Context Protocol. It connects AI models to local data sources::HL]].
 2. **Q: What is a Hydration Mismatch in Next.js?** Ans: When the pre-rendered HTML sent from the server does not exactly match the HTML generated by React on the browser during the initial load.
-3. **Q: Can MCP execute code on my machine?** Ans: By default, MCP is designed to *read* context (like a read-only database). If it needs to write/execute, it explicitly asks for your permission in the IDE.
+3. **Q: [[HL::Can MCP execute code on my machine?** Ans: By default, MCP is designed to *read* context (like a read-only database). If it needs to write/execute, it explicitly asks for your permission in the IDE::HL]].
 4. **Q: Why can't ChatGPT just find my hydration error?** Ans: ChatGPT doesn't have access to your local terminal, so it cannot see the exact React component tree state at the moment the error occurred. MCP provides this.
 5. **Q: What are React Server Components (RSC)?** Ans: Components that fetch data and render entirely on the server, never sending their JavaScript to the client (browser), making the app much faster.
 
