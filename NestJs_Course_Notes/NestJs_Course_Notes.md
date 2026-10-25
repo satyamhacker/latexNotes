@@ -1047,11 +1047,11 @@ Socho tumne ek naya apartment rent pe liya hai (via CLI). Landlord ne pehle se h
 # 📤 Expected Output: (Server automatically restart hoga bina kisi error ke)
 ```
 
-**Step 5: CLI Module Generation**
-(Terminal ka ek naya tab open karo, server ko chalta rehne do)
+[[HL::**Step 5: CLI Module Generation**::HL]]
+[[HL::(Terminal ka ek naya tab open karo, server ko chalta rehne do)::HL]]
 ```bash
-# Bash / Terminal (inside messages folder)
-1  nest generate module messages        # nest = CLI tool; generate = file banao; module = type of file; messages = naam
+[[HL::# Bash / Terminal (inside messages folder)::HL]]
+[[HL::1  nest generate module messages        # nest = CLI tool; generate = file banao; module = type of file; messages = naam::HL]]
 ```
 ```text
 # 📤 Expected Output:
@@ -1181,14 +1181,14 @@ Socho ek post office hai (Module). Jab tum usme ek naya Postman (Controller) hir
 
 ### 💻 7. Hands-On — Runnable Example
 
-**Part 1: Controller Generation Command**
+[[HL::**Part 1: Controller Generation Command**::HL]]
 ```bash
-# Terminal / CLI
-1  nest generate controller messages/messages --flat
-# Line 1 Explanation: 
-# nest generate controller = Naya controller create karo.
-# messages/messages = 'messages' folder ke andar, 'messages' naam ki class banao.
-# --flat flag = Ek aur naya sub-folder (messages/messages/) mat banana, seedha existing folder mein file rakh do.
+[[HL::# Terminal / CLI::HL]]
+[[HL::1  nest generate controller messages/messages --flat::HL]]
+[[HL::# Line 1 Explanation: ::HL]]
+[[HL::# nest generate controller = Naya controller create karo.::HL]]
+[[HL::# messages/messages = 'messages' folder ke andar, 'messages' naam ki class banao.::HL]]
+[[HL::# --flat flag = Ek aur naya sub-folder (messages/messages/) mat banana, seedha existing folder mein file rakh do.::HL]]
 ```
 ```text
 # 📤 Expected Output:
@@ -1485,21 +1485,21 @@ Socho tum ek purana mobile app version 1 chala rahe ho jo WhatsApp ka bohot pura
 
 [[HL::**Step 1: Enable Versioning in `main.ts`**::HL]]
 ```typescript
-// TypeScript | src/main.ts
-1  import { NestFactory } from '@nestjs/core';
-2  import { AppModule } from './app.module';
-3  import { VersioningType } from '@nestjs/common';       // Versioning Enum import karo
-4
-5  async function bootstrap() {
-6    const app = await NestFactory.create(AppModule);
-7    
-8    [[HL::app.enableVersioning({                               // ⭐enableVersioning() = Global flag ON::HL]]
-9      [[HL::type: VersioningType.URI,                          // ⭐VersioningType.URI = Versioning URL mein '/vX/' form mein dikhegi::HL]]
-10   });
-11 
-12   await app.listen(3000);
-13 }
-14 bootstrap();
+[[HL::// TypeScript | src/main.ts::HL]]
+[[HL::1  import { NestFactory } from '@nestjs/core';::HL]]
+[[HL::2  import { AppModule } from './app.module';::HL]]
+[[HL::3  import { VersioningType } from '@nestjs/common';       // Versioning Enum import karo::HL]]
+[[HL::4::HL]]
+[[HL::5  async function bootstrap() {::HL]]
+[[HL::6    const app = await NestFactory.create(AppModule);::HL]]
+[[HL::7    ::HL]]
+[[HL::8    app.enableVersioning({                               // ⭐enableVersioning() = Global flag ON::HL]]
+[[HL::9      type: VersioningType.URI,                          // ⭐VersioningType.URI = Versioning URL mein '/vX/' form mein dikhegi::HL]]
+[[HL::10   });::HL]]
+[[HL::11 ::HL]]
+[[HL::12   await app.listen(3000);::HL]]
+[[HL::13 }::HL]]
+[[HL::14 bootstrap();::HL]]
 ```
 
 [[HL::**Step 2: Apply Version Decorator to Controller**::HL]]
@@ -1978,12 +1978,12 @@ Senior engineers kabhi bhi poora `@Body()` ek saath use nahi karte agar unhe sir
 ### 🔍 5. Visual / Editor Mein Kya Dikhega
 NestJS mein files ko organize karne ka ek convention hai. Tumhare `src/messages` folder ke andar ek **DTOs folder** banega:
 ```text
-src/
- └── messages/
-      ├── dtos/
-      │    └── create-message.dto.ts  <-- Nayi DTO file yahan aayegi
-      ├── messages.controller.ts
-      └── messages.module.ts
+[[HL::src/::HL]]
+[[HL:: └── messages/::HL]]
+[[HL::      ├── dtos/::HL]]
+[[HL::      │    └── create-message.dto.ts  <-- Nayi DTO file yahan aayegi::HL]]
+[[HL::      ├── messages.controller.ts::HL]]
+[[HL::      └── messages.module.ts::HL]]
 ```
 
 ### ⚙️ 6. Under the Hood (Deep Dive)
@@ -2817,20 +2817,20 @@ Is concept ko samjhne ke liye software engineering ke teen stages (hierarchy) ko
 2. [[HL::**Better Approach:** Service apne constructor parameters mein repo maangti hai: `constructor(repo: MessagesRepository)`. Isse hum *dependency swapping* kar sakte hain (testing ke time fake pass kar dena).::HL]]
 3. [[HL::**Best Approach (Interfaces):** Service ek strict TypeScript interface demand karti hai: `constructor(repo: RepositoryInterface)`. Ab Service ko class ke naam se bhi matlab nahi. Hum production environment mein real repo aur tests mein fast in-memory repo bhej sakte hain. Poori tarah modularity achieve ho gayi!::HL]]
 
-> **💡 7. Concept Visualization (Theory Topic ke liye):**
-> *(SCOPE SIGNAL Note: Depth deep hai par Coverage purely conceptual hai. Implementation code aage aayega. Yahan flow samjho)*
+> [[HL::**💡 7. Concept Visualization (Theory Topic ke liye):**::HL]]
+> [[HL::*(SCOPE SIGNAL Note: Depth deep hai par Coverage purely conceptual hai. Implementation code aage aayega. Yahan flow samjho)*::HL]]
 > 
-> **Scenario: Running Automated Tests**
+> [[HL::**Scenario: Running Automated Tests**::HL]]
 > 
-> ❌ **Without IoC (Slow):**
-> Test Engine -> Service -> `new RealRepository()` -> **Slow Hard Disk** -> Test pass hone mein 5 sec lagenge.
+> [[HL::❌ **Without IoC (Slow):**::HL]]
+> [[HL::Test Engine -> Service -> `new RealRepository()` -> **Slow Hard Disk** -> Test pass hone mein 5 sec lagenge.::HL]]
 > 
-> ✅ **With IoC (Implementation Swap - Fast):**
-> Test Engine -> `FakeRepository` banata hai (jo sirf RAM mein data rakhta hai).
-> Test Engine -> Service ko fake object pass karta hai: `new Service(fakeRepo)`.
-> Service (sochti hai real hai) -> calls `findOne()` -> Data RAM (**Fast In-Memory**) se 0.001 sec mein aa jata hai.
+> [[HL::✅ **With IoC (Implementation Swap - Fast):**::HL]]
+> [[HL::Test Engine -> `FakeRepository` banata hai (jo sirf RAM mein data rakhta hai).::HL]]
+> [[HL::Test Engine -> Service ko fake object pass karta hai: `new Service(fakeRepo)`.::HL]]
+> [[HL::Service (sochti hai real hai) -> calls `findOne()` -> Data RAM (**Fast In-Memory**) se 0.001 sec mein aa jata hai.::HL]]
 > 
-> Yahi sabse bada use case hai IoC aur mock objects ka.
+> [[HL::Yahi sabse bada use case hai IoC aur mock objects ka.::HL]]
 
 ### 🔒 8. Security-First Check
 IoC security mein help karta hai. Agar tumhe credentials ya API keys handle karni hain, toh IoC use karke hum secrets manager ka ek mock injection test environment mein bhej sakte hain. Aisa karne se developers galti se production credentials (slow hard disk ya DB ke) test script mein leak nahi karenge.
@@ -3445,7 +3445,7 @@ UPDATE src/computer/computer.module.ts (170 bytes)
 - [[HL::**Anatomy:**::HL]] 
   - [[HL::`g`: Generate ka short form.::HL]]
   - [[HL::`module / service / controller`: Kya banana hai woh specify karta hai.::HL]]
-  - [[HL::`::HL]]<name>[[HL::`: Jaise CPU, Power, ya Disk. Yeh CLI ko batata hai ki file aur class ka naam kya rakhna hai.::HL]]
+  - [[HL::`<name>`: Jaise CPU, Power, ya Disk. Yeh CLI ko batata hai ki file aur class ka naam kya rakhna hai.::HL]]
 
 ### 🔒 8. Security-First Check
 (N/A — is concept mein direct security surface nahi hai, yeh purely scaffolding aur file management hai).
@@ -5471,9 +5471,9 @@ Columns:
 ```
 
 ##### 🔬 Code Explanation
-- **Line 3 & 4 (`user.entity.ts`):** `@Entity()` batata hai class table hai. Speaker ne clearly emphasize kiya hai ki naming convention mein hum `UserEntity` nahi likhte, seedha `User` likhte hain. Yeh industry standard hai taaki code padhne mein natural lage.
-- **Line 5 (`user.entity.ts`):** `@PrimaryGeneratedColumn()` ek decorator (special function jo `@` symbol se start hota hai metadata modify karne ke liye) hai. Yeh SQL mein `PRIMARY KEY` aur `AUTOINCREMENT` set karta hai. Matlab pehle user ko id 1 milegi, doosre ko 2, aur khud set hoti jayegi.
-- **Line 6 (`users.module.ts`):** `forFeature()` ka kaam hai parent module (User) aur Root connection ke beech bridge banana. Yeh call karne se Nest is module ke andar `UserRepository` automatically generate kar dega. *(Same 3-step process `report.entity.ts` (ID, Price, Make, Model properties) aur `ReportsModule` ke liye bhi repeat kiya jata hai).*
+- [[HL::**Line 3 & 4 (`user.entity.ts`):** `@Entity()` batata hai class table hai. Speaker ne clearly emphasize kiya hai ki naming convention mein hum `UserEntity` nahi likhte, seedha `User` likhte hain. Yeh industry standard hai taaki code padhne mein natural lage.::HL]]
+- [[HL::**Line 5 (`user.entity.ts`):** `@PrimaryGeneratedColumn()` ek decorator (special function jo `@` symbol se start hota hai metadata modify karne ke liye) hai. Yeh SQL mein `PRIMARY KEY` aur `AUTOINCREMENT` set karta hai. Matlab pehle user ko id 1 milegi, doosre ko 2, aur khud set hoti jayegi.::HL]]
+- [[HL::**Line 6 (`users.module.ts`):** `forFeature()` ka kaam hai parent module (User) aur Root connection ke beech bridge banana. Yeh call karne se Nest is module ke andar `UserRepository` automatically generate kar dega. *(Same 3-step process `report.entity.ts` (ID, Price, Make, Model properties) aur `ReportsModule` ke liye bhi repeat kiya jata hai).*::HL]]
 
 #### 🔒 8. Security-First Check
 - [[HL::**Risk:** Jab tum database se User fetch karoge, toh `password` column bhi by default uth ke aa jayega, aur agar woh galti se frontend API mein chala gaya, toh bahut bada security leak hoga.::HL]]
@@ -5895,9 +5895,9 @@ Socho tumhara backend ek exclusive VIP club hai. **ValidationPipe** club ke baha
 - [[HL::**Hinglish Simplification:** Jo bhi data user se aata hai, use hum pehle check karte hain (validate karte hain) ki woh sahi format mein hai ya nahi. Iske liye hum DTO classes banate hain aur NestJS ke built-in `ValidationPipe` ko global level pe on kar dete hain.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** User frontend se kuch bhi bhej sakta hai (e.g., email ki jagah number, ya bina password ke request). Agar yeh galat data seedha database mein chala gaya, toh app crash ho jayegi ya database corrupt ho jayega.
-- **Solution:** `ValidationPipe` request ko controller tak pahunchne se *pehle* hi intercept karta hai aur DTO rules ke hisaab se check karta hai. Galat hone par automatically error response bhej deta hai.
-- **What breaks if we don't use it?** Database constraints fail honge (jaise `NOT NULL` error), aur hackers easily malformed data (galat format ka data) inject karke server ko gira sakte hain.
+- [[HL::**Problem:** User frontend se kuch bhi bhej sakta hai (e.g., email ki jagah number, ya bina password ke request). Agar yeh galat data seedha database mein chala gaya, toh app crash ho jayegi ya database corrupt ho jayega.::HL]]
+- [[HL::**Solution:** `ValidationPipe` request ko controller tak pahunchne se *pehle* hi intercept karta hai aur DTO rules ke hisaab se check karta hai. Galat hone par automatically error response bhej deta hai.::HL]]
+- [[HL::**What breaks if we don't use it?** Database constraints fail honge (jaise `NOT NULL` error), aur hackers easily malformed data (galat format ka data) inject karke server ko gira sakte hain.::HL]]
 - **✅ Kab use karo (Use this when):** Jab bhi tumhare app mein koi POST, PUT, ya PATCH request aa rahi ho jisme user data bhej raha hai (payload).
 - **❌ Kab mat karo / Alternative prefer karo (Avoid when):** GET requests jahan koi body data nahi aata, wahan body validation ki zaroorat nahi hoti. Wahan URL parameters validate hote hain.
 
@@ -5960,16 +5960,16 @@ Socho tumhara backend ek exclusive VIP club hai. **ValidationPipe** club ke baha
 ```
 
 # 📤 Expected Output:
-*(Jab tum `request.http` yani VS Code ke REST client se galat data bhejoge: `{"email": "not-an-email", "password": 123}`)*
+[[HL::*(Jab tum `request.http` yani VS Code ke REST client se galat data bhejoge: `{"email": "not-an-email", "password": 123}`)*::HL]]
 ```json
-{
-  "statusCode": 400,
-  "message": [
-    "email must be an email",
-    "password must be a string"
-  ],
-  "error": "Bad Request"
-}
+[[HL::{::HL]]
+[[HL::  "statusCode": 400,::HL]]
+[[HL::  "message": [::HL]]
+[[HL::    "email must be an email",::HL]]
+[[HL::    "password must be a string"::HL]]
+[[HL::  ],::HL]]
+[[HL::  "error": "Bad Request"::HL]]
+[[HL::}::HL]]
 ```
 
 ##### 🔬 Code Explanation
@@ -6110,13 +6110,13 @@ Folder mein ek nayi script file banegi `seed.ts` jo package.json se chalegi. Ek 
 [[HL::2  import { User } from './user.entity';                                              // Apni Entity::HL]]
 [[HL::3::HL]]
 [[HL::4  @EventSubscriber()                                                                 // @EventSubscriber() = TypeORM is class ko globally event listener bana dega::HL]]
-[[HL::5  export class UserSubscriber implements EntitySubscriberInterface::HL]]<User> [[HL::{           // EntitySubscriberInterface = Type safety ke liye enforce karta hai ki rules follow hon::HL]]
+[[HL::5  export class UserSubscriber implements EntitySubscriberInterface<User> {           // EntitySubscriberInterface = Type safety ke liye enforce karta hai ki rules follow hon::HL]]
 [[HL::6::HL]]
 [[HL::7    listenTo() {                                                                     // Batata hai ki kis Entity ke events sunne hain::HL]]
 [[HL::8      return User;                                                                   // Hum sirf 'User' table ke changes track karenge::HL]]
 [[HL::9    }::HL]]
 [[HL::10::HL]]
-[[HL::11   beforeInsert(event: InsertEvent::HL]]<User>[[HL::) {                                         // beforeInsert = Data database mein save hone se exactly pehle chalega::HL]]
+[[HL::11   beforeInsert(event: InsertEvent<User>) {                                         // beforeInsert = Data database mein save hone se exactly pehle chalega::HL]]
 [[HL::12     console.log(`[AUDIT LOG] About to insert a new user:`, event.entity.email);    // Decoupled logic: Console log ya Audit table mein entry::HL]]
 [[HL::13   }::HL]]
 [[HL::14::HL]]
@@ -6135,7 +6135,7 @@ Folder mein ek nayi script file banegi `seed.ts` jo package.json se chalegi. Ek 
 ```
 
 ##### 🔬 Code Explanation
-- [[HL::**Line 5:** `EntitySubscriberInterface::HL]]<User>[[HL::` TypeScript ka interface hai jo guarantee karta hai ki humne TypeORM ke rules follow kiye hain aur yeh sirf User entity ko strictly bind karta hai.::HL]]
+- [[HL::**Line 5:** `EntitySubscriberInterface<User>` TypeScript ka interface hai jo guarantee karta hai ki humne TypeORM ke rules follow kiye hain aur yeh sirf User entity ko strictly bind karta hai.::HL]]
 - [[HL::**Line 11 (`beforeInsert`):** Yeh method transaction context mein chalata hai. Agar is function ke andar koi error throw hui, toh user banega hi nahi aur transaction rollback ho jayegi. Isse data consistency bachi rehti hai.::HL]]
 - [[HL::**Line 12:** Yahan humne simply `console.log` kiya hai, par real world mein log file ya `AuditLogs` table mein entry daali jati hai. Kyunki yeh Service se alag likha hai, ise **Decoupled Event Handling** (alag thalag logic) kehte hain.::HL]]
 
@@ -6291,7 +6291,7 @@ Socho tum ek chef (Service) ho jise pizza banana hai. Tumhe oven (Database) chah
 - [[HL::**Hinglish Simplification:** NestJS Service ke andar TypeORM ka repository lana taaki hum database queries run kar sakein, jiske liye `@InjectRepository` decorator ka use karna zaroori hai.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- [[HL::**Problem:** TypeScript mein generic types (`Repository::HL]]<User>[[HL::`) sirf development time par hote hain. Code run hote waqt (runtime par) yeh generics "hawa" ho jaate hain (is process ko Type Erasure kehte hain). DI system confuse ho jaata hai ki kaunsi repository inject karni hai.::HL]]
+- [[HL::**Problem:** TypeScript mein generic types (`Repository<User>`) sirf development time par hote hain. Code run hote waqt (runtime par) yeh generics "hawa" ho jaate hain (is process ko Type Erasure kehte hain). DI system confuse ho jaata hai ki kaunsi repository inject karni hai.::HL]]
 - [[HL::**Solution:** `@InjectRepository(User)` decorator explicit mark laga deta hai jo runtime par bhi zinda rehta hai, jisse NestJS ko pata chal jaata hai ki exact kaunsa TypeORM token lana hai.::HL]]
 - [[HL::**What breaks if we don't use it?** NestJS error throw karega: `Nest can't resolve dependencies of the UsersService`. App start hi nahi hogi.::HL]]
 - **✅ Kab use karo:** Jab bhi tumhe TypeORM repository ko kisi Service ya class ke andar use karna ho database interaction ke liye. (Yeh concept NestJS + TypeORM app mein har entity ke liye applicable hai).
@@ -6307,7 +6307,7 @@ Constructor ke aage parameters honge jahan @InjectRepository import ho rakha hog
 1. [[HL::NestJS application start hoti hai.::HL]]
 2. [[HL::DI system (Dependency Injection — ek system jo classes ke object khud banata hai) `UsersService` ka object banane aata hai.::HL]]
 3. [[HL::Woh dekhta hai ki iske constructor ko ek parameter chahiye.::HL]]
-4. [[HL::Kyunki TypeScript runtime pe `::HL]]<User>[[HL::` generic type ko bhool chuka hota hai, DI container `@InjectRepository(User)` decorator ko padhta hai.::HL]]
+4. [[HL::Kyunki TypeScript runtime pe `<User>` generic type ko bhool chuka hota hai, DI container `@InjectRepository(User)` decorator ko padhta hai.::HL]]
 5. [[HL::Is decorator se usse pata chalta hai ki `User` entity ka repository uthana hai aur Service mein daal dena hai.::HL]]
 
 #### 💻 7. Hands-On — Runnable Example
@@ -6322,7 +6322,7 @@ Constructor ke aage parameters honge jahan @InjectRepository import ho rakha hog
 [[HL::6  @Injectable()                                                          // Is class ko provider banata hai::HL]]
 [[HL::7  export class UsersService {::HL]]
 [[HL::8    constructor(                                                         // Constructor — class banne par sabse pehle yeh run hota hai::HL]]
-[[HL::9      @InjectRepository(User) private repo: Repository::HL]]<User>             [[HL::// @InjectRepository(User) se explicitly bata rahe hain ki User wali repo chahiye; private repo shorthand hai::HL]]
+[[HL::9      @InjectRepository(User) private repo: Repository<User>             // @InjectRepository(User) se explicitly bata rahe hain ki User wali repo chahiye; private repo shorthand hai::HL]]
 [[HL::10   ) {}                                                                 // Empty body kyunki private keyword ne automatically property bana di hai::HL]]
 [[HL::11 }::HL]]
 ```
@@ -6333,8 +6333,8 @@ Constructor ke aage parameters honge jahan @InjectRepository import ho rakha hog
 ```
 
 ##### [[HL::🔬 Code Explanation::HL]]
-- [[HL::**Line 9:** `@InjectRepository(User) private repo: Repository::HL]]<User>[[HL::` — Yeh line poore topic ki jaan hai.::HL]]
-  - [[HL::`Repository::HL]]<User>[[HL::` (generic type) TypeScript ko batata hai ki autocompletion kaise dena hai.::HL]]
+- [[HL::**Line 9:** `@InjectRepository(User) private repo: Repository<User>` — Yeh line poore topic ki jaan hai.::HL]]
+  - [[HL::`Repository<User>` (generic type) TypeScript ko batata hai ki autocompletion kaise dena hai.::HL]]
   - [[HL::`@InjectRepository(User)` NestJS ko runtime par batata hai ki konsi repo laani hai.::HL]]
   - [[HL::`private repo` ek TypeScript constructor shorthand hai — iska matlab tumhe alag se `this.repo = repo;` likhne ki zaroorat nahi, TypeScript khud class level pe `repo` variable bana dega.::HL]]
 
@@ -6352,8 +6352,8 @@ Constructor ke aage parameters honge jahan @InjectRepository import ho rakha hog
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 - [[HL::**Confusion 1 — "TypeScript types aur Decorator mein kya fark hai?"**::HL]]
   - [[HL::**Galat soch:** Type aur decorator ek hi kaam karte hain.::HL]]
-  - [[HL::**Actually:** Types (jaise `Repository::HL]]<User>[[HL::`) sirf tumhare text editor (VS Code) ko samjhane ke liye hote hain taaki red lines na aayen. Decorators (jaise `@Inject`) chalu code (runtime) ke liye hote hain taaki NestJS apna jadoo kar sake.::HL]]
-  - [[HL::**Prove karo:** Apna TypeScript code compile karke `.js` file dekho — `Repository::HL]]<User>[[HL::` gayab ho jayega, par `@InjectRepository` ka logic wahan maujood rahega.::HL]]
+  - [[HL::**Actually:** Types (jaise `Repository<User>`) sirf tumhare text editor (VS Code) ko samjhane ke liye hote hain taaki red lines na aayen. Decorators (jaise `@Inject`) chalu code (runtime) ke liye hote hain taaki NestJS apna jadoo kar sake.::HL]]
+  - [[HL::**Prove karo:** Apna TypeScript code compile karke `.js` file dekho — `Repository<User>` gayab ho jayega, par `@InjectRepository` ka logic wahan maujood rahega.::HL]]
 - **Confusion 2 — "Yeh 'private repo' mein 'this.repo = repo' kahan gaya?"**
   - **Galat soch:** Constructor mein kuch likha hi nahi, toh property set kaise hui?
   - **Actually:** TypeScript ka yeh "private shorthand" feature hai. Agar tum constructor argument ke aage `private` (ya `public`/`readonly`) lagate ho, toh TypeScript behind-the-scenes khud usse property assign kar deta hai.
@@ -6388,7 +6388,7 @@ Netflix ya kisi bhi badi website ke backend mein aisi hundreds of services hoti 
 
 #### ❓ 17. Interview Q&A
 - [[HL::**Q:** NestJS mein `@InjectRepository` decorator ki zaroorat kyun padti hai jabki humare paas TypeScript types hain?::HL]]
-- [[HL::**A:** Kyunki TypeScript mein 'Type Erasure' hota hai. Compilation ke baad `Repository::HL]]<User>[[HL::` jaise generic types gayab ho jaate hain. NestJS ke Dependency Injection container ko runtime par pata hi nahi chalta ki konsi repository inject karni hai. Decorator ek metadata token add kar deta hai jo runtime par available rehta hai, jisse NestJS sahi repository la pata hai.::HL]]
+- [[HL::**A:** Kyunki TypeScript mein 'Type Erasure' hota hai. Compilation ke baad `Repository<User>` jaise generic types gayab ho jaate hain. NestJS ke Dependency Injection container ko runtime par pata hi nahi chalta ki konsi repository inject karni hai. Decorator ek metadata token add kar deta hai jo runtime par available rehta hai, jisse NestJS sahi repository la pata hai.::HL]]
 - [[HL::**Q:** Constructor param mein `private` keyword ka kya faida hai?::HL]]
 - [[HL::**A:** Yeh TypeScript ka 'parameter property shorthand' hai. Isse hume class ke top pe explicitly variable declare karke constructor ke andar `this.repo = repo` likhne ki zaroorat nahi padti. Code clean aur concise rehta hai.::HL]]
 - **Q:** Agar mai `@InjectRepository` bhool jaun toh kya exact error aayega?
@@ -6807,7 +6807,7 @@ Postman par GET request maarne se user ka JSON object ya objects ki array return
 ```
 
 ##### 🔬 Code Explanation
-- [[HL::**Line 10 (`Partial::HL]]<User>[[HL::`):** TypeScript ka helper. User class mein `email` aur `password` required the, par update ke time ho sakta hai user sirf `email` change karna chahe. `Partial` unhe optional bana deta hai.::HL]]
+- [[HL::**Line 10 (`Partial<User>`):** TypeScript ka helper. User class mein `email` aur `password` required the, par update ke time ho sakta hai user sirf `email` change karna chahe. `Partial` unhe optional bana deta hai.::HL]]
 - [[HL::**Line 14 (`Object.assign(target, source)`):** Yeh purane object (target/user) mein naye properties (source/attrs) ko overlap (paste) kar deta hai. Agar attrs mein naya email hai, toh purana email overwrite ho jayega.::HL]]
 - [[HL::**Line 21 (`repo.remove(user)`):** Is function ko ID pass nahi kar sakte. Isko poora entity object dena padta hai. Tabhi database use delete karega.::HL]]
 
@@ -6873,8 +6873,8 @@ Instagram pe jab tum apna bio update karte ho, backend mein tumhari ID se purana
 - [[HL::**A:** Seedha `repo.update()` use karne se performance bach jati hai, lekin yeh Entity ke life-cycle hooks bypass kar deta hai. Agar update ke waqt koi validation ya logging karni hai, toh pehle data ko memory mein lana padta hai (1st round trip - `findOne`), modify karke wapas save (2nd round trip - `save`) karna parta hai.::HL]]
 - [[HL::**Q:** `repo.remove()` aur `repo.delete()` mein main farq kya hai?::HL]]
 - [[HL::**A:** `remove` humesha ek existing Entity Instance leta hai aur Entity hooks (jaise `@BeforeRemove`) ko execute karta hai. `delete` ek id ya query parameters leta hai, directly database command marta hai (fastest), par hooks trigger nahi hote.::HL]]
-- [[HL::**Q:** `Partial::HL]]<T>[[HL::` utility type ka role kya hota hai update methods mein?::HL]]
-- [[HL::**A:** Jab hum entity update karte hain, toh zaroori nahi client saari details bheje. TypeScript by default strict checking karta hai. `Partial::HL]]<User>[[HL::` User entity ke saare required fields ko automatically optional bana deta hai, jisse hume error ke bina sirf ek field (jaise email) bhej kar update karne deta hai.::HL]]
+- [[HL::**Q:** `Partial<T>` utility type ka role kya hota hai update methods mein?::HL]]
+- [[HL::**A:** Jab hum entity update karte hain, toh zaroori nahi client saari details bheje. TypeScript by default strict checking karta hai. `Partial<User>` User entity ke saare required fields ko automatically optional bana deta hai, jisse hume error ke bina sirf ek field (jaise email) bhej kar update karne deta hai.::HL]]
 
 #### 📝 18. One-Line Memory Hook
 "⭐ Remove lagata hai do chakkar, delete maarta hai direct takkar!"
@@ -7427,12 +7427,12 @@ Socho tum ek courier company (API) ho aur tumhare paas ek parcel (data object) a
 ```
 
 ### ⚙️ 6. Under the Hood (Deep Dive)
-**Request Response Lifecycle (Flow of Data):**
-1. **Incoming Request:** User GET request karta hai.
-2. **Controller -> Service -> Repository:** Request handle hoti hai aur database se full `User` Entity instance (jisme password bhi hai) nikal kar aata hai.
-3. **Interceptor Applies Rules:** Jaise hi controller entity instance return karta hai, `ClassSerializerInterceptor` (NestJS ka built-in interceptor jo data transform karta hai) beech mein aata hai. Woh check karta hai ki class mein konsi properties `@Exclude()` se marked hain.
-4. **JSON Conversion:** Interceptor un properties ko delete karke baaki data ko plain JSON object mein convert kar deta hai.
-5. **Outgoing Response:** Client ko clean JSON milta hai.
+[[HL::**Request Response Lifecycle (Flow of Data):**::HL]]
+1. [[HL::**Incoming Request:** User GET request karta hai.::HL]]
+2. [[HL::**Controller -> Service -> Repository:** Request handle hoti hai aur database se full `User` Entity instance (jisme password bhi hai) nikal kar aata hai.::HL]]
+3. [[HL::**Interceptor Applies Rules:** Jaise hi controller entity instance return karta hai, `ClassSerializerInterceptor` (NestJS ka built-in interceptor jo data transform karta hai) beech mein aata hai. Woh check karta hai ki class mein konsi properties `@Exclude()` se marked hain.::HL]]
+4. [[HL::**JSON Conversion:** Interceptor un properties ko delete karke baaki data ko plain JSON object mein convert kar deta hai.::HL]]
+5. [[HL::**Outgoing Response:** Client ko clean JSON milta hai.::HL]]
 
 ### 💻 7. Hands-On — Runnable Example
 
@@ -7583,11 +7583,11 @@ Pichla solution ek aisi security checking machine thi (airport scanner) jisme sa
 *(N/A — Yeh conceptual topic hai, iska logic memory aur architecture diagram mein behtar samajh aata hai.)*
 
 ### ⚙️ 6. Under the Hood (Deep Dive)
-Jab hum Custom Interceptor + DTO architecture use karte hain:
-1. **Controller output:** Controller poora Entity data return karta hai, use nahi pata kaun kya dekhega.
-2. **DTO Definition:** Hum ek class (Serialization DTO) banate hain aur usme batate hain ki *kya dikhana hai* (kya exclude karna hai uski bajaye).
-3. **Custom Interceptor Check:** Interceptor dekhta hai ki kis Handler (route) ne konsa DTO manga hai.
-4. **Data Mapping:** Interceptor original Entity data ko us DTO ke rules ke hisaab se format (filter) karta hai. Is wajah se formatting per-handler (har route ke liye alag) ho sakti hai.
+[[HL::Jab hum Custom Interceptor + DTO architecture use karte hain:::HL]]
+1. [[HL::**Controller output:** Controller poora Entity data return karta hai, use nahi pata kaun kya dekhega.::HL]]
+2. [[HL::**DTO Definition:** Hum ek class (Serialization DTO) banate hain aur usme batate hain ki *kya dikhana hai* (kya exclude karna hai uski bajaye).::HL]]
+3. [[HL::**Custom Interceptor Check:** Interceptor dekhta hai ki kis Handler (route) ne konsa DTO manga hai.::HL]]
+4. [[HL::**Data Mapping:** Interceptor original Entity data ko us DTO ke rules ke hisaab se format (filter) karta hai. Is wajah se formatting per-handler (har route ke liye alag) ho sakti hai.::HL]]
 
 ### 💡 7. Concept Visualization (Theory Topic ke liye)
 *Yeh Section strictly architectural concepts par focused hai, isliye code block ki jagah visual mental model dekho:*
@@ -7616,9 +7616,9 @@ Real-world systems (Netflix, Uber) mein ek single "User" object ki 10+ different
 - **✅ The 'Pro' Way:** Controller ko clean rakho, bas raw data return karo. Baaki saara View-related logic Custom Interceptor aur DTOs par chhod do.
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1 — "DTO toh Frontend se aane wale payload validate karne ke liye hote hain na?"**
-  - **Galat soch:** DTO = Request Body Validation.
-  - **Actually:** Data Transfer Object ek general concept hai data ko move karne ka. NestJS mein hum Input DTOs banate hain validate karne ke liye, aur *Output DTOs (Serialization DTOs)* banate hain data ko format karke bhejne ke liye. Dono alag hain.
+- [[HL::**Confusion 1 — "DTO toh Frontend se aane wale payload validate karne ke liye hote hain na?"**::HL]]
+  - [[HL::**Galat soch:** DTO = Request Body Validation.::HL]]
+  - [[HL::**Actually:** Data Transfer Object ek general concept hai data ko move karne ka. NestJS mein hum Input DTOs banate hain validate karne ke liye, aur *Output DTOs (Serialization DTOs)* banate hain data ko format karke bhejne ke liye. Dono alag hain.::HL]]
   - [[HL::**Prove karo:** Socho User registration. Input DTO mein `password` mandatory hoga. Lekin Output DTO mein `password` gayab hona chahiye. Ek hi class dono kaam nahi kar sakti.::HL]]
 - [[HL::**Confusion 2 — "Toh kya Entity ko DTO nahi bana sakte?"**::HL]]
   - [[HL::**Galat soch:** Database ki entity class ko hi return kar dena chahiye hamesha.::HL]]
@@ -9718,8 +9718,8 @@ Socho tum ek action movie direct kar rahe ho. Hero (AuthService) ko 10th floor s
 - [[HL::**Hinglish Simplification:** Apne tests ke andar, real services (jo DB call karti hain) ki jagah choti aur fast fake objects (mocks) use karna, taaki code test karna aasaan aur fast ho.::HL]]
 
 ### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Agar hum AuthService test kar rahe hain, aur uske andar `UsersService.find()` call hota hai jo real DB pe jata hai, toh test fail hone ke chances badh jate hain (Network down, DB locked, etc). Isse *"This is the hardest thing to understand in all of Nest"* concept start hota hai.
-- **Solution:** Hum ek fake testing container (Testing Module) banate hain aur NestJS ko trick karte hain ki `UsersService` ki jagah humara banaya hua dummy object use kare.
+- [[HL::**Problem:** Agar hum AuthService test kar rahe hain, aur uske andar `UsersService.find()` call hota hai jo real DB pe jata hai, toh test fail hone ke chances badh jate hain (Network down, DB locked, etc). Isse *"This is the hardest thing to understand in all of Nest"* concept start hota hai.::HL]]
+- [[HL::**Solution:** Hum ek fake testing container (Testing Module) banate hain aur NestJS ko trick karte hain ki `UsersService` ki jagah humara banaya hua dummy object use kare.::HL]]
 - [[HL::**What breaks if we don't use it?** Humara unit test actually ek integration test ban jayega jo unstable, slow aur flaky (kabhi pass, kabhi fail) hoga.::HL]]
 - [[HL::**✅ Kab use karo:** Jab bhi kisi aisi service ko test kar rahe ho jiske constructor mein koi aur service ya repository inject ho rahi ho.::HL]]
 - [[HL::**❌ Kab mat karo / Alternative:** Agar koi service bilkul independent hai aur kisi cheez pe depend nahi karti (no constructor injections), toh mocking ki koi zaroorat nahi hai.::HL]]
@@ -9733,11 +9733,11 @@ Jab tum `npm run test:watch` chalaoge, terminal mein continuous output aayega. A
 ```
 
 ### ⚙️ 6. Under the Hood (Deep Dive)
-1. Hum `Test.createTestingModule()` use karte hain. Yeh bilkul waisa hi hai jaise app ka main `@Module()` banta hai, par testing ke liye.
-2. `providers` array ke andar hum override rule define karte hain.
-3. `provide: UsersService` ka matlab: "Jab bhi koi UsersService maange..."
-4. `useValue: fakeUsersService` ka matlab: "...toh usko real class dene ki jagah yeh mera fake object pakda dena."
-5. Uske baad `.compile()` method container ko build kar deta hai.
+1. [[HL::Hum `Test.createTestingModule()` use karte hain. Yeh bilkul waisa hi hai jaise app ka main `@Module()` banta hai, par testing ke liye.::HL]]
+2. [[HL::`providers` array ke andar hum override rule define karte hain.::HL]]
+3. [[HL::`provide: UsersService` ka matlab: "Jab bhi koi UsersService maange..."::HL]]
+4. [[HL::`useValue: fakeUsersService` ka matlab: "...toh usko real class dene ki jagah yeh mera fake object pakda dena."::HL]]
+5. [[HL::Uske baad `.compile()` method container ko build kar deta hai.::HL]]
 
 ### 💻 7. Hands-On — Runnable Example
 [[HL::Yahan hum `auth.service.spec.ts` setup kar rahe hain jismein hum `UsersService` ko fake kar rahe hain.::HL]]
@@ -9790,7 +9790,7 @@ Jab tum `npm run test:watch` chalaoge, terminal mein continuous output aayega. A
 ```
 
 #### 🔬 Code Explanation (LINE-BY-LINE)
-- [[HL::**Line 8: `Partial::HL]]<UsersService>[[HL::`:** `Partial` ek built-in TypeScript utility hai. Real `UsersService` mein 20 methods ho sakte hain. Agar hum `Partial` na lagayein, toh TypeScript error dega ki tumne bache hue 18 methods define nahi kiye! `Partial` lagane se hum sirf wahi methods (find, create) fake kar sakte hain jo is test mein chahiye.::HL]]
+- [[HL::**Line 8: `Partial<UsersService>`:** `Partial` ek built-in TypeScript utility hai. Real `UsersService` mein 20 methods ho sakte hain. Agar hum `Partial` na lagayein, toh TypeScript error dega ki tumne bache hue 18 methods define nahi kiye! `Partial` lagane se hum sirf wahi methods (find, create) fake kar sakte hain jo is test mein chahiye.::HL]]
 - [[HL::**Line 13: `Promise.resolve([])`:** Kyunki real `find()` DB mein jata hai aur asychronous (`async/await`) hota hai, isliye test mein return value ko `Promise.resolve()` mein wrap karna zaroori hai. Warna AuthService error degi "find().then is not a function".::HL]]
 - [[HL::**Line 15: `as User`:** Type-casting. Humara fake object poori `User` entity (jisme logging hooks/decorators etc. hote hain) se match nahi karta. `as User` lagake hum TypeScript ko force karte hain ki "Is adhure object ko User hi maan le aur error mat de."::HL]]
 - [[HL::**Line 22-25: `{ provide: ..., useValue: ... }`:** Yeh sabse important part hai! Yeh NestJS ke DI container ko trick/ullu banata hai. Hum bol rahe hain token (provide) toh real use karo, par actual cheez (useValue) nakli dedo.::HL]]
@@ -9920,11 +9920,11 @@ Terminal mein tests grouped dikhenge:
 ```
 
 ### ⚙️ 6. Under the Hood (Deep Dive)
-Jest (testing framework) ka internal execution flow aise chalta hai:
-1. Sabse pehle `describe` block register hota hai.
-2. Jab Jest pehla `it` (test case) chalata hai, woh usse just pehle `beforeEach` call karta hai.
-3. Us test ke execute hone ke baad, agar dusra `it` block hai, toh Jest *phir se* naya `beforeEach` chalayega. Isse purana data (like fake object state) wipe out ho jata hai.
-4. Agar `done` (callback function jo Jest ko batata hai ki test officially finish ho gaya hai) pass kiya gaya hai, toh Jest test ko khatam nahi manega jab tak `done()` explicitly call na ho. Agar 5 seconds tak call nahi hua, toh "Timeout" error dega.
+[[HL::Jest (testing framework) ka internal execution flow aise chalta hai:::HL]]
+1. [[HL::Sabse pehle `describe` block register hota hai.::HL]]
+2. [[HL::Jab Jest pehla `it` (test case) chalata hai, woh usse just pehle `beforeEach` call karta hai.::HL]]
+3. [[HL::Us test ke execute hone ke baad, agar dusra `it` block hai, toh Jest *phir se* naya `beforeEach` chalayega. Isse purana data (like fake object state) wipe out ho jata hai.::HL]]
+4. [[HL::Agar `done` (callback function jo Jest ko batata hai ki test officially finish ho gaya hai) pass kiya gaya hai, toh Jest test ko khatam nahi manega jab tak `done()` explicitly call na ho. Agar 5 seconds tak call nahi hua, toh "Timeout" error dega.::HL]]
 
 ### 💻 7. Hands-On — Runnable Example
 [[HL::Yahan hum `signup()` (naya user register karne ka function) aur ek error case test karenge.::HL]]
@@ -10078,10 +10078,10 @@ Yeh "copy/register" actually memory (RAM) mein ek `users = []` (array) hai jo te
 *(N/A — is concept mein koi direct visual/editor state nahi hota, bas tests terminal mein run hote hain)*
 
 ### ⚙️ 6. Under the Hood (Deep Dive)
-Memory array kaam kaise karta hai:
-1. Fake service ke closure (internal memory) mein `let users = [];` define kiya jata hai.
-2. `create(email, pass)` -> Naya user generate karta hai, ID ke liye `Math.random()` use karta hai (kyunki DB to hai nahi auto-increment ID ke liye), object banata hai, aur `users.push(object)` karta hai.
-3. `find(email)` -> Real DB call ki jagah `users.filter(u => u.email === email)` chalata hai. Array se matching data uthata hai.
+[[HL::Memory array kaam kaise karta hai:::HL]]
+1. [[HL::Fake service ke closure (internal memory) mein `let users = [];` define kiya jata hai.::HL]]
+2. [[HL::`create(email, pass)` -> Naya user generate karta hai, ID ke liye `Math.random()` use karta hai (kyunki DB to hai nahi auto-increment ID ke liye), object banata hai, aur `users.push(object)` karta hai.::HL]]
+3. [[HL::`find(email)` -> Real DB call ki jagah `users.filter(u => u.email === email)` chalata hai. Array se matching data uthata hai.::HL]]
 4. [[HL::*Important:* Har test se pehle `beforeEach` mein `users = []` reset kiya jata hai taaki data leak na ho!::HL]]
 
 ### 💻 7. Hands-On — Runnable Example
@@ -10256,11 +10256,11 @@ controller.whoAmI({ userId: 1 })  // Nakli session object pass kiya manual call 
 ```
 
 ### ⚙️ 6. Under the Hood (Deep Dive)
-Controller Unit Test flow:
-1. Hum fake `AuthService` aur fake `UsersService` dono banate hain.
-2. NestJS container (DI) `UsersController` ko banata hai aur dono fakes inject karta hai.
-3. Decorators (jaise `@Session()` decorator jo express request session access karta hai) unit test environment mein **kaam nahi karte** kyunki HTTP request hai hi nahi!
-4. Isliye, hume controller function directly call karni padti hai: `controller.signin(body, fakeSession)`. 
+[[HL::Controller Unit Test flow:::HL]]
+1. [[HL::Hum fake `AuthService` aur fake `UsersService` dono banate hain.::HL]]
+2. [[HL::NestJS container (DI) `UsersController` ko banata hai aur dono fakes inject karta hai.::HL]]
+3. [[HL::Decorators (jaise `@Session()` decorator jo express request session access karta hai) unit test environment mein **kaam nahi karte** kyunki HTTP request hai hi nahi!::HL]]
+4. [[HL::Isliye, hume controller function directly call karni padti hai: `controller.signin(body, fakeSession)`.::HL]] 
 
 ### 💻 7. Hands-On — Runnable Example
 Yahan hum `users.controller.spec.ts` mein session object aur `Not Found Exception` ka test likh rahe hain.
@@ -10442,21 +10442,21 @@ Socho tum apne ghar mein CCTV cameras lagwa rahe ho. Lagane ke baad tum report n
 ```
 
 ### ⚙️ 6. Under the Hood (Deep Dive)
-Coverage 4 metrics (parameters) pe judge hoti hai:
-1. **Statements:** Kitne `const a = 1;` type ki statements run hui?
-2. **Branches:** Agar tumne `if / else` likha hai, toh kya test ne dono raste (true wala aur false wala) chalaye? Agar sirf true test kiya, toh Branch coverage drop hogi.
-3. **Functions:** File mein mojud saare functions call hue ya nahi?
-4. **Lines:** Code ki total lines of code me se kitni lines par testing execution gaya.
+[[HL::Coverage 4 metrics (parameters) pe judge hoti hai:::HL]]
+1. [[HL::**Statements:** Kitne `const a = 1;` type ki statements run hui?::HL]]
+2. [[HL::**Branches:** Agar tumne `if / else` likha hai, toh kya test ne dono raste (true wala aur false wala) chalaye? Agar sirf true test kiya, toh Branch coverage drop hogi.::HL]]
+3. [[HL::**Functions:** File mein mojud saare functions call hue ya nahi?::HL]]
+4. [[HL::**Lines:** Code ki total lines of code me se kitni lines par testing execution gaya.::HL]]
 
-Jest internally Babel (JS compiler) plugin use karke tumhare code mein trackers inject karta hai jo check karte hain kaunsi line execute hui jab test run hua.
+[[HL::Jest internally Babel (JS compiler) plugin use karke tumhare code mein trackers inject karta hai jo check karte hain kaunsi line execute hui jab test run hua.::HL]]
 
 ### 💻 7. Hands-On — Runnable Example
-Coverage run karna aur threshold set karna.
+[[HL::Coverage run karna aur threshold set karna.::HL]]
 
-**Step 1: Run Coverage Command**
+[[HL::**Step 1: Run Coverage Command**::HL]]
 ```bash
-# Terminal mein run karo (Jest based)
-1 npm run test:cov          # test:cov flag Jest ko bolta hai coverage track karo
+[[HL::# Terminal mein run karo (Jest based)::HL]]
+[[HL::1 npm run test:cov          # test:cov flag Jest ko bolta hai coverage track karo::HL]]
 ```
 ```text
 # [[HL::📤 Expected Output:::HL]]
@@ -10863,8 +10863,8 @@ Test Suites: 1 passed, 1 total
 ```
 
 #### 🔬 Code Explanation Rule (LINE-BY-LINE)
-- **Line 3 (package.json):** `"test:e2e"` — Yeh command Jest (JavaScript testing framework) ko batati hai ki sirf `./test/jest-e2e.json` config use karo, jo specifically `test` directory ke files ko target karta hai.
-- **Line 18 (app.e2e-spec.ts):** `request(app.getHttpServer())` — `request` Supertest ka function hai. Hum isme `app.getHttpServer()` pass karte hain jo under-the-hood random port wala temporary HTTP server return karta hai.
+- [[HL::**Line 3 (package.json):** `"test:e2e"` — Yeh command Jest (JavaScript testing framework) ko batati hai ki sirf `./test/jest-e2e.json` config use karo, jo specifically `test` directory ke files ko target karta hai.::HL]]
+- [[HL::**Line 18 (app.e2e-spec.ts):** `request(app.getHttpServer())` — `request` Supertest ka function hai. Hum isme `app.getHttpServer()` pass karte hain jo under-the-hood random port wala temporary HTTP server return karta hai.::HL]]
 
 
 ### 🖥️ Command Clarity Rule
@@ -11946,7 +11946,7 @@ Socho tumhe ek building mein current (electricity) supply karni hai. Agar tum ha
 2. [[HL::`⭐isGlobal: true` flag set hone se yeh module internal dependency injection container mein sab ke liye available ho jata hai.::HL]]
 3. [[HL::Jab TypeORM start hone ki koshish karta hai, `⭐TypeOrmModule.forRootAsync()` NestJS ko bolta hai: "Ruko! Mujhe dependency `inject: [ConfigService]` chahiye".::HL]]
 4. [[HL::NestJS `ConfigService` ka object laake `⭐useFactory` function ko pass karta hai.::HL]]
-5. [[HL::Us function ke andar hum `config.get::HL]]<string>[[HL::('DB_NAME')` bulate hain jo dynamic database string nikalta hai aur connection properties return karta hai.::HL]]
+5. [[HL::Us function ke andar hum `config.get<string>('DB_NAME')` bulate hain jo dynamic database string nikalta hai aur connection properties return karta hai.::HL]]
 
 
 ### 💻 7. Hands-On — Runnable Example
@@ -13025,33 +13025,33 @@ Socho ek School ki baat karte hain:
 - [[HL::**❌ Kab mat karo / Alternative prefer karo:** Jab NoSQL databases (jaise MongoDB) use kar rahe hon, jahan hum mostly related data ko ek hi document ke andar array bana kar embed (`embedded documents`) kar dete hain instead of separate tables.::HL]]
 
 ### 💡 7. Concept Visualization (Theory Topic ke liye)
-Yeh purely conceptual topic hai — Hands-On Section ki jagah Concept Visualization de raha hoon.
+[[HL::Yeh purely conceptual topic hai — Hands-On Section ki jagah Concept Visualization de raha hoon.::HL]]
 
-**1. 1-to-1 Association (Country / Capital)**
+[[HL::**1. 1-to-1 Association (Country / Capital)**::HL]]
 ```text
-[Country Table]         [Capital Table]
-ID: 1 (India)   <-----> ID: 100 (New Delhi) 
-(Ek country ki 1 capital, aur ek capital sirf 1 country ki)
-Other Example: Engine aur Car.
+[[HL::[Country Table]         [Capital Table]::HL]]
+[[HL::ID: 1 (India)   <-----> ID: 100 (New Delhi) ::HL]]
+[[HL::(Ek country ki 1 capital, aur ek capital sirf 1 country ki)::HL]]
+[[HL::Other Example: Engine aur Car.::HL]]
 ```
 
-**2. 1-to-many & many-to-one Association (Our Focus: User / Reports)**
+[[HL::**2. 1-to-many & many-to-one Association (Our Focus: User / Reports)**::HL]]
 ```text
-[User Table] (1 side)   [Report Table] (Many side)
-ID: 1 (Alex)    ------> Report A (Owner: 1)
-                ------> Report B (Owner: 1)
-                ------> Report C (Owner: 1)
-(Ek user ke paas kai reports ho sakti hain, par ek report ka owner sirf ek user hota hai)
-Other Examples: Amazon Customer aur uske Orders.
+[[HL::[User Table] (1 side)   [Report Table] (Many side)::HL]]
+[[HL::ID: 1 (Alex)    ------> Report A (Owner: 1)::HL]]
+[[HL::                ------> Report B (Owner: 1)::HL]]
+[[HL::                ------> Report C (Owner: 1)::HL]]
+[[HL::(Ek user ke paas kai reports ho sakti hain, par ek report ka owner sirf ek user hota hai)::HL]]
+[[HL::Other Examples: Amazon Customer aur uske Orders.::HL]]
 ```
 
-**3. many-to-many Association (Train / Riders)**
+[[HL::**3. many-to-many Association (Train / Riders)**::HL]]
 ```text
-[Train Table]           [Rider/Passenger Table]
-Train A         <-----> Passenger 1
-Train B         <-----> Passenger 2
-(Ek train mein kai passengers, ek passenger life mein kai trains mein baithta hai)
-Other Examples: University Classes aur Students, Passports aur People (dual citizenship cases).
+[[HL::[Train Table]           [Rider/Passenger Table]::HL]]
+[[HL::Train A         <-----> Passenger 1::HL]]
+[[HL::Train B         <-----> Passenger 2::HL]]
+[[HL::(Ek train mein kai passengers, ek passenger life mein kai trains mein baithta hai)::HL]]
+[[HL::Other Examples: University Classes aur Students, Passports aur People (dual citizenship cases).::HL]]
 ```
 
 ### 🔒 8. Security-First Check
@@ -13475,10 +13475,10 @@ Twitter/X API pe jab tum ek tweet (report) dekhte ho, uske response object mein 
 - [[HL::`messages: Message[]` = us aadmi ke saare letters ek list mein.::HL]]
 
 ### 📖 3. Technical Definition
-**Question:** *Is line ka detail mein kya matlab hai?*
+[[HL::**Question:** *Is line ka detail mein kya matlab hai?*::HL]]
 ```typescript
-@OneToMany(() => Message, (message) => message.sender)
-messages: Message[];
+[[HL::@OneToMany(() => Message, (message) => message.sender)::HL]]
+[[HL::messages: Message[];::HL]]
 ```
 
 ### 🔍 Step‑by‑Step Explanation
@@ -13524,18 +13524,18 @@ messages: Message[];
 - [[HL::Yahan `sender` property hai, to DB mein `senderId` column banega.::HL]]  
 - [[HL::Ye `senderId` column `users.id` ko reference karega.::HL]]
 
-**💻 Example (Message Entity)**
+[[HL::**💻 Example (Message Entity)**::HL]]
 ```typescript
-@ManyToOne(() => User, (user) => user.messages, { onDelete: 'CASCADE' })
-sender: User; // <-- Ye property DB mein 'senderId' ban jayegi
+[[HL::@ManyToOne(() => User, (user) => user.messages, { onDelete: 'CASCADE' })::HL]]
+[[HL::sender: User; // <-- Ye property DB mein 'senderId' ban jayegi::HL]]
 ```
 
-**Database table (messages):**
+[[HL::**Database table (messages):**::HL]]
 ```text
-id (uuid)          | PRIMARY KEY
-content (text)     | NOT NULL
-sentAt (timestamp) | DEFAULT now()
-senderId (uuid)    | FOREIGN KEY → users.id
+[[HL::id (uuid)          | PRIMARY KEY::HL]]
+[[HL::content (text)     | NOT NULL::HL]]
+[[HL::sentAt (timestamp) | DEFAULT now()::HL]]
+[[HL::senderId (uuid)    | FOREIGN KEY → users.id::HL]]
 ```
 
 [[HL::**✅ Hinglish Explanation:**::HL]]
@@ -13576,11 +13576,11 @@ senderId (uuid)    | FOREIGN KEY → users.id
 
 ### 📝 Notes — ManyToMany Relation in TypeORM
 
-**Code Example (ChatGroup side):**
+[[HL::**Code Example (ChatGroup side):**::HL]]
 ```typescript
-@ManyToMany(() => User, (user) => user.groups)
-@JoinTable() // Junction table automatically banega
-members: User[];
+[[HL::@ManyToMany(() => User, (user) => user.groups)::HL]]
+[[HL::@JoinTable() // Junction table automatically banega::HL]]
+[[HL::members: User[];::HL]]
 ```
 
 ---
@@ -14469,28 +14469,28 @@ Socho tum ek ATM machine ke keypad par numbers daba rahe ho "5000". Keyboard se 
 [[HL::**GetEstimateDto Implementation:**::HL]]
 
 ```typescript
-# TypeScript 5.x | class-validator & class-transformer
-1  import { IsString, IsNumber, Min, Max } from 'class-validator'; // Validators
-2  import { Transform } from 'class-transformer'; // ⭐@Transform decorator - data mutate karne ke liye
-3 
-4  export class GetEstimateDto { // GetEstimateDto class query receive karne ke liye
-5    @IsString()
-6    make: string; // Iske liye transform ki zaroorat nahi kyunki ye already string aayega
-7 
-8    @Transform(({ value }) => parseInt(value)) // String ko integer mein convert karo (year-validation)
-9    @IsNumber()
-10   @Min(1930)
-11   @Max(2050)
-12   year: number; 
-13
-14   @Transform(({ value }) => parseFloat(value)) // String ko decimal float mein convert karo
-15   @IsNumber()
-16   lng: number; // decimal-numbers (coordinates)
-17
-18   @Transform(({ value }) => parseInt(value)) // String ko int mein (mileage-validation)
-19   @IsNumber()
-20   mileage: number;
-21 }
+[[HL::# TypeScript 5.x | class-validator & class-transformer::HL]]
+[[HL::1  import { IsString, IsNumber, Min, Max } from 'class-validator'; // Validators::HL]]
+[[HL::2  import { Transform } from 'class-transformer'; // ⭐@Transform decorator - data mutate karne ke liye::HL]]
+[[HL::3 ::HL]]
+[[HL::4  export class GetEstimateDto { // GetEstimateDto class query receive karne ke liye::HL]]
+[[HL::5    @IsString()::HL]]
+[[HL::6    make: string; // Iske liye transform ki zaroorat nahi kyunki ye already string aayega::HL]]
+[[HL::7 ::HL]]
+[[HL::8    @Transform(({ value }) => parseInt(value)) // String ko integer mein convert karo (year-validation)::HL]]
+[[HL::9    @IsNumber()::HL]]
+[[HL::10   @Min(1930)::HL]]
+[[HL::11   @Max(2050)::HL]]
+[[HL::12   year: number; ::HL]]
+[[HL::13::HL]]
+[[HL::14   @Transform(({ value }) => parseFloat(value)) // String ko decimal float mein convert karo::HL]]
+[[HL::15   @IsNumber()::HL]]
+[[HL::16   lng: number; // decimal-numbers (coordinates)::HL]]
+[[HL::17::HL]]
+[[HL::18   @Transform(({ value }) => parseInt(value)) // String ko int mein (mileage-validation)::HL]]
+[[HL::19   @IsNumber()::HL]]
+[[HL::20   mileage: number;::HL]]
+[[HL::21 }::HL]]
 
 ```
 
@@ -15734,9 +15734,9 @@ Socho tum UPI se apne dost ko ₹5000 bhej rahe ho. Do kaam hone hain: 1) Tumhar
 - **✅ The 'Pro' Way:** Transaction block mein sirf Database Write operations rakho. Email/Stripe pehle/baad mein karo, varna 3rd party API down hone par database lock hang ho jayega.
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1 — "ACID kya hota hai?"**
-  - **Galat soch:** Koi chemical ya external framework hoga.
-  - **Actually:** Ek abbreviation hai database ki safeties ka: **A**tomicity (All or nothing), **C**onsistency (Rules follow honge), **I**solation (Do queries aapas mein interfere nahi karengi), **D**urability (Commit hone ke baad data disk par save hoga chahe light chali jaye).
+- [[HL::**Confusion 1 — "ACID kya hota hai?"**::HL]]
+  - [[HL::**Galat soch:** Koi chemical ya external framework hoga.::HL]]
+  - [[HL::**Actually:** Ek abbreviation hai database ki safeties ka: **A**tomicity (All or nothing), **C**onsistency (Rules follow honge), **I**solation (Do queries aapas mein interfere nahi karengi), **D**urability (Commit hone ke baad data disk par save hoga chahe light chali jaye).::HL]]
 - **Confusion 2 — "Main `this.repo.save()` kyun nahi use kar sakta `try` block ke andar?"**
   - **Galat soch:** Try-catch lagane se apne aap rollback ho jayega.
   - **Actually:** Nahi! Transaction boundary sirf `queryRunner` ke pass hai. Agar tum `this.repo` use karoge, toh wo default (non-transactional) connection use karega, jo database pe turant commit ho jayega. Phir `rollbackTransaction()` call hone par kuch undo nahi hoga kyunki use us action ka pata hi nahi. Prove karne ke liye log check karo: manager use karne par single connection id chalti hai.
@@ -16274,26 +16274,26 @@ Lekin agar asli ghar (**production server**) mein log reh rahe hain (users data)
 **The Data Loss Trap Diagram:**
 
 ```text
-STEP 1: DEVELOPER KI GALTI
-Developer ne code se galti se ek line delete ki:
-User Entity
-  id: number
-  email: string
-  // password: string  <-- galti se comment ho gaya
+[[HL::STEP 1: DEVELOPER KI GALTI::HL]]
+[[HL::Developer ne code se galti se ek line delete ki:::HL]]
+[[HL::User Entity::HL]]
+[[HL::  id: number::HL]]
+[[HL::  email: string::HL]]
+[[HL::  // password: string  <-- galti se comment ho gaya::HL]]
 
-STEP 2: SYNCHRONIZE TRIGGER (The Danger)
-App Restart hui -> TypeORM ne User Entity dekhi.
-TypeORM: "Arey, yahan toh password property nahi hai!"
+[[HL::STEP 2: SYNCHRONIZE TRIGGER (The Danger)::HL]]
+[[HL::App Restart hui -> TypeORM ne User Entity dekhi.::HL]]
+[[HL::TypeORM: "Arey, yahan toh password property nahi hai!"::HL]]
 
-STEP 3: AUTOMATED MODIFICATION (Disaster)
-TypeORM seedha Database ko command bhejta hai:
-`ALTER TABLE "users" DROP COLUMN "password";`
+[[HL::STEP 3: AUTOMATED MODIFICATION (Disaster)::HL]]
+[[HL::TypeORM seedha Database ko command bhejta hai:::HL]]
+[[HL::`ALTER TABLE "users" DROP COLUMN "password";`::HL]]
 
-STEP 4: ⭐ DATA LOSS 
-Production Database se har user ka password hamesha ke liye delete (accidental deletion).
+[[HL::STEP 4: ⭐ DATA LOSS ::HL]]
+[[HL::Production Database se har user ka password hamesha ke liye delete (accidental deletion).::HL]]
 
-SOLUTION: MIGRATIONS
-Migrations is automated destruction ko rokti hai. Schema change karne ke liye ek explicit file banani padti hai jo batati hai exactly kya change karna hai chronological order mein.
+[[HL::SOLUTION: MIGRATIONS::HL]]
+[[HL::Migrations is automated destruction ko rokti hai. Schema change karne ke liye ek explicit file banani padti hai jo batati hai exactly kya change karna hai chronological order mein.::HL]]
 ```
 
 #### 🔒 8. Security-First Check
@@ -16604,9 +16604,9 @@ Agar tumhara software ek restaurant hai:
 [[HL::*(Note: Assume tumne `npm run typeorm` package.json mein pehle hi map kiya hua hai upar wali topic ki tarah)*::HL]]
 ```bash
 # [[HL::Terminal mein run karo:::HL]]
-1  npm run typeorm migration:generate -- -n initial-schema -o
+[[HL::1  npm run typeorm migration:generate -- -n initial-schema -o::HL]]
 ```
-*(Inline Explanations: `npm run typeorm` hamari custom package.json script chalata hai. `--` npm ko batata hai ki aage ke arguments TypeORM CLI ko pass karne hain. `-n initial-schema` (name flag) file ko `initial-schema` naam dega. **⭐-o flag** batayega ki file plain Javascript mein generate karo.)*
+[[HL::*(Inline Explanations: `npm run typeorm` hamari custom package.json script chalata hai. `--` npm ko batata hai ki aage ke arguments TypeORM CLI ko pass karne hain. `-n initial-schema` (name flag) file ko `initial-schema` naam dega. **⭐-o flag** batayega ki file plain Javascript mein generate karo.)*::HL]]
 
 ```text
 # 📤 Expected Output:
@@ -16618,7 +16618,7 @@ Migration /my-nest-app/migrations/1684567890123-initial-schema.js has been gener
 # [[HL::Phir database actual mein update karne ke liye:::HL]]
 [[HL::1  npm run typeorm migration:run::HL]]
 ```
-*(Inline Explanations: `migration:run` migrations folder check karta hai aur jo bhi nayi timestamped file execute nahi hui hai, uski SQL Up queries chalata hai jisse tables created ho jati hain.)*
+[[HL::*(Inline Explanations: `migration:run` migrations folder check karta hai aur jo bhi nayi timestamped file execute nahi hui hai, uski SQL Up queries chalata hai jisse tables created ho jati hain.)*::HL]]
 
 ```text
 # 📤 Expected Output:
@@ -18008,14 +18008,14 @@ JWT ki string ke teen hisse hote hain (dot `.` se separated): `Header.Payload.Si
 
 ### 💻 7. Hands-On — Runnable Example
 
-Pehle CLI (Command Line Interface) mein packages install karo:
+[[HL::Pehle CLI (Command Line Interface) mein packages install karo:::HL]]
 ```bash
-npm install @nestjs/passport @nestjs/jwt passport-jwt
-npm install -D @types/passport-jwt
-# 📤 Expected Output:
-# added 15 packages, and audited 342 packages in 4s
+[[HL::npm install @nestjs/passport @nestjs/jwt passport-jwt::HL]]
+[[HL::npm install -D @types/passport-jwt::HL]]
+[[HL::# 📤 Expected Output:::HL]]
+[[HL::# added 15 packages, and audited 342 packages in 4s::HL]]
 ```
-*(Anatomy of command: `npm install` packages download karta hai, `-D` flag usse dev-dependency (sirf development ke liye) banata hai taaki types production size na badhayein).*
+[[HL::*(Anatomy of command: `npm install` packages download karta hai, `-D` flag usse dev-dependency (sirf development ke liye) banata hai taaki types production size na badhayein).*::HL]]
 
 Ab code likhte hain:
 
@@ -18479,18 +18479,18 @@ Iska solution? Restaurant ko alag-alag stations mein tod do — Drinks Station, 
 ### 🔍 5. Visual / Editor Mein Kya Dikhega
 
 ```text
-📦 enterprise-app
- ┣ 📂 auth-service         ← Ek alag project (Service A)
- ┃ ┣ 📜 main.ts
- ┃ ┗ 📜 package.json
- ┣ 📂 email-service        ← Ek alag project (Service B)
- ┃ ┣ 📜 main.ts
- ┃ ┗ 📜 package.json
- ┗ 📂 api-gateway          ← Frontend yahan baat karega
+[[HL::📦 enterprise-app::HL]]
+[[HL:: ┣ 📂 auth-service         ← Ek alag project (Service A)::HL]]
+[[HL:: ┃ ┣ 📜 main.ts::HL]]
+[[HL:: ┃ ┗ 📜 package.json::HL]]
+[[HL:: ┣ 📂 email-service        ← Ek alag project (Service B)::HL]]
+[[HL:: ┃ ┣ 📜 main.ts::HL]]
+[[HL:: ┃ ┗ 📜 package.json::HL]]
+[[HL:: ┗ 📂 api-gateway          ← Frontend yahan baat karega::HL]]
 
 ```
 
-*Note: Har service ka apna `main.ts` hoga jo `createMicroservice()` use karega.*
+[[HL::*Note: Har service ka apna `main.ts` hoga jo `createMicroservice()` use karega.*::HL]]
 
 ### ⚙️ 6. Under the Hood (Deep Dive)
 
@@ -19060,10 +19060,10 @@ Yahan waiter **Producer** hai, ticket line **Redis Queue** hai, aur chef **Consu
 
 ### 🧠 4. Why This Matters
 
-* **Problem:** Agar user ek "Generate Report" button dabata hai, aur PDF banne mein 15 seconds lagte hain, toh user ka browser 15 seconds tak ghoomta rahega. Agar tabhi 100 users ne button daba diya, toh server overload hoke crash ho jayega (API unresponsive).
-* **Solution:** User jaise hi button dabaye, task ko ek Queue mein daal do aur user ko turant "Report is generating" ka message dikha do. Background mein worker aaram se PDF banayega. Speaker emphasis ke mutabiq: Enterprise level par Queues *error handling* aur *automatic retries* ke liye best hain.
-* **What breaks if we don't use it?** HTTP requests timeout ho jayengi, users frustrate honge, aur temporary network failure (jaise email server down hona) pe task hamesha ke liye fail/lost ho jayega.
-* **✅ Kab use karo:** Jab task 500ms se zyada time le raha ho (e.g., Image resizing, bulk email sending, PDF generation), ya external unstable APIs call karni hon jahan retries ki zaroorat pad sakti hai.
+* [[HL::**Problem:** Agar user ek "Generate Report" button dabata hai, aur PDF banne mein 15 seconds lagte hain, toh user ka browser 15 seconds tak ghoomta rahega. Agar tabhi 100 users ne button daba diya, toh server overload hoke crash ho jayega (API unresponsive).::HL]]
+* [[HL::**Solution:** User jaise hi button dabaye, task ko ek Queue mein daal do aur user ko turant "Report is generating" ka message dikha do. Background mein worker aaram se PDF banayega. Speaker emphasis ke mutabiq: Enterprise level par Queues *error handling* aur *automatic retries* ke liye best hain.::HL]]
+* [[HL::**What breaks if we don't use it?** HTTP requests timeout ho jayengi, users frustrate honge, aur temporary network failure (jaise email server down hona) pe task hamesha ke liye fail/lost ho jayega.::HL]]
+* [[HL::**✅ Kab use karo:** Jab task 500ms se zyada time le raha ho (e.g., Image resizing, bulk email sending, PDF generation), ya external unstable APIs call karni hon jahan retries ki zaroorat pad sakti hai.::HL]]
 * **❌ Kab mat karo / Alternative prefer karo:** Jab user ko real-time synchronous result chahiye hi chahiye (e.g., Login password validation, database se profile fetch karna). Aise cases mein standard HTTP request-response flow hi use karo.
 
 ### 🔍 5. Visual / Editor Mein Kya Dikhega
