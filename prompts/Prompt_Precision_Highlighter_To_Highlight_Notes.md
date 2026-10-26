@@ -586,6 +586,7 @@ A [[HL::reverse shell::HL]] gives the attacker remote access.
 | Splitting highlight between `**` and `` ` `` in `` **`code`** `` | Forbidden — treat the entire bold+backtick compound as one atomic unit (Rule 47) |
 | Skipping Step 0 (existing tag inventory) in processing order | Forbidden — causes double-wrapping of existing highlights |
 | Outputting document without Coverage Audit line | Forbidden — Rule 48 mandates audit after every run |
+| Wrapping whole table row `[[HL::\| col1 \| col2 \|::HL]]` | Forbidden — Pipes must stay outside! Placing `[[HL::` before `\|` breaks Markdown table parsing completely, collapsing data into unformatted plain text. Highlight cells inside: `\| [[HL::col1::HL]] \| [[HL::col2::HL]] \|`. |
 
 ---
 
@@ -599,6 +600,13 @@ If you decide to write a Python script to automate highlighting across a massive
 - For Tables: `[[HL::| Feature | ... |::HL]]` pushes the tag BEFORE the `|`. The Markdown parser stops seeing it as a table. The entire table collapses into unformatted raw text.
 - For Blockquotes/Lists: `[[HL::> Text::HL]]` or `[[HL::* Text::HL]]` pushes the tag BEFORE the marker, destroying the list rendering.
 **The Fix:** Your script MUST isolate the content *after* the leading Markdown markers. For tables, your script MUST split the row by the pipe character (`|`), and wrap the text *inside* each individual cell (e.g., `| [[HL::Feature::HL]] |`), leaving the pipes untouched (ignoring pipes inside inline backticks or escaped pipes as per Rule 44).
+
+**Mandatory Post-Flight Assertion for Scripts:**
+```python
+# MUST RUN AT END OF EVERY SCRIPT:
+broken_tables = re.findall(r'^\s*\[\[HL::\s*\|', output_text, re.M)
+assert not broken_tables, f"FATAL: Found {len(broken_tables)} table rows starting with [[HL::|! Pipes must stay outside tags!"
+```
 
 ### Scripting Law 2: The HTML Tag Death Trap
 **The Mistake:** Wrapping a line that contains raw HTML tags (e.g., `* Line 8: Tumhe <h1> tag nahi likhna padta.`) inside a single `[[HL::` wrapper.

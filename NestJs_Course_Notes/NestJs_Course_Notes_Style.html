@@ -1059,6 +1059,26 @@
                     processed = processed.replace(/^#{3,4}\s+(?!MODULE_MARKER)(.*)/gm, '### TOPIC_MARKER $1');
                     processed = processed.replace(/^\s*(\d+\.\d+:)/gm, '**$1**');
 
+                    // 🟢 Normalize Table Rows: Move highlight tags inside pipes so Marked.js parses tables properly
+                    processed = processed.replace(/^(\s*)\[\[HL::\s*(\|.*?\|)\s*::HL\]\]\s*$/gm, function(match, indent, row) {
+                        const parts = row.split('|');
+                        if (parts.length < 4) return match;
+                        const newParts = [parts[0]];
+                        for (let i = 1; i < parts.length - 1; i++) {
+                            const cell = parts[i];
+                            const m = cell.match(/^(\s*)(.*?)(\s*)$/);
+                            if (!m || !m[2]) {
+                                newParts.push(cell);
+                            } else if (m[2].startsWith('[[HL::') && m[2].endsWith('::HL]]')) {
+                                newParts.push(cell);
+                            } else {
+                                newParts.push(`${m[1]}[[HL::${m[2]}::HL]]${m[3]}`);
+                            }
+                        }
+                        newParts.push(parts[parts.length - 1]);
+                        return indent + newParts.join('|');
+                    });
+
                     // 2. Configure Custom Marked Renderer
                     const renderer = new marked.Renderer();
 

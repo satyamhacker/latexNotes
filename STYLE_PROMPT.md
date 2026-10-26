@@ -11,6 +11,7 @@ You are an expert Frontend Developer and UI/UX Architect.
    - In PDF / Print view: code and badges inside `<mark class="yellow-highlight">` MUST render as **clean white pills with bold jet-black or deep-saturated dark ink** (`#0f172a`) so text is 100% crystal-clear.
    - On Screen: code and badges inside highlights MUST render as **solid deep dark chips (`#070a10`)** to prevent muddy color bleeding on the golden gradient.
 4. **Prevent all PDF clipping and scrollbar marks**: Code blocks in `@media print` MUST enforce `white-space: pre-wrap !important; word-break: break-all !important; overflow: visible !important;` and strip all scrollbars completely (`*::-webkit-scrollbar { display: none !important; }`).
+5. **Table Rendering & Highlight Isolation (Zero Table Collapse)**: In Markdown, table rows MUST start and end with pipe (`|`) characters. If a whole row is highlighted as `[[HL::| col1 | col2 |::HL]]`, Markdown parsers fail to recognize it as a table and collapse it into an unformatted plain text paragraph. The JavaScript engine MUST include the automatic table row normalizer in the pre-processor that moves `[[HL::` and `::HL]]` inside each individual table cell so that tables ALWAYS render as styled HTML `<table>` elements with clean headers, borders, and alternating row styling.
 
 Your task is to create a single-file `notes_viewer.html` that dynamically renders a Markdown file (e.g., `NestJs_Course_Notes.md`) with a **State-of-the-Art Premium Dark UI**, interactive **Highlights HUD & Navigation**, **Semantic Micro-Badges**, and **Zero-Loss Print-to-PDF fidelity**.
 
@@ -1068,6 +1069,26 @@ document.addEventListener("DOMContentLoaded", () => {
             processed = processed.replace(/^\s*(Module\s+\d+.*)/gim, '## MODULE_MARKER $1');
             processed = processed.replace(/^#{3,4}\s+(?!MODULE_MARKER)(.*)/gm, '### TOPIC_MARKER $1');
             processed = processed.replace(/^\s*(\d+\.\d+:)/gm, '**$1**');
+
+            // 🟢 Normalize Table Rows: Move highlight tags inside pipes so Marked.js parses tables properly
+            processed = processed.replace(/^(\s*)\[\[HL::\s*(\|.*?\|)\s*::HL\]\]\s*$/gm, function(match, indent, row) {
+                const parts = row.split('|');
+                if (parts.length < 4) return match;
+                const newParts = [parts[0]];
+                for (let i = 1; i < parts.length - 1; i++) {
+                    const cell = parts[i];
+                    const m = cell.match(/^(\s*)(.*?)(\s*)$/);
+                    if (!m || !m[2]) {
+                        newParts.push(cell);
+                    } else if (m[2].startsWith('[[HL::') && m[2].endsWith('::HL]]')) {
+                        newParts.push(cell);
+                    } else {
+                        newParts.push(`${m[1]}[[HL::${m[2]}::HL]]${m[3]}`);
+                    }
+                }
+                newParts.push(parts[parts.length - 1]);
+                return indent + newParts.join('|');
+            });
 
             // 2. Configure Custom Marked Renderer
             const renderer = new marked.Renderer();

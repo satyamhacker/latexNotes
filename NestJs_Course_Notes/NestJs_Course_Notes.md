@@ -5343,10 +5343,10 @@ Jaise naya Wi-Fi router laane par pehli baar uski main configuration (naam, pass
   - [[HL::**Fix:** Terminal mein upar scroll karke main error dekho. Jab tak `Nest application successfully started` nahi aata, db file nahi banegi.::HL]]
 
 #### [[HL::⚖️ 13. Comparison (Ye vs Woh)::HL]]
-[[HL::| Setting | `synchronize: true` | `synchronize: false` |::HL]]
+| [[HL::Setting::HL]] | [[HL::`synchronize: true`::HL]] | [[HL::`synchronize: false`::HL]] |
 |---|---|---|
-[[HL::| Environment | Development (Local) | Production (Live) |::HL]]
-[[HL::| Behavior | Entity change hote hi Table automatic update/drop hota hai. | Table update nahi hota, manually migrations run karni padti hain. |::HL]]
+| [[HL::Environment::HL]] | [[HL::Development (Local)::HL]] | [[HL::Production (Live)::HL]] |
+| [[HL::Behavior::HL]] | [[HL::Entity change hote hi Table automatic update/drop hota hai.::HL]] | [[HL::Table update nahi hota, manually migrations run karni padti hain.::HL]] |
 
 #### 🌍 14. Real-World Use Case (Production Application)
 Startup companies jab apna MVP (Minimum Viable Product) banati hain, toh locally `sqlite` aur `synchronize: true` use karti hain taaki schema daily 10 baar jaldi-jaldi badal sakein. Jab product launch hota hai, config automatically AWS RDS Postgres pe switch ho jati hai.
@@ -5507,11 +5507,11 @@ Columns:
   - [[HL::**Fix:** Terminal check karo, app errors solve karke successfully restart hone do. Changes DB mein sync ho jayenge.::HL]]
 
 #### [[HL::⚖️ 13. Comparison (Ye vs Woh)::HL]]
-[[HL::| TypeORM Decorator | Kaam | SQL Equivalent |::HL]]
+| [[HL::TypeORM Decorator::HL]] | [[HL::Kaam::HL]] | [[HL::SQL Equivalent::HL]] |
 |---|---|---|
-[[HL::| `@Entity()` | Class ko Table banata hai | `CREATE TABLE table_name` |::HL]]
-[[HL::| `@Column()` | Variable ko Column banata hai | `column_name VARCHAR` |::HL]]
-[[HL::| `@PrimaryGeneratedColumn()` | Unique auto-increasing ID banata hai | `id INT PRIMARY KEY AUTO_INCREMENT` |::HL]]
+| [[HL::`@Entity()`::HL]] | [[HL::Class ko Table banata hai::HL]] | [[HL::`CREATE TABLE table_name`::HL]] |
+| [[HL::`@Column()`::HL]] | [[HL::Variable ko Column banata hai::HL]] | [[HL::`column_name VARCHAR`::HL]] |
+| [[HL::`@PrimaryGeneratedColumn()`::HL]] | [[HL::Unique auto-increasing ID banata hai::HL]] | [[HL::`id INT PRIMARY KEY AUTO_INCREMENT`::HL]] |
 
 #### 🌍 14. Real-World Use Case (Production Application)
 Spotify app mein `User` entity mein email aur password save hota hai. Phir ek `Playlist` entity hoti hai. Dono entities database tables banti hain aur baad mein TypeORM `Relations` use karke unhe link karta hai (Ek user ki multiple playlists hain).
@@ -5648,11 +5648,11 @@ Badi companies (Uber, Netflix) mein database schema changes ke liye poori ek com
   - **Fix:** Dev environment mein dummy data dobara seed (insert) karo. Aage se dhyan rakho.
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
-[[HL::| Feature | `synchronize: true` | Migration Files |::HL]]
+| [[HL::Feature::HL]] | [[HL::`synchronize: true`::HL]] | [[HL::Migration Files::HL]] |
 |---|---|---|
-[[HL::| Target Environment | Development | Production |::HL]]
-[[HL::| Approach | Auto-magical, destructive | Step-by-step, version-controlled |::HL]]
-[[HL::| Data Safety | Low (Risky for existing data) | High (Safe, allows rolling back changes) |::HL]]
+| [[HL::Target Environment::HL]] | [[HL::Development::HL]] | [[HL::Production::HL]] |
+| [[HL::Approach::HL]] | [[HL::Auto-magical, destructive::HL]] | [[HL::Step-by-step, version-controlled::HL]] |
+| [[HL::Data Safety::HL]] | [[HL::Low (Risky for existing data)::HL]] | [[HL::High (Safe, allows rolling back changes)::HL]] |
 
 #### 🌍 14. Real-World Use Case (Production Application)
 Facebook/Meta jab naya feature launch karta hai (jaise "Reactions" column for posts), toh unke backend engineers ek safe Migration file push karte hain jo billions of rows wale table mein ek naya column bina downtime ke add karta hai.
@@ -6683,9 +6683,9 @@ Inserted user with id: 1
   - [[HL::**Fix:** Decorator ko change karke `@AfterInsert` karo.::HL]]
 
 #### [[HL::⚖️ 13. Comparison (Ye vs Woh)::HL]]
-[[HL::| Feature | Entity Instance | Plain Object |::HL]]
+| [[HL::Feature::HL]] | [[HL::Entity Instance::HL]] | [[HL::Plain Object::HL]] |
 |---|---|---|
-[[HL::| Type | Naya object (via `repo.create()`) | Direct JSON/JS object (via `{...}`) |::HL]]
+| [[HL::Type::HL]] | [[HL::Naya object (via `repo.create()`)::HL]] | [[HL::Direct JSON/JS object (via `{...}`)::HL]] |
 | Hooks chalte hain? | ✅ Haan | ❌ Nahi (Silent failure) |
 
 #### 🌍 14. Real-World Use Case
@@ -7007,11 +7007,11 @@ Industry standard mein controllers ko bilkul "thin" (patla) rakha jata hai. Cont
   - **Fix:** Pura route `/auth/1` call karo.
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
-[[HL::| Feature | `@Param` | `@Query` |::HL]]
+| [[HL::Feature::HL]] | [[HL::`@Param`::HL]] | [[HL::`@Query`::HL]] |
 |---|---|---|
-[[HL::| Kahan dikhta hai? | Path ke andar (`/auth/1`) | End mein (`?email=a@a.com`) |::HL]]
-[[HL::| Use Case | Specific resource pehchanna (ID) | Filtering, sorting, searching |::HL]]
-[[HL::| Mandatory hai? | Haan (agar URL structure mein hai) | Optional hota hai |::HL]]
+| [[HL::Kahan dikhta hai?::HL]] | [[HL::Path ke andar (`/auth/1`)::HL]] | [[HL::End mein (`?email=a@a.com`)::HL]] |
+| [[HL::Use Case::HL]] | [[HL::Specific resource pehchanna (ID)::HL]] | [[HL::Filtering, sorting, searching::HL]] |
+| [[HL::Mandatory hai?::HL]] | [[HL::Haan (agar URL structure mein hai)::HL]] | [[HL::Optional hota hai::HL]] |
 
 #### [[HL::🌍 14. Real-World Use Case::HL]]
 GitHub API (`[api.github.com/users/octocat](https://api.github.com/users/octocat)`) ek perfect example hai Controller route handling ka. Jab hum GET request bhejte hain, toh GitHub ka controller URL se 'octocat' as a Param nikalta hai, aur apne internal database mein user profile fetch karke JSON bhej deta hai.
@@ -7307,11 +7307,11 @@ Websockets HTTP 404 status code nahi samajhte, unka format alag hota hai. Servic
   - **Fix:** Hamesha operation ke just baad result null-check karo.
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
-[[HL::| Feature | `throw new Error()` (Plain) | `throw new NotFoundException()` (NestJS) |::HL]]
+| [[HL::Feature::HL]] | [[HL::`throw new Error()` (Plain)::HL]] | [[HL::`throw new NotFoundException()` (NestJS)::HL]] |
 |---|---|---|
-[[HL::| Status Code | 500 (Internal Server Error) | 404 (Not Found) |::HL]]
-[[HL::| Client ko kya dikhega? | Ganda server stack trace/error | Clean formatted JSON message |::HL]]
-[[HL::| Use Case | Un-expected system crash | Logical known failures (missing id) |::HL]]
+| [[HL::Status Code::HL]] | [[HL::500 (Internal Server Error)::HL]] | [[HL::404 (Not Found)::HL]] |
+| [[HL::Client ko kya dikhega?::HL]] | [[HL::Ganda server stack trace/error::HL]] | [[HL::Clean formatted JSON message::HL]] |
+| [[HL::Use Case::HL]] | [[HL::Un-expected system crash::HL]] | [[HL::Logical known failures (missing id)::HL]] |
 
 #### 🌍 14. Real-World Use Case
 WhatsApp Web par jab aap kisi aise URL ya message id ko kholne ki koshish karte ho jo delete ho gaya hai, toh backend Service error throw karti hai, exception filter usko catch karke client ko ek status (e.g., 404) bhejta hai, jisse UI pe likha aata hai: "This message was deleted".
@@ -7630,11 +7630,11 @@ Real-world systems (Netflix, Uber) mein ek single "User" object ki 10+ different
   - [[HL::**Fix:** Entity classes se formatting decorators hatao, saari formatting solely DTOs mein move karo.::HL]]
 
 ### [[HL::⚖️ 13. Comparison (Ye vs Woh)::HL]]
-[[HL::| Feature | Built-in `@Exclude()` | Custom Interceptor + DTOs |::HL]]
+| [[HL::Feature::HL]] | [[HL::Built-in `@Exclude()`::HL]] | [[HL::Custom Interceptor + DTOs::HL]] |
 |---------|-----------------------|---------------------------|
-[[HL::| **Flexibility** | Rigid / Static | Highly Flexible |::HL]]
-[[HL::| **Logic Location**| Entity class mein | Separate DTO classes mein |::HL]]
-[[HL::| **Scale** | Chhote apps ke liye theek | Large apps jahan multiple user roles hain wahan best |::HL]]
+| [[HL::**Flexibility**::HL]] | [[HL::Rigid / Static::HL]] | [[HL::Highly Flexible::HL]] |
+| [[HL::**Logic Location**::HL]]| [[HL::Entity class mein::HL]] | [[HL::Separate DTO classes mein::HL]] |
+| [[HL::**Scale**::HL]] | [[HL::Chhote apps ke liye theek::HL]] | [[HL::Large apps jahan multiple user roles hain wahan best::HL]] |
 
 ### [[HL::🌍 14. Real-World Use Case::HL]]
 [[HL::Healthcare systems. Jab doctor login karta hai toh patient ki full history (Admin DTO) aati hai. Jab receptionist dashboard dekhti hai, toh sirf patient ka naam aur appointment time (Public DTO) aata hai. Backend ka endpoint aur database query ek hi hoti hai, bas Data Transfer Object change ho jata hai interceptor ke through.::HL]]
@@ -7812,11 +7812,11 @@ Interceptor request aur response cycle ka gatekeeper hai. Agar tum yahan galti s
   - [[HL::**Fix:** Line 16 ke aage `return` add karo.::HL]]
 
 ### [[HL::⚖️ 13. Comparison (Ye vs Woh)::HL]]
-[[HL::| Feature | Middleware | Interceptor |::HL]]
+| [[HL::Feature::HL]] | [[HL::Middleware::HL]] | [[HL::Interceptor::HL]] |
 |---------|------------|-------------|
-[[HL::| **Execution Point** | Sirf route handler se pehle | Route handler se pehle AUR baad mein |::HL]]
-[[HL::| **Response Editing** | Mushkil hai (raw HTTP response obj) | Bohot aasan hai (`rxjs` map operator ke saath) |::HL]]
-[[HL::| **Context Awareness**| Pata nahi kaunsa controller/method hai | `ExecutionContext` se sab pata chal jata hai |::HL]]
+| [[HL::**Execution Point**::HL]] | [[HL::Sirf route handler se pehle::HL]] | [[HL::Route handler se pehle AUR baad mein::HL]] |
+| [[HL::**Response Editing**::HL]] | [[HL::Mushkil hai (raw HTTP response obj)::HL]] | [[HL::Bohot aasan hai (`rxjs` map operator ke saath)::HL]] |
+| [[HL::**Context Awareness**::HL]]| [[HL::Pata nahi kaunsa controller/method hai::HL]] | [[HL::`ExecutionContext` se sab pata chal jata hai::HL]] |
 
 ### [[HL::🌍 14. Real-World Use Case::HL]]
 [[HL::Caching Systems. Ek interceptor banaya jata hai jo check karta hai "Kya is URL ka data pehle se Redis (memory cache) mein hai?". Agar haan, toh `next.handle()` call hi nahi karta, seedha cache se data return kar deta hai. Agar nahi, toh route chala kar data laata hai, aur `.pipe(tap())` mein response ko agle user ke liye cache mein save kar deta hai.::HL]]
@@ -8161,11 +8161,11 @@ Production-ready codebases (jaise kisi enterprise fintech app mein) "Fat Control
   - **Fix:** Decorator ko controller class ke theek upar (`@Controller` ke paas) lagao. Controller-level application poore routes par automatically lag jayegi.
 
 ### ⚖️ 13. Comparison (Ye vs Woh)
-[[HL::| Syntax | `@UseInterceptors(new SerializeInterceptor(UserDto))` | `@Serialize(UserDto)` |::HL]]
+| [[HL::Syntax::HL]] | [[HL::`@UseInterceptors(new SerializeInterceptor(UserDto))`::HL]] | [[HL::`@Serialize(UserDto)`::HL]] |
 |--------|-----------------------------------------------------|-----------------------|
-[[HL::| **Readability** | Poor, verbose | Excellent, clean |::HL]]
-[[HL::| **Reusability** | Error-prone for new devs | Easy to import and use |::HL]]
-[[HL::| **Logic change**| Har jagah manually update karna padega | Sirf ek wrapper function mein update hoga |::HL]]
+| [[HL::**Readability**::HL]] | [[HL::Poor, verbose::HL]] | [[HL::Excellent, clean::HL]] |
+| [[HL::**Reusability**::HL]] | [[HL::Error-prone for new devs::HL]] | [[HL::Easy to import and use::HL]] |
+| [[HL::**Logic change**::HL]]| [[HL::Har jagah manually update karna padega::HL]] | [[HL::Sirf ek wrapper function mein update hoga::HL]] |
 
 ### [[HL::🌍 14. Real-World Use Case::HL]]
 [[HL::Large e-commerce platform (jaise Shopify) ka backend jahan 50+ engineers kaam karte hain. Core architecture team ek generic `@Serialize(Dto)` banakar internal package/library mein publish kar deti hai. Junior developers ko internal working (`plainToClass`, interceptors) nahi pata hoti, woh bas route par `@Serialize(ProductDto)` lagate hain aur security automatically handle ho jati hai.::HL]]
@@ -8320,11 +8320,11 @@ Industry mein "API First Design" practice bohot common hai. Senior developers fr
   - [[HL::**Fix:** DTO class ki saari public fields pe `@ApiProperty()` add karo.::HL]]
 
 ### [[HL::⚖️ 13. Comparison (Ye vs Woh)::HL]]
-[[HL::| Tool | Postman Workspace | Swagger (OpenAPI) |::HL]]
+| [[HL::Tool::HL]] | [[HL::Postman Workspace::HL]] | [[HL::Swagger (OpenAPI)::HL]] |
 |------|-------------------|-------------------|
-[[HL::| **Sync** | Manually update karna padta hai | Code ke saath Auto-sync (documentation-sync) |::HL]]
-[[HL::| **Best For** | Complex script testing / Chaining API requests | Frontend team onboarding / Quick reference |::HL]]
-[[HL::| **Location** | External App | Hosted on your API server (`/api`) |::HL]]
+| [[HL::**Sync**::HL]] | [[HL::Manually update karna padta hai::HL]] | [[HL::Code ke saath Auto-sync (documentation-sync)::HL]] |
+| [[HL::**Best For**::HL]] | [[HL::Complex script testing / Chaining API requests::HL]] | [[HL::Frontend team onboarding / Quick reference::HL]] |
+| [[HL::**Location**::HL]] | [[HL::External App::HL]] | [[HL::Hosted on your API server (`/api`)::HL]] |
 
 ### [[HL::🌍 14. Real-World Use Case::HL]]
 Stripe ya Razorpay (Payment gateways) ki API documentation OpenAPI specs se generated hoti hai. Jab bhi unki backend team naya endpoint banati hai, unki public docs automatically generate aur update ho jati hain, jisse hazaron developers instantly integrate kar lete hain.
@@ -9511,11 +9511,11 @@ Interceptor/Decorator bridge pattern bohot common enterprise architectural patte
   - **Fix:** Postman me check karo request headers. Agar cookie pass ho rahi hai toh App module ka provider order check karo.
 
 ### ⚖️ 13. Comparison (Ye vs Woh)
-[[HL::| Feature | Guard (`AuthGuard`) | Interceptor (`CurrentUserInterceptor`) |::HL]]
+| [[HL::Feature::HL]] | [[HL::Guard (`AuthGuard`)::HL]] | [[HL::Interceptor (`CurrentUserInterceptor`)::HL]] |
 | :--- | :--- | :--- |
-[[HL::| **Primary Job** | Allow/Deny Access (Bouncer) | Modify Data / Augment Request (Bridge) |::HL]]
-[[HL::| **Return** | Boolean (`true` / `false`) | `Observable` ya route handler `handle()` |::HL]]
-[[HL::| **DB Access** | Usually nahi (sirf token dekhta hai) | Haan (user load karta hai) |::HL]]
+| [[HL::**Primary Job**::HL]] | [[HL::Allow/Deny Access (Bouncer)::HL]] | [[HL::Modify Data / Augment Request (Bridge)::HL]] |
+| [[HL::**Return**::HL]] | [[HL::Boolean (`true` / `false`)::HL]] | [[HL::`Observable` ya route handler `handle()`::HL]] |
+| [[HL::**DB Access**::HL]] | [[HL::Usually nahi (sirf token dekhta hai)::HL]] | [[HL::Haan (user load karta hai)::HL]] |
 
 ### 🌍 14. Real-World Use Case (Production Application)
 [[HL::Jira, GitHub, ya kisi bhi Dashboard app mein lagbhag har route authenticated hota hai. Wahan har controller me auth check likhna impossible hai. Wahan `@UseGuards(AuthGuard)` controller class level par lagate hain, jisse class ke saare 50 routes ek sath lock ho jate hain, aur `@CurrentUser` se current logged in employee ka data saare API logic me available rehta hai.::HL]]
@@ -9661,12 +9661,12 @@ Socho ek car manufacturing plant hai. **Unit testing** ka matlab hai car ki ek s
   - **Fix:** Real DB ko mock karo taaki dependency chain cut ho jaye.
 
 ### ⚖️ 13. Comparison (Ye vs Woh)
-[[HL::| Feature | Unit Testing (`spec.ts`) | E2E Testing (`app.e2e-spec.ts`) |::HL]]
+| [[HL::Feature::HL]] | [[HL::Unit Testing (`spec.ts`)::HL]] | [[HL::E2E Testing (`app.e2e-spec.ts`)::HL]] |
 |---------|-------------------------|--------------------------------|
-[[HL::| **Scope** | Ek single class/function | Poori app (DB + Network) |::HL]]
-[[HL::| **Speed** | Super fast (ms) | Slow (seconds/minutes) |::HL]]
-[[HL::| **Location** | `src/` folder mein | Root `test/` folder mein |::HL]]
-[[HL::| **Web Server** | Start NAHI hota | Actual HTTP server start hota hai |::HL]]
+| [[HL::**Scope**::HL]] | [[HL::Ek single class/function::HL]] | [[HL::Poori app (DB + Network)::HL]] |
+| [[HL::**Speed**::HL]] | [[HL::Super fast (ms)::HL]] | [[HL::Slow (seconds/minutes)::HL]] |
+| [[HL::**Location**::HL]] | [[HL::`src/` folder mein::HL]] | [[HL::Root `test/` folder mein::HL]] |
+| [[HL::**Web Server**::HL]] | [[HL::Start NAHI hota::HL]] | [[HL::Actual HTTP server start hota hai::HL]] |
 
 ### 🌍 14. Real-World Use Case
 Netflix ya Uber jaisi companies mein backend developers code push karte hi unke cloud par hazaaron unit tests 10-20 seconds mein run ho jaate hain. Yeh ensure karta hai ki basic logic (jaise `calculateFare`) break nahi hua bina poori app boot kiye.
@@ -11856,10 +11856,10 @@ Large teams mein, `Git based workflow` ke andar `.env.example` naam ki ek file b
 
 
 ### [[HL::⚖️ 13. Comparison (Ye vs Woh)::HL]]
-[[HL::| Feature | .env.development | .env.test |::HL]]
+| [[HL::Feature::HL]] | [[HL::.env.development::HL]] | [[HL::.env.test::HL]] |
 |---|---|---|
-[[HL::| **Kab use hota hai?** | Development server run karte waqt (`npm run start:dev`) | E2E Tests run karte waqt (`npm run test:e2e`) |::HL]]
-[[HL::| **Data type** | Dummy but persistent data (Dev database) | Ephemeral data (Test db jo har baar clear hota hai) |::HL]]
+| [[HL::**Kab use hota hai?**::HL]] | [[HL::Development server run karte waqt (`npm run start:dev`)::HL]] | [[HL::E2E Tests run karte waqt (`npm run test:e2e`)::HL]] |
+| [[HL::**Data type**::HL]] | [[HL::Dummy but persistent data (Dev database)::HL]] | [[HL::Ephemeral data (Test db jo har baar clear hota hai)::HL]] |
 
 
 ### 🌍 14. Real-World Use Case (Production Application)
@@ -12773,10 +12773,10 @@ DTO (Data Transfer Object) bilkul us strict club bouncer ki tarah hai jo gate pe
   - [[HL::**Fix:** Validation Pipe settings mein `transform: true` set karo (main.ts mein) ya payload clean JSON number (`"year": 2015`) format mein bhejo.::HL]]
 
 ### [[HL::⚖️ 13. Comparison (Ye vs Woh)::HL]]
-[[HL::| Aspect | DTO based Validation | Manual Controller Validation |::HL]]
+| [[HL::Aspect::HL]] | [[HL::DTO based Validation::HL]] | [[HL::Manual Controller Validation::HL]] |
 |--------|----------------------|------------------------------|
-[[HL::| Code Cleanliness | Decorator based, clean logic | Nested if-else spaghetti code |::HL]]
-[[HL::| Reusability | Same DTO can be used across endpoints | Logic har jagah copy karni padegi |::HL]]
+| [[HL::Code Cleanliness::HL]] | [[HL::Decorator based, clean logic::HL]] | [[HL::Nested if-else spaghetti code::HL]] |
+| [[HL::Reusability::HL]] | [[HL::Same DTO can be used across endpoints::HL]] | [[HL::Logic har jagah copy karni padegi::HL]] |
 
 ### [[HL::🌍 14. Real-World Use Case::HL]]
 Food delivery apps (jaise Zomato/Swiggy) bhi location inputs lene se pehle API layer pe `@IsLatitude` aur `@IsLongitude` se validate karti hain, taaki user fake location (out of bounds GPS) na bhej sake aur delivery calculation system crash na ho.
@@ -12958,10 +12958,10 @@ Industry mein "collector's item" example (jaise 1980 Corolla ki price half milli
   - [[HL::**Fix:** Pehle `/auth/signup` ya `/auth/signin` endpoint pe POST request maro naya token lene ke liye, phir report endpoint try karo.::HL]]
 
 ### [[HL::⚖️ 13. Comparison (Ye vs Woh)::HL]]
-[[HL::| Layer | Guards (@UseGuards) | Pipes (Validation DTO) |::HL]]
+| [[HL::Layer::HL]] | [[HL::Guards (@UseGuards)::HL]] | [[HL::Pipes (Validation DTO)::HL]] |
 |---|---|---|
-[[HL::| Role | Who are you? Can you enter? (Auth) | Is your data correct? (Data shape) |::HL]]
-[[HL::| Execution Order | Pehle run hota hai | Guard ke baad run hota hai |::HL]]
+| [[HL::Role::HL]] | [[HL::Who are you? Can you enter? (Auth)::HL]] | [[HL::Is your data correct? (Data shape)::HL]] |
+| [[HL::Execution Order::HL]] | [[HL::Pehle run hota hai::HL]] | [[HL::Guard ke baad run hota hai::HL]] |
 
 ### 🌍 14. Real-World Use Case
 Instagram mein bina login kiye aap feed (GET) toh thodi bahut dekh sakte ho, but photo upload (POST) endpoint pe AuthGuard laga hota hai. Agar aap direct API call maro, toh woh 403 Forbidden reject kar dega.
@@ -13075,11 +13075,11 @@ Associations NestJS aur SQL databases ka sabse confusing part hote hain kyunki g
 *(Theory Section — Troubleshooting Flowchart N/A)*
 
 ### ⚖️ 13. Comparison (Ye vs Woh)
-[[HL::| Association | Use Case in Real Life | Foreign Key Placement |::HL]]
+| [[HL::Association::HL]] | [[HL::Use Case in Real Life::HL]] | [[HL::Foreign Key Placement::HL]] |
 |-------------|-----------------------|-----------------------|
-[[HL::| 1-to-1 | User & UserProfile | Kisi bhi table mein rakh lo |::HL]]
-[[HL::| 1-to-Many | User & Reports | Hamesha 'Many' wali table mein (Reports table mein `user_id`) |::HL]]
-[[HL::| Many-to-Many| Students & Courses | Ek third 'Join Table' banani padti hai (Enrollments) |::HL]]
+| [[HL::1-to-1::HL]] | [[HL::User & UserProfile::HL]] | [[HL::Kisi bhi table mein rakh lo::HL]] |
+| [[HL::1-to-Many::HL]] | [[HL::User & Reports::HL]] | [[HL::Hamesha 'Many' wali table mein (Reports table mein `user_id`)::HL]] |
+| [[HL::Many-to-Many::HL]]| [[HL::Students & Courses::HL]] | [[HL::Ek third 'Join Table' banani padti hai (Enrollments)::HL]] |
 
 ### 🌍 14. Real-World Use Case
 Amazon ka database: Ek `Customer` (user) aur uske hazaron `Orders` (reports). Yeh classic one-to-many association hai jisse tum apni order history dekh paate ho.
@@ -13199,11 +13199,11 @@ Industry codebases mein "Circular Dependencies" ek bohot common headache hai jab
   - [[HL::**Fix:** Usko arrow function wrapper mein convert karo: `@ManyToOne(User)` ki jagah `@ManyToOne(() => User)` likho.::HL]]
 
 ### [[HL::⚖️ 13. Comparison (Ye vs Woh)::HL]]
-[[HL::| Decorator | @OneToMany | @ManyToOne |::HL]]
+| [[HL::Decorator::HL]] | [[HL::@OneToMany::HL]] | [[HL::@ManyToOne::HL]] |
 |---|---|---|
-[[HL::| Side | User side pe lagta hai | Report side pe lagta hai |::HL]]
-[[HL::| Database Column | Koi column create nahi karta | Report table mein `userId` banata hai |::HL]]
-[[HL::| TypeScript Property | Array of objects (`Report[]`) | Single object (`User`) |::HL]]
+| [[HL::Side::HL]] | [[HL::User side pe lagta hai::HL]] | [[HL::Report side pe lagta hai::HL]] |
+| [[HL::Database Column::HL]] | [[HL::Koi column create nahi karta::HL]] | [[HL::Report table mein `userId` banata hai::HL]] |
+| [[HL::TypeScript Property::HL]] | [[HL::Array of objects (`Report[]`)::HL]] | [[HL::Single object (`User`)::HL]] |
 
 ### [[HL::🌍 14. Real-World Use Case::HL]]
 [[HL::Instagram mein ek User multiple posts (OneToMany) create karta hai, aur har post ka ek hi owner (ManyToOne) hota hai. TypeORM wahan posts table mein `user_id` column automatically bana deta hai.::HL]]
@@ -13912,11 +13912,11 @@ Production mein, agar lakhon reports hain aur public users sirf "approved" repor
 
 ### ⚖️ 13. Comparison (Ye vs Woh)
 
-[[HL::| Feature | PUT Method | PATCH Route |::HL]]
+| [[HL::Feature::HL]] | [[HL::PUT Method::HL]] | [[HL::PATCH Route::HL]] |
 | --- | --- | --- |
-[[HL::| **Purpose** | Poora record replace karna | Record ka ek chhota hissa update karna |::HL]]
-[[HL::| **Payload Size** | Bada (saari fields chahiye) | Chhota (sirf changed fields) |::HL]]
-[[HL::| **Use Case** | Profile edit jahan sab update ho | Toggle switch (Approve/Reject) |::HL]]
+| [[HL::**Purpose**::HL]] | [[HL::Poora record replace karna::HL]] | [[HL::Record ka ek chhota hissa update karna::HL]] |
+| [[HL::**Payload Size**::HL]] | [[HL::Bada (saari fields chahiye)::HL]] | [[HL::Chhota (sirf changed fields)::HL]] |
+| [[HL::**Use Case**::HL]] | [[HL::Profile edit jahan sab update ho::HL]] | [[HL::Toggle switch (Approve/Reject)::HL]] |
 
 ### 🌍 14. Real-World Use Case
 
@@ -15007,11 +15007,11 @@ NestJS ka Task Scheduling bilkul tumhare mobile ke alarm app ki tarah hi backgro
 
 ### ⚖️ 13. Comparison (Ye vs Woh)
 
-[[HL::| Feature | `@Cron` | `@Interval` | `@Timeout` |::HL]]
+| [[HL::Feature::HL]] | [[HL::`@Cron`::HL]] | [[HL::`@Interval`::HL]] | [[HL::`@Timeout`::HL]] |
 | --- | --- | --- | --- |
-[[HL::| **Execution pattern** | Calendar/Clock-based exact times | Repetitive continuous loop | One time delay run |::HL]]
-[[HL::| **Input type** | String (cron expression jaise `* * * * *`) | Milliseconds (number) | Milliseconds (number) |::HL]]
-[[HL::| **Use case** | "Har shanivaar raat ko" | "Har 10 minute check karte raho" | "Boot ke 5 second baad ek baar" |::HL]]
+| [[HL::**Execution pattern**::HL]] | [[HL::Calendar/Clock-based exact times::HL]] | [[HL::Repetitive continuous loop::HL]] | [[HL::One time delay run::HL]] |
+| [[HL::**Input type**::HL]] | [[HL::String (cron expression jaise `* * * * *`)::HL]] | [[HL::Milliseconds (number)::HL]] | [[HL::Milliseconds (number)::HL]] |
+| [[HL::**Use case**::HL]] | [[HL::"Har shanivaar raat ko"::HL]] | [[HL::"Har 10 minute check karte raho"::HL]] | [[HL::"Boot ke 5 second baad ek baar"::HL]] |
 
 ### 🌍 14. Real-World Use Case
 
@@ -15198,12 +15198,12 @@ Basic `select(*)` mein data leak ka bada risk hai agar tum unwanted fields (jais
   - **Fix:** Type `any` define karo, ya `getMany()` use karo agar entity instances chahiye.
 
 ### ⚖️ 13. Comparison (Ye vs Woh)
-[[HL::| Feature | `find()` / `findOne()` | `createQueryBuilder` |::HL]]
+| [[HL::Feature::HL]] | [[HL::`find()` / `findOne()`::HL]] | [[HL::`createQueryBuilder`::HL]] |
 |---|---|---|
-[[HL::| Complexity | Very Simple | Very Complex |::HL]]
-[[HL::| Flexibility | Low (Only basic filters) | High (Full SQL Power) |::HL]]
-[[HL::| Speed (DB Side) | Same | Same |::HL]]
-[[HL::| Readability | Best for beginners | Needs SQL background |::HL]]
+| [[HL::Complexity::HL]] | [[HL::Very Simple::HL]] | [[HL::Very Complex::HL]] |
+| [[HL::Flexibility::HL]] | [[HL::Low (Only basic filters)::HL]] | [[HL::High (Full SQL Power)::HL]] |
+| [[HL::Speed (DB Side)::HL]] | [[HL::Same::HL]] | [[HL::Same::HL]] |
+| [[HL::Readability::HL]] | [[HL::Best for beginners::HL]] | [[HL::Needs SQL background::HL]] |
 
 ### 🌍 14. Real-World Use Case
 Uber jaisi app mein jab aapko aas-paas ki cabs dhoondni hoti hain, wahan simple `find` kaam nahi aata. Wahan earth ki curvature, distance radius, aur time calculations ek hi query mein karni hoti hain. Wahan backend engineer strictly Query Builder use karke mathematical formulas execute karta hai.
@@ -15353,10 +15353,10 @@ Socho tum online car khareed rahe ho. Pehle tumne filter lagaya "Brand = Ford" (
   - **Fix:** Code check karo, first line chhod kar har jagah `andWhere()` hona chahiye.
 
 ### ⚖️ 13. Comparison (Ye vs Woh)
-[[HL::| Aspect | `.where()` | `.andWhere()` |::HL]]
+| [[HL::Aspect::HL]] | [[HL::`.where()`::HL]] | [[HL::`.andWhere()`::HL]] |
 |---|---|---|
-[[HL::| Role | Initialize condition. Overrides any previous condition. | Appends condition. Joins with 'AND'. |::HL]]
-[[HL::| When to use | Hamesha Query chain ke pehle filter logic mein. | First filter ke baad aane wale har additional filter mein. |::HL]]
+| [[HL::Role::HL]] | [[HL::Initialize condition. Overrides any previous condition.::HL]] | [[HL::Appends condition. Joins with 'AND'.::HL]] |
+| [[HL::When to use::HL]] | [[HL::Hamesha Query chain ke pehle filter logic mein.::HL]] | [[HL::First filter ke baad aane wale har additional filter mein.::HL]] |
 
 ### 🌍 14. Real-World Use Case
 Real-world mein "Tinder" ya "Zomato" location based radius matching use karte hain. Jaise restaurant aapke 5 km radius mein hai ya nahi, ye `latitude` aur `longitude` ke mathematical variance logic (`BETWEEN -x and x`) se hi calculate hota hai raw SQL level par kyunki application layer pe aake saara filter karna network choke kar dega.
@@ -15987,12 +15987,12 @@ Socho tum ek library mein ho. Tumne ek heavy reference book (Database) top shelf
   - **Fix:** Apne Module (ya AppModule) ke imports array mein `CacheModule.register()` confirm karo.
 
 ### ⚖️ 13. Comparison (Ye vs Woh)
-[[HL::| Feature | Local In-Memory Cache (Default) | Distributed Redis Cache |::HL]]
+| [[HL::Feature::HL]] | [[HL::Local In-Memory Cache (Default)::HL]] | [[HL::Distributed Redis Cache::HL]] |
 |---|---|---|
-[[HL::| Hosting | Usi server ki RAM mein. | Alag external server pe (Redis instance). |::HL]]
-[[HL::| Sync in Microservices | ❌ Nahi hota (har server ka apna). | ✅ Hota hai (sab ek hi store share karte hain). |::HL]]
-[[HL::| Setup | Aasaan (zero config). | Thoda complex (Redis install karna padta hai). |::HL]]
-[[HL::| Memory Consumption | High on app server. | Zero on app server, uses external RAM. |::HL]]
+| [[HL::Hosting::HL]] | [[HL::Usi server ki RAM mein.::HL]] | [[HL::Alag external server pe (Redis instance).::HL]] |
+| [[HL::Sync in Microservices::HL]] | [[HL::❌ Nahi hota (har server ka apna).::HL]] | [[HL::✅ Hota hai (sab ek hi store share karte hain).::HL]] |
+| [[HL::Setup::HL]] | [[HL::Aasaan (zero config).::HL]] | [[HL::Thoda complex (Redis install karna padta hai).::HL]] |
+| [[HL::Memory Consumption::HL]] | [[HL::High on app server.::HL]] | [[HL::Zero on app server, uses external RAM.::HL]] |
 
 ### 🌍 14. Real-World Use Case
 **Netflix** ki home screen. Jab tum Netflix kholte ho, jo "Trending Now" list dikhti hai, wo har second database se nikal kar calculate nahi hoti. Netflix ek central **Redis** server mein us list ko har 5 minute mein (TTL) calculate karke rakh deta hai. Poori duniya ke millions of users ek hi Redis cache se wahi same list milliseconds mein access kar lete hain.
@@ -18651,7 +18651,7 @@ Sending welcome email to user ID: 101
 | **Underlying Function** | `client.send()` | `client.emit()` |
 | **Response** | Reply expect karta hai | Koi reply expect nahi karta |
 | **Communication Style** | Synchronous (Request-Response) | Asynchronous (Fire-and-Forget) |
-[[HL::| **Use Case** | DB se data lana, Calculation results | Welcome email bhejna, User logs save karna |::HL]]
+| [[HL::**Use Case**::HL]] | [[HL::DB se data lana, Calculation results::HL]] | [[HL::Welcome email bhejna, User logs save karna::HL]] |
 
 ### [[HL::🌍 14. Real-World Use Case (Production Application)::HL]]
 
@@ -19540,12 +19540,12 @@ Is Section mein hum NestJS (server-side Node.js framework — scalable backend a
   - **Fix:** Hamesha `imports: [LoggerModule.forRoot({ ... })]` format enforce karo.
 
 ### ⚖️ 13. Comparison (Ye vs Woh)
-[[HL::| Feature | Static Module | Dynamic Module |::HL]]
+| [[HL::Feature::HL]] | [[HL::Static Module::HL]] | [[HL::Dynamic Module::HL]] |
 |---|---|---|
-[[HL::| Definition | Hardcoded in `@Module()` | Generated dynamically via method |::HL]]
-[[HL::| Customization | Koi setup data bahar se pass nahi hota | Options pass hote hain at import time |::HL]]
-[[HL::| Best For | Feature specific code (Users, Posts) | Reusable Plugins, DB connectors, Loggers |::HL]]
-[[HL::| Example | `imports: [UsersModule]` | `imports: [ConfigModule.forRoot()]` |::HL]]
+| [[HL::Definition::HL]] | [[HL::Hardcoded in `@Module()`::HL]] | [[HL::Generated dynamically via method::HL]] |
+| [[HL::Customization::HL]] | [[HL::Koi setup data bahar se pass nahi hota::HL]] | [[HL::Options pass hote hain at import time::HL]] |
+| [[HL::Best For::HL]] | [[HL::Feature specific code (Users, Posts)::HL]] | [[HL::Reusable Plugins, DB connectors, Loggers::HL]] |
+| [[HL::Example::HL]] | [[HL::`imports: [UsersModule]`::HL]] | [[HL::`imports: [ConfigModule.forRoot()]`::HL]] |
 
 ### 🌍 14. Real-World Use Case
 **TypeOrmModule** (NestJS ka official database module) sabse best example hai. TypeORM ko pata nahi hota ki tumhara database MySQL hai ya Postgres, host kya hai, ya password kya hai. Jab tum `TypeOrmModule.forRoot({ type: 'mysql', host: 'localhost', ... })` call karte ho, toh woh internally ek Dynamic Module banata hai aur inhi details se database connection establish karke tumhare liye ek service expose karta hai.
@@ -19786,12 +19786,12 @@ Total keywords across all subtopics in this topic: 9
   - [[HL::**Fix:** Postman settings mein "Send Accept-Encoding header" enable karo, taki woh text unzip karke JSON format dikhaye.::HL]]
 
 ### [[HL::⚖️ 13. Comparison (Ye vs Woh)::HL]]
-[[HL::| Feature | Long Polling | Server-Sent Events (SSE) | WebSockets |::HL]]
+| [[HL::Feature::HL]] | [[HL::Long Polling::HL]] | [[HL::Server-Sent Events (SSE)::HL]] | [[HL::WebSockets::HL]] |
 |---|---|---|---|
-[[HL::| Data Flow | Two-way (Fake real-time) | One-way (Server → Client) | Two-way (Full Duplex) |::HL]]
-[[HL::| Protocol | Normal HTTP | Normal HTTP | `ws://` (Custom protocol) |::HL]]
-[[HL::| Reconnection | Manually code karna padta hai | Browser khud auto-reconnect karta hai | Manually code karna padta hai (bina Socket.io ke) |::HL]]
-[[HL::| Best For | Legacy browsers | Live feeds, Tickers | Chat, Games |::HL]]
+| [[HL::Data Flow::HL]] | [[HL::Two-way (Fake real-time)::HL]] | [[HL::One-way (Server → Client)::HL]] | [[HL::Two-way (Full Duplex)::HL]] |
+| [[HL::Protocol::HL]] | [[HL::Normal HTTP::HL]] | [[HL::Normal HTTP::HL]] | [[HL::`ws://` (Custom protocol)::HL]] |
+| [[HL::Reconnection::HL]] | [[HL::Manually code karna padta hai::HL]] | [[HL::Browser khud auto-reconnect karta hai::HL]] | [[HL::Manually code karna padta hai (bina Socket.io ke)::HL]] |
+| [[HL::Best For::HL]] | [[HL::Legacy browsers::HL]] | [[HL::Live feeds, Tickers::HL]] | [[HL::Chat, Games::HL]] |
 
 ### 🌍 14. Real-World Use Case
 **Vercel / GitHub Actions:** Jab tum code deploy karte ho, toh frontend par jo live terminal logs (build progress) aate hain, woh mostly SSE (Server-Sent Events) ke through aate hain. Unhe tumhare typing input ki zaroorat nahi hai, unhe bas tumhare UI ko continuously batana hai ki deploy kis stage par hai.
