@@ -714,7 +714,7 @@ pre.mac-window code::-webkit-scrollbar-thumb:hover {
 }
 
 /* Inline Code */
-p code, li code, td code {
+p code, li code, td code, th code {
     background: rgba(56, 189, 248, 0.12);
     color: #7dd3fc;
     padding: 0.2em 0.45em;
@@ -722,6 +722,8 @@ p code, li code, td code {
     font-size: 0.88em;
     font-family: 'Fira Code', monospace;
     border: 1px solid rgba(56, 189, 248, 0.2);
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 /* Tables */
@@ -741,6 +743,13 @@ th, td {
     text-align: left;
     border-bottom: 1px solid var(--border-color);
     border-right: 1px solid var(--border-color);
+    vertical-align: top;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+td:empty::after {
+    content: '\00a0';
+    visibility: hidden;
 }
 th:last-child, td:last-child {
     border-right: none;
@@ -920,23 +929,100 @@ blockquote:not(.alert-callout) {
         max-width: 100% !important;
     }
 
-    /* Tables: Fixed width and word-wrapping */
+    /* 📊 Tables in Print / PDF: High-Definition Clean Grid */
     table {
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
-        table-layout: fixed !important;
+        border-collapse: collapse !important;
+        border-spacing: 0 !important;
+        border: 1.5px solid #3b4d6b !important;
         width: 100% !important;
-        overflow: visible !important;
+        max-width: 100% !important;
         margin: 1.5rem 0 !important;
+        background-color: #0f141f !important;
+        page-break-inside: auto !important;
+        break-inside: auto !important;
+        table-layout: auto !important; /* Dynamic proportional columns */
+        overflow: visible !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
     }
 
-    td, th {
+    thead {
+        display: table-header-group !important; /* Repeats table header if split across pages */
+    }
+
+    tfoot {
+        display: table-footer-group !important;
+    }
+
+    tr {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    th {
+        background-color: #1a2436 !important;
+        color: #38bdf8 !important;
+        font-family: 'Outfit', sans-serif !important;
+        font-weight: 700 !important;
+        font-size: 0.85rem !important;
+        letter-spacing: 0.3px !important;
+        border: 1px solid #3b4d6b !important;
+        padding: 0.65rem 0.85rem !important;
+        text-align: left !important;
+        vertical-align: middle !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    td {
+        background-color: #0d121c !important;
+        color: #cbd5e1 !important;
+        font-size: 0.82rem !important;
+        line-height: 1.5 !important;
+        border: 1px solid #233044 !important;
+        padding: 0.65rem 0.85rem !important;
+        vertical-align: top !important;
         word-wrap: break-word !important;
         overflow-wrap: break-word !important;
-        word-break: break-word !important;
+        word-break: normal !important;
         white-space: normal !important;
-        padding: 0.6rem 0.8rem !important;
-        font-size: 0.85rem !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    tr:nth-child(even) td {
+        background-color: #131b28 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    td:empty::after {
+        content: '\00a0' !important;
+        visibility: hidden !important;
+    }
+
+    /* Code tags inside table cells in print */
+    td code, th code {
+        white-space: pre-wrap !important;
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+        display: inline !important;
+        background: rgba(56, 189, 248, 0.15) !important;
+        color: #38bdf8 !important;
+        border: 1px solid rgba(56, 189, 248, 0.35) !important;
+        padding: 0.12em 0.38em !important;
+        font-size: 0.82em !important;
+        border-radius: 3px !important;
+        font-family: 'Fira Code', monospace !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* Inline code inside yellow highlights in tables */
+    td mark.yellow-highlight code, th mark.yellow-highlight code {
+        background-color: #ffffff !important;
+        color: #0f172a !important;
+        border: 1.5px solid #334155 !important;
     }
 
     .alert-callout, blockquote {
