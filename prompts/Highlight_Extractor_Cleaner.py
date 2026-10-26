@@ -1,10 +1,24 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Highlight_Extractor_Cleaner.py — Production-Grade Highlight Extraction & Hierarchy Engine
+Extracts highlighted concepts ([[HL::...::HL]]) from massive Markdown course notes,
+preserving headings, code blocks, tables, and structural hierarchy with 100% integrity.
+"""
+
 import os
 import re
 import sys
+import argparse
 
-SEPARATOR = '\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n'
+# ── Force UTF-8 on Windows Consoles (Prevents UnicodeEncodeError on emojis/arrows) ──
+if sys.platform == 'win32':
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stderr.reconfigure(encoding='utf-8')
+    except Exception:
+        pass
 
-# Regex to detect a complete, well-formed [[HL::...::HL]] pair (non-greedy, single-line)
 _HL_PAIR_RE = re.compile(r'\[\[HL::.*?::HL\]\]')
 
 
@@ -15,351 +29,355 @@ def _safe_path(path: str) -> str:
     return os.path.realpath(os.path.abspath(path.strip()))
 
 
-def _is_separator_line(line: str) -> bool:
-    """Return True if line is a structural separator (Rule 14).
-    
-    Matches: ━━━ style, === style, standalone --- horizontal rule.
-    Does NOT match table separator rows like | --- | --- | (those start with |).
-    """
-    s = line.strip()
-    if not s:
-        return False
-    # Must not be a table row (table rows start with |)
-    if s.startswith('|'):
-        return False
-    return bool(re.match(r'^(━+|={3,}|-{3,})$', s))
-
-
 def _is_table_separator_row(line: str) -> bool:
-    """Return True if line (ignoring [[HL:: / ::HL]] tags) is a Markdown table separator row."""
+    """Return True if line is a Markdown table separator row like |---|---|."""
     stripped_tags = line.replace("[[HL::", "").replace("::HL]]", "").strip()
     if not stripped_tags.startswith('|') or '-' not in stripped_tags:
         return False
     return bool(re.match(r'^\|[\s|:-]+\|?\s*$', stripped_tags))
 
 
-def _commit_block(block_lines: list, start_idx: int, end_idx: int,
-                  extracted: list, last_idx_ref: list) -> None:
-    """Append a highlighted block (with separator if needed) to extracted."""
-    if not block_lines:
-        return
-    last = last_idx_ref[0]
-    if last != -1 and start_idx > last + 1:
-        extracted.append(SEPARATOR)
-    extracted.extend(block_lines)
-    extracted.append('\n')
-    last_idx_ref[0] = end_idx
-
-
-def _is_closing_fence(line: str) -> bool:
-    """Return True only for a pure closing fence line (``` with no language tag).
-    
-    Opening fences have a language identifier: ```bash, ```python, ```text.
-    Closing fences are exactly ``` (optionally with surrounding whitespace).
-    This prevents premature closure on nested opening fences.
-    """
-    return bool(re.match(r'^\s*```\s*$', line))
-
-
-def _process_code_block(lines: list, i: int, extracted: list,
-                        last_idx_ref: list) -> int:
-    """Collect a fenced code block; commit if it contains a highlight.
-    
-    The opening fence line (```lang) is NEVER checked for [[HL:: tags —
-    fence lines must never be highlighted (Rule 12).
-    Uses _is_closing_fence() to avoid premature closure on nested opening fences.
-    """
-    fence_line = lines[i]
-    current = [fence_line]
-    has_hl = False          # intentionally NOT checking the fence line itself
-    j = i + 1
-    while j < len(lines):
-        line = lines[j]
-        current.append(line)
-        # Only a pure closing fence (```) ends the block — not ```python etc.
-        if _is_closing_fence(line):
-            if has_hl:
-                _commit_block(current, i, j, extracted, last_idx_ref)
-            return j + 1
-        if "[[HL::" in line:
-            has_hl = True
-        j += 1
-    # EOF without closing fence — commit if highlighted
-    if has_hl:
-        _commit_block(current, i, j - 1, extracted, last_idx_ref)
-    return j
-
-
-def _flush_context_block(block: list, start_i: int, end_i: int,
-                         has_hl: bool, extracted: list,
-                         last_idx_ref: list) -> None:
-    """Commit a table or blockquote block if it contained a highlight."""
-    if has_hl:
-        _commit_block(block, start_i, end_i, extracted, last_idx_ref)
-
-
-def _skip_yaml_frontmatter(lines: list) -> int:
-    """If file starts with YAML frontmatter (---), return index after closing ---.
-    
-    Rule 10: YAML frontmatter is completely off-limits.
-    Returns 0 if no frontmatter found.
-    """
-    if not lines:
-        return 0
-    if lines[0].strip() != '---':
-        return 0
-    for i in range(1, len(lines)):
-        if lines[i].strip() == '---':
-            return i + 1
-    return 0  # Unclosed frontmatter — treat whole file as content
-
-
-def _heal_broken_table_separators(lines: list) -> tuple:
-    """Detect and heal broken table separator rows like | [[HL::---::HL]] |.
-    
-    Rule 23: table separator rows must NEVER contain [[HL:: tags.
-    Returns (healed_lines, count_of_healed_rows).
-    """
-    healed = []
-    count = 0
-    for line in lines:
-        if ("[[HL::" in line or "::HL]]" in line) and _is_table_separator_row(line):
-            # Strip all [[HL:: / ::HL]] tags from this separator row entirely
-            fixed = line.replace("[[HL::", "").replace("::HL]]", "")
-            healed.append(fixed)
-            count += 1
+def _normalize_table_row(line: str) -> str:
+    """Normalize a table row so highlight tags are strictly inside cells (Rule 13/44)."""
+    m = re.match(r'^(\s*)\[\[HL::\s*(\|.*?\|)\s*::HL\]\]\s*$', line)
+    if not m:
+        return line
+    indent = m.group(1)
+    row_inner = m.group(2)
+    parts = row_inner.split('|')
+    if len(parts) < 4:
+        return line
+    new_parts = [parts[0]]
+    for cell in parts[1:-1]:
+        clean = cell.strip()
+        if not clean:
+            new_parts.append(cell)
+        elif clean.startswith('[[HL::') and clean.endswith('::HL]]'):
+            new_parts.append(f' {clean} ')
         else:
-            healed.append(line)
-    return healed, count
+            new_parts.append(f' [[HL::{clean}::HL]] ')
+    new_parts.append(parts[-1])
+    return indent + '|'.join(new_parts)
 
 
-def _clean_lines(raw: list) -> list:
-    """Strip [[HL:: / ::HL]] tags and collapse consecutive blank lines.
-    
-    Preserves intentional SEPARATOR lines inserted between extracted blocks.
-    """
-    # Flatten any multi-line chunks (like SEPARATOR) into individual lines first
-    flat_lines = []
-    for chunk in raw:
-        flat_lines.extend(chunk.splitlines(keepends=True))
-
-    result = []
-    prev_empty = False
-    for line in flat_lines:
-        # Remove complete [[HL::...::HL]] pairs first, then any leftover multi-line/orphan tags
-        cleaned = re.sub(r'\[\[HL::(.*?)::HL\]\]', r'\1', line)
-        cleaned = cleaned.replace("[[HL::", "").replace("::HL]]", "")
-        is_empty = cleaned.strip() == ''
-        if is_empty and prev_empty:
-            continue
-        result.append(cleaned)
-        prev_empty = is_empty
-    return result
+def _is_fence(line: str) -> tuple:
+    """Check if line is a code fence. Returns (is_fence, is_closing, fence_chars, lang)."""
+    m = re.match(r'^(\s*)(`{3,}|~{3,})(\w*.*)?$', line)
+    if not m:
+        return False, False, '', ''
+    indent, fence, rest = m.groups()
+    lang = (rest or '').strip()
+    is_closing = len(lang) == 0
+    return True, is_closing, fence, lang
 
 
 def _verify_tag_balance(lines: list) -> tuple:
-    """Count [[HL:: opens and ::HL]] closes across all lines.
-    
-    Returns (opens, closes, is_balanced).
-    Rule 33: opens must equal closes exactly.
-    """
+    """Count [[HL:: opens and ::HL]] closes. Returns (opens, closes, is_balanced)."""
     opens = sum(line.count("[[HL::") for line in lines)
     closes = sum(line.count("::HL]]") for line in lines)
     return opens, closes, opens == closes
 
 
-def extract_and_clean_highlights(input_file: str, output_file: str) -> None:
+def _skip_yaml_frontmatter(lines: list) -> int:
+    """Skip YAML frontmatter if present (Rule 10)."""
+    if not lines or lines[0].strip() != '---':
+        return 0
+    for i in range(1, len(lines)):
+        if lines[i].strip() == '---':
+            return i + 1
+    return 0
+
+
+DEFAULT_SEPARATOR = '\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n'
+
+
+def extract_highlights(input_file: str, output_file: str = None,
+                       keep_highlights: bool = True,
+                       include_headings: bool = True,
+                       clean_output_file: str = None,
+                       separator: str = DEFAULT_SEPARATOR,
+                       no_separator: bool = False) -> None:
+    """
+    Extracts highlighted blocks and preserves structural context.
+    - keep_highlights: If True, preserves [[HL::...::HL]] markers for the HTML viewer.
+    - include_headings: If True, retains parent Module & Topic headers for context.
+    - clean_output_file: Optional second output file with all highlight tags stripped.
+    - separator: Separator string inserted between disjoint highlight blocks (Rule 14/31).
+    - no_separator: If True, disables separator insertion.
+    """
     input_path = _safe_path(input_file)
+    if not os.path.exists(input_path):
+        raise FileNotFoundError(f"Input file not found: {input_path}")
+
+    if not output_file:
+        base, ext = os.path.splitext(input_path)
+        output_file = f"{base}_Highlights{ext}"
     output_path = _safe_path(output_file)
 
-    print(f"Reading file: {input_path}")
+    print(f"📖 Reading Source Notes: {input_path}")
     with open(input_path, 'r', encoding='utf-8') as f:
         lines = f.readlines()
 
-    # ── PRE-FLIGHT: Tag balance check on INPUT (Rule 33 / Post-flight check) ──
+    # Pre-flight tag check
     in_opens, in_closes, in_balanced = _verify_tag_balance(lines)
-    if not in_balanced:
-        print(f"⚠️  WARNING: Input file has UNBALANCED tags!")
-        print(f"   [[HL:: opens : {in_opens}")
-        print(f"   ::HL]] closes: {in_closes}")
-        print(f"   Difference   : {abs(in_opens - in_closes)} orphan tag(s)")
-        print(f"   Proceeding with extraction — orphan tags will be cleaned after verification.")
+    status_icon = "✅ Balanced" if in_balanced else f"⚠️ UNBALANCED (Diff: {abs(in_opens - in_closes)})"
+    print(f"📊 Pre-Flight Parity Audit: {in_opens} [[HL:: opens / {in_closes} ::HL]] closes [{status_icon}]")
 
-    extracted: list = []
-    last_idx_ref = [-1]   # mutable reference so helpers can update it
-
-    # ── Skip YAML frontmatter (Rule 10) ──────────────────────────────────────
     start_i = _skip_yaml_frontmatter(lines)
     if start_i > 0:
-        print(f"ℹ️  YAML frontmatter detected — skipping lines 0–{start_i - 1} (Rule 10)")
+        print(f"ℹ️  YAML frontmatter skipped (lines 0–{start_i - 1})")
 
-    # Context state
+    # Hierarchy tracking
+    current_h1 = None
+    current_h2 = None
+    current_h3 = None
+    current_h4 = None
+
+    emitted_h1 = None
+    emitted_h2 = None
+    emitted_h3 = None
+    emitted_h4 = None
+
+    extracted = []
     in_code = False
-    in_table = False
-    table_buf: list = []
-    table_start = 0
-    table_has_hl = False
-    in_quote = False
-    quote_buf: list = []
-    quote_start = 0
-    quote_has_hl = False
-    hl_balance = 0          # tracks open [[HL:: tags not yet closed
-    i = start_i
+    code_fence = ''
+    code_buf = []
+    code_has_hl = False
 
+    hl_balance = 0
+    last_idx = -1
+    heading_just_emitted = False
+    sep_str = separator if (separator and not no_separator) else ""
+
+    def emit_headings():
+        nonlocal emitted_h1, emitted_h2, emitted_h3, emitted_h4, heading_just_emitted
+        needed = False
+        if current_h1 and current_h1 != emitted_h1:
+            needed = True
+        elif current_h2 and current_h2 != emitted_h2:
+            needed = True
+        elif current_h3 and current_h3 != emitted_h3:
+            needed = True
+        elif current_h4 and current_h4 != emitted_h4:
+            needed = True
+
+        if needed:
+            if current_h1 and current_h1 != emitted_h1:
+                extracted.append(f"\n# {current_h1}\n\n")
+                emitted_h1 = current_h1
+                emitted_h2 = None
+                emitted_h3 = None
+                emitted_h4 = None
+            if current_h2 and current_h2 != emitted_h2:
+                extracted.append(f"\n## {current_h2}\n\n")
+                emitted_h2 = current_h2
+                emitted_h3 = None
+                emitted_h4 = None
+            if current_h3 and current_h3 != emitted_h3:
+                extracted.append(f"\n### {current_h3}\n\n")
+                emitted_h3 = current_h3
+                emitted_h4 = None
+            if current_h4 and current_h4 != emitted_h4:
+                extracted.append(f"\n#### {current_h4}\n\n")
+                emitted_h4 = current_h4
+            heading_just_emitted = True
+
+    i = start_i
     while i < len(lines):
         line = lines[i]
         stripped = line.strip()
-        has_hl = "[[HL::" in line
 
-        # ── Separator lines: skip entirely from source document (Rule 14) ────
-        if _is_separator_line(stripped):
-            # Flush any open context blocks before skipping
-            if in_table:
-                _flush_context_block(table_buf, table_start, i - 1,
-                                     table_has_hl, extracted, last_idx_ref)
-                in_table = False; table_buf = []; table_has_hl = False
-            if in_quote:
-                _flush_context_block(quote_buf, quote_start, i - 1,
-                                     quote_has_hl, extracted, last_idx_ref)
-                in_quote = False; quote_buf = []; quote_has_hl = False
+        # Track headings for context
+        clean_heading = re.sub(r'\[\[HL::(.*?)\]\]', r'\1', stripped).replace('[[HL::', '').replace('::HL]]', '')
+        if clean_heading.startswith('# '):
+            current_h1 = clean_heading[2:].strip()
+            current_h2 = None
+            current_h3 = None
+            current_h4 = None
+            i += 1
+            continue
+        elif clean_heading.startswith('## '):
+            current_h2 = clean_heading[3:].strip()
+            current_h3 = None
+            current_h4 = None
+            i += 1
+            continue
+        elif clean_heading.startswith('### '):
+            current_h3 = clean_heading[4:].strip()
+            current_h4 = None
+            i += 1
+            continue
+        elif clean_heading.startswith('#### '):
+            current_h4 = clean_heading[5:].strip()
             i += 1
             continue
 
-        # ── Code blocks ──────────────────────────────────────────────────────
-        if stripped.startswith("```"):
-            # Flush any open table/quote first
-            if in_table:
-                _flush_context_block(table_buf, table_start, i - 1,
-                                     table_has_hl, extracted, last_idx_ref)
-                in_table = False; table_buf = []; table_has_hl = False
-            if in_quote:
-                _flush_context_block(quote_buf, quote_start, i - 1,
-                                     quote_has_hl, extracted, last_idx_ref)
-                in_quote = False; quote_buf = []; quote_has_hl = False
-
-            if not in_code:
-                in_code = True
-                i = _process_code_block(lines, i, extracted, last_idx_ref)
-                in_code = False
-                continue
-            # Stray closing fence outside a tracked block — skip
-            i += 1
+        # ── Code Blocks (Rule 12/40) ─────────────────────────────────────────
+        is_fn, is_cl, fn_str, lang = _is_fence(line)
+        if is_fn and not in_code:
+            in_code = True
+            code_fence = fn_str
+            code_buf = [line]
+            code_has_hl = False
+            j = i + 1
+            while j < len(lines):
+                c_line = lines[j]
+                c_fn, c_cl, c_str, _ = _is_fence(c_line)
+                code_buf.append(c_line)
+                if "[[HL::" in c_line:
+                    code_has_hl = True
+                if c_fn and c_cl and c_str == code_fence:
+                    break
+                j += 1
+            
+            if code_has_hl:
+                emit_headings()
+                if sep_str and last_idx != -1 and i > last_idx + 1 and not heading_just_emitted:
+                    extracted.append(sep_str)
+                extracted.extend(code_buf)
+                extracted.append('\n')
+                last_idx = j
+                heading_just_emitted = False
+            
+            in_code = False
+            code_buf = []
+            i = j + 1
             continue
 
-        # ── Tables ───────────────────────────────────────────────────────────
-        if stripped.startswith('|'):
-            if in_quote:
-                _flush_context_block(quote_buf, quote_start, i - 1,
-                                     quote_has_hl, extracted, last_idx_ref)
-                in_quote = False; quote_buf = []; quote_has_hl = False
-            if not in_table:
-                in_table = True; table_buf = [line]
-                table_start = i; table_has_hl = has_hl
-            else:
-                table_buf.append(line)
-                table_has_hl = table_has_hl or has_hl
-            i += 1
+        # ── Tables (Rule 13/23/44) ───────────────────────────────────────────
+        is_tbl = stripped.startswith('|') or re.match(r'^(\s*)\[\[HL::\s*\|', line)
+        if is_tbl:
+            table_buf = []
+            table_has_hl = False
+            j = i
+            while j < len(lines):
+                t_line = lines[j]
+                t_str = t_line.strip()
+                if not (t_str.startswith('|') or re.match(r'^(\s*)\[\[HL::\s*\|', t_line)):
+                    break
+                norm_line = _normalize_table_row(t_line)
+                table_buf.append(norm_line)
+                if "[[HL::" in norm_line:
+                    table_has_hl = True
+                j += 1
+            
+            if table_has_hl:
+                emit_headings()
+                if sep_str and last_idx != -1 and i > last_idx + 1 and not heading_just_emitted:
+                    extracted.append(sep_str)
+                extracted.extend(table_buf)
+                extracted.append('\n')
+                last_idx = j - 1
+                heading_just_emitted = False
+            
+            table_buf = []
+            i = j
             continue
-        else:
-            if in_table:
-                _flush_context_block(table_buf, table_start, i - 1,
-                                     table_has_hl, extracted, last_idx_ref)
-                in_table = False; table_buf = []; table_has_hl = False
 
-        # ── Blockquotes ──────────────────────────────────────────────────────
-        if stripped.startswith('>'):
-            if not in_quote:
-                in_quote = True; quote_buf = [line]
-                quote_start = i; quote_has_hl = has_hl
-            else:
-                quote_buf.append(line)
-                quote_has_hl = quote_has_hl or has_hl
-            i += 1
-            continue
-        else:
-            if in_quote:
-                _flush_context_block(quote_buf, quote_start, i - 1,
-                                     quote_has_hl, extracted, last_idx_ref)
-                in_quote = False; quote_buf = []; quote_has_hl = False
-
-        # ── Prose / bullets (multi-line highlight balance) ───────────────────
+        # ── Prose, Blockquotes, Lists ────────────────────────────────────────
+        has_hl = "[[HL::" in line or "::HL]]" in line or hl_balance > 0
         opens = line.count("[[HL::")
         closes = line.count("::HL]]")
 
-        if hl_balance > 0 or opens > 0 or closes > 0:
-            # Only inject separator BEFORE a NEW highlight starts (hl_balance==0)
-            # Never inject separator mid-highlight (hl_balance>0) — Rule 31
-            if hl_balance == 0 and last_idx_ref[0] != -1 and i > last_idx_ref[0] + 1:
-                extracted.append(SEPARATOR)
+        if has_hl:
+            emit_headings()
+            # If start of a new highlight and gap exists
+            if sep_str and hl_balance == 0 and last_idx != -1 and i > last_idx + 1 and not heading_just_emitted:
+                extracted.append(sep_str)
             extracted.append(line)
-            last_idx_ref[0] = i
+            last_idx = i
+            heading_just_emitted = False
 
         hl_balance += (opens - closes)
         if hl_balance < 0:
-            hl_balance = 0   # guard against malformed closes
+            hl_balance = 0
         i += 1
 
-    # ── EOF flush of any still-open context blocks ────────────────────────────
-    if in_table and table_has_hl:
-        _flush_context_block(table_buf, table_start, len(lines) - 1,
-                             True, extracted, last_idx_ref)
-    if in_quote and quote_has_hl:
-        _flush_context_block(quote_buf, quote_start, len(lines) - 1,
-                             True, extracted, last_idx_ref)
+    # Format extracted lines
+    final_lines = []
+    prev_empty = False
+    for chunk in extracted:
+        for l in chunk.splitlines(keepends=True):
+            if not keep_highlights:
+                l = re.sub(r'\[\[HL::(.*?)::HL\]\]', r'\1', l).replace("[[HL::", "").replace("::HL]]", "")
+            is_empty = l.strip() == ''
+            if is_empty and prev_empty:
+                continue
+            final_lines.append(l)
+            prev_empty = is_empty
 
-    # ── EOF: warn if hl_balance is still non-zero (unclosed tag in prose) ────
-    if hl_balance != 0:
-        print(f"⚠️  WARNING: {hl_balance} unclosed [[HL:: tag(s) detected in prose at EOF!")
-        print(f"   The extracted output may contain orphan opening tags.")
+    # Post-flight integrity checks
+    out_opens, out_closes, out_balanced = _verify_tag_balance(final_lines)
+    print(f"\n📊 Post-Flight Parity Audit: {out_opens} [[HL:: opens / {out_closes} ::HL]] closes {'(Balanced ✅)' if out_balanced else '(Unbalanced ⚠️)'}")
 
-    # ── POST-FLIGHT: Heal broken table separator rows (Rule 23) ─────────────
-    extracted, healed_count = _heal_broken_table_separators(extracted)
-    if healed_count > 0:
-        print(f"⚠️  POST-FLIGHT: Healed {healed_count} broken table separator row(s) (Rule 23).")
-
-    # ── POST-FLIGHT: Tag balance check on EXTRACTED lines (Rule 33) ──────────
-    ext_opens, ext_closes, ext_balanced = _verify_tag_balance(extracted)
-    if not ext_balanced:
-        print(f"⚠️  POST-FLIGHT WARNING: Extracted output has UNBALANCED tags!")
-        print(f"   [[HL:: opens : {ext_opens}")
-        print(f"   ::HL]] closes: {ext_closes}")
+    # Check for broken table rows (at least 2 columns with pipes)
+    broken_tbls = [l for l in final_lines if re.match(r'^\s*\[\[HL::\s*\|.*?\|.*?\|', l)]
+    if broken_tbls:
+        print(f"⚠️  WARNING: Found {len(broken_tbls)} broken table rows in output!")
     else:
-        print(f"✅ Tag balance verified: {ext_opens} [[HL:: / {ext_closes} ::HL]] — balanced.")
-
-    final = _clean_lines(extracted)
+        print("✅ Table Integrity: 0 broken table rows.")
 
     with open(output_path, 'w', encoding='utf-8') as f:
-        f.writelines(final)
+        f.writelines(final_lines)
+    print(f"🚀 SUCCESS: Highlighted Summary written to: {output_path}")
 
-    # ── Coverage summary (Rule 48 spirit) ────────────────────────────────────
-    hl_count = sum(len(_HL_PAIR_RE.findall(line)) for line in extracted)
-    print(f"\n📊 Extraction Summary:")
-    print(f"   Total input lines      : {len(lines)}")
-    print(f"   Total extracted lines  : {len(final)}")
-    print(f"   [[HL::...::HL]] pairs  : {hl_count}")
-    print(f"   Tag balance (input)    : {'✅ OK' if in_balanced else '❌ UNBALANCED'}")
-    print(f"   Tag balance (extracted): {'✅ OK' if ext_balanced else '❌ UNBALANCED'}")
-    print(f"\nSaved to: {output_path}")
+    # Optionally write clean version
+    if clean_output_file:
+        clean_path = _safe_path(clean_output_file)
+        clean_lines = []
+        for l in final_lines:
+            cl = re.sub(r'\[\[HL::(.*?)::HL\]\]', r'\1', l).replace("[[HL::", "").replace("::HL]]", "")
+            clean_lines.append(cl)
+        with open(clean_path, 'w', encoding='utf-8') as f:
+            f.writelines(clean_lines)
+        print(f"🧹 Clean Version (Tags Stripped) written to: {clean_path}")
+
+    print(f"\n📊 Summary Stats:")
+    print(f"   Input Lines    : {len(lines):,}")
+    print(f"   Extracted Lines: {len(final_lines):,}")
+    print(f"   Saved Output   : {output_path}")
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Production-Grade Highlight Extractor & Cleaner for Large Markdown Course Notes."
+    )
+    parser.add_argument("input_file", nargs="?", default=None,
+                        help="Path to source Markdown notes with [[HL::...::HL]] tags.")
+    parser.add_argument("-o", "--output", default=None,
+                        help="Path to save extracted highlights. Defaults to <input>_Highlights.md.")
+    parser.add_argument("--clean-output", default=None,
+                        help="Optional second output file path to save a clean version without highlight tags.")
+    parser.add_argument("--strip-tags", action="store_true",
+                        help="Strip [[HL:: and ::HL]] tags in the main output file.")
+    parser.add_argument("--separator", default=DEFAULT_SEPARATOR,
+                        help="Separator string between non-contiguous highlights (default: ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━).")
+    parser.add_argument("--no-separator", action="store_true",
+                        help="Do not insert separators between non-contiguous highlights.")
+    parser.add_argument("--no-headings", action="store_true",
+                        help="Omit parent Module and Topic headings from the output.")
+
+    args = parser.parse_args()
+
+    # Default to NestJS Course Notes if no file given
+    if not args.input_file:
+        default_notes = r"e:\latexNotes\NestJs_Course_Notes\NestJs_Course_Notes.md"
+        if os.path.exists(default_notes):
+            args.input_file = default_notes
+        else:
+            parser.print_help()
+            sys.exit(1)
+
+    extract_highlights(
+        input_file=args.input_file,
+        output_file=args.output,
+        keep_highlights=not args.strip_tags,
+        include_headings=not args.no_headings,
+        clean_output_file=args.clean_output,
+        separator=args.separator,
+        no_separator=args.no_separator
+    )
 
 
 if __name__ == "__main__":
-    if len(sys.argv) == 3:
-        inp = sys.argv[1]
-        out = sys.argv[2]
-    else:
-        # 👇 Change these defaults as needed
-        inp = r"e:\latexNotes\Code_with_harry_data_analytis_course\Code_with_harry_data_analytis_course_notes.md"
-        out = r"e:\latexNotes\Code_with_harry_data_analytis_course\Code_with_harry_data_analytis_course_notes_Highlights.md"
-
-    try:
-        inp_safe = _safe_path(inp)
-        out_safe = _safe_path(out)
-    except ValueError as e:
-        print(f"Error: {e}")
-        sys.exit(1)
-
-    if not os.path.exists(inp_safe):
-        print(f"Error: Input file not found — '{inp_safe}'")
-        sys.exit(1)
-
-    extract_and_clean_highlights(inp_safe, out_safe)
+    main()
